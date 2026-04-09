@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import { VideoSamples } from "@/components/home/VideoSamples";
 import { VideoSamplesSkeleton } from "@/components/home/VideoSamplesSkeleton";
 import { Casos } from "@/components/home/Casos";
+import { Aliados } from "@/components/home/Aliados";
 import { Pricing } from "@/components/home/Pricing";
 import { VideoTestimonios } from "@/components/home/VideoTestimonios";
 import { FAQ } from "@/components/home/FAQ";
@@ -36,6 +37,7 @@ export default function HomePage() {
           <VideoSamples />
         </Suspense>
         <Casos />
+        <Aliados />
         <Pricing />
         <VideoTestimonios />
         <FAQ />

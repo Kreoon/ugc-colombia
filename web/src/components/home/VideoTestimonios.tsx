@@ -13,43 +13,41 @@ type Testimonial = {
   brand: string;
   quote: string;
   tag: string;
-  /** 9/16 vertical u 16/9 horizontal */
-  orientation: "vertical" | "horizontal";
 };
 
 const TESTIMONIOS: Testimonial[] = [
   {
-    id: "t1",
+    id: "tokio",
     src: "/videos/testimonios/testimonio-1.mp4",
     poster: "/videos/testimonios/testimonio-1.jpg",
-    name: "Cliente UGC",
-    role: "Fundador",
-    brand: "Marca LATAM",
-    quote: "Pasamos de 1.2x a 3.8x ROAS en 60 días sin subir presupuesto.",
-    tag: "Skincare",
-    orientation: "vertical",
+    name: "Tokio Mayoristas",
+    role: "Equipo comercial",
+    brand: "Distribución mayorista · Colombia",
+    quote:
+      "Nos mostraron la plataforma en vivo y entendimos al instante cómo iban a llegar los videos a nuestras manos. Desde adentro se ve otra cosa.",
+    tag: "Mayoristas",
   },
   {
-    id: "t2",
+    id: "equi",
     src: "/videos/testimonios/testimonio-2.mp4",
     poster: "/videos/testimonios/testimonio-2.jpg",
-    name: "Cliente UGC",
-    role: "Growth Lead",
-    brand: "DTC Fitness",
-    quote: "El primer lote superó lo que 3 independientes nos dieron en 2 meses.",
-    tag: "Fitness DTC",
-    orientation: "vertical",
+    name: "Equi Mayoristas",
+    role: "Cliente de marca",
+    brand: "Distribución mayorista · Colombia",
+    quote:
+      "El primer lote de videos UGC movió las ventas más rápido que cualquier contenido que habíamos probado antes.",
+    tag: "Mayoristas",
   },
   {
-    id: "t3",
+    id: "smartbeemo",
     src: "/videos/testimonios/testimonio-3.mp4",
     poster: "/videos/testimonios/testimonio-3.jpg",
-    name: "Cliente UGC",
-    role: "Director de marketing",
-    brand: "SaaS B2B",
-    quote: "Bajamos el CPA un 55% con los primeros 10 videos UGC.",
-    tag: "SaaS B2B",
-    orientation: "horizontal",
+    name: "Michel Edery",
+    role: "CEO & Co-Founder",
+    brand: "smartBeemo · CommerceTech LATAM",
+    quote:
+      "Lo que hace UGC Colombia es exactamente lo que la nueva generación de e-commerce necesita: contenido real que vende.",
+    tag: "smartBeemo",
   },
 ];
 
@@ -92,7 +90,7 @@ function VideoCard({ t, idx }: { t: Testimonial; idx: number }) {
     <motion.article
       ref={containerRef}
       className="group relative rounded-2xl overflow-hidden"
-      style={{ aspectRatio: t.orientation === "vertical" ? "9 / 16" : "16 / 9" }}
+      style={{ aspectRatio: "9 / 16" }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}

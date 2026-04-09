@@ -102,26 +102,6 @@ export function Hero() {
           }}
           className="relative"
         >
-          {/* Glow dorado pulsante detrás */}
-          <motion.div
-            aria-hidden
-            className="absolute inset-0 -z-10 rounded-full blur-3xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 70% 60% at center, rgba(212,160,23,0.6) 0%, rgba(249,179,52,0.3) 40%, transparent 75%)",
-              transform: "translateZ(-60px)",
-            }}
-            animate={{
-              opacity: [0.4, 0.75, 0.4],
-              scale: [0.95, 1.08, 0.95],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
           {/* Particles orbitando (4 dots dorados) */}
           <motion.div
             aria-hidden
@@ -149,10 +129,6 @@ export function Hero() {
               height={580}
               priority
               className="w-full h-auto relative z-10"
-              style={{
-                filter:
-                  "drop-shadow(0 0 24px rgba(212,160,23,0.45)) drop-shadow(0 0 60px rgba(249,179,52,0.2)) drop-shadow(0 10px 30px rgba(0,0,0,0.5))",
-              }}
             />
             {/* Franja de luz diagonal que barre el logo */}
             <div

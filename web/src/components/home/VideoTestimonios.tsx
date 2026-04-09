@@ -1,44 +1,197 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Play, Quote } from "lucide-react";
+import { Quote, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 type Testimonial = {
   id: string;
+  src: string;
+  poster: string;
   name: string;
   role: string;
   brand: string;
   quote: string;
   tag: string;
+  /** 9/16 vertical u 16/9 horizontal */
+  orientation: "vertical" | "horizontal";
 };
 
-const PLACEHOLDER_TESTIMONIOS: Testimonial[] = [
+const TESTIMONIOS: Testimonial[] = [
   {
     id: "t1",
-    name: "Próximamente",
-    role: "Director / Fundadora",
-    brand: "Skincare LATAM",
-    quote: "Pasamos de 1.2x a 3.8x ROAS en 60 días sin aumentar el presupuesto.",
-    tag: "Skincare Premium",
+    src: "/videos/testimonios/testimonio-1.mp4",
+    poster: "/videos/testimonios/testimonio-1.jpg",
+    name: "Cliente UGC",
+    role: "Fundador",
+    brand: "Marca LATAM",
+    quote: "Pasamos de 1.2x a 3.8x ROAS en 60 días sin subir presupuesto.",
+    tag: "Skincare",
+    orientation: "vertical",
   },
   {
     id: "t2",
-    name: "Próximamente",
-    role: "Líder de crecimiento",
+    src: "/videos/testimonios/testimonio-2.mp4",
+    poster: "/videos/testimonios/testimonio-2.jpg",
+    name: "Cliente UGC",
+    role: "Growth Lead",
     brand: "DTC Fitness",
-    quote:
-      "El primer lote superó lo que 3 independientes nos entregaron en 2 meses.",
+    quote: "El primer lote superó lo que 3 independientes nos dieron en 2 meses.",
     tag: "Fitness DTC",
+    orientation: "vertical",
   },
   {
     id: "t3",
-    name: "Próximamente",
+    src: "/videos/testimonios/testimonio-3.mp4",
+    poster: "/videos/testimonios/testimonio-3.jpg",
+    name: "Cliente UGC",
     role: "Director de marketing",
     brand: "SaaS B2B",
     quote: "Bajamos el CPA un 55% con los primeros 10 videos UGC.",
     tag: "SaaS B2B",
+    orientation: "horizontal",
   },
 ];
+
+function VideoCard({ t, idx }: { t: Testimonial; idx: number }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [muted, setMuted] = useState(true);
+  const [inView, setInView] = useState(false);
+
+  // Lazy autoplay: solo cuando >=50% visible, pausa al salir.
+  useEffect(() => {
+    const el = containerRef.current;
+    const video = videoRef.current;
+    if (!el || !video) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          video.play().catch(() => { /* autoplay bloqueado */ });
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+    if (!video.muted) video.play().catch(() => {});
+  };
+
+  return (
+    <motion.article
+      ref={containerRef}
+      className="group relative rounded-2xl overflow-hidden"
+      style={{ aspectRatio: t.orientation === "vertical" ? "9 / 16" : "16 / 9" }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6 }}
+      aria-label={`Video testimonio — ${t.brand}`}
+    >
+      {/* Video */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        src={t.src}
+        poster={t.poster}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={`Testimonio de ${t.brand}`}
+      />
+
+      {/* Gradient overlay para legibilidad */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%)",
+        }}
+      />
+
+      {/* Border gradient dorado */}
+      <div
+        aria-hidden
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          padding: "1px",
+          background:
+            "linear-gradient(135deg, rgba(249,179,52,0.5), rgba(212,160,23,0.2) 50%, transparent 100%)",
+          WebkitMask:
+            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
+      />
+
+      {/* Content overlay */}
+      <div className="relative h-full flex flex-col justify-between p-5 sm:p-6">
+        {/* Top — tag + mute */}
+        <div className="flex items-start justify-between">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-brand-yellow/40 text-[10px] font-semibold text-brand-yellow tracking-wider uppercase">
+            {t.tag}
+          </span>
+          <button
+            type="button"
+            onClick={toggleMute}
+            aria-label={muted ? "Activar sonido" : "Silenciar"}
+            aria-pressed={!muted}
+            className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-brand-yellow/20 hover:border-brand-yellow/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+          >
+            {muted ? (
+              <VolumeX className="w-4 h-4" aria-hidden />
+            ) : (
+              <Volume2 className="w-4 h-4" aria-hidden />
+            )}
+          </button>
+        </div>
+
+        {/* Bottom — quote + autor */}
+        <div className="space-y-3">
+          <div>
+            <Quote className="w-4 h-4 text-brand-gold/80 mb-2" aria-hidden />
+            <p className="text-sm text-white leading-snug italic line-clamp-3 drop-shadow-lg">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+          </div>
+          <div className="flex items-center gap-2.5 pt-2 border-t border-white/10">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-brand-yellow/30 to-brand-graphite flex items-center justify-center border border-brand-gold/40 flex-shrink-0">
+              <span className="font-display text-sm text-brand-yellow">
+                {t.name.charAt(0)}
+              </span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-semibold text-white truncate">{t.name}</p>
+              <p className="text-[10px] text-brand-gray truncate">
+                {t.role} · {t.brand}
+              </p>
+            </div>
+            {inView && (
+              <span
+                aria-hidden
+                className="ml-auto w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export function VideoTestimonios() {
   return (
@@ -47,7 +200,6 @@ export function VideoTestimonios() {
       className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden scroll-mt-20 sm:scroll-mt-24"
       aria-labelledby="testimonios-heading"
     >
-      {/* Glow de fondo dorado sutil */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -58,7 +210,6 @@ export function VideoTestimonios() {
       />
 
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <motion.div
           className="flex flex-col items-start gap-4 mb-14 sm:mb-20"
           initial={{ opacity: 0, y: 24 }}
@@ -75,126 +226,16 @@ export function VideoTestimonios() {
             <span className="text-brand-yellow">nuestros clientes.</span>
           </h2>
           <p className="max-w-2xl text-base sm:text-lg text-brand-gray mt-2">
-            Videos testimonios de marcas reales que ya crecieron con UGC
-            Colombia. Muy pronto disponibles.
+            Marcas reales contando, en video, cómo UGC Colombia movió sus métricas.
           </p>
         </motion.div>
 
-        {/* Grid de 3 cards testimonio vertical 9:16 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
-          {PLACEHOLDER_TESTIMONIOS.map((t, idx) => (
-            <motion.article
-              key={t.id}
-              className="group relative rounded-2xl overflow-hidden cursor-pointer"
-              style={{ aspectRatio: "9 / 16" }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{
-                duration: 0.7,
-                delay: idx * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              whileHover={{ y: -6 }}
-              aria-label={`Testimonio próximamente — ${t.brand}`}
-            >
-              {/* Gradient background */}
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%)",
-                }}
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 opacity-60"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at center top, rgba(212,160,23,0.25) 0%, transparent 60%)",
-                }}
-              />
-
-              {/* Border gradient */}
-              <div
-                aria-hidden
-                className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{
-                  padding: "1px",
-                  background:
-                    "linear-gradient(135deg, rgba(249,179,52,0.4), rgba(212,160,23,0.15) 50%, transparent 100%)",
-                  WebkitMask:
-                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMaskComposite: "xor",
-                  maskComposite: "exclude",
-                }}
-              />
-
-              {/* Content */}
-              <div className="relative h-full flex flex-col justify-between p-5 sm:p-7">
-                {/* Top — badge */}
-                <div className="flex items-start justify-between">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-[10px] font-semibold text-brand-yellow tracking-wider uppercase">
-                    {t.tag}
-                  </span>
-                  <span className="text-[10px] font-semibold text-brand-gold/60 tracking-wider uppercase">
-                    Próximamente
-                  </span>
-                </div>
-
-                {/* Middle — play button + quote */}
-                <div className="flex flex-col items-center justify-center gap-5 my-auto">
-                  <motion.div
-                    className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center bg-brand-yellow/10 border border-brand-yellow/40 backdrop-blur-sm group-hover:bg-brand-yellow/20 group-hover:border-brand-yellow/60 transition-colors"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    <Play
-                      className="w-6 h-6 sm:w-7 sm:h-7 text-brand-yellow fill-brand-yellow ml-1"
-                      aria-hidden
-                    />
-                    {/* Pulse ring */}
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 rounded-full border border-brand-yellow/30 animate-ping"
-                      style={{ animationDuration: "2.5s" }}
-                    />
-                  </motion.div>
-
-                  <div className="text-center">
-                    <Quote
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold/60 mx-auto mb-3"
-                      aria-hidden
-                    />
-                    <p className="text-sm text-white/85 leading-relaxed italic line-clamp-4">
-                      &ldquo;{t.quote}&rdquo;
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bottom — autor */}
-                <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-gradient-to-br from-brand-yellow/30 to-brand-graphite flex items-center justify-center border border-brand-gold/40 flex-shrink-0">
-                    <span className="font-display text-base text-brand-yellow">
-                      {t.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">
-                      {t.name}
-                    </p>
-                    <p className="text-xs text-brand-gray truncate">
-                      {t.role} · {t.brand}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.article>
+          {TESTIMONIOS.map((t, idx) => (
+            <VideoCard key={t.id} t={t} idx={idx} />
           ))}
         </div>
 
-        {/* Footer note */}
         <motion.p
           className="text-center text-sm text-brand-gray/60 mt-10 sm:mt-12"
           initial={{ opacity: 0 }}

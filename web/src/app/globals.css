@@ -148,7 +148,9 @@ body {
   }
 }
 
-/* ─── Logo shine sweep — franja de luz diagonal premium ─── */
+/* ─── Logo shine sweep — franja de luz diagonal premium ───
+   Se aplica CON mask-image del logo PNG, así la luz solo aparece
+   donde hay píxeles del logo (no en el recuadro rectangular).    */
 @keyframes logo-shine-sweep {
   0% {
     background-position: -150% 50%;
@@ -174,21 +176,33 @@ body {
 }
 
 .logo-shine {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     115deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.08) 38%,
-    rgba(249, 179, 52, 0.35) 46%,
-    rgba(255, 255, 255, 0.65) 50%,
-    rgba(249, 179, 52, 0.35) 54%,
-    rgba(255, 255, 255, 0.08) 62%,
-    transparent 80%
+    transparent 30%,
+    rgba(255, 255, 255, 0.15) 44%,
+    rgba(249, 179, 52, 0.55) 48%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(249, 179, 52, 0.55) 52%,
+    rgba(255, 255, 255, 0.15) 56%,
+    transparent 70%
   );
   background-size: 200% 200%;
   background-repeat: no-repeat;
   mix-blend-mode: screen;
   animation: logo-shine-sweep 5s ease-in-out infinite;
   animation-delay: 2s;
+  pointer-events: none;
+  /* Mask con el logo PNG — el shine solo se ve donde está el logo */
+  -webkit-mask-image: url("/brand/logo-dark-bg.png");
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url("/brand/logo-dark-bg.png");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: center;
 }
 
 /* Clases utilitarias custom */

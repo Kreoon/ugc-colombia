@@ -31,12 +31,17 @@ const baseFields = {
   city: z.string().optional().or(z.literal("")),
 };
 
+const legalField = z.literal(true, {
+  errorMap: () => ({ message: "Debes aceptar los términos y condiciones" }),
+});
+
 export const creatorSchema = z.object({
   type: z.literal("creator"),
   full_name: z.string().min(2, "Ingresa tu nombre completo"),
   instagram: z.string().optional().or(z.literal("")),
   tiktok: z.string().optional().or(z.literal("")),
   categories: z.array(z.enum(CATEGORIES)).optional(),
+  legal_accepted: legalField,
   ...baseFields,
 });
 
@@ -44,12 +49,8 @@ export const brandSchema = z.object({
   type: z.literal("brand"),
   company_name: z.string().min(2, "Nombre de empresa requerido"),
   contact_name: z.string().min(2, "Nombre del contacto requerido"),
-  website: z
-    .string()
-    .url("URL inválida")
-    .optional()
-    .or(z.literal("")),
   industry: z.string().optional().or(z.literal("")),
+  legal_accepted: legalField,
   ...baseFields,
 });
 

@@ -267,6 +267,28 @@ export function RegistrationForm() {
             <input type="text" {...creatorForm.register("city")} className={inputClass} placeholder="Bogotá" />
           </div>
 
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              {...creatorForm.register("legal_accepted")}
+              className="mt-0.5 w-4 h-4 accent-[#f97316] cursor-pointer flex-shrink-0"
+            />
+            <span className="text-xs text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300">
+              Soy mayor de 18 años y acepto los{" "}
+              <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
+                Términos
+              </a>
+              ,{" "}
+              <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
+                Privacidad
+              </a>{" "}
+              y Ley 1581
+            </span>
+          </label>
+          {creatorForm.formState.errors.legal_accepted && (
+            <p className={errorClass}>{creatorForm.formState.errors.legal_accepted.message}</p>
+          )}
+
           {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
 
           <button
@@ -333,14 +355,6 @@ export function RegistrationForm() {
           </div>
 
           <div>
-            <label className={labelClass}>Website</label>
-            <input type="url" {...brandForm.register("website")} className={inputClass} placeholder="https://miempresa.com" />
-            {brandForm.formState.errors.website && (
-              <p className={errorClass}>{brandForm.formState.errors.website.message}</p>
-            )}
-          </div>
-
-          <div>
             <label className={labelClass}>Industria</label>
             <select
               {...brandForm.register("industry")}
@@ -359,6 +373,28 @@ export function RegistrationForm() {
             <label className={labelClass}>Ciudad</label>
             <input type="text" {...brandForm.register("city")} className={inputClass} placeholder="Medellín" />
           </div>
+
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              {...brandForm.register("legal_accepted")}
+              className="mt-0.5 w-4 h-4 accent-[#f97316] cursor-pointer flex-shrink-0"
+            />
+            <span className="text-xs text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300">
+              Soy mayor de 18 años y acepto los{" "}
+              <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
+                Términos
+              </a>
+              ,{" "}
+              <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
+                Privacidad
+              </a>{" "}
+              y Ley 1581
+            </span>
+          </label>
+          {brandForm.formState.errors.legal_accepted && (
+            <p className={errorClass}>{brandForm.formState.errors.legal_accepted.message}</p>
+          )}
 
           {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
 

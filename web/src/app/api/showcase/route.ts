@@ -34,8 +34,8 @@ export async function GET(req: NextRequest) {
         { success: true, data: videos },
         {
           headers: {
-            // 60s en CDN, hasta 5 min sirviendo stale mientras revalida
-            "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+            // No cachear: queremos orden aleatorio nuevo en cada request.
+            "Cache-Control": "no-store, no-cache, must-revalidate",
           },
         }
       );

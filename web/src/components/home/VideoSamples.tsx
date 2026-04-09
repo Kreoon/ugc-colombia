@@ -53,10 +53,11 @@ function isDirectVideoFile(url: string): boolean {
 }
 
 function toBunnyAutoplayEmbed(url: string): string {
-  // Normaliza /play/ → /embed/ y agrega params de autoplay loop muted preview
+  // Normaliza /play/ → /embed/ y agrega params de autoplay loop muted preview.
+  // controls=false esconde la barra de Bunny para que la card quede 100% limpia.
   const normalized = url.replace("/play/", "/embed/");
   const sep = normalized.includes("?") ? "&" : "?";
-  return `${normalized}${sep}autoplay=true&loop=true&muted=true&preload=true&responsive=true`;
+  return `${normalized}${sep}autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false&showHeatmap=false&playsinline=true`;
 }
 
 function buildTag(v: KreoonVideoDTO): string {
@@ -74,13 +75,16 @@ function buildTag(v: KreoonVideoDTO): string {
  * Filtra a solo URLs reproducibles y con thumbnail. Si no hay suficientes
  * válidos, completa o cae al fallback estático.
  */
-async function loadKreoonSamples(limit = 6): Promise<VideoSample[]> {
+async function loadKreoonSamples(limit = 12): Promise<VideoSample[]> {
   try {
-    // cache: "no-store" para que cada recarga reciba un orden distinto
-    // (la Edge Function de KREOON ya barajea server-side).
-    const res = await fetch(`/api/showcase?action=videos&limit=${limit * 4}`, {
-      cache: "no-store",
-    });
+    // cache: "no-store" + seed por timestamp → bypass total de caches
+    // (Vercel CDN, browser cache, Supabase CDN). KREOON ya barajea
+    // server-side, así que cada recarga trae un orden distinto.
+    const seed = Date.now();
+    const res = await fetch(
+      `/api/showcase?action=videos&limit=${limit * 3}&_=${seed}`,
+      { cache: "no-store" }
+    );
     if (!res.ok) return FALLBACK_SAMPLES;
     const json = (await res.json()) as { success: boolean; data: KreoonVideoDTO[] | null };
     if (!json.success || !json.data || json.data.length === 0) return FALLBACK_SAMPLES;
@@ -146,7 +150,7 @@ function VideoCard({ sample }: { sample: VideoSample }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="group relative cursor-pointer flex-shrink-0 w-[200px] sm:w-auto"
+        className="group relative cursor-pointer w-full"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={() => setDialogOpen(true)}
@@ -279,13 +283,18 @@ export function VideoSamples() {
 
   useEffect(() => {
     let cancelled = false;
-    loadKreoonSamples(6).then(data => {
+    loadKreoonSamples(12).then(data => {
       if (!cancelled) setSamples(data);
     });
     return () => {
       cancelled = true;
     };
   }, []);
+
+  // Divide en 2 filas para el layout desktop (6 + 6 si hay 12)
+  const half = Math.ceil(samples.length / 2);
+  const row1 = samples.slice(0, half);
+  const row2 = samples.slice(half);
 
   return (
     <section
@@ -307,8 +316,8 @@ export function VideoSamples() {
         }}
       />
 
+      {/* Header centrado con padding lateral; el grid es full-bleed */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
@@ -337,24 +346,33 @@ export function VideoSamples() {
             Click en cualquier video para ver con audio.
           </p>
         </motion.div>
+      </div>
 
-        {/* Grid horizontal scrolleable en mobile, 3-col en desktop */}
-        <div
-          className="flex gap-4 overflow-x-auto pb-4 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 lg:grid-cols-6 snap-x snap-mandatory sm:snap-none"
-          role="list"
-          aria-label="Muestras de videos UGC"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {samples.map((sample) => (
-            <div
-              key={sample.id}
-              role="listitem"
-              className="snap-center sm:snap-none"
-            >
-              <VideoCard sample={sample} />
-            </div>
-          ))}
-        </div>
+      {/* Grid full-bleed: 2 filas de carruseles horizontales.
+          - Desktop (lg+): 7 cards visibles por fila, scroll horizontal si hay más.
+          - Mobile/tablet: scroll horizontal con snap. */}
+      <div
+        className="flex flex-col gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8"
+        role="list"
+        aria-label="Muestras de videos UGC"
+      >
+        {[row1, row2].map((row, rowIdx) => (
+          <div
+            key={rowIdx}
+            className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-2"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {row.map((sample) => (
+              <div
+                key={sample.id}
+                role="listitem"
+                className="snap-start flex-shrink-0 w-[42vw] sm:w-[28vw] md:w-[20vw] lg:w-[calc((100vw-2rem-6*0.75rem)/7)] xl:w-[calc((100vw-4rem-6*1rem)/7)]"
+              >
+                <VideoCard sample={sample} />
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </section>
   );

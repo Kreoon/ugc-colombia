@@ -84,20 +84,53 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
   // recargar el iframe. El video sigue reproduciéndose en el mismo frame.
   // Volumen siempre al máximo cuando se activa — el usuario controla el
   // volumen desde su dispositivo, no desde el player.
+  //
+  // IMPORTANTE: el effect depende tambien de shouldMount para que cuando
+  // el iframe aparezca por lazy-mount, se dispare el mute inicial. Si no,
+  // el iframe confia solo en el query param muted=true (que Bunny a veces
+  // ignora) y el video arranca con audio aunque el boton este apagado.
   useEffect(() => {
-    if (sample.kind !== "iframe") return;
+    if (sample.kind !== "iframe" || !shouldMount) return;
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    if (unmuted) {
+      forceMaxVolume(iframe);
+      // Reintentos escalonados: player.js a veces tarda en inicializar.
+      const t1 = setTimeout(() => forceMaxVolume(iframe), 250);
+      const t2 = setTimeout(() => forceMaxVolume(iframe), 800);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    } else {
+      // Mute agresivo con reintentos — garantiza que el video no suene
+      // aunque player.js todavía no estuviera listo al primer comando.
+      sendBunnyCommand(iframe, "mute");
+      sendBunnyCommand(iframe, "setVolume", 0);
+      const t1 = setTimeout(() => {
+        sendBunnyCommand(iframe, "mute");
+        sendBunnyCommand(iframe, "setVolume", 0);
+      }, 250);
+      const t2 = setTimeout(() => {
+        sendBunnyCommand(iframe, "mute");
+        sendBunnyCommand(iframe, "setVolume", 0);
+      }, 800);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
+  }, [unmuted, sample.kind, shouldMount]);
+
+  // onLoad del iframe: cuando Bunny termina de cargar su player.js,
+  // re-enviamos el estado actual. Es la capa mas confiable porque
+  // garantiza que el comando llega despues de que el reproductor
+  // este listo para recibirlo.
+  const handleIframeLoad = () => {
     const iframe = iframeRef.current;
     if (!iframe) return;
     if (unmuted) {
       forceMaxVolume(iframe);
-      // Re-enviar a los 250ms por si el player aún no había procesado
-      // el primer comando (player.js a veces tarda en estar listo).
-      const t = setTimeout(() => forceMaxVolume(iframe), 250);
-      return () => clearTimeout(t);
     } else {
       sendBunnyCommand(iframe, "mute");
+      sendBunnyCommand(iframe, "setVolume", 0);
     }
-  }, [unmuted, sample.kind]);
+  };
 
   const handleAudioClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -126,6 +159,7 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
               ref={iframeRef}
               src={sample.src}
               loading="lazy"
+              onLoad={handleIframeLoad}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               className="absolute left-1/2 top-1/2 pointer-events-none"
               style={{

@@ -1,19 +1,9 @@
-import { Navbar } from "@/components/sections/Navbar";
-import { Hero } from "@/components/sections/Hero";
-import { Problema } from "@/components/sections/Problema";
-import { Solucion } from "@/components/sections/Solucion";
-import { Casos } from "@/components/sections/Casos";
+import { ComingSoon } from "@/components/coming-soon/ComingSoon";
 
 export default function HomePage() {
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Problema />
-        <Solucion />
-        <Casos />
-      </main>
-    </>
+    <main id="main-content">
+      <ComingSoon />
+    </main>
   );
 }

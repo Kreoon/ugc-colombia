@@ -1,183 +1,94 @@
-import type { Metadata } from "next";
-import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Anton, Inter } from "next/font/google";
 import "./globals.css";
 
-// ─── Fuentes ───────────────────────────────────────────────────────────────
-const fraunces = Fraunces({
+const anton = Anton({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-anton",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-inter",
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-// ─── Metadata global ───────────────────────────────────────────────────────
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ugccolombia.co"),
-  title: {
-    default: "Agencia UGC en Colombia para Marcas LATAM y US Hispanic | UGC Colombia",
-    template: "%s | UGC Colombia",
-  },
+  title: "UGC Colombia — Contenido real, resultados reales.",
   description:
-    "Agencia boutique de UGC y estrategia integrada. Producimos 20–60 videos al mes para marcas de e-commerce, SaaS y DTC en LATAM y USA Hispanic. Tecnología propia Kreoon.",
-  keywords: [
-    "agencia ugc colombia",
-    "ugc creators colombia",
-    "agencia ugc latam",
-    "ugc para meta ads",
-    "contenido generado por usuarios",
-    "hispanic ugc creators",
-    "ugc agency latino market",
-  ],
-  authors: [{ name: "Alexander Cast", url: "https://ugccolombia.co/sobre" }],
-  creator: "UGC Colombia",
-  publisher: "UGC Colombia",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
-  alternates: {
-    canonical: "/",
-    languages: {
-      "es-CO": "/",
-      "es-419": "/",
-      "en-US": "/en",
-    },
-  },
+    "La agencia UGC que está cambiando el juego en LATAM. Contenido con humanos, potenciado por IA. Marcas que convierten más, creadores que se vuelven pro.",
+  metadataBase: new URL("https://ugccolombia.co"),
   openGraph: {
-    type: "website",
-    locale: "es_CO",
-    alternateLocale: ["en_US"],
+    title: "UGC Colombia — Contenido real, resultados reales.",
+    description:
+      "La agencia UGC que está cambiando el juego en LATAM. Muy pronto.",
     url: "https://ugccolombia.co",
     siteName: "UGC Colombia",
-    title: "Agencia UGC en Colombia para Marcas LATAM y US Hispanic",
-    description:
-      "La única agencia UGC latina con tecnología propia que entrega contenido al estándar de agencias USA. Creadores verificados, estrategia integrada, procesos auditables.",
     images: [
       {
-        url: "/og/default.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "UGC Colombia — Agencia boutique UGC LATAM",
+        alt: "UGC Colombia — Contenido real, resultados reales.",
       },
     ],
+    locale: "es_CO",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia UGC en Colombia para Marcas LATAM y US Hispanic",
+    title: "UGC Colombia — Contenido real, resultados reales.",
     description:
-      "Producimos 20–60 videos UGC al mes para marcas DTC, e-commerce y SaaS. Estándar USA, talento colombiano, tecnología propia.",
-    images: ["/og/default.png"],
-    creator: "@agenciaugccolombia",
+      "La agencia UGC que está cambiando el juego en LATAM. Muy pronto.",
+    images: ["/opengraph-image"],
   },
-  verification: {
-    // Agregar tokens de Google Search Console y Bing Webmaster aquí
-    // google: "xxxx",
-    // other: { "msvalidate.01": "xxxx" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
-};
-
-// ─── Schema JSON-LD — Organization global ──────────────────────────────────
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "UGC Colombia",
-  alternateName: "Agencia UGC Colombia",
-  url: "https://ugccolombia.co",
-  logo: "https://ugccolombia.co/logo.png",
-  founder: {
-    "@type": "Person",
-    name: "Alexander Cast",
-    sameAs: [
-      "https://www.linkedin.com/in/alexandercast",
-      "https://instagram.com/infiny",
-    ],
-  },
-  foundingDate: "2024",
-  areaServed: ["CO", "MX", "AR", "CL", "PE", "US"],
-  sameAs: [
-    "https://instagram.com/agenciaugccolombia",
-    "https://tiktok.com/@agenciaugccolombia",
-    "https://linkedin.com/company/ugc-colombia",
+  keywords: [
+    "UGC Colombia",
+    "agencia UGC",
+    "contenido UGC",
+    "creadores de contenido",
+    "marketing de contenido",
+    "LATAM",
+    "live shopping",
+    "contenido real",
   ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    email: "founder@kreoon.com",
-    contactType: "sales",
-    availableLanguage: ["Spanish", "English"],
-  },
 };
 
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "UGC Colombia",
-  url: "https://ugccolombia.co",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://ugccolombia.co/blog?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
-};
-
-// ─── Root Layout ────────────────────────────────────────────────────────────
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html
       lang="es"
-      className={`${fraunces.variable} ${geistSans.variable} ${geistMono.variable}`}
+      className={`${anton.variable} ${inter.variable} dark`}
+      suppressHydrationWarning
     >
-      <head>
-        {/* Schema Organization + WebSite — inyectados en todas las páginas */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        {/* Analytics placeholder — activar con NEXT_PUBLIC_GA4_ID en prod */}
-        {process.env.NEXT_PUBLIC_GA4_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');
-                `,
-              }}
-            />
-          </>
-        )}
-      </head>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="bg-brand-black text-white font-sans antialiased">
+        <a href="#main-content" className="skip-link">
+          Saltar al contenido principal
+        </a>
+        {children}
+        {/* Analytics: agregar aquí cuando estén disponibles las keys */}
+      </body>
     </html>
   );
 }

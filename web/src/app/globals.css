@@ -1,54 +1,107 @@
 @import "tailwindcss";
 
-/* ─── Tokens de diseño UGC Colombia ─── */
-@theme {
-  --color-brand-black: #0A0A0A;
-  --color-brand-gold: #FFD60A;
-  --color-brand-cream: #F5F5F0;
-  --color-brand-text: #1A1A1A;
-  --color-brand-red: #DC2626;
+/* ─── Brand tokens ─────────────────────────────────────────── */
+:root {
+  --brand-black:     #000000;
+  --brand-graphite:  #3D3D3C;
+  --brand-gray:      #BDBCBC;
+  --brand-yellow:    #F9B334;
+  --brand-gold:      #D4A017;
+  --brand-gold-dark: #C9940A;
 
-  --font-serif: var(--font-fraunces), Georgia, serif;
-  --font-sans: var(--font-geist-sans), Inter, sans-serif;
+  --font-anton: "Anton", sans-serif;
+  --font-inter: "Inter", sans-serif;
 }
 
-/* ─── Base global ─── */
+/* ─── Base ──────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-  background-color: var(--color-brand-cream);
-  color: var(--color-brand-text);
-  font-family: var(--font-sans);
+  background-color: var(--brand-black);
+  color: #ffffff;
+  font-family: var(--font-inter), Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* ─── Selección de texto con dorado ─── */
-::selection {
-  background-color: var(--color-brand-gold);
-  color: var(--color-brand-black);
+/* ─── Skip link de accesibilidad ───────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 8px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--brand-gold);
+  color: #000;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: top 0.1s;
 }
 
-/* ─── Focus visible accesible ─── */
-:focus-visible {
-  outline: 2px solid var(--color-brand-gold);
-  outline-offset: 3px;
-  border-radius: 2px;
+.skip-link:focus {
+  top: 8px;
 }
 
-/* ─── Scrollbar personalizado (webkit) ─── */
+/* ─── Scrollbar custom ─────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--color-brand-cream);
+  background: var(--brand-graphite);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: var(--brand-gold);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: var(--brand-yellow);
+}
+
+/* ─── Selection ────────────────────────────────────────────── */
+::selection {
+  background: var(--brand-gold);
+  color: #000000;
+}
+
+::-moz-selection {
+  background: var(--brand-gold);
+  color: #000000;
+}
+
+/* ─── Focus visible global ─────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ─── Reduced motion: deshabilitar animaciones CSS ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

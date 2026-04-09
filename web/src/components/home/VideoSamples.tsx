@@ -133,6 +133,7 @@ interface VideoCardProps {
 
 function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const { ref: intersectionRef, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.4,
     once: false,
@@ -152,9 +153,15 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
     }
   }, [isIntersecting, sample.kind, unmuted]);
 
-  // Para Bunny Stream iframe, alternamos entre src con/sin muted.
-  // Esto recarga el iframe pero es la forma simple sin postMessage.
-  const iframeSrc = unmuted ? withAudio(sample.src) : sample.src;
+  // Toggle de audio para iframe Bunny: mutamos el src directo sobre el
+  // elemento (sin remount de React) para que el cambio sea más fluido.
+  useEffect(() => {
+    if (sample.kind !== "iframe") return;
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const next = unmuted ? withAudio(sample.src) : sample.src;
+    if (iframe.src !== next) iframe.src = next;
+  }, [unmuted, sample.kind, sample.src]);
 
   const handleAudioClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -175,26 +182,15 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
         style={{ aspectRatio: "9/16" }}
       >
         {sample.kind === "iframe" ? (
-          // Trick: el iframe se escala al 118% y se traslada para que
-          // las barras superior e inferior de Bunny queden fuera del
-          // crop del overflow-hidden del padre. Resultado: card 100%
-          // limpia, solo el video.
-          <div className="absolute inset-0 overflow-hidden">
-            <iframe
-              key={iframeSrc}
-              src={iframeSrc}
-              loading="lazy"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              className="absolute left-1/2 top-1/2 pointer-events-none"
-              style={{
-                border: 0,
-                width: "118%",
-                height: "118%",
-                transform: "translate(-50%, -50%)",
-              }}
-              aria-hidden="true"
-            />
-          </div>
+          <iframe
+            ref={iframeRef}
+            src={sample.src}
+            loading="lazy"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ border: 0 }}
+            aria-hidden="true"
+          />
         ) : (
           <video
             ref={videoRef}

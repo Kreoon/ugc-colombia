@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
@@ -15,24 +15,43 @@ const NAV_LINKS = [
   { label: "Blog", href: "#blog" },
 ] as const;
 
+// Offset equal to navbar height to avoid content hidden under it
+const SCROLL_OFFSET = 80;
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    // Set initial state
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  // Close drawer on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setMobileOpen(false);
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleNavClick = useCallback((href: string) => {
     setMobileOpen(false);
     const id = href.replace("#", "");
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+      window.scrollTo({ top, behavior: "smooth" });
     }
-  };
+  }, []);
+
+  // Altura del navbar: compacta al scrollear
+  const navbarHeight = scrolled ? "h-14" : "h-16";
 
   return (
     <header
@@ -40,11 +59,16 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-black/90 backdrop-blur-md border-b border-brand-gold/20 shadow-[0_1px_20px_rgba(0,0,0,0.5)]"
+          ? "bg-black/92 backdrop-blur-md border-b border-brand-gold/20 shadow-[0_1px_20px_rgba(0,0,0,0.5)]"
           : "bg-black/60 backdrop-blur-sm border-b border-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-8">
+      <div
+        className={cn(
+          "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6 transition-all duration-300",
+          navbarHeight
+        )}
+      >
         {/* Logo */}
         <a
           href="/"
@@ -56,7 +80,10 @@ export function Navbar() {
             alt="UGC Colombia"
             width={148}
             height={40}
-            className="h-8 sm:h-9 w-auto"
+            className={cn(
+              "w-auto transition-all duration-300",
+              scrolled ? "h-7" : "h-8 sm:h-9"
+            )}
             priority
           />
         </a>
@@ -74,7 +101,8 @@ export function Navbar() {
                 "px-4 py-2 text-sm font-sans font-medium text-brand-gray",
                 "rounded-lg transition-all duration-150",
                 "hover:text-white hover:bg-white/6",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
+                "min-h-[44px]"
               )}
             >
               {link.label}
@@ -82,60 +110,77 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA desktop */}
-        <div className="hidden lg:flex items-center gap-3">
+        {/* Lado derecho: CTA visible siempre en mobile + desktop */}
+        <div className="flex items-center gap-3">
+          {/* CTA visible en mobile (compacto) + desktop (normal) */}
           <Button
             size="default"
             onClick={() => handleNavClick("#contacto")}
-            className="font-semibold tracking-wide text-sm"
+            className={cn(
+              "font-semibold tracking-wide transition-all duration-300",
+              "text-xs sm:text-sm",
+              scrolled ? "px-3 sm:px-4 py-2" : "px-3 sm:px-5 py-2.5"
+            )}
+            aria-label="Agendar Discovery Call"
           >
-            Discovery Call →
+            <span className="hidden sm:inline">Discovery Call →</span>
+            <span className="sm:hidden">Call →</span>
           </Button>
-        </div>
 
-        {/* Botón hamburguesa mobile */}
-        <button
-          className={cn(
-            "lg:hidden p-2 rounded-lg text-brand-gray",
-            "hover:text-white hover:bg-white/8 transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
-          )}
-          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-nav"
-          onClick={() => setMobileOpen((v) => !v)}
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          {/* Botón hamburguesa mobile */}
+          <button
+            className={cn(
+              "lg:hidden p-2 rounded-lg text-brand-gray",
+              "hover:text-white hover:bg-white/8 transition-colors",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
+              "min-w-[44px] min-h-[44px] flex items-center justify-center"
+            )}
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile drawer — radix dialog sin portal para que quede dentro del header flow */}
+      {/* Mobile drawer */}
       <DialogPrimitive.Root open={mobileOpen} onOpenChange={setMobileOpen}>
         <DialogPrimitive.Portal>
-          <DialogPrimitive.Overlay className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden" />
+          <DialogPrimitive.Overlay
+            className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+            style={{ top: scrolled ? "56px" : "64px" }}
+          />
           <DialogPrimitive.Content
             id="mobile-nav"
             aria-label="Menú de navegación móvil"
             className={cn(
-              "fixed top-16 left-0 right-0 z-40 lg:hidden",
-              "bg-black/95 backdrop-blur-xl border-b border-brand-gold/20",
-              "px-4 py-6 flex flex-col gap-2",
+              "fixed left-0 right-0 z-40 lg:hidden",
+              "bg-black/97 backdrop-blur-xl border-b border-brand-gold/20",
+              "px-4 py-5 flex flex-col gap-1",
               "data-[state=open]:animate-in data-[state=closed]:animate-out",
               "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-              "data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2",
+              "data-[state=closed]:slide-out-to-top-4 data-[state=open]:slide-in-from-top-4",
               "duration-200"
             )}
+            style={{ top: scrolled ? "56px" : "64px" }}
           >
             <DialogPrimitive.Title className="sr-only">
               Menú de navegación
             </DialogPrimitive.Title>
+
             {NAV_LINKS.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
                 className={cn(
                   "w-full text-left px-4 py-3.5 text-base font-sans font-medium text-brand-gray",
-                  "rounded-xl transition-all duration-150",
+                  "rounded-xl transition-all duration-150 min-h-[44px]",
                   "hover:text-white hover:bg-white/8 hover:translate-x-1",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
                 )}
@@ -143,10 +188,11 @@ export function Navbar() {
                 {link.label}
               </button>
             ))}
-            <div className="mt-2 pt-4 border-t border-white/10">
+
+            <div className="mt-3 pt-4 border-t border-white/10">
               <Button
                 size="lg"
-                className="w-full"
+                className="w-full min-h-[48px] text-base font-bold"
                 onClick={() => handleNavClick("#contacto")}
               >
                 Discovery Call →

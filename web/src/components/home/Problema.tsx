@@ -31,7 +31,7 @@ export function Problema() {
     <section
       id="problema"
       aria-labelledby="problema-title"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Noise texture overlay sutil */}
       <div
@@ -55,7 +55,7 @@ export function Problema() {
           <p className="sr-only">Problema</p>
           <h2
             id="problema-title"
-            className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"
+            className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight"
           >
             ¿Te suena familiar?
           </h2>
@@ -73,7 +73,7 @@ export function Problema() {
                 delay: 0.1 + i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="group relative rounded-2xl border border-brand-graphite/60 bg-white/3 p-6 sm:p-8 overflow-hidden transition-all duration-300 hover:border-brand-gold/30 hover:bg-white/5 hover:-translate-y-0.5"
+              className="group relative rounded-2xl border border-brand-graphite/60 bg-white/3 p-5 sm:p-7 lg:p-8 overflow-hidden transition-all duration-300 hover:border-brand-gold/30 hover:bg-white/5 hover:-translate-y-0.5"
             >
               {/* Gradient hover glow */}
               <div

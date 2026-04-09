@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ParticlesBg } from "@/components/home/ParticlesBg";
 
@@ -20,22 +20,37 @@ const fadeUp = {
   }),
 };
 
+const fadeUpReduced = {
+  hidden: { opacity: 0 },
+  visible: () => ({
+    opacity: 1,
+    transition: { duration: 0.3 },
+  }),
+};
+
 export function Hero() {
   const [mounted, setMounted] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
   useEffect(() => setMounted(true), []);
+
+  const variants = shouldReduceMotion ? fadeUpReduced : fadeUp;
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   return (
     <section
       id="hero"
       aria-label="Hero — UGC Colombia"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-black pt-16"
+      className="relative min-h-[90vh] lg:min-h-[820px] flex items-center justify-center overflow-hidden bg-brand-black pt-16"
     >
-      {/* Particles doradas */}
+      {/* Partículas — solo en desktop/tablets donde no hay impacto de performance notable */}
       <ParticlesBg />
 
       {/* Grid SVG pattern con radial mask */}
@@ -66,22 +81,22 @@ export function Hero() {
       />
 
       {/* Contenido */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 sm:py-28">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24 lg:py-28">
         {mounted && (
           <>
             {/* Headline */}
             <motion.h1
               custom={1}
-              variants={fadeUp}
+              variants={variants}
               initial="hidden"
               animate="visible"
               className="font-display leading-none mb-6"
             >
-              <span className="block text-white text-[clamp(3rem,9vw,8.5rem)] leading-[0.92]">
+              <span className="block text-white text-[clamp(2.4rem,8vw,8rem)] leading-[0.92]">
                 ESCALAMOS CREATIVE
               </span>
               <span
-                className="block text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] mt-2"
+                className="block text-[clamp(1.6rem,5.5vw,5.2rem)] leading-[0.95] mt-2"
                 style={{
                   background:
                     "linear-gradient(90deg, #f9b334 0%, #d4a017 50%, #f9b334 100%)",
@@ -90,17 +105,19 @@ export function Hero() {
                   backgroundClip: "text",
                 }}
               >
-                PARA MARCAS QUE VIVEN DEL PERFORMANCE.
+                PARA MARCAS QUE VIVEN
+                <br className="hidden xs:block sm:hidden" />
+                {" DEL PERFORMANCE."}
               </span>
             </motion.h1>
 
-            {/* Subheadline */}
+            {/* Subheadline — max width reducido en mobile para evitar líneas largas */}
             <motion.p
               custom={2}
-              variants={fadeUp}
+              variants={variants}
               initial="hidden"
               animate="visible"
-              className="max-w-3xl mx-auto text-brand-gray text-base sm:text-lg leading-relaxed mb-10"
+              className="max-w-md sm:max-w-xl lg:max-w-2xl mx-auto text-brand-gray text-sm sm:text-base lg:text-lg leading-relaxed mb-10"
             >
               De 5 a 300+ videos UGC al mes, hechos por creadores latinos
               verificados, listos para Meta y TikTok en{" "}
@@ -108,18 +125,18 @@ export function Hero() {
               Estrategia, casting y producción bajo un solo techo.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTAs — full width stacked en mobile, side by side en sm+ */}
             <motion.div
               custom={3}
-              variants={fadeUp}
+              variants={variants}
               initial="hidden"
               animate="visible"
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 px-2 sm:px-0"
             >
               <Button
                 size="lg"
                 onClick={() => scrollTo("contacto")}
-                className="w-full sm:w-auto text-base font-bold tracking-wide shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
+                className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)] focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 aria-label="Agendar Discovery Call con UGC Colombia"
               >
                 AGENDAR DISCOVERY CALL →
@@ -128,7 +145,7 @@ export function Hero() {
                 size="lg"
                 variant="outline"
                 onClick={() => scrollTo("muestras")}
-                className="w-full sm:w-auto text-base"
+                className="w-full sm:w-auto text-sm sm:text-base min-h-[52px] focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 aria-label="Ver muestras de videos UGC"
               >
                 VER MUESTRAS DE VIDEOS
@@ -138,10 +155,10 @@ export function Hero() {
             {/* Trust micro-copy */}
             <motion.p
               custom={4}
-              variants={fadeUp}
+              variants={variants}
               initial="hidden"
               animate="visible"
-              className="mt-6 text-xs text-brand-graphite tracking-wide"
+              className="mt-5 text-xs text-brand-graphite tracking-wide"
             >
               30 min · Gratis · Sin compromiso
             </motion.p>

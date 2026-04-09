@@ -28,6 +28,8 @@
   --brand-yellow: #f9b334;
   --brand-gold: #d4a017;
   --brand-gold-dark: #c9940a;
+  /* Navbar height para scroll offset */
+  --navbar-h: 64px;
 }
 
 /* ─── Base ──────────────────────────────────────────────────── */
@@ -40,6 +42,8 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  /* Offset para que los anchors no queden tapados por el navbar fixed */
+  scroll-padding-top: var(--navbar-h);
 }
 
 @media (prefers-reduced-motion: reduce) {

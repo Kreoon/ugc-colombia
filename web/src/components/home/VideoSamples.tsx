@@ -18,7 +18,7 @@ interface VideoSample {
   tag: string;
 }
 
-const SAMPLES: VideoSample[] = [
+const FALLBACK_SAMPLES: VideoSample[] = [
   { id: 1, src: "/videos/samples/sample-1.mp4", poster: "/videos/samples/sample-1-poster.jpg", tag: "Skincare · LATAM" },
   { id: 2, src: "/videos/samples/sample-2.mp4", poster: "/videos/samples/sample-2-poster.jpg", tag: "Moda · Colombia" },
   { id: 3, src: "/videos/samples/sample-3.mp4", poster: "/videos/samples/sample-3-poster.jpg", tag: "Lifestyle · UGC" },
@@ -26,6 +26,43 @@ const SAMPLES: VideoSample[] = [
   { id: 5, src: "/videos/samples/sample-5.mp4", poster: "/videos/samples/sample-5-poster.jpg", tag: "Beauty · UGC" },
   { id: 6, src: "/videos/samples/sample-6.mp4", poster: "/videos/samples/sample-6-poster.jpg", tag: "Tech · Colombia" },
 ];
+
+interface KreoonVideoDTO {
+  id: string;
+  title?: string;
+  video_url: string;
+  thumbnail_url: string;
+  creator_handle?: string;
+  brand_name?: string;
+  tag?: string;
+}
+
+/**
+ * Pide videos aprobados a /api/showcase (proxy a KREOON).
+ * Si KREOON no responde o devuelve vacío, retorna el array de fallback.
+ */
+async function loadKreoonSamples(limit = 6): Promise<VideoSample[]> {
+  try {
+    // cache: "no-store" para que cada recarga reciba un orden distinto
+    // (la Edge Function de KREOON ya hace ORDER BY random()).
+    const res = await fetch(`/api/showcase?action=videos&limit=${limit}`, {
+      cache: "no-store",
+    });
+    if (!res.ok) return FALLBACK_SAMPLES;
+    const json = (await res.json()) as { success: boolean; data: KreoonVideoDTO[] | null };
+    if (!json.success || !json.data || json.data.length === 0) return FALLBACK_SAMPLES;
+    return json.data.map((v, i) => ({
+      id: i + 1,
+      src: v.video_url,
+      poster: v.thumbnail_url,
+      tag: v.tag ?? (v.brand_name && v.creator_handle
+        ? `${v.brand_name} · @${v.creator_handle}`
+        : v.brand_name ?? v.title ?? "UGC"),
+    }));
+  } catch {
+    return FALLBACK_SAMPLES;
+  }
+}
 
 function VideoCard({ sample }: { sample: VideoSample }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -200,6 +237,17 @@ export function VideoSamples() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.05,
   });
+  const [samples, setSamples] = useState<VideoSample[]>(FALLBACK_SAMPLES);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadKreoonSamples(6).then(data => {
+      if (!cancelled) setSamples(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <section
@@ -259,7 +307,7 @@ export function VideoSamples() {
           aria-label="Muestras de videos UGC"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {SAMPLES.map((sample) => (
+          {samples.map((sample) => (
             <div
               key={sample.id}
               role="listitem"

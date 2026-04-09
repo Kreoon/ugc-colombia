@@ -26,7 +26,8 @@ const PLACEHOLDER_TESTIMONIOS: Testimonial[] = [
     name: "Próximamente",
     role: "Growth Lead",
     brand: "DTC Fitness",
-    quote: "El primer batch superó lo que 3 freelancers nos entregaron en 2 meses.",
+    quote:
+      "El primer batch superó lo que 3 freelancers nos entregaron en 2 meses.",
     tag: "Fitness DTC",
   },
   {
@@ -43,7 +44,7 @@ export function VideoTestimonios() {
   return (
     <section
       id="testimonios"
-      className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden scroll-mt-20 sm:scroll-mt-24"
       aria-labelledby="testimonios-heading"
     >
       {/* Glow de fondo dorado sutil */}
@@ -59,7 +60,7 @@ export function VideoTestimonios() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          className="flex flex-col items-start gap-4 mb-16 sm:mb-20"
+          className="flex flex-col items-start gap-4 mb-14 sm:mb-20"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -74,13 +75,13 @@ export function VideoTestimonios() {
             <span className="text-brand-yellow">nuestros clientes.</span>
           </h2>
           <p className="max-w-2xl text-base sm:text-lg text-brand-gray mt-2">
-            Videos testimonios de marcas reales que ya escalaron con UGC Colombia.
-            Muy pronto disponibles.
+            Videos testimonios de marcas reales que ya escalaron con UGC
+            Colombia. Muy pronto disponibles.
           </p>
         </motion.div>
 
         {/* Grid de 3 cards testimonio vertical 9:16 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
           {PLACEHOLDER_TESTIMONIOS.map((t, idx) => (
             <motion.article
               key={t.id}
@@ -95,6 +96,8 @@ export function VideoTestimonios() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               whileHover={{ y: -6 }}
+              // Accesibilidad: indica que es un placeholder sin video
+              aria-label={`Testimonio próximamente — ${t.brand}`}
             >
               {/* Gradient background */}
               <div
@@ -130,7 +133,7 @@ export function VideoTestimonios() {
               />
 
               {/* Content */}
-              <div className="relative h-full flex flex-col justify-between p-6 sm:p-7">
+              <div className="relative h-full flex flex-col justify-between p-5 sm:p-7">
                 {/* Top — badge */}
                 <div className="flex items-start justify-between">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-[10px] font-semibold text-brand-yellow tracking-wider uppercase">
@@ -142,14 +145,14 @@ export function VideoTestimonios() {
                 </div>
 
                 {/* Middle — play button + quote */}
-                <div className="flex flex-col items-center justify-center gap-6 my-auto">
+                <div className="flex flex-col items-center justify-center gap-5 my-auto">
                   <motion.div
-                    className="relative w-20 h-20 rounded-full flex items-center justify-center bg-brand-yellow/10 border border-brand-yellow/40 backdrop-blur-sm group-hover:bg-brand-yellow/20 group-hover:border-brand-yellow/60 transition-colors"
+                    className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center bg-brand-yellow/10 border border-brand-yellow/40 backdrop-blur-sm group-hover:bg-brand-yellow/20 group-hover:border-brand-yellow/60 transition-colors"
                     whileHover={{ scale: 1.08 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     <Play
-                      className="w-7 h-7 text-brand-yellow fill-brand-yellow ml-1"
+                      className="w-6 h-6 sm:w-7 sm:h-7 text-brand-yellow fill-brand-yellow ml-1"
                       aria-hidden
                     />
                     {/* Pulse ring */}
@@ -162,10 +165,10 @@ export function VideoTestimonios() {
 
                   <div className="text-center">
                     <Quote
-                      className="w-6 h-6 text-brand-gold/60 mx-auto mb-3"
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold/60 mx-auto mb-3"
                       aria-hidden
                     />
-                    <p className="text-sm sm:text-base text-white/85 leading-relaxed italic line-clamp-4">
+                    <p className="text-sm text-white/85 leading-relaxed italic line-clamp-4">
                       &ldquo;{t.quote}&rdquo;
                     </p>
                   </div>
@@ -173,7 +176,7 @@ export function VideoTestimonios() {
 
                 {/* Bottom — autor */}
                 <div className="flex items-center gap-3">
-                  <div className="relative w-11 h-11 rounded-full overflow-hidden bg-gradient-to-br from-brand-yellow/30 to-brand-graphite flex items-center justify-center border border-brand-gold/40">
+                  <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-gradient-to-br from-brand-yellow/30 to-brand-graphite flex items-center justify-center border border-brand-gold/40 flex-shrink-0">
                     <span className="font-display text-base text-brand-yellow">
                       {t.name.charAt(0)}
                     </span>
@@ -194,7 +197,7 @@ export function VideoTestimonios() {
 
         {/* Footer note */}
         <motion.p
-          className="text-center text-sm text-brand-gray/60 mt-12"
+          className="text-center text-sm text-brand-gray/60 mt-10 sm:mt-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -203,7 +206,7 @@ export function VideoTestimonios() {
           ¿Ya eres cliente y quieres compartir tu historia?{" "}
           <a
             href="#contacto"
-            className="text-brand-yellow hover:text-brand-gold underline underline-offset-4 transition-colors"
+            className="text-brand-yellow hover:text-brand-gold underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-sm"
           >
             Cuéntanos →
           </a>

@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 export function CTAFinal() {
   return (
     <section
-      id="cta"
-      className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8"
+      id="contacto"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 scroll-mt-20 sm:scroll-mt-24"
       aria-labelledby="cta-heading"
     >
       <motion.div
@@ -64,8 +64,8 @@ export function CTAFinal() {
         />
 
         {/* Content */}
-        <div className="relative px-8 sm:px-16 lg:px-24 py-20 sm:py-24 lg:py-32">
-          <div className="flex flex-col items-start gap-8 max-w-4xl">
+        <div className="relative px-6 sm:px-12 lg:px-20 xl:px-24 py-16 sm:py-20 lg:py-28">
+          <div className="flex flex-col items-start gap-7 max-w-4xl">
             {/* Badge */}
             <motion.span
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-xs font-semibold text-brand-yellow tracking-[0.2em] uppercase"
@@ -94,7 +94,7 @@ export function CTAFinal() {
 
             {/* Subheadline */}
             <motion.p
-              className="max-w-2xl text-lg sm:text-xl text-brand-gray leading-relaxed"
+              className="max-w-2xl text-base sm:text-lg lg:text-xl text-brand-gray leading-relaxed"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -106,7 +106,7 @@ export function CTAFinal() {
 
             {/* CTA Button */}
             <motion.div
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 mt-2 w-full sm:w-auto"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -114,7 +114,7 @@ export function CTAFinal() {
             >
               <motion.a
                 href="#discovery-call"
-                className="group relative inline-flex items-center gap-3 px-8 py-5 rounded-xl bg-brand-yellow text-brand-black font-semibold text-base sm:text-lg tracking-wide overflow-hidden"
+                className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-4 sm:py-5 rounded-xl bg-brand-yellow text-brand-black font-semibold text-base sm:text-lg tracking-wide overflow-hidden min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-yellow"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -139,21 +139,27 @@ export function CTAFinal() {
                 />
               </motion.a>
 
-              <div className="flex items-center gap-3 text-sm text-brand-gray">
+              <div className="flex items-center justify-center sm:justify-start gap-3 text-sm text-brand-gray">
                 <span className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
                   30 min
                 </span>
-                <span className="w-1 h-1 rounded-full bg-brand-graphite" />
+                <span
+                  className="w-1 h-1 rounded-full bg-brand-graphite"
+                  aria-hidden
+                />
                 <span>Gratis</span>
-                <span className="w-1 h-1 rounded-full bg-brand-graphite" />
+                <span
+                  className="w-1 h-1 rounded-full bg-brand-graphite"
+                  aria-hidden
+                />
                 <span>Sin compromiso</span>
               </div>
             </motion.div>
 
             {/* Trust line */}
             <motion.p
-              className="text-sm text-brand-gray/60 mt-4"
+              className="text-xs sm:text-sm text-brand-gray/60 mt-2"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

@@ -137,7 +137,7 @@ function ServicioCard({
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
-        "group relative rounded-2xl p-6 sm:p-7",
+        "group relative rounded-2xl p-5 sm:p-6 lg:p-7",
         "border border-brand-graphite/60 bg-white/[0.025]",
         "hover:border-brand-gold/40 hover:bg-white/[0.04]",
         "hover:shadow-[0_12px_40px_-12px_rgba(212,160,23,0.25)]",
@@ -161,12 +161,12 @@ function ServicioCard({
       />
 
       {/* Icon */}
-      <div className="relative w-12 h-12 rounded-xl bg-brand-yellow/10 border border-brand-yellow/25 flex items-center justify-center mb-5 group-hover:bg-brand-yellow/20 group-hover:border-brand-yellow/50 transition-colors">
+      <div className="relative w-11 h-11 rounded-xl bg-brand-yellow/10 border border-brand-yellow/25 flex items-center justify-center mb-4 group-hover:bg-brand-yellow/20 group-hover:border-brand-yellow/50 transition-colors">
         <Icon className="h-5 w-5 text-brand-yellow" aria-hidden="true" />
       </div>
 
       {/* Title */}
-      <h3 className="font-display text-xl sm:text-2xl text-white leading-tight mb-3">
+      <h3 className="font-display text-lg sm:text-xl lg:text-2xl text-white leading-tight mb-3">
         {servicio.title}
       </h3>
 
@@ -210,7 +210,7 @@ export function Servicios() {
     <section
       id="servicios"
       aria-labelledby="servicios-title"
-      className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Background decoration */}
       <div
@@ -228,7 +228,7 @@ export function Servicios() {
           initial={{ opacity: 0, y: 24 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16 sm:mb-20 max-w-4xl mx-auto"
+          className="text-center mb-14 sm:mb-20 max-w-4xl mx-auto"
         >
           <p className="sr-only">Servicios</p>
           <h2
@@ -283,7 +283,7 @@ export function Servicios() {
             delay: 0.6,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="relative mt-16 sm:mt-20 rounded-3xl overflow-hidden"
+          className="relative mt-14 sm:mt-20 rounded-3xl overflow-hidden"
         >
           {/* Background layers */}
           <div
@@ -331,19 +331,22 @@ export function Servicios() {
             }}
           />
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-10 p-8 sm:p-12 lg:p-16">
+          <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 p-6 sm:p-10 lg:p-14 xl:p-16">
             {/* Left: Paquete info */}
             <div className="lg:col-span-3 flex flex-col">
               {/* Badge */}
               <div className="inline-flex self-start items-center gap-2 px-4 py-2 rounded-full bg-brand-yellow/10 border border-brand-yellow/40 mb-6">
-                <Sparkles className="h-3.5 w-3.5 text-brand-yellow" aria-hidden />
+                <Sparkles
+                  className="h-3.5 w-3.5 text-brand-yellow"
+                  aria-hidden
+                />
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-yellow">
                   Paquete Completo · Más Popular
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.95] text-white tracking-tight uppercase mb-5">
+              <h3 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-white tracking-tight uppercase mb-5">
                 UGC Ads Pack.
                 <br />
                 <span
@@ -358,7 +361,7 @@ export function Servicios() {
                 </span>
               </h3>
 
-              <p className="text-base sm:text-lg text-brand-gray max-w-xl leading-relaxed mb-8">
+              <p className="text-sm sm:text-base lg:text-lg text-brand-gray max-w-xl leading-relaxed mb-8">
                 Los 8 servicios críticos de marketing y producción UGC bajo un
                 solo techo, un solo contrato, un solo equipo. Pensado para
                 marcas que valoran tiempo sobre DIY.
@@ -369,7 +372,7 @@ export function Servicios() {
                 <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-yellow mb-4">
                   Incluye todo lo siguiente
                 </p>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
                   {PACKAGE_INCLUDES.map((item) => (
                     <li
                       key={item}
@@ -390,9 +393,9 @@ export function Servicios() {
             </div>
 
             {/* Right: Price + CTA + comparison */}
-            <div className="lg:col-span-2 flex flex-col gap-6">
+            <div className="lg:col-span-2 flex flex-col gap-5">
               {/* Price card */}
-              <div className="rounded-2xl border-2 border-brand-yellow/60 bg-brand-yellow/5 p-6 sm:p-8">
+              <div className="rounded-2xl border-2 border-brand-yellow/60 bg-brand-yellow/5 p-5 sm:p-7">
                 <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-gold mb-3">
                   Desde
                 </p>
@@ -403,13 +406,14 @@ export function Servicios() {
                   <span className="text-sm text-brand-gray">USD / mes</span>
                 </div>
                 <p className="text-sm text-brand-gray mb-6">
-                  Escala desde 5 hasta 30+ videos al mes con 3 variantes cada uno.
+                  Escala desde 5 hasta 30+ videos al mes con 3 variantes cada
+                  uno.
                 </p>
 
                 {/* CTA */}
                 <a
                   href="#pricing"
-                  className="group/cta flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-brand-yellow text-black font-sans font-bold text-base tracking-wide hover:bg-brand-gold transition-all hover:shadow-[0_10px_40px_-10px_rgba(249,179,52,0.5)]"
+                  className="group/cta flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-brand-yellow text-black font-sans font-bold text-base tracking-wide hover:bg-brand-gold transition-all hover:shadow-[0_10px_40px_-10px_rgba(249,179,52,0.5)] min-h-[52px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
                   Ver planes
                   <ArrowRight
@@ -439,9 +443,7 @@ export function Servicios() {
                     <span>$700/mes</span>
                   </div>
                   <div className="border-t border-emerald-500/30 pt-3 mt-3 flex justify-between items-baseline">
-                    <span className="text-emerald-400 font-bold">
-                      Ahorras
-                    </span>
+                    <span className="text-emerald-400 font-bold">Ahorras</span>
                     <span className="font-display text-2xl text-emerald-400">
                       $4.000
                     </span>

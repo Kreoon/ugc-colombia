@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { useCountUp } from "@/hooks/use-count-up";
 
@@ -38,19 +39,52 @@ function Metric({ prefix, value, suffix, label, decimals = 0, trigger }: MetricP
   );
 }
 
-const METRICS = [
+interface MetricItem {
+  prefix?: string;
+  value: number;
+  suffix?: string;
+  label: string;
+  decimals?: number;
+}
+
+const FALLBACK_METRICS: MetricItem[] = [
   { prefix: "+", value: 30, suffix: "", label: "Creadores activos", decimals: 0 },
   { prefix: "", value: 14, suffix: " días", label: "Primera entrega", decimals: 0 },
   { prefix: "", value: 100, suffix: "K", label: "Meta MRR 2026 USD", decimals: 0 },
-] as const;
+];
 
 const TEXT_METRICS = ["LATAM + USA"];
+
+interface KreoonStatsDTO {
+  creators_count: number;
+  brands_count: number;
+  campaigns_completed: number;
+  videos_approved: number;
+}
 
 export function SocialProofBar() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.3,
     once: true,
   });
+  const [metrics, setMetrics] = useState<MetricItem[]>(FALLBACK_METRICS);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/showcase?action=stats", { cache: "no-store" })
+      .then(r => r.ok ? r.json() : null)
+      .then((json: { success: boolean; data: KreoonStatsDTO | null } | null) => {
+        if (cancelled || !json?.success || !json.data) return;
+        const { creators_count, brands_count, campaigns_completed } = json.data;
+        setMetrics([
+          { prefix: "+", value: creators_count, label: "Creadores activos" },
+          { prefix: "+", value: brands_count, label: "Marcas atendidas" },
+          { prefix: "+", value: campaigns_completed, label: "Campañas entregadas" },
+        ]);
+      })
+      .catch(() => { /* fallback ya cargado */ });
+    return () => { cancelled = true; };
+  }, []);
 
   return (
     <section
@@ -66,7 +100,7 @@ export function SocialProofBar() {
 
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-wrap sm:flex-nowrap divide-y sm:divide-y-0 sm:divide-x divide-brand-gold/15">
-          {METRICS.map((m) => (
+          {metrics.map((m) => (
             <Metric key={m.label} {...m} trigger={isIntersecting} />
           ))}
 

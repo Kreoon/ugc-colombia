@@ -44,7 +44,7 @@ export function Solucion() {
     <section
       id="solucion"
       aria-labelledby="solucion-title"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 scroll-mt-20 sm:scroll-mt-24"
       style={{
         background:
           "linear-gradient(180deg, #000000 0%, #0a0800 50%, #000000 100%)",
@@ -71,7 +71,7 @@ export function Solucion() {
           <p className="sr-only">Metodología</p>
           <h2
             id="solucion-title"
-            className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"
+            className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight"
           >
             Así trabajamos contigo.
           </h2>
@@ -95,7 +95,7 @@ export function Solucion() {
                   delay: 0.1 + i * 0.12,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative rounded-2xl border border-brand-graphite/50 bg-white/3 p-7 sm:p-8 overflow-hidden transition-all duration-300 hover:border-brand-gold/25 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,160,23,0.08)]"
+                className="group relative rounded-2xl border border-brand-graphite/50 bg-white/3 p-6 sm:p-7 lg:p-8 overflow-hidden transition-all duration-300 hover:border-brand-gold/25 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,160,23,0.08)]"
               >
                 {/* Corner glow */}
                 <div

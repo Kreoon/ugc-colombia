@@ -19,7 +19,7 @@ export function Casos() {
     <section
       id="casos"
       aria-labelledby="casos-title"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-brand-black"
+      className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-6xl mx-auto" ref={ref}>
         {/* Header */}
@@ -32,7 +32,7 @@ export function Casos() {
           <p className="sr-only">Casos</p>
           <h2
             id="casos-title"
-            className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"
+            className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight"
           >
             Los números hablan.
           </h2>
@@ -58,7 +58,7 @@ export function Casos() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Imagen placeholder */}
             <div
-              className="relative min-h-[260px] lg:min-h-full flex items-center justify-center overflow-hidden"
+              className="relative min-h-[220px] sm:min-h-[260px] lg:min-h-full flex items-center justify-center overflow-hidden"
               style={{
                 background:
                   "linear-gradient(135deg, #1a1200 0%, #0d0900 50%, #000000 100%)",
@@ -72,16 +72,19 @@ export function Casos() {
                   backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a017' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
                 }}
               />
-              <div className="relative z-10 text-center px-8 py-12">
+              <div className="relative z-10 text-center px-8 py-10 sm:py-12">
                 <div
-                  className="w-20 h-20 rounded-2xl mx-auto mb-4 flex items-center justify-center"
+                  className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl mx-auto mb-4 flex items-center justify-center"
                   style={{
                     background:
                       "linear-gradient(135deg, rgba(249,179,52,0.2), rgba(212,160,23,0.1))",
                     border: "1px solid rgba(212,160,23,0.3)",
                   }}
                 >
-                  <TrendingUp className="h-9 w-9 text-brand-yellow" aria-hidden="true" />
+                  <TrendingUp
+                    className="h-8 w-8 sm:h-9 sm:w-9 text-brand-yellow"
+                    aria-hidden="true"
+                  />
                 </div>
                 <p className="text-brand-gray text-sm font-sans">
                   Imagen del caso próximamente
@@ -90,13 +93,13 @@ export function Casos() {
             </div>
 
             {/* Contenido */}
-            <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+            <div className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
               {/* Badge */}
-              <span className="inline-flex self-start items-center mb-6 text-xs font-sans font-bold tracking-widest uppercase bg-brand-yellow/12 text-brand-yellow border border-brand-yellow/25 px-3 py-1.5 rounded-full">
+              <span className="inline-flex self-start items-center mb-5 text-xs font-sans font-bold tracking-widest uppercase bg-brand-yellow/12 text-brand-yellow border border-brand-yellow/25 px-3 py-1.5 rounded-full">
                 SKINCARE PREMIUM · LATAM
               </span>
 
-              <h3 className="font-display text-3xl sm:text-4xl text-white leading-tight mb-3">
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-3">
                 De 1.2x a{" "}
                 <span
                   style={{
@@ -111,21 +114,21 @@ export function Casos() {
                 en 8 semanas.
               </h3>
 
-              <p className="text-brand-gray text-sm sm:text-base leading-relaxed mb-8">
+              <p className="text-brand-gray text-sm sm:text-base leading-relaxed mb-7">
                 Framework C.O.N.V.E.R.T. aplicado durante 8 semanas. 32 videos
                 UGC producidos. 68% del ROAS final vino de solo 3 hooks
                 ganadores.
               </p>
 
               {/* Métricas */}
-              <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
                 {METRICAS.map((m) => (
                   <div
                     key={m.label}
                     className="rounded-xl bg-white/4 border border-brand-gold/15 p-3 sm:p-4 text-center"
                   >
                     <p
-                      className="font-display text-xl sm:text-2xl leading-tight mb-0.5"
+                      className="font-display text-lg sm:text-2xl leading-tight mb-0.5"
                       style={{
                         background:
                           "linear-gradient(135deg, #f9b334, #d4a017)",
@@ -136,7 +139,7 @@ export function Casos() {
                     >
                       {m.value}
                     </p>
-                    <p className="text-xs text-brand-gray font-sans">
+                    <p className="text-[10px] sm:text-xs text-brand-gray font-sans leading-tight">
                       {m.desc}
                     </p>
                   </div>
@@ -158,7 +161,7 @@ export function Casos() {
                 delay: 0.2 + i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="relative rounded-2xl border border-brand-graphite/50 bg-white/2 p-8 overflow-hidden flex flex-col items-center justify-center text-center min-h-[180px]"
+              className="relative rounded-2xl border border-brand-graphite/50 bg-white/2 p-8 overflow-hidden flex flex-col items-center justify-center text-center min-h-[160px] sm:min-h-[180px]"
             >
               {/* Blur overlay */}
               <div
@@ -167,7 +170,10 @@ export function Casos() {
               />
               <div className="relative z-10 flex flex-col items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/8 border border-white/15 flex items-center justify-center">
-                  <Lock className="h-4 w-4 text-brand-gray" aria-hidden="true" />
+                  <Lock
+                    className="h-4 w-4 text-brand-gray"
+                    aria-hidden="true"
+                  />
                 </div>
                 <span className="text-xs font-sans font-semibold text-brand-gold tracking-widest uppercase">
                   {tag}

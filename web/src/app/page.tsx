@@ -15,7 +15,13 @@ import { Footer } from "@/components/home/Footer";
 export default function HomePage() {
   return (
     <>
+      {/* Skip link de accesibilidad */}
+      <a href="#main-content" className="skip-link">
+        Saltar al contenido principal
+      </a>
+
       <Navbar />
+
       <main id="main-content" className="relative bg-brand-black text-white">
         <Hero />
         <SocialProofBar />

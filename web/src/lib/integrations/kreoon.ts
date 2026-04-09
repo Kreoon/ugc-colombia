@@ -53,10 +53,10 @@ async function kreoonFetch<T>(action: "videos" | "stats", params: Record<string,
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
-      // Videos: cache 24h (refresca 1 vez al día, shuffle server-side
-      //   con seed diario → mismo orden para todos los usuarios del día).
+      // Videos: cache 1h (refresca cada hora, shuffle server-side con
+      //   seed horario → mismo orden para todos los usuarios de la hora).
       // Stats: cache 60s (los conteos sí queremos frescos).
-      const revalidate = action === "videos" ? 86_400 : 60;
+      const revalidate = action === "videos" ? 3_600 : 60;
       const response = await fetch(url.toString(), {
         method: "GET",
         headers: {

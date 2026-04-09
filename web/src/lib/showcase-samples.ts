@@ -76,14 +76,15 @@ function transformVideos(videos: KreoonVideo[]): VideoSample[] {
 }
 
 /**
- * Hash determinístico de una fecha YYYY-MM-DD en un entero.
- * Se usa como seed del shuffle diario.
+ * Hash determinístico de la hora actual (YYYY-MM-DD-HH) en un entero.
+ * Se usa como seed del shuffle horario: 24 rotaciones distintas por día.
  */
-function dailySeed(): number {
-  const today = new Date().toISOString().slice(0, 10); // "2026-04-09"
+function hourlySeed(): number {
+  // ej: "2026-04-09-14" (FNV-1a sobre la cadena)
+  const bucket = new Date().toISOString().slice(0, 13).replace("T", "-");
   let h = 2166136261;
-  for (let i = 0; i < today.length; i++) {
-    h ^= today.charCodeAt(i);
+  for (let i = 0; i < bucket.length; i++) {
+    h ^= bucket.charCodeAt(i);
     h = Math.imul(h, 16777619);
   }
   return h >>> 0;
@@ -120,21 +121,20 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
  * Server Component entry point. Estrategia de cache:
  *
  * 1. `fetchApprovedVideos(40)` cacheado en Vercel Data Cache con
- *    `revalidate: 86400` (24h). El primer render del día pega a KREOON,
- *    el resto del día sirve desde cache (TTFB ~5-15ms).
- * 2. Shuffle con seed = hash(YYYY-MM-DD) → todos los usuarios del mismo
- *    día ven el MISMO orden. A medianoche UTC rota automáticamente.
+ *    `revalidate: 3600` (1h). El primer render de la hora pega a KREOON,
+ *    el resto de la hora sirve desde cache.
+ * 2. Shuffle con seed = hash(YYYY-MM-DD-HH) → todos los usuarios de la
+ *    misma hora ven el MISMO orden. Al cambiar la hora rota automáticamente.
  * 3. Como no hay signals dinámicos (no headers, no cookies, no random
  *    per-request), Next marca la página como ISR y el HTML completo se
- *    cachea en el CDN de Vercel — TTFB de edge (~5ms) para todos los
- *    usuarios del día.
+ *    cachea en el CDN de Vercel — TTFB de edge (~5-20ms).
  */
 export async function getShowcaseSamples(limit = 12): Promise<VideoSample[]> {
   try {
     const pool = await fetchApprovedVideos(40);
     const transformed = transformVideos(pool);
     if (transformed.length === 0) return FALLBACK_SAMPLES;
-    const shuffled = seededShuffle(transformed, dailySeed()).slice(0, limit);
+    const shuffled = seededShuffle(transformed, hourlySeed()).slice(0, limit);
     return shuffled.map((s, i) => ({ ...s, id: i + 1 }));
   } catch (err) {
     console.error("[showcase-samples] Error fetching KREOON:", err);

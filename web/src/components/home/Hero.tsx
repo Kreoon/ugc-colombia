@@ -93,7 +93,7 @@ export function Hero() {
               className="font-display leading-none mb-6"
             >
               <span className="block text-white text-[clamp(2.4rem,8vw,8rem)] leading-[0.92]">
-                ESCALAMOS CREATIVE
+                HACEMOS CRECER MARCAS
               </span>
               <span
                 className="block text-[clamp(1.6rem,5.5vw,5.2rem)] leading-[0.95] mt-2"
@@ -105,9 +105,9 @@ export function Hero() {
                   backgroundClip: "text",
                 }}
               >
-                PARA MARCAS QUE VIVEN
+                CON CONTENIDO QUE DE
                 <br className="hidden xs:block sm:hidden" />
-                {" DEL PERFORMANCE."}
+                {" VERDAD VENDE."}
               </span>
             </motion.h1>
 
@@ -122,7 +122,7 @@ export function Hero() {
               De 5 a 300+ videos UGC al mes, hechos por creadores latinos
               verificados, listos para Meta y TikTok en{" "}
               <span className="text-white font-semibold">7 días</span>.
-              Estrategia, casting y producción bajo un solo techo.
+              Estrategia, selección de creadores y producción bajo un mismo techo.
             </motion.p>
 
             {/* CTAs — full width stacked en mobile, side by side en sm+ */}
@@ -137,9 +137,9 @@ export function Hero() {
                 size="lg"
                 onClick={() => scrollTo("contacto")}
                 className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)] focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                aria-label="Agendar Discovery Call con UGC Colombia"
+                aria-label="Agendar llamada inicial con UGC Colombia"
               >
-                AGENDAR DISCOVERY CALL →
+                AGENDA TU LLAMADA INICIAL →
               </Button>
               <Button
                 size="lg"

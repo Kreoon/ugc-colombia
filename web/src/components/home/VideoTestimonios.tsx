@@ -16,7 +16,7 @@ const PLACEHOLDER_TESTIMONIOS: Testimonial[] = [
   {
     id: "t1",
     name: "Próximamente",
-    role: "CEO & Founder",
+    role: "Director / Fundadora",
     brand: "Skincare LATAM",
     quote: "Pasamos de 1.2x a 3.8x ROAS en 60 días sin aumentar el presupuesto.",
     tag: "Skincare Premium",
@@ -24,16 +24,16 @@ const PLACEHOLDER_TESTIMONIOS: Testimonial[] = [
   {
     id: "t2",
     name: "Próximamente",
-    role: "Growth Lead",
+    role: "Líder de crecimiento",
     brand: "DTC Fitness",
     quote:
-      "El primer batch superó lo que 3 freelancers nos entregaron en 2 meses.",
+      "El primer lote superó lo que 3 independientes nos entregaron en 2 meses.",
     tag: "Fitness DTC",
   },
   {
     id: "t3",
     name: "Próximamente",
-    role: "Head of Marketing",
+    role: "Director de marketing",
     brand: "SaaS B2B",
     quote: "Bajamos el CPA un 55% con los primeros 10 videos UGC.",
     tag: "SaaS B2B",
@@ -75,7 +75,7 @@ export function VideoTestimonios() {
             <span className="text-brand-yellow">nuestros clientes.</span>
           </h2>
           <p className="max-w-2xl text-base sm:text-lg text-brand-gray mt-2">
-            Videos testimonios de marcas reales que ya escalaron con UGC
+            Videos testimonios de marcas reales que ya crecieron con UGC
             Colombia. Muy pronto disponibles.
           </p>
         </motion.div>
@@ -96,7 +96,6 @@ export function VideoTestimonios() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               whileHover={{ y: -6 }}
-              // Accesibilidad: indica que es un placeholder sin video
               aria-label={`Testimonio próximamente — ${t.brand}`}
             >
               {/* Gradient background */}

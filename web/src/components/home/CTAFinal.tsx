@@ -87,9 +87,9 @@ export function CTAFinal() {
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              Dejá de perseguir
+              Deja de rogarles a los
               <br />
-              <span className="text-brand-yellow">creators por DM.</span>
+              <span className="text-brand-yellow">creadores por mensaje privado.</span>
             </motion.h2>
 
             {/* Subheadline */}
@@ -100,8 +100,8 @@ export function CTAFinal() {
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Escalá tu contenido con un equipo que ya lo hizo cientos de veces.
-              Estrategia, casting y producción bajo un solo techo.
+              Haz crecer tu contenido con un equipo que ya lo hizo cientos de veces.
+              Estrategia, selección de creadores y producción bajo un mismo techo.
             </motion.p>
 
             {/* CTA Button */}
@@ -123,7 +123,7 @@ export function CTAFinal() {
                     "0 10px 40px -10px rgba(249,179,52,0.5), 0 0 80px -20px rgba(212,160,23,0.4)",
                 }}
               >
-                <span className="relative z-10">AGENDAR DISCOVERY CALL</span>
+                <span className="relative z-10">AGENDA TU LLAMADA INICIAL</span>
                 <ArrowRight
                   className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1"
                   aria-hidden
@@ -165,7 +165,7 @@ export function CTAFinal() {
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Garantía de 7 días: si el primer batch no cumple el brief,
+              Garantía de 7 días: si el primer lote no cumple las instrucciones,
               devolvemos el mes completo.
             </motion.p>
           </div>

@@ -6,14 +6,14 @@ const NAV_LINKS = {
   agencia: [
     { label: "Servicios", href: "#servicios" },
     { label: "Casos", href: "#casos" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Precios", href: "#pricing" },
     { label: "Sobre nosotros", href: "/sobre-nosotros" },
     { label: "Blog", href: "/blog" },
   ],
   recursos: [
     { label: "Kit UGC 2026", href: "/recursos/kit-ugc-2026" },
     { label: "Preguntas frecuentes", href: "#faq" },
-    { label: "Discovery call", href: "#discovery-call" },
+    { label: "Llamada inicial", href: "#discovery-call" },
     { label: "Contacto", href: "#contacto" },
   ],
   legal: [
@@ -71,7 +71,7 @@ export function Footer() {
             </a>
             <p className="mt-6 text-sm text-brand-gray max-w-xs leading-relaxed">
               Contenido real, resultados reales. Agencia boutique UGC para
-              marcas que viven del performance en LATAM + USA Hispanic.
+              marcas que viven de los resultados en LATAM + USA Hispanic.
             </p>
 
             <div className="mt-8 flex items-center gap-3">

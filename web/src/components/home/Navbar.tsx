@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { label: "Servicios", href: "#servicios" },
   { label: "Casos", href: "#casos" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Precios", href: "#pricing" },
   { label: "Sobre", href: "#sobre" },
   { label: "Blog", href: "#blog" },
 ] as const;
@@ -121,10 +121,10 @@ export function Navbar() {
               "text-xs sm:text-sm",
               scrolled ? "px-3 sm:px-4 py-2" : "px-3 sm:px-5 py-2.5"
             )}
-            aria-label="Agendar Discovery Call"
+            aria-label="Agendar llamada inicial"
           >
-            <span className="hidden sm:inline">Discovery Call →</span>
-            <span className="sm:hidden">Call →</span>
+            <span className="hidden sm:inline">Llamada inicial →</span>
+            <span className="sm:hidden">Llamada →</span>
           </Button>
 
           {/* Botón hamburguesa mobile */}
@@ -195,7 +195,7 @@ export function Navbar() {
                 className="w-full min-h-[48px] text-base font-bold"
                 onClick={() => handleNavClick("#contacto")}
               >
-                Discovery Call →
+                Llamada inicial →
               </Button>
             </div>
           </DialogPrimitive.Content>

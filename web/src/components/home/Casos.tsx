@@ -5,9 +5,9 @@ import { useIntersection } from "@/hooks/use-intersection";
 import { TrendingUp, Lock } from "lucide-react";
 
 const METRICAS = [
-  { label: "CTR", value: "+146%", desc: "Click-through rate" },
+  { label: "CTR", value: "+146%", desc: "Tasa de clics" },
   { label: "CPA", value: "-55%", desc: "Costo por adquisición" },
-  { label: "ROAS", value: "+217%", desc: "Retorno en ads" },
+  { label: "ROAS", value: "+217%", desc: "Retorno en publicidad" },
 ] as const;
 
 export function Casos() {
@@ -29,12 +29,12 @@ export function Casos() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 sm:mb-16"
         >
-          <p className="sr-only">Casos</p>
+          <p className="sr-only">Casos de éxito</p>
           <h2
             id="casos-title"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight"
           >
-            Los números hablan.
+            Que los resultados hablen por nosotros.
           </h2>
         </motion.div>
 
@@ -115,8 +115,8 @@ export function Casos() {
               </h3>
 
               <p className="text-brand-gray text-sm sm:text-base leading-relaxed mb-7">
-                Framework C.O.N.V.E.R.T. aplicado durante 8 semanas. 32 videos
-                UGC producidos. 68% del ROAS final vino de solo 3 hooks
+                Marco C.O.N.V.E.R.T. aplicado durante 8 semanas. 32 videos
+                UGC producidos. El 68% del ROAS final vino de solo 3 ganchos
                 ganadores.
               </p>
 
@@ -151,7 +151,7 @@ export function Casos() {
 
         {/* 2 upcoming placeholders */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-          {["Ecommerce · Moda", "SaaS · Fintech"].map((tag, i) => (
+          {["Comercio electrónico · Moda", "SaaS · Fintech"].map((tag, i) => (
             <motion.div
               key={tag}
               initial={{ opacity: 0, y: 24 }}

@@ -6,19 +6,19 @@ import { useIntersection } from "@/hooks/use-intersection";
 const PROBLEMAS = [
   {
     num: "01",
-    text: "Contrataste 3 creators por DM y ninguno entregó a tiempo.",
+    text: "Contrataste 3 creadores por mensaje privado y ninguno entregó a tiempo.",
   },
   {
     num: "02",
-    text: "Tu CPA en Meta subió 40% y los ads con modelos de stock ya no convierten.",
+    text: "Tu CPA en Meta subió 40% y los anuncios con modelos de stock ya no convierten.",
   },
   {
     num: "03",
-    text: "Tu equipo interno grabó contenido pero parece ad, no UGC real.",
+    text: "Tu equipo interno grabó contenido pero parece publicidad, no UGC real.",
   },
   {
     num: "04",
-    text: "Pagaste una plataforma gringa y los videos suenan 'traducidos del inglés'.",
+    text: "Pagaste una plataforma extranjera y los videos suenan traducidos del inglés.",
   },
 ] as const;
 
@@ -52,7 +52,7 @@ export function Problema() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12 sm:mb-16"
         >
-          <p className="sr-only">Problema</p>
+          <p className="sr-only">El problema</p>
           <h2
             id="problema-title"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight"

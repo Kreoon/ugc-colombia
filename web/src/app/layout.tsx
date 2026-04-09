@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     "creadores de contenido",
     "marketing de contenido",
     "LATAM",
-    "live shopping",
+    "ventas en vivo",
     "contenido real",
   ],
 };

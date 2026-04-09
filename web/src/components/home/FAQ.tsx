@@ -16,35 +16,35 @@ type FAQItem = {
 const FAQS: FAQItem[] = [
   {
     q: "¿Cuánto tardan en entregar?",
-    a: "La primera tanda de videos está en tus manos en 7 días hábiles desde el kickoff. Después del primer mes operamos con batches semanales para garantizar flujo constante y testeo rápido de hooks.",
+    a: "La primera tanda de videos está en tus manos en 7 días hábiles desde el arranque inicial. Después del primer mes operamos con entregas semanales para garantizar un flujo constante y experimentación rápida con los ganchos.",
   },
   {
-    q: "¿Puedo ver el perfil del creator antes de producir?",
-    a: "Sí, siempre. Después del kickoff hacemos matching y te enviamos 3-5 perfiles de creadores pre-seleccionados con ficha, scoring A/B/C y videos previos del nicho. Vos aprobás antes de que grabemos un solo segundo.",
+    q: "¿Puedo ver el perfil del creador antes de producir?",
+    a: "Sí, siempre. Después del arranque inicial hacemos selección y te enviamos 3-5 perfiles de creadores pre-seleccionados con ficha, puntuación y videos previos del nicho. Tú apruebas antes de que grabemos un solo segundo.",
   },
   {
-    q: "¿Los videos tienen derechos para paid media?",
-    a: "Sí. Todos nuestros contratos incluyen derechos de uso comercial para paid media (Meta, TikTok, Google) por 12 meses. Si necesitás whitelisting, perpetual rights o exclusividad por nicho, lo cotizamos como add-on.",
+    q: "¿Los videos tienen derechos para publicidad pagada?",
+    a: "Sí. Todos nuestros contratos incluyen derechos de uso comercial para medios pagados (Meta, TikTok, Google) por 12 meses. Si necesitas publicación con tu marca, derechos perpetuos o exclusividad por nicho, lo cotizamos como complemento.",
   },
   {
-    q: "¿Trabajan con nichos regulados (salud, finanzas, beauty)?",
-    a: "Sí. Tenemos briefs compliance-ready para categorías sensibles. Cada claim se valida con el cliente antes de producir. Skincare, suplementos, fintech y seguros son parte de nuestro pool activo.",
+    q: "¿Trabajan con nichos regulados (salud, finanzas, belleza)?",
+    a: "Sí. Tenemos instrucciones listas para categorías sensibles. Cada afirmación se valida con el cliente antes de producir. Skincare, suplementos, fintech y seguros son parte de nuestra red activa.",
   },
   {
     q: "¿Hay permanencia mínima en los planes?",
     a: "Mínimo 3 meses en planes recurrentes. Después queda mes a mes, cancelable con 30 días de aviso. Los proyectos únicos (producción premium, consultoría) no tienen permanencia.",
   },
   {
-    q: "¿Puedo pedir reshoots si algo no me gusta?",
-    a: "Sí. Incluimos 1 reshoot gratuito por video si no cumple el brief aprobado. Rondas adicionales de revisión: hasta 2 por video sin costo en planes Growth y Scale. Más allá es cotizable.",
+    q: "¿Puedo pedir regrabaciones si algo no me gusta?",
+    a: "Sí. Incluimos 1 regrabación gratuita por video si no cumple las instrucciones aprobadas. Rondas adicionales de revisión: hasta 2 por video sin costo en los planes Crecimiento y Escala. Más allá es cotizable.",
   },
   {
     q: "¿Cómo es la comunicación durante el proyecto?",
-    a: "Grupo de WhatsApp dedicado con tu account manager, Diana Mile (líder de creadores) y Alexander cuando es estratégico. Respuesta en horario hábil < 4 horas. Reportes semanales. Reunión mensual de 30 min.",
+    a: "Grupo de WhatsApp dedicado con tu asesora de cuenta, Diana Mile (líder de creadores) y Alexander cuando es estratégico. Respuesta en horario hábil en menos de 4 horas. Reportes semanales. Reunión mensual de 30 min.",
   },
   {
     q: "¿Qué los diferencia de Billo o Insense?",
-    a: "Billo e Insense son marketplaces self-serve: vos hacés todo. Nosotros somos una agencia boutique con estrategia integrada, casting curado, dirección creativa y medición de performance. Mismo ticket, resultado distinto. Ideal si valorás tiempo sobre DIY.",
+    a: "Billo e Insense son plataformas de autogestión: tú haces todo. Nosotros somos una agencia boutique con estrategia integrada, selección curada de creadores, dirección creativa y medición de resultados. Mismo precio, resultado diferente. Ideal si valoras tu tiempo.",
   },
 ];
 
@@ -63,7 +63,7 @@ export function FAQ() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="sr-only">FAQ</span>
+          <span className="sr-only">Preguntas frecuentes</span>
           <h2
             id="faq-heading"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"
@@ -72,7 +72,7 @@ export function FAQ() {
             <span className="text-brand-yellow">frecuentes.</span>
           </h2>
           <p className="max-w-2xl text-base sm:text-lg text-brand-gray mt-2">
-            Todo lo que querés saber antes de agendar tu discovery call. Si
+            Todo lo que quieres saber antes de agendar tu llamada inicial. Si
             falta algo,{" "}
             <a
               href="https://wa.me/573001234567"
@@ -80,7 +80,7 @@ export function FAQ() {
               rel="noopener noreferrer"
               className="text-brand-yellow hover:text-brand-gold underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-sm"
             >
-              preguntanos por WhatsApp
+              pregúntanos por WhatsApp
             </a>
             .
           </p>

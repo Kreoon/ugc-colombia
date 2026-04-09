@@ -32,7 +32,7 @@ const SERVICIOS: Servicio[] = [
     icon: Compass,
     title: "Consultoría Estratégica",
     description:
-      "Sesiones 1-a-1 con Alexander para auditar tu creative actual y construir la hoja de ruta de los próximos 90 días.",
+      "Sesiones 1-a-1 con Alexander para auditar tu contenido actual y construir la hoja de ruta de los próximos 90 días.",
     priceFrom: "$400",
     priceUnit: "USD / sesión",
   },
@@ -41,7 +41,7 @@ const SERVICIOS: Servicio[] = [
     icon: TrendingUp,
     title: "Estrategia de Marketing",
     description:
-      "Plan completo de adquisición, funnel de ventas, pricing, canales y presupuesto para escalar tu marca con intención.",
+      "Plan completo de adquisición, embudo de ventas, precios, canales y presupuesto para hacer crecer tu marca con intención.",
     priceFrom: "$650",
     priceUnit: "USD / mes",
   },
@@ -50,7 +50,7 @@ const SERVICIOS: Servicio[] = [
     icon: BookOpen,
     title: "Estrategia de Contenido",
     description:
-      "Pilares editoriales, calendario mensual, ángulos ganadores y frameworks de hooks probados por vertical.",
+      "Pilares editoriales, calendario mensual, ángulos ganadores y marcos de ganchos probados por vertical.",
     priceFrom: "$450",
     priceUnit: "USD / mes",
   },
@@ -59,7 +59,7 @@ const SERVICIOS: Servicio[] = [
     icon: FileText,
     title: "Guiones UGC",
     description:
-      "Guiones conversacionales escritos con acento latino real. Hooks, transiciones y CTAs listos para grabar.",
+      "Guiones conversacionales escritos con acento latino real. Ganchos, transiciones y llamadas a la acción listos para grabar.",
     priceFrom: "$90",
     priceUnit: "USD / guion",
   },
@@ -68,7 +68,7 @@ const SERVICIOS: Servicio[] = [
     icon: Search,
     title: "Investigación de Mercado",
     description:
-      "Análisis de audiencia, dolores, insights culturales y tendencias LATAM + USA Hispanic con data real.",
+      "Análisis de audiencia, dolores, hallazgos culturales y tendencias LATAM + USA Hispanic con datos reales.",
     priceFrom: "$450",
     priceUnit: "USD / proyecto",
   },
@@ -77,7 +77,7 @@ const SERVICIOS: Servicio[] = [
     icon: Eye,
     title: "Análisis de Competencia",
     description:
-      "Auditoría de tus competidores directos: creative, pricing, posicionamiento y ventanas de oportunidad.",
+      "Auditoría de tus competidores directos: contenido creativo, precios, posicionamiento y oportunidades de mercado.",
     priceFrom: "$350",
     priceUnit: "USD / proyecto",
   },
@@ -86,7 +86,7 @@ const SERVICIOS: Servicio[] = [
     icon: Film,
     title: "Edición Profesional",
     description:
-      "Post-producción cinematográfica: color grading, motion graphics, subtítulos dinámicos y exports ad-ready.",
+      "Posproducción cinematográfica: corrección de color, gráficos animados, subtítulos animados y exportaciones listas para publicar.",
     priceFrom: "$65",
     priceUnit: "USD / video",
   },
@@ -95,7 +95,7 @@ const SERVICIOS: Servicio[] = [
     icon: BadgeCheck,
     title: "Creadores Verificados",
     description:
-      "Acceso a nuestra red de +30 creadores latinos pre-vetted. Matching por nicho, audiencia y estilo de marca.",
+      "Acceso a nuestra red de +30 creadores latinos pre-verificados. Selección por nicho, audiencia y estilo de marca.",
     priceFrom: "$150",
     priceUnit: "USD / video",
   },
@@ -110,9 +110,9 @@ const PACKAGE_INCLUDES = [
   "Análisis de competencia trimestral",
   "Edición profesional ilimitada",
   "Red de creadores verificados",
-  "Account manager dedicado",
-  "Reportes semanales de performance",
-  "Derechos paid media 12 meses",
+  "Asesora de cuenta dedicada",
+  "Reportes semanales de resultados",
+  "Derechos de publicidad 12 meses",
   "Garantía de 7 días",
 ];
 
@@ -254,7 +254,7 @@ export function Servicios() {
             <span className="text-white font-semibold">
               o los combinas todos
             </span>{" "}
-            en el UGC Ads Pack y ahorras hasta{" "}
+            en el Paquete Completo UGC y ahorras hasta{" "}
             <span className="text-emerald-400 font-semibold">
               $4.000 USD/mes
             </span>
@@ -347,7 +347,7 @@ export function Servicios() {
 
               {/* Title */}
               <h3 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-white tracking-tight uppercase mb-5">
-                UGC Ads Pack.
+                Paquete Completo UGC.
                 <br />
                 <span
                   style={{
@@ -364,7 +364,7 @@ export function Servicios() {
               <p className="text-sm sm:text-base lg:text-lg text-brand-gray max-w-xl leading-relaxed mb-8">
                 Los 8 servicios críticos de marketing y producción UGC bajo un
                 solo techo, un solo contrato, un solo equipo. Pensado para
-                marcas que valoran tiempo sobre DIY.
+                marcas que valoran su tiempo.
               </p>
 
               {/* Includes grid */}
@@ -439,7 +439,7 @@ export function Servicios() {
                     <span className="line-through opacity-70">~$4.700/mes</span>
                   </div>
                   <div className="flex justify-between text-white font-semibold">
-                    <span>UGC Ads Pack Growth</span>
+                    <span>Paquete Completo UGC - Crecimiento</span>
                     <span>$700/mes</span>
                   </div>
                   <div className="border-t border-emerald-500/30 pt-3 mt-3 flex justify-between items-baseline">

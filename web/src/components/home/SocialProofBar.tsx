@@ -50,7 +50,7 @@ interface MetricItem {
 const FALLBACK_METRICS: MetricItem[] = [
   { prefix: "+", value: 30, suffix: "", label: "Creadores activos", decimals: 0 },
   { prefix: "", value: 14, suffix: " días", label: "Primera entrega", decimals: 0 },
-  { prefix: "", value: 100, suffix: "K", label: "Meta MRR 2026 USD", decimals: 0 },
+  { prefix: "", value: 100, suffix: "K", label: "Meta ingresos 2026 USD", decimals: 0 },
 ];
 
 const TEXT_METRICS = ["LATAM + USA"];

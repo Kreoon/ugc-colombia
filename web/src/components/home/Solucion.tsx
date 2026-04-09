@@ -10,14 +10,14 @@ const PASOS = [
     step: "01",
     title: "Estrategia",
     description:
-      "Definimos tu buyer persona, ángulos de mensaje y territorios creativos antes de grabar un solo segundo. El brief estratégico que la mayoría de agencias omite.",
+      "Definimos tu perfil de cliente ideal, ángulos de mensaje y territorios creativos antes de grabar un solo segundo. El resumen estratégico que la mayoría de agencias omite.",
   },
   {
     icon: Users,
     step: "02",
-    title: "Casting curado",
+    title: "Selección de creadores",
     description:
-      "Seleccionamos creadores de nuestra red verificada que ya conocen tu nicho. Latinos reales, acentos reales, que conectan con tu audiencia objetivo.",
+      "Elegimos creadores de nuestra red verificada que ya conocen tu nicho. Latinos reales, acentos reales, que conectan con tu audiencia objetivo.",
   },
   {
     icon: Film,
@@ -29,9 +29,9 @@ const PASOS = [
   {
     icon: BarChart3,
     step: "04",
-    title: "Iteración con data",
+    title: "Iteración con datos",
     description:
-      "Medimos CTR, hook rate y ROAS de cada video. Los ganadores se escalan, los perdedores se reemplazan. Tu presupuesto de ads siempre con el mejor creative.",
+      "Medimos CTR, hook rate y ROAS de cada video. Los ganadores se escalan, los que no funcionan se reemplazan. Tu presupuesto de publicidad siempre con el mejor contenido.",
   },
 ] as const;
 
@@ -76,7 +76,7 @@ export function Solucion() {
             Así trabajamos contigo.
           </h2>
           <p className="mt-4 text-brand-gray max-w-xl mx-auto text-base sm:text-lg leading-relaxed">
-            Cuatro pasos probados que convierten tu inversión en creative en
+            Cuatro pasos probados que convierten tu inversión en contenido en
             resultados medibles.
           </p>
         </motion.div>

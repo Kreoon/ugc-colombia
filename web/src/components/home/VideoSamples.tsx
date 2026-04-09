@@ -316,7 +316,6 @@ export function VideoSamples() {
         }}
       />
 
-      {/* Header centrado con padding lateral; el grid es full-bleed */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -346,33 +345,33 @@ export function VideoSamples() {
             Click en cualquier video para ver con audio.
           </p>
         </motion.div>
-      </div>
 
-      {/* Grid full-bleed: 2 filas de carruseles horizontales.
-          - Desktop (lg+): 7 cards visibles por fila, scroll horizontal si hay más.
-          - Mobile/tablet: scroll horizontal con snap. */}
-      <div
-        className="flex flex-col gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8"
-        role="list"
-        aria-label="Muestras de videos UGC"
-      >
-        {[row1, row2].map((row, rowIdx) => (
-          <div
-            key={rowIdx}
-            className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-2"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {row.map((sample) => (
-              <div
-                key={sample.id}
-                role="listitem"
-                className="snap-start flex-shrink-0 w-[42vw] sm:w-[28vw] md:w-[20vw] lg:w-[calc((100vw-2rem-6*0.75rem)/7)] xl:w-[calc((100vw-4rem-6*1rem)/7)]"
-              >
-                <VideoCard sample={sample} />
-              </div>
-            ))}
-          </div>
-        ))}
+        {/* 2 filas centradas dentro del container max-w-7xl.
+            Desktop (lg+): grid de 7 columnas, todas las cards calzan dentro del container.
+            Mobile/tablet: scroll horizontal con snap. */}
+        <div
+          className="flex flex-col gap-3 sm:gap-4"
+          role="list"
+          aria-label="Muestras de videos UGC"
+        >
+          {[row1, row2].map((row, rowIdx) => (
+            <div
+              key={rowIdx}
+              className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-2 lg:overflow-visible lg:grid lg:grid-cols-7 lg:gap-3"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {row.map((sample) => (
+                <div
+                  key={sample.id}
+                  role="listitem"
+                  className="snap-start flex-shrink-0 w-[42vw] sm:w-[28vw] md:w-[20vw] lg:w-auto lg:flex-shrink"
+                >
+                  <VideoCard sample={sample} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

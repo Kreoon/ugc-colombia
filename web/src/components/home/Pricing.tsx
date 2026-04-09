@@ -41,56 +41,56 @@ const MAX_VISIBLE_FEATURES = 8;
 const PLANES_RECURRENTES: Plan[] = [
   {
     id: "starter",
-    name: "STARTER",
+    name: "INICIO",
     icon: Zap,
     price: "$400",
     priceUnit: "USD / mes",
     videos: "5 videos UGC",
-    variants: "+ 3 variantes = 15 deliverables",
+    variants: "+ 3 variantes = 15 entregables",
     description:
-      "Para marcas que quieren probar UGC con bajo riesgo y ver resultados rápido.",
+      "Para marcas que quieren probar sin complicarse.",
     features: [
       "5 videos UGC + 3 variantes cada uno",
-      "Brief estratégico incluido",
+      "Resumen estratégico incluido",
       "Investigación de mercado",
       "Análisis de competencia",
       "Guiones escritos por nuestro equipo",
-      "Casting curado de creadores",
-      "Edición profesional ad-ready",
+      "Selección curada de creadores",
+      "Edición profesional lista para publicar",
       "1 ronda de revisión por video",
       "Entrega en 7 días",
-      "Licencia paid media 12 meses",
+      "Licencia de publicidad 12 meses",
     ],
-    ctaLabel: "Empezar con Starter",
+    ctaLabel: "Quiero empezar",
     ctaType: "stripe",
     ctaHref: "/checkout/starter",
     saving: "Ahorras ~$2.200/mes",
   },
   {
     id: "growth",
-    name: "GROWTH",
+    name: "CRECIMIENTO",
     icon: Sparkles,
     price: "$700",
     priceUnit: "USD / mes",
     videos: "10 videos UGC",
-    variants: "+ 3 variantes = 30 deliverables",
+    variants: "+ 3 variantes = 30 entregables",
     description:
-      "El favorito de marcas que ya probaron UGC y están listas para escalar con intención.",
+      "El más popular: para marcas que ya saben lo que funciona.",
     features: [
       "10 videos UGC + 3 variantes cada uno",
       "Estrategia editorial mensual",
       "Investigación de mercado continua",
       "Análisis de competencia trimestral",
-      "Guiones con frameworks ganadores",
-      "Casting premium de nuestra red",
-      "Edición profesional + motion graphics",
+      "Guiones con marcos ganadores",
+      "Selección nivel premium de nuestra red",
+      "Edición profesional + gráficos animados",
       "2 rondas de revisión por video",
-      "Reporte mensual de performance",
-      "Account manager dedicado",
+      "Reporte mensual de resultados",
+      "Asesora de cuenta dedicada",
       "Entrega en 7 días",
-      "Licencia paid media 12 meses",
+      "Licencia de publicidad 12 meses",
     ],
-    ctaLabel: "Empezar con Growth",
+    ctaLabel: "Quiero crecer",
     ctaType: "stripe",
     ctaHref: "/checkout/growth",
     highlight: true,
@@ -99,29 +99,29 @@ const PLANES_RECURRENTES: Plan[] = [
   },
   {
     id: "scale",
-    name: "SCALE",
+    name: "ESCALA",
     icon: Rocket,
     price: "$1.500",
     priceUnit: "USD / mes",
     videos: "30 videos UGC",
-    variants: "+ 3 variantes = 90 deliverables",
+    variants: "+ 3 variantes = 90 entregables",
     description:
-      "Para marcas que saben que el creative es su ventaja competitiva y quieren dominar sus ads.",
+      "Para marcas que ya entendieron que el contenido es su mayor ventaja.",
     features: [
       "30 videos UGC + 3 variantes cada uno",
       "Estrategia de marketing completa",
       "Consultoría estratégica mensual con Alexander",
-      "Research + análisis continuo",
+      "Investigación + análisis continuo",
       "Banco de guiones por ángulo ganador",
-      "Pool de creadores premium Tier A",
-      "Edición cinematográfica + subtítulos dinámicos",
+      "Grupo de creadores nivel premium exclusivo",
+      "Edición cinematográfica + subtítulos animados",
       "Revisiones ilimitadas",
-      "Reportes semanales con data accionable",
-      "Account manager senior dedicado",
-      "Priority delivery",
-      "Licencia paid media 12 meses",
+      "Reportes semanales con datos accionables",
+      "Asesora de cuenta senior dedicada",
+      "Entrega prioritaria",
+      "Licencia de publicidad 12 meses",
     ],
-    ctaLabel: "Empezar con Scale",
+    ctaLabel: "Quiero escalar",
     ctaType: "stripe",
     ctaHref: "/checkout/scale",
     saving: "Ahorras ~$5.500/mes",
@@ -132,16 +132,16 @@ const ENTERPRISE_FEATURES = [
   "60+ videos UGC al mes (escalable)",
   "Variantes ilimitadas por video",
   "Estrategia 360° con tu equipo",
-  "Creative director asignado",
-  "Squad dedicado Tier A exclusivo",
-  "VSLs, hero videos y campañas premium",
-  "Post-producción cinematográfica ilimitada",
-  "Integración directa con tu equipo de performance",
-  "Dashboard en tiempo real",
+  "Director creativo asignado",
+  "Equipo dedicado nivel premium exclusivo",
+  "Videos de ventas, videos principales y campañas premium",
+  "Posproducción cinematográfica ilimitada",
+  "Integración directa con tu equipo de publicidad",
+  "Panel en tiempo real",
   "Slack/Teams compartido",
-  "SLAs garantizados por contrato",
-  "Derechos custom (whitelisting, exclusividad)",
-  "Onboarding ejecutivo con Alexander Cast",
+  "Acuerdos de servicio garantizados por contrato",
+  "Derechos a medida (publicación con tu marca, exclusividad)",
+  "Arranque ejecutivo con Alexander Cast",
 ];
 
 function PlanCard({
@@ -417,13 +417,13 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
           <div className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/40 mb-5">
             <Crown className="h-3.5 w-3.5 text-brand-yellow" aria-hidden />
             <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-yellow">
-              Enterprise · Custom
+              A la Medida · Personalizado
             </span>
           </div>
 
           {/* Headline */}
           <h3 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-white tracking-tight uppercase mb-4">
-            ¿Necesitás{" "}
+            ¿Necesitas{" "}
             <span
               style={{
                 background: "linear-gradient(90deg, #f9b334, #d4a017)",
@@ -432,20 +432,20 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
                 backgroundClip: "text",
               }}
             >
-              escala real?
+              algo a tu medida?
             </span>
           </h3>
 
           <p className="text-sm sm:text-base text-brand-gray leading-relaxed mb-6 max-w-lg">
-            Para empresas con alto volumen de ads que necesitan un squad
-            dedicado, creative director propio, delivery sin límites y SLAs
-            garantizados por contrato.
+            Para empresas con alto volumen de publicidad que necesitan un equipo
+            dedicado, director creativo propio, entrega sin límites y acuerdos de
+            servicio garantizados por contrato.
           </p>
 
           {/* Features grid — 2 columnas */}
           <ul
             className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5"
-            aria-label="Características Enterprise"
+            aria-label="Características del plan a la medida"
           >
             {ENTERPRISE_FEATURES.map((f) => (
               <li key={f} className="flex items-start gap-2.5">
@@ -474,7 +474,7 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
               </div>
               <div>
                 <p className="font-display text-3xl sm:text-4xl text-white leading-none">
-                  Custom
+                  A la medida
                 </p>
                 <p className="text-xs text-brand-gray mt-0.5">
                   60+ videos / mes · Escalable
@@ -483,7 +483,7 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
             </div>
 
             <p className="text-sm text-brand-gray mb-5">
-              Cotización a medida según volumen, verticales y SLAs requeridos.
+              Cotización personalizada según volumen, verticales y acuerdos de servicio requeridos.
             </p>
 
             <a
@@ -495,10 +495,10 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
                 "hover:shadow-[0_10px_40px_-10px_rgba(212,160,23,0.55)]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               )}
-              aria-label="Agendar consulta Enterprise con UGC Colombia"
+              aria-label="Agendar llamada con UGC Colombia para plan a la medida"
             >
               <CalendarDays className="h-5 w-5" aria-hidden />
-              Agendar consulta ejecutiva
+              Hablemos
               <span
                 aria-hidden
                 className="transition-transform group-hover/ent:translate-x-1"
@@ -508,15 +508,15 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
             </a>
 
             <p className="text-[10px] text-center text-brand-gray/60 mt-3">
-              Llamada 30 min · Cotización a medida · Sin compromiso
+              Llamada 30 min · Cotización personalizada · Sin compromiso
             </p>
           </div>
 
           {/* Diferenciadores clave */}
           <div className="flex flex-col gap-3">
             {[
-              "Squad dedicado exclusivo para tu marca",
-              "SLAs garantizados por contrato",
+              "Equipo dedicado exclusivo para tu marca",
+              "Acuerdos de servicio garantizados por contrato",
               "Integración directa con tu equipo",
             ].map((item) => (
               <div
@@ -567,12 +567,12 @@ export function Pricing() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14 sm:mb-18 max-w-3xl mx-auto"
         >
-          <p className="sr-only">Pricing</p>
+          <p className="sr-only">Precios</p>
           <h2
             id="pricing-title"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"
           >
-            Precios transparentes.
+            Precios claros.
             <br />
             <span
               style={{
@@ -582,12 +582,12 @@ export function Pricing() {
                 backgroundClip: "text",
               }}
             >
-              Sin sorpresas.
+              Sin letra pequeña.
             </span>
           </h2>
           <p className="mt-6 text-base sm:text-lg text-brand-gray leading-relaxed">
-            Cada plan incluye los 8 servicios del UGC Ads Pack + 3 variantes por
-            video para que tengas munición ilimitada para A/B testing en Meta y
+            Cada plan incluye los 8 servicios del Paquete Completo UGC + 3 variantes por
+            video para que tengas munición ilimitada para pruebas en Meta y
             TikTok Ads.
           </p>
         </motion.div>
@@ -640,7 +640,7 @@ export function Pricing() {
           />
           <div className="flex items-center gap-2">
             <span aria-hidden>🎯</span>
-            Licencia paid media 12m
+            Licencia de publicidad 12 meses
           </div>
         </motion.div>
       </div>

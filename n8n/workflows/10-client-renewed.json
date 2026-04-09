@@ -1,0 +1,334 @@
+{
+  "name": "10 - client-renewed",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "client-renewed",
+        "responseMode": "lastNode",
+        "options": { "rawBody": true }
+      },
+      "name": "Webhook - Client Renewed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Disparado al renovarse contrato (dia 90). Requiere X-Internal-Secret."
+    },
+    {
+      "parameters": {
+        "jsCode": "// HMAC timing-safe via XOR char-by-char.\nconst headers = $input.first().json.headers || {};\nconst received = headers['x-internal-secret'] || '';\nconst expected = $env.INTERNAL_WEBHOOK_SECRET || '';\nif (!received || received.length !== expected.length) {\n  throw new Error('Unauthorized: invalid internal secret');\n}\nlet diff = 0;\nfor (let i = 0; i < expected.length; i++) {\n  diff |= received.charCodeAt(i) ^ expected.charCodeAt(i);\n}\nif (diff !== 0) throw new Error('Unauthorized: invalid internal secret');\n\nconst body = $input.first().json.body || $input.first().json;\nconst required = ['client_id', 'new_plan', 'new_mrr_usd', 'contract_end_date'];\nfor (const f of required) {\n  if (body[f] === undefined || body[f] === null || body[f] === '') {\n    throw new Error(`Missing required field: ${f}`);\n  }\n}\nconst mrr = parseFloat(body.new_mrr_usd);\nif (isNaN(mrr) || mrr <= 0) throw new Error('Invalid new_mrr_usd');\n\n// Idempotency: client_id + contract_end_date (una sola renovacion por ciclo)\nconst idempotency_key = body.idempotency_key || `renew-${body.client_id}-${body.contract_end_date}`;\n\nreturn [{\n  json: {\n    client_id: body.client_id,\n    new_plan: body.new_plan,\n    new_mrr_usd: mrr,\n    contract_end_date: body.contract_end_date,\n    renewed_at: new Date().toISOString(),\n    previous_plan: body.previous_plan || null,\n    previous_mrr_usd: body.previous_mrr_usd ? parseFloat(body.previous_mrr_usd) : null,\n    renewal_number: body.renewal_number || 1,\n    idempotency_key\n  }\n}];"
+      },
+      "name": "Code - Auth & Validate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "client_renewals",
+        "returnAll": false,
+        "limit": 1,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            { "keyName": "idempotency_key", "condition": "eq", "keyValue": "={{ $json.idempotency_key }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Check Renewal Idempotency",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "notes": "PENDIENTE MIGRACION: la tabla client_renewals debe existir. Ver n8n/workflows-spec.md seccion 10."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [{ "value1": "={{ $json.length }}", "operation": "equal", "value2": 0 }]
+        }
+      },
+      "name": "IF - Is New Renewal?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "clients",
+        "returnAll": false,
+        "limit": 1,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            { "keyName": "id", "condition": "eq", "keyValue": "={{ $('Code - Auth & Validate Payload').item.json.client_id }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Get Client",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 200],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [{ "value1": "={{ $json.length }}", "operation": "larger", "value2": 0 }]
+        }
+      },
+      "name": "IF - Client Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1250, 200]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "clients",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            { "keyName": "id", "condition": "eq", "keyValue": "={{ $('Code - Auth & Validate Payload').item.json.client_id }}" }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "plan", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.new_plan }}" },
+            { "fieldId": "mrr", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.new_mrr_usd }}" },
+            { "fieldId": "contract_end_date", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.contract_end_date }}" },
+            { "fieldId": "last_renewal_at", "fieldValue": "={{ $now.toISO() }}" },
+            { "fieldId": "health_score", "fieldValue": "=100" },
+            { "fieldId": "churn_risk", "fieldValue": "=false" },
+            { "fieldId": "stage", "fieldValue": "active" }
+          ]
+        }
+      },
+      "name": "Supabase - Update Client Plan",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 100],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } }
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "client_renewals",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "client_id", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.client_id }}" },
+            { "fieldId": "previous_plan", "fieldValue": "={{ $('Supabase - Get Client').item.json[0].plan }}" },
+            { "fieldId": "previous_mrr_usd", "fieldValue": "={{ $('Supabase - Get Client').item.json[0].mrr }}" },
+            { "fieldId": "new_plan", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.new_plan }}" },
+            { "fieldId": "new_mrr_usd", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.new_mrr_usd }}" },
+            { "fieldId": "contract_end_date", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.contract_end_date }}" },
+            { "fieldId": "renewal_number", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.renewal_number }}" },
+            { "fieldId": "idempotency_key", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.idempotency_key }}" },
+            { "fieldId": "renewed_at", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.renewed_at }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Insert Renewal Record",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1650, 100],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "notes": "PENDIENTE: crear tabla client_renewals via migracion antes de activar este workflow."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Supabase - Get Client').item.json[0].contact_email }}" },
+            { "name": "subject", "value": "=Confirmacion de renovacion - Gracias por seguir con UGC Colombia" },
+            { "name": "html", "value": "=<h1>Gracias por renovar!</h1><p>Hola {{ $('Supabase - Get Client').item.json[0].company }},</p><p>Confirmamos la renovacion de tu contrato. Plan activo: <strong>{{ $('Code - Auth & Validate Payload').item.json.new_plan }}</strong>.</p><p>Vigencia hasta: {{ $('Code - Auth & Validate Payload').item.json.contract_end_date }}</p><p>Seguimos creando contenido increible para ti.</p><p>- Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - Resend Renewal Confirmation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 240],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Supabase - Get Client').item.json[0].whatsapp }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Gracias por renovar con UGC Colombia! Tu plan {{ $('Code - Auth & Validate Payload').item.json.new_plan }} esta activo hasta {{ $('Code - Auth & Validate Payload').item.json.contract_end_date }}. Seguimos creando contenido increible.\"\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 3000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Client Thanks",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 360],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.beehiiv.com/v2/publications/{{$env.BEEHIIV_PUB_ID}}/subscriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "email", "value": "={{ $('Supabase - Get Client').item.json[0].contact_email }}" },
+            { "name": "reactivate_existing", "value": "=true" },
+            { "name": "send_welcome_email", "value": "=false" },
+            { "name": "custom_fields", "value": "=[{\"name\":\"tag\",\"value\":\"cliente-renovado\"}]" }
+          ]
+        },
+        "options": { "ignore400": true }
+      },
+      "name": "HTTP - Beehiiv Tag Renovado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 480],
+      "credentials": { "httpHeaderAuth": { "name": "Beehiiv API" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"RENOVACION! {{ $('Supabase - Get Client').item.json[0].company }} - {{ $('Code - Auth & Validate Payload').item.json.new_plan }} - ${{ $('Code - Auth & Validate Payload').item.json.new_mrr_usd }}/mes USD. Renovacion #{{ $('Code - Auth & Validate Payload').item.json.renewal_number }}. A celebrar!\"\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Team Celebrate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 600],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"ok\",\n  \"client_id\": \"{{ $('Code - Auth & Validate Payload').item.json.client_id }}\",\n  \"message\": \"Renewal processed\"\n}"
+      },
+      "name": "Respond - Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"duplicate\",\n  \"message\": \"Renewal already processed (idempotency hit)\"\n}"
+      },
+      "name": "Respond - Duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 420]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "workflow_logs",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "workflow", "fieldValue": "client-renewed" },
+            { "fieldId": "node", "fieldValue": "Supabase - Get Client" },
+            { "fieldId": "level", "fieldValue": "error" },
+            { "fieldId": "message", "fieldValue": "Client not found in DB for renewal" },
+            { "fieldId": "payload", "fieldValue": "={{ JSON.stringify($('Code - Auth & Validate Payload').item.json) }}" },
+            { "fieldId": "created_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Log Missing Client",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 760],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 404,
+        "responseBody": "={\n  \"status\": \"error\",\n  \"message\": \"Client not found\"\n}"
+      },
+      "name": "Respond - Client Not Found",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1700, 760]
+    }
+  ],
+  "connections": {
+    "Webhook - Client Renewed": { "main": [[{ "node": "Code - Auth & Validate Payload", "type": "main", "index": 0 }]] },
+    "Code - Auth & Validate Payload": { "main": [[{ "node": "Supabase - Check Renewal Idempotency", "type": "main", "index": 0 }]] },
+    "Supabase - Check Renewal Idempotency": { "main": [[{ "node": "IF - Is New Renewal?", "type": "main", "index": 0 }]] },
+    "IF - Is New Renewal?": {
+      "main": [
+        [{ "node": "Supabase - Get Client", "type": "main", "index": 0 }],
+        [{ "node": "Respond - Duplicate", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Get Client": { "main": [[{ "node": "IF - Client Exists?", "type": "main", "index": 0 }]] },
+    "IF - Client Exists?": {
+      "main": [
+        [
+          { "node": "Supabase - Update Client Plan", "type": "main", "index": 0 },
+          { "node": "HTTP - Resend Renewal Confirmation", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Client Thanks", "type": "main", "index": 0 },
+          { "node": "HTTP - Beehiiv Tag Renovado", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Team Celebrate", "type": "main", "index": 0 }
+        ],
+        [{ "node": "Supabase - Log Missing Client", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Update Client Plan": { "main": [[{ "node": "Supabase - Insert Renewal Record", "type": "main", "index": 0 }]] },
+    "Supabase - Insert Renewal Record": { "main": [[{ "node": "Respond - Success", "type": "main", "index": 0 }]] },
+    "Supabase - Log Missing Client": { "main": [[{ "node": "Respond - Client Not Found", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "clients" },
+    { "name": "renewals" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

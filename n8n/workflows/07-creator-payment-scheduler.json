@@ -1,0 +1,465 @@
+{
+  "name": "07 - creator-payment-scheduler",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 1,15 * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Dias 1 y 15 9am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Pagos quincenales: dias 1 y 15 de cada mes a las 9am. CRITICO: flujo de dinero real."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "creators",
+        "returnAll": true,
+        "filterType": "string",
+        "filterString": "status=eq.active"
+      },
+      "name": "Supabase - Get Active Creators",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Trae todos los creators activos. La logica de montos se calcula en el siguiente nodo Code."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX H3: Calcular pagos pendientes con idempotencia por periodo.\n// La clave de idempotencia previene doble pago en reintentos.\nconst now = new Date();\nconst creators = $input.all().map(i => i.json);\n\n// Determinar periodo actual (quincena)\nconst day = now.getDate();\nconst year = now.getFullYear();\nconst month = String(now.getMonth() + 1).padStart(2, '0');\nconst period_start = day <= 15 \n  ? `${year}-${month}-01` \n  : `${year}-${month}-16`;\nconst period_end = day <= 15 \n  ? `${year}-${month}-15` \n  : new Date(year, now.getMonth() + 1, 0).toISOString().split('T')[0];\n\nconsole.log(`[payment-scheduler] Periodo: ${period_start} → ${period_end}. Creators activos: ${creators.length}`);\n\n// Para cada creator calcular idempotency_key del periodo\nconst paymentsToProcess = creators.map(creator => {\n  // FIX H3: Idempotency key unica por creator+periodo — evita doble pago en reintentos\n  const idempotency_key = `${creator.id}|${period_start}|${period_end}`;\n  return {\n    ...creator,\n    period_start,\n    period_end,\n    idempotency_key\n  };\n});\n\nreturn paymentsToProcess.map(p => ({ json: p }));"
+      },
+      "name": "Code - Calculate Period & Idempotency Keys",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "notes": "FIX H3: Calcula el periodo de pago actual (quincena) y genera idempotency_key unica por creator+periodo. Previene doble pago."
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [850, 300],
+      "notes": "Procesa un creator a la vez para rastrear errores individualmente."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "payments",
+        "returnAll": false,
+        "limit": 1,
+        "filterType": "string",
+        "filterString": "=idempotency_key=eq.{{ $json.idempotency_key }}"
+      },
+      "name": "Supabase - Check Existing Payment",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "FIX H3: Verifica si ya existe un pago para este creator+periodo antes de procesar. Idempotencia a nivel de DB."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.length }}",
+              "operation": "equal",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "name": "IF - Payment Already Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1250, 300],
+      "notes": "FIX H3: Si ya existe un registro de pago para este periodo (idempotency_key), skip. True=nuevo, False=ya procesado."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Calcular monto total pendiente para este creator en el periodo\n// En produccion esto deberia venir de una query SQL con JOIN a content_pieces\n// Por ahora usamos el campo rate_usd del creator como aproximacion\nconst creator = $('Split In Batches').item.json;\n\n// Verificar que hay monto a pagar (threshold minimo USD 20)\nconst total_usd = creator.pending_amount_usd || 0;\nif (total_usd < 20) {\n  return [{ json: { _skip: true, reason: `Amount below threshold: $${total_usd}`, creator_id: creator.id } }];\n}\n\nreturn [{ json: {\n  creator_id: creator.id,\n  creator_name: creator.full_name,\n  creator_email: creator.email,\n  total_usd: total_usd,\n  period_start: creator.period_start,\n  period_end: creator.period_end,\n  idempotency_key: creator.idempotency_key,\n  provider: total_usd > 500 ? 'mercury' : 'wise'\n} }];"
+      },
+      "name": "Code - Calculate Payment Amount",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1450, 220],
+      "notes": "Calcula monto final, verifica threshold minimo ($20 USD), determina proveedor (Mercury >$500, Wise resto)."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json._skip }}",
+              "operation": "notEqual",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "IF - Amount Above Threshold?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1650, 220],
+      "notes": "Si el monto esta bajo el threshold de $20 USD, skip sin error."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "payments",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "creator_id", "fieldValue": "={{ $json.creator_id }}" },
+            { "fieldId": "amount_usd", "fieldValue": "={{ $json.total_usd }}" },
+            { "fieldId": "currency", "fieldValue": "USD" },
+            { "fieldId": "period_start", "fieldValue": "={{ $json.period_start }}" },
+            { "fieldId": "period_end", "fieldValue": "={{ $json.period_end }}" },
+            { "fieldId": "status", "fieldValue": "initiating" },
+            { "fieldId": "provider", "fieldValue": "={{ $json.provider }}" },
+            { "fieldId": "idempotency_key", "fieldValue": "={{ $json.idempotency_key }}" },
+            { "fieldId": "scheduled_for", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Create Payment Record (initiating)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1850, 140],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "FIX H3: Crea registro con status='initiating' ANTES de llamar al banco. El unique index en idempotency_key previene duplicados. Si este insert falla, el workflow aborta y el banco NO es llamado."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('Code - Calculate Payment Amount').item.json.provider }}",
+              "operation": "equal",
+              "value2": "mercury"
+            }
+          ]
+        }
+      },
+      "name": "IF - Provider Mercury or Wise?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [2050, 140],
+      "notes": "Mercury para pagos >$500 USD (transferencia bancaria USA). Wise para el resto (internacional)."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mercury.com/api/v1/account/{{$env.MERCURY_ACCOUNT_ID}}/transactions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{$env.MERCURY_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Idempotency-Key", "value": "={{ $('Code - Calculate Payment Amount').item.json.idempotency_key }}" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"externalMemo\": \"UGC Colombia payment - {{ $('Code - Calculate Payment Amount').item.json.period_start }} to {{ $('Code - Calculate Payment Amount').item.json.period_end }}\",\n  \"amount\": {{ $('Code - Calculate Payment Amount').item.json.total_usd }},\n  \"recipientId\": \"{{ $('Code - Calculate Payment Amount').item.json.creator_id }}\",\n  \"paymentMethod\": \"ach\"\n}",
+        "options": {}
+      },
+      "name": "HTTP - Mercury Create Payment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2250, 80],
+      "notes": "FIX H3: Header Idempotency-Key enviado al banco. Mercury acepta idempotency_key nativo. Verificar response 201 en el siguiente nodo."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.wise.com/v1/transfers",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{$env.WISE_API_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "X-idempotence-uuid", "value": "={{ $('Code - Calculate Payment Amount').item.json.idempotency_key }}" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"targetAccount\": \"{{ $('Code - Calculate Payment Amount').item.json.creator_id }}\",\n  \"quoteUuid\": \"to-be-created-in-pre-step\",\n  \"customerTransactionId\": \"{{ $('Code - Calculate Payment Amount').item.json.idempotency_key }}\",\n  \"details\": {\n    \"reference\": \"UGC Colombia - {{ $('Code - Calculate Payment Amount').item.json.period_start }}\",\n    \"transferPurpose\": \"verification.transfers.purpose.pay.bills\",\n    \"sourceOfFunds\": \"verification.source.of.funds.business\"\n  }\n}",
+        "options": {}
+      },
+      "name": "HTTP - Wise Create Transfer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2250, 220],
+      "notes": "FIX H3: X-idempotence-uuid header enviado a Wise. Wise soporta idempotencia nativa. NOTA: en produccion crear quote antes de transfer."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX H3: Verificar que el banco acepto el pago antes de marcar como submitted.\nconst bankResponse = $input.first().json;\nconst paymentRecord = $('Supabase - Create Payment Record (initiating)').item.json;\nconst provider = $('Code - Calculate Payment Amount').item.json.provider;\n\n// Verificar respuesta del banco\nif (provider === 'mercury') {\n  // Mercury: esperar 201 con id de transaccion\n  if (!bankResponse.id) {\n    throw new Error(`[payment] Mercury no retorno ID de transaccion. Response: ${JSON.stringify(bankResponse).slice(0, 500)}`);\n  }\n  return [{ json: {\n    payment_db_id: paymentRecord.id,\n    provider_tx_id: bankResponse.id,\n    status: 'submitted',\n    creator_id: $('Code - Calculate Payment Amount').item.json.creator_id,\n    total_usd: $('Code - Calculate Payment Amount').item.json.total_usd,\n    provider: 'mercury'\n  } }];\n} else {\n  // Wise: esperar id de transfer\n  if (!bankResponse.id) {\n    throw new Error(`[payment] Wise no retorno ID de transfer. Response: ${JSON.stringify(bankResponse).slice(0, 500)}`);\n  }\n  return [{ json: {\n    payment_db_id: paymentRecord.id,\n    provider_tx_id: String(bankResponse.id),\n    status: 'submitted',\n    creator_id: $('Code - Calculate Payment Amount').item.json.creator_id,\n    total_usd: $('Code - Calculate Payment Amount').item.json.total_usd,\n    provider: 'wise'\n  } }];\n}"
+      },
+      "name": "Code - Verify Bank Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2450, 150],
+      "notes": "FIX H3: Verifica que el banco retorno un ID de transaccion valido. Lanza error si la respuesta indica fallo. Solo entonces procede a actualizar el registro."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "payments",
+        "id": "={{ $json.payment_db_id }}",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "status", "fieldValue": "submitted" },
+            { "fieldId": "tx_id", "fieldValue": "={{ $json.provider_tx_id }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Update Payment Submitted",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2650, 150],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "FIX H3: Actualiza el registro de pago a 'submitted' con el tx_id del banco. content_pieces.paid NO se marca aun — se espera webhook del banco para 'sent'."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <pagos@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Calculate Payment Amount').item.json.creator_email }}" },
+            { "name": "subject", "value": "Tu pago fue enviado - UGC Colombia" },
+            { "name": "html", "value": "=<h2>Hola {{ $('Code - Calculate Payment Amount').item.json.creator_name }}!</h2><p>Tu pago de <strong>${{ $('Code - Calculate Payment Amount').item.json.total_usd }} USD</strong> fue enviado por {{ $json.provider }}.</p><p>Tiempo estimado de llegada: 2-3 dias habiles.</p><p>Referencia: {{ $json.provider_tx_id }}</p><p>Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Resend - Creator Payment Notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2850, 80],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true,
+      "notes": "FIX H3: Notificacion al creator SOLO despues de confirmar que el banco acepto el pago (status=submitted con tx_id real)."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.BRIAN_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Pago procesado quincena:\\n- Creator: {{ $('Code - Calculate Payment Amount').item.json.creator_name }}\\n- Monto: ${{ $('Code - Calculate Payment Amount').item.json.total_usd }} USD\\n- Proveedor: {{ $json.provider }}\\n- TX ID: {{ $json.provider_tx_id }}\\n- Status: submitted (pendiente confirmacion banco)\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "HTTP - WhatsApp Brian Summary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2850, 220],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Notifica a Brian con resumen de cada pago procesado incluyendo TX ID para seguimiento."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "payments",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Supabase - Create Payment Record (initiating)').item.json.id }}"
+            }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "status", "fieldValue": "failed" },
+            { "fieldId": "tx_id", "fieldValue": "=ERROR: {{ $json.message }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Mark Payment Failed",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2450, 350],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "continueOnFail": true,
+      "notes": "FIX H3: Error branch. Marca el pago como 'failed' en DB para que no quede en status 'initiating' permanentemente."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"ERROR en pago creator:\\n- Creator ID: {{ $('Code - Calculate Payment Amount').item.json.creator_id }}\\n- Creator: {{ $('Code - Calculate Payment Amount').item.json.creator_name }}\\n- Monto: ${{ $('Code - Calculate Payment Amount').item.json.total_usd }} USD\\n- Periodo: {{ $('Code - Calculate Payment Amount').item.json.period_start }}\\n- Error: {{ $json.message }}\\n\\nREVISAR URGENTE — el creator NO fue pagado.\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "HTTP - WhatsApp Error Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2650, 350],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "FIX H3: Alerta critica a Alexander cuando un pago falla. Incluye toda la info para seguimiento manual."
+    }
+  ],
+  "connections": {
+    "Schedule - Dias 1 y 15 9am": {
+      "main": [
+        [{ "node": "Supabase - Get Active Creators", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Get Active Creators": {
+      "main": [
+        [{ "node": "Code - Calculate Period & Idempotency Keys", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Calculate Period & Idempotency Keys": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [{ "node": "Supabase - Check Existing Payment", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Check Existing Payment": {
+      "main": [
+        [{ "node": "IF - Payment Already Exists?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Payment Already Exists?": {
+      "main": [
+        [{ "node": "Code - Calculate Payment Amount", "type": "main", "index": 0 }],
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Calculate Payment Amount": {
+      "main": [
+        [{ "node": "IF - Amount Above Threshold?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Amount Above Threshold?": {
+      "main": [
+        [{ "node": "Supabase - Create Payment Record (initiating)", "type": "main", "index": 0 }],
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Create Payment Record (initiating)": {
+      "main": [
+        [{ "node": "IF - Provider Mercury or Wise?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Provider Mercury or Wise?": {
+      "main": [
+        [{ "node": "HTTP - Mercury Create Payment", "type": "main", "index": 0 }],
+        [{ "node": "HTTP - Wise Create Transfer", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Mercury Create Payment": {
+      "main": [
+        [{ "node": "Code - Verify Bank Response", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Wise Create Transfer": {
+      "main": [
+        [{ "node": "Code - Verify Bank Response", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Verify Bank Response": {
+      "main": [
+        [{ "node": "Supabase - Update Payment Submitted", "type": "main", "index": 0 }]
+      ],
+      "error": [
+        [{ "node": "Supabase - Mark Payment Failed", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Update Payment Submitted": {
+      "main": [
+        [
+          { "node": "Resend - Creator Payment Notification", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Brian Summary", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Resend - Creator Payment Notification": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - WhatsApp Brian Summary": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Mark Payment Failed": {
+      "main": [
+        [{ "node": "HTTP - WhatsApp Error Alert", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - WhatsApp Error Alert": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "payments" },
+    { "name": "creators" },
+    { "name": "critical" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

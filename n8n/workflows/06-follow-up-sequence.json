@@ -1,0 +1,311 @@
+{
+  "name": "06 - follow-up-sequence",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Diario 10am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Corre diariamente a las 10am. Identifica leads que necesitan un follow-up segun la cadencia definida."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "leads",
+        "returnAll": true,
+        "filterType": "string",
+        "filterString": "stage=in.(scored,contacted)&tier=neq.COLD&touch_count=lt.4&email_bounced=is.false"
+      },
+      "name": "Supabase - Query Leads Needing Touch",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Trae leads en stage scored/contacted, tier HOT o WARM, menos de 4 touches, sin bounce. FIX M4: email_bounced=false excluye bounces."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filtrar leads que cumplen la cadencia de tiempo\n// FIX M4: tambien excluir emails que hayan hecho opt-out (campo unsubscribed)\nconst now = new Date();\n\nconst eligible = $input.all().filter(item => {\n  const lead = item.json;\n  \n  // FIX M4: verificar campo unsubscribed si existe\n  if (lead.unsubscribed) return false;\n  if (lead.email_bounced) return false;\n  \n  const lastTouch = lead.last_touch_at ? new Date(lead.last_touch_at) : new Date(lead.created_at);\n  const daysSince = (now - lastTouch) / (1000 * 60 * 60 * 24);\n  const touchCount = lead.touch_count || 0;\n  \n  // Cadencia de follow-up\n  if (touchCount === 0 && daysSince >= 1) return true;   // D1: 1 dia despues de crear\n  if (touchCount === 1 && daysSince >= 2) return true;   // D3: 2 dias despues del touch 1\n  if (touchCount === 2 && daysSince >= 4) return true;   // D7: 4 dias despues del touch 2\n  if (touchCount === 3 && daysSince >= 7) return true;   // D14: 7 dias despues del touch 3\n  \n  return false;\n});\n\nif (eligible.length === 0) {\n  // Si no hay leads elegibles, terminar sin error\n  return [{ json: { _empty: true, count: 0, message: 'No leads need follow-up today' } }];\n}\n\nconsole.log(`[follow-up] ${eligible.length} leads elegibles para follow-up`);\nreturn eligible;"
+      },
+      "name": "Code - Filter by Cadence",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "notes": "FIX M4: Filtra en JavaScript por cadencia de dias Y por campos unsubscribed/email_bounced. Retorna array vacio con flag si no hay elegibles."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json._empty }}",
+              "operation": "notEqual",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "IF - Has Eligible Leads?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "notes": "Si no hay leads elegibles termina el workflow limpiamente."
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [1050, 220],
+      "notes": "Procesa un lead a la vez para control de rate limits."
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            { "value": "0" },
+            { "value": "1" },
+            { "value": "2" },
+            { "value": "3" }
+          ]
+        },
+        "dataPropertyName": "touch_count",
+        "fallbackOutput": "extra"
+      },
+      "name": "Switch - Touch Number",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [1250, 220],
+      "notes": "Rutas: 0=D1 email intro, 1=D3 WhatsApp case study, 2=D7 email testimonial, 3=D14 WhatsApp last call."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "Alexander Cast <alexander@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $json.email }}" },
+            { "name": "subject", "value": "=UGC Colombia puede ayudarte, {{ $json.full_name || 'hola' }}" },
+            { "name": "html", "value": "=<p>Hola {{ $json.full_name || '' }},</p><p>Vi que te interesaste en nuestros servicios de UGC. Me gustaria contarte como hemos ayudado a marcas similares a la tuya a generar contenido autentico que convierte.</p><p>Tenemos creators especializados en tu nicho listos para empezar esta semana.</p><p><a href='https://cal.com/ugc-colombia/discovery'>Agenda una llamada de 15 min gratis</a></p><p>Alexander Cast<br>UGC Colombia</p>" }
+          ]
+        },
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Touch 0 - D1 Email Intro",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 80],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true,
+      "notes": "D1: Email de introduccion personalizado. Se envia 1 dia despues de que el lead llego."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.phone }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Hola {{ $json.full_name || '' }}! Soy Alexander de UGC Colombia.\\n\\nQueria compartirte un caso de exito: logramos generar 40 piezas de contenido UGC en un mes para una marca de cuidado personal, con un CPM 60% mas bajo que los anuncios tradicionales.\\n\\nTe gustaria ver como lo hicimos? Tenemos algo similar disponible para tu marca.\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Touch 1 - D3 WhatsApp Case Study",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 220],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "D3: WhatsApp con caso de exito. Solo funciona si el lead tiene numero de telefono valido."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "Alexander Cast <alexander@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $json.email }}" },
+            { "name": "subject", "value": "Lo que dicen nuestros clientes de UGC Colombia" },
+            { "name": "html", "value": "=<p>Hola {{ $json.full_name || '' }},</p><p>Te comparto testimonios reales de marcas que trabajan con nosotros:</p><blockquote>\"Pasamos de 0 a 25 piezas de UGC en el primer mes. El ROI ha sido increible.\" — Marca de lifestyle</blockquote><blockquote>\"La calidad de los creators colombianos es excepcional y el costo es 3x menor que en USA.\" — Startup Bogota</blockquote><p>Si quieres ver resultados similares, podemos tener tu primer batch listo en 2 semanas.</p><p><strong>Esta oferta de onboarding gratuito vence el viernes.</strong></p><p><a href='https://cal.com/ugc-colombia/discovery'>Hablar ahora</a></p><p>Alexander</p>" }
+          ]
+        },
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Touch 2 - D7 Email Testimonial",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 360],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true,
+      "notes": "D7: Email con testimonios y urgencia. Oferta de onboarding con deadline."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.phone }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Hola {{ $json.full_name || '' }}, ultimo mensaje de mi parte.\\n\\nSe que estes muy ocupado/a. Si el momento no es el correcto ahora, sin problema — guardare tu contacto para cuando lo necesites.\\n\\nSi en algun momento quieres explorar UGC para tu marca, aqui estaré: https://cal.com/ugc-colombia/discovery\\n\\nExito con todo! Alexander\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Touch 3 - D14 WhatsApp Last Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 500],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "D14: Ultimo contacto. Mensaje de despedida sin presion — preserva la relacion."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "leads",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Split In Batches').item.json.id }}"
+            }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "touch_count", "fieldValue": "={{ ($('Split In Batches').item.json.touch_count || 0) + 1 }}" },
+            { "fieldId": "last_touch_at", "fieldValue": "={{ $now.toISO() }}" },
+            { "fieldId": "stage", "fieldValue": "contacted" }
+          ]
+        }
+      },
+      "name": "Supabase - Update touch_count++",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1700, 290],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Incrementa touch_count, actualiza last_touch_at y cambia stage a 'contacted'."
+    },
+    {
+      "parameters": {
+        "unit": "milliseconds",
+        "amount": 50
+      },
+      "name": "Wait - 50ms Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1900, 290],
+      "notes": "Rate limit: WhatsApp Cloud API max 80 msg/s. 50ms entre envios garantiza no superar el limite."
+    }
+  ],
+  "connections": {
+    "Schedule - Diario 10am": {
+      "main": [
+        [{ "node": "Supabase - Query Leads Needing Touch", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Query Leads Needing Touch": {
+      "main": [
+        [{ "node": "Code - Filter by Cadence", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Filter by Cadence": {
+      "main": [
+        [{ "node": "IF - Has Eligible Leads?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Has Eligible Leads?": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [{ "node": "Switch - Touch Number", "type": "main", "index": 0 }]
+      ]
+    },
+    "Switch - Touch Number": {
+      "main": [
+        [{ "node": "Touch 0 - D1 Email Intro", "type": "main", "index": 0 }],
+        [{ "node": "Touch 1 - D3 WhatsApp Case Study", "type": "main", "index": 0 }],
+        [{ "node": "Touch 2 - D7 Email Testimonial", "type": "main", "index": 0 }],
+        [{ "node": "Touch 3 - D14 WhatsApp Last Call", "type": "main", "index": 0 }]
+      ]
+    },
+    "Touch 0 - D1 Email Intro": {
+      "main": [
+        [{ "node": "Supabase - Update touch_count++", "type": "main", "index": 0 }]
+      ]
+    },
+    "Touch 1 - D3 WhatsApp Case Study": {
+      "main": [
+        [{ "node": "Supabase - Update touch_count++", "type": "main", "index": 0 }]
+      ]
+    },
+    "Touch 2 - D7 Email Testimonial": {
+      "main": [
+        [{ "node": "Supabase - Update touch_count++", "type": "main", "index": 0 }]
+      ]
+    },
+    "Touch 3 - D14 WhatsApp Last Call": {
+      "main": [
+        [{ "node": "Supabase - Update touch_count++", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Update touch_count++": {
+      "main": [
+        [{ "node": "Wait - 50ms Rate Limit", "type": "main", "index": 0 }]
+      ]
+    },
+    "Wait - 50ms Rate Limit": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "leads" },
+    { "name": "followup" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

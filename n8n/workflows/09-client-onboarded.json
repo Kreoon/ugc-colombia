@@ -1,0 +1,350 @@
+{
+  "name": "09 - client-onboarded",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "client-onboarded",
+        "responseMode": "lastNode",
+        "options": { "rawBody": true }
+      },
+      "name": "Webhook - Client Onboarded",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Disparado cuando un lead confirma pago y se convierte en cliente. Requiere header X-Internal-Secret."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validacion HMAC timing-safe via XOR char-by-char (sandbox-safe).\n// El secret esperado viene de env y se compara contra el header X-Internal-Secret.\nconst headers = $input.first().json.headers || {};\nconst received = headers['x-internal-secret'] || '';\nconst expected = $env.INTERNAL_WEBHOOK_SECRET || '';\nif (!received || received.length !== expected.length) {\n  throw new Error('Unauthorized: invalid internal secret');\n}\nlet diff = 0;\nfor (let i = 0; i < expected.length; i++) {\n  diff |= received.charCodeAt(i) ^ expected.charCodeAt(i);\n}\nif (diff !== 0) throw new Error('Unauthorized: invalid internal secret');\n\n// Validar payload\nconst body = $input.first().json.body || $input.first().json;\nconst required = ['client_name', 'contact_email', 'plan', 'mrr_usd', 'source_lead_id'];\nfor (const f of required) {\n  if (body[f] === undefined || body[f] === null || body[f] === '') {\n    throw new Error(`Missing required field: ${f}`);\n  }\n}\nconst mrr = parseFloat(body.mrr_usd);\nif (isNaN(mrr) || mrr <= 0) throw new Error('Invalid mrr_usd');\n\n// Idempotency key: source_lead_id + plan (un lead solo se convierte una vez por plan)\nconst idempotency_key = body.idempotency_key || `onboard-${body.source_lead_id}-${body.plan}`;\n\nlet whatsapp = (body.whatsapp || '').replace(/\\D/g, '');\nif (whatsapp && whatsapp.length === 10) whatsapp = '57' + whatsapp;\nif (whatsapp && !/^\\d{11,15}$/.test(whatsapp)) whatsapp = null;\n\nreturn [{\n  json: {\n    client_name: String(body.client_name).trim(),\n    company: body.company || body.client_name,\n    contact_email: String(body.contact_email).toLowerCase().trim(),\n    whatsapp: whatsapp,\n    plan: body.plan,\n    mrr_usd: mrr,\n    source_lead_id: body.source_lead_id,\n    contract_start_date: body.contract_start_date || new Date().toISOString(),\n    idempotency_key,\n    stage: 'active',\n    health_score: 100,\n    churn_risk: false,\n    created_at: new Date().toISOString()\n  }\n}];"
+      },
+      "name": "Code - Auth & Validate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300],
+      "notes": "Valida HMAC interno timing-safe + payload requerido. Genera idempotency_key estable basado en source_lead_id+plan."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "clients",
+        "returnAll": false,
+        "limit": 1,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            { "keyName": "idempotency_key", "condition": "eq", "keyValue": "={{ $json.idempotency_key }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Check Idempotency",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "notes": "Idempotencia: si ya existe un cliente con ese idempotency_key, no reinsertar."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [{ "value1": "={{ $json.length }}", "operation": "equal", "value2": 0 }]
+        }
+      },
+      "name": "IF - Is New Client?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "clients",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "company", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.company }}" },
+            { "fieldId": "contact_email", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.contact_email }}" },
+            { "fieldId": "whatsapp", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.whatsapp }}" },
+            { "fieldId": "plan", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.plan }}" },
+            { "fieldId": "mrr", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.mrr_usd }}" },
+            { "fieldId": "started_at", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.contract_start_date }}" },
+            { "fieldId": "source_lead_id", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.source_lead_id }}" },
+            { "fieldId": "idempotency_key", "fieldValue": "={{ $('Code - Auth & Validate Payload').item.json.idempotency_key }}" },
+            { "fieldId": "stage", "fieldValue": "active" },
+            { "fieldId": "health_score", "fieldValue": "=100" },
+            { "fieldId": "churn_risk", "fieldValue": "=false" }
+          ]
+        }
+      },
+      "name": "Supabase - Insert Client",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 200],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "notes": "Sin On Error Continue — el resultado se verifica en IF - Insert OK."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [{ "value1": "={{ $json.id }}", "operation": "isNotEmpty" }]
+        }
+      },
+      "name": "IF - Insert OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1250, 200]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "leads",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            { "keyName": "id", "condition": "eq", "keyValue": "={{ $('Code - Auth & Validate Payload').item.json.source_lead_id }}" }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "stage", "fieldValue": "won" },
+            { "fieldId": "win_date", "fieldValue": "={{ $now.toISO() }}" },
+            { "fieldId": "converted_client_id", "fieldValue": "={{ $('Supabase - Insert Client').item.json.id }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Mark Lead Won",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 120],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "continueOnFail": true,
+      "notes": "Marca el lead origen como ganado. continueOnFail: si el lead fue archivado, no bloquear onboarding."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Auth & Validate Payload').item.json.contact_email }}" },
+            { "name": "subject", "value": "=Bienvenido a UGC Colombia, {{ $('Code - Auth & Validate Payload').item.json.client_name }}!" },
+            { "name": "html", "value": "=<h1>Bienvenido a UGC Colombia!</h1><p>Hola {{ $('Code - Auth & Validate Payload').item.json.client_name }},</p><p>Gracias por confiar en nosotros. Tu plan <strong>{{ $('Code - Auth & Validate Payload').item.json.plan }}</strong> esta activo.</p><p>En las proximas 24h Diana te contactara para el kickoff y onboarding formal.</p><p>- Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - Resend Welcome Client Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 240],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true,
+      "notes": "Retry 3x con backoff. continueOnFail para no bloquear WhatsApp si Resend falla."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Code - Auth & Validate Payload').item.json.whatsapp }}\",\n  \"type\": \"template\",\n  \"template\": {\n    \"name\": \"welcome_client\",\n    \"language\": { \"code\": \"es\" },\n    \"components\": [{\n      \"type\": \"body\",\n      \"parameters\": [\n        { \"type\": \"text\", \"text\": \"{{ $('Code - Auth & Validate Payload').item.json.client_name }}\" },\n        { \"type\": \"text\", \"text\": \"{{ $('Code - Auth & Validate Payload').item.json.plan }}\" }\n      ]\n    }]\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 3000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Client Welcome",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 360],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Template welcome_client via Jarvis/WhatsApp Cloud API. Retry con jitter."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.DIANA_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Nuevo cliente asignado: {{ $('Code - Auth & Validate Payload').item.json.client_name }}\\nPlan: {{ $('Code - Auth & Validate Payload').item.json.plan }}\\nMRR: ${{ $('Code - Auth & Validate Payload').item.json.mrr_usd }} USD\\nEmail: {{ $('Code - Auth & Validate Payload').item.json.contact_email }}\\nClient ID: {{ $('Supabase - Insert Client').item.json.id }}\\n\\nContactar en <24h para kickoff.\"\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Diana",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 480],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Notificacion interna a Diana para iniciar kickoff."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"CLIENTE CERRADO!\\n{{ $('Code - Auth & Validate Payload').item.json.client_name }} - {{ $('Code - Auth & Validate Payload').item.json.plan }} - ${{ $('Code - Auth & Validate Payload').item.json.mrr_usd }}/mes USD\\nLead origen: {{ $('Code - Auth & Validate Payload').item.json.source_lead_id }}\"\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Alexander",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 600],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.beehiiv.com/v2/publications/{{$env.BEEHIIV_PUB_ID}}/subscriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "email", "value": "={{ $('Code - Auth & Validate Payload').item.json.contact_email }}" },
+            { "name": "reactivate_existing", "value": "=true" },
+            { "name": "send_welcome_email", "value": "=false" },
+            { "name": "custom_fields", "value": "=[{\"name\":\"tag\",\"value\":\"cliente-activo\"}]" }
+          ]
+        },
+        "options": { "ignore400": true }
+      },
+      "name": "HTTP - Beehiiv Tag Cliente-Activo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 720],
+      "credentials": { "httpHeaderAuth": { "name": "Beehiiv API" } },
+      "continueOnFail": true,
+      "notes": "Agrega/actualiza suscriptor con tag cliente-activo. ignore400 para tratar 409 como exito."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Placeholder: creacion de carpeta Drive manual por ahora.\n// TODO: integrar Google Drive API via credential OAuth cuando este habilitada en jarvis-kreoon-ai.\nconst client = $('Code - Auth & Validate Payload').item.json;\nconst clientId = $('Supabase - Insert Client').item.json.id;\nreturn [{\n  json: {\n    drive_folder_pending: true,\n    folder_name: `[${client.plan}] ${client.client_name} - ${clientId}`,\n    note: 'Crear manualmente en Drive: UGC Colombia/Clientes/' + client.client_name,\n    client_id: clientId\n  }\n}];"
+      },
+      "name": "Code - Drive Folder Placeholder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1650, 720],
+      "notes": "Placeholder para creacion de carpeta Drive. Manual por ahora — migrar a Google Drive API cuando este habilitada."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"ok\",\n  \"client_id\": \"{{ $('Supabase - Insert Client').item.json.id }}\",\n  \"message\": \"Client onboarded successfully\"\n}"
+      },
+      "name": "Respond - Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"duplicate\",\n  \"message\": \"Client already onboarded (idempotency hit)\",\n  \"client_id\": \"{{ $json[0].id }}\"\n}"
+      },
+      "name": "Respond - Duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 420]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "workflow_logs",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "workflow", "fieldValue": "client-onboarded" },
+            { "fieldId": "node", "fieldValue": "Supabase - Insert Client" },
+            { "fieldId": "level", "fieldValue": "error" },
+            { "fieldId": "message", "fieldValue": "Insert client failed — id undefined" },
+            { "fieldId": "payload", "fieldValue": "={{ JSON.stringify($('Code - Auth & Validate Payload').item.json) }}" },
+            { "fieldId": "created_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Log Insert Failure",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 840],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 500,
+        "responseBody": "={\n  \"status\": \"error\",\n  \"message\": \"Failed to persist client. Team notified.\"\n}"
+      },
+      "name": "Respond - Insert Failed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1700, 840]
+    }
+  ],
+  "connections": {
+    "Webhook - Client Onboarded": { "main": [[{ "node": "Code - Auth & Validate Payload", "type": "main", "index": 0 }]] },
+    "Code - Auth & Validate Payload": { "main": [[{ "node": "Supabase - Check Idempotency", "type": "main", "index": 0 }]] },
+    "Supabase - Check Idempotency": { "main": [[{ "node": "IF - Is New Client?", "type": "main", "index": 0 }]] },
+    "IF - Is New Client?": {
+      "main": [
+        [{ "node": "Supabase - Insert Client", "type": "main", "index": 0 }],
+        [{ "node": "Respond - Duplicate", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Insert Client": { "main": [[{ "node": "IF - Insert OK?", "type": "main", "index": 0 }]] },
+    "IF - Insert OK?": {
+      "main": [
+        [
+          { "node": "Supabase - Mark Lead Won", "type": "main", "index": 0 },
+          { "node": "HTTP - Resend Welcome Client Email", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Client Welcome", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Diana", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Alexander", "type": "main", "index": 0 },
+          { "node": "HTTP - Beehiiv Tag Cliente-Activo", "type": "main", "index": 0 }
+        ],
+        [{ "node": "Supabase - Log Insert Failure", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Beehiiv Tag Cliente-Activo": { "main": [[{ "node": "Code - Drive Folder Placeholder", "type": "main", "index": 0 }]] },
+    "Code - Drive Folder Placeholder": { "main": [[{ "node": "Respond - Success", "type": "main", "index": 0 }]] },
+    "Supabase - Log Insert Failure": { "main": [[{ "node": "Respond - Insert Failed", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "clients" },
+    { "name": "onboarding" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

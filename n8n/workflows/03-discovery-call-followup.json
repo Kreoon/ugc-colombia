@@ -1,0 +1,422 @@
+{
+  "name": "03 - discovery-call-followup",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "calcom-booking",
+        "responseMode": "lastNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "name": "Webhook - Cal.com Booking",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Recibe eventos de Cal.com: BOOKING_CREATED, BOOKING_CANCELLED, BOOKING_RESCHEDULED. Requiere rawBody=true para verificacion HMAC."
+    },
+    {
+      "parameters": {
+        "action": "hmac",
+        "type": "SHA256",
+        "value": "={{ JSON.stringify($json.body) }}",
+        "secret": "={{$env.CALCOM_WEBHOOK_SECRET}}",
+        "dataPropertyName": "computed_signature",
+        "encoding": "hex"
+      },
+      "name": "Crypto - Compute HMAC",
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "notes": "FIX H4: Calcula HMAC SHA256 del body usando el secreto de Cal.com. El resultado se compara en el siguiente nodo."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX H4: Verificacion de firma HMAC. \n// Nota: n8n sandbox no expone crypto module directamente;\n// la comparacion timing-safe se implementa comparando char por char con igual tiempo.\nconst received = $('Webhook - Cal.com Booking').item.json.headers['x-cal-signature-256'] || '';\nconst expected = $input.first().json.computed_signature || '';\n\n// Implementacion timing-safe sin modulo crypto (compatible con sandbox n8n)\n// Compara longitud primero, luego XOR caracter a caracter\nif (!received) {\n  throw new Error('[calcom] Header x-cal-signature-256 ausente — request rechazado');\n}\n\nif (received.length !== expected.length) {\n  throw new Error('[calcom] Firma invalida — longitud no coincide');\n}\n\nlet diff = 0;\nfor (let i = 0; i < expected.length; i++) {\n  diff |= received.charCodeAt(i) ^ expected.charCodeAt(i);\n}\n\nif (diff !== 0) {\n  throw new Error(`[calcom] Firma HMAC invalida — request rechazado`);\n}\n\n// Firma valida: retornar el body del evento\nconst body = $('Webhook - Cal.com Booking').item.json.body;\nreturn [{ json: body }];"
+      },
+      "name": "Code - Verify HMAC Signature",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "notes": "FIX H4: Verificacion de firma timing-safe implementada con XOR char-by-char (sin modulo crypto del sandbox). Lanza error si firma ausente, longitud distinta, o valor no coincide."
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            { "value": "BOOKING_CREATED" },
+            { "value": "BOOKING_RESCHEDULED" },
+            { "value": "BOOKING_CANCELLED" }
+          ]
+        },
+        "dataPropertyName": "triggerEvent",
+        "fallbackOutput": "extra"
+      },
+      "name": "Switch - Event Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "notes": "Rutas: 0=CREATED, 1=RESCHEDULED (ambos van a upsert), 2=CANCELLED → rama de cancelacion."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "upsert",
+        "tableId": "bookings",
+        "conflictColumns": "cal_booking_id",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "cal_booking_id", "fieldValue": "={{ $json.uid || $json.bookingId }}" },
+            { "fieldId": "scheduled_at", "fieldValue": "={{ $json.startTime }}" },
+            { "fieldId": "status", "fieldValue": "confirmed" },
+            { "fieldId": "notes", "fieldValue": "={{ $json.responses?.notes?.value || '' }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Upsert Booking",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 220],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "notes": "Upsert por cal_booking_id (UNIQUE en DB). Funciona para CREATED y RESCHEDULED."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Verify HMAC Signature').item.json.responses?.email?.value || $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.email }}" },
+            { "name": "subject", "value": "Tu discovery call esta confirmada - UGC Colombia" },
+            { "name": "html", "value": "=<h2>Discovery call confirmada!</h2><p>Hola {{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.name }},</p><p>Tu llamada esta agendada para el <strong>{{ $('Code - Verify HMAC Signature').item.json.startTime }}</strong>.</p><p>Link de reunion: {{ $('Code - Verify HMAC Signature').item.json.videoCallData?.url || 'Se enviara por separado' }}</p><p>Si necesitas reagendar: {{ $('Code - Verify HMAC Signature').item.json.rescheduleLink }}</p><p>Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "Resend - Confirmation Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 140],
+      "credentials": {
+        "httpHeaderAuth": { "name": "Resend API" }
+      },
+      "notes": "Email de confirmacion con detalles de la llamada y link de Google Meet."
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "hours",
+        "resumeTime": "={{ DateTime.fromISO($('Code - Verify HMAC Signature').item.json.startTime).minus({hours: 24}).toISO() }}"
+      },
+      "name": "Wait - Until 24h Before",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1450, 140],
+      "notes": "Pausa hasta 24h antes de la llamada. Persistido en disco — sobrevive reinicios de n8n."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "get",
+        "tableId": "bookings",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "cal_booking_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Code - Verify HMAC Signature').item.json.uid || $('Code - Verify HMAC Signature').item.json.bookingId }}"
+            }
+          ]
+        }
+      },
+      "name": "Supabase - Check Booking Status (24h)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1650, 140],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "FIX M3: Verifica que el booking siga en status=confirmed antes de enviar reminder. Si fue cancelado durante la espera, skip."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.status }}",
+              "operation": "equal",
+              "value2": "confirmed"
+            }
+          ]
+        }
+      },
+      "name": "IF - Still Confirmed? (24h)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1850, 140],
+      "notes": "FIX M3: Solo enviar WhatsApp reminder si el booking sigue confirmado."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.timeZone }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Hola! Te recordamos que manana tienes tu discovery call con UGC Colombia a las {{ $('Code - Verify HMAC Signature').item.json.startTime }}.\\n\\nLink: {{ $('Code - Verify HMAC Signature').item.json.videoCallData?.url }}\\n\\nSi necesitas reagendar: {{ $('Code - Verify HMAC Signature').item.json.rescheduleLink }}\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "HTTP - WhatsApp 24h Reminder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2050, 120],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Reminder 24h antes. Solo se ejecuta si booking sigue confirmed."
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "hours",
+        "resumeTime": "={{ DateTime.fromISO($('Code - Verify HMAC Signature').item.json.startTime).plus({hours: 1}).toISO() }}"
+      },
+      "name": "Wait - Until 1h After Call",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2250, 120],
+      "notes": "Pausa hasta 1h despues de la llamada para dar tiempo al prospect y luego enviar survey."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "get",
+        "tableId": "bookings",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "cal_booking_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Code - Verify HMAC Signature').item.json.uid || $('Code - Verify HMAC Signature').item.json.bookingId }}"
+            }
+          ]
+        }
+      },
+      "name": "Supabase - Check Booking Status (post-call)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2450, 120],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "notes": "FIX M3: Verifica estado del booking antes de enviar post-call survey."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.status }}",
+              "operation": "equal",
+              "value2": "confirmed"
+            }
+          ]
+        }
+      },
+      "name": "IF - Still Confirmed? (post-call)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [2650, 120],
+      "notes": "FIX M3: Solo enviar post-call survey si la llamada no fue cancelada."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.email }}" },
+            { "name": "subject", "value": "Como fue tu experiencia con UGC Colombia?" },
+            { "name": "html", "value": "=<h2>Gracias por tu tiempo!</h2><p>Hola {{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.name }},</p><p>Fue genial hablar contigo. Nos ayudaria mucho si pudieras tomar 2 minutos para compartir tu experiencia.</p><p><a href='https://tally.so/r/ugc-colombia-nps'>Completar encuesta (2 min)</a></p><p>Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Resend - Post-call Survey",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2850, 100],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "notes": "Email post-call con link a encuesta NPS + feedback (Tally.so)."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "bookings",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "cal_booking_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Code - Verify HMAC Signature').item.json.uid || $('Code - Verify HMAC Signature').item.json.bookingId }}"
+            }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "status", "fieldValue": "cancelled" }
+          ]
+        }
+      },
+      "name": "Supabase - Update Cancelled",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 420],
+      "credentials": { "supabaseApi": { "name": "Supabase - UGC Colombia" } },
+      "notes": "Rama de cancelacion: actualiza status del booking a 'cancelled'."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Discovery call CANCELADA\\n- Attendee: {{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.name }}\\n- Email: {{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.email }}\\n- Hora original: {{ $('Code - Verify HMAC Signature').item.json.startTime }}\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "HTTP - WhatsApp Cancellation Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 420],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Notifica a Alexander cuando un prospect cancela su discovery call."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"status\": \"ok\" }"
+      },
+      "name": "Respond - OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 320],
+      "notes": "Responde 200 a Cal.com rapidamente. El procesamiento continua de forma asincrona con los nodos Wait."
+    }
+  ],
+  "connections": {
+    "Webhook - Cal.com Booking": {
+      "main": [
+        [{ "node": "Crypto - Compute HMAC", "type": "main", "index": 0 }]
+      ]
+    },
+    "Crypto - Compute HMAC": {
+      "main": [
+        [{ "node": "Code - Verify HMAC Signature", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Verify HMAC Signature": {
+      "main": [
+        [{ "node": "Switch - Event Type", "type": "main", "index": 0 }]
+      ]
+    },
+    "Switch - Event Type": {
+      "main": [
+        [{ "node": "Supabase - Upsert Booking", "type": "main", "index": 0 }],
+        [{ "node": "Supabase - Upsert Booking", "type": "main", "index": 0 }],
+        [{ "node": "Supabase - Update Cancelled", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Upsert Booking": {
+      "main": [
+        [
+          { "node": "Respond - OK", "type": "main", "index": 0 },
+          { "node": "Resend - Confirmation Email", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Resend - Confirmation Email": {
+      "main": [
+        [{ "node": "Wait - Until 24h Before", "type": "main", "index": 0 }]
+      ]
+    },
+    "Wait - Until 24h Before": {
+      "main": [
+        [{ "node": "Supabase - Check Booking Status (24h)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Check Booking Status (24h)": {
+      "main": [
+        [{ "node": "IF - Still Confirmed? (24h)", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Still Confirmed? (24h)": {
+      "main": [
+        [{ "node": "HTTP - WhatsApp 24h Reminder", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "HTTP - WhatsApp 24h Reminder": {
+      "main": [
+        [{ "node": "Wait - Until 1h After Call", "type": "main", "index": 0 }]
+      ]
+    },
+    "Wait - Until 1h After Call": {
+      "main": [
+        [{ "node": "Supabase - Check Booking Status (post-call)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Check Booking Status (post-call)": {
+      "main": [
+        [{ "node": "IF - Still Confirmed? (post-call)", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Still Confirmed? (post-call)": {
+      "main": [
+        [{ "node": "Resend - Post-call Survey", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Supabase - Update Cancelled": {
+      "main": [
+        [{ "node": "HTTP - WhatsApp Cancellation Alert", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "bookings" },
+    { "name": "calcom" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

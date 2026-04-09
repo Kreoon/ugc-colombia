@@ -1,0 +1,333 @@
+{
+  "name": "02 - bant-scorer",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bant-scorer",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook - BANT Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Recibe lead_id desde lead-ingestion o llamadas manuales. Body: { lead_id: 'uuid' }"
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "get",
+        "tableId": "leads",
+        "id": "={{ $json.lead_id }}"
+      },
+      "name": "Supabase - Get Lead",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "notes": "Recupera el lead completo para enviar a Claude para scoring."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{$env.ANTHROPIC_API_KEY}}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-5-20250929\",\n  \"max_tokens\": 500,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"Analiza este lead UGC Colombia y devuelve SOLO JSON valido con este esquema exacto: {\\\"budget\\\":0-25,\\\"authority\\\":0-25,\\\"need\\\":0-25,\\\"timeline\\\":0-25,\\\"total\\\":0-100,\\\"tier\\\":\\\"HOT\\\"|\\\"WARM\\\"|\\\"COLD\\\",\\\"reasoning\\\":\\\"\\\"}. Reglas: HOT>=75, WARM 50-74, COLD<50. Lead: company={{ $json.company }}, budget_range={{ $json.budget_range }}, notes={{ $json.notes }}, source={{ $json.source }}. No incluyas texto fuera del JSON.\"\n  }]\n}",
+        "options": {
+          "retry": {
+            "enabled": true,
+            "maxTries": 2,
+            "waitBetweenTries": 3000
+          }
+        }
+      },
+      "name": "HTTP - Anthropic BANT Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [650, 300],
+      "notes": "Llama a Claude Sonnet para analisis BANT. Retry 2x. Prompt fuerza JSON puro sin texto adicional."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX H6: Parseo robusto de respuesta de Claude con fallback estructurado.\nconst input = $input.first().json;\n\n// Verificar que content existe y tiene al menos un bloque de tipo text\nconst block = input?.content?.find(b => b.type === 'text');\nif (!block?.text) {\n  throw new Error(`[bant] Respuesta Claude sin text block. stop_reason=${input?.stop_reason}. Payload: ${JSON.stringify(input).slice(0, 500)}`);\n}\n\n// FIX H6: Regex non-greedy para no capturar multiples objetos JSON\nconst match = block.text.match(/\\{[\\s\\S]*?\\}/);\nif (!match) {\n  throw new Error(`[bant] No se encontro JSON en respuesta Claude: ${block.text.slice(0, 500)}`);\n}\n\nlet bant;\ntry {\n  bant = JSON.parse(match[0]);\n} catch (e) {\n  throw new Error(`[bant] JSON invalido en respuesta Claude: ${match[0].slice(0, 300)} — Error: ${e.message}`);\n}\n\n// FIX H6: Validar esquema de respuesta\nconst validTiers = ['HOT', 'WARM', 'COLD'];\nif (typeof bant.total !== 'number') {\n  throw new Error(`[bant] Campo 'total' invalido (tipo: ${typeof bant.total}): ${JSON.stringify(bant)}`);\n}\nif (!validTiers.includes(bant.tier)) {\n  throw new Error(`[bant] Campo 'tier' invalido (valor: ${bant.tier}): ${JSON.stringify(bant)}`);\n}\n\n// Garantizar que todos los campos numericos son numeros\nbant.budget = Number(bant.budget) || 0;\nbant.authority = Number(bant.authority) || 0;\nbant.need = Number(bant.need) || 0;\nbant.timeline = Number(bant.timeline) || 0;\nbant.total = Number(bant.total) || 0;\nbant.lead_id = $('Webhook - BANT Trigger').item.json.lead_id;\n\nreturn [{ json: bant }];"
+      },
+      "name": "Code - Parse BANT Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 300],
+      "notes": "FIX H6: Parseo robusto. Busca bloque type=text. Regex non-greedy. Valida esquema completo (tipos, valores de tier). Incluye lead_id para actualizacion."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "leads",
+        "id": "={{ $json.lead_id }}",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "bant_score", "fieldValue": "={{ $json.total }}" },
+            { "fieldId": "tier", "fieldValue": "={{ $json.tier }}" },
+            { "fieldId": "stage", "fieldValue": "scored" },
+            { "fieldId": "last_touch_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Update Lead Score",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "notes": "Actualiza bant_score, tier y stage en el lead. Cambia stage a 'scored' para que follow-up-sequence lo procese."
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "value": "HOT"
+            },
+            {
+              "value": "WARM"
+            },
+            {
+              "value": "COLD"
+            }
+          ]
+        },
+        "fallbackOutput": "extra"
+      },
+      "name": "Switch - Tier Routing",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [1250, 300],
+      "notes": "Rutea segun tier: HOT → alerta urgente WhatsApp, WARM → log para nurture, COLD → solo log."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"HOT LEAD detectado!\\n- Score BANT: {{ $('Code - Parse BANT Response').item.json.total }}/100\\n- Tier: HOT\\n- Lead ID: {{ $('Code - Parse BANT Response').item.json.lead_id }}\\n- Razon: {{ $('Code - Parse BANT Response').item.json.reasoning }}\\n\\nContactar en menos de 1 hora!\"\n  }\n}",
+        "options": {
+          "retry": {
+            "enabled": true,
+            "maxTries": 3,
+            "waitBetweenTries": 2000
+          }
+        }
+      },
+      "name": "HTTP - WhatsApp HOT Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 180],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "WhatsApp Cloud API"
+        }
+      },
+      "notes": "Alerta critica a Alexander para leads HOT. Incluye score, reasoning y lead_id. SLA: contactar en <1h."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "workflow_logs",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "workflow", "fieldValue": "bant-scorer" },
+            { "fieldId": "node", "fieldValue": "Switch - Tier Routing" },
+            { "fieldId": "level", "fieldValue": "info" },
+            { "fieldId": "message", "fieldValue": "=WARM lead scored — agregado a nurture sequence" },
+            { "fieldId": "payload", "fieldValue": "={{ JSON.stringify($('Code - Parse BANT Response').item.json) }}" },
+            { "fieldId": "created_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Log WARM Lead",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 320],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "Log para leads WARM. El follow-up-sequence los tomara en su proximo run diario."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "workflow_logs",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "workflow", "fieldValue": "bant-scorer" },
+            { "fieldId": "node", "fieldValue": "Switch - Tier Routing" },
+            { "fieldId": "level", "fieldValue": "info" },
+            { "fieldId": "message", "fieldValue": "=COLD lead scored — sin accion inmediata" },
+            { "fieldId": "payload", "fieldValue": "={{ JSON.stringify($('Code - Parse BANT Response').item.json) }}" },
+            { "fieldId": "created_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Log COLD Lead",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 460],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "Log para leads COLD. No se toma accion activa — eventualmente se podran reactivar."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"ok\",\n  \"lead_id\": \"{{ $('Code - Parse BANT Response').item.json.lead_id }}\",\n  \"tier\": \"{{ $('Code - Parse BANT Response').item.json.tier }}\",\n  \"score\": {{ $('Code - Parse BANT Response').item.json.total }}\n}"
+      },
+      "name": "Respond - BANT Complete",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1700, 300],
+      "notes": "Responde con el resultado del scoring BANT."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "leads",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Webhook - BANT Trigger').item.json.lead_id }}"
+            }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "stage", "fieldValue": "scoring_failed" },
+            { "fieldId": "notes", "fieldValue": "=Scoring automatico fallo. Revisar manualmente. Error: {{ $json.message }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Mark Scoring Failed",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [850, 500],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "FIX H6: Si el parseo falla, marca el lead como 'scoring_failed' para revision manual. Evita que quede atascado en stage='new'."
+    }
+  ],
+  "connections": {
+    "Webhook - BANT Trigger": {
+      "main": [
+        [{ "node": "Supabase - Get Lead", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Get Lead": {
+      "main": [
+        [{ "node": "HTTP - Anthropic BANT Analysis", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Anthropic BANT Analysis": {
+      "main": [
+        [{ "node": "Code - Parse BANT Response", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Parse BANT Response": {
+      "main": [
+        [{ "node": "Supabase - Update Lead Score", "type": "main", "index": 0 }]
+      ],
+      "error": [
+        [{ "node": "Supabase - Mark Scoring Failed", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Update Lead Score": {
+      "main": [
+        [{ "node": "Switch - Tier Routing", "type": "main", "index": 0 }]
+      ]
+    },
+    "Switch - Tier Routing": {
+      "main": [
+        [{ "node": "HTTP - WhatsApp HOT Alert", "type": "main", "index": 0 }],
+        [{ "node": "Supabase - Log WARM Lead", "type": "main", "index": 0 }],
+        [{ "node": "Supabase - Log COLD Lead", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - WhatsApp HOT Alert": {
+      "main": [
+        [{ "node": "Respond - BANT Complete", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Log WARM Lead": {
+      "main": [
+        [{ "node": "Respond - BANT Complete", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Log COLD Lead": {
+      "main": [
+        [{ "node": "Respond - BANT Complete", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "leads" },
+    { "name": "ai" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "ugc-colombia-remotion",
+  "version": "1.0.0",
+  "description": "Composiciones Remotion para UGC Colombia (@agenciaugccolombia)",
+  "private": true,
+  "scripts": {
+    "studio": "npx remotion studio",
+    "build": "npx remotion render",
+    "render:logo-reels": "npx remotion render LogoReveal-Reels out/logo-reels.mp4",
+    "render:logo-youtube": "npx remotion render LogoReveal-YouTube out/logo-youtube.mp4",
+    "render:logo-square": "npx remotion render LogoReveal-Square out/logo-square.mp4",
+    "render:case-study": "npx remotion render CaseStudyCard out/case-study.mp4",
+    "render:quote": "npx remotion render QuoteCard out/quote-card.mp4",
+    "render:stats-youtube": "npx remotion render StatsReveal-YouTube out/stats-youtube.mp4",
+    "render:stats-square": "npx remotion render StatsReveal-Square out/stats-square.mp4",
+    "render:stats-reels": "npx remotion render StatsReveal-Reels out/stats-reels.mp4",
+    "render:g01": "npx remotion render Reel-G01-El-problema-con-tu-UGC out/g01-reel.mp4",
+    "render:g02": "npx remotion render Reel-G02-Por-qu--tus-ads-se-ven-b out/g02-reel.mp4",
+    "render:all-reels": "node scripts/render-all.js",
+    "generate:voiceovers": "node scripts/generate-voiceovers.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "remotion": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/player": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "remotion": {
+    "entryPoint": "./src/Root.tsx"
+  }
+}

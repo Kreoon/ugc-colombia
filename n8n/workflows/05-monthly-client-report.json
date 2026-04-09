@@ -1,0 +1,315 @@
+{
+  "name": "05 - monthly-client-report",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 1 * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Dia 1 del Mes 9am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Dispara el dia 1 de cada mes a las 9am. Genera y envia reportes mensuales a todos los clientes activos."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "clients",
+        "returnAll": true,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "plan",
+              "condition": "neq",
+              "keyValue": "churned"
+            }
+          ]
+        }
+      },
+      "name": "Supabase - Get Active Clients",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Trae todos los clientes cuyo plan no sea 'churned'."
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "notes": "Procesa un cliente a la vez para evitar timeouts y controlar rate limits de email."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "content_pieces",
+        "returnAll": true,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "client_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        }
+      },
+      "name": "Supabase - Get Client Content",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Trae el contenido del cliente del mes anterior para calcular metricas."
+    },
+    {
+      "parameters": {
+        "jsCode": "const client = $('Split In Batches').item.json;\nconst allContent = $input.all().map(i => i.json);\n\n// Calcular rango del mes anterior\nconst now = new Date();\nconst firstDayLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);\nconst firstDayCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);\n\n// Filtrar contenido del mes anterior\nconst lastMonthContent = allContent.filter(c => {\n  if (!c.published_at) return false;\n  const pubDate = new Date(c.published_at);\n  return pubDate >= firstDayLastMonth && pubDate < firstDayCurrentMonth;\n});\n\n// Calcular metricas\nconst metrics = {\n  videos: lastMonthContent.filter(c => c.type === 'video').length,\n  photos: lastMonthContent.filter(c => c.type === 'photo').length,\n  carousels: lastMonthContent.filter(c => c.type === 'carousel').length,\n  published: lastMonthContent.filter(c => c.status === 'published').length,\n  total: lastMonthContent.length\n};\n\nconst monthName = firstDayLastMonth.toLocaleDateString('es-CO', { month: 'long', year: 'numeric' });\n\n// Construir HTML del reporte\nconst html = `\n<!DOCTYPE html>\n<html lang=\"es\">\n<head><meta charset=\"UTF-8\"><style>\nbody { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; }\nh1 { color: #1a1a2e; border-bottom: 2px solid #e94560; padding-bottom: 10px; }\ntable { width: 100%; border-collapse: collapse; margin: 20px 0; }\nth { background: #1a1a2e; color: white; padding: 10px; text-align: left; }\ntd { padding: 10px; border-bottom: 1px solid #eee; }\n.total { font-weight: bold; background: #f5f5f5; }\n.footer { margin-top: 30px; font-size: 12px; color: #666; }\n</style></head>\n<body>\n<h1>Reporte ${monthName}</h1>\n<h2>${client.company}</h2>\n<p>Aqui tienes el resumen de actividad de contenido UGC del mes pasado:</p>\n<table>\n<tr><th>Tipo de Contenido</th><th>Cantidad</th></tr>\n<tr><td>Videos</td><td>${metrics.videos}</td></tr>\n<tr><td>Fotos</td><td>${metrics.photos}</td></tr>\n<tr><td>Carruseles</td><td>${metrics.carousels}</td></tr>\n<tr class=\"total\"><td>Total publicados</td><td>${metrics.published}</td></tr>\n<tr class=\"total\"><td>Total entregados</td><td>${metrics.total}</td></tr>\n</table>\n<p>Para ver el detalle completo o descargar los archivos, ingresa a tu portal de cliente.</p>\n<div class=\"footer\"><p>Equipo UGC Colombia | hola@agenciaugccolombia.com</p></div>\n</body></html>`;\n\nreturn [{ json: { html, client, metrics, monthName } }];"
+      },
+      "name": "Code - Build HTML Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300],
+      "notes": "Calcula metricas del mes anterior y genera HTML del reporte. Compatible con adjunto PDF o envio inline."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$env.BROWSERLESS_TOKEN}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "name": "IF - Browserless Available?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1250, 300],
+      "notes": "FIX M5: Verifica que BROWSERLESS_TOKEN este configurado antes de intentar generar PDF. Si no, envia reporte HTML inline."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://chrome.browserless.io/pdf?token={{$env.BROWSERLESS_TOKEN}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"html\": {{ JSON.stringify($('Code - Build HTML Report').item.json.html) }},\n  \"options\": {\n    \"format\": \"A4\",\n    \"margin\": { \"top\": \"20px\", \"bottom\": \"20px\", \"left\": \"20px\", \"right\": \"20px\" }\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "pdf_binary"
+            }
+          }
+        }
+      },
+      "name": "HTTP - Generate PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 200],
+      "continueOnFail": true,
+      "notes": "FIX M5: continueOnFail=true. Si Browserless falla, el workflow continua y envia HTML inline."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.pdf_binary !== undefined && $json.pdf_binary !== null }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "IF - PDF Generated?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1650, 200],
+      "notes": "FIX M5: Verifica que Browserless retorno un PDF valido. Si fallo, rama false envia HTML inline."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Build HTML Report').item.json.client.contact_email }}" },
+            { "name": "subject", "value": "=Tu reporte mensual UGC Colombia - {{ $('Code - Build HTML Report').item.json.monthName }}" },
+            { "name": "html", "value": "=<p>Hola {{ $('Code - Build HTML Report').item.json.client.company }},</p><p>Adjunto encontraras tu reporte mensual en PDF.</p><p>Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "Resend - Email con PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1850, 140],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "notes": "Envia email con PDF adjunto cuando Browserless genero el PDF correctamente."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Build HTML Report').item.json.client.contact_email }}" },
+            { "name": "subject", "value": "=Tu reporte mensual UGC Colombia - {{ $('Code - Build HTML Report').item.json.monthName }}" },
+            { "name": "html", "value": "={{ $('Code - Build HTML Report').item.json.html }}" }
+          ]
+        },
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "Resend - Email HTML Inline (fallback)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1850, 300],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "notes": "FIX M5: Fallback cuando PDF generation falla o Browserless no esta configurado. Envia HTML directamente en el email."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Code - Build HTML Report').item.json.client.whatsapp }}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Hola {{ $('Code - Build HTML Report').item.json.client.company }}! Tu reporte mensual de UGC Colombia ({{ $('Code - Build HTML Report').item.json.monthName }}) esta en tu correo {{ $('Code - Build HTML Report').item.json.client.contact_email }}.\\n\\nResumen: {{ $('Code - Build HTML Report').item.json.metrics.total }} piezas entregadas, {{ $('Code - Build HTML Report').item.json.metrics.published }} publicadas.\"\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Client Notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2100, 220],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Notifica al cliente por WhatsApp que el reporte fue enviado a su email."
+    },
+    {
+      "parameters": {
+        "unit": "milliseconds",
+        "amount": 120
+      },
+      "name": "Wait - Rate Limit 120ms",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2300, 220],
+      "notes": "Rate limit: Resend free tier = 10 req/s. 120ms entre clientes garantiza no superar el limite."
+    }
+  ],
+  "connections": {
+    "Schedule - Dia 1 del Mes 9am": {
+      "main": [
+        [{ "node": "Supabase - Get Active Clients", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Get Active Clients": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [{ "node": "Supabase - Get Client Content", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Get Client Content": {
+      "main": [
+        [{ "node": "Code - Build HTML Report", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Build HTML Report": {
+      "main": [
+        [{ "node": "IF - Browserless Available?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Browserless Available?": {
+      "main": [
+        [{ "node": "HTTP - Generate PDF", "type": "main", "index": 0 }],
+        [{ "node": "Resend - Email HTML Inline (fallback)", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Generate PDF": {
+      "main": [
+        [{ "node": "IF - PDF Generated?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - PDF Generated?": {
+      "main": [
+        [{ "node": "Resend - Email con PDF", "type": "main", "index": 0 }],
+        [{ "node": "Resend - Email HTML Inline (fallback)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Resend - Email con PDF": {
+      "main": [
+        [{ "node": "HTTP - WhatsApp Client Notification", "type": "main", "index": 0 }]
+      ]
+    },
+    "Resend - Email HTML Inline (fallback)": {
+      "main": [
+        [{ "node": "HTTP - WhatsApp Client Notification", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - WhatsApp Client Notification": {
+      "main": [
+        [{ "node": "Wait - Rate Limit 120ms", "type": "main", "index": 0 }]
+      ]
+    },
+    "Wait - Rate Limit 120ms": {
+      "main": [
+        [{ "node": "Split In Batches", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "clients" },
+    { "name": "reports" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

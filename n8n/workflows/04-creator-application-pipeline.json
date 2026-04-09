@@ -1,0 +1,209 @@
+{
+  "name": "04 - creator-application-pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "creator-application",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook - Creator Form",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Recibe aplicaciones de creators desde el formulario web. Campos: full_name, email, phone, instagram, tiktok, niche, followers, city, portfolio_url, rate_expectation."
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $input.first().json;\nif (!d.email || !d.instagram) throw new Error('Missing required fields: email and instagram are required');\n\nd.followers = parseInt(d.followers) || 0;\nd.applied_at = new Date().toISOString();\nd.status = 'pending_review';\n\n// Normalizar instagram handle (quitar @ si viene con prefijo)\nd.instagram = (d.instagram || '').replace('@', '').trim();\nd.tiktok = (d.tiktok || '').replace('@', '').trim() || null;\n\n// Normalizar email\nd.email = d.email.toLowerCase().trim();\n\n// Normalizar telefono\nlet phone = (d.phone || '').replace(/\\D/g, '');\nif (phone && phone.length === 10) phone = '57' + phone;\nd.phone = phone || null;\n\nreturn [{ json: d }];"
+      },
+      "name": "Code - Validate Creator",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300],
+      "notes": "Valida campos requeridos, normaliza handles de Instagram/TikTok (sin @), email, telefono E.164."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{$env.ANTHROPIC_API_KEY}}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-5-20250929\",\n  \"max_tokens\": 600,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"Evalua este creator UGC para agencia colombiana. Devuelve SOLO JSON valido: {\\\"score\\\":0-100,\\\"strengths\\\":[],\\\"weaknesses\\\":[],\\\"recommendation\\\":\\\"accept\\\"|\\\"review\\\"|\\\"reject\\\",\\\"reasoning\\\":\\\"\\\"}. Criterios: nicho relevante para LATAM, followers >= 5000 para micro-influencer, ubicacion Colombia preferible, expectativa de tarifa razonable. Datos: niche={{ $json.niche }}, followers={{ $json.followers }}, city={{ $json.city }}, rate={{ $json.rate_expectation }}, portfolio={{ $json.portfolio_url }}, instagram={{ $json.instagram }}\"\n  }]\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 2, "waitBetweenTries": 3000 }
+        }
+      },
+      "name": "HTTP - Anthropic Creator Scoring",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [650, 300],
+      "notes": "Claude evalua el creator basado en nicho, seguidores, ubicacion y tarifa esperada."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX H7: Parseo robusto con try/catch y guards en cada acceso.\nconst input = $input.first().json;\n\n// Buscar bloque de tipo text (no asumir content[0])\nconst block = input?.content?.find(b => b.type === 'text');\nif (!block?.text) {\n  // FIX H7: No lanzar error que abort el workflow — insertar con score=null\n  console.warn('[creator-scoring] Claude sin text block:', JSON.stringify(input).slice(0, 300));\n  const creator = $('Code - Validate Creator').item.json;\n  return [{ json: { ...creator, score: null, ai_notes: JSON.stringify({ error: 'Claude sin text block', raw: input }), status: 'scoring_failed' } }];\n}\n\n// FIX H7: Guard en match — si null, fallback en lugar de crash\nconst match = block.text.match(/\\{[\\s\\S]*?\\}/);\nif (!match) {\n  console.warn('[creator-scoring] No JSON en respuesta:', block.text.slice(0, 300));\n  const creator = $('Code - Validate Creator').item.json;\n  return [{ json: { ...creator, score: null, ai_notes: JSON.stringify({ error: 'No JSON', raw: block.text.slice(0, 500) }), status: 'scoring_failed' } }];\n}\n\nlet score;\ntry {\n  score = JSON.parse(match[0]);\n} catch (e) {\n  console.warn('[creator-scoring] JSON invalido:', match[0].slice(0, 200), e.message);\n  const creator = $('Code - Validate Creator').item.json;\n  return [{ json: { ...creator, score: null, ai_notes: JSON.stringify({ error: e.message, raw: match[0].slice(0, 300) }), status: 'scoring_failed' } }];\n}\n\nconst creator = $('Code - Validate Creator').item.json;\nreturn [{ json: {\n  ...creator,\n  score: typeof score.score === 'number' ? score.score : null,\n  ai_notes: JSON.stringify(score),\n  status: creator.status  // mantener 'pending_review'\n} }];"
+      },
+      "name": "Code - Merge Creator Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 300],
+      "notes": "FIX H7: Parseo defensivo. Si Claude falla por cualquier razon, retorna creator con score=null y status='scoring_failed' en lugar de abortar. Diana revisa manualmente."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "creators",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "full_name", "fieldValue": "={{ $json.full_name }}" },
+            { "fieldId": "email", "fieldValue": "={{ $json.email }}" },
+            { "fieldId": "phone", "fieldValue": "={{ $json.phone }}" },
+            { "fieldId": "instagram", "fieldValue": "={{ $json.instagram }}" },
+            { "fieldId": "niche", "fieldValue": "={{ $json.niche }}" },
+            { "fieldId": "followers", "fieldValue": "={{ $json.followers }}" },
+            { "fieldId": "city", "fieldValue": "={{ $json.city }}" },
+            { "fieldId": "score", "fieldValue": "={{ $json.score }}" },
+            { "fieldId": "status", "fieldValue": "={{ $json.status }}" },
+            { "fieldId": "applied_at", "fieldValue": "={{ $json.applied_at }}" },
+            { "fieldId": "assigned_to", "fieldValue": "diana@ugccolombia.com" },
+            { "fieldId": "ai_notes", "fieldValue": "={{ $json.ai_notes }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Insert Creator",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Inserta el creator en DB. Si scoring fallo, igual se inserta con score=null para revision manual por Diana."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.DIANA_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Nueva aplicacion creator UGC:\\n- Nombre: {{ $('Code - Merge Creator Score').item.json.full_name }}\\n- Instagram: @{{ $('Code - Merge Creator Score').item.json.instagram }}\\n- Nicho: {{ $('Code - Merge Creator Score').item.json.niche }}\\n- Seguidores: {{ $('Code - Merge Creator Score').item.json.followers }}\\n- Ciudad: {{ $('Code - Merge Creator Score').item.json.city }}\\n- Score IA: {{ $('Code - Merge Creator Score').item.json.score !== null ? $('Code - Merge Creator Score').item.json.score + '/100' : 'REVISAR (scoring fallo)' }}\\n- Recomendacion: {{ JSON.parse($('Code - Merge Creator Score').item.json.ai_notes).recommendation || 'manual' }}\"\n  }\n}",
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "HTTP - WhatsApp Diana",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 220],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Notifica a Diana con score IA y recomendacion. Si scoring fallo, indica que requiere revision manual."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "={{ $('Code - Merge Creator Score').item.json.email }}" },
+            { "name": "subject", "value": "Recibimos tu aplicacion - UGC Colombia" },
+            { "name": "html", "value": "=<h2>Hola {{ $('Code - Merge Creator Score').item.json.full_name }}!</h2><p>Gracias por aplicar para hacer parte de la red de creators de UGC Colombia.</p><p>Hemos recibido tu aplicacion y la revisaremos en los proximos <strong>3-5 dias habiles</strong>.</p><p>Si tienes preguntas puedes escribirnos directamente por Instagram: <a href='https://instagram.com/agenciaugccolombia'>@agenciaugccolombia</a></p><p>Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": {
+          "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 }
+        }
+      },
+      "name": "Resend - Acknowledge Applicant",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 380],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true,
+      "notes": "Email de confirmacion al creator. SLA: revision en 3-5 dias habiles."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"ok\",\n  \"message\": \"Application received. We will review within 3-5 business days.\",\n  \"creator_id\": \"{{ $('Supabase - Insert Creator').item.json.id }}\"\n}"
+      },
+      "name": "Respond - Application Received",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1500, 300],
+      "notes": "Responde 200 confirmando recepcion de la aplicacion."
+    }
+  ],
+  "connections": {
+    "Webhook - Creator Form": {
+      "main": [
+        [{ "node": "Code - Validate Creator", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Validate Creator": {
+      "main": [
+        [{ "node": "HTTP - Anthropic Creator Scoring", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Anthropic Creator Scoring": {
+      "main": [
+        [{ "node": "Code - Merge Creator Score", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Merge Creator Score": {
+      "main": [
+        [{ "node": "Supabase - Insert Creator", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Insert Creator": {
+      "main": [
+        [
+          { "node": "HTTP - WhatsApp Diana", "type": "main", "index": 0 },
+          { "node": "Resend - Acknowledge Applicant", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "HTTP - WhatsApp Diana": {
+      "main": [
+        [{ "node": "Respond - Application Received", "type": "main", "index": 0 }]
+      ]
+    },
+    "Resend - Acknowledge Applicant": {
+      "main": [
+        [{ "node": "Respond - Application Received", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "creators" },
+    { "name": "ai" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

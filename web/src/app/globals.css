@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* ─── Tokens de diseño UGC Colombia ─── */
+@theme {
+  --color-brand-black: #0A0A0A;
+  --color-brand-gold: #FFD60A;
+  --color-brand-cream: #F5F5F0;
+  --color-brand-text: #1A1A1A;
+  --color-brand-red: #DC2626;
+
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-geist-sans), Inter, sans-serif;
+}
+
+/* ─── Base global ─── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-brand-cream);
+  color: var(--color-brand-text);
+  font-family: var(--font-sans);
+}
+
+/* ─── Selección de texto con dorado ─── */
+::selection {
+  background-color: var(--color-brand-gold);
+  color: var(--color-brand-black);
+}
+
+/* ─── Focus visible accesible ─── */
+:focus-visible {
+  outline: 2px solid var(--color-brand-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Scrollbar personalizado (webkit) ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

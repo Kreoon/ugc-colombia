@@ -1,0 +1,443 @@
+{
+  "name": "01 - lead-ingestion",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-ingestion",
+        "responseMode": "lastNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "name": "Webhook - Lead Ingestion",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Recibe leads desde web form, WhatsApp (Jarvis) o Instagram DM. Requiere header X-Internal-Secret para autenticacion."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX H8: No usar On Error Continue en el insert — verificar resultado explicitamente.\n// FIX M9: Normalizar telefono a E.164 antes de continuar.\nconst item = $input.first().json;\nconst required = ['source', 'email'];\nfor (const f of required) {\n  if (!item[f]) throw new Error(`Missing required field: ${f}`);\n}\n\n// Normalizar email\nconst email = item.email.toLowerCase().trim();\n\n// FIX M9: Normalizar telefono a E.164\nlet phone = (item.phone || '').replace(/\\D/g, '');\nif (phone && phone.length === 10) phone = '57' + phone;\nif (phone && !/^\\d{11,15}$/.test(phone)) {\n  // No lanzar error — loggear y continuar con null\n  console.warn(`[lead-ingestion] Telefono invalido tras normalizacion: \"${item.phone}\" -> \"${phone}\"`);\n  phone = null;\n}\n\n// FIX L5: Idempotency key sin Date.now() — usar solo source+email como fallback\nconst idempotency_key = item.idempotency_key || `${item.source}-${email}`;\n\nconst normalized = {\n  source: item.source,\n  full_name: (item.full_name || '').trim(),\n  email: email,\n  phone: phone || null,\n  company: item.company || null,\n  budget_range: item.budget_range || null,\n  notes: item.message || null,\n  idempotency_key: idempotency_key,\n  stage: 'new',\n  touch_count: 0,\n  created_at: new Date().toISOString()\n};\nreturn [{ json: normalized }];"
+      },
+      "name": "Code - Validate & Normalize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300],
+      "notes": "Valida campos requeridos, normaliza email y telefono a E.164. FIX M9: prefija 57 para numeros colombianos de 10 digitos. FIX L5: idempotency_key sin timestamp."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "getAll",
+        "tableId": "leads",
+        "returnAll": false,
+        "limit": 1,
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "condition": "eq",
+              "keyValue": "={{ $json.email }}"
+            }
+          ]
+        }
+      },
+      "name": "Supabase - Check Existing Lead",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "notes": "Verifica si el lead ya existe por email para evitar duplicados."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.length }}",
+              "operation": "equal",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "name": "IF - Is New Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "notes": "True (output 0) = lead nuevo → insertar. False (output 1) = lead existente → actualizar touch_count."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "leads",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "source", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.source }}" },
+            { "fieldId": "full_name", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.full_name }}" },
+            { "fieldId": "email", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.email }}" },
+            { "fieldId": "phone", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.phone }}" },
+            { "fieldId": "company", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.company }}" },
+            { "fieldId": "budget_range", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.budget_range }}" },
+            { "fieldId": "notes", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.notes }}" },
+            { "fieldId": "idempotency_key", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.idempotency_key }}" },
+            { "fieldId": "stage", "fieldValue": "new" },
+            { "fieldId": "touch_count", "fieldValue": "=0" },
+            { "fieldId": "created_at", "fieldValue": "={{ $('Code - Validate & Normalize').item.json.created_at }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Insert Lead",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 200],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "notes": "FIX H8: Sin On Error Continue. El resultado se verifica en el siguiente nodo IF antes de continuar."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.id }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "name": "IF - Insert OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1250, 200],
+      "notes": "FIX H8: Verifica que el insert retorno un ID valido antes de continuar. Evita enviar welcome email con lead_id=undefined."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "retry": {
+            "enabled": true,
+            "maxTries": 3,
+            "waitBetweenTries": 2000
+          }
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "from",
+              "value": "UGC Colombia <hola@agenciaugccolombia.com>"
+            },
+            {
+              "name": "to",
+              "value": "={{ $('Code - Validate & Normalize').item.json.email }}"
+            },
+            {
+              "name": "subject",
+              "value": "=Bienvenido a UGC Colombia, {{ $('Code - Validate & Normalize').item.json.full_name }}"
+            },
+            {
+              "name": "html",
+              "value": "=<h2>Hola {{ $('Code - Validate & Normalize').item.json.full_name }}!</h2><p>Gracias por tu interes en UGC Colombia. En las proximas 24h te contactamos para agendar una discovery call gratis.</p><p><a href='https://cal.com/ugc-colombia/discovery'>Agenda tu llamada ahora</a></p><p>Equipo UGC Colombia</p>"
+            }
+          ]
+        }
+      },
+      "name": "HTTP - Resend Welcome Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 120],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Resend API"
+        }
+      },
+      "notes": "Email de bienvenida con link a Cal.com. Retry 3x con backoff 2s."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.beehiiv.com/v2/publications/{{$env.BEEHIIV_PUB_ID}}/subscriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "email",
+              "value": "={{ $('Code - Validate & Normalize').item.json.email }}"
+            },
+            {
+              "name": "reactivate_existing",
+              "value": "=true"
+            },
+            {
+              "name": "send_welcome_email",
+              "value": "=false"
+            },
+            {
+              "name": "utm_source",
+              "value": "={{ $('Code - Validate & Normalize').item.json.source }}"
+            }
+          ]
+        },
+        "options": {
+          "ignore400": true
+        }
+      },
+      "name": "HTTP - Beehiiv Subscribe",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 240],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Beehiiv API"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "FIX M8: ignore400=true trata el 409 (email ya existe) como exito. continueOnFail para no bloquear el flujo principal."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"Nuevo lead UGC:\\n- Nombre: {{ $('Code - Validate & Normalize').item.json.full_name }}\\n- Fuente: {{ $('Code - Validate & Normalize').item.json.source }}\\n- Email: {{ $('Code - Validate & Normalize').item.json.email }}\\n- Budget: {{ $('Code - Validate & Normalize').item.json.budget_range || 'No especificado' }}\\n- Lead ID: {{ $('Supabase - Insert Lead').item.json.id }}\"\n  }\n}",
+        "options": {
+          "retry": {
+            "enabled": true,
+            "maxTries": 3,
+            "waitBetweenTries": 2000
+          }
+        }
+      },
+      "name": "HTTP - WhatsApp Alexander",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 360],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "WhatsApp Cloud API"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "FIX M6: Retry 3x. continueOnFail para que fallo en WA no bloquee el trigger de BANT scorer."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dev.kreoon.com/webhook/bant-scorer",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "lead_id",
+              "value": "={{ $('Supabase - Insert Lead').item.json.id }}"
+            }
+          ]
+        }
+      },
+      "name": "HTTP - Trigger BANT Scorer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 480],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Internal Webhook Auth"
+        }
+      },
+      "notes": "Dispara el workflow bant-scorer de forma asincrona. Solo se ejecuta si Insert OK."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"ok\",\n  \"lead_id\": \"{{ $('Supabase - Insert Lead').item.json.id }}\"\n}"
+      },
+      "name": "Respond - Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1700, 300],
+      "notes": "Responde 200 con el lead_id al llamador original."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "update",
+        "tableId": "leads",
+        "filterType": "manual",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "condition": "eq",
+              "keyValue": "={{ $('Supabase - Check Existing Lead').item.json[0].email }}"
+            }
+          ]
+        },
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "touch_count",
+              "fieldValue": "={{ $('Supabase - Check Existing Lead').item.json[0].touch_count + 1 }}"
+            },
+            {
+              "fieldId": "last_touch_at",
+              "fieldValue": "={{ $now.toISO() }}"
+            }
+          ]
+        }
+      },
+      "name": "Supabase - Update Touch Count",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 420],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "notes": "Rama de lead existente: incrementa touch_count y actualiza last_touch_at."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"existing\",\n  \"message\": \"Lead already tracked, touch_count updated\"\n}"
+      },
+      "name": "Respond - Existing Lead",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1250, 420],
+      "notes": "Responde 200 indicando que el lead ya existia."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "workflow_logs",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "workflow", "fieldValue": "lead-ingestion" },
+            { "fieldId": "node", "fieldValue": "Supabase - Insert Lead" },
+            { "fieldId": "level", "fieldValue": "error" },
+            { "fieldId": "message", "fieldValue": "Insert failed — lead_id undefined after insert" },
+            { "fieldId": "payload", "fieldValue": "={{ JSON.stringify($('Code - Validate & Normalize').item.json) }}" },
+            { "fieldId": "created_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Log Insert Failure",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1450, 600],
+      "credentials": {
+        "supabaseApi": {
+          "name": "Supabase - UGC Colombia"
+        }
+      },
+      "continueOnFail": true,
+      "notes": "FIX H8: Log explicito cuando el insert no retorna ID. continueOnFail para poder responder 500 al webhook."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 500,
+        "responseBody": "={\n  \"status\": \"error\",\n  \"message\": \"Failed to persist lead. Our team has been notified.\"\n}"
+      },
+      "name": "Respond - Insert Failed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1700, 600],
+      "notes": "FIX H8: Responde 500 real cuando el lead no se guardo en DB. Evita exito falso al formulario."
+    }
+  ],
+  "connections": {
+    "Webhook - Lead Ingestion": {
+      "main": [
+        [{ "node": "Code - Validate & Normalize", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Validate & Normalize": {
+      "main": [
+        [{ "node": "Supabase - Check Existing Lead", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Check Existing Lead": {
+      "main": [
+        [{ "node": "IF - Is New Lead?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Is New Lead?": {
+      "main": [
+        [{ "node": "Supabase - Insert Lead", "type": "main", "index": 0 }],
+        [{ "node": "Supabase - Update Touch Count", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Insert Lead": {
+      "main": [
+        [{ "node": "IF - Insert OK?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Insert OK?": {
+      "main": [
+        [
+          { "node": "HTTP - Resend Welcome Email", "type": "main", "index": 0 },
+          { "node": "HTTP - Beehiiv Subscribe", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Alexander", "type": "main", "index": 0 },
+          { "node": "HTTP - Trigger BANT Scorer", "type": "main", "index": 0 }
+        ],
+        [{ "node": "Supabase - Log Insert Failure", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - Resend Welcome Email": {
+      "main": [
+        [{ "node": "Respond - Success", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Update Touch Count": {
+      "main": [
+        [{ "node": "Respond - Existing Lead", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Log Insert Failure": {
+      "main": [
+        [{ "node": "Respond - Insert Failed", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "leads" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

@@ -1,0 +1,273 @@
+{
+  "name": "08 - content-repurposing-alert",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "content-uploaded",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook - Content Uploaded",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "notes": "Recibe notificacion cuando se sube contenido pilar. Llamado por Bunny Stream webhook o manualmente por el equipo. Body: { content_id, client_id, type, url, pillar, duration_sec }"
+    },
+    {
+      "parameters": {
+        "jsCode": "// FIX L6: Normalizar el campo 'pillar' que puede llegar como boolean true o string 'true'.\n// Tambien normalizar duration_sec a numero.\nconst d = $input.first().json;\n\nif (!d.content_id) throw new Error('Missing content_id in payload');\nif (!d.client_id) throw new Error('Missing client_id in payload');\n\n// Normalizar pillar: acepta boolean true O string 'true'\nconst pillar = d.pillar === true || d.pillar === 'true' || d.pillar === 1 || d.pillar === '1';\n\n// Normalizar duration_sec a numero\nconst duration_sec = parseInt(d.duration_sec) || 0;\n\nconsole.log(`[content-repurposing] content_id=${d.content_id}, pillar=${pillar}, duration_sec=${duration_sec}`);\n\nreturn [{ json: {\n  ...d,\n  pillar: pillar,\n  duration_sec: duration_sec\n} }];"
+      },
+      "name": "Code - Normalize Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300],
+      "notes": "FIX L6: Normaliza 'pillar' que puede llegar como boolean, string 'true', numero 1 o string '1'. Sin este fix la comparacion estricta falla silenciosamente."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.pillar === true && $json.duration_sec > 120 }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "IF - Is Pillar Content?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "notes": "Solo procesar si es contenido pilar (pillar=true) Y duracion > 120 segundos. Luego de normalizacion, pillar ya es boolean."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "workflow_logs",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "workflow", "fieldValue": "content-repurposing-alert" },
+            { "fieldId": "node", "fieldValue": "IF - Is Pillar Content?" },
+            { "fieldId": "level", "fieldValue": "info" },
+            { "fieldId": "message", "fieldValue": "Content no cumple criterio de pilar — sin derivadas" },
+            { "fieldId": "payload", "fieldValue": "={{ JSON.stringify($json) }}" },
+            { "fieldId": "created_at", "fieldValue": "={{ $now.toISO() }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Log Non-Pillar",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [850, 420],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "continueOnFail": true,
+      "notes": "FIX L6: Log explicito cuando el contenido no cumple el criterio de pilar. Antes era un silent skip."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"skipped\",\n  \"reason\": \"Not pillar content or duration <= 120s\",\n  \"content_id\": \"{{ $json.content_id }}\"\n}"
+      },
+      "name": "Respond - Not Pillar",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 420],
+      "notes": "Responde indicando que el contenido fue recibido pero no es pilar — no se generan derivadas."
+    },
+    {
+      "parameters": {
+        "jsCode": "const piece = $input.first().json;\nconst derivatives = [\n  { type: 'reel_30s', platform: 'instagram', priority: 1 },\n  { type: 'short_60s', platform: 'youtube', priority: 1 },\n  { type: 'tiktok_15s', platform: 'tiktok', priority: 2 },\n  { type: 'carousel_5slides', platform: 'instagram', priority: 2 },\n  { type: 'tweet_thread', platform: 'twitter', priority: 3 },\n  { type: 'linkedin_post', platform: 'linkedin', priority: 3 },\n  { type: 'newsletter_section', platform: 'beehiiv', priority: 2 },\n  { type: 'blog_post_1500w', platform: 'web', priority: 3 }\n];\n\nconsole.log(`[content-repurposing] Generando ${derivatives.length} derivadas para content_id=${piece.content_id}`);\n\nreturn derivatives.map(d => ({\n  json: {\n    ...d,\n    parent_id: piece.content_id,\n    client_id: piece.client_id,\n    status: 'pending_derivative',\n    created_at: new Date().toISOString()\n  }\n}));"
+      },
+      "name": "Code - Generate Derivative List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 220],
+      "notes": "Genera lista de 8 derivadas con prioridades. Cada derivada es un item separado para insert en batch."
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "create",
+        "tableId": "content_pieces",
+        "dataToSend": "defineBelow",
+        "fieldsUi": {
+          "fieldValues": [
+            { "fieldId": "type", "fieldValue": "={{ $json.type }}" },
+            { "fieldId": "client_id", "fieldValue": "={{ $json.client_id }}" },
+            { "fieldId": "status", "fieldValue": "pending_derivative" },
+            { "fieldId": "pillar", "fieldValue": "=false" },
+            { "fieldId": "created_at", "fieldValue": "={{ $json.created_at }}" }
+          ]
+        }
+      },
+      "name": "Supabase - Insert Derivatives",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 220],
+      "credentials": {
+        "supabaseApi": { "name": "Supabase - UGC Colombia" }
+      },
+      "notes": "Inserta cada derivada como registro en content_pieces con status=pending_derivative. Se ejecuta una vez por cada item del array anterior."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Agrupar todas las derivadas insertadas y formatear mensaje para el equipo\nconst items = $input.all().map(i => i.json);\n\nconst p1 = items.filter(d => d.priority === 1);\nconst p2 = items.filter(d => d.priority === 2);\nconst p3 = items.filter(d => d.priority === 3);\n\nconst formatList = arr => arr.map(d => `• ${d.type} (${d.platform})`).join('\\n');\n\nconst parentId = $('Code - Normalize Payload').item.json.content_id;\nconst clientId = $('Code - Normalize Payload').item.json.client_id;\nconst url = $('Code - Normalize Payload').item.json.url;\n\nconst msg = `Nuevo pilar subido! Checklist de derivadas a generar:\\n\\nP1 - Urgente:\\n${formatList(p1)}\\n\\nP2 - Esta semana:\\n${formatList(p2)}\\n\\nP3 - Cuando haya tiempo:\\n${formatList(p3)}\\n\\nCliente: ${clientId}\\nURL: ${url || 'sin url'}\\nTotal: ${items.length} piezas`;\n\nreturn [{ json: { message: msg, total: items.length, client_id: clientId, parent_id: parentId } }];"
+      },
+      "name": "Code - Format Team Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1250, 220],
+      "notes": "Agrupa las derivadas por prioridad y construye el mensaje de WhatsApp para el equipo."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.DIANA_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"{{ $json.message }}\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "HTTP - WhatsApp Diana (derivadas)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 140],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Notifica a Diana con el checklist de derivadas agrupado por prioridad."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{$env.WHATSAPP_PHONE_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{$env.ALEXANDER_WHATSAPP}}\",\n  \"type\": \"text\",\n  \"text\": {\n    \"body\": \"{{ $json.message }}\"\n  }\n}",
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "HTTP - WhatsApp Alexander (derivadas)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1450, 280],
+      "credentials": { "httpHeaderAuth": { "name": "WhatsApp Cloud API" } },
+      "continueOnFail": true,
+      "notes": "Copia del checklist a Alexander para oversight."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "to", "value": "diana@ugccolombia.com" },
+            { "name": "subject", "value": "=Checklist derivadas - {{ $('Code - Format Team Message').item.json.total }} piezas pendientes" },
+            { "name": "html", "value": "=<h2>Nuevo pilar subido — Derivadas a generar</h2><pre style='font-family:monospace;background:#f5f5f5;padding:15px;'>{{ $('Code - Format Team Message').item.json.message }}</pre><p>URL del pilar: {{ $('Code - Normalize Payload').item.json.url || 'Sin URL' }}</p><p>Equipo UGC Colombia</p>" }
+          ]
+        },
+        "options": { "retry": { "enabled": true, "maxTries": 3, "waitBetweenTries": 2000 } }
+      },
+      "name": "Resend - Email Checklist",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1650, 210],
+      "credentials": { "httpHeaderAuth": { "name": "Resend API" } },
+      "continueOnFail": true,
+      "notes": "Email con el checklist completo de derivadas a Diana. Mas facil de trackear que WhatsApp para items de trabajo."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"ok\",\n  \"derivatives_created\": {{ $('Code - Format Team Message').item.json.total }},\n  \"content_id\": \"{{ $('Code - Normalize Payload').item.json.content_id }}\"\n}"
+      },
+      "name": "Respond - Derivatives Created",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1900, 210],
+      "notes": "Responde con el numero de derivadas creadas."
+    }
+  ],
+  "connections": {
+    "Webhook - Content Uploaded": {
+      "main": [
+        [{ "node": "Code - Normalize Payload", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Normalize Payload": {
+      "main": [
+        [{ "node": "IF - Is Pillar Content?", "type": "main", "index": 0 }]
+      ]
+    },
+    "IF - Is Pillar Content?": {
+      "main": [
+        [{ "node": "Code - Generate Derivative List", "type": "main", "index": 0 }],
+        [{ "node": "Supabase - Log Non-Pillar", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Log Non-Pillar": {
+      "main": [
+        [{ "node": "Respond - Not Pillar", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Generate Derivative List": {
+      "main": [
+        [{ "node": "Supabase - Insert Derivatives", "type": "main", "index": 0 }]
+      ]
+    },
+    "Supabase - Insert Derivatives": {
+      "main": [
+        [{ "node": "Code - Format Team Message", "type": "main", "index": 0 }]
+      ]
+    },
+    "Code - Format Team Message": {
+      "main": [
+        [
+          { "node": "HTTP - WhatsApp Diana (derivadas)", "type": "main", "index": 0 },
+          { "node": "HTTP - WhatsApp Alexander (derivadas)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "HTTP - WhatsApp Diana (derivadas)": {
+      "main": [
+        [{ "node": "Resend - Email Checklist", "type": "main", "index": 0 }]
+      ]
+    },
+    "HTTP - WhatsApp Alexander (derivadas)": {
+      "main": [
+        [{ "node": "Resend - Email Checklist", "type": "main", "index": 0 }]
+      ]
+    },
+    "Resend - Email Checklist": {
+      "main": [
+        [{ "node": "Respond - Derivatives Created", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    { "name": "ugc-colombia" },
+    { "name": "content" },
+    { "name": "repurposing" },
+    { "name": "production" }
+  ],
+  "versionId": "1.0.0"
+}

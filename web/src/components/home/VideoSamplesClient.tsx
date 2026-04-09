@@ -26,9 +26,20 @@ interface VideoCardProps {
 function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Intersección play/pause del <video> nativo
   const { ref: intersectionRef, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.4,
     once: false,
+  });
+
+  // Intersección lazy-mount del iframe Bunny (una sola vez, con 400px de
+  // precarga para que llegue listo antes de entrar al viewport). Evita
+  // cargar los 12 players simultáneos al paint inicial.
+  const { ref: mountRef, isIntersecting: shouldMount } = useIntersection<HTMLDivElement>({
+    threshold: 0,
+    rootMargin: "400px",
+    once: true,
   });
 
   // Autoplay nativo cuando entra al viewport (solo file). Iframes Bunny
@@ -70,19 +81,28 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
       className="relative w-full"
     >
       <div
+        ref={mountRef}
         className="relative overflow-hidden rounded-xl bg-black shadow-[0_4px_16px_rgba(0,0,0,0.35)]"
         style={{ aspectRatio: "9/16" }}
       >
         {sample.kind === "iframe" ? (
-          <iframe
-            ref={iframeRef}
-            src={sample.src}
-            loading="lazy"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            style={{ border: 0 }}
-            aria-hidden="true"
-          />
+          shouldMount ? (
+            <iframe
+              ref={iframeRef}
+              src={sample.src}
+              loading="lazy"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              style={{ border: 0 }}
+              aria-hidden="true"
+            />
+          ) : (
+            // Placeholder mientras la card está fuera del viewport + 400px
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-br from-neutral-900 to-black"
+            />
+          )
         ) : (
           <video
             ref={videoRef}
@@ -192,8 +212,7 @@ export function VideoSamplesClient({ initialSamples }: { initialSamples: VideoSa
           {[row1, row2].map((row, rowIdx) => (
             <div
               key={rowIdx}
-              className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-2 lg:overflow-visible lg:grid lg:grid-cols-6 lg:gap-3 lg:justify-items-center"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              className="no-scrollbar flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-2 lg:overflow-visible lg:grid lg:grid-cols-6 lg:gap-4 lg:pb-0 lg:justify-items-stretch"
             >
               {row.map((sample) => (
                 <div

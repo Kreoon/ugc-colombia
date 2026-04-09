@@ -4,7 +4,9 @@ import { SocialProofBar } from "@/components/home/SocialProofBar";
 import { Problema } from "@/components/home/Problema";
 import { Solucion } from "@/components/home/Solucion";
 import { Servicios } from "@/components/home/Servicios";
+import { Suspense } from "react";
 import { VideoSamples } from "@/components/home/VideoSamples";
+import { VideoSamplesSkeleton } from "@/components/home/VideoSamplesSkeleton";
 import { Casos } from "@/components/home/Casos";
 import { Pricing } from "@/components/home/Pricing";
 import { VideoTestimonios } from "@/components/home/VideoTestimonios";
@@ -32,7 +34,9 @@ export default function HomePage() {
         <Problema />
         <Solucion />
         <Servicios />
-        <VideoSamples />
+        <Suspense fallback={<VideoSamplesSkeleton />}>
+          <VideoSamples />
+        </Suspense>
         <Casos />
         <Pricing />
         <VideoTestimonios />

@@ -7,14 +7,27 @@ import { useIntersection } from "@/hooks/use-intersection";
 import { FALLBACK_SAMPLES, type VideoSample } from "@/lib/showcase-samples";
 
 /**
- * Quita el flag muted del query string para construir la URL "con audio".
+ * Envía un comando player.js al iframe Bunny Stream vía postMessage.
+ * Bunny soporta el protocolo player.js (https://github.com/embedly/player.js)
+ * para mute/unmute/setVolume sin recargar el iframe.
  */
-function withAudio(src: string): string {
-  return src
-    .replace(/[?&]muted=true/g, (m) => (m.startsWith("?") ? "?" : ""))
-    .replace(/\?&/, "?")
-    .replace(/&&/g, "&")
-    .replace(/[?&]$/, "");
+function sendBunnyCommand(
+  iframe: HTMLIFrameElement | null,
+  method: "mute" | "unmute" | "setVolume",
+  value?: number
+) {
+  if (!iframe?.contentWindow) return;
+  try {
+    const message = JSON.stringify({
+      context: "player.js",
+      version: "0.0.12",
+      method,
+      ...(value !== undefined ? { value } : {}),
+    });
+    iframe.contentWindow.postMessage(message, "*");
+  } catch {
+    // silencioso — si falla, el usuario puede reintentar
+  }
 }
 
 interface VideoCardProps {
@@ -56,15 +69,19 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
     }
   }, [isIntersecting, sample.kind, unmuted]);
 
-  // Toggle de audio para iframe Bunny: mutamos el src directo sobre el
-  // elemento (sin remount de React) para que el cambio sea más fluido.
+  // Toggle de audio para iframe Bunny: usa postMessage player.js SIN
+  // recargar el iframe. El video sigue reproduciéndose en el mismo frame.
   useEffect(() => {
     if (sample.kind !== "iframe") return;
     const iframe = iframeRef.current;
     if (!iframe) return;
-    const next = unmuted ? withAudio(sample.src) : sample.src;
-    if (iframe.src !== next) iframe.src = next;
-  }, [unmuted, sample.kind, sample.src]);
+    if (unmuted) {
+      sendBunnyCommand(iframe, "unmute");
+      sendBunnyCommand(iframe, "setVolume", 1);
+    } else {
+      sendBunnyCommand(iframe, "mute");
+    }
+  }, [unmuted, sample.kind]);
 
   const handleAudioClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -87,17 +104,24 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
       >
         {sample.kind === "iframe" ? (
           shouldMount ? (
+            // Scale 103% + translate -50% para cropear los 1-2px de borde
+            // claro que pinta Bunny Stream en los edges del embed.
             <iframe
               ref={iframeRef}
               src={sample.src}
               loading="lazy"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              style={{ border: 0 }}
+              className="absolute left-1/2 top-1/2 pointer-events-none"
+              style={{
+                border: 0,
+                outline: 0,
+                width: "103%",
+                height: "103%",
+                transform: "translate(-50%, -50%)",
+              }}
               aria-hidden="true"
             />
           ) : (
-            // Placeholder mientras la card está fuera del viewport + 400px
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-gradient-to-br from-neutral-900 to-black"

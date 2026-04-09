@@ -33,7 +33,7 @@ const SERVICIOS: Servicio[] = [
     title: "Consultoría Estratégica",
     description:
       "Sesiones 1-a-1 con Alexander para auditar tu creative actual y construir la hoja de ruta de los próximos 90 días.",
-    priceFrom: "$800",
+    priceFrom: "$400",
     priceUnit: "USD / sesión",
   },
   {
@@ -42,7 +42,7 @@ const SERVICIOS: Servicio[] = [
     title: "Estrategia de Marketing",
     description:
       "Plan completo de adquisición, funnel de ventas, pricing, canales y presupuesto para escalar tu marca con intención.",
-    priceFrom: "$1.200",
+    priceFrom: "$650",
     priceUnit: "USD / mes",
   },
   {
@@ -51,7 +51,7 @@ const SERVICIOS: Servicio[] = [
     title: "Estrategia de Contenido",
     description:
       "Pilares editoriales, calendario mensual, ángulos ganadores y frameworks de hooks probados por vertical.",
-    priceFrom: "$900",
+    priceFrom: "$450",
     priceUnit: "USD / mes",
   },
   {
@@ -60,7 +60,7 @@ const SERVICIOS: Servicio[] = [
     title: "Guiones UGC",
     description:
       "Guiones conversacionales escritos con acento latino real. Hooks, transiciones y CTAs listos para grabar.",
-    priceFrom: "$150",
+    priceFrom: "$90",
     priceUnit: "USD / guion",
   },
   {
@@ -69,7 +69,7 @@ const SERVICIOS: Servicio[] = [
     title: "Investigación de Mercado",
     description:
       "Análisis de audiencia, dolores, insights culturales y tendencias LATAM + USA Hispanic con data real.",
-    priceFrom: "$600",
+    priceFrom: "$450",
     priceUnit: "USD / proyecto",
   },
   {
@@ -78,7 +78,7 @@ const SERVICIOS: Servicio[] = [
     title: "Análisis de Competencia",
     description:
       "Auditoría de tus competidores directos: creative, pricing, posicionamiento y ventanas de oportunidad.",
-    priceFrom: "$500",
+    priceFrom: "$350",
     priceUnit: "USD / proyecto",
   },
   {
@@ -87,7 +87,7 @@ const SERVICIOS: Servicio[] = [
     title: "Edición Profesional",
     description:
       "Post-producción cinematográfica: color grading, motion graphics, subtítulos dinámicos y exports ad-ready.",
-    priceFrom: "$80",
+    priceFrom: "$65",
     priceUnit: "USD / video",
   },
   {
@@ -96,8 +96,8 @@ const SERVICIOS: Servicio[] = [
     title: "Creadores Verificados",
     description:
       "Acceso a nuestra red de +30 creadores latinos pre-vetted. Matching por nicho, audiencia y estilo de marca.",
-    priceFrom: "$300",
-    priceUnit: "USD / creador",
+    priceFrom: "$150",
+    priceUnit: "USD / video",
   },
 ];
 
@@ -256,7 +256,7 @@ export function Servicios() {
             </span>{" "}
             en el UGC Ads Pack y ahorras hasta{" "}
             <span className="text-emerald-400 font-semibold">
-              $4.500 USD/mes
+              $4.000 USD/mes
             </span>
             .
           </p>
@@ -398,12 +398,12 @@ export function Servicios() {
                 </p>
                 <div className="flex items-baseline gap-3 mb-2">
                   <span className="font-display text-5xl sm:text-6xl text-white">
-                    $1.500
+                    $400
                   </span>
                   <span className="text-sm text-brand-gray">USD / mes</span>
                 </div>
                 <p className="text-sm text-brand-gray mb-6">
-                  Escala desde 5 hasta 100+ videos al mes.
+                  Escala desde 5 hasta 30+ videos al mes con 3 variantes cada uno.
                 </p>
 
                 {/* CTA */}
@@ -411,7 +411,7 @@ export function Servicios() {
                   href="#pricing"
                   className="group/cta flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-brand-yellow text-black font-sans font-bold text-base tracking-wide hover:bg-brand-gold transition-all hover:shadow-[0_10px_40px_-10px_rgba(249,179,52,0.5)]"
                 >
-                  Empezar con el paquete
+                  Ver planes
                   <ArrowRight
                     className="h-5 w-5 transition-transform group-hover/cta:translate-x-1"
                     aria-hidden
@@ -432,22 +432,22 @@ export function Servicios() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-white/75">
                     <span>Contratando por separado</span>
-                    <span className="line-through opacity-70">~$6.000/mes</span>
+                    <span className="line-through opacity-70">~$4.700/mes</span>
                   </div>
                   <div className="flex justify-between text-white font-semibold">
-                    <span>UGC Ads Pack</span>
-                    <span>$1.500/mes</span>
+                    <span>UGC Ads Pack Growth</span>
+                    <span>$700/mes</span>
                   </div>
                   <div className="border-t border-emerald-500/30 pt-3 mt-3 flex justify-between items-baseline">
                     <span className="text-emerald-400 font-bold">
                       Ahorras
                     </span>
                     <span className="font-display text-2xl text-emerald-400">
-                      $4.500
+                      $4.000
                     </span>
                   </div>
                   <p className="text-[11px] text-emerald-400/80 text-right">
-                    USD / mes · 75% menos
+                    USD / mes · 85% menos
                   </p>
                 </div>
               </div>

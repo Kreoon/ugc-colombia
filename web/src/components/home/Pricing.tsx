@@ -2,201 +2,380 @@
 
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Check, Sparkles, Zap, Crown, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+type CtaType = "stripe" | "agenda";
 
 interface Plan {
   id: string;
   name: string;
+  icon: React.ElementType;
   price: string;
-  period: string;
+  priceUnit: string;
+  videos: string;
+  variants: string;
   description: string;
   features: string[];
+  ctaLabel: string;
+  ctaType: CtaType;
+  ctaHref: string;
   highlight?: boolean;
   badge?: string;
-  ctaLabel: string;
+  saving?: string;
 }
 
 const PLANES: Plan[] = [
   {
     id: "starter",
     name: "STARTER",
-    price: "$500",
-    period: "/ mes",
-    description: "Para marcas que quieren probar UGC con bajo riesgo.",
+    icon: Zap,
+    price: "$400",
+    priceUnit: "USD / mes",
+    videos: "5 videos UGC",
+    variants: "+ 3 variantes por video = 15 deliverables",
+    description: "Para marcas que quieren probar UGC con bajo riesgo y ver resultados rápido.",
     features: [
-      "5 videos UGC al mes",
+      "5 videos UGC + 3 variantes cada uno",
       "Brief estratégico incluido",
-      "Matching de creator",
-      "1 ronda de revisión",
+      "Investigación de mercado",
+      "Análisis de competencia",
+      "Guiones escritos por nuestro equipo",
+      "Casting curado de creadores",
+      "Edición profesional ad-ready",
+      "1 ronda de revisión por video",
       "Entrega en 7 días",
-      "Licencia completa para ads",
+      "Licencia paid media 12 meses",
     ],
-    ctaLabel: "Empezar con Starter →",
+    ctaLabel: "Empezar con Starter",
+    ctaType: "stripe",
+    ctaHref: "/checkout/starter",
+    saving: "Ahorras ~$2.200/mes",
   },
   {
     id: "growth",
     name: "GROWTH",
-    price: "$900",
-    period: "/ mes",
-    description: "El favorito de marcas que ya probaron UGC y quieren escalar.",
+    icon: Sparkles,
+    price: "$700",
+    priceUnit: "USD / mes",
+    videos: "10 videos UGC",
+    variants: "+ 3 variantes por video = 30 deliverables",
+    description: "El favorito de marcas que ya probaron UGC y están listas para escalar con intención.",
     features: [
-      "10 videos UGC al mes",
+      "10 videos UGC + 3 variantes cada uno",
       "Estrategia editorial mensual",
-      "2 rondas de revisión",
-      "Reporte de performance",
+      "Investigación de mercado continua",
+      "Análisis de competencia trimestral",
+      "Guiones con frameworks ganadores",
+      "Casting premium de nuestra red",
+      "Edición profesional + motion graphics",
+      "2 rondas de revisión por video",
+      "Reporte mensual de performance",
       "Account manager dedicado",
       "Entrega en 7 días",
-      "Licencia completa para ads",
+      "Licencia paid media 12 meses",
     ],
+    ctaLabel: "Empezar con Growth",
+    ctaType: "stripe",
+    ctaHref: "/checkout/growth",
     highlight: true,
     badge: "MÁS POPULAR",
-    ctaLabel: "Empezar con Growth →",
+    saving: "Ahorras ~$4.000/mes",
   },
   {
     id: "scale",
     name: "SCALE",
+    icon: Rocket,
     price: "$1.500",
-    period: "/ mes",
-    description: "Para marcas que ya saben que el creative es su ventaja competitiva.",
+    priceUnit: "USD / mes",
+    videos: "30 videos UGC",
+    variants: "+ 3 variantes por video = 90 deliverables",
+    description: "Para marcas que saben que el creative es su ventaja competitiva y quieren dominar sus ads.",
     features: [
-      "20 videos UGC al mes",
-      "Estrategia + consultoría",
+      "30 videos UGC + 3 variantes cada uno",
+      "Estrategia de marketing completa",
+      "Consultoría estratégica mensual con Alexander",
+      "Research + análisis de competencia continuo",
+      "Banco de guiones por ángulo ganador",
+      "Pool de creadores premium Tier A",
+      "Edición cinematográfica + subtítulos dinámicos",
       "Revisiones ilimitadas",
-      "Reporte avanzado con data",
-      "Account manager dedicado",
-      "Priority delivery (10 días)",
-      "Licencia completa para ads",
+      "Reportes semanales con data accionable",
+      "Account manager senior dedicado",
+      "Priority delivery",
+      "Licencia paid media 12 meses",
     ],
-    ctaLabel: "Empezar con Scale →",
+    ctaLabel: "Empezar con Scale",
+    ctaType: "stripe",
+    ctaHref: "/checkout/scale",
+    saving: "Ahorras ~$5.500/mes",
+  },
+  {
+    id: "enterprise",
+    name: "ENTERPRISE",
+    icon: Crown,
+    price: "Custom",
+    priceUnit: "Hablemos",
+    videos: "60+ videos / mes",
+    variants: "Variantes ilimitadas · contenido a medida",
+    description: "Para empresas escalables con alto volumen de ads que necesitan creative a medida, equipo dedicado y delivery sin límites.",
+    features: [
+      "60+ videos UGC al mes (escalable)",
+      "Variantes ilimitadas por video",
+      "Estrategia 360° integrada con tu equipo",
+      "Creative director asignado",
+      "Squad dedicado de creadores Tier A exclusivos",
+      "Producción premium: VSLs, hero videos, campañas",
+      "Post-producción cinematográfica ilimitada",
+      "Integración directa con tu equipo de performance",
+      "Dashboard en tiempo real de métricas",
+      "Slack/Teams compartido con nuestro equipo",
+      "SLAs garantizados por contrato",
+      "Derechos de uso custom (whitelisting, exclusividad)",
+      "Onboarding ejecutivo con Alexander Cast",
+    ],
+    ctaLabel: "Agendar consulta",
+    ctaType: "agenda",
+    ctaHref: "#discovery-call",
   },
 ];
 
-function PlanCard({ plan, index, isIntersecting }: {
+function PlanCard({
+  plan,
+  index,
+  isIntersecting,
+}: {
   plan: Plan;
   index: number;
   isIntersecting: boolean;
 }) {
+  const Icon = plan.icon;
+  const isEnterprise = plan.id === "enterprise";
+
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 36 }}
       animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.6,
-        delay: 0.1 + index * 0.12,
+        delay: 0.1 + index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
-        "relative flex flex-col rounded-2xl p-7 sm:p-8 overflow-hidden",
+        "relative flex flex-col rounded-2xl p-6 sm:p-7 overflow-hidden h-full",
         "transition-all duration-300",
         plan.highlight
           ? [
               "border-2 border-brand-gold",
-              "bg-gradient-to-b from-brand-yellow/6 to-black",
-              "shadow-[0_0_50px_rgba(212,160,23,0.2)]",
-              "hover:shadow-[0_0_70px_rgba(212,160,23,0.3)]",
-              "-mt-2 sm:-mt-4",
+              "bg-gradient-to-b from-brand-yellow/8 to-black",
+              "shadow-[0_0_60px_-20px_rgba(212,160,23,0.4)]",
+              "hover:shadow-[0_0_80px_-15px_rgba(212,160,23,0.55)]",
+              "lg:-mt-4 lg:mb-4",
+            ]
+          : isEnterprise
+          ? [
+              "border border-brand-gold/40",
+              "bg-gradient-to-br from-brand-graphite/20 via-black to-brand-black",
+              "hover:border-brand-gold/70 hover:shadow-[0_12px_40px_-12px_rgba(212,160,23,0.3)]",
             ]
           : [
-              "border border-brand-graphite/60 bg-white/3",
-              "hover:border-brand-gold/30 hover:shadow-[0_8px_30px_rgba(212,160,23,0.08)]",
+              "border border-brand-graphite/60 bg-white/[0.025]",
+              "hover:border-brand-gold/35 hover:bg-white/[0.04]",
+              "hover:shadow-[0_10px_30px_-10px_rgba(212,160,23,0.15)]",
             ]
       )}
     >
-      {/* Glow top para plan highlight */}
+      {/* Top glow bar for highlighted */}
       {plan.highlight && (
         <div
-          aria-hidden="true"
-          className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-gold to-transparent"
+          aria-hidden
+          className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold to-transparent"
         />
       )}
 
-      {/* Badge popular */}
+      {/* Enterprise crown pattern */}
+      {isEnterprise && (
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(249,179,52,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(249,179,52,0.5) 1px, transparent 1px)",
+            backgroundSize: "30px 30px",
+            maskImage:
+              "radial-gradient(ellipse at top, black 30%, transparent 80%)",
+          }}
+        />
+      )}
+
+      {/* Badge */}
       {plan.badge && (
-        <div className="flex justify-center mb-5">
-          <span className="inline-flex items-center text-xs font-sans font-bold tracking-widest uppercase bg-brand-yellow text-black px-4 py-1.5 rounded-full">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-bold tracking-[0.2em] uppercase bg-brand-yellow text-black px-4 py-1.5 rounded-full shadow-lg">
+            <Sparkles className="h-3 w-3" aria-hidden />
             {plan.badge}
           </span>
         </div>
       )}
 
-      {/* Plan name */}
-      <p
-        className={cn(
-          "font-display text-sm tracking-widest mb-2",
-          plan.highlight ? "text-brand-yellow" : "text-brand-gold"
-        )}
-      >
-        {plan.name}
-      </p>
+      {/* Header: icon + name */}
+      <div className="flex items-start justify-between mb-5">
+        <div
+          className={cn(
+            "w-11 h-11 rounded-xl flex items-center justify-center",
+            plan.highlight
+              ? "bg-brand-yellow text-black shadow-[0_0_20px_rgba(249,179,52,0.5)]"
+              : isEnterprise
+              ? "bg-gradient-to-br from-brand-yellow to-brand-gold-dark text-black"
+              : "bg-brand-yellow/10 border border-brand-yellow/25 text-brand-yellow"
+          )}
+        >
+          <Icon className="h-5 w-5" aria-hidden />
+        </div>
+        <p
+          className={cn(
+            "font-display text-xs tracking-[0.25em]",
+            plan.highlight
+              ? "text-brand-yellow"
+              : isEnterprise
+              ? "text-brand-gold"
+              : "text-brand-gold/80"
+          )}
+        >
+          {plan.name}
+        </p>
+      </div>
 
       {/* Price */}
-      <div className="flex items-end gap-1 mb-3">
-        <span
-          className="font-display text-5xl sm:text-6xl leading-none text-white"
+      <div className="mb-2">
+        {isEnterprise ? (
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-4xl sm:text-5xl leading-none text-white">
+              Custom
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-5xl sm:text-6xl leading-none text-white">
+              {plan.price}
+            </span>
+            <span className="text-brand-gray font-sans text-sm">
+              {plan.priceUnit}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Videos highlight */}
+      <div
+        className={cn(
+          "mt-4 mb-4 rounded-xl px-4 py-3 border",
+          plan.highlight
+            ? "border-brand-gold/50 bg-brand-yellow/8"
+            : isEnterprise
+            ? "border-brand-gold/35 bg-brand-yellow/5"
+            : "border-brand-graphite/60 bg-white/[0.02]"
+        )}
+      >
+        <p
+          className={cn(
+            "font-display text-xl sm:text-2xl leading-tight",
+            plan.highlight || isEnterprise ? "text-brand-yellow" : "text-white"
+          )}
         >
-          {plan.price}
-        </span>
-        <span className="text-brand-gray font-sans text-sm mb-2">
-          {plan.period}
-        </span>
+          {plan.videos}
+        </p>
+        <p className="text-[11px] text-brand-gray mt-0.5">{plan.variants}</p>
       </div>
 
       {/* Description */}
-      <p className="text-brand-gray text-sm leading-relaxed mb-6">
+      <p className="text-sm text-brand-gray leading-relaxed mb-5">
         {plan.description}
       </p>
 
+      {/* Savings badge */}
+      {plan.saving && (
+        <div className="mb-5 inline-flex items-center gap-2 self-start rounded-lg border border-emerald-500/30 bg-emerald-500/8 px-3 py-1.5">
+          <span aria-hidden className="text-xs">
+            💰
+          </span>
+          <span className="text-xs font-semibold text-emerald-400">
+            {plan.saving}
+          </span>
+        </div>
+      )}
+
       {/* Features */}
-      <ul className="space-y-3 mb-8 flex-1" aria-label={`Características del plan ${plan.name}`}>
+      <ul
+        className="space-y-2.5 mb-6 flex-1"
+        aria-label={`Características del plan ${plan.name}`}
+      >
         {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3">
-            <div
+          <li key={feature} className="flex items-start gap-2.5">
+            <span
               className={cn(
-                "flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5",
+                "flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-0.5",
                 plan.highlight
                   ? "bg-brand-yellow text-black"
-                  : "bg-brand-gold/15 text-brand-gold"
+                  : isEnterprise
+                  ? "bg-brand-gold/20 border border-brand-gold/50 text-brand-gold"
+                  : "bg-brand-yellow/15 border border-brand-yellow/35 text-brand-yellow"
               )}
             >
-              <Check className="h-3 w-3" aria-hidden="true" />
-            </div>
-            <span className="text-sm text-brand-gray font-sans">{feature}</span>
+              <Check className="h-2.5 w-2.5" strokeWidth={3} aria-hidden />
+            </span>
+            <span className="text-xs sm:text-sm text-white/85 leading-relaxed">
+              {feature}
+            </span>
           </li>
         ))}
       </ul>
 
       {/* CTA */}
-      <Button
-        size="default"
-        variant={plan.highlight ? "default" : "outline"}
+      <a
+        href={plan.ctaHref}
         className={cn(
-          "w-full font-semibold",
-          plan.highlight &&
-            "shadow-[0_0_20px_rgba(249,179,52,0.3)] hover:shadow-[0_0_32px_rgba(249,179,52,0.5)]"
+          "group/cta flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl font-sans font-bold text-sm sm:text-base tracking-wide transition-all",
+          plan.highlight
+            ? "bg-brand-yellow text-black hover:bg-brand-gold hover:shadow-[0_10px_40px_-10px_rgba(249,179,52,0.6)]"
+            : isEnterprise
+            ? "bg-gradient-to-r from-brand-yellow to-brand-gold-dark text-black hover:shadow-[0_10px_40px_-10px_rgba(212,160,23,0.5)]"
+            : "bg-white/[0.04] border border-brand-gold/40 text-brand-yellow hover:bg-brand-yellow/10 hover:border-brand-gold/70"
         )}
-        aria-label={`${plan.ctaLabel} — Plan ${plan.name} a ${plan.price} por mes`}
+        aria-label={`${plan.ctaLabel} — Plan ${plan.name}`}
       >
         {plan.ctaLabel}
-      </Button>
-    </motion.div>
+        <span
+          aria-hidden
+          className="transition-transform group-hover/cta:translate-x-1"
+        >
+          →
+        </span>
+      </a>
+
+      {/* Payment method hint */}
+      <p className="text-[10px] text-center text-brand-gray/60 mt-3">
+        {plan.ctaType === "stripe"
+          ? "Pago seguro con Stripe · Cancela cuando quieras"
+          : "Llamada 30 min · Cotización a medida"}
+      </p>
+    </motion.article>
   );
 }
 
 export function Pricing() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
-    threshold: 0.06,
+    threshold: 0.04,
   });
 
   return (
     <section
       id="pricing"
       aria-labelledby="pricing-title"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8"
+      className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden"
       style={{
         background:
-          "linear-gradient(180deg, #000000 0%, #060402 50%, #000000 100%)",
+          "linear-gradient(180deg, #000000 0%, #080604 50%, #000000 100%)",
       }}
     >
       {/* Radial glow */}
@@ -205,22 +384,22 @@ export function Pricing() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,160,23,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(212,160,23,0.08) 0%, transparent 60%)",
         }}
       />
 
-      <div className="max-w-6xl mx-auto" ref={ref}>
+      <div className="relative max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto"
         >
           <p className="sr-only">Pricing</p>
           <h2
             id="pricing-title"
-            className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"
+            className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"
           >
             Precios transparentes.
             <br />
@@ -235,14 +414,15 @@ export function Pricing() {
               Sin sorpresas.
             </span>
           </h2>
-          <p className="mt-4 text-brand-gray text-base sm:text-lg max-w-xl mx-auto">
-            Todos los planes incluyen brief estratégico, casting curado y
-            licencia completa de uso en ads.
+          <p className="mt-6 text-base sm:text-lg text-brand-gray leading-relaxed">
+            Cada plan incluye los 8 servicios del UGC Ads Pack + 3 variantes por
+            video para que tengas munición ilimitada para A/B testing en Meta y
+            TikTok Ads.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 items-start">
+        {/* Cards — 4 columns on large */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
           {PLANES.map((plan, i) => (
             <PlanCard
               key={plan.id}
@@ -253,19 +433,32 @@ export function Pricing() {
           ))}
         </div>
 
-        {/* Enterprise mention */}
+        {/* Trust row */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 text-center"
+          transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-sm text-brand-gray"
         >
-          <p className="text-brand-gray text-sm font-sans">
-            ¿Necesitas 300+ videos al mes?{" "}
-            <button className="text-brand-yellow font-semibold hover:text-brand-gold transition-colors underline underline-offset-2">
-              Pregunta por Enterprise desde $3.000
-            </button>
-          </p>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Pago seguro con Stripe
+          </div>
+          <div className="hidden sm:block w-1 h-1 rounded-full bg-brand-graphite" />
+          <div className="flex items-center gap-2">
+            <span aria-hidden>🛡️</span>
+            Garantía de 7 días
+          </div>
+          <div className="hidden sm:block w-1 h-1 rounded-full bg-brand-graphite" />
+          <div className="flex items-center gap-2">
+            <span aria-hidden>♾️</span>
+            Sin permanencia forzada
+          </div>
+          <div className="hidden sm:block w-1 h-1 rounded-full bg-brand-graphite" />
+          <div className="flex items-center gap-2">
+            <span aria-hidden>🎯</span>
+            Licencia paid media 12m
+          </div>
         </motion.div>
       </div>
     </section>

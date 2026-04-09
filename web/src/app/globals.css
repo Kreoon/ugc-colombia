@@ -1,16 +1,29 @@
 @import "tailwindcss";
 
-/* ─── Brand tokens ─────────────────────────────────────────── */
-:root {
-  --brand-black:     #000000;
-  --brand-graphite:  #3D3D3C;
-  --brand-gray:      #BDBCBC;
-  --brand-yellow:    #F9B334;
-  --brand-gold:      #D4A017;
-  --brand-gold-dark: #C9940A;
+/* ─── Tailwind v4 theme tokens ───────────────────────────────
+   Registra los colores, fuentes y escalas custom para que
+   Tailwind genere utilities como bg-brand-yellow, text-brand-gold,
+   font-display, etc.                                             */
+@theme {
+  --color-brand-black: #000000;
+  --color-brand-graphite: #3d3d3c;
+  --color-brand-gray: #bdbcbc;
+  --color-brand-yellow: #f9b334;
+  --color-brand-gold: #d4a017;
+  --color-brand-gold-dark: #c9940a;
 
-  --font-anton: "Anton", sans-serif;
-  --font-inter: "Inter", sans-serif;
+  --font-display: var(--font-anton), Anton, sans-serif;
+  --font-sans: var(--font-inter), Inter, sans-serif;
+}
+
+/* ─── Brand tokens legacy (compat con inline styles) ──────── */
+:root {
+  --brand-black: #000000;
+  --brand-graphite: #3d3d3c;
+  --brand-gray: #bdbcbc;
+  --brand-yellow: #f9b334;
+  --brand-gold: #d4a017;
+  --brand-gold-dark: #c9940a;
 }
 
 /* ─── Base ──────────────────────────────────────────────────── */

@@ -98,15 +98,16 @@ export function Hero() {
           {/* Glow dorado detrás del logo */}
           <div
             aria-hidden
-            className="absolute inset-0 -z-10 blur-3xl opacity-40"
+            className="absolute inset-0 -z-10 blur-3xl opacity-50"
             style={{
               background:
-                "radial-gradient(ellipse at center, rgba(212,160,23,0.45) 0%, rgba(249,179,52,0.2) 30%, transparent 60%)",
-              transform: "translateZ(-40px) scale(0.95)",
+                "radial-gradient(ellipse at center, rgba(212,160,23,0.55) 0%, rgba(249,179,52,0.25) 35%, transparent 65%)",
+              transform: "translateZ(-40px) scale(1.05)",
             }}
           />
 
-          {/* Video transparente (webm con alpha) + fallback mp4 */}
+          {/* Video render 3D premium con máscara radial
+              para integrar el fondo gris del render con la página negra */}
           <video
             autoPlay
             muted
@@ -114,12 +115,19 @@ export function Hero() {
             playsInline
             preload="auto"
             poster="/logo-poster.png"
-            className="w-full h-auto drop-shadow-[0_20px_40px_rgba(212,160,23,0.35)]"
+            className="w-full h-auto"
             style={{
+              // Máscara radial: centro opaco 100%, bordes fade a transparente
+              // Así el fondo gris del render 3D desaparece suavemente
+              // hacia los bordes e integra con el negro de la página
+              WebkitMaskImage:
+                "radial-gradient(ellipse 60% 55% at center, #000 40%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0.5) 78%, transparent 95%)",
+              maskImage:
+                "radial-gradient(ellipse 60% 55% at center, #000 40%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0.5) 78%, transparent 95%)",
               filter:
-                "drop-shadow(0 0 28px rgba(212,160,23,0.25)) drop-shadow(0 0 60px rgba(249,179,52,0.15))",
+                "drop-shadow(0 0 30px rgba(212,160,23,0.25)) drop-shadow(0 0 80px rgba(249,179,52,0.15)) contrast(1.08) saturate(1.1)",
             }}
-            aria-label="Logo animado de UGC Colombia"
+            aria-label="Logo animado 3D de UGC Colombia"
           >
             <source src="/logo-animation.webm" type="video/webm" />
             <source src="/logo-animation.mp4" type="video/mp4" />

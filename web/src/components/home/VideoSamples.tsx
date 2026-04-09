@@ -11,20 +11,23 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+type VideoKind = "file" | "iframe";
+
 interface VideoSample {
   id: number;
   src: string;
   poster: string;
   tag: string;
+  kind: VideoKind;
 }
 
 const FALLBACK_SAMPLES: VideoSample[] = [
-  { id: 1, src: "/videos/samples/sample-1.mp4", poster: "/videos/samples/sample-1-poster.jpg", tag: "Skincare · LATAM" },
-  { id: 2, src: "/videos/samples/sample-2.mp4", poster: "/videos/samples/sample-2-poster.jpg", tag: "Moda · Colombia" },
-  { id: 3, src: "/videos/samples/sample-3.mp4", poster: "/videos/samples/sample-3-poster.jpg", tag: "Lifestyle · UGC" },
-  { id: 4, src: "/videos/samples/sample-4.mp4", poster: "/videos/samples/sample-4-poster.jpg", tag: "Fitness · LATAM" },
-  { id: 5, src: "/videos/samples/sample-5.mp4", poster: "/videos/samples/sample-5-poster.jpg", tag: "Beauty · UGC" },
-  { id: 6, src: "/videos/samples/sample-6.mp4", poster: "/videos/samples/sample-6-poster.jpg", tag: "Tech · Colombia" },
+  { id: 1, src: "/videos/samples/sample-1.mp4", poster: "/videos/samples/sample-1-poster.jpg", tag: "Skincare · LATAM", kind: "file" },
+  { id: 2, src: "/videos/samples/sample-2.mp4", poster: "/videos/samples/sample-2-poster.jpg", tag: "Moda · Colombia", kind: "file" },
+  { id: 3, src: "/videos/samples/sample-3.mp4", poster: "/videos/samples/sample-3-poster.jpg", tag: "Lifestyle · UGC", kind: "file" },
+  { id: 4, src: "/videos/samples/sample-4.mp4", poster: "/videos/samples/sample-4-poster.jpg", tag: "Fitness · LATAM", kind: "file" },
+  { id: 5, src: "/videos/samples/sample-5.mp4", poster: "/videos/samples/sample-5-poster.jpg", tag: "Beauty · UGC", kind: "file" },
+  { id: 6, src: "/videos/samples/sample-6.mp4", poster: "/videos/samples/sample-6-poster.jpg", tag: "Tech · Colombia", kind: "file" },
 ];
 
 interface KreoonVideoDTO {
@@ -38,14 +41,22 @@ interface KreoonVideoDTO {
 }
 
 /**
- * Solo aceptamos videos reproducibles directamente con <video src>:
- * .mp4, .webm, .mov sirven; los embed iframes (Bunny Stream
- * iframe.mediadelivery.net) no, porque rompen el reproductor nativo.
+ * Bunny Stream embed URL → embed con autoplay/loop/muted para preview tipo video nativo.
+ * Si ya es .mp4/.webm/.mov la dejamos como video directo.
  */
-function isPlayableVideoUrl(url: string): boolean {
-  if (!url) return false;
-  if (url.includes("iframe.mediadelivery.net")) return false;
+function isBunnyStreamEmbed(url: string): boolean {
+  return /iframe\.mediadelivery\.net\/(?:embed|play)\//i.test(url);
+}
+
+function isDirectVideoFile(url: string): boolean {
   return /\.(mp4|webm|mov)(\?|$)/i.test(url);
+}
+
+function toBunnyAutoplayEmbed(url: string): string {
+  // Normaliza /play/ → /embed/ y agrega params de autoplay loop muted preview
+  const normalized = url.replace("/play/", "/embed/");
+  const sep = normalized.includes("?") ? "&" : "?";
+  return `${normalized}${sep}autoplay=true&loop=true&muted=true&preload=true&responsive=true`;
 }
 
 function buildTag(v: KreoonVideoDTO): string {
@@ -74,15 +85,29 @@ async function loadKreoonSamples(limit = 6): Promise<VideoSample[]> {
     const json = (await res.json()) as { success: boolean; data: KreoonVideoDTO[] | null };
     if (!json.success || !json.data || json.data.length === 0) return FALLBACK_SAMPLES;
 
-    const valid = json.data
-      .filter(v => isPlayableVideoUrl(v.video_url) && v.thumbnail_url)
-      .slice(0, limit)
-      .map<VideoSample>((v, i) => ({
-        id: i + 1,
-        src: v.video_url,
-        poster: v.thumbnail_url as string,
+    const valid: VideoSample[] = [];
+    for (const v of json.data) {
+      if (!v.video_url) continue;
+      let src: string;
+      let kind: VideoKind;
+      if (isDirectVideoFile(v.video_url)) {
+        src = v.video_url;
+        kind = "file";
+      } else if (isBunnyStreamEmbed(v.video_url)) {
+        src = toBunnyAutoplayEmbed(v.video_url);
+        kind = "iframe";
+      } else {
+        continue;
+      }
+      valid.push({
+        id: valid.length + 1,
+        src,
+        poster: v.thumbnail_url ?? "",
         tag: buildTag(v),
-      }));
+        kind,
+      });
+      if (valid.length >= limit) break;
+    }
 
     if (valid.length === 0) return FALLBACK_SAMPLES;
     return valid;
@@ -100,8 +125,10 @@ function VideoCard({ sample }: { sample: VideoSample }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  // Autoplay cuando entra viewport, pausa cuando sale
+  // Autoplay cuando entra viewport (solo para <video> nativo; los iframes
+  // de Bunny Stream ya hacen autoplay vía query params).
   useEffect(() => {
+    if (sample.kind !== "file") return;
     const video = videoRef.current;
     if (!video) return;
     if (isIntersecting) {
@@ -109,7 +136,7 @@ function VideoCard({ sample }: { sample: VideoSample }) {
     } else {
       video.pause();
     }
-  }, [isIntersecting]);
+  }, [isIntersecting, sample.kind]);
 
   return (
     <>
@@ -145,17 +172,29 @@ function VideoCard({ sample }: { sample: VideoSample }) {
             transition: "transform 0.25s ease, box-shadow 0.25s ease",
           }}
         >
-          <video
-            ref={videoRef}
-            src={sample.src}
-            poster={sample.poster}
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="absolute inset-0 w-full h-full object-cover"
-            aria-hidden="true"
-          />
+          {sample.kind === "iframe" ? (
+            <iframe
+              src={sample.src}
+              loading="lazy"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              style={{ border: 0 }}
+              aria-hidden="true"
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              src={sample.src}
+              poster={sample.poster}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover"
+              aria-hidden="true"
+            />
+          )}
         </div>
       </motion.div>
 
@@ -166,7 +205,7 @@ function VideoCard({ sample }: { sample: VideoSample }) {
             Video UGC: {sample.tag}
           </DialogTitle>
           <div className="relative" style={{ aspectRatio: "9/16" }}>
-            <VideoDialogPlayer src={sample.src} poster={sample.poster} />
+            <VideoDialogPlayer sample={sample} />
           </div>
         </DialogContent>
       </Dialog>
@@ -175,13 +214,14 @@ function VideoCard({ sample }: { sample: VideoSample }) {
 }
 
 /** Player con audio dentro del dialog */
-function VideoDialogPlayer({ src, poster }: { src: string; poster: string }) {
+function VideoDialogPlayer({ sample }: { sample: VideoSample }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(false);
 
   useEffect(() => {
+    if (sample.kind !== "file") return;
     videoRef.current?.play().catch(() => {});
-  }, []);
+  }, [sample.kind]);
 
   const toggleMute = () => {
     if (!videoRef.current) return;
@@ -189,12 +229,27 @@ function VideoDialogPlayer({ src, poster }: { src: string; poster: string }) {
     setMuted(videoRef.current.muted);
   };
 
+  if (sample.kind === "iframe") {
+    // En el dialog queremos audio activado: quitamos &muted=true
+    const dialogSrc = sample.src.replace("&muted=true", "").replace("muted=true&", "").replace("muted=true", "");
+    return (
+      <iframe
+        src={dialogSrc}
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+        allowFullScreen
+        className="w-full h-full"
+        style={{ border: 0 }}
+        title="Video UGC"
+      />
+    );
+  }
+
   return (
     <>
       <video
         ref={videoRef}
-        src={src}
-        poster={poster}
+        src={sample.src}
+        poster={sample.poster}
         loop
         playsInline
         autoPlay

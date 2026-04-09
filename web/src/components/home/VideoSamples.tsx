@@ -1,15 +1,9 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import Image from "next/image";
 import { motion } from "motion/react";
 import { Volume2, VolumeX } from "lucide-react";
 import { useIntersection } from "@/hooks/use-intersection";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 type VideoKind = "file" | "iframe";
 
@@ -120,158 +114,116 @@ async function loadKreoonSamples(limit = 12): Promise<VideoSample[]> {
   }
 }
 
-function VideoCard({ sample }: { sample: VideoSample }) {
+/**
+ * Quita el flag muted del query string para construir la URL "con audio".
+ */
+function withAudio(src: string): string {
+  return src
+    .replace(/[?&]muted=true/g, (m) => (m.startsWith("?") ? "?" : ""))
+    .replace(/\?&/, "?")
+    .replace(/&&/g, "&")
+    .replace(/[?&]$/, "");
+}
+
+interface VideoCardProps {
+  sample: VideoSample;
+  unmuted: boolean;
+  onToggleAudio: () => void;
+}
+
+function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { ref: intersectionRef, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.4,
     once: false,
   });
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
-  // Autoplay cuando entra viewport (solo para <video> nativo; los iframes
-  // de Bunny Stream ya hacen autoplay vía query params).
+  // Autoplay nativo cuando entra al viewport (solo file). Iframes Bunny
+  // ya autoplay via query params.
   useEffect(() => {
     if (sample.kind !== "file") return;
     const video = videoRef.current;
     if (!video) return;
+    video.muted = !unmuted;
     if (isIntersecting) {
-      video.play().catch(() => {/* autoplay blocked */});
+      video.play().catch(() => {/* autoplay bloqueado */});
     } else {
       video.pause();
     }
-  }, [isIntersecting, sample.kind]);
+  }, [isIntersecting, sample.kind, unmuted]);
 
-  return (
-    <>
-      <motion.div
-        ref={intersectionRef}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="group relative cursor-pointer w-full"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onClick={() => setDialogOpen(true)}
-        role="button"
-        tabIndex={0}
-        aria-label={`Ver video UGC: ${sample.tag}. Click para expandir con audio`}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setDialogOpen(true);
-          }
-        }}
-      >
-        {/* Card minimal: solo el video, sin badges, sin gradients, sin iconos */}
-        <div
-          className="relative overflow-hidden rounded-xl bg-black"
-          style={{
-            aspectRatio: "9/16",
-            boxShadow: hovered
-              ? "0 12px 32px rgba(0,0,0,0.5)"
-              : "0 4px 16px rgba(0,0,0,0.35)",
-            transform: hovered ? "translateY(-2px)" : "translateY(0)",
-            transition: "transform 0.25s ease, box-shadow 0.25s ease",
-          }}
-        >
-          {sample.kind === "iframe" ? (
-            <iframe
-              src={sample.src}
-              loading="lazy"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              style={{ border: 0 }}
-              aria-hidden="true"
-            />
-          ) : (
-            <video
-              ref={videoRef}
-              src={sample.src}
-              poster={sample.poster}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="absolute inset-0 w-full h-full object-cover"
-              aria-hidden="true"
-            />
-          )}
-        </div>
-      </motion.div>
+  // Para Bunny Stream iframe, alternamos entre src con/sin muted.
+  // Esto recarga el iframe pero es la forma simple sin postMessage.
+  const iframeSrc = unmuted ? withAudio(sample.src) : sample.src;
 
-      {/* Dialog fullscreen con audio */}
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-sm w-full p-0 overflow-hidden bg-black border-brand-gold/30">
-          <DialogTitle className="sr-only">
-            Video UGC: {sample.tag}
-          </DialogTitle>
-          <div className="relative" style={{ aspectRatio: "9/16" }}>
-            <VideoDialogPlayer sample={sample} />
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-}
-
-/** Player con audio dentro del dialog */
-function VideoDialogPlayer({ sample }: { sample: VideoSample }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(false);
-
-  useEffect(() => {
-    if (sample.kind !== "file") return;
-    videoRef.current?.play().catch(() => {});
-  }, [sample.kind]);
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !videoRef.current.muted;
-    setMuted(videoRef.current.muted);
+  const handleAudioClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleAudio();
   };
 
-  if (sample.kind === "iframe") {
-    // En el dialog queremos audio activado: quitamos &muted=true
-    const dialogSrc = sample.src.replace("&muted=true", "").replace("muted=true&", "").replace("muted=true", "");
-    return (
-      <iframe
-        src={dialogSrc}
-        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-        allowFullScreen
-        className="w-full h-full"
-        style={{ border: 0 }}
-        title="Video UGC"
-      />
-    );
-  }
-
   return (
-    <>
-      <video
-        ref={videoRef}
-        src={sample.src}
-        poster={sample.poster}
-        loop
-        playsInline
-        autoPlay
-        className="w-full h-full object-cover"
-        aria-label="Video UGC de muestra"
-      />
-      <button
-        onClick={toggleMute}
-        className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm p-2 rounded-full border border-white/10 text-white hover:bg-black/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
-        aria-label={muted ? "Activar sonido" : "Silenciar video"}
+    <motion.div
+      ref={intersectionRef}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="relative w-full"
+    >
+      <div
+        className="relative overflow-hidden rounded-xl bg-black shadow-[0_4px_16px_rgba(0,0,0,0.35)]"
+        style={{ aspectRatio: "9/16" }}
       >
-        {muted ? (
-          <VolumeX className="h-4 w-4" aria-hidden="true" />
+        {sample.kind === "iframe" ? (
+          // Trick: el iframe se escala al 118% y se traslada para que
+          // las barras superior e inferior de Bunny queden fuera del
+          // crop del overflow-hidden del padre. Resultado: card 100%
+          // limpia, solo el video.
+          <div className="absolute inset-0 overflow-hidden">
+            <iframe
+              key={iframeSrc}
+              src={iframeSrc}
+              loading="lazy"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              className="absolute left-1/2 top-1/2 pointer-events-none"
+              style={{
+                border: 0,
+                width: "118%",
+                height: "118%",
+                transform: "translate(-50%, -50%)",
+              }}
+              aria-hidden="true"
+            />
+          </div>
         ) : (
-          <Volume2 className="h-4 w-4" aria-hidden="true" />
+          <video
+            ref={videoRef}
+            src={sample.src}
+            poster={sample.poster}
+            muted={!unmuted}
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            aria-hidden="true"
+          />
         )}
-      </button>
-    </>
+
+        {/* Único control: botón de audio */}
+        <button
+          type="button"
+          onClick={handleAudioClick}
+          className="absolute top-2 right-2 z-10 p-1.5 rounded-full bg-black/60 backdrop-blur-sm text-white hover:bg-black/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+          aria-label={unmuted ? "Silenciar video" : "Activar sonido"}
+        >
+          {unmuted ? (
+            <Volume2 className="h-3.5 w-3.5" aria-hidden="true" />
+          ) : (
+            <VolumeX className="h-3.5 w-3.5" aria-hidden="true" />
+          )}
+        </button>
+      </div>
+    </motion.div>
   );
 }
 
@@ -280,6 +232,8 @@ export function VideoSamples() {
     threshold: 0.05,
   });
   const [samples, setSamples] = useState<VideoSample[]>(FALLBACK_SAMPLES);
+  // Solo un video puede tener audio activo a la vez; null = todos en mute.
+  const [unmutedId, setUnmutedId] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -342,7 +296,7 @@ export function VideoSamples() {
             </span>
           </h2>
           <p className="mt-4 text-brand-gray text-base sm:text-lg">
-            Click en cualquier video para ver con audio.
+            Activa el sonido en el video que quieras escuchar.
           </p>
         </motion.div>
 
@@ -366,7 +320,13 @@ export function VideoSamples() {
                   role="listitem"
                   className="snap-start flex-shrink-0 w-[42vw] sm:w-[28vw] md:w-[20vw] lg:w-auto lg:flex-shrink"
                 >
-                  <VideoCard sample={sample} />
+                  <VideoCard
+                    sample={sample}
+                    unmuted={unmutedId === sample.id}
+                    onToggleAudio={() =>
+                      setUnmutedId(prev => (prev === sample.id ? null : sample.id))
+                    }
+                  />
                 </div>
               ))}
             </div>

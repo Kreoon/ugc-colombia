@@ -196,10 +196,10 @@ function PlanCard({
         />
       )}
 
-      {/* Badge flotante */}
+      {/* Badge inline (dentro del card para no quedar clippeado por overflow-hidden) */}
       {plan.badge && (
-        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-bold tracking-[0.2em] uppercase bg-brand-yellow text-black px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+        <div className="flex justify-center mb-4 -mt-1">
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-bold tracking-[0.2em] uppercase bg-brand-yellow text-black px-4 py-1.5 rounded-full shadow-[0_4px_20px_-4px_rgba(249,179,52,0.6)] whitespace-nowrap">
             <Sparkles className="h-3 w-3" aria-hidden />
             {plan.badge}
           </span>

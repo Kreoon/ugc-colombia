@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/home/Navbar";
 import { Hero } from "@/components/home/Hero";
 import { SocialProofBar } from "@/components/home/SocialProofBar";
+import { Marcas } from "@/components/home/Marcas";
 import { Problema } from "@/components/home/Problema";
 import { Solucion } from "@/components/home/Solucion";
 import { Servicios } from "@/components/home/Servicios";
@@ -13,10 +14,6 @@ import { VideoTestimonios } from "@/components/home/VideoTestimonios";
 import { FAQ } from "@/components/home/FAQ";
 import { CTAFinal } from "@/components/home/CTAFinal";
 import { Footer } from "@/components/home/Footer";
-
-// Render dinámico por request: VideoSamples pide videos aleatorios a KREOON
-// con cache: "no-store", así cada recarga trae un mix distinto.
-export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   return (
@@ -31,6 +28,7 @@ export default function HomePage() {
       <main id="main-content" className="relative bg-brand-black text-white">
         <Hero />
         <SocialProofBar />
+        <Marcas />
         <Problema />
         <Solucion />
         <Servicios />

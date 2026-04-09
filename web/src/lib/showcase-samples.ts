@@ -49,7 +49,7 @@ function buildTag(v: KreoonVideo): string {
   return "UGC";
 }
 
-function transformVideos(videos: KreoonVideo[], limit: number): VideoSample[] {
+function transformVideos(videos: KreoonVideo[]): VideoSample[] {
   const out: VideoSample[] = [];
   for (const v of videos) {
     if (!v.video_url) continue;
@@ -71,22 +71,49 @@ function transformVideos(videos: KreoonVideo[], limit: number): VideoSample[] {
       tag: buildTag(v),
       kind,
     });
-    if (out.length >= limit) break;
   }
   return out;
 }
 
 /**
- * Se llama desde el Server Component. Hace un solo fetch (sin pasar por
- * el proxy /api/showcase) directo a la Edge Function de KREOON con
- * `cache: "no-store"` para que cada request SSR traiga un orden distinto.
- * Si algo falla, devuelve el fallback estático.
+ * Fisher-Yates shuffle in-place. O(n), criptográficamente NO seguro
+ * pero más que suficiente para un showcase visual.
+ */
+function shuffle<T>(arr: T[]): T[] {
+  const out = arr.slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/**
+ * Server Component entry point. Estrategia de cache:
+ *
+ * 1. `fetchApprovedVideos(40)` hace un fetch cacheado en Vercel Data
+ *    Cache con `revalidate: 60`. El primer request del minuto regenera
+ *    el pool de 40 videos desde KREOON; el resto del minuto sirve
+ *    desde cache (TTFB ~10-30ms en vez de 500-800ms).
+ * 2. Shuffle server-side los 40 videos y slice los primeros 12. Esto
+ *    garantiza orden distinto en cada request aunque el fetch esté
+ *    cacheado — el shuffle corre en cada SSR.
+ * 3. Si el transform reduce el pool (ej. muchas URLs inválidas), la
+ *    lista puede ser menor a 12.
+ *
+ * Con force-dynamic en page.tsx, la página se renderiza por request
+ * pero el fetch a KREOON está cacheado, así que el overhead es
+ * solamente el shuffle + render (~5-20ms).
  */
 export async function getShowcaseSamples(limit = 12): Promise<VideoSample[]> {
   try {
-    const videos = await fetchApprovedVideos(limit * 3);
-    const samples = transformVideos(videos, limit);
-    return samples.length > 0 ? samples : FALLBACK_SAMPLES;
+    const pool = await fetchApprovedVideos(40);
+    const transformed = transformVideos(pool);
+    if (transformed.length === 0) return FALLBACK_SAMPLES;
+    const shuffled = shuffle(transformed).slice(0, limit);
+    // Reasigna IDs secuenciales para que las keys de React sean estables
+    // dentro del mismo render pero distintas entre renders.
+    return shuffled.map((s, i) => ({ ...s, id: i + 1 }));
   } catch (err) {
     console.error("[showcase-samples] Error fetching KREOON:", err);
     return FALLBACK_SAMPLES;

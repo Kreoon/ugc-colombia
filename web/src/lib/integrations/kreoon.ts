@@ -45,8 +45,6 @@ async function kreoonFetch<T>(action: "videos" | "stats", params: Record<string,
   const url = new URL(getFnUrl());
   url.searchParams.set("action", action);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-  // Bust cache de Bunny/Supabase para que cada request reciba un orden nuevo
-  if (action === "videos") url.searchParams.set("_", String(Date.now()));
 
   let lastError: unknown;
 
@@ -55,11 +53,10 @@ async function kreoonFetch<T>(action: "videos" | "stats", params: Record<string,
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
-      // videos: no cachear (queremos random fresh). stats: cache 60s.
-      const cacheConfig = action === "videos"
-        ? { cache: "no-store" as const }
-        : { next: { revalidate: 60, tags: [`kreoon-${action}`] } };
-
+      // Ambos endpoints cacheados en Vercel Data Cache (60s) para TTFB
+      // bajo. Para videos, la aleatoriedad se logra cacheando un pool
+      // grande y barajeando server-side en cada request (ver
+      // getShowcaseSamples).
       const response = await fetch(url.toString(), {
         method: "GET",
         headers: {
@@ -67,7 +64,7 @@ async function kreoonFetch<T>(action: "videos" | "stats", params: Record<string,
           "User-Agent": "ugccolombia-app/1.0",
         },
         signal: controller.signal,
-        ...cacheConfig,
+        next: { revalidate: 60, tags: [`kreoon-${action}`] },
       });
 
       clearTimeout(timeoutId);

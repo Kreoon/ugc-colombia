@@ -30,6 +30,17 @@ function sendBunnyCommand(
   }
 }
 
+/**
+ * Fuerza volumen al máximo en el iframe Bunny. Envía tanto value=1
+ * (rango 0-1) como value=100 (rango 0-100) porque distintas versiones
+ * del player.js interpretan setVolume de forma diferente.
+ */
+function forceMaxVolume(iframe: HTMLIFrameElement | null) {
+  sendBunnyCommand(iframe, "unmute");
+  sendBunnyCommand(iframe, "setVolume", 1);
+  sendBunnyCommand(iframe, "setVolume", 100);
+}
+
 interface VideoCardProps {
   sample: VideoSample;
   unmuted: boolean;
@@ -71,13 +82,18 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
 
   // Toggle de audio para iframe Bunny: usa postMessage player.js SIN
   // recargar el iframe. El video sigue reproduciéndose en el mismo frame.
+  // Volumen siempre al máximo cuando se activa — el usuario controla el
+  // volumen desde su dispositivo, no desde el player.
   useEffect(() => {
     if (sample.kind !== "iframe") return;
     const iframe = iframeRef.current;
     if (!iframe) return;
     if (unmuted) {
-      sendBunnyCommand(iframe, "unmute");
-      sendBunnyCommand(iframe, "setVolume", 1);
+      forceMaxVolume(iframe);
+      // Re-enviar a los 250ms por si el player aún no había procesado
+      // el primer comando (player.js a veces tarda en estar listo).
+      const t = setTimeout(() => forceMaxVolume(iframe), 250);
+      return () => clearTimeout(t);
     } else {
       sendBunnyCommand(iframe, "mute");
     }

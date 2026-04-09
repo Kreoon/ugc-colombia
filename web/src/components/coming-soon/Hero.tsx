@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { useRef, type PointerEvent } from "react";
 
 const LINE_ONE_WORDS = ["CONTENIDO", "REAL,"];
 const LINE_TWO_WORDS = ["RESULTADOS", "REALES."];
@@ -24,24 +25,106 @@ const wordVariants = {
   },
 };
 
+/**
+ * Hero con logo animado 3D interactivo.
+ * - Video .webm con canal alpha (fondo transparente)
+ * - Fallback a .mp4 con mix-blend-mode: screen para navegadores sin soporte webm-alpha
+ * - Wrapper con perspective + rotateX/rotateY via mouse parallax
+ * - Idle float animation
+ * - Drop shadow dorado para profundidad
+ */
 export function Hero() {
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  // Motion values para el tilt 3D
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smoothing con spring para que el movimiento sea natural
+  const springConfig = { stiffness: 120, damping: 18, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // Transform: rotación sutil (-12 a +12 grados)
+  const rotateY = useTransform(smoothX, [-0.5, 0.5], [-12, 12]);
+  const rotateX = useTransform(smoothY, [-0.5, 0.5], [10, -10]);
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const relX = (event.clientX - rect.left) / rect.width - 0.5;
+    const relY = (event.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(relX);
+    mouseY.set(relY);
+  };
+
+  const handlePointerLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <section
       className="flex flex-col items-center justify-center gap-8 px-4 py-12 sm:py-16 text-center"
       aria-labelledby="hero-headline"
     >
-      {/* Logo animado */}
-      <div className="w-full max-w-[320px] sm:max-w-[480px] lg:max-w-[600px] mx-auto">
-        <video
-          src="/logo-animation.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="w-full h-auto"
-          aria-label="Logo animado de UGC Colombia"
-        />
+      {/* Logo 3D con parallax */}
+      <div
+        ref={wrapperRef}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        className="w-full max-w-[320px] sm:max-w-[480px] lg:max-w-[560px] mx-auto"
+        style={{ perspective: "1200px" }}
+      >
+        <motion.div
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          animate={{
+            y: [0, -8, 0],
+          }}
+          transition={{
+            y: {
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+          className="relative"
+        >
+          {/* Glow dorado detrás del logo */}
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 blur-3xl opacity-40"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(212,160,23,0.45) 0%, rgba(249,179,52,0.2) 30%, transparent 60%)",
+              transform: "translateZ(-40px) scale(0.95)",
+            }}
+          />
+
+          {/* Video transparente (webm con alpha) + fallback mp4 */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/logo-poster.png"
+            className="w-full h-auto drop-shadow-[0_20px_40px_rgba(212,160,23,0.35)]"
+            style={{
+              filter:
+                "drop-shadow(0 0 28px rgba(212,160,23,0.25)) drop-shadow(0 0 60px rgba(249,179,52,0.15))",
+            }}
+            aria-label="Logo animado de UGC Colombia"
+          >
+            <source src="/logo-animation.webm" type="video/webm" />
+            <source src="/logo-animation.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
       </div>
 
       {/* Headline principal */}

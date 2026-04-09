@@ -3,11 +3,9 @@
 import { useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Gift, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, Briefcase, CheckCircle2, Gift, Loader2, Sparkles, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
-  CATEGORIES,
-  INDUSTRIES,
   brandSchema,
   creatorSchema,
   type BrandPayload,
@@ -16,6 +14,7 @@ import {
 import { registerUser } from "@/lib/api/registration";
 
 type UserType = "creator" | "brand";
+type Step = 1 | 2;
 
 const ACCENT = "#f97316";
 
@@ -25,54 +24,58 @@ const inputClass = cn(
   "focus:outline-none focus:border-[#f97316] focus:ring-2 focus:ring-[#f97316]/30",
   "transition-colors"
 );
-
 const labelClass =
   "block text-[11px] font-sans font-semibold text-zinc-400 mb-1.5 tracking-wider uppercase";
 const errorClass = "mt-1 text-xs text-red-400";
 
-const BENEFITS = [
-  "1 mes gratis de suscripción",
-  "500 tokens AI de bienvenida",
-  "Descuento en comisiones del marketplace",
-  'Badge "UGC Colombia" en tu perfil',
+const BENEFITS = ["1 mes gratis de suscripción", "800 tokens AI de bienvenida"];
+
+const LEGAL_ITEMS = [
+  { name: "legal_age" as const, label: "Declaro bajo juramento que soy mayor de 18 años" },
+  {
+    name: "legal_terms" as const,
+    label: (
+      <>
+        Acepto los{" "}
+        <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
+          Términos y Condiciones
+        </a>
+      </>
+    ),
+  },
+  {
+    name: "legal_privacy" as const,
+    label: (
+      <>
+        Acepto la{" "}
+        <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
+          Política de Privacidad
+        </a>
+      </>
+    ),
+  },
+  {
+    name: "legal_data" as const,
+    label: "Acepto el Tratamiento de Datos (Ley 1581)",
+  },
 ];
 
-export function RegistrationForm() {
-  const [userType, setUserType] = useState<UserType>("creator");
+export function RegistrationForm({ initialType }: { initialType?: UserType } = {}) {
+  const [step, setStep] = useState<Step>(initialType ? 2 : 1);
+  const [userType, setUserType] = useState<UserType | null>(initialType ?? null);
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [categories, setCategories] = useState<string[]>([]);
 
   const creatorForm = useForm<CreatorPayload>({
     resolver: zodResolver(creatorSchema) as Resolver<CreatorPayload>,
     defaultValues: { type: "creator" },
   });
-
   const brandForm = useForm<BrandPayload>({
     resolver: zodResolver(brandSchema) as Resolver<BrandPayload>,
     defaultValues: { type: "brand" },
   });
 
-  const toggleCategory = (cat: string) => {
-    setCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
-    );
-  };
-
-  const onCreatorSubmit = async (values: CreatorPayload) => {
-    setServerError("");
-    try {
-      await registerUser({
-        ...values,
-        categories: categories as CreatorPayload["categories"],
-      });
-      setSuccess(true);
-    } catch (err) {
-      setServerError(err instanceof Error ? err.message : "Error inesperado");
-    }
-  };
-
-  const onBrandSubmit = async (values: BrandPayload) => {
+  const onSubmit = async (values: CreatorPayload | BrandPayload) => {
     setServerError("");
     try {
       await registerUser(values);
@@ -84,41 +87,28 @@ export function RegistrationForm() {
 
   if (success) {
     return (
-      <div
-        className={cn(
-          "w-full max-w-md mx-auto rounded-2xl p-8 text-center",
-          "bg-[#111] border border-[#222]",
-          "shadow-[0_0_60px_rgba(249,115,22,0.15)] animate-fade-in"
-        )}
-      >
+      <div className="w-full max-w-md mx-auto rounded-2xl p-8 text-center bg-[#111] border border-[#222] shadow-[0_0_60px_rgba(249,115,22,0.15)] animate-fade-in">
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f97316]/15 flex items-center justify-center">
           <CheckCircle2 className="w-9 h-9 text-[#f97316]" />
         </div>
         <h2 className="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase mb-2">
-          ¡Bienvenido a la Comunidad UGC Colombia!
+          ¡Bienvenido a UGC Colombia!
         </h2>
         <p className="text-zinc-400 font-sans text-sm mb-6">
           Revisa tu email para verificar tu cuenta.
         </p>
-
         <div className="bg-[#0a0a0a] border border-[#f97316]/30 rounded-xl p-5 mb-6 text-left">
           <p className="text-[#f97316] font-sans font-semibold text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
             <Sparkles className="w-4 h-4" /> Beneficios otorgados
           </p>
           <ul className="space-y-2 text-sm text-zinc-300 font-sans">
             <li>✓ 1 mes gratis de suscripción</li>
-            <li>✓ 500 tokens AI de bienvenida</li>
-            <li>✓ Badge &quot;UGC Colombia&quot; activado</li>
+            <li>✓ 800 tokens AI de bienvenida</li>
           </ul>
         </div>
-
         <a
           href="https://kreoon.com/auth"
-          className={cn(
-            "block w-full py-3 rounded-lg font-sans font-bold text-sm tracking-wide",
-            "bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors",
-            "shadow-[0_0_20px_rgba(249,115,22,0.4)]"
-          )}
+          className="block w-full py-3 rounded-lg font-sans font-bold text-sm tracking-wide bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors shadow-[0_0_20px_rgba(249,115,22,0.4)]"
         >
           Ingresar a KREOON →
         </a>
@@ -126,22 +116,12 @@ export function RegistrationForm() {
     );
   }
 
-  const isCreator = userType === "creator";
-  const activeForm = isCreator ? creatorForm : brandForm;
-  const loading = activeForm.formState.isSubmitting;
-
   return (
-    <div
-      className={cn(
-        "w-full max-w-md mx-auto rounded-2xl p-6 sm:p-8",
-        "bg-[#111] border border-[#222]",
-        "shadow-[0_0_80px_rgba(249,115,22,0.08)] animate-slide-up"
-      )}
-    >
+    <div className="w-full max-w-md mx-auto rounded-2xl p-6 sm:p-8 bg-[#111] border border-[#222] shadow-[0_0_80px_rgba(249,115,22,0.08)] animate-slide-up">
       {/* Header */}
-      <div className="text-center mb-6">
+      <div className="text-center mb-5">
         <span
-          className="inline-block px-3 py-1 rounded-full text-[10px] font-sans font-bold tracking-widest uppercase mb-4"
+          className="inline-block px-3 py-1 rounded-full text-[10px] font-sans font-bold tracking-widest uppercase mb-3"
           style={{ backgroundColor: `${ACCENT}1f`, color: ACCENT, border: `1px solid ${ACCENT}66` }}
         >
           Comunidad UGC
@@ -151,295 +131,285 @@ export function RegistrationForm() {
           <span className="text-zinc-600">×</span>
           <span className="text-white">KREOON</span>
         </div>
-        <h1 className="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase leading-tight">
-          Únete a la Comunidad
-        </h1>
+        <div className="flex items-center justify-center gap-2 text-[10px] text-zinc-500 font-sans tracking-wider uppercase">
+          Paso {step} de 2
+        </div>
       </div>
 
-      {/* Benefits */}
-      <div className="bg-[#0a0a0a] border border-[#f97316]/25 rounded-xl p-4 mb-6">
-        <p className="flex items-center gap-2 text-[#f97316] font-sans font-bold text-xs uppercase tracking-wider mb-3">
-          <Gift className="w-4 h-4" /> Beneficios exclusivos
+      {/* Beneficios compactos */}
+      <div className="bg-[#0a0a0a] border border-[#f97316]/25 rounded-xl p-3 mb-5">
+        <p className="flex items-center gap-2 text-[#f97316] font-sans font-bold text-[10px] uppercase tracking-wider mb-2">
+          <Gift className="w-3.5 h-3.5" /> Beneficios al registrarte
         </p>
-        <ul className="space-y-1.5">
+        <ul className="grid grid-cols-1 gap-1">
           {BENEFITS.map((b) => (
-            <li key={b} className="flex items-start gap-2 text-sm text-zinc-300 font-sans">
-              <span className="text-[#f97316] flex-shrink-0">✓</span>
+            <li key={b} className="flex items-center gap-2 text-xs text-zinc-300 font-sans">
+              <span className="text-[#f97316]">✓</span>
               <span>{b}</span>
             </li>
           ))}
         </ul>
       </div>
 
-      {/* Toggle */}
-      <div className="grid grid-cols-2 gap-2 mb-6 p-1 bg-[#0a0a0a] rounded-xl border border-[#222]">
-        {(["creator", "brand"] as const).map((t) => (
+      {/* PASO 1: Selector de tipo */}
+      {step === 1 && (
+        <div className="space-y-3">
+          <h2 className="font-display text-xl text-white tracking-wide uppercase text-center">
+            ¿Cómo quieres registrarte?
+          </h2>
+          <p className="text-zinc-400 font-sans text-sm text-center mb-2">
+            Selecciona tu tipo de cuenta
+          </p>
+
           <button
-            key={t}
             type="button"
             onClick={() => {
-              setUserType(t);
-              setServerError("");
+              setUserType("brand");
+              setStep(2);
             }}
-            className={cn(
-              "py-2.5 rounded-lg text-sm font-sans font-semibold tracking-wide transition-all",
-              userType === t
-                ? "bg-[#f97316] text-white shadow-[0_0_16px_rgba(249,115,22,0.45)]"
-                : "text-zinc-400 hover:text-white"
-            )}
+            className="w-full p-4 rounded-xl border border-[#222] hover:border-[#f97316] bg-[#0a0a0a] text-left transition-all group flex items-center gap-4"
           >
-            {t === "creator" ? "Creador" : "Marca"}
+            <div className="w-11 h-11 rounded-lg bg-[#f97316]/15 flex items-center justify-center group-hover:bg-[#f97316]/25 transition-colors">
+              <Briefcase className="w-5 h-5 text-[#f97316]" />
+            </div>
+            <div className="flex-1">
+              <p className="text-white font-sans font-semibold text-sm">Marca / Empresa</p>
+              <p className="text-zinc-500 font-sans text-xs">Busco creadores para mis campañas</p>
+            </div>
+            <span className="text-[#f97316] text-lg">→</span>
           </button>
-        ))}
-      </div>
-
-      {/* Forms */}
-      {isCreator ? (
-        <form
-          key="creator"
-          onSubmit={creatorForm.handleSubmit(onCreatorSubmit)}
-          className="space-y-4"
-          noValidate
-        >
-          <div>
-            <label className={labelClass}>Email *</label>
-            <input type="email" {...creatorForm.register("email")} className={inputClass} placeholder="tu@email.com" />
-            {creatorForm.formState.errors.email && (
-              <p className={errorClass}>{creatorForm.formState.errors.email.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Contraseña *</label>
-            <input type="password" {...creatorForm.register("password")} className={inputClass} placeholder="Mínimo 8 caracteres" />
-            {creatorForm.formState.errors.password && (
-              <p className={errorClass}>{creatorForm.formState.errors.password.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Nombre completo *</label>
-            <input type="text" {...creatorForm.register("full_name")} className={inputClass} placeholder="Juan Pérez" />
-            {creatorForm.formState.errors.full_name && (
-              <p className={errorClass}>{creatorForm.formState.errors.full_name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Teléfono</label>
-            <input type="tel" {...creatorForm.register("phone")} className={inputClass} placeholder="+57 300 000 0000" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelClass}>Instagram</label>
-              <input type="text" {...creatorForm.register("instagram")} className={inputClass} placeholder="@usuario" />
-            </div>
-            <div>
-              <label className={labelClass}>TikTok</label>
-              <input type="text" {...creatorForm.register("tiktok")} className={inputClass} placeholder="@usuario" />
-            </div>
-          </div>
-
-          <div>
-            <label className={labelClass}>Categorías</label>
-            <div className="flex flex-wrap gap-2">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => toggleCategory(cat)}
-                  className={cn(
-                    "px-3 py-1.5 rounded-full text-xs font-sans font-medium capitalize transition-all",
-                    categories.includes(cat)
-                      ? "bg-[#f97316] text-white border border-[#f97316]"
-                      : "border border-[#333] text-zinc-400 hover:text-white hover:border-[#f97316]"
-                  )}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label className={labelClass}>Ciudad</label>
-            <input type="text" {...creatorForm.register("city")} className={inputClass} placeholder="Bogotá" />
-          </div>
-
-          <label className="flex items-start gap-3 cursor-pointer group">
-            <input
-              type="checkbox"
-              {...creatorForm.register("legal_accepted")}
-              className="mt-0.5 w-4 h-4 accent-[#f97316] cursor-pointer flex-shrink-0"
-            />
-            <span className="text-xs text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300">
-              Soy mayor de 18 años y acepto los{" "}
-              <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
-                Términos
-              </a>
-              ,{" "}
-              <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
-                Privacidad
-              </a>{" "}
-              y Ley 1581
-            </span>
-          </label>
-          {creatorForm.formState.errors.legal_accepted && (
-            <p className={errorClass}>{creatorForm.formState.errors.legal_accepted.message}</p>
-          )}
-
-          {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
 
           <button
-            type="submit"
-            disabled={loading}
-            className={cn(
-              "w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide",
-              "bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors",
-              "shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50",
-              "flex items-center justify-center gap-2"
-            )}
+            type="button"
+            onClick={() => {
+              setUserType("creator");
+              setStep(2);
+            }}
+            className="w-full p-4 rounded-xl border border-[#222] hover:border-[#f97316] bg-[#0a0a0a] text-left transition-all group flex items-center gap-4"
           >
-            {loading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" /> Registrando...
-              </>
-            ) : (
-              "Crear cuenta de creador →"
-            )}
+            <div className="w-11 h-11 rounded-lg bg-[#f97316]/15 flex items-center justify-center group-hover:bg-[#f97316]/25 transition-colors">
+              <User className="w-5 h-5 text-[#f97316]" />
+            </div>
+            <div className="flex-1">
+              <p className="text-white font-sans font-semibold text-sm">Freelancer / Creador</p>
+              <p className="text-zinc-500 font-sans text-xs">Creo contenido UGC para marcas</p>
+            </div>
+            <span className="text-[#f97316] text-lg">→</span>
           </button>
-        </form>
-      ) : (
-        <form
-          key="brand"
-          onSubmit={brandForm.handleSubmit(onBrandSubmit)}
-          className="space-y-4"
-          noValidate
-        >
-          <div>
-            <label className={labelClass}>Email *</label>
-            <input type="email" {...brandForm.register("email")} className={inputClass} placeholder="contacto@empresa.com" />
-            {brandForm.formState.errors.email && (
-              <p className={errorClass}>{brandForm.formState.errors.email.message}</p>
-            )}
-          </div>
+        </div>
+      )}
 
-          <div>
-            <label className={labelClass}>Contraseña *</label>
-            <input type="password" {...brandForm.register("password")} className={inputClass} placeholder="Mínimo 8 caracteres" />
-            {brandForm.formState.errors.password && (
-              <p className={errorClass}>{brandForm.formState.errors.password.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Nombre de la empresa *</label>
-            <input type="text" {...brandForm.register("company_name")} className={inputClass} placeholder="Mi Marca S.A.S." />
-            {brandForm.formState.errors.company_name && (
-              <p className={errorClass}>{brandForm.formState.errors.company_name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Nombre del contacto *</label>
-            <input type="text" {...brandForm.register("contact_name")} className={inputClass} placeholder="María Gómez" />
-            {brandForm.formState.errors.contact_name && (
-              <p className={errorClass}>{brandForm.formState.errors.contact_name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Teléfono</label>
-            <input type="tel" {...brandForm.register("phone")} className={inputClass} placeholder="+57 300 000 0000" />
-          </div>
-
-          <div>
-            <label className={labelClass}>Industria</label>
-            <select
-              {...brandForm.register("industry")}
-              className={cn(inputClass, "appearance-none cursor-pointer")}
+      {/* PASO 2: Datos */}
+      {step === 2 && userType && (
+        <>
+          {!initialType && (
+            <button
+              type="button"
+              onClick={() => setStep(1)}
+              className="flex items-center gap-1 text-zinc-500 hover:text-[#f97316] text-xs font-sans mb-4 transition-colors"
             >
-              <option value="">Selecciona industria</option>
-              {INDUSTRIES.map((i) => (
-                <option key={i.value} value={i.value}>
-                  {i.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className={labelClass}>Ciudad</label>
-            <input type="text" {...brandForm.register("city")} className={inputClass} placeholder="Medellín" />
-          </div>
-
-          <label className="flex items-start gap-3 cursor-pointer group">
-            <input
-              type="checkbox"
-              {...brandForm.register("legal_accepted")}
-              className="mt-0.5 w-4 h-4 accent-[#f97316] cursor-pointer flex-shrink-0"
-            />
-            <span className="text-xs text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300">
-              Soy mayor de 18 años y acepto los{" "}
-              <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
-                Términos
-              </a>
-              ,{" "}
-              <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
-                Privacidad
-              </a>{" "}
-              y Ley 1581
-            </span>
-          </label>
-          {brandForm.formState.errors.legal_accepted && (
-            <p className={errorClass}>{brandForm.formState.errors.legal_accepted.message}</p>
+              <ArrowLeft className="w-3.5 h-3.5" /> Cambiar tipo
+            </button>
           )}
 
-          {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
+          <div className="mb-5">
+            <h2 className="font-display text-xl text-white tracking-wide uppercase">
+              Completa tu registro
+            </h2>
+            <p className="text-zinc-400 font-sans text-sm">
+              Ingresa tus datos para crear tu cuenta
+            </p>
+          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className={cn(
-              "w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide",
-              "bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors",
-              "shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50",
-              "flex items-center justify-center gap-2"
-            )}
-          >
-            {loading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" /> Registrando...
-              </>
-            ) : (
-              "Crear cuenta de marca →"
-            )}
-          </button>
-        </form>
+          {userType === "creator" ? (
+            <CreatorStep form={creatorForm} onSubmit={onSubmit} serverError={serverError} />
+          ) : (
+            <BrandStep form={brandForm} onSubmit={onSubmit} serverError={serverError} />
+          )}
+        </>
       )}
 
       {/* Footer */}
-      <div className="mt-6 pt-5 border-t border-[#222] text-center space-y-2">
+      <div className="mt-6 pt-5 border-t border-[#222] text-center">
         <p className="text-zinc-500 text-xs">
-          Powered by{" "}
-          <a href="https://kreoon.com" className="text-[#f97316] font-semibold hover:underline">
-            KREOON
-          </a>
-        </p>
-        <p className="text-zinc-600 text-[10px] leading-relaxed px-4">
-          Tus datos están protegidos según nuestra{" "}
-          <a href="/privacidad" className="text-zinc-500 hover:text-[#f97316] underline">
-            política de privacidad
-          </a>
-        </p>
-        <p className="text-zinc-500 text-xs pt-2">
           ¿Ya tienes cuenta?{" "}
           <a href="https://kreoon.com/auth" className="text-[#f97316] font-semibold hover:underline">
             Inicia sesión
           </a>
         </p>
+        <p className="text-zinc-600 text-[10px] mt-2">
+          Powered by{" "}
+          <a href="https://kreoon.com" className="text-[#f97316] hover:underline">
+            KREOON
+          </a>
+        </p>
       </div>
     </div>
+  );
+}
+
+/* ---------- Sub-componentes ---------- */
+
+type FormProps<T extends CreatorPayload | BrandPayload> = {
+  form: ReturnType<typeof useForm<T>>;
+  onSubmit: (values: T) => Promise<void>;
+  serverError: string;
+};
+
+type PhoneRegisterProps = React.InputHTMLAttributes<HTMLInputElement> & { ref?: React.Ref<HTMLInputElement> };
+function PhoneInput({ registerProps, error }: { registerProps: PhoneRegisterProps; error?: string }) {
+  return (
+    <div>
+      <label className={labelClass}>Teléfono *</label>
+      <div className="flex gap-2">
+        <div className="flex items-center gap-1.5 px-3 bg-[#0a0a0a] border border-[#222] rounded-lg text-sm text-zinc-300 font-sans">
+          <span>🇨🇴</span>
+          <span>+57</span>
+        </div>
+        <input type="tel" {...registerProps} className={inputClass} placeholder="300 123 4567" />
+      </div>
+      {error && <p className={errorClass}>{error}</p>}
+    </div>
+  );
+}
+
+function LegalCheckboxes<T extends CreatorPayload | BrandPayload>({ form }: { form: ReturnType<typeof useForm<T>> }) {
+  const errors = form.formState.errors as Record<string, { message?: string } | undefined>;
+  const hasError =
+    errors.legal_age || errors.legal_terms || errors.legal_privacy || errors.legal_data;
+
+  return (
+    <div className="space-y-2.5 pt-1">
+      <p className={labelClass}>Aceptaciones legales *</p>
+      {LEGAL_ITEMS.map((item) => (
+        <label key={item.name} className="flex items-start gap-3 cursor-pointer group">
+          <input
+            type="checkbox"
+            {...form.register(item.name as never)}
+            className="mt-0.5 w-4 h-4 accent-[#f97316] cursor-pointer flex-shrink-0"
+          />
+          <span className="text-xs text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300">
+            {item.label}
+          </span>
+        </label>
+      ))}
+      {hasError && (
+        <p className={errorClass}>Debes aceptar todos los puntos legales</p>
+      )}
+    </div>
+  );
+}
+
+function CreatorStep({ form, onSubmit, serverError }: FormProps<CreatorPayload>) {
+  const { register, handleSubmit, formState } = form;
+  const errors = formState.errors;
+  const loading = formState.isSubmitting;
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+      <div>
+        <label className={labelClass}>Nombre completo *</label>
+        <input type="text" {...register("full_name")} className={inputClass} placeholder="Tu nombre completo" />
+        {errors.full_name && <p className={errorClass}>{errors.full_name.message}</p>}
+      </div>
+
+      <div>
+        <label className={labelClass}>Email *</label>
+        <input type="email" {...register("email")} className={inputClass} placeholder="tu@email.com" />
+        {errors.email && <p className={errorClass}>{errors.email.message}</p>}
+      </div>
+
+      <PhoneInput registerProps={register("phone")} error={errors.phone?.message} />
+
+      <div>
+        <label className={labelClass}>Contraseña *</label>
+        <input type="password" {...register("password")} className={inputClass} placeholder="Mínimo 8 caracteres" />
+        {errors.password && <p className={errorClass}>{errors.password.message}</p>}
+      </div>
+
+      <div>
+        <label className={labelClass}>Confirmar contraseña *</label>
+        <input type="password" {...register("confirm_password")} className={inputClass} placeholder="Repite tu contraseña" />
+        {errors.confirm_password && <p className={errorClass}>{errors.confirm_password.message}</p>}
+      </div>
+
+      <LegalCheckboxes form={form} />
+
+      {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50 flex items-center justify-center gap-2"
+      >
+        {loading ? (
+          <>
+            <Loader2 className="w-4 h-4 animate-spin" /> Creando cuenta...
+          </>
+        ) : (
+          "Crear cuenta"
+        )}
+      </button>
+    </form>
+  );
+}
+
+function BrandStep({ form, onSubmit, serverError }: FormProps<BrandPayload>) {
+  const { register, handleSubmit, formState } = form;
+  const errors = formState.errors;
+  const loading = formState.isSubmitting;
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+      <div>
+        <label className={labelClass}>Nombre completo *</label>
+        <input type="text" {...register("full_name")} className={inputClass} placeholder="Tu nombre completo" />
+        {errors.full_name && <p className={errorClass}>{errors.full_name.message}</p>}
+      </div>
+
+      <div>
+        <label className={labelClass}>Email *</label>
+        <input type="email" {...register("email")} className={inputClass} placeholder="contacto@empresa.com" />
+        {errors.email && <p className={errorClass}>{errors.email.message}</p>}
+      </div>
+
+      <div>
+        <label className={labelClass}>Nombre de empresa *</label>
+        <input type="text" {...register("company_name")} className={inputClass} placeholder="Nombre de tu empresa" />
+        {errors.company_name && <p className={errorClass}>{errors.company_name.message}</p>}
+      </div>
+
+      <PhoneInput registerProps={register("phone")} error={errors.phone?.message} />
+
+      <div>
+        <label className={labelClass}>Contraseña *</label>
+        <input type="password" {...register("password")} className={inputClass} placeholder="Mínimo 8 caracteres" />
+        {errors.password && <p className={errorClass}>{errors.password.message}</p>}
+      </div>
+
+      <div>
+        <label className={labelClass}>Confirmar contraseña *</label>
+        <input type="password" {...register("confirm_password")} className={inputClass} placeholder="Repite tu contraseña" />
+        {errors.confirm_password && <p className={errorClass}>{errors.confirm_password.message}</p>}
+      </div>
+
+      <LegalCheckboxes form={form} />
+
+      {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50 flex items-center justify-center gap-2"
+      >
+        {loading ? (
+          <>
+            <Loader2 className="w-4 h-4 animate-spin" /> Creando cuenta...
+          </>
+        ) : (
+          "Crear cuenta"
+        )}
+      </button>
+    </form>
   );
 }

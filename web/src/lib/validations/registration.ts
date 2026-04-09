@@ -24,35 +24,43 @@ export const INDUSTRIES = [
   { value: "otro", label: "Otro" },
 ] as const;
 
+const passwordField = z.string().min(8, "Mínimo 8 caracteres");
+const legalField = z.literal(true, {
+  errorMap: () => ({ message: "Debes aceptar este punto" }),
+});
+
 const baseFields = {
+  full_name: z.string().min(2, "Ingresa tu nombre completo"),
   email: z.string().email("Email inválido"),
-  password: z.string().min(8, "Mínimo 8 caracteres"),
-  phone: z.string().optional().or(z.literal("")),
-  city: z.string().optional().or(z.literal("")),
+  phone: z.string().min(7, "Teléfono inválido"),
+  password: passwordField,
+  confirm_password: z.string(),
+  legal_age: legalField,
+  legal_terms: legalField,
+  legal_privacy: legalField,
+  legal_data: legalField,
 };
 
-const legalField = z.literal(true, {
-  errorMap: () => ({ message: "Debes aceptar los términos y condiciones" }),
-});
+export const creatorSchema = z
+  .object({
+    type: z.literal("creator"),
+    ...baseFields,
+  })
+  .refine((d) => d.password === d.confirm_password, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirm_password"],
+  });
 
-export const creatorSchema = z.object({
-  type: z.literal("creator"),
-  full_name: z.string().min(2, "Ingresa tu nombre completo"),
-  instagram: z.string().optional().or(z.literal("")),
-  tiktok: z.string().optional().or(z.literal("")),
-  categories: z.array(z.enum(CATEGORIES)).optional(),
-  legal_accepted: legalField,
-  ...baseFields,
-});
-
-export const brandSchema = z.object({
-  type: z.literal("brand"),
-  company_name: z.string().min(2, "Nombre de empresa requerido"),
-  contact_name: z.string().min(2, "Nombre del contacto requerido"),
-  industry: z.string().optional().or(z.literal("")),
-  legal_accepted: legalField,
-  ...baseFields,
-});
+export const brandSchema = z
+  .object({
+    type: z.literal("brand"),
+    company_name: z.string().min(2, "Nombre de empresa requerido"),
+    ...baseFields,
+  })
+  .refine((d) => d.password === d.confirm_password, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirm_password"],
+  });
 
 export type CreatorPayload = z.infer<typeof creatorSchema>;
 export type BrandPayload = z.infer<typeof brandSchema>;

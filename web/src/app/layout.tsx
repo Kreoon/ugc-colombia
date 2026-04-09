@@ -82,6 +82,15 @@ export default function RootLayout({
       className={`${anton.variable} ${inter.variable} dark`}
       suppressHydrationWarning
     >
+      <head>
+        {/* Resource hints para acelerar carga del showcase (Bunny Stream + KREOON). */}
+        <link rel="preconnect" href="https://iframe.mediadelivery.net" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://iframe.mediadelivery.net" />
+        <link rel="preconnect" href="https://wjkbqcrxwsmvtxmqgiqc.functions.supabase.co" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://wjkbqcrxwsmvtxmqgiqc.functions.supabase.co" />
+        <link rel="dns-prefetch" href="https://cdn.kreoon.com" />
+        <link rel="dns-prefetch" href="https://kreoon-images.b-cdn.net" />
+      </head>
       <body className="bg-brand-black text-white font-sans antialiased">
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal

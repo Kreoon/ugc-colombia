@@ -12,6 +12,10 @@ import { FAQ } from "@/components/home/FAQ";
 import { CTAFinal } from "@/components/home/CTAFinal";
 import { Footer } from "@/components/home/Footer";
 
+// Render dinámico por request: VideoSamples pide videos aleatorios a KREOON
+// con cache: "no-store", así cada recarga trae un mix distinto.
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <>

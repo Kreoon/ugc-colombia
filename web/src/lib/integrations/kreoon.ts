@@ -53,10 +53,10 @@ async function kreoonFetch<T>(action: "videos" | "stats", params: Record<string,
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
-      // Ambos endpoints cacheados en Vercel Data Cache (60s) para TTFB
-      // bajo. Para videos, la aleatoriedad se logra cacheando un pool
-      // grande y barajeando server-side en cada request (ver
-      // getShowcaseSamples).
+      // Videos: cache 24h (refresca 1 vez al día, shuffle server-side
+      //   con seed diario → mismo orden para todos los usuarios del día).
+      // Stats: cache 60s (los conteos sí queremos frescos).
+      const revalidate = action === "videos" ? 86_400 : 60;
       const response = await fetch(url.toString(), {
         method: "GET",
         headers: {
@@ -64,7 +64,7 @@ async function kreoonFetch<T>(action: "videos" | "stats", params: Record<string,
           "User-Agent": "ugccolombia-app/1.0",
         },
         signal: controller.signal,
-        next: { revalidate: 60, tags: [`kreoon-${action}`] },
+        next: { revalidate, tags: [`kreoon-${action}`] },
       });
 
       clearTimeout(timeoutId);

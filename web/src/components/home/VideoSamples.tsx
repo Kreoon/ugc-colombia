@@ -14,16 +14,14 @@
  *  - Aleatoriedad preservada: cada SSR pide a KREOON con no-store.
  */
 
-import { headers } from "next/headers";
 import { getShowcaseSamples } from "@/lib/showcase-samples";
 import { VideoSamplesClient } from "./VideoSamplesClient";
 
 export async function VideoSamples() {
-  // Lee headers para marcar este componente como dinámico (el shuffle
-  // server-side corre en cada request), pero el fetch interno a KREOON
-  // se mantiene cacheado en Vercel Data Cache via `next: { revalidate: 60 }`.
-  // Resultado: TTFB bajo + orden aleatorio por pageview.
-  await headers();
+  // Sin signals dinámicos (no headers, no cookies, no random per-request).
+  // getShowcaseSamples usa un shuffle con seed diario y fetch cacheado 24h,
+  // así Next marca la página como ISR y el HTML se sirve desde el CDN de
+  // Vercel. A medianoche UTC rota el orden para todos los usuarios.
   const samples = await getShowcaseSamples(12);
   return <VideoSamplesClient initialSamples={samples} />;
 }

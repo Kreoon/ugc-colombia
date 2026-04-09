@@ -76,13 +76,41 @@ function transformVideos(videos: KreoonVideo[]): VideoSample[] {
 }
 
 /**
- * Fisher-Yates shuffle in-place. O(n), criptográficamente NO seguro
- * pero más que suficiente para un showcase visual.
+ * Hash determinístico de una fecha YYYY-MM-DD en un entero.
+ * Se usa como seed del shuffle diario.
  */
-function shuffle<T>(arr: T[]): T[] {
+function dailySeed(): number {
+  const today = new Date().toISOString().slice(0, 10); // "2026-04-09"
+  let h = 2166136261;
+  for (let i = 0; i < today.length; i++) {
+    h ^= today.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/**
+ * LCG (Linear Congruential Generator) — RNG seedable simple y suficiente
+ * para barajar un array visual. No criptográfico.
+ */
+function mulberry32(seed: number) {
+  return function () {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Fisher-Yates shuffle con seed determinístico. Dado el mismo seed,
+ * produce siempre el mismo orden.
+ */
+function seededShuffle<T>(arr: T[], seed: number): T[] {
   const out = arr.slice();
+  const rand = mulberry32(seed);
   for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rand() * (i + 1));
     [out[i], out[j]] = [out[j], out[i]];
   }
   return out;
@@ -91,28 +119,22 @@ function shuffle<T>(arr: T[]): T[] {
 /**
  * Server Component entry point. Estrategia de cache:
  *
- * 1. `fetchApprovedVideos(40)` hace un fetch cacheado en Vercel Data
- *    Cache con `revalidate: 60`. El primer request del minuto regenera
- *    el pool de 40 videos desde KREOON; el resto del minuto sirve
- *    desde cache (TTFB ~10-30ms en vez de 500-800ms).
- * 2. Shuffle server-side los 40 videos y slice los primeros 12. Esto
- *    garantiza orden distinto en cada request aunque el fetch esté
- *    cacheado — el shuffle corre en cada SSR.
- * 3. Si el transform reduce el pool (ej. muchas URLs inválidas), la
- *    lista puede ser menor a 12.
- *
- * Con force-dynamic en page.tsx, la página se renderiza por request
- * pero el fetch a KREOON está cacheado, así que el overhead es
- * solamente el shuffle + render (~5-20ms).
+ * 1. `fetchApprovedVideos(40)` cacheado en Vercel Data Cache con
+ *    `revalidate: 86400` (24h). El primer render del día pega a KREOON,
+ *    el resto del día sirve desde cache (TTFB ~5-15ms).
+ * 2. Shuffle con seed = hash(YYYY-MM-DD) → todos los usuarios del mismo
+ *    día ven el MISMO orden. A medianoche UTC rota automáticamente.
+ * 3. Como no hay signals dinámicos (no headers, no cookies, no random
+ *    per-request), Next marca la página como ISR y el HTML completo se
+ *    cachea en el CDN de Vercel — TTFB de edge (~5ms) para todos los
+ *    usuarios del día.
  */
 export async function getShowcaseSamples(limit = 12): Promise<VideoSample[]> {
   try {
     const pool = await fetchApprovedVideos(40);
     const transformed = transformVideos(pool);
     if (transformed.length === 0) return FALLBACK_SAMPLES;
-    const shuffled = shuffle(transformed).slice(0, limit);
-    // Reasigna IDs secuenciales para que las keys de React sean estables
-    // dentro del mismo render pero distintas entre renders.
+    const shuffled = seededShuffle(transformed, dailySeed()).slice(0, limit);
     return shuffled.map((s, i) => ({ ...s, id: i + 1 }));
   } catch (err) {
     console.error("[showcase-samples] Error fetching KREOON:", err);

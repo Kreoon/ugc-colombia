@@ -159,7 +159,7 @@ export function CTAFinal() {
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Garantía de 14 días: si el primer batch no cumple el brief,
+              Garantía de 7 días: si el primer batch no cumple el brief,
               devolvemos el mes completo.
             </motion.p>
           </div>

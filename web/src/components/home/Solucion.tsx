@@ -24,7 +24,7 @@ const PASOS = [
     step: "03",
     title: "Producción en lote",
     description:
-      "Producimos todos los videos en ciclos coordinados. Revisión, corrección y entrega en 14 días con guiones aprobados. Sin sorpresas, sin perseguir a nadie.",
+      "Producimos todos los videos en ciclos coordinados. Revisión, corrección y entrega en 7 días con guiones aprobados. Sin sorpresas, sin perseguir a nadie.",
   },
   {
     icon: BarChart3,
@@ -68,9 +68,7 @@ export function Solucion() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14 sm:mb-20"
         >
-          <p className="text-brand-gold text-sm font-sans font-semibold tracking-widest uppercase mb-3">
-            Nuestra metodología
-          </p>
+          <p className="sr-only">Metodología</p>
           <h2
             id="solucion-title"
             className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"

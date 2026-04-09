@@ -119,7 +119,7 @@ export function Hero() {
             >
               De 5 a 300+ videos UGC al mes, hechos por creadores latinos
               verificados, listos para Meta y TikTok en{" "}
-              <span className="text-white font-semibold">14 días</span>.
+              <span className="text-white font-semibold">7 días</span>.
               Estrategia, casting y producción bajo un solo techo.
             </motion.p>
 

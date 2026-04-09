@@ -16,7 +16,7 @@ type FAQItem = {
 const FAQS: FAQItem[] = [
   {
     q: "¿Cuánto tardan en entregar?",
-    a: "La primera tanda de videos está en tus manos en 14 días hábiles desde el kickoff. Después del primer mes operamos con batches semanales para garantizar flujo constante y testeo rápido de hooks.",
+    a: "La primera tanda de videos está en tus manos en 7 días hábiles desde el kickoff. Después del primer mes operamos con batches semanales para garantizar flujo constante y testeo rápido de hooks.",
   },
   {
     q: "¿Puedo ver el perfil del creator antes de producir?",
@@ -63,9 +63,7 @@ export function FAQ() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="text-xs sm:text-sm font-semibold text-brand-yellow tracking-[0.25em] uppercase">
-            FAQ
-          </span>
+          <span className="sr-only">FAQ</span>
           <h2
             id="faq-heading"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"

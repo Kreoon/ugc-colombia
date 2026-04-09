@@ -30,7 +30,7 @@ const PLANES: Plan[] = [
       "Brief estratégico incluido",
       "Matching de creator",
       "1 ronda de revisión",
-      "Entrega en 14 días",
+      "Entrega en 7 días",
       "Licencia completa para ads",
     ],
     ctaLabel: "Empezar con Starter →",
@@ -47,7 +47,7 @@ const PLANES: Plan[] = [
       "2 rondas de revisión",
       "Reporte de performance",
       "Account manager dedicado",
-      "Entrega en 14 días",
+      "Entrega en 7 días",
       "Licencia completa para ads",
     ],
     highlight: true,
@@ -217,9 +217,7 @@ export function Pricing() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 sm:mb-16"
         >
-          <p className="text-brand-gold text-sm font-sans font-semibold tracking-widest uppercase mb-3">
-            Planes y precios
-          </p>
+          <p className="sr-only">Pricing</p>
           <h2
             id="pricing-title"
             className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"

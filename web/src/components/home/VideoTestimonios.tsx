@@ -65,9 +65,7 @@ export function VideoTestimonios() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="text-xs sm:text-sm font-semibold text-brand-yellow tracking-[0.25em] uppercase">
-            Testimonios
-          </span>
+          <span className="sr-only">Testimonios</span>
           <h2
             id="testimonios-heading"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"

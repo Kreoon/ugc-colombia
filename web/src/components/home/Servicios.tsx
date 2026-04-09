@@ -195,9 +195,7 @@ export function Servicios() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 sm:mb-16"
         >
-          <p className="text-brand-gold text-sm font-sans font-semibold tracking-widest uppercase mb-3">
-            Lo que hacemos
-          </p>
+          <p className="sr-only">Servicios</p>
           <h2
             id="servicios-title"
             className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight"

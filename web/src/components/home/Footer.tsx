@@ -161,7 +161,7 @@ export function Footer() {
             <span className="text-brand-yellow" aria-hidden>
               ★
             </span>{" "}
-            en Bogotá, Colombia
+            en Medellín, Colombia
           </p>
         </div>
       </div>

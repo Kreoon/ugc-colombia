@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, Briefcase, CheckCircle2, Gift, Loader2, Sparkles, User } from "lucide-react";
+import { ArrowLeft, Briefcase, CheckCircle2, Loader2, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   brandSchema,
@@ -16,49 +16,15 @@ import { registerUser } from "@/lib/api/registration";
 type UserType = "creator" | "brand";
 type Step = 1 | 2;
 
-const ACCENT = "#f97316";
-
 const inputClass = cn(
-  "w-full bg-[#0a0a0a] border border-[#222] rounded-lg px-4 py-3",
-  "text-white placeholder:text-zinc-500 font-sans text-sm",
-  "focus:outline-none focus:border-[#f97316] focus:ring-2 focus:ring-[#f97316]/30",
+  "w-full bg-black/60 border border-brand-gold/30 rounded-lg px-4 py-3",
+  "text-white placeholder:text-brand-gray/60 font-sans text-sm",
+  "focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/30",
   "transition-colors"
 );
 const labelClass =
-  "block text-[11px] font-sans font-semibold text-zinc-400 mb-1.5 tracking-wider uppercase";
+  "block text-[11px] font-sans font-semibold text-brand-gray mb-1.5 tracking-wider uppercase";
 const errorClass = "mt-1 text-xs text-red-400";
-
-const BENEFITS = ["1 mes gratis de suscripción", "800 tokens AI de bienvenida"];
-
-const LEGAL_ITEMS = [
-  { name: "legal_age" as const, label: "Declaro bajo juramento que soy mayor de 18 años" },
-  {
-    name: "legal_terms" as const,
-    label: (
-      <>
-        Acepto los{" "}
-        <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
-          Términos y Condiciones
-        </a>
-      </>
-    ),
-  },
-  {
-    name: "legal_privacy" as const,
-    label: (
-      <>
-        Acepto la{" "}
-        <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#f97316] hover:underline">
-          Política de Privacidad
-        </a>
-      </>
-    ),
-  },
-  {
-    name: "legal_data" as const,
-    label: "Acepto el Tratamiento de Datos (Ley 1581)",
-  },
-];
 
 export function RegistrationForm({ initialType }: { initialType?: UserType } = {}) {
   const [step, setStep] = useState<Step>(initialType ? 2 : 1);
@@ -87,28 +53,19 @@ export function RegistrationForm({ initialType }: { initialType?: UserType } = {
 
   if (success) {
     return (
-      <div className="w-full max-w-md mx-auto rounded-2xl p-8 text-center bg-[#111] border border-[#222] shadow-[0_0_60px_rgba(249,115,22,0.15)] animate-fade-in">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f97316]/15 flex items-center justify-center">
-          <CheckCircle2 className="w-9 h-9 text-[#f97316]" />
+      <div className="w-full max-w-md mx-auto rounded-2xl p-8 text-center bg-brand-graphite/40 backdrop-blur-md border border-brand-gold/30 shadow-[0_0_60px_rgba(212,160,23,0.18)] animate-fade-in">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-brand-yellow/15 flex items-center justify-center">
+          <CheckCircle2 className="w-9 h-9 text-brand-yellow" />
         </div>
         <h2 className="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase mb-2">
           ¡Bienvenido a UGC Colombia!
         </h2>
-        <p className="text-zinc-400 font-sans text-sm mb-6">
-          Revisa tu email para verificar tu cuenta.
+        <p className="text-brand-gray font-sans text-sm mb-6">
+          Revisa tu email para verificar tu cuenta y luego ingresa a la plataforma KREOON.
         </p>
-        <div className="bg-[#0a0a0a] border border-[#f97316]/30 rounded-xl p-5 mb-6 text-left">
-          <p className="text-[#f97316] font-sans font-semibold text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
-            <Sparkles className="w-4 h-4" /> Beneficios otorgados
-          </p>
-          <ul className="space-y-2 text-sm text-zinc-300 font-sans">
-            <li>✓ 1 mes gratis de suscripción</li>
-            <li>✓ 800 tokens AI de bienvenida</li>
-          </ul>
-        </div>
         <a
           href="https://kreoon.com/auth"
-          className="block w-full py-3 rounded-lg font-sans font-bold text-sm tracking-wide bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+          className="block w-full py-3 rounded-lg font-sans font-bold text-sm tracking-wide bg-brand-yellow text-black hover:bg-brand-gold transition-colors shadow-[0_0_20px_rgba(212,160,23,0.45)]"
         >
           Ingresar a KREOON →
         </a>
@@ -117,47 +74,29 @@ export function RegistrationForm({ initialType }: { initialType?: UserType } = {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto rounded-2xl p-6 sm:p-8 bg-[#111] border border-[#222] shadow-[0_0_80px_rgba(249,115,22,0.08)] animate-slide-up">
+    <div className="w-full max-w-md mx-auto rounded-2xl p-6 sm:p-8 bg-brand-graphite/40 backdrop-blur-md border border-brand-gold/20 shadow-[0_0_80px_rgba(212,160,23,0.10)] animate-slide-up">
       {/* Header */}
       <div className="text-center mb-5">
-        <span
-          className="inline-block px-3 py-1 rounded-full text-[10px] font-sans font-bold tracking-widest uppercase mb-3"
-          style={{ backgroundColor: `${ACCENT}1f`, color: ACCENT, border: `1px solid ${ACCENT}66` }}
-        >
+        <span className="inline-block px-3 py-1 rounded-full text-[10px] font-sans font-bold tracking-widest uppercase mb-3 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
           Comunidad UGC
         </span>
         <div className="flex items-center justify-center gap-2 mb-3 text-xs font-sans font-bold tracking-widest uppercase">
-          <span style={{ color: ACCENT }}>UGC Colombia</span>
-          <span className="text-zinc-600">×</span>
+          <span className="text-brand-yellow">UGC Colombia</span>
+          <span className="text-brand-gray">×</span>
           <span className="text-white">KREOON</span>
         </div>
-        <div className="flex items-center justify-center gap-2 text-[10px] text-zinc-500 font-sans tracking-wider uppercase">
+        <div className="text-[10px] text-brand-gray font-sans tracking-wider uppercase">
           Paso {step} de 2
         </div>
       </div>
 
-      {/* Beneficios compactos */}
-      <div className="bg-[#0a0a0a] border border-[#f97316]/25 rounded-xl p-3 mb-5">
-        <p className="flex items-center gap-2 text-[#f97316] font-sans font-bold text-[10px] uppercase tracking-wider mb-2">
-          <Gift className="w-3.5 h-3.5" /> Beneficios al registrarte
-        </p>
-        <ul className="grid grid-cols-1 gap-1">
-          {BENEFITS.map((b) => (
-            <li key={b} className="flex items-center gap-2 text-xs text-zinc-300 font-sans">
-              <span className="text-[#f97316]">✓</span>
-              <span>{b}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* PASO 1: Selector de tipo */}
+      {/* PASO 1: Selector */}
       {step === 1 && (
         <div className="space-y-3">
           <h2 className="font-display text-xl text-white tracking-wide uppercase text-center">
             ¿Cómo quieres registrarte?
           </h2>
-          <p className="text-zinc-400 font-sans text-sm text-center mb-2">
+          <p className="text-brand-gray font-sans text-sm text-center mb-2">
             Selecciona tu tipo de cuenta
           </p>
 
@@ -167,16 +106,16 @@ export function RegistrationForm({ initialType }: { initialType?: UserType } = {
               setUserType("brand");
               setStep(2);
             }}
-            className="w-full p-4 rounded-xl border border-[#222] hover:border-[#f97316] bg-[#0a0a0a] text-left transition-all group flex items-center gap-4"
+            className="w-full p-4 rounded-xl border border-brand-gold/25 hover:border-brand-yellow bg-black/60 text-left transition-all group flex items-center gap-4"
           >
-            <div className="w-11 h-11 rounded-lg bg-[#f97316]/15 flex items-center justify-center group-hover:bg-[#f97316]/25 transition-colors">
-              <Briefcase className="w-5 h-5 text-[#f97316]" />
+            <div className="w-11 h-11 rounded-lg bg-brand-yellow/15 flex items-center justify-center group-hover:bg-brand-yellow/25 transition-colors">
+              <Briefcase className="w-5 h-5 text-brand-yellow" />
             </div>
             <div className="flex-1">
               <p className="text-white font-sans font-semibold text-sm">Marca / Empresa</p>
-              <p className="text-zinc-500 font-sans text-xs">Busco creadores para mis campañas</p>
+              <p className="text-brand-gray font-sans text-xs">Busco creadores para mis campañas</p>
             </div>
-            <span className="text-[#f97316] text-lg">→</span>
+            <span className="text-brand-yellow text-lg">→</span>
           </button>
 
           <button
@@ -185,28 +124,28 @@ export function RegistrationForm({ initialType }: { initialType?: UserType } = {
               setUserType("creator");
               setStep(2);
             }}
-            className="w-full p-4 rounded-xl border border-[#222] hover:border-[#f97316] bg-[#0a0a0a] text-left transition-all group flex items-center gap-4"
+            className="w-full p-4 rounded-xl border border-brand-gold/25 hover:border-brand-yellow bg-black/60 text-left transition-all group flex items-center gap-4"
           >
-            <div className="w-11 h-11 rounded-lg bg-[#f97316]/15 flex items-center justify-center group-hover:bg-[#f97316]/25 transition-colors">
-              <User className="w-5 h-5 text-[#f97316]" />
+            <div className="w-11 h-11 rounded-lg bg-brand-yellow/15 flex items-center justify-center group-hover:bg-brand-yellow/25 transition-colors">
+              <User className="w-5 h-5 text-brand-yellow" />
             </div>
             <div className="flex-1">
-              <p className="text-white font-sans font-semibold text-sm">Freelancer / Creador</p>
-              <p className="text-zinc-500 font-sans text-xs">Creo contenido UGC para marcas</p>
+              <p className="text-white font-sans font-semibold text-sm">Freelancer / Talento</p>
+              <p className="text-brand-gray font-sans text-xs">Creo contenido UGC para marcas</p>
             </div>
-            <span className="text-[#f97316] text-lg">→</span>
+            <span className="text-brand-yellow text-lg">→</span>
           </button>
         </div>
       )}
 
-      {/* PASO 2: Datos */}
+      {/* PASO 2 */}
       {step === 2 && userType && (
         <>
           {!initialType && (
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="flex items-center gap-1 text-zinc-500 hover:text-[#f97316] text-xs font-sans mb-4 transition-colors"
+              className="flex items-center gap-1 text-brand-gray hover:text-brand-yellow text-xs font-sans mb-4 transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> Cambiar tipo
             </button>
@@ -216,7 +155,7 @@ export function RegistrationForm({ initialType }: { initialType?: UserType } = {
             <h2 className="font-display text-xl text-white tracking-wide uppercase">
               Completa tu registro
             </h2>
-            <p className="text-zinc-400 font-sans text-sm">
+            <p className="text-brand-gray font-sans text-sm">
               Ingresa tus datos para crear tu cuenta
             </p>
           </div>
@@ -230,16 +169,16 @@ export function RegistrationForm({ initialType }: { initialType?: UserType } = {
       )}
 
       {/* Footer */}
-      <div className="mt-6 pt-5 border-t border-[#222] text-center">
-        <p className="text-zinc-500 text-xs">
+      <div className="mt-6 pt-5 border-t border-brand-gold/15 text-center">
+        <p className="text-brand-gray text-xs">
           ¿Ya tienes cuenta?{" "}
-          <a href="https://kreoon.com/auth" className="text-[#f97316] font-semibold hover:underline">
+          <a href="https://kreoon.com/auth" className="text-brand-yellow font-semibold hover:underline">
             Inicia sesión
           </a>
         </p>
-        <p className="text-zinc-600 text-[10px] mt-2">
+        <p className="text-brand-gray/70 text-[10px] mt-2">
           Powered by{" "}
-          <a href="https://kreoon.com" className="text-[#f97316] hover:underline">
+          <a href="https://kreoon.com" className="text-brand-yellow hover:underline">
             KREOON
           </a>
         </p>
@@ -262,7 +201,7 @@ function PhoneInput({ registerProps, error }: { registerProps: PhoneRegisterProp
     <div>
       <label className={labelClass}>Teléfono *</label>
       <div className="flex gap-2">
-        <div className="flex items-center gap-1.5 px-3 bg-[#0a0a0a] border border-[#222] rounded-lg text-sm text-zinc-300 font-sans">
+        <div className="flex items-center gap-1.5 px-3 bg-black/60 border border-brand-gold/30 rounded-lg text-sm text-white font-sans">
           <span>🇨🇴</span>
           <span>+57</span>
         </div>
@@ -273,37 +212,56 @@ function PhoneInput({ registerProps, error }: { registerProps: PhoneRegisterProp
   );
 }
 
-function LegalCheckboxes<T extends CreatorPayload | BrandPayload>({ form }: { form: ReturnType<typeof useForm<T>> }) {
+function LegalCheckbox<T extends CreatorPayload | BrandPayload>({ form }: { form: ReturnType<typeof useForm<T>> }) {
   const errors = form.formState.errors as Record<string, { message?: string } | undefined>;
-  const hasError =
-    errors.legal_age || errors.legal_terms || errors.legal_privacy || errors.legal_data;
-
   return (
-    <div className="space-y-2.5 pt-1">
-      <p className={labelClass}>Aceptaciones legales *</p>
-      {LEGAL_ITEMS.map((item) => (
-        <label key={item.name} className="flex items-start gap-3 cursor-pointer group">
-          <input
-            type="checkbox"
-            {...form.register(item.name as never)}
-            className="mt-0.5 w-4 h-4 accent-[#f97316] cursor-pointer flex-shrink-0"
-          />
-          <span className="text-xs text-zinc-400 font-sans leading-relaxed group-hover:text-zinc-300">
-            {item.label}
-          </span>
-        </label>
-      ))}
-      {hasError && (
-        <p className={errorClass}>Debes aceptar todos los puntos legales</p>
+    <div>
+      <label className="flex items-start gap-3 cursor-pointer group">
+        <input
+          type="checkbox"
+          {...form.register("legal_accepted" as never)}
+          className="mt-0.5 w-4 h-4 accent-brand-yellow cursor-pointer flex-shrink-0"
+        />
+        <span className="text-xs text-brand-gray font-sans leading-relaxed group-hover:text-white">
+          Soy mayor de 18 años y acepto los{" "}
+          <a href="https://kreoon.com/terms" target="_blank" rel="noopener noreferrer" className="text-brand-yellow hover:underline">
+            Términos
+          </a>
+          ,{" "}
+          <a href="https://kreoon.com/privacy" target="_blank" rel="noopener noreferrer" className="text-brand-yellow hover:underline">
+            Privacidad
+          </a>{" "}
+          y Ley 1581
+        </span>
+      </label>
+      {errors.legal_accepted && (
+        <p className={errorClass}>Debes aceptar los términos y condiciones</p>
       )}
     </div>
+  );
+}
+
+function SubmitButton({ loading, label }: { loading: boolean; label: string }) {
+  return (
+    <button
+      type="submit"
+      disabled={loading}
+      className="w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide bg-brand-yellow text-black hover:bg-brand-gold transition-colors shadow-[0_0_20px_rgba(212,160,23,0.4)] disabled:opacity-50 flex items-center justify-center gap-2"
+    >
+      {loading ? (
+        <>
+          <Loader2 className="w-4 h-4 animate-spin" /> Creando cuenta...
+        </>
+      ) : (
+        label
+      )}
+    </button>
   );
 }
 
 function CreatorStep({ form, onSubmit, serverError }: FormProps<CreatorPayload>) {
   const { register, handleSubmit, formState } = form;
   const errors = formState.errors;
-  const loading = formState.isSubmitting;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -333,23 +291,11 @@ function CreatorStep({ form, onSubmit, serverError }: FormProps<CreatorPayload>)
         {errors.confirm_password && <p className={errorClass}>{errors.confirm_password.message}</p>}
       </div>
 
-      <LegalCheckboxes form={form} />
+      <LegalCheckbox form={form} />
 
       {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50 flex items-center justify-center gap-2"
-      >
-        {loading ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" /> Creando cuenta...
-          </>
-        ) : (
-          "Crear cuenta"
-        )}
-      </button>
+      <SubmitButton loading={formState.isSubmitting} label="Crear cuenta" />
     </form>
   );
 }
@@ -357,7 +303,6 @@ function CreatorStep({ form, onSubmit, serverError }: FormProps<CreatorPayload>)
 function BrandStep({ form, onSubmit, serverError }: FormProps<BrandPayload>) {
   const { register, handleSubmit, formState } = form;
   const errors = formState.errors;
-  const loading = formState.isSubmitting;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -393,23 +338,11 @@ function BrandStep({ form, onSubmit, serverError }: FormProps<BrandPayload>) {
         {errors.confirm_password && <p className={errorClass}>{errors.confirm_password.message}</p>}
       </div>
 
-      <LegalCheckboxes form={form} />
+      <LegalCheckbox form={form} />
 
       {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50 flex items-center justify-center gap-2"
-      >
-        {loading ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" /> Creando cuenta...
-          </>
-        ) : (
-          "Crear cuenta"
-        )}
-      </button>
+      <SubmitButton loading={formState.isSubmitting} label="Crear cuenta" />
     </form>
   );
 }

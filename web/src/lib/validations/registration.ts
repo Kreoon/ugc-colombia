@@ -35,10 +35,7 @@ const baseFields = {
   phone: z.string().min(7, "Teléfono inválido"),
   password: passwordField,
   confirm_password: z.string(),
-  legal_age: legalField,
-  legal_terms: legalField,
-  legal_privacy: legalField,
-  legal_data: legalField,
+  legal_accepted: legalField,
 };
 
 export const creatorSchema = z

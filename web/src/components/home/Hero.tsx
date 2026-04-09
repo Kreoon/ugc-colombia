@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ParticlesBg } from "@/components/home/ParticlesBg";
 
 const STAGGER_DELAY = 0.12;
@@ -70,20 +69,6 @@ export function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 sm:py-28">
         {mounted && (
           <>
-            {/* Badge pill */}
-            <motion.div
-              custom={0}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="flex justify-center mb-8"
-            >
-              <Badge variant="gold" className="text-xs sm:text-xs gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
-                AGENCIA BOUTIQUE · LATAM
-              </Badge>
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               custom={1}

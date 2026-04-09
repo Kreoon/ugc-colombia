@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
 import "./globals.css";
+import { PageLoader } from "@/components/PageLoader";
 
 const anton = Anton({
   weight: "400",
@@ -95,6 +96,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>
+        <PageLoader />
         {children}
         {/* Analytics: agregar aquí cuando estén disponibles las keys */}
       </body>

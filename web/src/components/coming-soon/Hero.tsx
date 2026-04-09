@@ -69,12 +69,12 @@ export function Hero() {
       className="flex flex-col items-center justify-center gap-8 px-4 py-12 sm:py-16 text-center"
       aria-labelledby="hero-headline"
     >
-      {/* Logo 3D con parallax */}
+      {/* Logo 3D con parallax (ahora 16:9) */}
       <div
         ref={wrapperRef}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
-        className="w-full max-w-[320px] sm:max-w-[480px] lg:max-w-[560px] mx-auto"
+        className="w-full max-w-[520px] sm:max-w-[720px] lg:max-w-[880px] mx-auto aspect-video"
         style={{ perspective: "1200px" }}
       >
         <motion.div

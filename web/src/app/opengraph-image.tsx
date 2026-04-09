@@ -5,11 +5,6 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage() {
-  // Carga Anton desde Google Fonts para el render de ImageResponse
-  const antonFont = await fetch(
-    "https://fonts.gstatic.com/s/anton/v25/1Ptgg87LROyAm0K08i4gS7lu.woff2"
-  ).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div
@@ -20,13 +15,14 @@ export default async function OGImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #000000 0%, #1a1a1a 60%, #3D3D3C 100%)",
-          fontFamily: "Anton, sans-serif",
+          background:
+            "linear-gradient(135deg, #000000 0%, #1a1a1a 60%, #3D3D3C 100%)",
+          fontFamily: "sans-serif",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Grain texture overlay simulado con círculos sutiles */}
+        {/* Accent glow overlays */}
         <div
           style={{
             position: "absolute",
@@ -35,7 +31,7 @@ export default async function OGImage() {
             right: 0,
             bottom: 0,
             background:
-              "radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(249,179,52,0.05) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(249,179,52,0.08) 0%, transparent 50%)",
           }}
         />
 
@@ -58,16 +54,16 @@ export default async function OGImage() {
               background: "rgba(212,160,23,0.15)",
               border: "1px solid rgba(212,160,23,0.4)",
               borderRadius: "999px",
-              padding: "6px 20px",
-              marginBottom: "8px",
+              padding: "8px 24px",
+              marginBottom: "12px",
             }}
           >
             <span
               style={{
                 color: "#D4A017",
-                fontSize: "18px",
-                letterSpacing: "0.2em",
-                fontFamily: "Anton, sans-serif",
+                fontSize: "20px",
+                letterSpacing: "0.25em",
+                fontWeight: 700,
               }}
             >
               UGC COLOMBIA
@@ -78,10 +74,10 @@ export default async function OGImage() {
           <div
             style={{
               color: "#ffffff",
-              fontSize: "96px",
+              fontSize: "104px",
               lineHeight: 1,
-              letterSpacing: "-0.01em",
-              fontFamily: "Anton, sans-serif",
+              letterSpacing: "-0.02em",
+              fontWeight: 900,
               textTransform: "uppercase",
             }}
           >
@@ -91,11 +87,11 @@ export default async function OGImage() {
           {/* Headline line 2 */}
           <div
             style={{
-              color: "#D4A017",
-              fontSize: "96px",
+              color: "#F9B334",
+              fontSize: "104px",
               lineHeight: 1,
-              letterSpacing: "-0.01em",
-              fontFamily: "Anton, sans-serif",
+              letterSpacing: "-0.02em",
+              fontWeight: 900,
               textTransform: "uppercase",
             }}
           >
@@ -106,9 +102,8 @@ export default async function OGImage() {
           <div
             style={{
               color: "#BDBCBC",
-              fontSize: "24px",
-              marginTop: "16px",
-              fontFamily: "sans-serif",
+              fontSize: "26px",
+              marginTop: "20px",
               fontWeight: 400,
               letterSpacing: "0.02em",
             }}
@@ -124,8 +119,9 @@ export default async function OGImage() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: "6px",
-            background: "linear-gradient(90deg, #C9940A, #D4A017, #F9B334, #D4A017, #C9940A)",
+            height: "8px",
+            background:
+              "linear-gradient(90deg, #C9940A, #D4A017, #F9B334, #D4A017, #C9940A)",
           }}
         />
 
@@ -133,12 +129,12 @@ export default async function OGImage() {
         <div
           style={{
             position: "absolute",
-            bottom: "24px",
-            right: "40px",
-            color: "#3D3D3C",
-            fontSize: "16px",
-            fontFamily: "sans-serif",
-            letterSpacing: "0.05em",
+            bottom: "28px",
+            right: "44px",
+            color: "#BDBCBC",
+            fontSize: "18px",
+            letterSpacing: "0.08em",
+            fontWeight: 500,
           }}
         >
           ugccolombia.co
@@ -147,14 +143,6 @@ export default async function OGImage() {
     ),
     {
       ...size,
-      fonts: [
-        {
-          name: "Anton",
-          data: antonFont,
-          style: "normal",
-          weight: 400,
-        },
-      ],
     }
   );
 }

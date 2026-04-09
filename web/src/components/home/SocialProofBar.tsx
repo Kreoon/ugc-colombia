@@ -75,12 +75,22 @@ export function SocialProofBar() {
       .then(r => r.ok ? r.json() : null)
       .then((json: { success: boolean; data: KreoonStatsDTO | null } | null) => {
         if (cancelled || !json?.success || !json.data) return;
-        const { creators_count, brands_count, campaigns_completed } = json.data;
-        setMetrics([
-          { prefix: "+", value: creators_count, label: "Creadores activos" },
-          { prefix: "+", value: brands_count, label: "Marcas atendidas" },
-          { prefix: "+", value: campaigns_completed, label: "Campañas entregadas" },
-        ]);
+        const { creators_count, videos_approved, campaigns_completed } = json.data;
+        // Solo reemplaza la métrica cuando hay valor real (>0).
+        // Para campañas, si el marketplace aún no tiene datos, usamos el conteo
+        // de videos aprobados como proxy de "trabajos entregados".
+        const next: MetricItem[] = [
+          creators_count > 0
+            ? { prefix: "+", value: creators_count, label: "Creadores en la red" }
+            : FALLBACK_METRICS[0],
+          videos_approved > 0
+            ? { prefix: "+", value: videos_approved, label: "Videos producidos" }
+            : FALLBACK_METRICS[1],
+          campaigns_completed > 0
+            ? { prefix: "+", value: campaigns_completed, label: "Campañas entregadas" }
+            : FALLBACK_METRICS[2],
+        ];
+        setMetrics(next);
       })
       .catch(() => { /* fallback ya cargado */ });
     return () => { cancelled = true; };

@@ -31,34 +31,61 @@ interface KreoonVideoDTO {
   id: string;
   title?: string;
   video_url: string;
-  thumbnail_url: string;
+  thumbnail_url: string | null;
   creator_handle?: string;
   brand_name?: string;
   tag?: string;
 }
 
 /**
+ * Solo aceptamos videos reproducibles directamente con <video src>:
+ * .mp4, .webm, .mov sirven; los embed iframes (Bunny Stream
+ * iframe.mediadelivery.net) no, porque rompen el reproductor nativo.
+ */
+function isPlayableVideoUrl(url: string): boolean {
+  if (!url) return false;
+  if (url.includes("iframe.mediadelivery.net")) return false;
+  return /\.(mp4|webm|mov)(\?|$)/i.test(url);
+}
+
+function buildTag(v: KreoonVideoDTO): string {
+  if (v.tag) return v.tag;
+  const handle = v.creator_handle && v.creator_handle !== "creador" ? `@${v.creator_handle}` : "";
+  const brand = v.brand_name && v.brand_name !== "Marca" ? v.brand_name : "";
+  if (brand && handle) return `${brand} · ${handle}`;
+  if (brand) return brand;
+  if (handle) return handle;
+  return "UGC";
+}
+
+/**
  * Pide videos aprobados a /api/showcase (proxy a KREOON).
- * Si KREOON no responde o devuelve vacío, retorna el array de fallback.
+ * Filtra a solo URLs reproducibles y con thumbnail. Si no hay suficientes
+ * válidos, completa o cae al fallback estático.
  */
 async function loadKreoonSamples(limit = 6): Promise<VideoSample[]> {
   try {
     // cache: "no-store" para que cada recarga reciba un orden distinto
-    // (la Edge Function de KREOON ya hace ORDER BY random()).
-    const res = await fetch(`/api/showcase?action=videos&limit=${limit}`, {
+    // (la Edge Function de KREOON ya barajea server-side).
+    const res = await fetch(`/api/showcase?action=videos&limit=${limit * 4}`, {
       cache: "no-store",
     });
     if (!res.ok) return FALLBACK_SAMPLES;
     const json = (await res.json()) as { success: boolean; data: KreoonVideoDTO[] | null };
     if (!json.success || !json.data || json.data.length === 0) return FALLBACK_SAMPLES;
-    return json.data.map((v, i) => ({
-      id: i + 1,
-      src: v.video_url,
-      poster: v.thumbnail_url,
-      tag: v.tag ?? (v.brand_name && v.creator_handle
-        ? `${v.brand_name} · @${v.creator_handle}`
-        : v.brand_name ?? v.title ?? "UGC"),
-    }));
+
+    const valid = json.data
+      .filter(v => isPlayableVideoUrl(v.video_url) && v.thumbnail_url)
+      .slice(0, limit)
+      .map<VideoSample>((v, i) => ({
+        id: i + 1,
+        src: v.video_url,
+        poster: v.thumbnail_url as string,
+        tag: buildTag(v),
+      }));
+
+    if (valid.length === 0) return FALLBACK_SAMPLES;
+    return valid;
   } catch {
     return FALLBACK_SAMPLES;
   }

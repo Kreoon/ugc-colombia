@@ -14,6 +14,10 @@
 
   --font-display: var(--font-anton), Anton, sans-serif;
   --font-sans: var(--font-inter), Inter, sans-serif;
+
+  /* Animaciones registradas en theme para usar con Tailwind */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
 /* ─── Brand tokens legacy (compat con inline styles) ──────── */
@@ -108,7 +112,7 @@ body {
   border-radius: 3px;
 }
 
-/* ─── Keyframes (Tailwind v4 requiere definirlos aquí) ─────── */
+/* ─── Keyframes ────────────────────────────────────────────── */
 @keyframes marquee {
   from {
     transform: translateX(0%);
@@ -148,9 +152,25 @@ body {
   }
 }
 
-/* ─── Logo shine sweep — franja de luz diagonal premium ───
-   Se aplica CON mask-image del logo PNG, así la luz solo aparece
-   donde hay píxeles del logo (no en el recuadro rectangular).    */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* ─── Logo shine sweep ─────────────────────────────────────── */
 @keyframes logo-shine-sweep {
   0% {
     background-position: -150% 50%;
@@ -194,7 +214,6 @@ body {
   animation: logo-shine-sweep 5s ease-in-out infinite;
   animation-delay: 2s;
   pointer-events: none;
-  /* Mask con el logo PNG — el shine solo se ve donde está el logo */
   -webkit-mask-image: url("/brand/logo-dark-bg.png");
   -webkit-mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
@@ -205,7 +224,7 @@ body {
   mask-position: center;
 }
 
-/* Clases utilitarias custom */
+/* ─── Clases utilitarias custom ────────────────────────────── */
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
@@ -220,6 +239,31 @@ body {
 
 .animate-glow-pulse {
   animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* Gradient border utility — se aplica con before: pseudo */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 179, 52, 0.6),
+    rgba(212, 160, 23, 0.3),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* ─── Reduced motion: deshabilitar animaciones CSS ─────────── */

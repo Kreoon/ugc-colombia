@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { Volume2, VolumeX, Maximize2 } from "lucide-react";
+import { Volume2, VolumeX } from "lucide-react";
 import { useIntersection } from "@/hooks/use-intersection";
 import {
   Dialog,
@@ -133,19 +133,18 @@ function VideoCard({ sample }: { sample: VideoSample }) {
           }
         }}
       >
-        {/* Card container 9:16 */}
+        {/* Card minimal: solo el video, sin badges, sin gradients, sin iconos */}
         <div
-          className="relative overflow-hidden rounded-2xl transition-all duration-300"
+          className="relative overflow-hidden rounded-xl bg-black"
           style={{
             aspectRatio: "9/16",
             boxShadow: hovered
-              ? "0 0 0 2px rgba(212,160,23,0.7), 0 16px 40px rgba(212,160,23,0.2)"
-              : "0 4px 20px rgba(0,0,0,0.4)",
-            transform: hovered ? "scale(1.03) translateY(-4px)" : "scale(1)",
-            transition: "all 0.3s cubic-bezier(0.22,1,0.36,1)",
+              ? "0 12px 32px rgba(0,0,0,0.5)"
+              : "0 4px 16px rgba(0,0,0,0.35)",
+            transform: hovered ? "translateY(-2px)" : "translateY(0)",
+            transition: "transform 0.25s ease, box-shadow 0.25s ease",
           }}
         >
-          {/* Video */}
           <video
             ref={videoRef}
             src={sample.src}
@@ -157,37 +156,6 @@ function VideoCard({ sample }: { sample: VideoSample }) {
             className="absolute inset-0 w-full h-full object-cover"
             aria-hidden="true"
           />
-
-          {/* Overlay gradient bottom */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.85) 100%)",
-            }}
-          />
-
-          {/* Badge tag */}
-          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-            <span className="text-xs font-sans font-semibold text-white bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-              {sample.tag}
-            </span>
-            <span className="text-xs font-sans text-brand-gray bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-1">
-              <VolumeX className="h-3 w-3" aria-hidden="true" />
-              Tap
-            </span>
-          </div>
-
-          {/* Expand icon on hover */}
-          <div
-            aria-hidden="true"
-            className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-          >
-            <div className="bg-black/60 backdrop-blur-sm p-1.5 rounded-lg border border-white/10">
-              <Maximize2 className="h-3.5 w-3.5 text-white" />
-            </div>
-          </div>
         </div>
       </motion.div>
 
@@ -199,18 +167,6 @@ function VideoCard({ sample }: { sample: VideoSample }) {
           </DialogTitle>
           <div className="relative" style={{ aspectRatio: "9/16" }}>
             <VideoDialogPlayer src={sample.src} poster={sample.poster} />
-            <div
-              aria-hidden="true"
-              className="absolute bottom-0 left-0 right-0 p-4"
-              style={{
-                background:
-                  "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
-              }}
-            >
-              <span className="text-xs font-sans font-semibold text-brand-yellow tracking-wide">
-                {sample.tag}
-              </span>
-            </div>
           </div>
         </DialogContent>
       </Dialog>

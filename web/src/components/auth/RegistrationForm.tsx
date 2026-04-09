@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CheckCircle2, Gift, Loader2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   CATEGORIES,
@@ -18,15 +17,25 @@ import { registerUser } from "@/lib/api/registration";
 
 type UserType = "creator" | "brand";
 
+const ACCENT = "#f97316";
+
 const inputClass = cn(
-  "w-full bg-black/60 border border-brand-gold/30 rounded-lg px-4 py-3",
-  "text-white placeholder:text-brand-gray/60 font-sans text-sm",
-  "focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/30",
+  "w-full bg-[#0a0a0a] border border-[#222] rounded-lg px-4 py-3",
+  "text-white placeholder:text-zinc-500 font-sans text-sm",
+  "focus:outline-none focus:border-[#f97316] focus:ring-2 focus:ring-[#f97316]/30",
   "transition-colors"
 );
 
-const labelClass = "block text-xs font-sans font-medium text-brand-gray mb-1.5 tracking-wide uppercase";
+const labelClass =
+  "block text-[11px] font-sans font-semibold text-zinc-400 mb-1.5 tracking-wider uppercase";
 const errorClass = "mt-1 text-xs text-red-400";
+
+const BENEFITS = [
+  "1 mes gratis de suscripción",
+  "500 tokens AI de bienvenida",
+  "Descuento en comisiones del marketplace",
+  'Badge "UGC Colombia" en tu perfil',
+];
 
 export function RegistrationForm() {
   const [userType, setUserType] = useState<UserType>("creator");
@@ -53,7 +62,10 @@ export function RegistrationForm() {
   const onCreatorSubmit = async (values: CreatorPayload) => {
     setServerError("");
     try {
-      await registerUser({ ...values, categories: categories as CreatorPayload["categories"] });
+      await registerUser({
+        ...values,
+        categories: categories as CreatorPayload["categories"],
+      });
       setSuccess(true);
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "Error inesperado");
@@ -75,21 +87,41 @@ export function RegistrationForm() {
       <div
         className={cn(
           "w-full max-w-md mx-auto rounded-2xl p-8 text-center",
-          "bg-brand-graphite/40 backdrop-blur-md border border-brand-gold/30",
-          "shadow-[0_0_40px_rgba(212,160,23,0.15)] animate-fade-in"
+          "bg-[#111] border border-[#222]",
+          "shadow-[0_0_60px_rgba(249,115,22,0.15)] animate-fade-in"
         )}
       >
-        <CheckCircle2 className="w-16 h-16 text-brand-yellow mx-auto mb-4" />
-        <h2 className="font-display text-3xl text-white tracking-wide uppercase mb-3">
-          ¡Registro Exitoso!
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f97316]/15 flex items-center justify-center">
+          <CheckCircle2 className="w-9 h-9 text-[#f97316]" />
+        </div>
+        <h2 className="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase mb-2">
+          ¡Bienvenido a la Comunidad UGC Colombia!
         </h2>
-        <p className="text-brand-gray font-sans text-sm mb-6 leading-relaxed">
-          Revisa tu email para verificar tu cuenta. Luego ingresa a la plataforma
-          KREOON para completar tu perfil.
+        <p className="text-zinc-400 font-sans text-sm mb-6">
+          Revisa tu email para verificar tu cuenta.
         </p>
-        <Button asChild size="lg" className="w-full">
-          <a href="https://kreoon.com/auth">Ir a KREOON →</a>
-        </Button>
+
+        <div className="bg-[#0a0a0a] border border-[#f97316]/30 rounded-xl p-5 mb-6 text-left">
+          <p className="text-[#f97316] font-sans font-semibold text-xs uppercase tracking-wider mb-3 flex items-center gap-2">
+            <Sparkles className="w-4 h-4" /> Beneficios otorgados
+          </p>
+          <ul className="space-y-2 text-sm text-zinc-300 font-sans">
+            <li>✓ 1 mes gratis de suscripción</li>
+            <li>✓ 500 tokens AI de bienvenida</li>
+            <li>✓ Badge &quot;UGC Colombia&quot; activado</li>
+          </ul>
+        </div>
+
+        <a
+          href="https://kreoon.com/auth"
+          className={cn(
+            "block w-full py-3 rounded-lg font-sans font-bold text-sm tracking-wide",
+            "bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors",
+            "shadow-[0_0_20px_rgba(249,115,22,0.4)]"
+          )}
+        >
+          Ingresar a KREOON →
+        </a>
       </div>
     );
   }
@@ -102,27 +134,45 @@ export function RegistrationForm() {
     <div
       className={cn(
         "w-full max-w-md mx-auto rounded-2xl p-6 sm:p-8",
-        "bg-brand-graphite/40 backdrop-blur-md border border-brand-gold/20",
-        "shadow-[0_0_60px_rgba(212,160,23,0.1)] animate-slide-up"
+        "bg-[#111] border border-[#222]",
+        "shadow-[0_0_80px_rgba(249,115,22,0.08)] animate-slide-up"
       )}
     >
       {/* Header */}
       <div className="text-center mb-6">
-        <div className="flex items-center justify-center gap-2 mb-3 text-xs font-sans font-semibold tracking-widest uppercase">
-          <span className="text-brand-yellow">UGC Colombia</span>
-          <span className="text-brand-gray">×</span>
-          <span className="text-brand-gold">KREOON</span>
+        <span
+          className="inline-block px-3 py-1 rounded-full text-[10px] font-sans font-bold tracking-widest uppercase mb-4"
+          style={{ backgroundColor: `${ACCENT}1f`, color: ACCENT, border: `1px solid ${ACCENT}66` }}
+        >
+          Comunidad UGC
+        </span>
+        <div className="flex items-center justify-center gap-2 mb-3 text-xs font-sans font-bold tracking-widest uppercase">
+          <span style={{ color: ACCENT }}>UGC Colombia</span>
+          <span className="text-zinc-600">×</span>
+          <span className="text-white">KREOON</span>
         </div>
-        <h1 className="font-display text-3xl sm:text-4xl text-white tracking-wide uppercase">
+        <h1 className="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase leading-tight">
           Únete a la Comunidad
         </h1>
-        <p className="text-brand-gray font-sans text-sm mt-2">
-          Creadores y marcas creando contenido que vende
+      </div>
+
+      {/* Benefits */}
+      <div className="bg-[#0a0a0a] border border-[#f97316]/25 rounded-xl p-4 mb-6">
+        <p className="flex items-center gap-2 text-[#f97316] font-sans font-bold text-xs uppercase tracking-wider mb-3">
+          <Gift className="w-4 h-4" /> Beneficios exclusivos
         </p>
+        <ul className="space-y-1.5">
+          {BENEFITS.map((b) => (
+            <li key={b} className="flex items-start gap-2 text-sm text-zinc-300 font-sans">
+              <span className="text-[#f97316] flex-shrink-0">✓</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Toggle */}
-      <div className="grid grid-cols-2 gap-2 mb-6 p-1 bg-black/60 rounded-xl border border-brand-gold/20">
+      <div className="grid grid-cols-2 gap-2 mb-6 p-1 bg-[#0a0a0a] rounded-xl border border-[#222]">
         {(["creator", "brand"] as const).map((t) => (
           <button
             key={t}
@@ -134,16 +184,16 @@ export function RegistrationForm() {
             className={cn(
               "py-2.5 rounded-lg text-sm font-sans font-semibold tracking-wide transition-all",
               userType === t
-                ? "bg-brand-yellow text-black shadow-[0_0_16px_rgba(249,179,52,0.4)]"
-                : "text-brand-gray hover:text-white"
+                ? "bg-[#f97316] text-white shadow-[0_0_16px_rgba(249,115,22,0.45)]"
+                : "text-zinc-400 hover:text-white"
             )}
           >
-            {t === "creator" ? "Soy Creador" : "Soy Marca"}
+            {t === "creator" ? "Creador" : "Marca"}
           </button>
         ))}
       </div>
 
-      {/* Creator form */}
+      {/* Forms */}
       {isCreator ? (
         <form
           key="creator"
@@ -152,26 +202,8 @@ export function RegistrationForm() {
           noValidate
         >
           <div>
-            <label className={labelClass}>Nombre completo *</label>
-            <input
-              type="text"
-              {...creatorForm.register("full_name")}
-              className={inputClass}
-              placeholder="Juan Pérez"
-            />
-            {creatorForm.formState.errors.full_name && (
-              <p className={errorClass}>{creatorForm.formState.errors.full_name.message}</p>
-            )}
-          </div>
-
-          <div>
             <label className={labelClass}>Email *</label>
-            <input
-              type="email"
-              {...creatorForm.register("email")}
-              className={inputClass}
-              placeholder="tu@email.com"
-            />
+            <input type="email" {...creatorForm.register("email")} className={inputClass} placeholder="tu@email.com" />
             {creatorForm.formState.errors.email && (
               <p className={errorClass}>{creatorForm.formState.errors.email.message}</p>
             )}
@@ -179,56 +211,34 @@ export function RegistrationForm() {
 
           <div>
             <label className={labelClass}>Contraseña *</label>
-            <input
-              type="password"
-              {...creatorForm.register("password")}
-              className={inputClass}
-              placeholder="Mínimo 8 caracteres"
-            />
+            <input type="password" {...creatorForm.register("password")} className={inputClass} placeholder="Mínimo 8 caracteres" />
             {creatorForm.formState.errors.password && (
               <p className={errorClass}>{creatorForm.formState.errors.password.message}</p>
             )}
           </div>
 
           <div>
-            <label className={labelClass}>Teléfono (WhatsApp)</label>
-            <input
-              type="tel"
-              {...creatorForm.register("phone")}
-              className={inputClass}
-              placeholder="+57 300 000 0000"
-            />
+            <label className={labelClass}>Nombre completo *</label>
+            <input type="text" {...creatorForm.register("full_name")} className={inputClass} placeholder="Juan Pérez" />
+            {creatorForm.formState.errors.full_name && (
+              <p className={errorClass}>{creatorForm.formState.errors.full_name.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className={labelClass}>Teléfono</label>
+            <input type="tel" {...creatorForm.register("phone")} className={inputClass} placeholder="+57 300 000 0000" />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className={labelClass}>Instagram</label>
-              <input
-                type="text"
-                {...creatorForm.register("instagram")}
-                className={inputClass}
-                placeholder="@usuario"
-              />
+              <input type="text" {...creatorForm.register("instagram")} className={inputClass} placeholder="@usuario" />
             </div>
             <div>
               <label className={labelClass}>TikTok</label>
-              <input
-                type="text"
-                {...creatorForm.register("tiktok")}
-                className={inputClass}
-                placeholder="@usuario"
-              />
+              <input type="text" {...creatorForm.register("tiktok")} className={inputClass} placeholder="@usuario" />
             </div>
-          </div>
-
-          <div>
-            <label className={labelClass}>Ciudad</label>
-            <input
-              type="text"
-              {...creatorForm.register("city")}
-              className={inputClass}
-              placeholder="Bogotá"
-            />
           </div>
 
           <div>
@@ -242,8 +252,8 @@ export function RegistrationForm() {
                   className={cn(
                     "px-3 py-1.5 rounded-full text-xs font-sans font-medium capitalize transition-all",
                     categories.includes(cat)
-                      ? "bg-brand-gold text-black border border-brand-gold"
-                      : "border border-brand-gold/40 text-brand-gray hover:text-white hover:border-brand-gold"
+                      ? "bg-[#f97316] text-white border border-[#f97316]"
+                      : "border border-[#333] text-zinc-400 hover:text-white hover:border-[#f97316]"
                   )}
                 >
                   {cat}
@@ -252,11 +262,23 @@ export function RegistrationForm() {
             </div>
           </div>
 
-          {serverError && (
-            <p className="text-sm text-red-400 text-center">{serverError}</p>
-          )}
+          <div>
+            <label className={labelClass}>Ciudad</label>
+            <input type="text" {...creatorForm.register("city")} className={inputClass} placeholder="Bogotá" />
+          </div>
 
-          <Button type="submit" size="lg" className="w-full" disabled={loading}>
+          {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={cn(
+              "w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide",
+              "bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors",
+              "shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50",
+              "flex items-center justify-center gap-2"
+            )}
+          >
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" /> Registrando...
@@ -264,7 +286,7 @@ export function RegistrationForm() {
             ) : (
               "Crear cuenta de creador →"
             )}
-          </Button>
+          </button>
         </form>
       ) : (
         <form
@@ -274,39 +296,8 @@ export function RegistrationForm() {
           noValidate
         >
           <div>
-            <label className={labelClass}>Nombre de la empresa *</label>
-            <input
-              type="text"
-              {...brandForm.register("company_name")}
-              className={inputClass}
-              placeholder="Mi Marca S.A.S."
-            />
-            {brandForm.formState.errors.company_name && (
-              <p className={errorClass}>{brandForm.formState.errors.company_name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Nombre del contacto *</label>
-            <input
-              type="text"
-              {...brandForm.register("contact_name")}
-              className={inputClass}
-              placeholder="María Gómez"
-            />
-            {brandForm.formState.errors.contact_name && (
-              <p className={errorClass}>{brandForm.formState.errors.contact_name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className={labelClass}>Email corporativo *</label>
-            <input
-              type="email"
-              {...brandForm.register("email")}
-              className={inputClass}
-              placeholder="contacto@empresa.com"
-            />
+            <label className={labelClass}>Email *</label>
+            <input type="email" {...brandForm.register("email")} className={inputClass} placeholder="contacto@empresa.com" />
             {brandForm.formState.errors.email && (
               <p className={errorClass}>{brandForm.formState.errors.email.message}</p>
             )}
@@ -314,35 +305,36 @@ export function RegistrationForm() {
 
           <div>
             <label className={labelClass}>Contraseña *</label>
-            <input
-              type="password"
-              {...brandForm.register("password")}
-              className={inputClass}
-              placeholder="Mínimo 8 caracteres"
-            />
+            <input type="password" {...brandForm.register("password")} className={inputClass} placeholder="Mínimo 8 caracteres" />
             {brandForm.formState.errors.password && (
               <p className={errorClass}>{brandForm.formState.errors.password.message}</p>
             )}
           </div>
 
           <div>
-            <label className={labelClass}>Teléfono</label>
-            <input
-              type="tel"
-              {...brandForm.register("phone")}
-              className={inputClass}
-              placeholder="+57 300 000 0000"
-            />
+            <label className={labelClass}>Nombre de la empresa *</label>
+            <input type="text" {...brandForm.register("company_name")} className={inputClass} placeholder="Mi Marca S.A.S." />
+            {brandForm.formState.errors.company_name && (
+              <p className={errorClass}>{brandForm.formState.errors.company_name.message}</p>
+            )}
           </div>
 
           <div>
-            <label className={labelClass}>Sitio web</label>
-            <input
-              type="url"
-              {...brandForm.register("website")}
-              className={inputClass}
-              placeholder="https://miempresa.com"
-            />
+            <label className={labelClass}>Nombre del contacto *</label>
+            <input type="text" {...brandForm.register("contact_name")} className={inputClass} placeholder="María Gómez" />
+            {brandForm.formState.errors.contact_name && (
+              <p className={errorClass}>{brandForm.formState.errors.contact_name.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className={labelClass}>Teléfono</label>
+            <input type="tel" {...brandForm.register("phone")} className={inputClass} placeholder="+57 300 000 0000" />
+          </div>
+
+          <div>
+            <label className={labelClass}>Website</label>
+            <input type="url" {...brandForm.register("website")} className={inputClass} placeholder="https://miempresa.com" />
             {brandForm.formState.errors.website && (
               <p className={errorClass}>{brandForm.formState.errors.website.message}</p>
             )}
@@ -365,19 +357,21 @@ export function RegistrationForm() {
 
           <div>
             <label className={labelClass}>Ciudad</label>
-            <input
-              type="text"
-              {...brandForm.register("city")}
-              className={inputClass}
-              placeholder="Medellín"
-            />
+            <input type="text" {...brandForm.register("city")} className={inputClass} placeholder="Medellín" />
           </div>
 
-          {serverError && (
-            <p className="text-sm text-red-400 text-center">{serverError}</p>
-          )}
+          {serverError && <p className="text-sm text-red-400 text-center">{serverError}</p>}
 
-          <Button type="submit" size="lg" className="w-full" disabled={loading}>
+          <button
+            type="submit"
+            disabled={loading}
+            className={cn(
+              "w-full py-3.5 rounded-lg font-sans font-bold text-sm tracking-wide",
+              "bg-[#f97316] text-white hover:bg-[#ea6a10] transition-colors",
+              "shadow-[0_0_20px_rgba(249,115,22,0.35)] disabled:opacity-50",
+              "flex items-center justify-center gap-2"
+            )}
+          >
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" /> Registrando...
@@ -385,28 +379,27 @@ export function RegistrationForm() {
             ) : (
               "Crear cuenta de marca →"
             )}
-          </Button>
+          </button>
         </form>
       )}
 
-      <p className="text-brand-gray/70 text-[11px] text-center mt-5 leading-relaxed">
-        Al registrarte aceptas los{" "}
-        <a href="/terminos" className="text-brand-yellow hover:underline">
-          Términos
-        </a>{" "}
-        y la{" "}
-        <a href="/privacidad" className="text-brand-yellow hover:underline">
-          Política de Privacidad
-        </a>
-      </p>
-
-      <div className="mt-5 pt-5 border-t border-brand-gold/15 text-center">
-        <p className="text-brand-gray text-sm">
+      {/* Footer */}
+      <div className="mt-6 pt-5 border-t border-[#222] text-center space-y-2">
+        <p className="text-zinc-500 text-xs">
+          Powered by{" "}
+          <a href="https://kreoon.com" className="text-[#f97316] font-semibold hover:underline">
+            KREOON
+          </a>
+        </p>
+        <p className="text-zinc-600 text-[10px] leading-relaxed px-4">
+          Tus datos están protegidos según nuestra{" "}
+          <a href="/privacidad" className="text-zinc-500 hover:text-[#f97316] underline">
+            política de privacidad
+          </a>
+        </p>
+        <p className="text-zinc-500 text-xs pt-2">
           ¿Ya tienes cuenta?{" "}
-          <a
-            href="https://kreoon.com/auth"
-            className="text-brand-yellow font-semibold hover:underline"
-          >
+          <a href="https://kreoon.com/auth" className="text-[#f97316] font-semibold hover:underline">
             Inicia sesión
           </a>
         </p>

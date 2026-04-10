@@ -6,13 +6,22 @@ import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { Quote, Volume2, VolumeX, Star } from "lucide-react";
 
-const SECOND_TESTIMONIAL = {
-  quote:
-    "Pasamos de producir 2 videos al mes internamente a tener 30 listos para ads. El equipo de UGC Colombia nos devolvio el tiempo para enfocarnos en escalar.",
-  name: "Carolina Mejia",
-  title: "CMO · FitLab LATAM",
-  initials: "CM",
-};
+const EXTRA_TESTIMONIALS = [
+  {
+    quote:
+      "Nos sentimos súper contentos de trabajar con UGC Colombia. La colaboración, la atención y sobre todo los tiempos de entrega son increíbles. Han conectado a la perfección con nuestra visión.",
+    name: "Equi Mayoristas",
+    title: "Tienda mayorista",
+    initials: "EM",
+  },
+  {
+    quote:
+      "Con más de $18M invertidos en pauta, garantizamos el trabajo de UGC Colombia. Son muy rápidos, súper creativos y su contenido está completamente enfocado hacia la venta.",
+    name: "Michel Edery",
+    title: "CEO · smartBeemo — +$18M en pauta",
+    initials: "ME",
+  },
+];
 
 export function PreciosTestimonial() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
@@ -98,12 +107,12 @@ export function PreciosTestimonial() {
                 backgroundClip: "text",
               }}
             >
-              Michel Edery
+              Tokio
             </span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-brand-gray">
-            CEO & Co-Founder de smartBeemo — CommerceTech LATAM con +60K
-            estudiantes.
+            Lencería para el hogar & dropshipping — cliente desde hace más de 1
+            año.
           </p>
         </motion.div>
 
@@ -140,7 +149,7 @@ export function PreciosTestimonial() {
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="Testimonio de Michel Edery"
+                aria-label="Testimonio de Tokio"
               />
               {/* Gradient overlay mejorado */}
               <div
@@ -168,10 +177,10 @@ export function PreciosTestimonial() {
               {/* Name bottom */}
               <div className="absolute bottom-3 left-3 right-3 text-white">
                 <p className="text-xs font-semibold drop-shadow-lg">
-                  Michel Edery
+                  Tokio
                 </p>
                 <p className="text-[10px] text-brand-gray drop-shadow-lg">
-                  CEO · smartBeemo
+                  Lencería & Dropshipping
                 </p>
               </div>
             </div>
@@ -184,12 +193,12 @@ export function PreciosTestimonial() {
               aria-hidden
             />
             <p className="font-display text-xl sm:text-2xl lg:text-3xl text-white/95 leading-snug italic mb-6 pl-4 lg:pl-6">
-              &ldquo;Lo que hace UGC Colombia es exactamente lo que la nueva
-              generacion de e-commerce necesita:{" "}
+              &ldquo;Llevamos más de un año trabajando con UGC Colombia y la
+              experiencia ha sido excelente. Los videos están{" "}
               <span className="text-brand-yellow not-italic">
-                contenido real que vende.
-              </span>
-              &rdquo;
+                muy bien elaborados y trabajados.
+              </span>{" "}
+              Los recomendamos ampliamente.&rdquo;
             </p>
 
             {/* Metrics — métricas reales de contenido */}
@@ -224,44 +233,50 @@ export function PreciosTestimonial() {
           </div>
         </motion.div>
 
-        {/* Segundo testimonial — solo texto */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 rounded-2xl border border-brand-graphite/50 bg-white/[0.02] p-6 sm:p-8 max-w-4xl mx-auto"
-        >
-          <div className="flex items-start gap-4 sm:gap-6">
-            {/* Avatar */}
-            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-gold/30 flex items-center justify-center">
-              <span className="font-display text-sm text-brand-yellow">
-                {SECOND_TESTIMONIAL.initials}
-              </span>
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-1 mb-2">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-3.5 w-3.5 fill-brand-yellow text-brand-yellow"
-                    aria-hidden
-                  />
-                ))}
+        {/* Testimoniales adicionales en texto */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+          {EXTRA_TESTIMONIALS.map((t, idx) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: 0.35 + idx * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="rounded-2xl border border-brand-graphite/50 bg-white/[0.02] p-6 sm:p-8"
+            >
+              <div className="flex items-start gap-4 sm:gap-5">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-gold/30 flex items-center justify-center">
+                  <span className="font-display text-sm text-brand-yellow">
+                    {t.initials}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-1 mb-2">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-3.5 w-3.5 fill-brand-yellow text-brand-yellow"
+                        aria-hidden
+                      />
+                    ))}
+                  </div>
+                  <p className="text-sm sm:text-base text-white/90 leading-relaxed italic mb-3">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div>
+                    <p className="text-xs font-semibold text-white">
+                      {t.name}
+                    </p>
+                    <p className="text-[11px] text-brand-gray">{t.title}</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-sm sm:text-base text-white/90 leading-relaxed italic mb-3">
-                &ldquo;{SECOND_TESTIMONIAL.quote}&rdquo;
-              </p>
-              <div>
-                <p className="text-xs font-semibold text-white">
-                  {SECOND_TESTIMONIAL.name}
-                </p>
-                <p className="text-[11px] text-brand-gray">
-                  {SECOND_TESTIMONIAL.title}
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

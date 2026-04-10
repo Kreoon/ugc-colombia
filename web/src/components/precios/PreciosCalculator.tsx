@@ -12,14 +12,68 @@ const SOLO_EDIT = 65;
 const SOLO_CREATOR = 150;
 const SOLO_STRATEGY = 450;
 
-function recommendPlan(videos: number) {
-  if (videos <= 7) return { name: "INICIO", price: 400, href: "#planes" };
-  if (videos <= 15) return { name: "CRECIMIENTO", price: 700, href: "#planes" };
-  if (videos <= 35) return { name: "ESCALA", price: 1500, href: "#planes" };
-  return { name: "A LA MEDIDA", price: null, href: "#contacto" };
+/** Calcula el precio del paquete UGC Colombia según volumen */
+function getPackagePrice(videos: number): {
+  name: string;
+  price: number;
+  priceLabel: string;
+  href: string;
+} {
+  if (videos <= 5)
+    return { name: "INICIO", price: 400, priceLabel: "$400", href: "#planes" };
+  if (videos <= 10)
+    return {
+      name: "CRECIMIENTO",
+      price: 700,
+      priceLabel: "$700",
+      href: "#planes",
+    };
+  if (videos <= 30)
+    return {
+      name: "ESCALA",
+      price: 1500,
+      priceLabel: "$1,500",
+      href: "#planes",
+    };
+  if (videos <= 50)
+    return {
+      name: "VOLUMEN 50",
+      price: 2200,
+      priceLabel: "$2,200",
+      href: "#contacto",
+    };
+  if (videos <= 99) {
+    const price = videos * 40;
+    return {
+      name: "A LA MEDIDA",
+      price,
+      priceLabel: `$${price.toLocaleString("en-US")}`,
+      href: "#contacto",
+    };
+  }
+  if (videos <= 200) {
+    const price = videos * 35;
+    return {
+      name: "A LA MEDIDA",
+      price,
+      priceLabel: `$${price.toLocaleString("en-US")}`,
+      href: "#contacto",
+    };
+  }
+  const price = videos * 29;
+  return {
+    name: "A LA MEDIDA",
+    price,
+    priceLabel: `$${price.toLocaleString("en-US")}`,
+    href: "#contacto",
+  };
 }
 
-/** Hook para animar un numero de 0 a target */
+/** Precio por video para mostrar */
+function getPricePerVideo(videos: number, totalPrice: number): string {
+  return `$${Math.round(totalPrice / videos)}`;
+}
+
 function useCountUp(target: number, duration = 600) {
   const [current, setCurrent] = useState(0);
   const rafRef = useRef<number>(0);
@@ -44,26 +98,29 @@ function useCountUp(target: number, duration = 600) {
   return current;
 }
 
+/** Escalas predefinidas del slider */
+const SLIDER_STOPS = [5, 10, 30, 50, 100, 150, 200, 300];
+
 export function PreciosCalculator() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.1,
   });
   const [videos, setVideos] = useState(10);
 
-  const { soloCost, packagePrice, savings, savingsPct, plan } = useMemo(() => {
+  const { soloCost, plan, savings, savingsPct } = useMemo(() => {
     const soloCost =
       videos * (SOLO_SCRIPT + SOLO_EDIT + SOLO_CREATOR) + SOLO_STRATEGY;
-    const plan = recommendPlan(videos);
-    const packagePrice = plan.price ?? soloCost * 0.7;
-    const savings = Math.max(0, soloCost - packagePrice);
+    const plan = getPackagePrice(videos);
+    const savings = Math.max(0, soloCost - plan.price);
     const savingsPct = Math.round((savings / soloCost) * 100);
-    return { soloCost, packagePrice, savings, savingsPct, plan };
+    return { soloCost, plan, savings, savingsPct };
   }, [videos]);
 
   const animatedSavings = useCountUp(savings);
   const animatedSoloCost = useCountUp(soloCost);
+  const perVideo = getPricePerVideo(videos, plan.price);
 
-  const sliderPct = ((videos - 3) / 57) * 100;
+  const sliderPct = ((videos - 5) / (300 - 5)) * 100;
 
   return (
     <section
@@ -71,7 +128,6 @@ export function PreciosCalculator() {
       aria-labelledby="calculadora-title"
       className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
-      {/* Custom slider thumb styles */}
       <style>{`
         .pricing-slider::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -99,7 +155,6 @@ export function PreciosCalculator() {
         }
       `}</style>
 
-      {/* Imagen editorial de fondo */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         <Image
           src="/brand/precios/calculadora.png"
@@ -120,7 +175,6 @@ export function PreciosCalculator() {
       />
 
       <div className="relative max-w-5xl mx-auto" ref={ref}>
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
@@ -134,7 +188,7 @@ export function PreciosCalculator() {
             id="calculadora-title"
             className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1] text-white tracking-tight uppercase"
           >
-            Cuanto te{" "}
+            ¿Cuánto te{" "}
             <span
               style={{
                 background: "linear-gradient(90deg, #f9b334, #d4a017)",
@@ -148,19 +202,17 @@ export function PreciosCalculator() {
             ?
           </h2>
           <p className="mt-5 text-sm sm:text-base text-brand-gray leading-relaxed">
-            Mueve el slider segun los videos que necesitas al mes. Te mostramos
-            cuanto te costaria contratarlos por separado vs. nuestro paquete.
+            Mueve el slider según los videos que necesitas al mes. Te mostramos
+            cuánto te costaría contratarlos por separado vs. nuestro paquete.
           </p>
         </motion.div>
 
-        {/* Card */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative rounded-3xl border border-brand-graphite/60 bg-gradient-to-b from-white/[0.04] to-transparent p-6 sm:p-10 lg:p-12 overflow-hidden"
         >
-          {/* Glow corner */}
           <div
             aria-hidden
             className="absolute top-0 right-0 w-80 h-80 pointer-events-none"
@@ -169,7 +221,6 @@ export function PreciosCalculator() {
                 "radial-gradient(ellipse at 100% 0%, rgba(16,185,129,0.14), transparent 65%)",
             }}
           />
-          {/* Gradient border */}
           <div
             aria-hidden
             className="absolute inset-0 rounded-3xl pointer-events-none"
@@ -210,8 +261,8 @@ export function PreciosCalculator() {
               <input
                 id="video-slider"
                 type="range"
-                min={3}
-                max={60}
+                min={5}
+                max={300}
                 step={1}
                 value={videos}
                 onChange={(e) => setVideos(parseInt(e.target.value, 10))}
@@ -221,10 +272,19 @@ export function PreciosCalculator() {
                 }}
               />
               <div className="flex justify-between mt-3 text-[11px] text-brand-gray/70">
-                <span>3</span>
-                <span>15</span>
-                <span>30</span>
-                <span>60+</span>
+                {SLIDER_STOPS.map((stop) => (
+                  <button
+                    key={stop}
+                    type="button"
+                    onClick={() => setVideos(stop)}
+                    className={cn(
+                      "transition-colors hover:text-brand-yellow",
+                      videos === stop && "text-brand-yellow font-bold"
+                    )}
+                  >
+                    {stop}
+                  </button>
+                ))}
               </div>
 
               <div className="mt-6 p-4 rounded-xl border border-brand-graphite/60 bg-white/[0.02]">
@@ -234,10 +294,13 @@ export function PreciosCalculator() {
                 <p className="font-display text-2xl text-brand-yellow tracking-wide">
                   PLAN {plan.name}
                 </p>
+                <p className="text-[11px] text-brand-gold/60 mt-1">
+                  {perVideo}/video · todo incluido
+                </p>
               </div>
             </div>
 
-            {/* Derecha: comparacion de costos */}
+            {/* Derecha: comparación de costos */}
             <div className="space-y-4">
               {/* Sin paquete */}
               <div className="rounded-xl border border-brand-graphite/60 bg-white/[0.015] p-5">
@@ -248,7 +311,7 @@ export function PreciosCalculator() {
                   ${animatedSoloCost.toLocaleString("en-US")}
                 </p>
                 <p className="text-[11px] text-brand-gray/70 mt-1">
-                  Guiones + edicion + creadores + estrategia
+                  Guiones + edición + creadores + estrategia
                 </p>
               </div>
 
@@ -258,12 +321,10 @@ export function PreciosCalculator() {
                   Con plan {plan.name}
                 </p>
                 <p className="font-display text-4xl sm:text-5xl text-white">
-                  {plan.price
-                    ? `$${plan.price.toLocaleString("en-US")}`
-                    : "A la medida"}
+                  {plan.priceLabel}
                 </p>
                 <p className="text-[11px] text-brand-gray mt-1">
-                  {plan.price ? "USD / mes · todo incluido" : "Hablemos"}
+                  USD / mes · todo incluido
                 </p>
               </div>
 
@@ -304,18 +365,49 @@ export function PreciosCalculator() {
                 />
               </a>
 
-              {/* Micro-copy CRO */}
               <p className="flex items-center justify-center gap-1.5 text-xs text-brand-gray/70">
                 <Users className="h-3 w-3" aria-hidden />
-                Unete a 133+ marcas que ya ahorran
+                Únete a 133+ marcas que ya ahorran
               </p>
             </div>
           </div>
         </motion.div>
 
+        {/* Tabla de precios por volumen */}
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+          {[
+            { range: "5–50", price: "Desde $80", note: "por video" },
+            { range: "50–99", price: "$40", note: "por video" },
+            { range: "100–200", price: "$35", note: "por video" },
+            { range: "200+", price: "$29", note: "por video" },
+          ].map((tier) => (
+            <div
+              key={tier.range}
+              className="rounded-xl border border-brand-graphite/40 bg-white/[0.02] p-3 text-center"
+            >
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-gray mb-1">
+                {tier.range} videos
+              </p>
+              <p
+                className="font-display text-lg"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #f9b334, #d4a017)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {tier.price}
+              </p>
+              <p className="text-[10px] text-brand-gray/60">{tier.note}</p>
+            </div>
+          ))}
+        </div>
+
         <p className="mt-6 text-center text-xs text-brand-gray/60">
-          * Estimacion basada en tarifas promedio de freelance en LATAM: $90
-          guion, $65 edicion, $150 por creador, $450 estrategia base.
+          * Comparación basada en tarifas promedio de freelance en LATAM: $90
+          guión, $65 edición, $150 por creador, $450 estrategia base.
         </p>
       </div>
     </section>

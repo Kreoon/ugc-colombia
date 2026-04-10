@@ -4,12 +4,12 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const CLIENT_LOGOS = [
-  { name: "smartBeemo", letters: "sB" },
-  { name: "FitLab", letters: "FL" },
-  { name: "Nova Beauty", letters: "NB" },
-  { name: "Growthy", letters: "GR" },
-  { name: "Alma Foods", letters: "AF" },
-  { name: "Velora", letters: "VL" },
+  { name: "Beemo", letters: "Be" },
+  { name: "Unlocked Academy", letters: "UA" },
+  { name: "Altevo", letters: "Al" },
+  { name: "Vitalcom", letters: "Vi" },
+  { name: "Orion Sunglasses", letters: "OS" },
+  { name: "Soluna", letters: "So" },
 ];
 
 export function ClientLogoBar({ className }: { className?: string }) {

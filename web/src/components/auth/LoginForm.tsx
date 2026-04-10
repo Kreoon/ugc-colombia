@@ -53,8 +53,8 @@ export function LoginForm() {
         return;
       }
 
-      // Redirect to KREOON
-      window.location.href = "https://kreoon.com/auth/callback?next=/dashboard";
+      // Redirect to KREOON welcome page
+      window.location.href = "https://kreoon.com/auth/callback?next=/welcome/ugc-colombia";
     } catch {
       setServerError("Error al iniciar sesion. Intenta de nuevo.");
     }

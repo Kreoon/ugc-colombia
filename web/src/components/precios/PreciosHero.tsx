@@ -1,11 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
 import { ClientLogoBar } from "./ClientLogoBar";
+
+interface KreoonStatsDTO {
+  creators_count: number;
+  brands_count: number;
+  campaigns_completed: number;
+  videos_approved: number;
+}
 
 const STAGGER = 0.12;
 const fadeUp = {
@@ -25,15 +33,45 @@ const fadeUpReduced = {
   visible: () => ({ opacity: 1, transition: { duration: 0.3 } }),
 };
 
-const STATS = [
-  { value: "7", label: "días de entrega" },
-  { value: "3", label: "variantes por video" },
-  { value: "12", label: "meses de licencia ads" },
+// Fallback stats si KREOON no responde
+const FALLBACK_STATS = [
+  { value: "+30", label: "Creadores activos" },
+  { value: "38%", label: "Hook rate promedio" },
+  { value: "2.8%", label: "CTR Meta Ads" },
 ];
 
 export function PreciosHero() {
   const reduced = useReducedMotion();
   const variants = reduced ? fadeUpReduced : fadeUp;
+
+  const [stats, setStats] = useState(FALLBACK_STATS);
+
+  useEffect(() => {
+    fetch("/api/showcase?action=stats", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then(
+        (json: { success: boolean; data: KreoonStatsDTO | null } | null) => {
+          if (!json?.success || !json.data) return;
+          const { creators_count, videos_approved, campaigns_completed } =
+            json.data;
+          setStats([
+            creators_count > 0
+              ? { value: `+${creators_count}`, label: "Creadores en la red" }
+              : FALLBACK_STATS[0],
+            videos_approved > 0
+              ? { value: `${videos_approved}`, label: "Videos producidos" }
+              : { value: "38%", label: "Hook rate promedio" },
+            campaigns_completed > 0
+              ? {
+                  value: `${campaigns_completed}`,
+                  label: "Campañas entregadas",
+                }
+              : { value: "2.8%", label: "CTR Meta Ads" },
+          ]);
+        }
+      )
+      .catch(() => {});
+  }, []);
 
   return (
     <section
@@ -177,7 +215,7 @@ export function PreciosHero() {
           animate="visible"
           className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
         >
-          {STATS.map((stat, i) => (
+          {stats.map((stat: { value: string; label: string }, i: number) => (
             <div key={i} className="flex items-baseline gap-2">
               <span
                 className="font-display text-2xl sm:text-3xl"

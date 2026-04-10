@@ -34,7 +34,7 @@ const SERVICIOS: Servicio[] = [
     title: "Consultoría Estratégica",
     description:
       "Sesiones 1-a-1 con Alexander para auditar tu contenido actual y construir la hoja de ruta de los próximos 90 días.",
-    priceFrom: "$400",
+    priceFrom: "$200",
     priceUnit: "USD / sesión",
   },
   {
@@ -43,7 +43,7 @@ const SERVICIOS: Servicio[] = [
     title: "Estrategia de Marketing",
     description:
       "Plan completo de adquisición, embudo de ventas, precios, canales y presupuesto para hacer crecer tu marca con intención.",
-    priceFrom: "$650",
+    priceFrom: "$325",
     priceUnit: "USD / mes",
   },
   {
@@ -52,7 +52,7 @@ const SERVICIOS: Servicio[] = [
     title: "Estrategia de Contenido",
     description:
       "Pilares editoriales, calendario mensual, ángulos ganadores y marcos de ganchos probados por vertical.",
-    priceFrom: "$450",
+    priceFrom: "$225",
     priceUnit: "USD / mes",
   },
   {
@@ -61,7 +61,7 @@ const SERVICIOS: Servicio[] = [
     title: "Guiones UGC",
     description:
       "Guiones conversacionales escritos con acento latino real. Ganchos, transiciones y llamadas a la acción listos para grabar.",
-    priceFrom: "$90",
+    priceFrom: "$45",
     priceUnit: "USD / guion",
   },
   {
@@ -70,7 +70,7 @@ const SERVICIOS: Servicio[] = [
     title: "Investigación de Mercado",
     description:
       "Análisis de audiencia, dolores, hallazgos culturales y tendencias LATAM + USA Hispanic con datos reales.",
-    priceFrom: "$450",
+    priceFrom: "$225",
     priceUnit: "USD / proyecto",
   },
   {
@@ -79,7 +79,7 @@ const SERVICIOS: Servicio[] = [
     title: "Análisis de Competencia",
     description:
       "Auditoría de tus competidores directos: contenido creativo, precios, posicionamiento y oportunidades de mercado.",
-    priceFrom: "$350",
+    priceFrom: "$175",
     priceUnit: "USD / proyecto",
   },
   {
@@ -88,7 +88,7 @@ const SERVICIOS: Servicio[] = [
     title: "Edición Profesional",
     description:
       "Posproducción cinematográfica: corrección de color, gráficos animados, subtítulos animados y exportaciones listas para publicar.",
-    priceFrom: "$65",
+    priceFrom: "$33",
     priceUnit: "USD / video",
   },
   {
@@ -97,7 +97,7 @@ const SERVICIOS: Servicio[] = [
     title: "Creadores Verificados",
     description:
       "Acceso a nuestra red de +30 creadores latinos pre-verificados. Selección por nicho, audiencia y estilo de marca.",
-    priceFrom: "$150",
+    priceFrom: "$75",
     priceUnit: "USD / video",
   },
 ];

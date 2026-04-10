@@ -7,10 +7,10 @@ import { useIntersection } from "@/hooks/use-intersection";
 import { Calculator, TrendingDown, ArrowRight, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const SOLO_SCRIPT = 90;
-const SOLO_EDIT = 65;
-const SOLO_CREATOR = 150;
-const SOLO_STRATEGY = 450;
+const SOLO_SCRIPT = 45;
+const SOLO_EDIT = 33;
+const SOLO_CREATOR = 75;
+const SOLO_STRATEGY = 225;
 
 /** Calcula el precio del paquete UGC Colombia según volumen */
 function getPackagePrice(videos: number): {
@@ -445,8 +445,8 @@ export function PreciosCalculator() {
         </div>
 
         <p className="mt-6 text-center text-xs text-brand-gray/60">
-          * Comparación basada en tarifas promedio de freelance en LATAM: $90
-          guión, $65 edición, $150 por creador, $450 estrategia base.
+          * Comparación basada en tarifas promedio de freelance en LATAM: $45
+          guión, $33 edición, $75 por creador, $225 estrategia base.
         </p>
       </div>
     </section>

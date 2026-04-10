@@ -1,18 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
 import { ClientLogoBar } from "./ClientLogoBar";
 
+const STAGGER = 0.12;
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.12,
+      delay: i * STAGGER,
       duration: 0.65,
       ease: [0.22, 1, 0.36, 1] as const,
     },
@@ -38,7 +40,20 @@ export function PreciosHero() {
       aria-label="Precios — UGC Colombia"
       className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-brand-black pt-24"
     >
-      {/* Grid SVG de fondo */}
+      {/* Imagen editorial de fondo */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/brand/precios/hero.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/75 via-brand-black/65 to-brand-black" />
+      </div>
+
+      {/* Grid SVG pattern */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -54,41 +69,30 @@ export function PreciosHero() {
             "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
         }}
       />
-      {/* Glow dorado */}
+      {/* Radial glow dorado */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 55%, rgba(212,160,23,0.12) 0%, transparent 70%)",
-        }}
-      />
-      {/* Grain texture overlay */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize: "128px 128px",
+            "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(212,160,23,0.10) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-20">
-        {/* Badge de urgencia */}
-        <motion.div
+        {/* Eyebrow pill badge — mismo patrón que ServiciosHero */}
+        <motion.span
           custom={0}
           variants={variants}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-brand-gold/30 bg-brand-yellow/[0.06]"
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-6 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40"
         >
-          <Users className="h-3.5 w-3.5 text-brand-yellow" aria-hidden />
-          <span className="text-[11px] sm:text-xs font-sans font-semibold text-brand-yellow tracking-wide">
-            Solo 3 espacios disponibles en Abril
-          </span>
-        </motion.div>
+          <Users className="h-3 w-3" aria-hidden />
+          Solo 3 espacios en Abril
+        </motion.span>
 
-        {/* Titulo */}
+        {/* Título — mismos clamp que ServiciosHero */}
         <motion.h1
           custom={1}
           variants={variants}
@@ -96,11 +100,11 @@ export function PreciosHero() {
           animate="visible"
           className="font-display leading-none mb-6"
         >
-          <span className="block text-white text-[clamp(2.4rem,7vw,6rem)] leading-[0.92] uppercase">
-            Invierte una vez.
+          <span className="block text-white text-[clamp(2.4rem,7vw,6rem)] leading-[0.92]">
+            INVIERTE UNA VEZ.
           </span>
           <span
-            className="block text-[clamp(1.6rem,5vw,4.5rem)] leading-[0.95] mt-2 uppercase"
+            className="block text-[clamp(1.6rem,5vw,4.5rem)] leading-[0.95] mt-2"
             style={{
               background:
                 "linear-gradient(90deg, #f9b334 0%, #d4a017 50%, #f9b334 100%)",
@@ -109,11 +113,11 @@ export function PreciosHero() {
               backgroundClip: "text",
             }}
           >
-            Vende durante meses.
+            VENDE DURANTE MESES.
           </span>
         </motion.h1>
 
-        {/* Subtitulo */}
+        {/* Subtítulo */}
         <motion.p
           custom={2}
           variants={variants}
@@ -121,8 +125,8 @@ export function PreciosHero() {
           animate="visible"
           className="max-w-2xl mx-auto text-brand-gray text-base sm:text-lg leading-relaxed mb-10"
         >
-          Cuatro paquetes disenados por etapa de negocio. Precios claros, sin
-          letra pequena y con{" "}
+          Cuatro paquetes diseñados por etapa de negocio. Precios claros, sin
+          letra pequeña y con{" "}
           <span className="text-white font-semibold">
             licencia de publicidad por 12 meses incluida
           </span>
@@ -151,7 +155,7 @@ export function PreciosHero() {
             variant="outline"
             className="w-full sm:w-auto text-sm sm:text-base min-h-[52px]"
           >
-            <Link href="/#contacto">AGENDA TU DIAGNOSTICO</Link>
+            <Link href="/#contacto">AGENDA TU DIAGNÓSTICO</Link>
           </Button>
         </motion.div>
 

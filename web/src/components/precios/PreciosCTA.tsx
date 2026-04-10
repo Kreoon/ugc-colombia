@@ -59,13 +59,11 @@ export function PreciosCTA() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="relative max-w-4xl mx-auto text-center"
       >
-        {/* Badge urgencia */}
-        <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-brand-gold/30 bg-brand-yellow/[0.06]">
-          <Users className="h-3.5 w-3.5 text-brand-yellow" aria-hidden />
-          <span className="text-[11px] sm:text-xs font-sans font-semibold text-brand-yellow tracking-wide">
-            Solo quedan 3 espacios para Abril 2026
-          </span>
-        </div>
+        {/* Badge urgencia — pill badge pattern */}
+        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-xs font-semibold text-brand-yellow tracking-[0.2em] uppercase mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
+          Solo quedan 3 espacios para Abril 2026
+        </span>
 
         <h2
           id="cta-precios-title"

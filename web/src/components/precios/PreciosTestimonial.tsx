@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { Quote, Volume2, VolumeX, Star } from "lucide-react";
@@ -54,6 +55,17 @@ export function PreciosTestimonial() {
       aria-labelledby="testimonio-pricing-title"
       className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden"
     >
+      {/* Imagen editorial de fondo */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/brand/precios/testimonial.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-18"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/70 to-brand-black" />
+      </div>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -70,19 +82,9 @@ export function PreciosTestimonial() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 max-w-2xl mx-auto"
         >
-          <div className="inline-flex items-center gap-3 mb-5">
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-r from-transparent to-brand-gold/60"
-            />
-            <span className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold/80 font-sans">
-              Caso real
-            </span>
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-l from-transparent to-brand-gold/60"
-            />
-          </div>
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
+            Caso real
+          </span>
           <h2
             id="testimonio-pricing-title"
             className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1] text-white tracking-tight uppercase"

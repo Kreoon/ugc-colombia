@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { Calculator, TrendingDown, ArrowRight, Users } from "lucide-react";
@@ -98,6 +99,17 @@ export function PreciosCalculator() {
         }
       `}</style>
 
+      {/* Imagen editorial de fondo */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/brand/precios/calculadora.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-18"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/70 to-brand-black" />
+      </div>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -115,19 +127,9 @@ export function PreciosCalculator() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 sm:mb-14 max-w-2xl mx-auto"
         >
-          <div className="inline-flex items-center gap-3 mb-5">
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-r from-transparent to-brand-gold/60"
-            />
-            <span className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold/80 font-sans">
-              Calculadora de ahorro
-            </span>
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-l from-transparent to-brand-gold/60"
-            />
-          </div>
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
+            Calculadora de ahorro
+          </span>
           <h2
             id="calculadora-title"
             className="font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1] text-white tracking-tight uppercase"

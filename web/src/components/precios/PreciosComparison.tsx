@@ -104,19 +104,9 @@ export function PreciosComparison() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14 sm:mb-18 max-w-3xl mx-auto"
         >
-          <div className="inline-flex items-center gap-3 mb-5">
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-r from-transparent to-brand-gold/60"
-            />
-            <span className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold/80 font-sans">
-              Compara en detalle
-            </span>
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-l from-transparent to-brand-gold/60"
-            />
-          </div>
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
+            Compara en detalle
+          </span>
           <h2
             id="comparativa-title"
             className="font-display text-[clamp(2.25rem,5vw,4rem)] leading-[0.95] text-white tracking-tight uppercase"

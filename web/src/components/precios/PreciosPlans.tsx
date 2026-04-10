@@ -10,6 +10,10 @@ import {
   ChevronDown,
   ChevronUp,
   CalendarDays,
+  ShieldCheck,
+  Infinity,
+  Target,
+  CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -20,6 +24,15 @@ import {
 } from "@/lib/pricing-plans";
 
 const MAX_VISIBLE_FEATURES = 10;
+
+/** Calcula precio por video basado en precio y cantidad de videos */
+function getPricePerVideo(plan: Plan): string | null {
+  const priceNum = parseInt(plan.price.replace(/[$.,]/g, ""), 10);
+  const videoMatch = plan.videos.match(/(\d+)/);
+  if (!priceNum || !videoMatch) return null;
+  const videos = parseInt(videoMatch[1], 10);
+  return `$${Math.round(priceNum / videos)}`;
+}
 
 function PlanCard({
   plan,
@@ -32,6 +45,7 @@ function PlanCard({
 }) {
   const Icon = plan.icon;
   const [expanded, setExpanded] = useState(false);
+  const pricePerVideo = getPricePerVideo(plan);
 
   const visibleFeatures = expanded
     ? plan.features
@@ -65,6 +79,24 @@ function PlanCard({
             ]
       )}
     >
+      {/* Shimmer border animation for highlighted plan */}
+      {plan.highlight && (
+        <div
+          aria-hidden
+          className="absolute inset-0 rounded-2xl pointer-events-none overflow-hidden"
+        >
+          <div
+            className="absolute -inset-[1px] rounded-2xl"
+            style={{
+              background:
+                "conic-gradient(from 0deg, transparent 0%, rgba(249,179,52,0.4) 10%, transparent 20%)",
+              animation: "shimmer-spin 4s linear infinite",
+            }}
+          />
+          <div className="absolute inset-[2px] rounded-[14px] bg-gradient-to-b from-brand-yellow/8 to-black" />
+        </div>
+      )}
+
       {plan.highlight && (
         <div
           aria-hidden
@@ -73,7 +105,7 @@ function PlanCard({
       )}
 
       {plan.badge && (
-        <div className="flex justify-center mb-4 -mt-1">
+        <div className="relative z-10 flex justify-center mb-4 -mt-1">
           <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-bold tracking-[0.2em] uppercase bg-brand-yellow text-black px-4 py-1.5 rounded-full shadow-[0_4px_20px_-4px_rgba(249,179,52,0.6)] whitespace-nowrap">
             <Sparkles className="h-3 w-3" aria-hidden />
             {plan.badge}
@@ -82,7 +114,7 @@ function PlanCard({
       )}
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-4 mt-1">
+      <div className="relative z-10 flex items-start justify-between mb-4 mt-1">
         <div
           className={cn(
             "w-10 h-10 rounded-xl flex items-center justify-center",
@@ -104,7 +136,7 @@ function PlanCard({
       </div>
 
       {/* Precio */}
-      <div className="mb-3">
+      <div className="relative z-10 mb-3">
         <div className="flex items-baseline gap-2">
           <span className="font-display text-4xl sm:text-5xl leading-none text-white">
             {plan.price}
@@ -113,12 +145,17 @@ function PlanCard({
             {plan.priceUnit}
           </span>
         </div>
+        {pricePerVideo && (
+          <p className="text-[11px] text-brand-gold/70 font-sans mt-1.5">
+            {pricePerVideo}/video · todo incluido
+          </p>
+        )}
       </div>
 
       {/* Videos highlight */}
       <div
         className={cn(
-          "mt-3 mb-3 rounded-xl px-3 py-2.5 border",
+          "relative z-10 mt-3 mb-3 rounded-xl px-3 py-2.5 border",
           plan.highlight
             ? "border-brand-gold/50 bg-brand-yellow/8"
             : "border-brand-graphite/60 bg-white/[0.02]"
@@ -136,16 +173,13 @@ function PlanCard({
       </div>
 
       {/* Description */}
-      <p className="text-xs sm:text-sm text-brand-gray leading-relaxed mb-4">
+      <p className="relative z-10 text-xs sm:text-sm text-brand-gray leading-relaxed mb-4">
         {plan.description}
       </p>
 
       {/* Ahorro */}
       {plan.saving && (
-        <div className="mb-4 inline-flex items-center gap-2 self-start rounded-lg border border-emerald-500/30 bg-emerald-500/8 px-3 py-1.5">
-          <span aria-hidden className="text-xs">
-            💰
-          </span>
+        <div className="relative z-10 mb-4 inline-flex items-center gap-2 self-start rounded-lg border border-emerald-500/30 bg-emerald-500/8 px-3 py-1.5">
           <span className="text-xs font-semibold text-emerald-400">
             {plan.saving}
           </span>
@@ -154,8 +188,8 @@ function PlanCard({
 
       {/* Features */}
       <ul
-        className="space-y-2 mb-4 flex-1"
-        aria-label={`Características del plan ${plan.name}`}
+        className="relative z-10 space-y-2 mb-4 flex-1"
+        aria-label={`Caracteristicas del plan ${plan.name}`}
       >
         {visibleFeatures.map((feature) => (
           <li key={feature} className="flex items-start gap-2">
@@ -180,7 +214,7 @@ function PlanCard({
         <button
           onClick={() => setExpanded((v) => !v)}
           className={cn(
-            "self-start flex items-center gap-1.5 text-xs font-semibold mb-4 transition-colors",
+            "relative z-10 self-start flex items-center gap-1.5 text-xs font-semibold mb-4 transition-colors",
             plan.highlight
               ? "text-brand-yellow hover:text-brand-gold"
               : "text-brand-gold/70 hover:text-brand-yellow",
@@ -196,7 +230,7 @@ function PlanCard({
           ) : (
             <>
               <ChevronDown className="h-3.5 w-3.5" aria-hidden />+{hiddenCount}{" "}
-              más incluido
+              mas incluido
             </>
           )}
         </button>
@@ -206,7 +240,7 @@ function PlanCard({
       <a
         href={plan.ctaHref}
         className={cn(
-          "group/cta flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-sans font-bold text-sm tracking-wide transition-all min-h-[44px]",
+          "relative z-10 group/cta flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-sans font-bold text-sm tracking-wide transition-all min-h-[44px]",
           plan.highlight
             ? "bg-brand-yellow text-black hover:bg-brand-gold hover:shadow-[0_10px_40px_-10px_rgba(249,179,52,0.6)]"
             : "bg-white/[0.04] border border-brand-gold/40 text-brand-yellow hover:bg-brand-yellow/10 hover:border-brand-gold/70",
@@ -223,7 +257,7 @@ function PlanCard({
         </span>
       </a>
 
-      <p className="text-[10px] text-center text-brand-gray/60 mt-2.5">
+      <p className="relative z-10 text-[10px] text-center text-brand-gray/60 mt-2.5">
         Pago seguro con Stripe · Cancela cuando quieras
       </p>
     </motion.article>
@@ -288,7 +322,7 @@ function EnterpriseCard({
       {/* Features */}
       <ul
         className="space-y-2 mb-4 flex-1"
-        aria-label="Características del plan A la medida"
+        aria-label="Caracteristicas del plan A la medida"
       >
         {ENTERPRISE_FEATURES.slice(0, 10).map((feature) => (
           <li key={feature} className="flex items-start gap-2">
@@ -322,7 +356,7 @@ function EnterpriseCard({
       </a>
 
       <p className="text-[10px] text-center text-brand-gray/60 mt-2.5">
-        Llamada 30 min · Cotización personalizada
+        Llamada 30 min · Cotizacion personalizada
       </p>
     </motion.article>
   );
@@ -343,6 +377,14 @@ export function PreciosPlans() {
           "linear-gradient(180deg, #000000 0%, #080604 50%, #000000 100%)",
       }}
     >
+      {/* Shimmer keyframe for highlighted card */}
+      <style>{`
+        @keyframes shimmer-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -379,7 +421,7 @@ export function PreciosPlans() {
           </h2>
           <p className="mt-6 text-base sm:text-lg text-brand-gray leading-relaxed">
             Todos los planes incluyen estrategia, guiones, creadores
-            verificados, edición profesional y licencia de publicidad por 12
+            verificados, edicion profesional y licencia de publicidad por 12
             meses. Elige el volumen que calce con tu presupuesto hoy y escala
             cuando quieras.
           </p>
@@ -398,7 +440,7 @@ export function PreciosPlans() {
           <EnterpriseCard index={3} isIntersecting={isIntersecting} />
         </div>
 
-        {/* Trust row */}
+        {/* Trust row — iconos profesionales */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
@@ -406,7 +448,10 @@ export function PreciosPlans() {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-brand-gray"
         >
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+            <CreditCard
+              className="h-4 w-4 text-brand-gold/70 flex-shrink-0"
+              aria-hidden
+            />
             Pago seguro con Stripe
           </div>
           <div
@@ -414,15 +459,21 @@ export function PreciosPlans() {
             aria-hidden
           />
           <div className="flex items-center gap-2">
-            <span aria-hidden>🛡️</span>
-            Garantía de 7 días
+            <ShieldCheck
+              className="h-4 w-4 text-brand-gold/70 flex-shrink-0"
+              aria-hidden
+            />
+            Garantia de 7 dias
           </div>
           <div
             className="hidden sm:block w-1 h-1 rounded-full bg-brand-graphite"
             aria-hidden
           />
           <div className="flex items-center gap-2">
-            <span aria-hidden>♾️</span>
+            <Infinity
+              className="h-4 w-4 text-brand-gold/70 flex-shrink-0"
+              aria-hidden
+            />
             Sin permanencia forzada
           </div>
           <div
@@ -430,7 +481,10 @@ export function PreciosPlans() {
             aria-hidden
           />
           <div className="flex items-center gap-2">
-            <span aria-hidden>🎯</span>
+            <Target
+              className="h-4 w-4 text-brand-gold/70 flex-shrink-0"
+              aria-hidden
+            />
             Licencia ads 12 meses
           </div>
         </motion.div>

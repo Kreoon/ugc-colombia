@@ -3,7 +3,14 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, ShieldCheck, Users } from "lucide-react";
+
+const RECENT_CLIENTS = [
+  { initials: "ME", name: "Michel E." },
+  { initials: "CM", name: "Carolina M." },
+  { initials: "JP", name: "Juan P." },
+  { initials: "LS", name: "Laura S." },
+];
 
 export function PreciosCTA() {
   return (
@@ -12,13 +19,13 @@ export function PreciosCTA() {
       className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden"
       aria-labelledby="cta-precios-title"
     >
-      {/* Background glow */}
+      {/* Background glow — mejorado */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,160,23,0.12) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,160,23,0.15) 0%, transparent 65%)",
         }}
       />
       {/* Grid pattern */}
@@ -35,6 +42,15 @@ export function PreciosCTA() {
             "radial-gradient(ellipse at center, black 25%, transparent 75%)",
         }}
       />
+      {/* Secondary glow */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 40% 30% at 50% 70%, rgba(249,179,52,0.08) 0%, transparent 100%)",
+        }}
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 32 }}
@@ -43,18 +59,12 @@ export function PreciosCTA() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="relative max-w-4xl mx-auto text-center"
       >
-        <div className="inline-flex items-center gap-3 mb-6">
-          <span
-            aria-hidden
-            className="h-px w-8 bg-gradient-to-r from-transparent to-brand-gold/60"
-          />
-          <span className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-brand-gold/80 font-sans">
-            ¿Listo para empezar?
+        {/* Badge urgencia */}
+        <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-brand-gold/30 bg-brand-yellow/[0.06]">
+          <Users className="h-3.5 w-3.5 text-brand-yellow" aria-hidden />
+          <span className="text-[11px] sm:text-xs font-sans font-semibold text-brand-yellow tracking-wide">
+            Solo quedan 3 espacios para Abril 2026
           </span>
-          <span
-            aria-hidden
-            className="h-px w-8 bg-gradient-to-l from-transparent to-brand-gold/60"
-          />
         </div>
 
         <h2
@@ -70,20 +80,36 @@ export function PreciosCTA() {
               backgroundClip: "text",
             }}
           >
-            diagnóstico gratuito
+            diagnostico gratuito
           </span>
           .
         </h2>
 
-        <p className="text-base sm:text-lg text-brand-gray leading-relaxed mb-10 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-brand-gray leading-relaxed mb-8 max-w-2xl mx-auto">
           30 minutos por video llamada. Revisamos tu marca, tus ads y tus
-          objetivos. Salimos con una recomendación clara del paquete que calza
+          objetivos. Salimos con una recomendacion clara del paquete que calza
           —{" "}
           <span className="text-white font-semibold">
             sin venta forzada, sin compromiso
           </span>
           .
         </p>
+
+        {/* Guarantee badge */}
+        <div className="inline-flex items-center gap-2.5 mb-8 px-5 py-3 rounded-xl border border-brand-gold/25 bg-white/[0.03]">
+          <ShieldCheck
+            className="h-5 w-5 text-brand-yellow flex-shrink-0"
+            aria-hidden
+          />
+          <div className="text-left">
+            <p className="text-xs font-bold text-white">
+              Garantia de 7 dias
+            </p>
+            <p className="text-[10px] text-brand-gray">
+              100% de devolucion si no encajamos
+            </p>
+          </div>
+        </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
           <Button
@@ -104,6 +130,31 @@ export function PreciosCTA() {
           >
             <a href="#planes">VER PAQUETES</a>
           </Button>
+        </div>
+
+        {/* Avatar stack */}
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <div className="flex items-center -space-x-2.5">
+            {RECENT_CLIENTS.map((client) => (
+              <div
+                key={client.initials}
+                className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border-2 border-brand-black flex items-center justify-center"
+                title={client.name}
+              >
+                <span className="text-[10px] font-bold text-brand-yellow/80 font-sans">
+                  {client.initials}
+                </span>
+              </div>
+            ))}
+            <div className="w-9 h-9 rounded-full bg-brand-yellow/10 border-2 border-brand-black flex items-center justify-center">
+              <span className="text-[10px] font-bold text-brand-yellow/60 font-sans">
+                +129
+              </span>
+            </div>
+          </div>
+          <p className="text-xs text-brand-gray">
+            133+ marcas ya confian en UGC Colombia
+          </p>
         </div>
 
         <p className="mt-6 text-xs text-brand-graphite tracking-wide">

@@ -34,7 +34,7 @@ function CellValue({
             ? "bg-brand-yellow text-black"
             : "bg-brand-yellow/15 border border-brand-yellow/40 text-brand-yellow"
         )}
-        aria-label="Sí incluido"
+        aria-label="Si incluido"
       >
         <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
       </span>
@@ -62,7 +62,6 @@ function CellValue({
   );
 }
 
-/** Agrupa las rows por categoria. */
 function groupByCategory(rows: ComparisonRow[]) {
   const groups = new Map<string, ComparisonRow[]>();
   for (const row of rows) {
@@ -137,7 +136,7 @@ export function PreciosComparison() {
           </h2>
           <p className="mt-6 text-base sm:text-lg text-brand-gray leading-relaxed">
             22 variables comparadas lado a lado. Sin asteriscos, sin letra
-            pequeña.
+            pequena.
           </p>
         </motion.div>
 
@@ -148,17 +147,17 @@ export function PreciosComparison() {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="hidden lg:block rounded-2xl border border-brand-graphite/60 bg-white/[0.015] overflow-hidden"
         >
-          {/* Header sticky */}
-          <div className="grid grid-cols-[2fr_1fr_1.1fr_1fr_1fr] bg-gradient-to-b from-white/[0.05] to-transparent border-b border-brand-graphite/60">
+          {/* Sticky header */}
+          <div className="grid grid-cols-[2fr_1fr_1.1fr_1fr_1fr] bg-gradient-to-b from-white/[0.05] to-white/[0.02] border-b border-brand-graphite/60 sticky top-0 z-20 backdrop-blur-md">
             <div className="p-5 text-[10px] font-bold tracking-[0.25em] uppercase text-brand-gold/70">
-              Característica
+              Caracteristica
             </div>
             {PLAN_COLUMNS.map((col) => (
               <div
                 key={col.key}
                 className={cn(
                   "p-5 text-center border-l border-brand-graphite/40",
-                  col.highlight && "bg-brand-yellow/5"
+                  col.highlight && "bg-brand-yellow/[0.08]"
                 )}
               >
                 <p
@@ -174,7 +173,7 @@ export function PreciosComparison() {
             ))}
           </div>
 
-          {/* Rows por categoría */}
+          {/* Rows por categoria */}
           {grouped.map((group) => (
             <div key={group.category}>
               {/* Category header */}
@@ -186,7 +185,7 @@ export function PreciosComparison() {
               {group.items.map((row) => (
                 <div
                   key={row.feature}
-                  className="grid grid-cols-[2fr_1fr_1.1fr_1fr_1fr] border-b border-brand-graphite/30 last:border-b-0 hover:bg-white/[0.015] transition-colors"
+                  className="grid grid-cols-[2fr_1fr_1.1fr_1fr_1fr] border-b border-brand-graphite/30 last:border-b-0 hover:bg-brand-yellow/[0.02] hover:shadow-[inset_0_0_30px_rgba(212,160,23,0.03)] transition-all duration-200"
                 >
                   <div className="px-5 py-3.5 text-sm text-white/90 font-sans">
                     {row.feature}
@@ -194,7 +193,7 @@ export function PreciosComparison() {
                   <div className="px-5 py-3.5 text-center border-l border-brand-graphite/30">
                     <CellValue value={row.inicio} />
                   </div>
-                  <div className="px-5 py-3.5 text-center border-l border-brand-graphite/30 bg-brand-yellow/[0.02]">
+                  <div className="px-5 py-3.5 text-center border-l border-brand-graphite/30 bg-brand-yellow/[0.04]">
                     <CellValue value={row.crecimiento} highlight />
                   </div>
                   <div className="px-5 py-3.5 text-center border-l border-brand-graphite/30">

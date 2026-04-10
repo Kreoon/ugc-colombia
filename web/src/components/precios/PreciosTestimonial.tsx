@@ -3,7 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
-import { Quote, Volume2, VolumeX } from "lucide-react";
+import { Quote, Volume2, VolumeX, Star } from "lucide-react";
+
+const SECOND_TESTIMONIAL = {
+  quote:
+    "Pasamos de producir 2 videos al mes internamente a tener 30 listos para ads. El equipo de UGC Colombia nos devolvio el tiempo para enfocarnos en escalar.",
+  name: "Carolina Mejia",
+  title: "CMO · FitLab LATAM",
+  initials: "CM",
+};
 
 export function PreciosTestimonial() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
@@ -14,7 +22,6 @@ export function PreciosTestimonial() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [muted, setMuted] = useState(true);
 
-  // Lazy autoplay
   useEffect(() => {
     const el = containerRef.current;
     const video = videoRef.current;
@@ -98,6 +105,7 @@ export function PreciosTestimonial() {
           </p>
         </motion.div>
 
+        {/* Testimonial principal con video */}
         <motion.div
           ref={containerRef}
           initial={{ opacity: 0, y: 32 }}
@@ -118,7 +126,7 @@ export function PreciosTestimonial() {
           {/* Video vertical */}
           <div className="relative lg:col-span-2 mx-auto w-full max-w-[280px] lg:max-w-none">
             <div
-              className="relative rounded-2xl overflow-hidden border border-brand-gold/30"
+              className="relative rounded-2xl overflow-hidden border border-brand-gold/30 shadow-[0_0_40px_-15px_rgba(212,160,23,0.3)]"
               style={{ aspectRatio: "9 / 16" }}
             >
               <video
@@ -132,13 +140,13 @@ export function PreciosTestimonial() {
                 preload="metadata"
                 aria-label="Testimonio de Michel Edery"
               />
-              {/* Gradient overlay */}
+              {/* Gradient overlay mejorado */}
               <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 25%, transparent 55%, rgba(0,0,0,0.75) 100%)",
+                    "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, transparent 20%, transparent 50%, rgba(0,0,0,0.85) 100%)",
                 }}
               />
               {/* Mute toggle */}
@@ -175,7 +183,7 @@ export function PreciosTestimonial() {
             />
             <p className="font-display text-xl sm:text-2xl lg:text-3xl text-white/95 leading-snug italic mb-6 pl-4 lg:pl-6">
               &ldquo;Lo que hace UGC Colombia es exactamente lo que la nueva
-              generación de e-commerce necesita:{" "}
+              generacion de e-commerce necesita:{" "}
               <span className="text-brand-yellow not-italic">
                 contenido real que vende.
               </span>
@@ -210,6 +218,45 @@ export function PreciosTestimonial() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Segundo testimonial — solo texto */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-8 rounded-2xl border border-brand-graphite/50 bg-white/[0.02] p-6 sm:p-8 max-w-4xl mx-auto"
+        >
+          <div className="flex items-start gap-4 sm:gap-6">
+            {/* Avatar */}
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border border-brand-gold/30 flex items-center justify-center">
+              <span className="font-display text-sm text-brand-yellow">
+                {SECOND_TESTIMONIAL.initials}
+              </span>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-1 mb-2">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-3.5 w-3.5 fill-brand-yellow text-brand-yellow"
+                    aria-hidden
+                  />
+                ))}
+              </div>
+              <p className="text-sm sm:text-base text-white/90 leading-relaxed italic mb-3">
+                &ldquo;{SECOND_TESTIMONIAL.quote}&rdquo;
+              </p>
+              <div>
+                <p className="text-xs font-semibold text-white">
+                  {SECOND_TESTIMONIAL.name}
+                </p>
+                <p className="text-[11px] text-brand-gray">
+                  {SECOND_TESTIMONIAL.title}
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>

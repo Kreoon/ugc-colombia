@@ -1,25 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import {
   Check,
   Sparkles,
   Crown,
-  CalendarDays,
   ChevronDown,
   ChevronUp,
+  CalendarDays,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 import {
   PLANES_RECURRENTES,
   ENTERPRISE_FEATURES,
+  ENTERPRISE_PLAN,
   type Plan,
 } from "@/lib/pricing-plans";
 
-// Máx 8 features visibles — el resto en "ver más"
-const MAX_VISIBLE_FEATURES = 8;
+const MAX_VISIBLE_FEATURES = 10;
 
 function PlanCard({
   plan,
@@ -48,24 +48,23 @@ function PlanCard({
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
-        "relative flex flex-col rounded-2xl p-5 sm:p-6 lg:p-7 overflow-hidden h-full",
-        "transition-all duration-300",
+        "relative flex flex-col rounded-2xl p-5 sm:p-6 lg:p-7 overflow-hidden h-full transition-all duration-300",
         plan.highlight
           ? [
               "border-2 border-brand-gold",
               "bg-gradient-to-b from-brand-yellow/8 to-black",
-              "shadow-[0_0_60px_-20px_rgba(212,160,23,0.4)]",
-              "hover:shadow-[0_0_80px_-15px_rgba(212,160,23,0.55)]",
-              "md:-mt-4 md:mb-4",
+              "shadow-[0_0_60px_-20px_rgba(212,160,23,0.45)]",
+              "hover:shadow-[0_0_80px_-15px_rgba(212,160,23,0.6)]",
+              "lg:-mt-4 lg:mb-4",
             ]
           : [
               "border border-brand-graphite/60 bg-white/[0.025]",
-              "hover:border-brand-gold/35 hover:bg-white/[0.04]",
-              "hover:shadow-[0_10px_30px_-10px_rgba(212,160,23,0.15)]",
+              "hover:border-brand-gold/40 hover:bg-white/[0.04]",
+              "hover:shadow-[0_12px_40px_-12px_rgba(212,160,23,0.25)]",
+              "hover:-translate-y-1",
             ]
       )}
     >
-      {/* Top glow bar para el destacado */}
       {plan.highlight && (
         <div
           aria-hidden
@@ -73,7 +72,6 @@ function PlanCard({
         />
       )}
 
-      {/* Badge inline (dentro del card para no quedar clippeado por overflow-hidden) */}
       {plan.badge && (
         <div className="flex justify-center mb-4 -mt-1">
           <span className="inline-flex items-center gap-1.5 text-[10px] font-sans font-bold tracking-[0.2em] uppercase bg-brand-yellow text-black px-4 py-1.5 rounded-full shadow-[0_4px_20px_-4px_rgba(249,179,52,0.6)] whitespace-nowrap">
@@ -83,7 +81,7 @@ function PlanCard({
         </div>
       )}
 
-      {/* Header: icon + name */}
+      {/* Header */}
       <div className="flex items-start justify-between mb-4 mt-1">
         <div
           className={cn(
@@ -178,7 +176,6 @@ function PlanCard({
         ))}
       </ul>
 
-      {/* Toggle ver más / ver menos */}
       {hiddenCount > 0 && (
         <button
           onClick={() => setExpanded((v) => !v)}
@@ -226,7 +223,6 @@ function PlanCard({
         </span>
       </a>
 
-      {/* Hint pago */}
       <p className="text-[10px] text-center text-brand-gray/60 mt-2.5">
         Pago seguro con Stripe · Cancela cuando quieras
       </p>
@@ -234,201 +230,121 @@ function PlanCard({
   );
 }
 
-function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
+function EnterpriseCard({
+  index,
+  isIntersecting,
+}: {
+  index: number;
+  isIntersecting: boolean;
+}) {
+  const Icon = ENTERPRISE_PLAN.icon;
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
+    <motion.article
+      initial={{ opacity: 0, y: 36 }}
       animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mt-6 rounded-2xl overflow-hidden"
+      transition={{
+        duration: 0.6,
+        delay: 0.1 + index * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={cn(
+        "relative flex flex-col rounded-2xl p-5 sm:p-6 lg:p-7 overflow-hidden h-full transition-all duration-300",
+        "border border-brand-graphite/60 bg-gradient-to-b from-white/[0.04] to-black",
+        "hover:border-brand-gold/40 hover:shadow-[0_12px_40px_-12px_rgba(212,160,23,0.25)] hover:-translate-y-1"
+      )}
     >
-      {/* Background */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(135deg, #0c0c0c 0%, #141208 40%, #0a0900 100%)",
-        }}
-      />
-      {/* Radial glow */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 80% at 10% 50%, rgba(212,160,23,0.14) 0%, transparent 55%), radial-gradient(ellipse 50% 60% at 90% 50%, rgba(249,179,52,0.08) 0%, transparent 60%)",
-        }}
-      />
-      {/* Grid pattern decorativo */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(249,179,52,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(249,179,52,0.5) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          maskImage:
-            "radial-gradient(ellipse at 20% 50%, black 20%, transparent 70%)",
-        }}
-      />
-      {/* Gradient border dorado */}
-      <div
-        aria-hidden
-        className="absolute inset-0 rounded-2xl pointer-events-none"
-        style={{
-          padding: "1.5px",
-          background:
-            "linear-gradient(135deg, rgba(249,179,52,0.7) 0%, rgba(212,160,23,0.4) 30%, rgba(212,160,23,0.15) 60%, transparent 100%)",
-          WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-        }}
-      />
-
-      <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-7 sm:p-10 lg:p-12">
-        {/* Columna izquierda — info */}
-        <div className="flex flex-col">
-          {/* Badge */}
-          <div className="inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/40 mb-5">
-            <Crown className="h-3.5 w-3.5 text-brand-yellow" aria-hidden />
-            <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-yellow">
-              A la Medida · Personalizado
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h3 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-white tracking-tight uppercase mb-4">
-            ¿Necesitas{" "}
-            <span
-              style={{
-                background: "linear-gradient(90deg, #f9b334, #d4a017)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              algo a tu medida?
-            </span>
-          </h3>
-
-          <p className="text-sm sm:text-base text-brand-gray leading-relaxed mb-6 max-w-lg">
-            Para empresas con alto volumen de publicidad que necesitan un equipo
-            dedicado, director creativo propio, entrega sin límites y acuerdos de
-            servicio garantizados por contrato.
-          </p>
-
-          {/* Features grid — 2 columnas */}
-          <ul
-            className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5"
-            aria-label="Características del plan a la medida"
-          >
-            {ENTERPRISE_FEATURES.map((f) => (
-              <li key={f} className="flex items-start gap-2.5">
-                <span className="flex-shrink-0 w-4 h-4 rounded-full bg-brand-gold/20 border border-brand-gold/50 flex items-center justify-center mt-0.5">
-                  <Check
-                    className="h-2.5 w-2.5 text-brand-gold"
-                    strokeWidth={3}
-                    aria-hidden
-                  />
-                </span>
-                <span className="text-xs sm:text-sm text-white/80 leading-relaxed">
-                  {f}
-                </span>
-              </li>
-            ))}
-          </ul>
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4 mt-1">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-yellow to-brand-gold-dark text-black flex items-center justify-center shadow-[0_0_20px_rgba(249,179,52,0.4)]">
+          <Icon className="h-5 w-5" aria-hidden />
         </div>
-
-        {/* Columna derecha — CTA */}
-        <div className="flex flex-col justify-center gap-6">
-          {/* Price card */}
-          <div className="rounded-2xl border-2 border-brand-gold/50 bg-brand-yellow/5 p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-yellow to-brand-gold-dark flex items-center justify-center shadow-[0_0_20px_rgba(249,179,52,0.4)]">
-                <Crown className="h-6 w-6 text-black" aria-hidden />
-              </div>
-              <div>
-                <p className="font-display text-3xl sm:text-4xl text-white leading-none">
-                  A la medida
-                </p>
-                <p className="text-xs text-brand-gray mt-0.5">
-                  60+ videos / mes · Escalable
-                </p>
-              </div>
-            </div>
-
-            <p className="text-sm text-brand-gray mb-5">
-              Cotización personalizada según volumen, verticales y acuerdos de servicio requeridos.
-            </p>
-
-            <a
-              href="#discovery-call"
-              className={cn(
-                "group/ent flex items-center justify-center gap-2.5 w-full px-6 py-4 rounded-xl",
-                "bg-gradient-to-r from-brand-yellow to-brand-gold-dark text-black",
-                "font-sans font-bold text-base tracking-wide transition-all min-h-[44px]",
-                "hover:shadow-[0_10px_40px_-10px_rgba(212,160,23,0.55)]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-              )}
-              aria-label="Agendar llamada con UGC Colombia para plan a la medida"
-            >
-              <CalendarDays className="h-5 w-5" aria-hidden />
-              Hablemos
-              <span
-                aria-hidden
-                className="transition-transform group-hover/ent:translate-x-1"
-              >
-                →
-              </span>
-            </a>
-
-            <p className="text-[10px] text-center text-brand-gray/60 mt-3">
-              Llamada 30 min · Cotización personalizada · Sin compromiso
-            </p>
-          </div>
-
-          {/* Diferenciadores clave */}
-          <div className="flex flex-col gap-3">
-            {[
-              "Equipo dedicado exclusivo para tu marca",
-              "Acuerdos de servicio garantizados por contrato",
-              "Integración directa con tu equipo",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-xl border border-brand-gold/20 bg-brand-yellow/3 px-4 py-3"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow flex-shrink-0" />
-                <span className="text-sm text-white/85">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <p className="font-display text-xs tracking-[0.25em] text-brand-gold/80">
+          {ENTERPRISE_PLAN.name}
+        </p>
       </div>
-    </motion.div>
+
+      {/* Precio */}
+      <div className="mb-3">
+        <span className="font-display text-3xl sm:text-4xl leading-none text-white">
+          A la medida
+        </span>
+      </div>
+
+      {/* Videos highlight */}
+      <div className="mt-3 mb-3 rounded-xl px-3 py-2.5 border border-brand-gold/40 bg-brand-yellow/5">
+        <p className="font-display text-lg sm:text-xl leading-tight text-brand-yellow">
+          60+ videos / mes
+        </p>
+        <p className="text-[11px] text-brand-gray mt-0.5">
+          Variantes ilimitadas · SLA garantizado
+        </p>
+      </div>
+
+      {/* Description */}
+      <p className="text-xs sm:text-sm text-brand-gray leading-relaxed mb-4">
+        {ENTERPRISE_PLAN.tagline}
+      </p>
+
+      {/* Features */}
+      <ul
+        className="space-y-2 mb-4 flex-1"
+        aria-label="Características del plan A la medida"
+      >
+        {ENTERPRISE_FEATURES.slice(0, 10).map((feature) => (
+          <li key={feature} className="flex items-start gap-2">
+            <span className="flex-shrink-0 w-4 h-4 rounded-full bg-brand-gold/20 border border-brand-gold/50 flex items-center justify-center mt-0.5">
+              <Check
+                className="h-2.5 w-2.5 text-brand-gold"
+                strokeWidth={3}
+                aria-hidden
+              />
+            </span>
+            <span className="text-xs text-white/85 leading-relaxed">
+              {feature}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      <a
+        href="#contacto"
+        className="group/cta flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-sans font-bold text-sm tracking-wide transition-all min-h-[44px] bg-gradient-to-r from-brand-yellow to-brand-gold-dark text-black hover:shadow-[0_10px_40px_-10px_rgba(212,160,23,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      >
+        <CalendarDays className="h-4 w-4" aria-hidden />
+        Hablemos
+        <span
+          aria-hidden
+          className="transition-transform group-hover/cta:translate-x-1"
+        >
+          →
+        </span>
+      </a>
+
+      <p className="text-[10px] text-center text-brand-gray/60 mt-2.5">
+        Llamada 30 min · Cotización personalizada
+      </p>
+    </motion.article>
   );
 }
 
-export function Pricing() {
+export function PreciosPlans() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.04,
   });
 
   return (
     <section
-      id="pricing"
-      aria-labelledby="pricing-title"
+      id="planes"
+      aria-labelledby="planes-title"
       className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden scroll-mt-20 sm:scroll-mt-24"
       style={{
         background:
           "linear-gradient(180deg, #000000 0%, #080604 50%, #000000 100%)",
       }}
     >
-      {/* Radial glow */}
       <div
-        aria-hidden="true"
+        aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
@@ -436,20 +352,19 @@ export function Pricing() {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto" ref={ref}>
-        {/* Header */}
+      <div className="relative max-w-7xl mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14 sm:mb-18 max-w-3xl mx-auto"
         >
-          <p className="sr-only">Precios</p>
+          <p className="sr-only">Planes y precios</p>
           <h2
-            id="pricing-title"
+            id="planes-title"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"
           >
-            Precios claros.
+            4 paquetes.
             <br />
             <span
               style={{
@@ -459,18 +374,19 @@ export function Pricing() {
                 backgroundClip: "text",
               }}
             >
-              Sin letra pequeña.
+              Uno por cada etapa.
             </span>
           </h2>
           <p className="mt-6 text-base sm:text-lg text-brand-gray leading-relaxed">
-            Cada plan incluye los 8 servicios del Paquete Completo UGC + 3 variantes por
-            video para que tengas munición ilimitada para pruebas en Meta y
-            TikTok Ads.
+            Todos los planes incluyen estrategia, guiones, creadores
+            verificados, edición profesional y licencia de publicidad por 12
+            meses. Elige el volumen que calce con tu presupuesto hoy y escala
+            cuando quieras.
           </p>
         </motion.div>
 
-        {/* Grid 3 planes recurrentes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+        {/* Grid 4 planes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
           {PLANES_RECURRENTES.map((plan, i) => (
             <PlanCard
               key={plan.id}
@@ -479,10 +395,8 @@ export function Pricing() {
               isIntersecting={isIntersecting}
             />
           ))}
+          <EnterpriseCard index={3} isIntersecting={isIntersecting} />
         </div>
-
-        {/* Banner Enterprise full-width */}
-        <EnterpriseBanner isIntersecting={isIntersecting} />
 
         {/* Trust row */}
         <motion.div
@@ -517,7 +431,7 @@ export function Pricing() {
           />
           <div className="flex items-center gap-2">
             <span aria-hidden>🎯</span>
-            Licencia de publicidad 12 meses
+            Licencia ads 12 meses
           </div>
         </motion.div>
       </div>

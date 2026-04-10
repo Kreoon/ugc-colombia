@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Casos", href: "#casos" },
-  { label: "Precios", href: "#pricing" },
+  { label: "Servicios", href: "/servicios", external: true as const },
+  { label: "Casos", href: "/casos", external: true as const },
+  { label: "Precios", href: "/precios", external: true as const },
   { label: "Sobre", href: "#sobre" },
   { label: "Blog", href: "#blog" },
 ] as const;
@@ -93,21 +93,31 @@ export function Navbar() {
           aria-label="Navegación principal"
           className="hidden lg:flex items-center gap-1"
         >
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className={cn(
-                "px-4 py-2 text-sm font-sans font-medium text-brand-gray",
-                "rounded-lg transition-all duration-150",
-                "hover:text-white hover:bg-white/6",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
-                "min-h-[44px]"
-              )}
-            >
-              {link.label}
-            </button>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const className = cn(
+              "px-4 py-2 text-sm font-sans font-medium text-brand-gray",
+              "rounded-lg transition-all duration-150",
+              "hover:text-white hover:bg-white/6",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
+              "min-h-[44px] flex items-center"
+            );
+            if ("external" in link && link.external) {
+              return (
+                <a key={link.href} href={link.href} className={className}>
+                  {link.label}
+                </a>
+              );
+            }
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className={className}
+              >
+                {link.label}
+              </button>
+            );
+          })}
           <a
             href="/registro"
             className={cn(
@@ -186,20 +196,31 @@ export function Navbar() {
               Menú de navegación
             </DialogPrimitive.Title>
 
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                className={cn(
-                  "w-full text-left px-4 py-3.5 text-base font-sans font-medium text-brand-gray",
-                  "rounded-xl transition-all duration-150 min-h-[44px]",
-                  "hover:text-white hover:bg-white/8 hover:translate-x-1",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
-                )}
-              >
-                {link.label}
-              </button>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const className = cn(
+                "w-full text-left px-4 py-3.5 text-base font-sans font-medium text-brand-gray",
+                "rounded-xl transition-all duration-150 min-h-[44px]",
+                "hover:text-white hover:bg-white/8 hover:translate-x-1",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+              );
+              if ("external" in link && link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={className}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              return (
+                <button key={link.href} onClick={() => handleNavClick(link.href)} className={className}>
+                  {link.label}
+                </button>
+              );
+            })}
 
             <a
               href="/registro"

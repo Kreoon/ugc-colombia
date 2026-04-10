@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
-import { createClient } from "@supabase/supabase-js";
 
 const loginSchema = z.object({
   email: z.string().email("Email invalido"),
@@ -15,8 +14,7 @@ const loginSchema = z.object({
 
 type LoginPayload = z.infer<typeof loginSchema>;
 
-const SUPABASE_URL = "https://wjkbqcrxwsmvtxmqgiqc.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indqa2JxY3J4d3NtdnR4bXFnaXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0NDQwNTYsImV4cCI6MjA4NTAyMDA1Nn0.BorqcEBToDVeFBDQktZoCjCndYwB0bc6jlKmSJn-Wi8";
+const FUNCTIONS_URL = "https://wjkbqcrxwsmvtxmqgiqc.supabase.co/functions/v1";
 
 const inputClass = cn(
   "w-full bg-black/60 border border-brand-gold/30 rounded-lg px-4 py-3",
@@ -38,23 +36,27 @@ export function LoginForm() {
   const onSubmit = async (values: LoginPayload) => {
     setServerError("");
     try {
-      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const { error } = await supabase.auth.signInWithPassword({
-        email: values.email.toLowerCase().trim(),
-        password: values.password,
+      const res = await fetch(`${FUNCTIONS_URL}/public-login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: values.email.toLowerCase().trim(),
+          password: values.password,
+        }),
       });
 
-      if (error) {
-        if (error.message.includes("Invalid login")) {
-          setServerError("Email o contrasena incorrectos");
-        } else {
-          setServerError(error.message);
-        }
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setServerError(data?.error || "Email o contrasena incorrectos");
         return;
       }
 
-      // Redirect to KREOON welcome page
-      window.location.href = "https://kreoon.com/auth/callback?next=/welcome/ugc-colombia";
+      if (data.success && data.login_url) {
+        window.location.href = data.login_url;
+      } else {
+        setServerError("Error al iniciar sesion. Intenta de nuevo.");
+      }
     } catch {
       setServerError("Error al iniciar sesion. Intenta de nuevo.");
     }

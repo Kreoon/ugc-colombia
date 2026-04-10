@@ -1,19 +1,119 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
-import { TrendingUp, Lock } from "lucide-react";
+import { TrendingUp, Sparkles, ShoppingBag, Layers } from "lucide-react";
 
-const METRICAS = [
-  { label: "CTR", value: "+146%", desc: "Tasa de clics" },
-  { label: "CPA", value: "-55%", desc: "Costo por adquisición" },
-  { label: "ROAS", value: "+217%", desc: "Retorno en publicidad" },
+type Metrica = { label: string; value: string; desc: string };
+type Caso = {
+  id: string;
+  tag: string;
+  icon: typeof TrendingUp;
+  image: string;
+  imageAlt: string;
+  title: React.ReactNode;
+  desc: string;
+  metricas: readonly Metrica[];
+};
+
+const CASOS: readonly Caso[] = [
+  {
+    id: "skincare",
+    tag: "SKINCARE PREMIUM · LATAM",
+    icon: Sparkles,
+    image: "/brand/casos/caso-skincare.png",
+    imageAlt: "Gota de sérum premium en luz editorial dorada",
+    title: (
+      <>
+        Del 22% al{" "}
+        <span
+          style={{
+            background: "linear-gradient(90deg, #f9b334, #d4a017)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          38% de hook rate
+        </span>
+        .
+      </>
+    ),
+    desc: "Target del marco C.O.N.V.E.R.T. aplicado a skincare: sacar el creativo del promedio de industria (20-25%) y llevarlo al top-cuartil de Meta (30%+). Foco en los primeros 2 segundos.",
+    metricas: [
+      { label: "HOOK", value: "38%", desc: "Hook rate Meta (3s)" },
+      { label: "HOLD", value: "62%", desc: "Retención a 15s" },
+      { label: "CTR", value: "2.8%", desc: "Click-through rate" },
+    ],
+  },
+  {
+    id: "moda",
+    tag: "E-COMMERCE · MODA",
+    icon: ShoppingBag,
+    image: "/brand/casos/caso-moda.png",
+    imageAlt: "Tela editorial drapeada en luz cálida diagonal",
+    title: (
+      <>
+        CTR de{" "}
+        <span
+          style={{
+            background: "linear-gradient(90deg, #f9b334, #d4a017)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          3.4% en TikTok
+        </span>
+        .
+      </>
+    ),
+    desc: "Target en Spark Ads nativos: superar el 3% de CTR (vs 0.84% del promedio de TikTok Ads). Foco en ganchos visuales de producto en contexto real, no en foto de estudio.",
+    metricas: [
+      { label: "HOOK", value: "42%", desc: "Hook rate TikTok (2s)" },
+      { label: "CTR", value: "3.4%", desc: "Spark Ads nativos" },
+      { label: "CPM", value: "-38%", desc: "vs creativo de marca" },
+    ],
+  },
+  {
+    id: "saas",
+    tag: "SAAS · FINTECH",
+    icon: Layers,
+    image: "/brand/casos/caso-saas.png",
+    imageAlt: "Haz de luz dorado cinematográfico sobre espacio oscuro",
+    title: (
+      <>
+        Hold rate del{" "}
+        <span
+          style={{
+            background: "linear-gradient(90deg, #f9b334, #d4a017)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          64% en frío
+        </span>
+        .
+      </>
+    ),
+    desc: "Target en audiencias frías B2B: llevar el hold rate al top-cuartil (60%+) explicando el producto en 15 segundos. Medimos costo por visita cualificada, no ROAS.",
+    metricas: [
+      { label: "HOLD", value: "64%", desc: "Retención a 15s" },
+      { label: "HOOK", value: "34%", desc: "Hook rate Meta (3s)" },
+      { label: "CPV", value: "-47%", desc: "Costo por visita cualif." },
+    ],
+  },
 ] as const;
 
 export function Casos() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.1,
   });
+
+  const [destacado, ...resto] = CASOS;
+  const IconoDestacado = destacado.icon;
 
   return (
     <section
@@ -27,7 +127,7 @@ export function Casos() {
           initial={{ opacity: 0, y: 24 }}
           animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-5"
         >
           <p className="sr-only">Casos de éxito</p>
           <h2
@@ -38,6 +138,17 @@ export function Casos() {
           </h2>
         </motion.div>
 
+        {/* Subtítulo metodológico */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center text-brand-gray text-sm sm:text-base font-sans max-w-2xl mx-auto mb-12 sm:mb-16 leading-relaxed"
+        >
+          Medimos lo que el video <span className="text-white font-semibold">sí controla</span>:
+          hook rate, hold rate y CTR. No ROAS — eso depende de oferta, pricing y funnel.
+        </motion.p>
+
         {/* Caso destacado */}
         <motion.div
           initial={{ opacity: 0, y: 36 }}
@@ -45,7 +156,6 @@ export function Casos() {
           transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="relative rounded-3xl overflow-hidden border border-brand-gold/25 bg-gradient-to-br from-brand-yellow/4 to-transparent mb-5"
         >
-          {/* Glow corner */}
           <div
             aria-hidden="true"
             className="absolute top-0 right-0 w-80 h-80 pointer-events-none"
@@ -56,73 +166,50 @@ export function Casos() {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-            {/* Imagen placeholder */}
-            <div
-              className="relative min-h-[220px] sm:min-h-[260px] lg:min-h-full flex items-center justify-center overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1a1200 0%, #0d0900 50%, #000000 100%)",
-              }}
-            >
-              {/* Pattern decorativo */}
+            <div className="relative min-h-[240px] sm:min-h-[280px] lg:min-h-full overflow-hidden bg-brand-black">
+              <Image
+                src={destacado.image}
+                alt={destacado.imageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a017' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-brand-black/60"
               />
-              <div className="relative z-10 text-center px-8 py-10 sm:py-12">
-                <div
-                  className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl mx-auto mb-4 flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(249,179,52,0.2), rgba(212,160,23,0.1))",
-                    border: "1px solid rgba(212,160,23,0.3)",
-                  }}
-                >
-                  <TrendingUp
-                    className="h-8 w-8 sm:h-9 sm:w-9 text-brand-yellow"
-                    aria-hidden="true"
-                  />
-                </div>
-                <p className="text-brand-gray text-sm font-sans">
-                  Imagen del caso próximamente
-                </p>
+              <div
+                aria-hidden="true"
+                className="absolute top-3 left-3 w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(249,179,52,0.25), rgba(212,160,23,0.1))",
+                  border: "1px solid rgba(212,160,23,0.35)",
+                }}
+              >
+                <IconoDestacado
+                  className="h-5 w-5 text-brand-yellow"
+                  aria-hidden="true"
+                />
               </div>
             </div>
 
-            {/* Contenido */}
             <div className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
-              {/* Badge */}
               <span className="inline-flex self-start items-center mb-5 text-xs font-sans font-bold tracking-widest uppercase bg-brand-yellow/12 text-brand-yellow border border-brand-yellow/25 px-3 py-1.5 rounded-full">
-                SKINCARE PREMIUM · LATAM
+                {destacado.tag}
               </span>
 
               <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl text-white leading-tight mb-3">
-                De 1.2x a{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(90deg, #f9b334, #d4a017)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  3.8x ROAS
-                </span>{" "}
-                en 8 semanas.
+                {destacado.title}
               </h3>
 
               <p className="text-brand-gray text-sm sm:text-base leading-relaxed mb-7">
-                Marco C.O.N.V.E.R.T. aplicado durante 8 semanas. 32 videos
-                UGC producidos. El 68% del ROAS final vino de solo 3 ganchos
-                ganadores.
+                {destacado.desc}
               </p>
 
-              {/* Métricas */}
               <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                {METRICAS.map((m) => (
+                {destacado.metricas.map((m) => (
                   <div
                     key={m.label}
                     className="rounded-xl bg-white/4 border border-brand-gold/15 p-3 sm:p-4 text-center"
@@ -149,42 +236,111 @@ export function Casos() {
           </div>
         </motion.div>
 
-        {/* 2 upcoming placeholders */}
+        {/* Casos secundarios */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-          {["Comercio electrónico · Moda", "SaaS · Fintech"].map((tag, i) => (
-            <motion.div
-              key={tag}
-              initial={{ opacity: 0, y: 24 }}
-              animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.5,
-                delay: 0.2 + i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="relative rounded-2xl border border-brand-graphite/50 bg-white/2 p-8 overflow-hidden flex flex-col items-center justify-center text-center min-h-[160px] sm:min-h-[180px]"
-            >
-              {/* Blur overlay */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 backdrop-blur-[2px] bg-black/30 rounded-2xl"
-              />
-              <div className="relative z-10 flex flex-col items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/8 border border-white/15 flex items-center justify-center">
-                  <Lock
-                    className="h-4 w-4 text-brand-gray"
-                    aria-hidden="true"
-                  />
+          {resto.map((caso, i) => {
+            const Icono = caso.icon;
+            return (
+              <motion.article
+                key={caso.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={isIntersecting ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2 + i * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="relative rounded-2xl border border-brand-gold/20 bg-brand-black overflow-hidden flex flex-col min-h-[380px]"
+              >
+                <Image
+                  src={caso.image}
+                  alt={caso.imageAlt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover opacity-55"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/85 to-brand-black/40"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 100% 0%, rgba(249,179,52,0.12), transparent 70%)",
+                  }}
+                />
+
+                <div className="relative z-10 flex flex-col h-full p-6 sm:p-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(249,179,52,0.18), rgba(212,160,23,0.08))",
+                        border: "1px solid rgba(212,160,23,0.25)",
+                      }}
+                    >
+                      <Icono
+                        className="h-5 w-5 text-brand-yellow"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-sans font-bold tracking-widest uppercase text-brand-gold">
+                      {caso.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-xl sm:text-2xl text-white leading-tight mb-2">
+                    {caso.title}
+                  </h3>
+
+                  <p className="text-brand-gray text-xs sm:text-sm leading-relaxed mb-5">
+                    {caso.desc}
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-2 mt-auto">
+                    {caso.metricas.map((m) => (
+                      <div
+                        key={m.label}
+                        className="rounded-lg bg-white/4 border border-brand-gold/15 p-2.5 text-center"
+                      >
+                        <p
+                          className="font-display text-base sm:text-lg leading-tight mb-0.5"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, #f9b334, #d4a017)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
+                          }}
+                        >
+                          {m.value}
+                        </p>
+                        <p className="text-[9px] sm:text-[10px] text-brand-gray font-sans leading-tight">
+                          {m.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <span className="text-xs font-sans font-semibold text-brand-gold tracking-widest uppercase">
-                  {tag}
-                </span>
-                <p className="text-sm text-brand-gray font-sans">
-                  Caso próximamente
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.article>
+            );
+          })}
         </div>
+
+        {/* Disclaimer metodológico */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isIntersecting ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center text-[11px] sm:text-xs text-brand-gray/70 font-sans max-w-3xl mx-auto mt-10 leading-relaxed"
+        >
+          Targets basados en benchmarks públicos de industria 2025-2026 (Motion, Triple Whale,
+          Dash Social, Billo). No reportamos ROAS ni ventas como KPI propio: esas métricas
+          dependen de variables ajenas al video — oferta, pricing, landing y checkout.
+        </motion.p>
       </div>
     </section>
   );

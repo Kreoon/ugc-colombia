@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import {
@@ -274,6 +275,7 @@ export function Servicios() {
           ))}
         </div>
 
+
         {/* ─── Paquete Completo — el héroe ────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -294,6 +296,17 @@ export function Servicios() {
                 "linear-gradient(135deg, #0a0a0a 0%, #141414 40%, #1a1a1a 100%)",
             }}
           />
+          {/* Imagen editorial del kit UGC */}
+          <div aria-hidden className="absolute inset-0 opacity-[0.28]">
+            <Image
+              src="/brand/home/servicios.png"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover object-right"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-brand-black/40" />
+          </div>
           <div
             aria-hidden
             className="absolute inset-0"

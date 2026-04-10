@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -50,6 +51,19 @@ export function Hero() {
       aria-label="Hero — UGC Colombia"
       className="relative min-h-[90vh] lg:min-h-[820px] flex items-center justify-center overflow-hidden bg-brand-black pt-16"
     >
+      {/* Imagen de fondo editorial */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/brand/home/hero.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/60 to-brand-black" />
+      </div>
+
       {/* Partículas — solo en desktop/tablets donde no hay impacto de performance notable */}
       <ParticlesBg />
 

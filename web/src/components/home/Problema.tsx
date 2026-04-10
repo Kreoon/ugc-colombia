@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import {
@@ -106,6 +107,21 @@ export function Problema() {
             "radial-gradient(ellipse 50% 30% at 50% 0%, rgba(220,38,38,0.05) 0%, transparent 60%)",
         }}
       />
+
+      {/* Imagen editorial de fatiga creativa — fondo derecho */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 right-0 w-full lg:w-1/2 h-[50%] lg:h-full pointer-events-none opacity-[0.18]"
+      >
+        <Image
+          src="/brand/home/problema.png"
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-right"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-brand-black/60 to-brand-black" />
+      </div>
 
       <div className="max-w-7xl mx-auto relative" ref={ref}>
         {/* Header */}

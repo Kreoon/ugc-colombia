@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { Target, Users, Film, BarChart3 } from "lucide-react";
@@ -50,6 +51,21 @@ export function Solucion() {
           "linear-gradient(180deg, #000000 0%, #0a0800 50%, #000000 100%)",
       }}
     >
+      {/* Imagen editorial de workspace */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none opacity-[0.22]"
+      >
+        <Image
+          src="/brand/home/solucion.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black via-brand-black/70 to-brand-black" />
+      </div>
+
       {/* Glow central */}
       <div
         aria-hidden="true"

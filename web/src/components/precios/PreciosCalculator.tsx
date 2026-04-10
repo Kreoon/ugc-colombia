@@ -407,7 +407,7 @@ export function PreciosCalculator() {
 
               <p className="flex items-center justify-center gap-1.5 text-xs text-brand-gray/70">
                 <Users className="h-3 w-3" aria-hidden />
-                Únete a 133+ marcas que ya ahorran
+                Únete a las marcas que ya ahorran
               </p>
             </div>
           </div>

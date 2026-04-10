@@ -26,9 +26,9 @@ const fadeUpReduced = {
 };
 
 const STATS = [
-  { value: "133+", label: "marcas" },
-  { value: "4.2x", label: "ROAS promedio" },
-  { value: "2,000+", label: "videos entregados" },
+  { value: "7", label: "días de entrega" },
+  { value: "3", label: "variantes por video" },
+  { value: "12", label: "meses de licencia ads" },
 ];
 
 export function PreciosHero() {

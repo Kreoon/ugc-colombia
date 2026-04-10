@@ -146,12 +146,12 @@ export function PreciosCTA() {
             ))}
             <div className="w-9 h-9 rounded-full bg-brand-yellow/10 border-2 border-brand-black flex items-center justify-center">
               <span className="text-[10px] font-bold text-brand-yellow/60 font-sans">
-                +129
+                +
               </span>
             </div>
           </div>
           <p className="text-xs text-brand-gray">
-            133+ marcas ya confian en UGC Colombia
+            Marcas en Colombia y LATAM ya confian en nosotros
           </p>
         </div>
 

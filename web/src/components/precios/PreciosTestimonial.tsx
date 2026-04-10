@@ -192,12 +192,12 @@ export function PreciosTestimonial() {
               &rdquo;
             </p>
 
-            {/* Metrics */}
+            {/* Metrics — solo métricas de contenido, no ROAS */}
             <div className="grid grid-cols-3 gap-3 sm:gap-4 mt-8">
               {[
-                { value: "+217%", label: "ROAS promedio" },
-                { value: "-55%", label: "CPA" },
-                { value: "+146%", label: "CTR" },
+                { value: "7", label: "días de entrega" },
+                { value: "30+", label: "creadores activos" },
+                { value: "3", label: "variantes por video" },
               ].map((m) => (
                 <div
                   key={m.label}

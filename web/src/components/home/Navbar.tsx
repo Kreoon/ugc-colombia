@@ -119,6 +119,18 @@ export function Navbar() {
             );
           })}
           <a
+            href="/login"
+            className={cn(
+              "px-4 py-2 text-sm font-sans font-semibold text-brand-gray",
+              "rounded-lg transition-all duration-150",
+              "hover:text-white hover:bg-brand-gold/10",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
+              "min-h-[44px] flex items-center"
+            )}
+          >
+            Ingresar
+          </a>
+          <a
             href="/registro"
             className={cn(
               "px-4 py-2 text-sm font-sans font-semibold text-brand-yellow",
@@ -222,6 +234,18 @@ export function Navbar() {
               );
             })}
 
+            <a
+              href="/login"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "w-full text-left px-4 py-3.5 text-base font-sans font-semibold text-brand-gray",
+                "rounded-xl transition-all duration-150 min-h-[44px]",
+                "hover:text-white hover:bg-brand-gold/10 hover:translate-x-1",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
+              )}
+            >
+              Ingresar
+            </a>
             <a
               href="/registro"
               onClick={() => setMobileOpen(false)}

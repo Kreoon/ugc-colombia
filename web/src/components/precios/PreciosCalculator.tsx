@@ -98,14 +98,53 @@ function useCountUp(target: number, duration = 600) {
   return current;
 }
 
-/** Escalas predefinidas del slider */
-const SLIDER_STOPS = [5, 10, 30, 50, 100, 150, 200, 300];
+/**
+ * Escalas fijas para planes (5, 10, 30, 50).
+ * Después de 50, el slider se mueve de 1 en 1 hasta 300.
+ * Internamente el slider va de 0 a 253 (4 escalones fijos + 250 valores libres).
+ */
+const FIXED_STOPS = [5, 10, 30, 50];
+const FREE_MIN = 51;
+const FREE_MAX = 300;
+const SLIDER_MAX = FIXED_STOPS.length - 1 + (FREE_MAX - FREE_MIN + 1); // 3 + 250 = 253
+
+function sliderToVideos(pos: number): number {
+  if (pos <= 3) return FIXED_STOPS[pos];
+  return FREE_MIN + (pos - FIXED_STOPS.length);
+}
+
+function videosToSlider(v: number): number {
+  const idx = FIXED_STOPS.indexOf(v);
+  if (idx !== -1) return idx;
+  if (v >= FREE_MIN) return FIXED_STOPS.length + (v - FREE_MIN);
+  // Snap to nearest fixed stop
+  for (let i = FIXED_STOPS.length - 1; i >= 0; i--) {
+    if (v >= FIXED_STOPS[i]) return i;
+  }
+  return 0;
+}
+
+const LABEL_STOPS = [
+  { videos: 5, label: "5" },
+  { videos: 10, label: "10" },
+  { videos: 30, label: "30" },
+  { videos: 50, label: "50" },
+  { videos: 100, label: "100" },
+  { videos: 200, label: "200" },
+  { videos: 300, label: "300" },
+];
 
 export function PreciosCalculator() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.1,
   });
   const [videos, setVideos] = useState(10);
+
+  const sliderPos = videosToSlider(videos);
+
+  const handleSlider = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVideos(sliderToVideos(parseInt(e.target.value, 10)));
+  };
 
   const { soloCost, plan, savings, savingsPct } = useMemo(() => {
     const soloCost =
@@ -120,7 +159,7 @@ export function PreciosCalculator() {
   const animatedSoloCost = useCountUp(soloCost);
   const perVideo = getPricePerVideo(videos, plan.price);
 
-  const sliderPct = ((videos - 5) / (300 - 5)) * 100;
+  const sliderPct = (sliderPos / SLIDER_MAX) * 100;
 
   return (
     <section
@@ -261,28 +300,28 @@ export function PreciosCalculator() {
               <input
                 id="video-slider"
                 type="range"
-                min={5}
-                max={300}
+                min={0}
+                max={SLIDER_MAX}
                 step={1}
-                value={videos}
-                onChange={(e) => setVideos(parseInt(e.target.value, 10))}
+                value={sliderPos}
+                onChange={handleSlider}
                 className="pricing-slider w-full h-2 rounded-full appearance-none cursor-pointer"
                 style={{
                   background: `linear-gradient(90deg, #f9b334 0%, #d4a017 ${sliderPct}%, rgba(61,61,60,0.6) ${sliderPct}%, rgba(61,61,60,0.6) 100%)`,
                 }}
               />
               <div className="flex justify-between mt-3 text-[11px] text-brand-gray/70">
-                {SLIDER_STOPS.map((stop) => (
+                {LABEL_STOPS.map((stop) => (
                   <button
-                    key={stop}
+                    key={stop.videos}
                     type="button"
-                    onClick={() => setVideos(stop)}
+                    onClick={() => setVideos(stop.videos)}
                     className={cn(
                       "transition-colors hover:text-brand-yellow",
-                      videos === stop && "text-brand-yellow font-bold"
+                      videos === stop.videos && "text-brand-yellow font-bold"
                     )}
                   >
-                    {stop}
+                    {stop.label}
                   </button>
                 ))}
               </div>

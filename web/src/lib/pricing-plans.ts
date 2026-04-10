@@ -49,7 +49,7 @@ export const PLANES_RECURRENTES: Plan[] = [
     ctaLabel: "Quiero empezar",
     ctaType: "stripe",
     ctaHref: "/checkout/starter",
-    saving: "Ahorras ~$2.200/mes",
+    saving: "Ahorras ~$590/mes",
   },
   {
     id: "growth",
@@ -79,7 +79,7 @@ export const PLANES_RECURRENTES: Plan[] = [
     ctaHref: "/checkout/growth",
     highlight: true,
     badge: "MÁS POPULAR",
-    saving: "Ahorras ~$4.000/mes",
+    saving: "Ahorras ~$1.055/mes",
   },
   {
     id: "scale",
@@ -108,7 +108,7 @@ export const PLANES_RECURRENTES: Plan[] = [
     ctaLabel: "Quiero escalar",
     ctaType: "stripe",
     ctaHref: "/checkout/scale",
-    saving: "Ahorras ~$5.500/mes",
+    saving: "Ahorras ~$3.315/mes",
   },
 ];
 

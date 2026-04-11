@@ -131,7 +131,9 @@ export function Problema() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl mb-14 sm:mb-20"
         >
-          <p className="sr-only">Problema</p>
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
+            ¿Te suena familiar?
+          </span>
           <h2
             id="problema-title"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight"

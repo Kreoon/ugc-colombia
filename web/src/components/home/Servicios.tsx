@@ -231,7 +231,9 @@ export function Servicios() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14 sm:mb-20 max-w-4xl mx-auto"
         >
-          <p className="sr-only">Servicios</p>
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
+            8 servicios integrados
+          </span>
           <h2
             id="servicios-title"
             className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-white tracking-tight uppercase"

@@ -23,7 +23,7 @@ export function PorEsoExistimos() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="inline-block text-[11px] sm:text-xs font-sans font-semibold tracking-[0.35em] uppercase text-brand-gold mb-6">
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
             Por eso existimos
           </span>
           <h2

@@ -475,7 +475,7 @@ export function Pricing() {
             </span>
           </h2>
           <p className="mt-6 text-base sm:text-lg text-brand-gray leading-relaxed">
-            Cada plan incluye los 8 servicios del Paquete Completo UGC + 3 variantes por
+            Cada plan incluye los 8 servicios del Paquete Completo UGC + 2 a 3 variantes por
             video para que tengas munición ilimitada para pruebas en Meta y
             TikTok Ads.
           </p>

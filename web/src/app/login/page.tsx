@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/seo/metadata";
 import { Navbar } from "@/components/home/Navbar";
 import { Footer } from "@/components/home/Footer";
 import { LoginForm } from "@/components/auth/LoginForm";
 
-export const metadata: Metadata = {
-  title: "Iniciar Sesión | UGC Colombia × KREOON",
+export const metadata = createMetadata({
+  title: "Iniciar Sesión",
   description:
     "Inicia sesión en tu cuenta de UGC Colombia y accede a la plataforma KREOON.",
-};
+  path: "/login",
+  noIndex: true,
+});
 
 export default function LoginPage() {
   return (

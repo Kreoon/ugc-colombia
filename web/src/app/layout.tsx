@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
 import "./globals.css";
 import { PageLoader } from "@/components/PageLoader";
+import { TrackingScripts } from "@/components/tracking/TrackingScripts";
+import { CookieConsent } from "@/components/tracking/CookieConsent";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema } from "@/lib/seo/json-ld";
 
 const anton = Anton({
   weight: "400",
@@ -98,7 +102,9 @@ export default function RootLayout({
         </a>
         <PageLoader />
         {children}
-        {/* Analytics: agregar aquí cuando estén disponibles las keys */}
+        <TrackingScripts />
+        <CookieConsent />
+        <JsonLd data={organizationSchema()} />
       </body>
     </html>
   );

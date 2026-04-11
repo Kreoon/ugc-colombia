@@ -421,7 +421,7 @@ export function Servicios() {
                   <span className="text-sm text-brand-gray">USD / mes</span>
                 </div>
                 <p className="text-sm text-brand-gray mb-6">
-                  Escala desde 5 hasta 30+ videos al mes con 3 variantes cada
+                  Escala desde 5 hasta 30+ videos al mes con 2 a 3 variantes cada
                   uno.
                 </p>
 

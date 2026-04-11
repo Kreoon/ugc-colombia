@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/seo/metadata";
 import { Navbar } from "@/components/home/Navbar";
 import { Footer } from "@/components/home/Footer";
 import { RegistrationForm } from "@/components/auth/RegistrationForm";
 
-export const metadata: Metadata = {
-  title: "Registro | UGC Colombia × KREOON",
+export const metadata = createMetadata({
+  title: "Registro",
   description:
     "Únete a la comunidad UGC Colombia. Registro gratuito para marcas y creadores.",
-};
+  path: "/registro",
+  noIndex: true,
+});
 
 export default function RegistroPage() {
   return (

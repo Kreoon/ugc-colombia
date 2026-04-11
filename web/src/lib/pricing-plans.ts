@@ -32,10 +32,10 @@ export const PLANES_RECURRENTES: Plan[] = [
     price: "$400",
     priceUnit: "USD / mes",
     videos: "5 videos UGC",
-    variants: "+ 3 variantes = 15 entregables",
+    variants: "+ 2 variantes = 15 entregables",
     description: "Para marcas que quieren probar sin complicarse.",
     features: [
-      "5 videos UGC + 3 variantes cada uno",
+      "5 videos UGC + 2 variantes cada uno",
       "Resumen estratégico incluido",
       "Investigación de mercado",
       "Análisis de competencia",
@@ -58,10 +58,10 @@ export const PLANES_RECURRENTES: Plan[] = [
     price: "$700",
     priceUnit: "USD / mes",
     videos: "10 videos UGC",
-    variants: "+ 3 variantes = 30 entregables",
+    variants: "+ 2 variantes = 30 entregables",
     description: "El más popular: para marcas que ya saben lo que funciona.",
     features: [
-      "10 videos UGC + 3 variantes cada uno",
+      "10 videos UGC + 2 variantes cada uno",
       "Estrategia editorial mensual",
       "Investigación de mercado continua",
       "Análisis de competencia trimestral",
@@ -88,7 +88,7 @@ export const PLANES_RECURRENTES: Plan[] = [
     price: "$1.500",
     priceUnit: "USD / mes",
     videos: "30 videos UGC",
-    variants: "+ 3 variantes = 90 entregables",
+    variants: "+ 3 variantes = 120 entregables",
     description:
       "Para marcas que ya entendieron que el contenido es su mayor ventaja.",
     features: [
@@ -114,7 +114,7 @@ export const PLANES_RECURRENTES: Plan[] = [
 
 export const ENTERPRISE_FEATURES = [
   "60+ videos UGC al mes (escalable)",
-  "Variantes ilimitadas por video",
+  "3 variantes por video",
   "Estrategia 360° con tu equipo",
   "Director creativo asignado",
   "Equipo dedicado nivel premium exclusivo",
@@ -163,18 +163,18 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   {
     category: "Producción",
     feature: "Variantes por video",
-    inicio: "3",
-    crecimiento: "3",
+    inicio: "2",
+    crecimiento: "2",
     escala: "3",
-    enterprise: "Ilimitadas",
+    enterprise: "3",
   },
   {
     category: "Producción",
     feature: "Entregables totales/mes",
     inicio: "15",
     crecimiento: "30",
-    escala: "90",
-    enterprise: "180+",
+    escala: "120",
+    enterprise: "200+",
   },
   {
     category: "Producción",

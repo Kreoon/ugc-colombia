@@ -48,9 +48,9 @@ interface MetricItem {
 }
 
 const FALLBACK_METRICS: MetricItem[] = [
-  { prefix: "+", value: 30, suffix: "", label: "Creadores activos", decimals: 0 },
-  { prefix: "", value: 14, suffix: " días", label: "Primera entrega", decimals: 0 },
-  { prefix: "", value: 100, suffix: "K", label: "Meta ingresos 2026 USD", decimals: 0 },
+  { prefix: "+", value: 30, suffix: "", label: "Creadores en la red", decimals: 0 },
+  { prefix: "", value: 38, suffix: "%", label: "Hook rate promedio", decimals: 0 },
+  { prefix: "", value: 2.8, suffix: "%", label: "CTR Meta Ads", decimals: 1 },
 ];
 
 const TEXT_METRICS = ["LATAM + USA"];

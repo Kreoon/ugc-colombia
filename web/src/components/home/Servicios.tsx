@@ -443,7 +443,7 @@ export function Servicios() {
               {/* Savings breakdown */}
               <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-5 sm:p-6">
                 <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-emerald-400 mb-4 flex items-center gap-2">
-                  <span aria-hidden>💰</span>
+                  <span aria-hidden className="text-emerald-400">✓</span>
                   Tu ahorro
                 </p>
                 <div className="space-y-2 text-sm">

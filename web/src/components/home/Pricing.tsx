@@ -9,6 +9,10 @@ import {
   CalendarDays,
   ChevronDown,
   ChevronUp,
+  ShieldCheck,
+  Infinity,
+  Target,
+  CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -145,8 +149,8 @@ function PlanCard({
       {/* Ahorro */}
       {plan.saving && (
         <div className="mb-4 inline-flex items-center gap-2 self-start rounded-lg border border-emerald-500/30 bg-emerald-500/8 px-3 py-1.5">
-          <span aria-hidden className="text-xs">
-            💰
+          <span aria-hidden className="text-xs text-emerald-400">
+            ✓
           </span>
           <span className="text-xs font-semibold text-emerald-400">
             {plan.saving}
@@ -492,7 +496,7 @@ export function Pricing() {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-brand-gray"
         >
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+            <CreditCard className="h-4 w-4 text-brand-gold/70 flex-shrink-0" aria-hidden />
             Pago seguro con Stripe
           </div>
           <div
@@ -500,7 +504,7 @@ export function Pricing() {
             aria-hidden
           />
           <div className="flex items-center gap-2">
-            <span aria-hidden>🛡️</span>
+            <ShieldCheck className="h-4 w-4 text-brand-gold/70 flex-shrink-0" aria-hidden />
             Garantía de 7 días
           </div>
           <div
@@ -508,7 +512,7 @@ export function Pricing() {
             aria-hidden
           />
           <div className="flex items-center gap-2">
-            <span aria-hidden>♾️</span>
+            <Infinity className="h-4 w-4 text-brand-gold/70 flex-shrink-0" aria-hidden />
             Sin permanencia forzada
           </div>
           <div
@@ -516,7 +520,7 @@ export function Pricing() {
             aria-hidden
           />
           <div className="flex items-center gap-2">
-            <span aria-hidden>🎯</span>
+            <Target className="h-4 w-4 text-brand-gold/70 flex-shrink-0" aria-hidden />
             Licencia de publicidad 12 meses
           </div>
         </motion.div>

@@ -164,10 +164,10 @@ function DolorBlockSection({ block, index }: { block: DolorBlockType; index: num
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:pl-14">
-            <Button asChild size="default" className="font-bold tracking-wide">
+            <Button asChild size="lg" className="font-bold tracking-wide min-h-[52px]">
               <Link href={`/servicios#${block.servicioId}`}>{block.servicioLabel} →</Link>
             </Button>
-            <Button asChild size="default" variant="outline">
+            <Button asChild size="lg" variant="outline" className="min-h-[52px]">
               <Link href="/#contacto">Agendar diagnóstico</Link>
             </Button>
           </div>

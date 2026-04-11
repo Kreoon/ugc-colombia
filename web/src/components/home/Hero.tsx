@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ParticlesBg } from "@/components/home/ParticlesBg";
+import { ClientLogoBar } from "@/components/precios/ClientLogoBar";
 
 const STAGGER_DELAY = 0.12;
 
@@ -98,6 +100,18 @@ export function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24 lg:py-28">
         {mounted && (
           <>
+            {/* Pill badge urgencia */}
+            <motion.span
+              custom={0}
+              variants={variants}
+              initial="hidden"
+              animate="visible"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-6 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40"
+            >
+              <Users className="h-3 w-3" aria-hidden />
+              Cupos limitados este mes
+            </motion.span>
+
             {/* Headline */}
             <motion.h1
               custom={1}
@@ -176,6 +190,41 @@ export function Hero() {
             >
               30 min · Gratis · Sin compromiso
             </motion.p>
+
+            {/* Stat ribbon */}
+            <motion.div
+              custom={5}
+              variants={variants}
+              initial="hidden"
+              animate="visible"
+              className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
+            >
+              {[
+                { value: "7", label: "días de entrega" },
+                { value: "38%", label: "hook rate promedio" },
+                { value: "2.8%", label: "CTR Meta Ads" },
+              ].map((stat, i) => (
+                <div key={i} className="flex items-baseline gap-2">
+                  <span
+                    className="font-display text-2xl sm:text-3xl"
+                    style={{
+                      background: "linear-gradient(135deg, #f9b334 0%, #d4a017 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span className="text-xs sm:text-sm text-brand-gray">{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Logo bar clientes */}
+            <motion.div custom={6} variants={variants} initial="hidden" animate="visible" className="mt-12">
+              <ClientLogoBar />
+            </motion.div>
           </>
         )}
       </div>

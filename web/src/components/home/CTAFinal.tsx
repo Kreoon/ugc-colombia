@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
 export function CTAFinal() {
   return (
@@ -157,17 +157,50 @@ export function CTAFinal() {
               </div>
             </motion.div>
 
-            {/* Trust line */}
-            <motion.p
-              className="text-xs sm:text-sm text-brand-gray/60 mt-2"
+            {/* Guarantee badge */}
+            <motion.div
+              className="inline-flex items-center gap-2.5 mt-6 px-5 py-3 rounded-xl border border-brand-gold/25 bg-white/[0.03]"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Garantía de 7 días: si el primer lote no cumple las instrucciones,
-              devolvemos el mes completo.
-            </motion.p>
+              <ShieldCheck className="h-5 w-5 text-brand-yellow flex-shrink-0" aria-hidden />
+              <div className="text-left">
+                <p className="text-xs font-bold text-white">Garantía de 7 días</p>
+                <p className="text-[10px] text-brand-gray">100% de devolución si no encajamos</p>
+              </div>
+            </motion.div>
+
+            {/* Avatar stack */}
+            <motion.div
+              className="flex flex-col items-center sm:items-start gap-3 mt-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <div className="flex items-center -space-x-2.5">
+                {[
+                  { initials: "TK", name: "Tokio" },
+                  { initials: "EM", name: "Equi" },
+                  { initials: "ME", name: "Michel" },
+                  { initials: "Vi", name: "Vitalcom" },
+                ].map((c) => (
+                  <div
+                    key={c.initials}
+                    className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border-2 border-brand-black flex items-center justify-center"
+                    title={c.name}
+                  >
+                    <span className="text-[10px] font-bold text-brand-yellow/80 font-sans">{c.initials}</span>
+                  </div>
+                ))}
+                <div className="w-9 h-9 rounded-full bg-brand-yellow/10 border-2 border-brand-black flex items-center justify-center">
+                  <span className="text-[10px] font-bold text-brand-yellow/60 font-sans">+</span>
+                </div>
+              </div>
+              <p className="text-xs text-brand-gray">Marcas en Colombia y LATAM ya confían en nosotros</p>
+            </motion.div>
           </div>
         </div>
       </motion.div>

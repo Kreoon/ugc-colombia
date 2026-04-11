@@ -213,7 +213,7 @@ export function VideoTestimonios() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         <motion.div
           className="flex flex-col items-start gap-4 mb-14 sm:mb-20"
           initial={{ opacity: 0, y: 24 }}

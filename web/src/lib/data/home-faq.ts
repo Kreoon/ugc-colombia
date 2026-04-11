@@ -17,7 +17,7 @@ export const HOME_FAQS: FAQItem[] = [
   {
     question: "¿Los videos tienen derechos para publicidad pagada?",
     answer:
-      "Sí. Todos nuestros contratos incluyen derechos de uso comercial para medios pagados (Meta, TikTok, Google) por 12 meses. Si necesitas publicación con tu marca, derechos perpetuos o exclusividad por nicho, lo cotizamos como complemento.",
+      "Sí. Todos nuestros contratos incluyen derechos de uso comercial para medios pagados (Meta, TikTok, Google) por 12 meses. Si necesitas publicación con tu marca, se negocia directamente con el creador según su engagement y seguidores. Derechos perpetuos o exclusividad por nicho se cotizan como complemento.",
   },
   {
     question:

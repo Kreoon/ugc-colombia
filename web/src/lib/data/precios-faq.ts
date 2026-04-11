@@ -63,7 +63,7 @@ export const PRECIOS_FAQS: PreciosFAQItem[] = [
   {
     question: "Que incluye la licencia de publicidad de 12 meses?",
     answer:
-      "Uso comercial para medios pagados (Meta Ads, TikTok Ads, Google Ads, YouTube Ads) por 12 meses desde la entrega del video. Si necesitas derechos perpetuos, exclusividad por nicho o publicacion organica con el handle de tu marca, se cotiza como complemento y queda en contrato.",
+      "Uso comercial para medios pagados (Meta Ads, TikTok Ads, Google Ads, YouTube Ads) por 12 meses desde la entrega del video. Si necesitas publicacion con tu marca, se negocia directamente con el creador teniendo en cuenta su engagement y seguidores. Derechos perpetuos o exclusividad por nicho se cotizan como complemento.",
     icon: FileText,
   },
   {

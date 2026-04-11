@@ -124,7 +124,7 @@ export const ENTERPRISE_FEATURES = [
   "Panel en tiempo real",
   "Slack/Teams compartido",
   "Acuerdos de servicio garantizados por contrato",
-  "Derechos a medida (publicación con tu marca, exclusividad)",
+  "Publicación con tu marca (negociable según engagement y seguidores del creador)",
   "Arranque ejecutivo con Alexander Cast",
 ];
 
@@ -312,10 +312,10 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   {
     category: "Derechos",
     feature: "Publicación con tu marca",
-    inicio: false,
-    crecimiento: false,
-    escala: false,
-    enterprise: true,
+    inicio: "Negociable",
+    crecimiento: "Negociable",
+    escala: "Negociable",
+    enterprise: "Negociable",
   },
   {
     category: "Derechos",

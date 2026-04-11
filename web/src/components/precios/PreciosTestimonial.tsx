@@ -238,10 +238,14 @@ export function PreciosTestimonial() {
 
             {/* Autor con credenciales */}
             <div className="flex items-center gap-4 mb-8 pb-8 border-b border-brand-gold/15">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-yellow to-brand-gold-dark flex items-center justify-center shadow-[0_0_24px_rgba(249,179,52,0.4)] flex-shrink-0">
-                <span className="font-display text-xl text-black font-bold">
-                  ME
-                </span>
+              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-gold/50 shadow-[0_0_24px_rgba(249,179,52,0.4)] flex-shrink-0">
+                <Image
+                  src="/brand/precios/michel-edery.png"
+                  alt="Michel Edery"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <div className="flex items-center gap-2">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 export function PorEsoExistimos() {
@@ -8,9 +9,14 @@ export function PorEsoExistimos() {
       aria-labelledby="por-eso-heading"
       className="relative py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
+      {/* Imagen editorial de fondo */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <Image src="/brand/casos-page/proposito.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.18]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/70 to-brand-black" />
+      </div>
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none -z-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(212,160,23,0.08) 0%, transparent 70%)",

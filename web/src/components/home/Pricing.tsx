@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import {
@@ -430,6 +431,11 @@ export function Pricing() {
           "linear-gradient(180deg, #000000 0%, #080604 50%, #000000 100%)",
       }}
     >
+      {/* Imagen editorial de fondo */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
+        <Image src="/brand/home/pricing.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.18]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/70 to-brand-black" />
+      </div>
       {/* Radial glow */}
       <div
         aria-hidden="true"

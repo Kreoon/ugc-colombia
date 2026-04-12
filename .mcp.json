@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "google-analytics": {
+      "command": "C:\\Users\\SICOMMER SAS\\AppData\\Roaming\\Python\\Python313\\Scripts\\analytics-mcp.exe",
+      "args": [],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:\\Users\\SICOMMER SAS\\AppData\\Roaming\\gcloud\\application_default_credentials.json",
+        "GOOGLE_PROJECT_ID": "jarvis-kreoon-ai",
+        "GOOGLE_CLOUD_PROJECT": "jarvis-kreoon-ai"
+      }
+    }
+  }
+}

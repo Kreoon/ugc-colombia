@@ -19,6 +19,7 @@ interface Props {
   data: AuditData;
   score: LeadScore;
   diagnosis: AIDiagnosis;
+  onBooking: () => void;
   onClose: () => void;
 }
 
@@ -42,30 +43,6 @@ function getScoreBg(temp: string) {
   return "from-blue-500/20 to-cyan-500/10 border-blue-500/30";
 }
 
-function getCalendarUrl(data: AuditData): string {
-  const name = data.brand_info?.full_name || data.creator_info?.full_name || "";
-  const email = data.contact?.email || "";
-  const company = data.brand_info?.company_name || "";
-  const type = data.lead_type === "marca" ? "Marca" : "Creador/a";
-
-  const title = encodeURIComponent(`Discovery Call — ${company || name} (${type})`);
-  const details = encodeURIComponent(
-    `Llamada de diagnóstico con UGC Colombia.\n\nNombre: ${name}\nEmpresa: ${company}\nEmail: ${email}\nTipo: ${type}\nScore: ${data.score?.total || 0}/100`
-  );
-
-  // Google Calendar link — 30 min slot
-  const now = new Date();
-  // Round to next hour
-  now.setHours(now.getHours() + 1, 0, 0, 0);
-  const start = now.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const end = new Date(now.getTime() + 30 * 60 * 1000)
-    .toISOString()
-    .replace(/[-:]/g, "")
-    .replace(/\.\d{3}/, "");
-
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${start}/${end}&add=founder@kreoon.com`;
-}
-
 function getWhatsAppUrl(data: AuditData): string {
   const name = data.brand_info?.full_name || data.creator_info?.full_name || "";
   const company = data.brand_info?.company_name || "";
@@ -79,7 +56,7 @@ function getWhatsAppUrl(data: AuditData): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
 }
 
-export function StepDiagnosis({ data, score, diagnosis, onClose }: Props) {
+export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Props) {
   const ScoreIcon = getScoreIcon(score.temperature);
   const isHot = score.temperature === "hot";
   const isCold = score.temperature === "cold";
@@ -194,11 +171,11 @@ export function StepDiagnosis({ data, score, diagnosis, onClose }: Props) {
 
         {!isCold ? (
           <>
-            {/* Hot/Warm: direct calendar booking */}
+            {/* Hot/Warm: go to embedded calendar */}
             <Button
               size="xl"
               className="w-full gap-3"
-              onClick={() => window.open(getCalendarUrl(data), "_blank")}
+              onClick={onBooking}
             >
               <Calendar className="w-5 h-5" />
               {isHot ? "Agendar llamada prioritaria" : "Agendar llamada de diagnóstico"}

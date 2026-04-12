@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import { useAudit } from "./AuditContext";
 import { StepType } from "./steps/StepType";
 import { StepBrandInfo } from "./steps/StepBrandInfo";
@@ -10,6 +11,7 @@ import { StepBrandAudit } from "./steps/StepBrandAudit";
 import { StepCreatorAudit } from "./steps/StepCreatorAudit";
 import { StepContact } from "./steps/StepContact";
 import { StepDiagnosis } from "./steps/StepDiagnosis";
+import { StepBooking } from "./steps/StepBooking";
 import type {
   BrandInfo,
   CreatorInfo,
@@ -32,15 +34,13 @@ export interface AuditData {
   diagnosis?: AIDiagnosis;
 }
 
-const TOTAL_STEPS_BRAND = 5;
-const TOTAL_STEPS_CREATOR = 5;
+// Steps: 0=type, 1=info, 2=audit, 3=contact, 4=diagnosis, 5=booking
+const PROGRESS_STEPS = 4; // steps 1-4 shown in progress bar
 
 export function AuditModal() {
   const { isOpen, closeAudit } = useAudit();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<AuditData>({ lead_type: null });
-
-  const totalSteps = data.lead_type === "creador" ? TOTAL_STEPS_CREATOR : TOTAL_STEPS_BRAND;
 
   function handleReset() {
     setStep(0);
@@ -49,7 +49,6 @@ export function AuditModal() {
 
   function handleClose() {
     closeAudit();
-    // Reset after animation
     setTimeout(handleReset, 300);
   }
 
@@ -83,25 +82,37 @@ export function AuditModal() {
     setStep(4);
   }
 
+  function goToBooking() {
+    setStep(5);
+  }
+
   function goBack() {
     if (step > 0) setStep(step - 1);
   }
 
+  // Wider modal for booking step (calendar iframe needs space)
+  const isBookingStep = step === 5;
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0">
-        {/* Progress bar */}
-        {step > 0 && step < totalSteps && (
+      <DialogContent
+        className={cn(
+          "max-h-[90vh] overflow-y-auto p-0 transition-[max-width] duration-300",
+          isBookingStep ? "max-w-3xl" : "max-w-2xl"
+        )}
+      >
+        {/* Progress bar — shown on steps 1-3 */}
+        {step >= 1 && step <= 3 && (
           <div className="px-6 pt-6">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[11px] font-sans font-semibold text-brand-gray tracking-wider uppercase">
-                Paso {step} de {totalSteps - 1}
+                Paso {step} de {PROGRESS_STEPS}
               </span>
             </div>
             <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-brand-yellow to-brand-gold rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${(step / (totalSteps - 1)) * 100}%` }}
+                style={{ width: `${(step / PROGRESS_STEPS) * 100}%` }}
               />
             </div>
           </div>
@@ -134,6 +145,16 @@ export function AuditModal() {
               data={data}
               score={data.score}
               diagnosis={data.diagnosis}
+              onBooking={goToBooking}
+              onClose={handleClose}
+            />
+          )}
+
+          {step === 5 && data.score && (
+            <StepBooking
+              data={data}
+              score={data.score}
+              onBack={() => setStep(4)}
               onClose={handleClose}
             />
           )}

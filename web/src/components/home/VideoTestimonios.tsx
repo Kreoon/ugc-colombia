@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { Quote, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 
 type Testimonial = {
   id: string;
@@ -193,6 +194,8 @@ function VideoCard({ t, idx }: { t: Testimonial; idx: number }) {
 }
 
 export function VideoTestimonios() {
+  const { openAudit } = useAudit();
+
   return (
     <section
       id="testimonios"
@@ -250,12 +253,13 @@ export function VideoTestimonios() {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           ¿Ya eres cliente y quieres compartir tu historia?{" "}
-          <a
-            href="#contacto"
+          <button
+            type="button"
+            onClick={openAudit}
             className="text-brand-yellow hover:text-brand-gold underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-sm"
           >
             Cuéntanos →
-          </a>
+          </button>
         </motion.p>
       </div>
     </section>

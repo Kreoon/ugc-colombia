@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Users } from "lucide-react";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import { ClientLogoBar } from "./ClientLogoBar";
 
 interface KreoonStatsDTO {
@@ -43,6 +43,7 @@ const FALLBACK_STATS = [
 export function PreciosHero() {
   const reduced = useReducedMotion();
   const variants = reduced ? fadeUpReduced : fadeUp;
+  const { openAudit } = useAudit();
 
   const [stats, setStats] = useState(FALLBACK_STATS);
 
@@ -188,12 +189,12 @@ export function PreciosHero() {
             <a href="#planes">VER LOS 4 PAQUETES →</a>
           </Button>
           <Button
-            asChild
             size="lg"
             variant="outline"
             className="w-full sm:w-auto text-sm sm:text-base min-h-[52px]"
+            onClick={openAudit}
           >
-            <Link href="/#contacto">AGENDA TU DIAGNÓSTICO</Link>
+            AGENDA TU DIAGNÓSTICO
           </Button>
         </motion.div>
 

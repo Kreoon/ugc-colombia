@@ -2,8 +2,11 @@
 
 import { motion } from "motion/react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 
 export function CTAFinal() {
+  const { openAudit } = useAudit();
+
   return (
     <section
       id="contacto"
@@ -112,9 +115,10 @@ export function CTAFinal() {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              <motion.a
-                href="#discovery-call"
-                className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-4 sm:py-5 rounded-xl bg-brand-yellow text-brand-black font-semibold text-base sm:text-lg tracking-wide overflow-hidden min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-yellow"
+              <motion.button
+                type="button"
+                onClick={openAudit}
+                className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-4 sm:py-5 rounded-xl bg-brand-yellow text-brand-black font-semibold text-base sm:text-lg tracking-wide overflow-hidden min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-yellow cursor-pointer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -123,7 +127,7 @@ export function CTAFinal() {
                     "0 10px 40px -10px rgba(249,179,52,0.5), 0 0 80px -20px rgba(212,160,23,0.4)",
                 }}
               >
-                <span className="relative z-10">AGENDA TU LLAMADA INICIAL</span>
+                <span className="relative z-10">DIAGNÓSTICO GRATIS CON IA</span>
                 <ArrowRight
                   className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1"
                   aria-hidden
@@ -137,7 +141,7 @@ export function CTAFinal() {
                       "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
                   }}
                 />
-              </motion.a>
+              </motion.button>
 
               <div className="flex items-center justify-center sm:justify-start gap-3 text-sm text-brand-gray">
                 <span className="flex items-center gap-2">

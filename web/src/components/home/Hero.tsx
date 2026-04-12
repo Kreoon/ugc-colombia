@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import { ParticlesBg } from "@/components/home/ParticlesBg";
 import { ClientLogoBar } from "@/components/precios/ClientLogoBar";
 
@@ -34,6 +35,7 @@ const fadeUpReduced = {
 export function Hero() {
   const [mounted, setMounted] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const { openAudit } = useAudit();
 
   useEffect(() => setMounted(true), []);
 
@@ -163,11 +165,11 @@ export function Hero() {
             >
               <Button
                 size="lg"
-                onClick={() => scrollTo("contacto")}
+                onClick={openAudit}
                 className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)] focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                aria-label="Agendar llamada inicial con UGC Colombia"
+                aria-label="Iniciar diagnóstico gratuito con UGC Colombia"
               >
-                AGENDA TU LLAMADA INICIAL →
+                DIAGNÓSTICO GRATIS →
               </Button>
               <Button
                 size="lg"

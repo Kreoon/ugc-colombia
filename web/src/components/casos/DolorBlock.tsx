@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { Check, X, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import { DOLOR_BLOCKS, type DolorBlock as DolorBlockType } from "./dolores-data";
 
 export function DoloresList() {
@@ -31,6 +32,7 @@ export function DoloresList() {
 function DolorBlockSection({ block, index }: { block: DolorBlockType; index: number }) {
   const Icon = block.icon;
   const reverse = index % 2 === 1;
+  const { openAudit } = useAudit();
 
   return (
     <div
@@ -167,8 +169,8 @@ function DolorBlockSection({ block, index }: { block: DolorBlockType; index: num
             <Button asChild size="lg" className="font-bold tracking-wide min-h-[52px]">
               <Link href={`/servicios#${block.servicioId}`}>{block.servicioLabel} →</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="min-h-[52px]">
-              <Link href="/#contacto">Agendar diagnóstico</Link>
+            <Button size="lg" variant="outline" className="min-h-[52px]" onClick={openAudit}>
+              Agendar diagnóstico
             </Button>
           </div>
         </motion.div>

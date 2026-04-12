@@ -5,6 +5,7 @@ import Image from "next/image";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -21,6 +22,7 @@ const SCROLL_OFFSET = 80;
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { openAudit } = useAudit();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -149,16 +151,16 @@ export function Navbar() {
           {/* CTA visible en mobile (compacto) + desktop (normal) */}
           <Button
             size="default"
-            onClick={() => handleNavClick("#contacto")}
+            onClick={openAudit}
             className={cn(
               "font-semibold tracking-wide transition-all duration-300",
               "text-xs sm:text-sm",
               scrolled ? "px-3 sm:px-4 py-2" : "px-3 sm:px-5 py-2.5"
             )}
-            aria-label="Agendar llamada inicial"
+            aria-label="Iniciar diagnóstico gratuito"
           >
-            <span className="hidden sm:inline">Llamada inicial →</span>
-            <span className="sm:hidden">Llamada →</span>
+            <span className="hidden sm:inline">Diagnóstico gratis →</span>
+            <span className="sm:hidden">Diagnóstico →</span>
           </Button>
 
           {/* Botón hamburguesa mobile */}
@@ -263,9 +265,9 @@ export function Navbar() {
               <Button
                 size="lg"
                 className="w-full min-h-[48px] text-base font-bold"
-                onClick={() => handleNavClick("#contacto")}
+                onClick={openAudit}
               >
-                Llamada inicial →
+                Diagnóstico gratis →
               </Button>
             </div>
           </DialogPrimitive.Content>

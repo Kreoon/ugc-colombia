@@ -13,8 +13,8 @@ const NAV_LINKS = {
   recursos: [
     { label: "Kit UGC 2026", href: "/recursos/kit-ugc-2026" },
     { label: "Preguntas frecuentes", href: "#faq" },
-    { label: "Llamada inicial", href: "#discovery-call" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Llamada inicial", href: "#diagnostico" },
+    { label: "Contacto", href: "#diagnostico" },
   ],
   legal: [
     { label: "Política de privacidad", href: "/legal/privacidad" },

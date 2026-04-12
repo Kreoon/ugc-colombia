@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import Link from "next/link";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import {
   Accordion,
   AccordionContent,
@@ -11,6 +11,8 @@ import {
 import { PRECIOS_FAQS } from "@/lib/data/precios-faq";
 
 export function PreciosFAQ() {
+  const { openAudit } = useAudit();
+
   return (
     <section
       id="faq-precios"
@@ -92,12 +94,13 @@ export function PreciosFAQ() {
                 Agenda una llamada gratuita de 30 min y la resolvemos contigo.
               </p>
             </div>
-            <Link
-              href="/#contacto"
+            <button
+              type="button"
+              onClick={openAudit}
               className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-yellow text-black font-sans font-bold text-sm tracking-wide transition-all hover:bg-brand-gold hover:shadow-[0_8px_30px_-8px_rgba(249,179,52,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Agenda tu llamada →
-            </Link>
+            </button>
           </div>
         </motion.div>
       </div>

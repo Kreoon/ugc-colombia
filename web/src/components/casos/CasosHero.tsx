@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 
 const STAGGER = 0.12;
 const fadeUp = {
@@ -22,6 +22,7 @@ const fadeUpReduced = {
 export function CasosHero() {
   const reduced = useReducedMotion();
   const variants = reduced ? fadeUpReduced : fadeUp;
+  const { openAudit } = useAudit();
 
   return (
     <section
@@ -116,11 +117,11 @@ export function CasosHero() {
           animate="visible"
         >
           <Button
-            asChild
             size="lg"
             className="font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
+            onClick={openAudit}
           >
-            <Link href="/#contacto">AGENDAR DIAGNÓSTICO GRATIS →</Link>
+            AGENDAR DIAGNÓSTICO GRATIS →
           </Button>
         </motion.div>
 

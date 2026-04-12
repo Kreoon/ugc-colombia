@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import { SERVICE_LINES, type ServiceLine } from "./service-lines";
 
 export function ServiciosDetalle() {
@@ -24,6 +25,7 @@ export function ServiciosDetalle() {
 function ServiceBlock({ line, index }: { line: ServiceLine; index: number }) {
   const Icon = line.icon;
   const reverse = index % 2 === 1;
+  const { openAudit } = useAudit();
 
   return (
     <div
@@ -118,8 +120,8 @@ function ServiceBlock({ line, index }: { line: ServiceLine; index: number }) {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Button asChild size="lg" className="font-bold tracking-wide">
-              <Link href="/#contacto">Solicitar propuesta →</Link>
+            <Button size="lg" className="font-bold tracking-wide" onClick={openAudit}>
+              Solicitar propuesta →
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/#pricing">Ver planes</Link>

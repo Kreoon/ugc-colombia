@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 
 const STAGGER = 0.12;
 const fadeUp = {
@@ -22,6 +23,7 @@ const fadeUpReduced = {
 export function ServiciosHero() {
   const reduced = useReducedMotion();
   const variants = reduced ? fadeUpReduced : fadeUp;
+  const { openAudit } = useAudit();
 
   return (
     <section
@@ -120,11 +122,11 @@ export function ServiciosHero() {
           className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 px-2 sm:px-0"
         >
           <Button
-            asChild
             size="lg"
             className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
+            onClick={openAudit}
           >
-            <Link href="/#contacto">AGENDA TU DIAGNÓSTICO →</Link>
+            AGENDA TU DIAGNÓSTICO →
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full sm:w-auto text-sm sm:text-base min-h-[52px]">
             <Link href="/registro">CREAR CUENTA GRATIS</Link>

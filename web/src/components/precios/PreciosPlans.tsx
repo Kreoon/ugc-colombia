@@ -16,6 +16,7 @@ import {
   CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 import {
   PLANES_RECURRENTES,
   ENTERPRISE_FEATURES,
@@ -258,6 +259,8 @@ function PlanCard({
 }
 
 function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
+  const { openAudit } = useAudit();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -384,8 +387,9 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
               Cotización personalizada según volumen, verticales y acuerdos de servicio requeridos.
             </p>
 
-            <a
-              href="#contacto"
+            <button
+              type="button"
+              onClick={openAudit}
               className={cn(
                 "group/ent flex items-center justify-center gap-2.5 w-full px-6 py-4 rounded-xl",
                 "bg-gradient-to-r from-brand-yellow to-brand-gold-dark text-black",
@@ -403,7 +407,7 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
               >
                 →
               </span>
-            </a>
+            </button>
 
             <p className="text-[10px] text-center text-brand-gray/60 mt-3">
               Llamada 30 min · Cotización personalizada · Sin compromiso

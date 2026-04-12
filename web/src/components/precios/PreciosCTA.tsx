@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CalendarDays, ShieldCheck, Users } from "lucide-react";
+import { useAudit } from "@/components/lead-audit/AuditContext";
 
 const RECENT_CLIENTS = [
   { initials: "ME", name: "Michel E." },
@@ -13,6 +13,8 @@ const RECENT_CLIENTS = [
 ];
 
 export function PreciosCTA() {
+  const { openAudit } = useAudit();
+
   return (
     <section
       id="cta-precios"
@@ -111,14 +113,12 @@ export function PreciosCTA() {
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
           <Button
-            asChild
             size="lg"
             className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
+            onClick={openAudit}
           >
-            <Link href="/#contacto">
-              <CalendarDays className="h-5 w-5 mr-2" aria-hidden />
-              AGENDA TU LLAMADA →
-            </Link>
+            <CalendarDays className="h-5 w-5 mr-2" aria-hidden />
+            AGENDA TU LLAMADA →
           </Button>
           <Button
             asChild

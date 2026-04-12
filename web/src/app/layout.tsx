@@ -4,6 +4,8 @@ import "./globals.css";
 import { PageLoader } from "@/components/PageLoader";
 import { TrackingScripts } from "@/components/tracking/TrackingScripts";
 import { CookieConsent } from "@/components/tracking/CookieConsent";
+import { AuditProvider } from "@/components/lead-audit/AuditContext";
+import { AuditModal } from "@/components/lead-audit/AuditModal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema } from "@/lib/seo/json-ld";
 
@@ -101,7 +103,10 @@ export default function RootLayout({
           Saltar al contenido principal
         </a>
         <PageLoader />
-        {children}
+        <AuditProvider>
+          {children}
+          <AuditModal />
+        </AuditProvider>
         <TrackingScripts />
         <CookieConsent />
         <JsonLd data={organizationSchema()} />

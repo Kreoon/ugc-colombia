@@ -5,7 +5,7 @@ import type { SocialProfile } from "./perplexity";
 
 // ─── Gemini caller ───────────────────────────────────────────────────────────
 
-async function callGemini(system: string, user: string): Promise<any> {
+async function callGemini(system: string, user: string, label: string = ""): Promise<any> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY not configured");
 
@@ -17,19 +17,31 @@ async function callGemini(system: string, user: string): Promise<any> {
       body: JSON.stringify({
         system_instruction: { parts: [{ text: system }] },
         contents: [{ parts: [{ text: user }] }],
-        generationConfig: { temperature: 0.4, maxOutputTokens: 3000 },
+        generationConfig: {
+          temperature: 0.4,
+          maxOutputTokens: 4000,
+          responseMimeType: "application/json",
+        },
       }),
-      signal: AbortSignal.timeout(30_000),
+      signal: AbortSignal.timeout(60_000),
     }
   );
 
   const data = await res.json();
-  let text = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+
+  // Gemini 2.5 puede tener múltiples parts (thinking + response)
+  const parts = data?.candidates?.[0]?.content?.parts ?? [];
+  let text = "";
+  for (const part of parts) {
+    if (part.text) text = part.text; // última part con texto es la respuesta
+  }
+
   text = text.trim().replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
 
   try {
     return JSON.parse(text);
   } catch {
+    console.error(`[prompt-chain] ${label} JSON parse failed. Raw (first 500):`, text.slice(0, 500));
     return {};
   }
 }
@@ -124,20 +136,29 @@ Desafio: ${input.clientChallenge || "No especificado"}`;
 
   // P1 + P3 in parallel
   const [p1, p3] = await Promise.all([
-    callGemini(P1_SYSTEM, `${brandCtx}\n\nPRESENCIA:\n${igCtx}`),
-    callGemini(P3_SYSTEM, `${brandCtx}\n\nPOSTS (${input.igProfile?.recent_posts.length ?? 0}):\n${postsCtx}\n\nPUBLICIDAD:\n${adsCtx}`),
+    callGemini(P1_SYSTEM, `${brandCtx}\n\nPRESENCIA:\n${igCtx}`, "P1-Market"),
+    callGemini(P3_SYSTEM, `${brandCtx}\n\nPOSTS (${input.igProfile?.recent_posts.length ?? 0}):\n${postsCtx}\n\nPUBLICIDAD:\n${adsCtx}`, "P3-Audit"),
   ]);
+
+  console.log(`[prompt-chain] P1 keys: ${Object.keys(p1).join(", ") || "EMPTY"}`);
+  console.log(`[prompt-chain] P3 keys: ${Object.keys(p3).join(", ") || "EMPTY"}`);
 
   // P4 needs P1 + P3
   const p4 = await callGemini(P4_SYSTEM,
-    `${brandCtx}\n\nAVATAR:\n${JSON.stringify(p1.avatar_ideal || {})}\n\nQUE FUNCIONA:\n${JSON.stringify(p3.whats_working || [])}\nQUE FALLA:\n${JSON.stringify(p3.whats_failing || [])}`
+    `${brandCtx}\n\nAVATAR:\n${JSON.stringify(p1.avatar_ideal || {})}\n\nQUE FUNCIONA:\n${JSON.stringify(p3.whats_working || [])}\nQUE FALLA:\n${JSON.stringify(p3.whats_failing || [])}`,
+    "P4-Strategy"
   );
+
+  console.log(`[prompt-chain] P4 keys: ${Object.keys(p4).join(", ") || "EMPTY"}`);
 
   // P5 needs all
   const scores = p3.content_scores || {};
   const p5 = await callGemini(P5_SYSTEM,
-    `${brandCtx}\n\nSCORES:\n${JSON.stringify(scores)}\n\nAVATAR:\n${JSON.stringify(p1.buyer_persona || {})}\n\nESTRATEGIA:\nPilares: ${(p4.content_pillars || []).map((p: any) => p.name).join(", ")}\n\nQUICK WINS:\n${JSON.stringify(p3.whats_working || [])}`
+    `${brandCtx}\n\nSCORES:\n${JSON.stringify(scores)}\n\nAVATAR:\n${JSON.stringify(p1.buyer_persona || {})}\n\nESTRATEGIA:\nPilares: ${(p4.content_pillars || []).map((p: any) => p.name).join(", ")}\n\nQUICK WINS:\n${JSON.stringify(p3.whats_working || [])}`,
+    "P5-Proposal"
   );
+
+  console.log(`[prompt-chain] P5 keys: ${Object.keys(p5).join(", ") || "EMPTY"}`);
 
   const overall = p5.overall_score || Math.round(
     ((scores.content_quality?.score || 50) +

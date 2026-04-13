@@ -93,7 +93,6 @@ export async function POST(req: NextRequest) {
       lead_type: data.lead_type,
       qualification_score: data.qualification_score,
       temperature: data.temperature,
-      ai_diagnosis: data.ai_diagnosis,
       audit_completed_at: new Date().toISOString(),
       raw_form_data: data,
     };

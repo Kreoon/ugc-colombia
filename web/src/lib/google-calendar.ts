@@ -60,9 +60,11 @@ export interface TimeSlot {
   host_name: string;
 }
 
-// Config
-const BUSINESS_START_HOUR = 9;    // 9 AM COT
-const BUSINESS_END_HOUR = 18;     // 6 PM COT
+// Config — horario de Alexander: 8am-12pm y 2pm-7pm COT
+const MORNING_START = 8;          // 8 AM COT
+const MORNING_END = 12;           // 12 PM COT (almuerzo empieza)
+const AFTERNOON_START = 14;       // 2 PM COT (almuerzo termina)
+const AFTERNOON_END = 19;         // 7 PM COT
 const SLOT_DURATION_MIN = 30;     // 30 min slots
 const BUFFER_MIN = 15;            // 15 min buffer antes y después de eventos
 const MIN_ADVANCE_HOURS = 4;      // Mínimo 4 horas de anticipación
@@ -138,12 +140,19 @@ export async function getAvailableSlots(): Promise<TimeSlot[]> {
       const dayOfWeek = day.getDay();
 
       if (!BLOCKED_DAYS.includes(dayOfWeek)) {
-        for (let hour = BUSINESS_START_HOUR; hour < BUSINESS_END_HOUR; hour++) {
+        // 2 bloques: mañana (8-12) y tarde (2-7)
+        const blocks = [
+          { start: MORNING_START, end: MORNING_END },
+          { start: AFTERNOON_START, end: AFTERNOON_END },
+        ];
+
+        for (const block of blocks) {
+        for (let hour = block.start; hour < block.end; hour++) {
           for (let min = 0; min < 60; min += SLOT_DURATION_MIN) {
-            // Último slot debe terminar antes de BUSINESS_END_HOUR
+            // Último slot debe terminar antes del fin del bloque
             const endHour = hour + Math.floor((min + SLOT_DURATION_MIN) / 60);
             const endMin = (min + SLOT_DURATION_MIN) % 60;
-            if (endHour > BUSINESS_END_HOUR || (endHour === BUSINESS_END_HOUR && endMin > 0)) continue;
+            if (endHour > block.end || (endHour === block.end && endMin > 0)) continue;
 
             const slotStart = new Date(day);
             // COT = UTC-5
@@ -168,6 +177,7 @@ export async function getAvailableSlots(): Promise<TimeSlot[]> {
             }
           }
         }
+        } // end blocks
       }
 
       day.setDate(day.getDate() + 1);

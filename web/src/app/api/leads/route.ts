@@ -271,38 +271,96 @@ export async function POST(req: NextRequest) {
         const companyName = isBrand ? data.brand_info?.company_name : "Creador/a";
         const communityUrl = process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/ugccolombia";
 
-        // Email al lead — confirmación inmediata
+        // Email al lead — bienvenida + comunidad + agenda
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ugccolombia.co";
+        const logoUrl = `${siteUrl}/brand/logo-dark-bg.png`;
+        const firstName = leadName.split(" ")[0];
+
         await resend.emails.send({
           from: "UGC Colombia <noreply@ugccolombia.co>",
           to: data.contact.email,
-          subject: `${leadName}, tu análisis de marca está en camino`,
+          subject: `Bienvenido/a a UGC Colombia, ${firstName}`,
           html: `
-<div style="font-family:'Inter',Helvetica,Arial,sans-serif;background:#000;color:#fff;max-width:560px;margin:0 auto;padding:0;">
-  <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:32px 24px;border-bottom:2px solid #D4A01740;">
-    <p style="color:#10B981;font-size:13px;margin:0 0 4px;">✓ Datos recibidos</p>
-    <h1 style="color:#fff;font-size:24px;margin:0;">Estamos analizando tu marca con IA</h1>
-  </div>
-  <div style="padding:24px;">
-    <p style="color:#BDBCBC;font-size:14px;line-height:1.7;">
-      Hola ${leadName.split(" ")[0]},<br><br>
-      Nuestra IA está analizando ${companyName}: scrapeando tu Instagram, revisando tus ads en Meta y estudiando tu competencia.
-      En unos minutos recibirás un diagnóstico completo con:
-    </p>
-    <ul style="color:#BDBCBC;font-size:14px;line-height:2;padding-left:20px;">
-      <li><strong style="color:#fff;">Score de tu marca</strong> — qué tan bien está tu contenido</li>
-      <li><strong style="color:#fff;">Brechas detectadas</strong> — dónde estás perdiendo oportunidades</li>
-      <li><strong style="color:#fff;">Plan de acción</strong> — qué hacer esta semana para mejorar</li>
-      <li><strong style="color:#fff;">Paquete recomendado</strong> — cómo UGC Colombia puede ayudarte</li>
-    </ul>
+<div style="font-family:'Inter',Helvetica,Arial,sans-serif;background:#000;color:#fff;max-width:580px;margin:0 auto;padding:0;">
 
-    <div style="margin:24px 0;padding:16px;border:1px solid #D4A01730;border-radius:12px;background:#D4A01708;">
-      <p style="color:#D4A017;font-size:14px;font-weight:700;margin:0 0 4px;">Mientras tanto, tienes 2 regalos más:</p>
-      <p style="color:#BDBCBC;font-size:13px;margin:0 0 8px;">📞 Llamada estratégica de 30 min gratis — agéndala en <a href="https://ugccolombia.co" style="color:#F9B334;">ugccolombia.co</a></p>
-      <p style="color:#BDBCBC;font-size:13px;margin:0;">💬 Comunidad de WhatsApp — <a href="${communityUrl}" style="color:#10B981;">Unirte gratis aquí</a></p>
+  <!-- HEADER con logo -->
+  <div style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 50%,#0a0a0a 100%);padding:32px 24px;text-align:center;border-bottom:2px solid #D4A01730;">
+    <img src="${logoUrl}" alt="UGC Colombia" width="180" style="display:inline-block;margin-bottom:16px;" />
+    <h1 style="color:#fff;font-size:22px;margin:0;font-weight:700;">Contenido real, resultados reales.</h1>
+    <p style="color:#BDBCBC;font-size:13px;margin:8px 0 0;">Agencia boutique UGC para marcas que viven de los resultados en LATAM</p>
+  </div>
+
+  <!-- BIENVENIDA -->
+  <div style="padding:28px 24px 0;">
+    <p style="color:#fff;font-size:16px;font-weight:700;margin:0 0 12px;">Hola ${firstName},</p>
+    <p style="color:#BDBCBC;font-size:14px;line-height:1.7;margin:0;">
+      Gracias por confiar en nosotros. Tu marca ya está siendo analizada por nuestra inteligencia artificial.
+      En unos minutos recibirás un diagnóstico completo con score, brechas y recomendaciones personalizadas.
+    </p>
+  </div>
+
+  <!-- QUIÉNES SOMOS -->
+  <div style="padding:24px;margin:20px 24px;border:1px solid #D4A01720;border-radius:16px;background:linear-gradient(135deg,#D4A01708,transparent);">
+    <p style="color:#D4A017;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 8px;font-weight:700;">Quiénes somos</p>
+    <p style="color:#BDBCBC;font-size:13px;line-height:1.7;margin:0;">
+      UGC Colombia es la agencia que conecta marcas con creadores de contenido reales para producir videos, fotos y estrategias que de verdad venden.
+      Estrategia + creadores + producción + IA bajo un mismo techo.
+      Ya ayudamos a marcas en Colombia, LATAM y USA Hispanic a multiplicar sus resultados.
+    </p>
+  </div>
+
+  <!-- 3 REGALOS -->
+  <div style="padding:0 24px;">
+    <p style="color:#fff;font-size:15px;font-weight:700;margin:0 0 16px;">Esto es 100% gratis para ti:</p>
+
+    <!-- Regalo 1: Análisis IA -->
+    <div style="display:flex;gap:12px;margin-bottom:12px;padding:14px;border:1px solid #D4A01725;border-radius:12px;background:#D4A01706;">
+      <div style="min-width:28px;height:28px;border-radius:50%;background:#D4A01720;color:#D4A017;font-size:13px;font-weight:800;text-align:center;line-height:28px;">1</div>
+      <div>
+        <p style="color:#fff;font-size:14px;font-weight:600;margin:0 0 2px;">Análisis de tu marca con IA</p>
+        <p style="color:#BDBCBC;font-size:12px;margin:0;">Score, brechas, pilares de contenido y plan de acción. Llega a tu email en minutos.</p>
+      </div>
+    </div>
+
+    <!-- Regalo 2: Llamada -->
+    <div style="display:flex;gap:12px;margin-bottom:12px;padding:14px;border:1px solid #D4A01725;border-radius:12px;background:#D4A01706;">
+      <div style="min-width:28px;height:28px;border-radius:50%;background:#D4A01720;color:#D4A017;font-size:13px;font-weight:800;text-align:center;line-height:28px;">2</div>
+      <div>
+        <p style="color:#fff;font-size:14px;font-weight:600;margin:0 0 2px;">Llamada estratégica de 30 min gratis</p>
+        <p style="color:#BDBCBC;font-size:12px;margin:0;">Un especialista revisa tu marca contigo y te da un plan concreto.</p>
+      </div>
+    </div>
+
+    <!-- Regalo 3: Comunidad -->
+    <div style="display:flex;gap:12px;margin-bottom:12px;padding:14px;border:1px solid #10B98125;border-radius:12px;background:#10B98106;">
+      <div style="min-width:28px;height:28px;border-radius:50%;background:#10B98120;color:#10B981;font-size:13px;font-weight:800;text-align:center;line-height:28px;">3</div>
+      <div>
+        <p style="color:#fff;font-size:14px;font-weight:600;margin:0 0 2px;">Comunidad de marcas y emprendedores</p>
+        <p style="color:#BDBCBC;font-size:12px;margin:0;">+200 marcas compartiendo estrategias de marketing, ventas y contenido. Gratis.</p>
+      </div>
     </div>
   </div>
-  <div style="padding:16px 24px;border-top:1px solid #222;">
-    <p style="color:#3D3D3C;font-size:11px;margin:0;text-align:center;">UGC Colombia · <a href="https://ugccolombia.co" style="color:#D4A017;">ugccolombia.co</a></p>
+
+  <!-- CTAs -->
+  <div style="padding:24px;text-align:center;">
+    <a href="${communityUrl}" style="display:block;background:#10B981;color:#fff;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-size:15px;margin-bottom:12px;">UNIRME A LA COMUNIDAD GRATIS →</a>
+    <a href="${siteUrl}" style="display:block;background:#D4A017;color:#000;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-size:15px;">AGENDAR MI LLAMADA DE 30 MIN →</a>
+  </div>
+
+  <!-- REDES -->
+  <div style="padding:20px 24px;text-align:center;border-top:1px solid #222;">
+    <p style="color:#BDBCBC;font-size:12px;margin:0 0 8px;">Síguenos y aprende más:</p>
+    <a href="https://www.instagram.com/agenciaugccolombia" style="color:#F9B334;font-size:13px;text-decoration:none;margin:0 8px;">Instagram</a>
+    <a href="https://www.tiktok.com/@agenciaugccolombia" style="color:#F9B334;font-size:13px;text-decoration:none;margin:0 8px;">TikTok</a>
+    <a href="https://www.linkedin.com/company/ugccolombia" style="color:#F9B334;font-size:13px;text-decoration:none;margin:0 8px;">LinkedIn</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding:16px 24px;border-top:1px solid #111;">
+    <p style="color:#3D3D3C;font-size:11px;margin:0;text-align:center;">
+      UGC Colombia · Contenido real, resultados reales.<br>
+      <a href="${siteUrl}" style="color:#D4A017;">ugccolombia.co</a> · Bogotá, Colombia
+    </p>
   </div>
 </div>`,
         });

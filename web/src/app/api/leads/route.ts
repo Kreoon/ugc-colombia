@@ -261,6 +261,84 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // ── IMMEDIATE EMAIL: confirmación + notificación al equipo ──
+    const resendKey = process.env.RESEND_API_KEY;
+    if (resendKey && !resendKey.includes("placeholder")) {
+      try {
+        const { Resend } = await import("resend");
+        const resend = new Resend(resendKey);
+        const leadName = info?.full_name || "amigo/a";
+        const companyName = isBrand ? data.brand_info?.company_name : "Creador/a";
+        const communityUrl = process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/ugccolombia";
+
+        // Email al lead — confirmación inmediata
+        await resend.emails.send({
+          from: "UGC Colombia <noreply@ugccolombia.co>",
+          to: data.contact.email,
+          subject: `${leadName}, tu análisis de marca está en camino`,
+          html: `
+<div style="font-family:'Inter',Helvetica,Arial,sans-serif;background:#000;color:#fff;max-width:560px;margin:0 auto;padding:0;">
+  <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:32px 24px;border-bottom:2px solid #D4A01740;">
+    <p style="color:#10B981;font-size:13px;margin:0 0 4px;">✓ Datos recibidos</p>
+    <h1 style="color:#fff;font-size:24px;margin:0;">Estamos analizando tu marca con IA</h1>
+  </div>
+  <div style="padding:24px;">
+    <p style="color:#BDBCBC;font-size:14px;line-height:1.7;">
+      Hola ${leadName.split(" ")[0]},<br><br>
+      Nuestra IA está analizando ${companyName}: scrapeando tu Instagram, revisando tus ads en Meta y estudiando tu competencia.
+      En unos minutos recibirás un diagnóstico completo con:
+    </p>
+    <ul style="color:#BDBCBC;font-size:14px;line-height:2;padding-left:20px;">
+      <li><strong style="color:#fff;">Score de tu marca</strong> — qué tan bien está tu contenido</li>
+      <li><strong style="color:#fff;">Brechas detectadas</strong> — dónde estás perdiendo oportunidades</li>
+      <li><strong style="color:#fff;">Plan de acción</strong> — qué hacer esta semana para mejorar</li>
+      <li><strong style="color:#fff;">Paquete recomendado</strong> — cómo UGC Colombia puede ayudarte</li>
+    </ul>
+
+    <div style="margin:24px 0;padding:16px;border:1px solid #D4A01730;border-radius:12px;background:#D4A01708;">
+      <p style="color:#D4A017;font-size:14px;font-weight:700;margin:0 0 4px;">Mientras tanto, tienes 2 regalos más:</p>
+      <p style="color:#BDBCBC;font-size:13px;margin:0 0 8px;">📞 Llamada estratégica de 30 min gratis — agéndala en <a href="https://ugccolombia.co" style="color:#F9B334;">ugccolombia.co</a></p>
+      <p style="color:#BDBCBC;font-size:13px;margin:0;">💬 Comunidad de WhatsApp — <a href="${communityUrl}" style="color:#10B981;">Unirte gratis aquí</a></p>
+    </div>
+  </div>
+  <div style="padding:16px 24px;border-top:1px solid #222;">
+    <p style="color:#3D3D3C;font-size:11px;margin:0;text-align:center;">UGC Colombia · <a href="https://ugccolombia.co" style="color:#D4A017;">ugccolombia.co</a></p>
+  </div>
+</div>`,
+        });
+
+        // Email al equipo — notificación inmediata
+        const tempEmoji = data.temperature === "hot" ? "🔥" : data.temperature === "warm" ? "🟡" : "🔵";
+        await resend.emails.send({
+          from: "UGC Colombia <noreply@ugccolombia.co>",
+          to: "founder@kreoon.com",
+          subject: `${tempEmoji} Nuevo lead: ${companyName} — Score ${data.qualification_score}/100`,
+          html: `
+<div style="font-family:Inter,sans-serif;background:#000;color:#fff;padding:24px;max-width:520px;margin:0 auto;">
+  <h2 style="color:#D4A017;margin:0 0 16px;">${tempEmoji} Nuevo lead en el sistema</h2>
+  <table style="font-size:13px;color:#BDBCBC;line-height:2;width:100%;">
+    <tr><td style="color:#D4A017;width:100px;">Nombre</td><td>${leadName}</td></tr>
+    <tr><td style="color:#D4A017;">Empresa</td><td>${companyName}</td></tr>
+    <tr><td style="color:#D4A017;">Email</td><td><a href="mailto:${data.contact.email}" style="color:#F9B334;">${data.contact.email}</a></td></tr>
+    <tr><td style="color:#D4A017;">WhatsApp</td><td><a href="https://wa.me/57${data.contact.whatsapp}" style="color:#F9B334;">+57${data.contact.whatsapp}</a></td></tr>
+    <tr><td style="color:#D4A017;">Score</td><td><strong>${data.qualification_score}/100 (${data.temperature})</strong></td></tr>
+    <tr><td style="color:#D4A017;">Tipo</td><td>${data.lead_type}</td></tr>
+    ${isBrand ? `<tr><td style="color:#D4A017;">Industria</td><td>${data.brand_info?.industry}</td></tr>` : ""}
+    ${isBrand && data.brand_info?.instagram_handle ? `<tr><td style="color:#D4A017;">Instagram</td><td>@${data.brand_info.instagram_handle}</td></tr>` : ""}
+    ${isBrand ? `<tr><td style="color:#D4A017;">Dolor</td><td>${(data.brand_audit as Record<string, unknown>)?.biggest_pain || "N/A"}</td></tr>` : ""}
+    ${isBrand ? `<tr><td style="color:#D4A017;">Ads/mes</td><td>${(data.brand_audit as Record<string, unknown>)?.ad_budget || "N/A"}</td></tr>` : ""}
+    ${isBrand ? `<tr><td style="color:#D4A017;">Urgencia</td><td>${(data.brand_audit as Record<string, unknown>)?.urgency || "N/A"}</td></tr>` : ""}
+  </table>
+  <p style="color:#3D3D3C;font-size:11px;margin-top:20px;">El diagnóstico IA se está generando. Recibirás otro email cuando esté listo.</p>
+</div>`,
+        });
+
+        console.log(`[leads] Immediate emails sent: lead (${data.contact.email}) + team`);
+      } catch (emailErr) {
+        console.error("[leads] Resend immediate email error:", emailErr);
+      }
+    }
+
     return NextResponse.json({ success: true, lead_id: leadId }, { status: 200 });
   } catch (err) {
     console.error("[leads] Unexpected error:", err);

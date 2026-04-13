@@ -11,11 +11,10 @@ import {
   BarChart3,
   Target,
   Zap,
-  TrendingUp,
+  Calendar,
   Instagram,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAudit } from "@/components/lead-audit/AuditContext";
 import { Navbar } from "@/components/home/Navbar";
 import { Footer } from "@/components/home/Footer";
 
@@ -56,7 +55,6 @@ export function DiagnosisPageClient({
   qualificationScore,
   temperature,
 }: Props) {
-  const { openAudit } = useAudit();
   const overallScore = diagnosis?.overall_score ?? qualificationScore ?? 0;
   const scores = diagnosis?.scores ?? {};
   const igProfile = diagnosis?.ig_profile;
@@ -254,7 +252,7 @@ export function DiagnosisPageClient({
               </motion.div>
             )}
 
-            {/* CTA */}
+            {/* CTA — directo a agendar */}
             <motion.div
               className="mt-12 p-8 rounded-2xl border border-brand-gold/20 bg-gradient-to-br from-brand-yellow/8 to-transparent text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -267,12 +265,14 @@ export function DiagnosisPageClient({
               <p className="text-sm text-brand-gray mb-6 max-w-md mx-auto">
                 {serviceProposal.recommended
                   ? `Te recomendamos nuestro plan "${serviceProposal.recommended}". Agenda una llamada y te explicamos cómo.`
-                  : "Agenda tu diagnóstico gratuito y te mostramos exactamente cómo mejorar tus resultados."}
+                  : "30 minutos gratis con un estratega de contenido. Sin compromiso."}
               </p>
-              <Button size="xl" onClick={openAudit} className="gap-2">
-                <TrendingUp className="w-5 h-5" />
-                Agenda tu diagnóstico gratis
-                <ArrowRight className="w-5 h-5" />
+              <Button size="xl" asChild className="gap-2">
+                <a href="/agendar">
+                  <Calendar className="w-5 h-5" />
+                  Agendar mi llamada gratis de 30 min
+                  <ArrowRight className="w-5 h-5" />
+                </a>
               </Button>
             </motion.div>
 

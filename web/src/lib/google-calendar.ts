@@ -104,8 +104,10 @@ export async function getAvailableSlots(): Promise<TimeSlot[]> {
         const busy: Array<{ start: string; end: string }> =
           data.calendars?.primary?.busy || [];
         return { host, busy };
-      } catch {
-        return { host, busy: [] as Array<{ start: string; end: string }> };
+      } catch (err) {
+        console.error(`[calendar] FreeBusy failed for ${host.name}:`, err);
+        // If token fails, return null to skip this host entirely (don't show slots)
+        return null;
       }
     })
   );
@@ -113,7 +115,15 @@ export async function getAvailableSlots(): Promise<TimeSlot[]> {
   const allSlots: TimeSlot[] = [];
   const bufferMs = BUFFER_MIN * 60 * 1000;
 
-  for (const { host, busy } of busyByHost) {
+  // Filter out failed hosts (null = token failed, don't show their slots)
+  const validHosts = busyByHost.filter((h): h is { host: Host; busy: Array<{ start: string; end: string }> } => h !== null);
+
+  if (validHosts.length === 0) {
+    console.error("[calendar] No valid hosts — all token refreshes failed");
+    return [];
+  }
+
+  for (const { host, busy } of validHosts) {
     // Expandir cada busy range con 15min buffer antes y después
     const busyRanges = busy.map((b) => ({
       start: new Date(b.start).getTime() - bufferMs,

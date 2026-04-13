@@ -1,5 +1,5 @@
 // Google Calendar integration — availability + booking
-// Uses OAuth refresh tokens for Alexander (founder) and Brian (ops)
+// Solo founder@kreoon.com por ahora
 
 interface Host {
   key: string;
@@ -21,15 +21,11 @@ function getHosts(): Host[] {
     });
   }
 
-  const opsToken = process.env.GOOGLE_REFRESH_TOKEN_OPS;
-  if (opsToken) {
-    hosts.push({
-      key: "ops",
-      name: "Brian",
-      email: "operaciones@kreoon.com",
-      refreshToken: opsToken,
-    });
-  }
+  // Brian deshabilitado por ahora — descomentar cuando se necesite
+  // const opsToken = process.env.GOOGLE_REFRESH_TOKEN_OPS;
+  // if (opsToken) {
+  //   hosts.push({ key: "ops", name: "Brian", email: "operaciones@kreoon.com", refreshToken: opsToken });
+  // }
 
   return hosts;
 }
@@ -64,21 +60,23 @@ export interface TimeSlot {
   host_name: string;
 }
 
-// Business hours in COT (UTC-5)
-const BUSINESS_START_HOUR = 9;  // 9 AM
-const BUSINESS_END_HOUR = 18;   // 6 PM
-const SLOT_DURATION_MIN = 30;
-const DAYS_AHEAD = 14;
-const BLOCKED_DAYS = [0, 6]; // Sunday=0, Saturday=6
+// Config
+const BUSINESS_START_HOUR = 9;    // 9 AM COT
+const BUSINESS_END_HOUR = 18;     // 6 PM COT
+const SLOT_DURATION_MIN = 30;     // 30 min slots
+const BUFFER_MIN = 15;            // 15 min buffer antes y después de eventos
+const MIN_ADVANCE_HOURS = 4;      // Mínimo 4 horas de anticipación
+const DAYS_AHEAD = 14;            // 14 días hacia adelante
+const BLOCKED_DAYS = [0, 6];      // Domingo=0, Sábado=6
 
 export async function getAvailableSlots(): Promise<TimeSlot[]> {
   const hosts = getHosts();
   if (hosts.length === 0) return [];
 
-  // Time range: today + 14 days
+  // Time range: ahora + 4h mínimo, hasta +14 días
   const now = new Date();
   const timeMin = new Date(now);
-  timeMin.setMinutes(timeMin.getMinutes() + 60); // at least 1h from now
+  timeMin.setHours(timeMin.getHours() + MIN_ADVANCE_HOURS);
   const timeMax = new Date(now);
   timeMax.setDate(timeMax.getDate() + DAYS_AHEAD);
 
@@ -112,36 +110,40 @@ export async function getAvailableSlots(): Promise<TimeSlot[]> {
     })
   );
 
-  // Generate all possible slots per host
   const allSlots: TimeSlot[] = [];
+  const bufferMs = BUFFER_MIN * 60 * 1000;
 
   for (const { host, busy } of busyByHost) {
+    // Expandir cada busy range con 15min buffer antes y después
     const busyRanges = busy.map((b) => ({
-      start: new Date(b.start).getTime(),
-      end: new Date(b.end).getTime(),
+      start: new Date(b.start).getTime() - bufferMs,
+      end: new Date(b.end).getTime() + bufferMs,
     }));
 
-    // Iterate day by day
+    // Iterar día por día
     const day = new Date(timeMin);
     day.setUTCHours(0, 0, 0, 0);
 
     while (day < timeMax) {
       const dayOfWeek = day.getDay();
 
-      // Skip weekends
       if (!BLOCKED_DAYS.includes(dayOfWeek)) {
-        // Generate slots for this day in COT
         for (let hour = BUSINESS_START_HOUR; hour < BUSINESS_END_HOUR; hour++) {
           for (let min = 0; min < 60; min += SLOT_DURATION_MIN) {
+            // Último slot debe terminar antes de BUSINESS_END_HOUR
+            const endHour = hour + Math.floor((min + SLOT_DURATION_MIN) / 60);
+            const endMin = (min + SLOT_DURATION_MIN) % 60;
+            if (endHour > BUSINESS_END_HOUR || (endHour === BUSINESS_END_HOUR && endMin > 0)) continue;
+
             const slotStart = new Date(day);
             // COT = UTC-5
             slotStart.setUTCHours(hour + 5, min, 0, 0);
             const slotEnd = new Date(slotStart.getTime() + SLOT_DURATION_MIN * 60 * 1000);
 
-            // Skip slots in the past
+            // Skip slots que no cumplen mínimo de anticipación (4h)
             if (slotStart.getTime() < timeMin.getTime()) continue;
 
-            // Check if slot overlaps with any busy period
+            // Check si el slot choca con algún busy range (incluyendo buffers)
             const isAvailable = !busyRanges.some(
               (b) => slotStart.getTime() < b.end && slotEnd.getTime() > b.start
             );
@@ -162,25 +164,26 @@ export async function getAvailableSlots(): Promise<TimeSlot[]> {
     }
   }
 
-  // Group by time slot and randomly pick one host per slot
-  const slotMap = new Map<string, TimeSlot[]>();
-  for (const slot of allSlots) {
-    const key = slot.start;
-    if (!slotMap.has(key)) slotMap.set(key, []);
-    slotMap.get(key)!.push(slot);
+  // Si hay múltiples hosts, agrupar por horario y asignar random
+  if (hosts.length > 1) {
+    const slotMap = new Map<string, TimeSlot[]>();
+    for (const slot of allSlots) {
+      if (!slotMap.has(slot.start)) slotMap.set(slot.start, []);
+      slotMap.get(slot.start)!.push(slot);
+    }
+
+    const finalSlots: TimeSlot[] = [];
+    for (const [, candidates] of slotMap) {
+      const pick = candidates[Math.floor(Math.random() * candidates.length)];
+      finalSlots.push(pick);
+    }
+    finalSlots.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+    return finalSlots;
   }
 
-  const finalSlots: TimeSlot[] = [];
-  for (const [, candidates] of slotMap) {
-    // Random pick between available hosts
-    const pick = candidates[Math.floor(Math.random() * candidates.length)];
-    finalSlots.push(pick);
-  }
-
-  // Sort by time
-  finalSlots.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
-
-  return finalSlots;
+  // Un solo host — retornar directo
+  allSlots.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+  return allSlots;
 }
 
 // ─── Booking ─────────────────────────────────────────────────────────────────
@@ -202,11 +205,55 @@ export async function createBooking(
   const host = hosts.find((h) => h.key === slot.host_key);
   if (!host) throw new Error("Host not found");
 
-  const token = await getAccessToken(host.refreshToken);
+  // Validar mínimo 4h de anticipación
+  const slotTime = new Date(slot.start).getTime();
+  const minTime = Date.now() + MIN_ADVANCE_HOURS * 60 * 60 * 1000;
+  if (slotTime < minTime) {
+    throw new Error("Este horario ya no está disponible. Selecciona otro con al menos 4 horas de anticipación.");
+  }
 
+  // Verificar que el slot sigue disponible (evitar race conditions)
+  const token = await getAccessToken(host.refreshToken);
+  const slotStart = new Date(slot.start);
+  const slotEnd = new Date(slot.end);
+  const bufferMs = BUFFER_MIN * 60 * 1000;
+
+  const checkRes = await fetch(
+    "https://www.googleapis.com/calendar/v3/freeBusy",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        timeMin: new Date(slotStart.getTime() - bufferMs).toISOString(),
+        timeMax: new Date(slotEnd.getTime() + bufferMs).toISOString(),
+        items: [{ id: "primary" }],
+      }),
+    }
+  );
+  const checkData = await checkRes.json();
+  const conflicts = checkData.calendars?.primary?.busy || [];
+  if (conflicts.length > 0) {
+    throw new Error("Este horario acaba de ser reservado. Por favor selecciona otro.");
+  }
+
+  // Crear evento
   const event = {
     summary: `Discovery Call — ${attendee.company || attendee.name} | UGC Colombia`,
-    description: `Llamada de diagnóstico con UGC Colombia.\n\nNombre: ${attendee.name}\nEmpresa: ${attendee.company || "N/A"}\nEmail: ${attendee.email}\nScore: ${attendee.score || "N/A"}/100\n\nHost: ${host.name}`,
+    description: [
+      `Llamada de diagnóstico con UGC Colombia.`,
+      ``,
+      `Nombre: ${attendee.name}`,
+      `Empresa: ${attendee.company || "N/A"}`,
+      `Email: ${attendee.email}`,
+      `Score: ${attendee.score || "N/A"}/100`,
+      ``,
+      `Host: ${host.name} (${host.email})`,
+      ``,
+      `— Generado automáticamente por ugccolombia.co`,
+    ].join("\n"),
     start: { dateTime: slot.start, timeZone: "America/Bogota" },
     end: { dateTime: slot.end, timeZone: "America/Bogota" },
     attendees: [
@@ -223,9 +270,11 @@ export async function createBooking(
       useDefault: false,
       overrides: [
         { method: "email", minutes: 60 },
+        { method: "email", minutes: 15 },
         { method: "popup", minutes: 15 },
       ],
     },
+    colorId: "5", // Banana yellow — matches brand
     sendUpdates: "all",
   };
 

@@ -204,6 +204,7 @@ export function getProgressLabel(index: number, total: number): string {
   const pct = (index + 1) / total;
   if (pct <= 0.33) return "Entendiendo tu marca...";
   if (pct <= 0.66) return "Analizando tus brechas...";
+  if (pct < 1) return "Casi listo...";
   return "Generando tu diagnóstico...";
 }
 
@@ -212,8 +213,12 @@ export function isQuizComplete(answers: Record<string, string>): boolean {
   return path.every((key) => answers[key] !== undefined);
 }
 
-// Ensure all required fields for BrandAudit exist, fill with defaults if needed
+// Build audit data — fields not in the quiz path get neutral defaults
+// Also returns which fields were actually asked (for diagnosis accuracy)
 export function buildAuditFromQuiz(answers: Record<string, string>) {
+  const path = getQuizPath(answers);
+  const asked = new Set(path);
+
   return {
     ad_budget: answers.ad_budget || "nada",
     content_budget: answers.content_budget || "nada",
@@ -223,5 +228,12 @@ export function buildAuditFromQuiz(answers: Record<string, string>) {
     monthly_content_pieces: answers.monthly_content_pieces || "0",
     biggest_pain: answers.biggest_pain || "no_se_que_hacer",
     urgency: answers.urgency || "explorando",
+    // Extra: which fields were actually asked (not sent to backend, used for diagnosis)
+    _asked_fields: asked,
   };
+}
+
+// Get which fields were actually asked in the quiz
+export function getAskedFields(answers: Record<string, string>): Set<string> {
+  return new Set(getQuizPath(answers));
 }

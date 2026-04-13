@@ -100,36 +100,39 @@ export interface AIDiagnosis {
 export function generateDiagnosis(
   info: BrandInfo,
   audit: BrandAudit,
-  score: LeadScore
+  score: LeadScore,
+  askedFields?: Set<string>
 ): AIDiagnosis {
   const gaps: string[] = [];
   const recommendations: string[] = [];
+  // Only generate gaps for fields that were actually asked in the quiz
+  const asked = askedFields || new Set(["ad_budget", "content_budget", "current_ctr", "creative_age_weeks", "monthly_content_pieces", "has_active_ads", "biggest_pain", "urgency"]);
 
-  // Detect gaps
-  if (audit.ad_budget === "nada" || audit.ad_budget === "menos_500") {
+  // Detect gaps — only for fields the user actually answered
+  if (asked.has("ad_budget") && (audit.ad_budget === "nada" || audit.ad_budget === "menos_500")) {
     gaps.push("Tu inversión en publicidad es baja o nula — sin distribución, incluso el mejor contenido pasa desapercibido.");
   }
 
-  if (audit.content_budget === "nada") {
+  if (asked.has("content_budget") && audit.content_budget === "nada") {
     gaps.push("No estás invirtiendo en producción de contenido — tu marca depende de lo que ya tienes, y el mercado se mueve rápido.");
   }
 
-  if (audit.current_ctr === "menos_1") {
+  if (asked.has("current_ctr") && audit.current_ctr === "menos_1") {
     gaps.push("Tu CTR está por debajo del 1% — señal clara de fatiga creativa o targeting desalineado.");
     recommendations.push("Necesitas creativos frescos con hooks que capten atención en los primeros 2 segundos. UGC es el formato con mayor CTR en Meta Ads.");
   }
 
-  if (audit.creative_age_weeks === "mas_8" || audit.creative_age_weeks === "4_8") {
+  if (asked.has("creative_age_weeks") && (audit.creative_age_weeks === "mas_8" || audit.creative_age_weeks === "4_8")) {
     gaps.push("Llevas más de un mes sin producir contenido nuevo — tus anuncios están perdiendo efectividad cada día.");
     recommendations.push("La regla de oro: rota creativos cada 2-3 semanas. Con un pack mensual de UGC, nunca te quedas sin munición.");
   }
 
-  if (audit.creative_age_weeks === "no_tengo") {
+  if (asked.has("creative_age_weeks") && audit.creative_age_weeks === "no_tengo") {
     gaps.push("No tienes creativos de video — estás compitiendo con las manos atadas frente a marcas que sí los tienen.");
     recommendations.push("El 92% de los consumidores confía más en contenido generado por personas reales que en anuncios de marca. Empieza con un pack de 4-6 videos UGC.");
   }
 
-  if (audit.monthly_content_pieces === "0" || audit.monthly_content_pieces === "1_3") {
+  if (asked.has("monthly_content_pieces") && (audit.monthly_content_pieces === "0" || audit.monthly_content_pieces === "1_3")) {
     gaps.push("Tu producción de contenido es mínima — necesitas consistencia para alimentar tanto orgánico como paid.");
   }
 

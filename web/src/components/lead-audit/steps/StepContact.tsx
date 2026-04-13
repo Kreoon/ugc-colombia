@@ -43,7 +43,7 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
 
     if (data.lead_type === "marca" && data.brand_info && data.brand_audit) {
       score = calculateBrandScore(data.brand_info, data.brand_audit);
-      diagnosis = generateDiagnosis(data.brand_info, data.brand_audit, score);
+      diagnosis = generateDiagnosis(data.brand_info, data.brand_audit, score, data.asked_fields);
     } else {
       score = { total: 50, temperature: "warm", breakdown: { ad_budget: 0, content_budget: 0, urgency: 0, industry: 0, pain: 0, ads_active: 0, creative_fatigue: 0, website: 0 } };
       diagnosis = {

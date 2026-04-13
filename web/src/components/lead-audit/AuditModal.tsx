@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { getAskedFields } from "@/lib/quiz-engine";
 import { useAudit } from "./AuditContext";
 import { StepType } from "./steps/StepType";
 import { StepBrandInfo } from "./steps/StepBrandInfo";
@@ -27,6 +28,7 @@ export interface AuditData {
   lead_type: LeadTypeValue;
   lead_id?: string;
   early_diagnosis_key?: string;
+  asked_fields?: Set<string>;
   brand_info?: BrandInfo;
   creator_info?: CreatorInfo;
   brand_audit?: BrandAudit;
@@ -71,7 +73,8 @@ export function AuditModal() {
   }
 
   function handleBrandAudit(audit: BrandAudit) {
-    setData({ ...data, brand_audit: audit });
+    const asked = getAskedFields(audit as unknown as Record<string, string>);
+    setData({ ...data, brand_audit: audit, asked_fields: asked });
     setStep(3);
   }
 

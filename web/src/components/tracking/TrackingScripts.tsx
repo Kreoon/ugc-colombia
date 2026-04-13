@@ -5,7 +5,6 @@ import { getConsent } from "@/lib/tracking/consent";
 import { captureUTMParams } from "@/lib/tracking/utm";
 import type { ConsentState } from "@/lib/tracking/types";
 
-import { GoogleTagManager } from "./GoogleTagManager";
 import { GoogleAnalytics } from "./GoogleAnalytics";
 import { MetaPixel } from "./MetaPixel";
 import { TikTokPixel } from "./TikTokPixel";
@@ -32,7 +31,7 @@ export function TrackingScripts() {
     <>
       {consent.analytics && (
         <>
-          <GoogleTagManager />
+          {/* GTM se instala directo en layout.tsx (head + body) para carga inmediata */}
           <GoogleAnalytics />
           <Hotjar />
           <ScrollDepthTracker />

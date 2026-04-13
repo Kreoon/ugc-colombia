@@ -8,6 +8,7 @@ import { AuditProvider } from "@/components/lead-audit/AuditContext";
 import { AuditModal } from "@/components/lead-audit/AuditModal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema } from "@/lib/seo/json-ld";
+import { GTM_ID } from "@/lib/tracking/constants";
 
 const anton = Anton({
   weight: "400",
@@ -90,6 +91,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Google Tag Manager — debe ir lo más arriba posible en <head> */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`,
+          }}
+        />
         {/* Resource hints para acelerar carga del showcase (Bunny Stream + KREOON). */}
         <link rel="preconnect" href="https://iframe.mediadelivery.net" crossOrigin="" />
         <link rel="dns-prefetch" href="https://iframe.mediadelivery.net" />
@@ -99,6 +110,15 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://kreoon-images.b-cdn.net" />
       </head>
       <body className="bg-brand-black text-white font-sans antialiased">
+        {/* Google Tag Manager (noscript) — debe ir justo después de <body> */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>

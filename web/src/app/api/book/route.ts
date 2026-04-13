@@ -8,9 +8,9 @@ const bookSchema = z.object({
   host_key: z.string(),
   name: z.string().min(1),
   email: z.string().email(),
-  company: z.string().optional(),
-  score: z.number().optional(),
-  lead_id: z.string().optional(),
+  company: z.string().nullish(),
+  score: z.number().nullish(),
+  lead_id: z.string().nullish(),
 });
 
 export async function POST(req: NextRequest) {

@@ -261,7 +261,7 @@ export async function createBooking(
 
   // Crear evento
   const event = {
-    summary: `Discovery Call — ${attendee.company || attendee.name} | UGC Colombia`,
+    summary: `Llamada de Diagnóstico Estratégico - ${attendee.name} | UGC Colombia`,
     description: [
       `Llamada de diagnóstico con UGC Colombia.`,
       ``,

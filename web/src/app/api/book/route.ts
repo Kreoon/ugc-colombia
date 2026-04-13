@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
 <div style="font-family:'Inter',Helvetica,Arial,sans-serif;background:#000;color:#fff;max-width:520px;margin:0 auto;padding:0;">
   <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);padding:32px 24px;border-bottom:2px solid #D4A01740;">
     <p style="color:#10B981;font-size:13px;margin:0 0 4px;">✓ Llamada confirmada</p>
-    <h1 style="color:#fff;font-size:24px;margin:0;">Discovery Call con UGC Colombia</h1>
+    <h1 style="color:#fff;font-size:24px;margin:0;">Llamada de Diagnóstico Estratégico con UGC Colombia</h1>
   </div>
   <div style="padding:24px;">
     <table style="width:100%;border-collapse:collapse;font-size:14px;">

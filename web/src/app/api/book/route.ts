@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     const result = await createBooking(
       { start: data.start, end: data.end, host_key: data.host_key },
-      { name: data.name, email: data.email, company: data.company, score: data.score }
+      { name: data.name, email: data.email, company: data.company ?? undefined, score: data.score ?? undefined }
     );
 
     // Update lead in Supabase

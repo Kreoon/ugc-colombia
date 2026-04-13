@@ -103,6 +103,10 @@ export async function POST(req: NextRequest) {
       row.website = data.brand_info.website || null;
       row.industry = data.brand_info.industry;
       row.instagram_handle = data.brand_info.instagram_handle || null;
+      // Generar slug para página de diagnóstico desde el momento de creación
+      const handle = (data.brand_info.instagram_handle || "").replace(/^@/, "").trim();
+      row.diagnosis_slug = handle || data.brand_info.company_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      row.diagnosis_public = true;
     }
 
     if (isBrand && data.brand_audit) {

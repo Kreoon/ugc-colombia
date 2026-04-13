@@ -341,10 +341,11 @@ export async function POST(req: NextRequest) {
     </div>
   </div>
 
-  <!-- CTAs -->
+  <!-- CTAs — 3 botones -->
   <div style="padding:24px;text-align:center;">
-    <a href="${communityUrl}" style="display:block;background:#10B981;color:#fff;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-size:15px;margin-bottom:12px;">UNIRME A LA COMUNIDAD GRATIS →</a>
-    <a href="${siteUrl}/agendar?name=${encodeURIComponent(leadName)}&email=${encodeURIComponent(data.contact.email)}&company=${encodeURIComponent(String(companyName))}&lead_id=${leadId || ''}&score=${data.qualification_score}" style="display:block;background:#D4A017;color:#000;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-size:15px;">AGENDAR MI LLAMADA DE 30 MIN →</a>
+    <a href="${siteUrl}/agendar?name=${encodeURIComponent(leadName)}&email=${encodeURIComponent(data.contact.email)}&company=${encodeURIComponent(String(companyName))}&lead_id=${leadId || ''}&score=${data.qualification_score}" style="display:block;background:#D4A017;color:#000;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-size:15px;margin-bottom:10px;">AGENDAR MI LLAMADA GRATIS DE 30 MIN →</a>
+    <a href="${communityUrl}" style="display:block;background:#10B981;color:#fff;font-weight:700;padding:14px;border-radius:12px;text-decoration:none;font-size:15px;margin-bottom:10px;">UNIRME A LA COMUNIDAD DE WHATSAPP →</a>
+    ${isBrand && data.brand_info?.instagram_handle ? `<a href="${siteUrl}/diagnostico/${(data.brand_info.instagram_handle || '').replace(/^@/, '')}" style="display:block;background:transparent;color:#D4A017;font-weight:600;padding:12px;border:1px solid #D4A01740;border-radius:12px;text-decoration:none;font-size:14px;">VER MI ANÁLISIS COMPLETO →</a>` : ''}
   </div>
 
   <!-- REDES -->

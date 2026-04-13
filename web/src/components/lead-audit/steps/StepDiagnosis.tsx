@@ -168,74 +168,46 @@ export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Pr
         />
       )}
 
-      {/* CTA section */}
+      {/* CTA — 100% enfocado en agendar */}
       <motion.div
-        className="space-y-3"
+        className="space-y-4"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
       >
-        {/* 3 regalos */}
-        <p className="text-xs text-brand-gray uppercase tracking-wider font-semibold mb-3">
-          Esto es gratis para ti
-        </p>
-
-        <div className="space-y-3">
-          {/* Regalo 1: Análisis por email */}
-          <div className="flex items-start gap-3 p-3 rounded-xl bg-brand-yellow/5 border border-brand-yellow/15">
-            <span className="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-[11px] text-brand-yellow font-bold flex-shrink-0 mt-0.5">1</span>
-            <div>
-              <p className="text-sm text-white font-medium">Análisis completo en tu email</p>
-              <p className="text-[11px] text-brand-gray">Score, brechas, recomendaciones y plan de acción personalizado.</p>
-            </div>
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1" />
-          </div>
-
-          {/* Regalo 2: Llamada gratis */}
-          <button
-            type="button"
+        <div className="p-5 rounded-2xl border border-brand-gold/25 bg-gradient-to-br from-brand-yellow/8 to-transparent text-center">
+          <p className="text-white font-bold text-base mb-1">
+            {isHot
+              ? "Tu marca tiene alto potencial — hablemos esta semana"
+              : "¿Quieres un plan concreto para mejorar estos resultados?"}
+          </p>
+          <p className="text-xs text-brand-gray mb-4">
+            30 minutos gratis con un estratega de contenido. Sin compromiso.
+          </p>
+          <Button
+            size="xl"
+            className="w-full gap-2"
             onClick={onBooking}
-            className="flex items-start gap-3 p-3 rounded-xl bg-brand-yellow/5 border border-brand-yellow/15 w-full text-left hover:bg-brand-yellow/10 transition-colors group"
           >
-            <span className="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-[11px] text-brand-yellow font-bold flex-shrink-0 mt-0.5">2</span>
-            <div className="flex-1">
-              <p className="text-sm text-white font-medium">Llamada estratégica de 30 min gratis</p>
-              <p className="text-[11px] text-brand-gray">Un especialista revisa tu marca contigo y te da un plan concreto.</p>
-            </div>
-            <ArrowRight className="w-4 h-4 text-brand-yellow flex-shrink-0 mt-1 group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          {/* Regalo 3: Comunidad */}
-          <a
-            href={process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-start gap-3 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 w-full text-left hover:bg-emerald-500/10 transition-colors group"
-          >
-            <span className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-[11px] text-emerald-400 font-bold flex-shrink-0 mt-0.5">3</span>
-            <div className="flex-1">
-              <p className="text-sm text-white font-medium">Acceso a nuestra comunidad</p>
-              <p className="text-[11px] text-brand-gray">+200 marcas compartiendo estrategias de marketing, ventas y contenido.</p>
-            </div>
-            <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
-          </a>
+            <Calendar className="w-5 h-5" />
+            Agendar mi llamada gratis
+            <ArrowRight className="w-5 h-5" />
+          </Button>
+          {isHot && (
+            <p className="text-[11px] text-brand-yellow mt-2">
+              Score alto — tienes slots prioritarios esta semana
+            </p>
+          )}
         </div>
 
-        {/* CTA principal */}
-        <Button
-          size="lg"
-          className="w-full gap-2 mt-4"
-          onClick={onBooking}
-        >
-          <Calendar className="w-5 h-5" />
-          {isHot ? "Agendar mi llamada gratis (prioritaria)" : "Agendar mi llamada gratis de 30 min"}
-          <ArrowRight className="w-5 h-5" />
-        </Button>
+        <p className="text-center text-[11px] text-brand-gray/40">
+          Te enviamos el análisis completo a tu email. Revisa tu bandeja.
+        </p>
 
         <button
           type="button"
           onClick={onClose}
-          className="w-full text-center text-xs text-brand-gray/60 hover:text-brand-gray transition-colors py-2 mt-2"
+          className="w-full text-center text-xs text-brand-gray/60 hover:text-brand-gray transition-colors py-1"
         >
           Cerrar
         </button>

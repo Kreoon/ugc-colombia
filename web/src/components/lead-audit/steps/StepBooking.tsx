@@ -104,11 +104,14 @@ export function StepBooking({ data, score, onBack, onClose }: Props) {
 
       if (!res.ok) throw new Error(result.error || "Error al agendar");
 
-      setBooked({
-        host_name: result.host_name,
-        meet_link: result.meet_link,
-        start: result.start,
+      // Redirect to thank you page with meeting details
+      const params = new URLSearchParams({
+        host: result.host_name || "",
+        meet: result.meet_link || "",
+        start: result.start || "",
       });
+      onClose();
+      window.location.href = `/gracias?${params.toString()}`;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al agendar");
     } finally {

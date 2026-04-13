@@ -12,7 +12,7 @@ const CLIENT_LOGOS: {
   { name: "Beemo", letters: "Be", logo: "https://beemo.tv/img/logo_smartbeemo.svg" },
   { name: "Unlocked Academy", letters: "UA", logo: "https://lwfiles.mycourse.app/68dc04362e776ced248cac8e-public/b5b23fe7d48093ee532a2206f6cd2049.png" },
   { name: "Altevo", letters: "Al", logo: "https://altevo.com.co/cdn/shop/files/Altevo_Logo.png?v=1758591345&width=150" },
-  { name: "Vitalcom", letters: "Vi", logo: "https://assets.skool.com/f/5c95a3174d2f4ea885f0c635959dfecf/7c7707c4438245d19469b65c4d1e8194c69499abf4f44c3091a913fa077fd85d-md.jpg", darkBg: true },
+  { name: "Vitalcom", letters: "Vi", logo: "https://scontent.feoh4-4.fna.fbcdn.net/v/t39.30808-6/468136678_122126298848446269_6952890091794705534_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=53a332&_nc_ohc=diMVg_MCpkEQ7kNvwFh5Zf5&_nc_oc=AdootnGc2JbPUY48kwnis24uiV9WQlrWwx1KEtq1fVCJKe3NjipJVbz1DvDJqCVmqqk&_nc_zt=23&_nc_ht=scontent.feoh4-4.fna&_nc_gid=YIwdUyE0BJrHhRBXT-3pvA&_nc_ss=7a389&oh=00_Af24NGIh8mn-KvuCn5E6diZVLK1bod1Ws7nQxYUEfEFZnA&oe=69E2D919" },
   { name: "Shop Tokio", letters: "ST", logo: "https://shoptokio.co/cdn/shop/files/gempages_513541607190955198-297e6fa2-f0e0-455a-bdf4-12a9388c792d.webp?v=1728089603&width=260" },
   { name: "Soluna", letters: "So", logo: "https://laboratoriosoluna.com/cdn/shop/files/Diseno_sin_titulo_1.png?v=1738769608&width=300" },
 ];

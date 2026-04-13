@@ -9,21 +9,6 @@ interface StepTypeProps {
   onSelect: (type: "marca" | "creador") => void;
 }
 
-const options = [
-  {
-    type: "marca" as const,
-    icon: Building2,
-    title: "Soy una marca",
-    description: "Busco creadores de contenido UGC para mi marca o negocio",
-  },
-  {
-    type: "creador" as const,
-    icon: Camera,
-    title: "Soy creador/a",
-    description: "Quiero crear contenido UGC para marcas y ganar dinero",
-  },
-];
-
 export function StepType({ onSelect }: StepTypeProps) {
   const router = useRouter();
   const { closeAudit } = useAudit();
@@ -42,19 +27,17 @@ export function StepType({ onSelect }: StepTypeProps) {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-[10px] font-semibold text-brand-yellow tracking-[0.2em] uppercase mb-4">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
-          Diagnóstico gratuito
+          Diagnóstico gratuito con IA
         </span>
-        <h2 className="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight mb-2">
-          Cuéntanos sobre ti
+        <h2 className="font-sans text-xl sm:text-2xl text-white font-bold mb-2">
+          Descubre qué necesita tu marca
         </h2>
-        <p className="text-sm text-brand-gray max-w-md mb-8">
-          En menos de 2 minutos obtendrás un diagnóstico personalizado con IA
-          sobre tu estrategia de contenido.
+        <p className="text-sm text-brand-gray/70 max-w-md mb-8">
+          En menos de 2 minutos recibirás un análisis personalizado con datos reales de tu industria.
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-        {/* Marca → continúa el flujo de auditoría */}
         <motion.button
           type="button"
           onClick={() => onSelect("marca")}
@@ -70,11 +53,10 @@ export function StepType({ onSelect }: StepTypeProps) {
           </div>
           <div className="text-center">
             <p className="font-sans font-bold text-white text-base mb-1">Soy una marca</p>
-            <p className="text-xs text-brand-gray leading-relaxed">Busco creadores de contenido UGC para mi marca o negocio</p>
+            <p className="text-xs text-brand-gray leading-relaxed">Quiero contenido UGC para mi marca o negocio</p>
           </div>
         </motion.button>
 
-        {/* Creador → redirige a /registro */}
         <motion.button
           type="button"
           onClick={handleCreator}
@@ -90,7 +72,7 @@ export function StepType({ onSelect }: StepTypeProps) {
           </div>
           <div className="text-center">
             <p className="font-sans font-bold text-white text-base mb-1">Soy creador/a</p>
-            <p className="text-xs text-brand-gray leading-relaxed">Quiero crear contenido UGC para marcas y ganar dinero</p>
+            <p className="text-xs text-brand-gray leading-relaxed">Quiero ganar dinero creando contenido para marcas</p>
           </div>
         </motion.button>
       </div>

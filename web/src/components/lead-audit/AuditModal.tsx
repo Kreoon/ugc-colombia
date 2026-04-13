@@ -35,7 +35,6 @@ export interface AuditData {
 }
 
 // Steps: 0=type, 1=info, 2=audit, 3=contact, 4=diagnosis, 5=booking
-const PROGRESS_STEPS = 4; // steps 1-4 shown in progress bar
 
 export function AuditModal() {
   const { isOpen, closeAudit } = useAudit();
@@ -101,23 +100,6 @@ export function AuditModal() {
           isBookingStep ? "max-w-3xl" : "max-w-2xl"
         )}
       >
-        {/* Progress bar — shown on steps 1-3 */}
-        {step >= 1 && step <= 3 && (
-          <div className="px-6 pt-6">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[11px] font-sans font-semibold text-brand-gray tracking-wider uppercase">
-                Paso {step} de {PROGRESS_STEPS}
-              </span>
-            </div>
-            <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-brand-yellow to-brand-gold rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${(step / PROGRESS_STEPS) * 100}%` }}
-              />
-            </div>
-          </div>
-        )}
-
         {/* Steps */}
         <div className="p-6">
           {step === 0 && <StepType onSelect={handleTypeSelect} />}

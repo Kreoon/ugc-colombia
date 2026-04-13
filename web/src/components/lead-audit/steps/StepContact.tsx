@@ -38,7 +38,6 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
     setIsSubmitting(true);
     setServerError("");
 
-    // Calculate score (only for brands, creators get a default)
     let score: LeadScore;
     let diagnosis: AIDiagnosis;
 
@@ -46,18 +45,14 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
       score = calculateBrandScore(data.brand_info, data.brand_audit);
       diagnosis = generateDiagnosis(data.brand_info, data.brand_audit, score);
     } else {
-      // Creator default — they all get connected
       score = { total: 50, temperature: "warm", breakdown: { ad_budget: 0, content_budget: 0, urgency: 0, industry: 0, pain: 0, ads_active: 0, creative_fatigue: 0, website: 0 } };
       diagnosis = {
         headline: "Tu perfil de creador/a",
         score_label: "Tienes potencial para trabajar con marcas a través de UGC Colombia",
         gaps: [],
-        recommendations: [
-          "Nuestro equipo revisará tu perfil y te contactará con oportunidades que encajen con tu nicho.",
-          "Mientras tanto, asegúrate de tener un portafolio actualizado con tus mejores trabajos.",
-        ],
+        recommendations: ["Nuestro equipo revisará tu perfil y te contactará con oportunidades."],
         urgency_message: "Te contactaremos en las próximas 48 horas.",
-        cta_message: "Agenda una llamada para conocernos y empezar a conectarte con marcas.",
+        cta_message: "Agenda una llamada para conocernos.",
       };
     }
 
@@ -89,16 +84,16 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
 
   return (
     <StepLayout
-      title="Último paso"
-      subtitle="Déjanos tus datos para enviarte tu diagnóstico personalizado."
+      title="Casi listo — ¿dónde te enviamos el diagnóstico?"
+      subtitle="Recibirás un análisis completo de tu marca por email."
       onBack={onBack}
       onSubmit={handleSubmit}
-      submitLabel="Ver mi diagnóstico con IA"
+      submitLabel="Ver mi diagnóstico →"
       isSubmitting={isSubmitting}
     >
       <div className="space-y-4">
         <div>
-          <label className={labelClass}>Email *</label>
+          <label className={labelClass}>Email</label>
           <input
             type="email"
             className={inputClass}
@@ -110,9 +105,9 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
         </div>
 
         <div>
-          <label className={labelClass}>WhatsApp *</label>
+          <label className={labelClass}>WhatsApp</label>
           <div className="flex gap-2">
-            <span className="flex items-center px-3 bg-black/60 border border-brand-gold/30 rounded-lg text-sm text-brand-gray">
+            <span className="flex items-center px-3.5 bg-black/60 border border-brand-gold/30 rounded-xl text-sm text-brand-gray">
               +57
             </span>
             <input
@@ -126,26 +121,14 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
           {errors.whatsapp && <p className={errorClass}>{errors.whatsapp}</p>}
         </div>
 
-        <div>
-          <label className={labelClass}>País</label>
-          <input
-            type="text"
-            className={inputClass}
-            placeholder="Colombia"
-            value={form.country}
-            onChange={(e) => setForm({ ...form, country: e.target.value })}
-          />
-        </div>
-
         {serverError && (
-          <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-sm text-red-400">
+          <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-sm text-red-400">
             {serverError}
           </div>
         )}
 
-        <p className="text-[11px] text-brand-gray/60 leading-relaxed">
-          Al enviar aceptas que te contactemos por email y WhatsApp con tu diagnóstico
-          y oportunidades relevantes. No spam, lo prometemos.
+        <p className="text-[11px] text-brand-gray/50 leading-relaxed">
+          Al enviar aceptas recibir tu diagnóstico por email y WhatsApp. Cero spam.
         </p>
       </div>
     </StepLayout>

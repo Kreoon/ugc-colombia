@@ -3,12 +3,13 @@
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import type { ReactNode } from "react";
 
-// Shared styles matching RegistrationForm patterns
+// ─── Shared styles ───────────────────────────────────────────────────────────
+
 export const inputClass = cn(
-  "w-full bg-black/60 border border-brand-gold/30 rounded-lg px-4 py-3",
+  "w-full bg-black/60 border border-brand-gold/30 rounded-xl px-4 py-3.5",
   "text-white placeholder:text-brand-gray/50 font-sans text-sm",
   "focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold/60",
   "transition-all duration-200"
@@ -19,10 +20,7 @@ export const labelClass =
 
 export const errorClass = "mt-1 text-xs text-red-400";
 
-export const selectClass = cn(
-  inputClass,
-  "appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23BDBCBC%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22/%3E%3C/svg%3E')] bg-[length:12px] bg-[right_12px_center] bg-no-repeat pr-8"
-);
+// ─── OptionCard — single select with auto-advance ───────────────────────────
 
 interface OptionCardProps {
   selected: boolean;
@@ -34,16 +32,17 @@ interface OptionCardProps {
 
 export function OptionCard({ selected, onClick, label, sublabel, icon }: OptionCardProps) {
   return (
-    <button
+    <motion.button
       type="button"
       onClick={onClick}
       className={cn(
-        "flex items-center gap-3 w-full px-4 py-3 rounded-xl border text-left transition-all text-sm",
+        "flex items-center gap-3 w-full px-4 py-3.5 rounded-xl border text-left transition-colors text-sm",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
         selected
           ? "border-brand-gold/60 bg-brand-yellow/10 text-white"
           : "border-white/10 bg-white/[0.02] text-brand-gray hover:border-white/20 hover:bg-white/[0.04]"
       )}
+      whileTap={{ scale: 0.98 }}
     >
       {icon && <span className="flex-shrink-0">{icon}</span>}
       <div className="flex-1 min-w-0">
@@ -53,9 +52,7 @@ export function OptionCard({ selected, onClick, label, sublabel, icon }: OptionC
       <div
         className={cn(
           "w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all",
-          selected
-            ? "border-brand-yellow bg-brand-yellow"
-            : "border-white/20"
+          selected ? "border-brand-yellow bg-brand-yellow" : "border-white/20"
         )}
       >
         {selected && (
@@ -64,9 +61,11 @@ export function OptionCard({ selected, onClick, label, sublabel, icon }: OptionC
           </svg>
         )}
       </div>
-    </button>
+    </motion.button>
   );
 }
+
+// ─── MultiSelectCard — chips for multi-select ───────────────────────────────
 
 interface MultiSelectCardProps {
   selected: boolean;
@@ -80,7 +79,7 @@ export function MultiSelectCard({ selected, onClick, label }: MultiSelectCardPro
       type="button"
       onClick={onClick}
       className={cn(
-        "px-3 py-2 rounded-lg border text-xs font-sans font-medium transition-all",
+        "px-3.5 py-2.5 rounded-lg border text-xs font-sans font-medium transition-all",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
         selected
           ? "border-brand-gold/60 bg-brand-yellow/15 text-brand-yellow"
@@ -91,6 +90,80 @@ export function MultiSelectCard({ selected, onClick, label }: MultiSelectCardPro
     </button>
   );
 }
+
+// ─── SurveyQuestion — one question per screen ───────────────────────────────
+
+interface SurveyQuestionProps {
+  question: string;
+  hint?: string;
+  children: ReactNode;
+  onBack?: () => void;
+  onSubmit?: () => void;
+  submitLabel?: string;
+  isSubmitting?: boolean;
+  canSubmit?: boolean;
+  showSubmit?: boolean;
+}
+
+export function SurveyQuestion({
+  question,
+  hint,
+  children,
+  onBack,
+  onSubmit,
+  submitLabel = "Continuar",
+  isSubmitting = false,
+  canSubmit = true,
+  showSubmit = true,
+}: SurveyQuestionProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+      className="min-h-[200px] flex flex-col"
+    >
+      <div className="mb-5">
+        <h3 className="font-sans text-lg sm:text-xl text-white font-bold leading-snug">
+          {question}
+        </h3>
+        {hint && (
+          <p className="text-sm text-brand-gray/70 mt-1.5">{hint}</p>
+        )}
+      </div>
+
+      <div className="flex-1">{children}</div>
+
+      <div className="flex items-center justify-between mt-6 gap-4">
+        {onBack ? (
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-sm text-brand-gray hover:text-white transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Atrás
+          </button>
+        ) : (
+          <div />
+        )}
+        {showSubmit && onSubmit && (
+          <Button
+            type="button"
+            onClick={onSubmit}
+            disabled={!canSubmit || isSubmitting}
+            size="default"
+          >
+            {isSubmitting ? "Enviando..." : submitLabel}
+          </Button>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── StepLayout — wrapper for multi-field steps ─────────────────────────────
 
 interface StepLayoutProps {
   title: string;
@@ -115,25 +188,26 @@ export function StepLayout({
 }: StepLayoutProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
+      initial={{ opacity: 0, x: 40 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      exit={{ opacity: 0, x: -40 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mb-6">
-        <h3 className="font-display text-xl sm:text-2xl text-white uppercase tracking-tight">
+      <div className="mb-5">
+        <h3 className="font-sans text-lg sm:text-xl text-white font-bold leading-snug">
           {title}
         </h3>
-        {subtitle && <p className="text-sm text-brand-gray mt-1">{subtitle}</p>}
+        {subtitle && <p className="text-sm text-brand-gray/70 mt-1.5">{subtitle}</p>}
       </div>
 
       {children}
 
-      <div className="flex items-center justify-between mt-8 gap-4">
+      <div className="flex items-center justify-between mt-6 gap-4">
         {onBack ? (
           <button
             type="button"
             onClick={onBack}
-            className="flex items-center gap-2 text-sm text-brand-gray hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-sm text-brand-gray hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Atrás
@@ -146,7 +220,7 @@ export function StepLayout({
             type="button"
             onClick={onSubmit}
             disabled={!canSubmit || isSubmitting}
-            size="lg"
+            size="default"
           >
             {isSubmitting ? "Enviando..." : submitLabel}
           </Button>

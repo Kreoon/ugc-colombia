@@ -1,66 +1,119 @@
 "use client";
 
-import { useState } from "react";
-import { StepLayout, labelClass, errorClass, OptionCard } from "./shared";
+import { useState, useCallback } from "react";
+import { AnimatePresence } from "motion/react";
+import { SurveyQuestion, OptionCard } from "./shared";
 import type { BrandAudit } from "@/lib/validations/lead-audit";
 import { brandAuditSchema } from "@/lib/validations/lead-audit";
 
-const AD_BUDGETS = [
-  { value: "nada", label: "$0 — No invierto en ads" },
-  { value: "menos_500", label: "Menos de $500 USD/mes" },
-  { value: "500_1000", label: "$500 - $1,000 USD/mes" },
-  { value: "1000_3000", label: "$1,000 - $3,000 USD/mes" },
-  { value: "3000_5000", label: "$3,000 - $5,000 USD/mes" },
-  { value: "mas_5000", label: "Más de $5,000 USD/mes" },
-] as const;
+// ─── Survey questions config ─────────────────────────────────────────────────
 
-const CONTENT_BUDGETS = [
-  { value: "nada", label: "$0 — No invierto en contenido" },
-  { value: "menos_500", label: "Menos de $500 USD/mes" },
-  { value: "500_1000", label: "$500 - $1,000 USD/mes" },
-  { value: "1000_3000", label: "$1,000 - $3,000 USD/mes" },
-  { value: "3000_5000", label: "$3,000 - $5,000 USD/mes" },
-  { value: "mas_5000", label: "Más de $5,000 USD/mes" },
-] as const;
+interface QuestionConfig {
+  key: string;
+  question: string;
+  hint?: string;
+  options: Array<{ value: string; label: string; sublabel?: string }>;
+}
 
-const CTR_OPTIONS = [
-  { value: "no_se", label: "No sé / No mido" },
-  { value: "menos_1", label: "Menos de 1%" },
-  { value: "1_2", label: "Entre 1% y 2%" },
-  { value: "mas_2", label: "Más de 2%" },
-] as const;
+const QUESTIONS: QuestionConfig[] = [
+  {
+    key: "biggest_pain",
+    question: "¿Cuál es tu mayor frustración con el contenido de tu marca?",
+    hint: "Elige la que más te identifique — esto define el enfoque de tu diagnóstico.",
+    options: [
+      { value: "no_tengo_contenido", label: "No tengo contenido de calidad", sublabel: "Necesito empezar desde cero o casi" },
+      { value: "contenido_no_convierte", label: "Mi contenido no genera ventas", sublabel: "Publico pero no veo resultados en ingresos" },
+      { value: "muy_caro", label: "Producir contenido es muy caro", sublabel: "Los costos se comen mi margen" },
+      { value: "no_encuentro_creadores", label: "No encuentro buenos creadores", sublabel: "Es un dolor encontrar gente confiable" },
+      { value: "inconsistencia", label: "No soy consistente publicando", sublabel: "Empiezo con fuerza y luego me pierdo" },
+      { value: "no_se_que_hacer", label: "No sé por dónde empezar", sublabel: "Estoy perdido/a con tantas opciones" },
+    ],
+  },
+  {
+    key: "ad_budget",
+    question: "¿Cuánto inviertes en publicidad digital al mes?",
+    hint: "Meta Ads, Google Ads, TikTok Ads — todo cuenta.",
+    options: [
+      { value: "nada", label: "$0 — No invierto en ads" },
+      { value: "menos_500", label: "Menos de $500 USD/mes" },
+      { value: "500_1000", label: "$500 - $1,000 USD/mes" },
+      { value: "1000_3000", label: "$1,000 - $3,000 USD/mes" },
+      { value: "3000_5000", label: "$3,000 - $5,000 USD/mes" },
+      { value: "mas_5000", label: "Más de $5,000 USD/mes" },
+    ],
+  },
+  {
+    key: "content_budget",
+    question: "¿Y cuánto inviertes en producción de contenido?",
+    hint: "Videos, fotos, diseño, creadores, agencia — lo que sea.",
+    options: [
+      { value: "nada", label: "$0 — No invierto en contenido" },
+      { value: "menos_500", label: "Menos de $500 USD/mes" },
+      { value: "500_1000", label: "$500 - $1,000 USD/mes" },
+      { value: "1000_3000", label: "$1,000 - $3,000 USD/mes" },
+      { value: "3000_5000", label: "$3,000 - $5,000 USD/mes" },
+      { value: "mas_5000", label: "Más de $5,000 USD/mes" },
+    ],
+  },
+  {
+    key: "has_active_ads",
+    question: "¿Tienes anuncios activos corriendo en este momento?",
+    options: [
+      { value: "true", label: "Sí, tengo ads corriendo", sublabel: "En Meta, Google, TikTok u otra plataforma" },
+      { value: "false", label: "No, no tengo ads activos", sublabel: "Actualmente no estoy pautando" },
+    ],
+  },
+  {
+    key: "current_ctr",
+    question: "¿Cuál es tu CTR promedio en anuncios?",
+    hint: "Si no lo sabes, no te preocupes — eso ya nos dice algo importante.",
+    options: [
+      { value: "no_se", label: "No sé / No mido", sublabel: "No tengo claro este dato" },
+      { value: "menos_1", label: "Menos de 1%", sublabel: "La gente no hace clic en mis ads" },
+      { value: "1_2", label: "Entre 1% y 2%", sublabel: "Decente pero quiero mejorar" },
+      { value: "mas_2", label: "Más de 2%", sublabel: "Mis ads funcionan bien en clics" },
+    ],
+  },
+  {
+    key: "creative_age_weeks",
+    question: "¿Hace cuánto produjiste tu último video para ads o redes?",
+    hint: "La frescura del contenido impacta directamente en tus resultados.",
+    options: [
+      { value: "menos_2", label: "Menos de 2 semanas" },
+      { value: "2_4", label: "2 a 4 semanas" },
+      { value: "4_8", label: "1 a 2 meses" },
+      { value: "mas_8", label: "Más de 2 meses", sublabel: "Tus creativos probablemente están fatigados" },
+      { value: "no_tengo", label: "Nunca he producido video", sublabel: "No tengo creativos de video" },
+    ],
+  },
+  {
+    key: "monthly_content_pieces",
+    question: "¿Cuántas piezas de contenido produces al mes?",
+    hint: "Reels, posts, carruseles, stories con diseño — todo cuenta.",
+    options: [
+      { value: "0", label: "Ninguna", sublabel: "No estoy produciendo contenido" },
+      { value: "1_3", label: "1 a 3 piezas" },
+      { value: "4_8", label: "4 a 8 piezas" },
+      { value: "9_15", label: "9 a 15 piezas" },
+      { value: "mas_15", label: "Más de 15 piezas", sublabel: "Tengo una operación activa" },
+    ],
+  },
+  {
+    key: "urgency",
+    question: "¿Qué tan urgente es resolver tu contenido?",
+    hint: "Esto nos ayuda a priorizar tu diagnóstico.",
+    options: [
+      { value: "inmediata", label: "Lo necesito ya", sublabel: "Cada semana sin contenido nuevo me cuesta dinero" },
+      { value: "este_mes", label: "Quiero arrancar este mes", sublabel: "Tengo la decisión tomada" },
+      { value: "proximo_trimestre", label: "En el próximo trimestre", sublabel: "Estoy planeando con tiempo" },
+      { value: "explorando", label: "Solo estoy explorando", sublabel: "Quiero ver qué opciones hay" },
+    ],
+  },
+];
 
-const CREATIVE_AGE = [
-  { value: "menos_2", label: "Menos de 2 semanas" },
-  { value: "2_4", label: "2-4 semanas" },
-  { value: "4_8", label: "1-2 meses" },
-  { value: "mas_8", label: "Más de 2 meses" },
-  { value: "no_tengo", label: "No tengo creativos de video" },
-] as const;
+const TOTAL_Q = QUESTIONS.length;
 
-const MONTHLY_PIECES = [
-  { value: "0", label: "Ninguno" },
-  { value: "1_3", label: "1-3 piezas" },
-  { value: "4_8", label: "4-8 piezas" },
-  { value: "9_15", label: "9-15 piezas" },
-  { value: "mas_15", label: "Más de 15 piezas" },
-] as const;
-
-const PAINS = [
-  { value: "no_tengo_contenido", label: "No tengo contenido de calidad" },
-  { value: "contenido_no_convierte", label: "Mi contenido no genera ventas" },
-  { value: "muy_caro", label: "Producir contenido es muy caro" },
-  { value: "no_encuentro_creadores", label: "No encuentro buenos creadores" },
-  { value: "inconsistencia", label: "No soy consistente publicando" },
-  { value: "no_se_que_hacer", label: "No sé por dónde empezar" },
-] as const;
-
-const URGENCY = [
-  { value: "inmediata", label: "Necesito esto ya — es urgente" },
-  { value: "este_mes", label: "Quiero arrancar este mes" },
-  { value: "proximo_trimestre", label: "En el próximo trimestre" },
-  { value: "explorando", label: "Solo estoy explorando opciones" },
-] as const;
+// ─── Component ───────────────────────────────────────────────────────────────
 
 interface Props {
   onSubmit: (data: BrandAudit) => void;
@@ -68,197 +121,87 @@ interface Props {
 }
 
 export function StepBrandAudit({ onSubmit, onBack }: Props) {
-  const [form, setForm] = useState({
-    ad_budget: "" as string,
-    content_budget: "" as string,
-    has_active_ads: false,
-    current_ctr: "" as string,
-    creative_age_weeks: "" as string,
-    monthly_content_pieces: "" as string,
-    biggest_pain: "" as string,
-    urgency: "" as string,
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [qIndex, setQIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
 
-  function handleSubmit() {
-    const result = brandAuditSchema.safeParse(form);
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      result.error.issues.forEach((issue) => {
-        fieldErrors[issue.path[0] as string] = issue.message;
-      });
-      setErrors(fieldErrors);
-      // Scroll to first error
-      const firstKey = result.error.issues[0]?.path[0] as string;
-      document.getElementById(`audit-${firstKey}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
+  const currentQ = QUESTIONS[qIndex];
+
+  const handleSelect = useCallback(
+    (value: string) => {
+      const updated = { ...answers, [currentQ.key]: value };
+      setAnswers(updated);
+
+      // Auto-advance after a brief delay (feels intentional)
+      setTimeout(() => {
+        if (qIndex < TOTAL_Q - 1) {
+          setQIndex(qIndex + 1);
+        } else {
+          // Last question — submit
+          const parsed = buildAuditData(updated);
+          if (parsed) onSubmit(parsed);
+        }
+      }, 300);
+    },
+    [answers, currentQ.key, qIndex, onSubmit]
+  );
+
+  function handleBack() {
+    if (qIndex > 0) {
+      setQIndex(qIndex - 1);
+    } else {
+      onBack();
     }
-    setErrors({});
-    onSubmit(result.data);
   }
 
   return (
-    <StepLayout
-      title="Auditoría de tu estrategia"
-      subtitle="Responde honestamente — tu diagnóstico será más preciso."
-      onBack={onBack}
-      onSubmit={handleSubmit}
-      submitLabel="Ver mi diagnóstico"
-    >
-      <div className="space-y-6">
-        {/* Ad budget */}
-        <div id="audit-ad_budget">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">1.</span>
-            ¿Cuánto inviertes en publicidad digital al mes? *
-          </label>
-          {errors.ad_budget && <p className={errorClass}>{errors.ad_budget}</p>}
-          <div className="space-y-2 mt-2">
-            {AD_BUDGETS.map((b) => (
-              <OptionCard
-                key={b.value}
-                selected={form.ad_budget === b.value}
-                onClick={() => setForm({ ...form, ad_budget: b.value })}
-                label={b.label}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Content budget */}
-        <div id="audit-content_budget">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">2.</span>
-            ¿Cuánto inviertes en producción de contenido al mes? *
-          </label>
-          {errors.content_budget && <p className={errorClass}>{errors.content_budget}</p>}
-          <div className="space-y-2 mt-2">
-            {CONTENT_BUDGETS.map((b) => (
-              <OptionCard
-                key={b.value}
-                selected={form.content_budget === b.value}
-                onClick={() => setForm({ ...form, content_budget: b.value })}
-                label={b.label}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Active ads toggle */}
-        <div>
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">3.</span>
-            ¿Tienes anuncios activos en este momento?
-          </label>
-          <div className="grid grid-cols-2 gap-2 mt-2">
-            <OptionCard
-              selected={form.has_active_ads === true}
-              onClick={() => setForm({ ...form, has_active_ads: true })}
-              label="Sí, tengo ads corriendo"
-            />
-            <OptionCard
-              selected={form.has_active_ads === false}
-              onClick={() => setForm({ ...form, has_active_ads: false })}
-              label="No, no tengo ads activos"
-            />
-          </div>
-        </div>
-
-        {/* CTR */}
-        <div id="audit-current_ctr">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">4.</span>
-            ¿Cuál es tu CTR promedio en anuncios? *
-          </label>
-          {errors.current_ctr && <p className={errorClass}>{errors.current_ctr}</p>}
-          <div className="grid grid-cols-2 gap-2 mt-2">
-            {CTR_OPTIONS.map((c) => (
-              <OptionCard
-                key={c.value}
-                selected={form.current_ctr === c.value}
-                onClick={() => setForm({ ...form, current_ctr: c.value })}
-                label={c.label}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Creative age */}
-        <div id="audit-creative_age_weeks">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">5.</span>
-            ¿Hace cuánto produjiste tu último creativo de video? *
-          </label>
-          {errors.creative_age_weeks && <p className={errorClass}>{errors.creative_age_weeks}</p>}
-          <div className="space-y-2 mt-2">
-            {CREATIVE_AGE.map((c) => (
-              <OptionCard
-                key={c.value}
-                selected={form.creative_age_weeks === c.value}
-                onClick={() => setForm({ ...form, creative_age_weeks: c.value })}
-                label={c.label}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Monthly content */}
-        <div id="audit-monthly_content_pieces">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">6.</span>
-            ¿Cuántas piezas de contenido produces al mes? *
-          </label>
-          {errors.monthly_content_pieces && <p className={errorClass}>{errors.monthly_content_pieces}</p>}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
-            {MONTHLY_PIECES.map((m) => (
-              <OptionCard
-                key={m.value}
-                selected={form.monthly_content_pieces === m.value}
-                onClick={() => setForm({ ...form, monthly_content_pieces: m.value })}
-                label={m.label}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Biggest pain */}
-        <div id="audit-biggest_pain">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">7.</span>
-            ¿Cuál es tu mayor dolor con el contenido? *
-          </label>
-          {errors.biggest_pain && <p className={errorClass}>{errors.biggest_pain}</p>}
-          <div className="space-y-2 mt-2">
-            {PAINS.map((p) => (
-              <OptionCard
-                key={p.value}
-                selected={form.biggest_pain === p.value}
-                onClick={() => setForm({ ...form, biggest_pain: p.value })}
-                label={p.label}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Urgency */}
-        <div id="audit-urgency">
-          <label className={labelClass}>
-            <span className="text-brand-yellow mr-1">8.</span>
-            ¿Qué tan urgente es resolver esto? *
-          </label>
-          {errors.urgency && <p className={errorClass}>{errors.urgency}</p>}
-          <div className="space-y-2 mt-2">
-            {URGENCY.map((u) => (
-              <OptionCard
-                key={u.value}
-                selected={form.urgency === u.value}
-                onClick={() => setForm({ ...form, urgency: u.value })}
-                label={u.label}
-              />
-            ))}
-          </div>
-        </div>
+    <div>
+      {/* Thin progress bar — no numbers */}
+      <div className="h-0.5 w-full bg-white/8 rounded-full overflow-hidden mb-6">
+        <div
+          className="h-full bg-brand-yellow/60 rounded-full transition-all duration-500 ease-out"
+          style={{ width: `${((qIndex + 1) / TOTAL_Q) * 100}%` }}
+        />
       </div>
-    </StepLayout>
+
+      <AnimatePresence mode="wait">
+        <SurveyQuestion
+          key={currentQ.key}
+          question={currentQ.question}
+          hint={currentQ.hint}
+          onBack={handleBack}
+          showSubmit={false}
+        >
+          <div className="space-y-2">
+            {currentQ.options.map((opt) => (
+              <OptionCard
+                key={opt.value}
+                selected={answers[currentQ.key] === opt.value}
+                onClick={() => handleSelect(opt.value)}
+                label={opt.label}
+                sublabel={opt.sublabel}
+              />
+            ))}
+          </div>
+        </SurveyQuestion>
+      </AnimatePresence>
+    </div>
   );
+}
+
+// ─── Build audit data from answers ───────────────────────────────────────────
+
+function buildAuditData(answers: Record<string, string>): BrandAudit | null {
+  const data = {
+    ad_budget: answers.ad_budget,
+    content_budget: answers.content_budget,
+    has_active_ads: answers.has_active_ads === "true",
+    current_ctr: answers.current_ctr,
+    creative_age_weeks: answers.creative_age_weeks,
+    monthly_content_pieces: answers.monthly_content_pieces,
+    biggest_pain: answers.biggest_pain,
+    urgency: answers.urgency,
+  };
+
+  const result = brandAuditSchema.safeParse(data);
+  return result.success ? result.data : null;
 }

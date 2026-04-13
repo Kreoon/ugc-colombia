@@ -87,7 +87,7 @@ Genera la siguiente pregunta. JSON:
 {"question":"","hint":"","options":[{"value":"","label":"","sublabel":"","maps_to":"","maps_value":""}],"insight_for_previous":{"text":"","emoji":""},"is_last":false,"pain_level":"medium"}`;
 
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

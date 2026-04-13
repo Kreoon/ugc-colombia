@@ -160,9 +160,10 @@ export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Pr
       </motion.p>
 
       {/* Gemini IA upgrade — polling for real diagnosis */}
-      {data.lead_id && (
+      {(data.lead_id || data.early_diagnosis_key) && (
         <GeminiDiagnosisUpgrade
           leadId={data.lead_id}
+          earlyDiagnosisKey={data.early_diagnosis_key}
           instagramHandle={data.brand_info?.instagram_handle?.replace(/^@/, "")}
         />
       )}

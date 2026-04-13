@@ -69,13 +69,13 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
         }),
       });
 
+      const resBody = await res.json().catch(() => ({} as Record<string, unknown>));
+
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || "Error al enviar tus datos");
+        throw new Error((resBody.error as string) || "Error al enviar tus datos");
       }
 
-      const resBody = await res.json().catch(() => ({}));
-      onSubmit(result.data, score, diagnosis, resBody.lead_id);
+      onSubmit(result.data, score, diagnosis, resBody.lead_id as string | undefined);
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "Error inesperado. Intenta de nuevo.");
     } finally {

@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 
 interface Props {
-  leadId: string;
+  leadId?: string;
+  earlyDiagnosisKey?: string;
   instagramHandle?: string;
 }
 
@@ -33,15 +34,19 @@ interface GeminiDiagnosis {
   ig_profile?: { username: string; followers: number; engagement_rate: number };
 }
 
-export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
+export function GeminiDiagnosisUpgrade({ leadId, earlyDiagnosisKey, instagramHandle }: Props) {
   const [status, setStatus] = useState<"polling" | "ready" | "timeout">("polling");
   const [diagnosis, setDiagnosis] = useState<GeminiDiagnosis | null>(null);
   const [diagnosisSlug, setDiagnosisSlug] = useState<string | null>(null);
   const attemptsRef = useRef(0);
-  const maxAttempts = 30; // 30 * 10s = 5 min max
+  const maxAttempts = 36; // 36 * 5s = 3 min max
 
   useEffect(() => {
-    if (!leadId || status !== "polling") return;
+    if (status !== "polling") return;
+    if (!leadId && !earlyDiagnosisKey) {
+      setStatus("timeout");
+      return;
+    }
 
     const interval = setInterval(async () => {
       attemptsRef.current++;
@@ -52,24 +57,39 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
       }
 
       try {
-        const res = await fetch(`/api/diagnosis-status?lead_id=${leadId}`);
-        const data = await res.json();
+        // Try early-diagnosis first (in-memory cache, faster)
+        if (earlyDiagnosisKey) {
+          const res = await fetch(`/api/early-diagnosis?key=${earlyDiagnosisKey}`);
+          const data = await res.json();
+          if (data.status === "ready" && data.diagnosis?.overall_score) {
+            setDiagnosis(data.diagnosis);
+            setDiagnosisSlug(earlyDiagnosisKey);
+            setStatus("ready");
+            clearInterval(interval);
+            return;
+          }
+        }
 
-        if (data.status === "ready" && data.diagnosis) {
-          setDiagnosis(data.diagnosis);
-          setDiagnosisSlug(data.diagnosis_slug);
-          setStatus("ready");
-          clearInterval(interval);
+        // Fallback: check Supabase via lead_id
+        if (leadId) {
+          const res = await fetch(`/api/diagnosis-status?lead_id=${leadId}`);
+          const data = await res.json();
+          if (data.status === "ready" && data.diagnosis?.overall_score) {
+            setDiagnosis(data.diagnosis);
+            setDiagnosisSlug(data.diagnosis_slug || earlyDiagnosisKey);
+            setStatus("ready");
+            clearInterval(interval);
+            return;
+          }
         }
       } catch {
         // Silently retry
       }
-    }, 10_000);
+    }, 5_000); // Poll every 5s
 
     return () => clearInterval(interval);
-  }, [leadId, status]);
+  }, [leadId, earlyDiagnosisKey, status]);
 
-  // Polling state
   if (status === "polling") {
     return (
       <motion.div
@@ -93,14 +113,14 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
               Analizando {instagramHandle ? `@${instagramHandle}` : "tu marca"} con IA...
             </p>
             <p className="text-[11px] text-brand-gray/60 mt-0.5">
-              Scrapeando Instagram, ads, y competencia. Esto toma ~2 minutos.
+              Scrapeando Instagram, analizando ads y competencia. Toma ~2 minutos.
             </p>
           </div>
         </div>
         <div className="mt-3 h-1 w-full bg-white/5 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-brand-yellow/40 rounded-full"
-            animate={{ width: ["5%", "70%"] }}
+            animate={{ width: ["5%", "80%"] }}
             transition={{ duration: 120, ease: "easeOut" }}
           />
         </div>
@@ -108,7 +128,6 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
     );
   }
 
-  // Timeout
   if (status === "timeout") {
     return (
       <div className="mt-6 p-4 rounded-xl border border-white/10 bg-white/[0.02]">
@@ -119,7 +138,6 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
     );
   }
 
-  // Ready — show Gemini results
   if (!diagnosis) return null;
 
   const slug = diagnosisSlug || instagramHandle;
@@ -132,7 +150,6 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Header */}
         <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-brand-yellow/10 border border-brand-yellow/20">
           <Sparkles className="w-4 h-4 text-brand-yellow" />
           <p className="text-xs text-brand-yellow font-semibold">
@@ -140,39 +157,35 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
           </p>
         </div>
 
-        {/* Executive summary */}
         {diagnosis.executive_summary && (
           <div className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
             <p className="text-sm text-brand-gray leading-relaxed">{diagnosis.executive_summary}</p>
           </div>
         )}
 
-        {/* IG profile real data */}
         {diagnosis.ig_profile && (
           <div className="flex items-center gap-4 p-3 rounded-xl bg-white/[0.02] border border-white/8 text-xs text-brand-gray">
             <span>@{diagnosis.ig_profile.username}</span>
-            <span>{diagnosis.ig_profile.followers.toLocaleString()} seguidores</span>
+            <span>{diagnosis.ig_profile.followers?.toLocaleString()} seguidores</span>
             <span>{diagnosis.ig_profile.engagement_rate}% ER</span>
           </div>
         )}
 
-        {/* Top failing + working */}
-        {diagnosis.content_audit.whats_failing?.slice(0, 2).map((item, i) => (
+        {diagnosis.content_audit?.whats_failing?.slice(0, 2).map((item, i) => (
           <div key={`f-${i}`} className="flex gap-2 p-3 rounded-xl bg-orange-500/5 border border-orange-500/15 text-sm text-brand-gray">
             <AlertTriangle className="w-4 h-4 text-orange-400 flex-shrink-0 mt-0.5" />
             <span>{item.insight}</span>
           </div>
         ))}
 
-        {diagnosis.content_audit.whats_working?.slice(0, 2).map((item, i) => (
+        {diagnosis.content_audit?.whats_working?.slice(0, 2).map((item, i) => (
           <div key={`w-${i}`} className="flex gap-2 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 text-sm text-brand-gray">
             <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
             <span>{item.insight}</span>
           </div>
         ))}
 
-        {/* Pillars */}
-        {diagnosis.content_strategy.pillars?.length > 0 && (
+        {diagnosis.content_strategy?.pillars?.length > 0 && (
           <div>
             <p className="flex items-center gap-1.5 text-[11px] text-brand-gray uppercase tracking-wider font-semibold mb-2">
               <Target className="w-3.5 h-3.5 text-brand-yellow" />
@@ -188,7 +201,6 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
           </div>
         )}
 
-        {/* Quick wins */}
         {diagnosis.quick_wins?.slice(0, 2).map((qw, i) => (
           <div key={`qw-${i}`} className="flex gap-2 p-3 rounded-xl bg-brand-yellow/5 border border-brand-yellow/15 text-sm text-brand-gray">
             <Zap className="w-4 h-4 text-brand-yellow flex-shrink-0 mt-0.5" />
@@ -199,7 +211,6 @@ export function GeminiDiagnosisUpgrade({ leadId, instagramHandle }: Props) {
           </div>
         ))}
 
-        {/* Link to full page */}
         {slug && (
           <a
             href={`/diagnostico/${slug}`}

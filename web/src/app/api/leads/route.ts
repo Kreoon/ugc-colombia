@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { after } from "next/server";
 import { z } from "zod";
 
 // Rate limiting simple en memoria
@@ -196,6 +197,32 @@ export async function POST(req: NextRequest) {
       console.log("[leads] Mock insert:", JSON.stringify(row, null, 2));
     }
 
+    // Check if early-diagnosis already completed (from StepBrandInfo)
+    if (isBrand && data.brand_info && leadId && supabaseUrl && supabaseKey) {
+      const handle = (data.brand_info.instagram_handle || "").replace(/^@/, "").trim();
+      const earlyKey = handle || data.brand_info.company_name.toLowerCase().replace(/\s+/g, "-");
+      const baseUrlCheck = process.env.NEXT_PUBLIC_SITE_URL
+        || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
+      try {
+        const earlyRes = await fetch(`${baseUrlCheck}/api/early-diagnosis?key=${earlyKey}`);
+        const earlyData = await earlyRes.json();
+        if (earlyData.status === "ready" && earlyData.diagnosis) {
+          const { createClient } = await import("@supabase/supabase-js");
+          const supabase = createClient(supabaseUrl, supabaseKey);
+          const slug = handle || data.brand_info.company_name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+          await supabase.from("leads").update({
+            ai_diagnosis: earlyData.diagnosis,
+            diagnosis_slug: slug,
+            diagnosis_public: true,
+          }).eq("id", leadId);
+          console.log(`[leads] Early diagnosis saved for ${data.brand_info.company_name}`);
+        }
+      } catch {
+        // Will fall through to full pipeline below
+      }
+    }
+
     // Fire brand diagnosis pipeline in background for brands with IG handle
     if (isBrand && data.brand_info) {
       const diagnosisPayload = {
@@ -212,22 +239,26 @@ export async function POST(req: NextRequest) {
         temperature: data.temperature,
       };
 
-      // Fire and forget — don't block the response
+      // Use after() so the pipeline survives after response is sent
       const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
         || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
-      fetch(`${baseUrl}/api/brand-diagnosis`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-internal-key": process.env.INTERNAL_API_KEY || "ugc-diagnosis-2026",
-        },
-        body: JSON.stringify(diagnosisPayload),
-      }).catch((err) => {
-        console.error("[leads] Failed to trigger diagnosis pipeline:", err);
+      after(async () => {
+        try {
+          console.log(`[leads] Starting brand diagnosis pipeline for ${data.brand_info!.company_name}`);
+          await fetch(`${baseUrl}/api/brand-diagnosis`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-internal-key": process.env.INTERNAL_API_KEY || "ugc-diagnosis-2026",
+            },
+            body: JSON.stringify(diagnosisPayload),
+          });
+          console.log(`[leads] Brand diagnosis pipeline completed for ${data.brand_info!.company_name}`);
+        } catch (err) {
+          console.error("[leads] Failed to trigger diagnosis pipeline:", err);
+        }
       });
-
-      console.log(`[leads] Brand diagnosis pipeline triggered for ${data.brand_info.company_name}`);
     }
 
     return NextResponse.json({ success: true, lead_id: leadId }, { status: 200 });

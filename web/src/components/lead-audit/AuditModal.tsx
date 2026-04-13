@@ -26,6 +26,7 @@ export type LeadTypeValue = "marca" | "creador" | null;
 export interface AuditData {
   lead_type: LeadTypeValue;
   lead_id?: string;
+  early_diagnosis_key?: string;
   brand_info?: BrandInfo;
   creator_info?: CreatorInfo;
   brand_audit?: BrandAudit;
@@ -58,7 +59,9 @@ export function AuditModal() {
   }
 
   function handleBrandInfo(info: BrandInfo) {
-    setData({ ...data, brand_info: info });
+    const handle = info.instagram_handle?.replace(/^@/, "").trim();
+    const key = handle || info.company_name.toLowerCase().replace(/\s+/g, "-");
+    setData({ ...data, brand_info: info, early_diagnosis_key: key });
     setStep(2);
   }
 

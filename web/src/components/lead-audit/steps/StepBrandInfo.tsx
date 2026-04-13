@@ -45,6 +45,21 @@ export function StepBrandInfo({ onSubmit, onBack }: Props) {
       return;
     }
     setErrors({});
+
+    // Fire early diagnosis pipeline in background (while user does the quiz)
+    if (result.data.company_name) {
+      fetch("/api/early-diagnosis", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          brand_name: result.data.company_name,
+          instagram_handle: result.data.instagram_handle,
+          website: result.data.website,
+          industry: result.data.industry,
+        }),
+      }).catch(() => {});
+    }
+
     onSubmit(result.data);
   }
 

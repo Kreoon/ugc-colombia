@@ -10,7 +10,7 @@ import type { ContactInfo } from "@/lib/validations/lead-audit";
 
 interface Props {
   data: AuditData;
-  onSubmit: (contact: ContactInfo, score: LeadScore, diagnosis: AIDiagnosis) => void;
+  onSubmit: (contact: ContactInfo, score: LeadScore, diagnosis: AIDiagnosis, leadId?: string) => void;
   onBack: () => void;
 }
 
@@ -74,7 +74,8 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
         throw new Error(body.error || "Error al enviar tus datos");
       }
 
-      onSubmit(result.data, score, diagnosis);
+      const resBody = await res.json().catch(() => ({}));
+      onSubmit(result.data, score, diagnosis, resBody.lead_id);
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "Error inesperado. Intenta de nuevo.");
     } finally {

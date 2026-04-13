@@ -110,7 +110,7 @@ export function buildLeadEmail(
   <div style="padding:24px;text-align:center;background:linear-gradient(180deg,transparent,${color}10);">
     <p style="color:#fff;font-size:16px;font-weight:700;margin:0 0 8px;">¿Quieres implementar estas mejoras?</p>
     <p style="color:#BDBCBC;font-size:13px;margin:0 0 20px;">Agenda tu llamada estratégica con nuestro equipo.</p>
-    <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3UuXHBul3xmIlzDPpFquDzWkCq0cwPfyr-PQAEwv3SlN9mI2zgbSEu1xj1nc3nSKE1YsMGvkAL" style="display:inline-block;background:${color};color:#000;font-weight:700;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;">AGENDAR LLAMADA →</a>
+    <a href="https://ugccolombia.co" style="display:inline-block;background:${color};color:#000;font-weight:700;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;">AGENDAR LLAMADA →</a>
   </div>
 
   <!-- Footer -->

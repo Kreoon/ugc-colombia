@@ -96,6 +96,7 @@ export function StepBooking({ data, score, onBack, onClose }: Props) {
           email: data.contact.email,
           company: data.brand_info?.company_name,
           score: score.total,
+          lead_id: data.lead_id,
         }),
       });
 

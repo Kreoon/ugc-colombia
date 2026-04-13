@@ -25,6 +25,7 @@ export type LeadTypeValue = "marca" | "creador" | null;
 
 export interface AuditData {
   lead_type: LeadTypeValue;
+  lead_id?: string;
   brand_info?: BrandInfo;
   creator_info?: CreatorInfo;
   brand_audit?: BrandAudit;
@@ -76,8 +77,8 @@ export function AuditModal() {
     setStep(3);
   }
 
-  function handleContact(contact: ContactInfo, score: LeadScore, diagnosis: AIDiagnosis) {
-    setData({ ...data, contact, score, diagnosis });
+  function handleContact(contact: ContactInfo, score: LeadScore, diagnosis: AIDiagnosis, leadId?: string) {
+    setData({ ...data, contact, score, diagnosis, lead_id: leadId });
     setStep(4);
   }
 

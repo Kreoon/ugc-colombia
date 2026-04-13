@@ -3,12 +3,13 @@
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 
-/**
- * Marcas con las que hemos trabajado.
- * Wordmarks tipograficos (sin assets) para un look premium editorial.
- * Para reemplazar por logos reales: cambia `label` por <Image src="/brand/logos/xxx.svg" .../>.
- */
-const MARCAS = [
+const MARCAS: { label: string; logo?: string; font?: string; className?: string }[] = [
+  { label: "Beemo", logo: "https://beemo.tv/img/logo_smartbeemo.svg" },
+  { label: "Unlocked Academy", logo: "https://lwfiles.mycourse.app/68dc04362e776ced248cac8e-public/b5b23fe7d48093ee532a2206f6cd2049.png" },
+  { label: "Altevo", logo: "https://altevo.com.co/cdn/shop/files/Altevo_Logo.png?v=1758591345&width=150" },
+  { label: "Vitalcom", logo: "https://assets.skool.com/f/5c95a3174d2f4ea885f0c635959dfecf/7c7707c4438245d19469b65c4d1e8194c69499abf4f44c3091a913fa077fd85d-md.jpg" },
+  { label: "Shop Tokio", logo: "https://shoptokio.co/cdn/shop/files/gempages_513541607190955198-297e6fa2-f0e0-455a-bdf4-12a9388c792d.webp?v=1728089603&width=260" },
+  { label: "Soluna", logo: "https://laboratoriosoluna.com/cdn/shop/files/Diseno_sin_titulo_1.png?v=1738769608&width=300" },
   { label: "KREOON", font: "font-display", className: "tracking-tight" },
   { label: "Infiny Group", font: "font-display", className: "italic tracking-tight" },
   { label: "EFFICOMMERCE", font: "font-sans", className: "tracking-[0.2em] font-semibold" },
@@ -17,7 +18,7 @@ const MARCAS = [
   { label: "LOS REYES", font: "font-sans", className: "tracking-[0.25em] font-bold" },
   { label: "Jarvis AI", font: "font-display", className: "italic tracking-tight" },
   { label: "Alexander Cast", font: "font-display", className: "tracking-tight" },
-] as const;
+];
 
 // Duplicamos para loop infinito sin corte visible.
 const LOOP = [...MARCAS, ...MARCAS];
@@ -104,19 +105,27 @@ export function Marcas() {
                   className="flex items-center justify-center shrink-0"
                   aria-hidden={i >= MARCAS.length ? "true" : undefined}
                 >
-                  <span
-                    className={[
-                      m.font,
-                      m.className,
-                      "text-2xl sm:text-3xl lg:text-[2rem] leading-none select-none",
-                      "text-white/45 hover:text-white transition-colors duration-300",
-                    ].join(" ")}
-                    style={{
-                      textShadow: "0 0 24px rgba(249,179,52,0.0)",
-                    }}
-                  >
-                    {m.label}
-                  </span>
+                  {m.logo ? (
+                    <img
+                      src={m.logo}
+                      alt={m.label}
+                      className="h-8 sm:h-10 lg:h-12 w-auto object-contain grayscale brightness-0 invert opacity-50 hover:opacity-90 transition-all duration-300"
+                    />
+                  ) : (
+                    <span
+                      className={[
+                        m.font,
+                        m.className,
+                        "text-2xl sm:text-3xl lg:text-[2rem] leading-none select-none",
+                        "text-white/45 hover:text-white transition-colors duration-300",
+                      ].join(" ")}
+                      style={{
+                        textShadow: "0 0 24px rgba(249,179,52,0.0)",
+                      }}
+                    >
+                      {m.label}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

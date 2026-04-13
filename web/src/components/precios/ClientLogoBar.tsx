@@ -7,13 +7,11 @@ const CLIENT_LOGOS: {
   name: string;
   letters: string;
   logo?: string;
-  darkBg?: boolean;
-  whiteBg?: boolean;
 }[] = [
   { name: "Beemo", letters: "Be", logo: "https://beemo.tv/img/logo_smartbeemo.svg" },
   { name: "Unlocked Academy", letters: "UA", logo: "https://lwfiles.mycourse.app/68dc04362e776ced248cac8e-public/b5b23fe7d48093ee532a2206f6cd2049.png" },
   { name: "Altevo", letters: "Al", logo: "https://altevo.com.co/cdn/shop/files/Altevo_Logo.png?v=1758591345&width=150" },
-  { name: "Vitalcom", letters: "Vi", logo: "/brand/logos/vitalcom.jpg", whiteBg: true },
+  { name: "Vitalcom", letters: "Vi", logo: "/brand/logos/vitalcom.png" },
   { name: "Shop Tokio", letters: "ST", logo: "https://shoptokio.co/cdn/shop/files/gempages_513541607190955198-297e6fa2-f0e0-455a-bdf4-12a9388c792d.webp?v=1728089603&width=260" },
   { name: "Soluna", letters: "So", logo: "https://laboratoriosoluna.com/cdn/shop/files/Diseno_sin_titulo_1.png?v=1738769608&width=300" },
 ];
@@ -37,13 +35,7 @@ export function ClientLogoBar({ className }: { className?: string }) {
               <img
                 src={client.logo}
                 alt={client.name}
-                className={`h-7 w-auto object-contain transition-all duration-300 ${
-                  client.whiteBg
-                    ? "invert grayscale mix-blend-screen opacity-70 hover:opacity-100"
-                    : client.darkBg
-                      ? "mix-blend-screen grayscale opacity-70 hover:opacity-100"
-                      : "grayscale brightness-0 invert opacity-50 hover:opacity-90"
-                }`}
+                className="h-7 w-auto object-contain grayscale brightness-0 invert opacity-50 hover:opacity-90 transition-all duration-300"
               />
             ) : (
               <>

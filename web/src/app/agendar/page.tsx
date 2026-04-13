@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { AgendarClient } from "./AgendarClient";
 
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function AgendarPage() {
-  return <AgendarClient />;
+  return (
+    <Suspense>
+      <AgendarClient />
+    </Suspense>
+  );
 }

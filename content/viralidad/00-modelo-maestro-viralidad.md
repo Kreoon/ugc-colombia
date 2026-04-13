@@ -570,13 +570,13 @@ Cada miembro del equipo tiene un rol de contenido especifico. Esto evita redunda
 **Cadencia:** 4-6 piezas/semana
 **Voz:** Tecnica pero accesible, de "developer que explica como si fueras su amigo"
 
-### BRIAN — Finance
-**Rol de contenido:** Pricing, ROI, costos, presupuestos.
-**Pilares principales:** Educativo (35%), Estrategico (25%), Casos (25%), Debate (10%), BTS (5%)
-**Plataformas dominantes:** LinkedIn, X, Newsletter
-**Formatos optimos:** Post texto LinkedIn, Thread con calculos, Newsletter analitico
-**Cadencia:** 3-5 piezas/semana
-**Voz:** Analitica, precisa, honesta con numeros, sin hype
+### BRIAN VELASQUEZ — COO / Mano Derecha del CEO
+**Rol de contenido:** Estratega operativo, build-in-public, procesos, management de agencia.
+**Pilares principales:** Estrategico (35%), Educativo (25%), Casos (20%), Debate (15%), BTS (5%)
+**Plataformas dominantes:** LinkedIn Personal, X, TikTok, YouTube
+**Formatos optimos:** Post largo LinkedIn, Thread X, TikTok cara a camara, YouTube 10-15 min
+**Cadencia:** 5-7 piezas/semana
+**Voz:** Directo, organizado, honesto, estrategico. "El que pone orden en el caos operativo." Habla desde las trincheras — procesos, sistemas, coordinacion de equipos, gestion de clientes. No es el financiero — es el que construye la maquinaria que hace que todo funcione.
 
 ---
 

@@ -27,8 +27,8 @@ Esta carpeta contiene cinco packs operativos en formato PDF-ready (Markdown) dis
 **Uso:** Biblia operativa diaria. Usar como referencia en cada kickoff, cada brief, cada escalamiento con creador o cliente.
 
 ### 03-PACK-BRIAN-FINANCE.md
-**Dirigido a:** Brian (Finanzas)
-**Contenido:** Pricing guide LATAM/USA por formato, condiciones de pago, proceso de facturación al cliente (cobro 50/50 + cobranza), proceso de pago a creadores con idempotencia, cálculo de MRR / Health Score / DSO / margen bruto, política de cobranza, riesgos financieros y mitigación.
+**Dirigido a:** Brian Velásquez (COO / Mano Derecha del CEO)
+**Contenido:** Pricing guide LATAM/USA por formato, condiciones de pago, proceso de facturación al cliente (cobro 50/50 + cobranza), proceso de pago a creadores con idempotencia, cálculo de MRR / Health Score / DSO / margen bruto, política de cobranza, riesgos financieros y mitigación. Nota: este pack cubre la faceta financiera del rol de Brian. Su rol completo incluye operaciones de toda la agencia, coordinación de equipos, supervisión de calidad, producción creativa y gestión de clientes clave.
 **Uso:** Ejecutar cada billing cycle, preparar MBR mensual, gestionar facturas vencidas y health score de clientes.
 
 ### 04-PACK-TANYA-COMMUNITY.md
@@ -58,7 +58,7 @@ Esta carpeta contiene cinco packs operativos en formato PDF-ready (Markdown) dis
 |---|---|---|---|
 | Alexander Cast | CEO / Strategy | founder@kreoon.com | (principal) |
 | Diana Mile | Head of Operations | tdianamile@gmail.com | (Colombia) |
-| Brian | Finance | comercial@infinygroup.com | - |
+| Brian Velásquez | COO / Mano Derecha del CEO | comercial@infinygroup.com | - |
 | Samuel | Tech Lead | dev@kreoon.com | - |
 | Tanya | Community & Content | - | - |
 

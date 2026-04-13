@@ -1,3462 +1,4821 @@
-# PACK VIRAL — Brian (Finance Lead)
-## UGC Colombia · Contenido de Alto Impacto 2026 · PARTE 1/2
+# PACK VIRAL — Brian Velasquez (COO / Mano Derecha del CEO) — PARTE 1A
+## UGC Colombia · Guiones TikTok / Reels 2026
 
-**Rol en contenido:** Finance voice, numeros reales, pricing honesto, metricas SaaS aplicadas a agencias UGC
-**Voz:** Analitica, precisa, honesta. El que hace las cuentas honestas de la industria.
-**Plataformas:** LinkedIn (principal), X/Twitter (threads), Newsletter
-**Cadencia:** 3-5 piezas por semana
+**Rol real:** COO. No finanzas. No cuentas. Opera toda la agencia: procesos, delivery, sistemas, creadores, onboarding, QA, capacity. Mano derecha de Alexander.
+**Voz:** Directo, organizado, desde las trincheras. El que pone orden cuando hay caos.
+**Plataformas:** TikTok + Instagram Reels (principal), LinkedIn (secundario)
+**Voz ElevenLabs:** Cristian Sanchez — tono tranquilo pero seguro, pausa antes de cada dato clave
 **Fecha:** 2026-04-10
 
 ---
 
-## 1. Posicionamiento y Voz de Brian
+## 1. Posicionamiento y Voz
 
-### Arquetipo de creador
+### Quien es Brian vs Alexander
 
-Brian es **el CFO que habla sin filtro**. En un espacio donde todo el mundo muestra screenshots de ventas y promete ROI imposible, Brian llega con spreadsheets reales, margenes reales y proyecciones conservadoras que se cumplen. No vende suenos. Vende claridad numerica.
+| Dimension | Alexander (CEO) | Brian (COO) |
+|---|---|---|
+| Enfoque | Vision, ventas, estrategia, marca | Ejecucion, sistemas, entrega, control |
+| Pregunta que responde | A donde vamos? | Como llegamos sin que todo se caiga? |
+| Relacion con el caos | Lo genera (mueve rapido, decide rapido) | Lo contiene (documenta, sistematiza, escala) |
+| En el contenido | Habla de mercado, oportunidad, UGC como industria | Habla de operaciones reales, errores, SOPs, capacity |
+| Tono en redes | Visionario, provocador, build in public | Practico, organizado, "te cuento como lo hacemos por dentro" |
+| Lo que dice que el otro no puede | "El CEO no ve los cuellos de botella hasta que ya costaron plata. Yo los veo antes." | — |
 
-Mientras Alexander habla de estrategia y Diana habla de creadores, Brian habla de lo que realmente importa a cualquier marca o fundador: cuanto cuesta, cuanto entra, cuanto queda.
+**La dinamica narrativa que genera contenido:** Alexander promete. Brian entrega. Sin Brian, las promesas de Alexander son solo marketing. Sin Alexander, los sistemas de Brian no tienen a donde escalar. Esa tension es el gold content de Brian.
 
-Su contenido es el contrapeso honesto del hype de la industria UGC.
+### Que puede decir Brian que NADIE MAS en el equipo puede decir
 
-### Propuesta de valor unica
+1. Cuantos creators coordinamos realmente y como (numero exacto, sistema real).
+2. Como se ve un SOP de agencia UGC por dentro (con campos, triggers, responsables).
+3. Por que la mayoria de agencias LATAM mueren por operaciones deficientes, no por falta de ventas.
+4. Que pasa operativamente cuando un cliente pide un cambio de ultimo momento y hay 7 creators activos.
+5. Como hacer QA de 50 videos al mes siendo 5 personas.
+6. Cuanto capacity tiene realmente una agencia del tamano de UGC Colombia.
+7. El error operativo especifico que les costo un cliente (con detalle, sin nombre del cliente).
+8. Como se construye un onboarding de cliente que no dependa del fundador para funcionar.
 
-- Es el unico finance lead de agencia UGC en LATAM que publica sus numeros internos reales (MRR, margen, CAC)
-- No tiene incentivo en venderte humo: el no cierra deals, el hace que los deals sean sostenibles
-- Traduce metricas SaaS (NRR, DSO, LTV/CAC) al lenguaje de marketers y founders que no tienen CFO
-- Habla de UGC como inversion medible, no como gasto de contenido
+### Vocabulario SI
 
-### En que se diferencia del resto
+- SOP, proceso, sistema, pipeline, capacity, QA, SLA, entrega, batch, brief
+- Escalar, documentar, sistematizar, estandarizar, priorizar, delegar
+- Cuello de botella, incendio, punto de falla, dependencia critica
+- "Esto me lo aprendi caro", "en la practica", "desde las trincheras"
+- "Parce", "bacano", "lo que nadie te cuenta", "esto es lo real"
 
-| Otros finance creators | Brian |
-|---|---|
-| "Con UGC puedes 10x tu ROI" | "Con UGC y esta combinacion especifica de variables, nuestros clientes promediaron 2.8x ROAS en Q4 2025" |
-| Screenshots de revenue sin contexto | P&L parcial con margenes visibles y costos incluidos |
-| Hablan de precios de USA | Habla de precios LATAM y USA con tablas y justificacion |
-| Proyecciones optimistas sin supuestos | Tres escenarios: conservador, base y optimista con supuestos declarados |
+### Vocabulario NO
 
-### Como suena Brian
-
-**Velocidad:** Media. Pausa deliberada antes de cada numero clave. El silencio antes de un dato es tecnica, no nerviosismo.
-
-**Vocabulario SI usar:**
-- "la matematica dice", "si corremos los numeros", "y aqui esta lo que la gente no ve"
-- "en nuestro caso especifico", "con datos propios", "esto no es benchmark gringo"
-- "conservadoramente", "en el peor escenario", "el punto de equilibrio real"
-- "parce, hagamos el calculo juntos", "esto me lo aprendi caro"
-
-**Vocabulario NO usar:**
-- "increible oportunidad", "resultado garantizado", "escala exponencial"
-- "los gurus dicen", "segun los expertos", "en teoria"
-- Cualquier afirmacion sin numero que la soporte
-- "facil", "rapido", "sencillo" — las finanzas no son faciles
-
-**Estructura de frase favorita:** Dato concreto → calculo paso a paso → conclusion que sorprende → implicacion practica.
-
-Ejemplo: "Nuestro CAC promedio en Q1 fue $287 USD. Nuestro LTV objetivo es $4.800. Eso es un ratio de 16.7x. La regla del sector dice que con 3x ya eres viable. Entonces, o estamos haciendo algo muy bien, o hay algo que no estoy viendo. Les cuento cual es."
-
-### Regla de oro de Brian
-
-Cada pieza debe responder una de estas tres preguntas:
-1. Cuanto cuesta / cuanto deja / cuanto vale realmente?
-2. Como mido si esto esta funcionando?
-3. Que error financiero debo evitar?
-
-Si la pieza no responde ninguna de estas, no se publica.
+- "Sinergia", "apalancar", "potenciar", "holistic approach"
+- Coaching motivacional, frases de calendario, "mindset de ganador"
+- "Increible", "extraordinario", "oportunidad unica"
+- Cualquier promesa sin sistema detras que la soporte
+- "Es facil", "en 3 pasos simples", "cualquiera puede hacerlo"
 
 ---
 
-## 2. Calendario Semanal Recomendado
+## 2. Calendario Semanal (7 piezas)
 
-### Semana tipo (3-5 piezas)
-
-| Dia | Plataforma | Formato | Pilar | Tiempo produccion estimado |
+| Dia | Plataforma | Formato | Pilar | Duracion |
 |---|---|---|---|---|
-| Lunes | LinkedIn | Post analitico largo (1.500 chars) | Educativo | 45 min redaccion |
-| Martes | TikTok / Reels | Video calculo en vivo 45-60s | Educativo | 30 min grabacion |
-| Miercoles | X/Twitter | Thread financiero 8-10 tweets | Estrategico | 25 min redaccion |
-| Jueves | LinkedIn | Carrusel con template numerico | Casos / Educativo | 60 min (incluye diseno) |
-| Viernes | Newsletter | Edicion mensual o quincenal | Estrategico | 90 min redaccion |
+| Lunes | TikTok + Reels | Talking head: un insight operativo de la semana pasada | Operaciones reales / BTS | 45-60s |
+| Martes | LinkedIn | Post largo: ensenanza sistematizada (proceso con pasos) | Educativo COO | 1.200-1.500 chars |
+| Miercoles | TikTok + Reels | Tutorial / demo: muestra una herramienta o un SOP | Tutorial / Casos | 60s |
+| Jueves | TikTok + Reels | Hot take operativo o error de la industria | Provocacion / Debate | 30-45s |
+| Viernes | LinkedIn + X | Thread: "cómo funciona [proceso] en UGC Colombia" | Educativo tecnico | Thread 6-8 puntos |
+| Sabado | TikTok + Reels | Build in public: numero o metrica de la semana | BIP (build in public) | 30-45s |
+| Domingo | Stories IG | 3-5 stories detras de camara operativo | BTS / Humanizacion | Stories 15s c/u |
 
-### Notas de cadencia
-
-- **Minimo sostenible:** lunes LinkedIn + miercoles Twitter + jueves carrusel = 3 piezas/semana
-- **Maximo recomendado:** 5 piezas. Brian no debe publicar por volumen, debe publicar por precision
-- **Batching:** grabar todos los videos el martes en 90 min. Redactar todos los posts el domingo en 2h
-- **Repurpose obligatorio:** cada carrusel de LinkedIn genera un thread de Twitter. Cada video genera un post. Nunca crear contenido nuevo si se puede reutilizar con angulo diferente.
-
----
-
-## 3. GUIONES CORTOS TIKTOK / REELS / SHORTS (15 guiones)
-
-*Mix: 6 educativos, 4 estrategicos, 3 casos, 1 debate, 1 BTS*
+**Notas de cadencia:**
+- Minimo sostenible: lunes + miercoles + jueves (3 videos) + martes LinkedIn
+- Batching: grabar lunes, miercoles y jueves en una sola sesion de 2h (misma camisa, fondos distintos)
+- Repurpose obligatorio: cada video TikTok genera su caption LinkedIn. Cada LinkedIn genera 2 tweets.
+- Nunca publicar sin CTA especifica al perfil o a la siguiente pieza de la serie
 
 ---
 
-### GUION 01 — "El ROI real de $500 USD en UGC (calculo en vivo)"
-
-**Pilar:** Educativo | **Plataforma:** TikTok / Reels / Shorts | **Duracion:** 60s
-**Tipo de hook:** Resultado Hook
+## 3. GUIONES CORTOS — 15 TikTok / Reels (palabra por palabra)
 
 ---
 
-**HOOK (0:00-0:03)**
-"Con $500 dolares en UGC, cuanto retorno puedes esperar realmente? Hagamos el calculo."
-
-*Caption overlay pantalla: "$500 USD EN UGC = ?" en texto grande, blanco sobre fondo oscuro*
+### GUION 01
+**Tema:** "Soy la mano derecha del CEO de una agencia UGC. Esto hago realmente."
+**Pilar:** Posicionamiento / BTS
+**Duracion:** 60s
+**Tipo de hook:** Direct Hook
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"Con $500 dolares en UGC, cuanto retorno puedes esperar realmente? Hagamos el calculo juntos.
+**[0:00-0:03] HOOK**
+Voz: "Soy el COO de una agencia UGC en Colombia. Y no, no soy el que graba los videos."
 
-Supongamos que contratas nuestro plan Starter: 4 videos UGC por $500 al mes.
+Caption overlay: SOY EL COO. ESTO ES LO QUE HAGO REALMENTE.
 
-Ahora, esos 4 videos van a pauta. Destinas $300 adicionales en Meta Ads. Total invertido: $800 USD ese mes.
+**[0:03-0:10] CONTEXTO**
+Voz: "Mi socio Alexander es el CEO. El cierra clientes, habla con el mundo, mueve la estrategia. Yo soy el que hace que todo lo que el promete... realmente ocurra."
 
-Si tu ROAS promedio con UGC es de 2.8x — que es lo que promediamos en clientes DTC en nuestro Q4 — eso significa $2.240 en revenue generado desde esos ads.
+Caption overlay: CEO = vision / COO = ejecucion
 
-Pero ojo. El UGC no solo funciona en pauta. Esos mismos videos los subes organico. Si uno sola pieza agarra traccion, el costo efectivo por conversion cae a la mitad.
+**[0:10-0:25] DESARROLLO**
+Voz: "En un dia tipico yo: reviso que los 30 creators activos tengan sus briefs claros, hago QA de los videos que entran antes de que el cliente los vea, actualizo el pipeline de entregas, y si algo se cae — lo arreglo antes de que llegue a Alexander."
 
-Cliente nuestro del sector cosmeticos: $500 en UGC, $400 en ads, $2.100 en ventas directas atribuidas. Eso es un ROAS de 2.6x solo en paid, sin contar organico.
+Caption overlay (secuencial):
+- 30 creators coordinados
+- QA de cada video antes del cliente
+- Pipeline de entregas actualizado
 
-No te voy a prometer 10x porque eso es mentira. Pero si el UGC esta bien hecho y la pauta esta bien segmentada, entre 2x y 3x en los primeros 60 dias es alcanzable.
+**[0:25-0:45] INSIGHT**
+Voz: "La gente piensa que el CEO es el negocio. Pero la verdad es que sin un COO que sistematice la operacion, el CEO solo esta apagando incendios con sonrisa en la cara. Yo soy el que construye los extintores antes de que haya fuego."
 
-La variable que mas afecta el retorno no es el video. Es el brief. Y eso es otro tema."
+Caption overlay: SIN SISTEMA = EL CEO APAGA INCENDIOS SOLO
 
-**Captions overlay por segmento:**
-- 0:03 → "PLAN STARTER: 4 videos / $500 mes"
-- 0:12 → "+ $300 pauta Meta = $800 total"
-- 0:22 → "ROAS promedio clientes DTC: 2.8x"
-- 0:32 → "= $2.240 revenue generado"
-- 0:45 → "Caso real: $900 invertidos → $2.100 ventas"
-- 0:55 → "La variable clave: el brief"
+**[0:45-0:57] CIERRE**
+Voz: "Si estas construyendo una agencia o un negocio de servicios, en algun punto vas a necesitar a alguien como yo. No porque seas malo ejecutando — sino porque un CEO que opera es un CEO que no puede escalar."
 
-**CTA (0:57-1:00):**
-"Sigueme si quieres que hagamos mas calculos de este tipo. El proximo: cuanto cuesta realmente NO tener UGC."
+**[0:57-1:00] CTA**
+Voz: "Sigueme para ver como opera una agencia UGC por dentro."
 
-**Hashtags:** #UGCColombia #ROI #MarketingDigital #EcommerceLatam #ContentMarketing #FinanzasMarketing
-
-**Caption del post:**
-"$500 en UGC. Cuanto retorna? Hice el calculo en vivo con datos reales de clientes nuestros.
-
-No es 10x. No es magia. Es matematica.
-
-El numero que mas sorprende no es el ROAS. Es la variable que mas lo afecta. (No es el video — te lo digo al final)
-
-Guarda este video si gestionas pauta o presupuesto de contenido."
+Caption overlay: SIGUEME — OPERACIONES REALES, SIN FILTRO
 
 ---
 
-### GUION 02 — "Cuanto cuesta realmente una campana UGC"
+**CAPTION POST:**
+Soy el COO de UGC Colombia.
 
-**Pilar:** Educativo | **Plataforma:** TikTok / Reels | **Duracion:** 45s
+No soy el que sale en los reels de Alexander.
+Soy el que hace que lo que el promete no se convierta en caos.
+
+Mientras el CEO habla con clientes, yo:
+- Coordino 30 creators activos
+- Hago QA de cada video antes del cliente
+- Construyo los SOPs para que nada dependa de que yo este presente
+
+El CEO mueve rapido. El COO hace que el movimiento no destruya lo que ya funciona.
+
+Si estas construyendo un negocio de servicios y todavia haces todo tu solo: esto es para ti.
+
+#UGCColombia #AgenciaUGC #OperacionesReales #COO #Emprendimiento
+
+---
+
+### GUION 02
+**Tema:** "El sistema que usamos para nunca fallar una entrega"
+**Pilar:** Educativo operativo
+**Duracion:** 60s
+**Tipo de hook:** Curiosity Hook
+**Plataforma:** TikTok + Reels
+
+---
+
+**GUION COMPLETO:**
+
+**[0:00-0:03] HOOK**
+Voz: "Esto es lo que hace que una agencia UGC nunca falle una entrega. Y no es talento — es sistema."
+
+Caption overlay: EL SISTEMA QUE NOS HACE NUNCA FALLAR UNA ENTREGA
+
+**[0:03-0:10] SETUP**
+Voz: "En UGC Colombia coordinamos entregas de hasta 50 videos al mes con 5 personas. La unica razon por la que eso no es caos puro es porque tenemos un pipeline de entrega documentado."
+
+Caption overlay: 50 VIDEOS / MES · 5 PERSONAS · CERO CAOS
+
+**[0:10-0:35] LOS 4 PASOS**
+Voz: "El pipeline tiene cuatro etapas. Primero: brief enviado al creator con fecha limite y checklist de requisitos tecnicos. Segundo: creator entrega borrador — entra a QA de Diana antes de que el cliente vea un solo frame. Tercero: feedback del cliente en ventana de 48 horas — si no responde en 48 horas, queda aprobado por defecto. Cuarto: entrega final marcada en Supabase, creador recibe su pago en 48 horas."
+
+Caption overlay (una por etapa):
+- ETAPA 1: Brief con fecha limite
+- ETAPA 2: QA interno antes del cliente
+- ETAPA 3: Feedback en 48h o aprobado
+- ETAPA 4: Entrega + pago al creator
+
+**[0:35-0:50] INSIGHT**
+Voz: "Lo que hace que esto funcione no es que todos sean perfectos. Es que cada etapa tiene un responsable claro, una fecha clara, y un criterio de aprobacion claro. Cuando algo falla, se en exactamente en que etapa fallo y quien lo tiene que resolver."
+
+Caption overlay: RESPONSABLE + FECHA + CRITERIO = SIN EXCUSAS
+
+**[0:50-0:57] CIERRE**
+Voz: "Si tu agencia o negocio de servicios depende de que todo el mundo sepa que hacer sin que alguien lo haya documentado... el proximo incendio ya esta encendido."
+
+**[0:57-1:00] CTA**
+Voz: "Sigueme — la proxima semana te muestro el SOP completo."
+
+Caption overlay: SIGUIENTE: EL SOP COMPLETO EN DETALLE
+
+---
+
+**CAPTION POST:**
+El sistema que nos permite entregar 50 videos al mes sin caos.
+
+No es magia. Es pipeline documentado.
+
+4 etapas, cada una con:
+- Responsable definido
+- Fecha limite clara
+- Criterio de aprobacion sin ambiguedad
+
+Cuando algo falla en una agencia, el 90% de las veces no es porque el equipo sea malo.
+Es porque nadie documento quien hace que antes de que hubiera fuego.
+
+Esto lo aprendi caro.
+
+#OperacionesAgencia #UGCColombia #SOP #GestionDeProyectos #AgenciaUGC
+
+---
+
+### GUION 03
+**Tema:** "Como manejo operaciones de 5 personas + 30 creators"
+**Pilar:** BTS / Educativo
+**Duracion:** 60s
+**Tipo de hook:** Result Hook
+**Plataforma:** TikTok + Reels
+
+---
+
+**GUION COMPLETO:**
+
+**[0:00-0:03] HOOK**
+Voz: "Cinco personas. Treinta creators. Multiples clientes activos al mismo tiempo. Esto es como lo operamos sin volvernos locos."
+
+Caption overlay: 5 PERSONAS · 30 CREATORS · ASI LO OPERAMOS
+
+**[0:03-0:12] CONTEXTO**
+Voz: "Cuando digo que coordino 30 creators, la gente imagina WhatsApp caos a las 11 de la noche. Y antes si era eso. Hasta que documentamos un sistema de tres capas."
+
+Caption overlay: ANTES: WHATSAPP CAOS / AHORA: SISTEMA DE 3 CAPAS
+
+**[0:12-0:35] LAS 3 CAPAS**
+Voz: "Capa uno: Tanya maneja la comunidad de creators — Discord para cultura y retos, WhatsApp por tier para comunicacion operativa rapida. Capa dos: Diana asigna cada proyecto al creator correcto segun categoria, disponibilidad y historial. Nunca asignamos al azar. Capa tres: yo superviso el pipeline completo — veo en tiempo real en que etapa esta cada entrega y donde hay riesgo de atraso."
+
+Caption overlay:
+- CAPA 1: Tanya — comunidad y comunicacion
+- CAPA 2: Diana — asignacion por tier y disponibilidad
+- CAPA 3: Brian — pipeline y riesgo de atraso
+
+**[0:35-0:50] INSIGHT**
+Voz: "La clave es que cada persona tiene un scope claro. Tanya no asigna proyectos. Diana no hace comunidad. Yo no hago QA de video. Cuando los roles se mezclan, todo se vuelve de todos — y lo que es de todos no es de nadie."
+
+Caption overlay: SCOPE CLARO = ACCOUNTABILITY REAL
+
+**[0:50-0:57] CIERRE**
+Voz: "A medida que escalemos a 100, 200 creators, este sistema se expande capa por capa. No empezamos de cero. Escalamos lo que ya funciona."
+
+**[0:57-1:00] CTA**
+Voz: "Comenta 'SISTEMA' y te cuento que herramientas usamos en cada capa."
+
+Caption overlay: COMENTA "SISTEMA" PARA VER LAS HERRAMIENTAS
+
+---
+
+**CAPTION POST:**
+Como coordino 30 creators y 5 personas sin WhatsApp caos.
+
+El secreto: tres capas con scope claro por persona.
+
+Capa 1 (Tanya): comunidad y comunicacion de creators
+Capa 2 (Diana): asignacion de proyectos por disponibilidad y tier
+Capa 3 (yo): supervision de pipeline completo y riesgo de atraso
+
+Lo que aprendi de esto:
+Cuando los roles se mezclan, todo se vuelve responsabilidad de todos.
+Y lo que es responsabilidad de todos no es responsabilidad de nadie.
+
+Comenta "SISTEMA" y te cuento las herramientas exactas que usamos.
+
+#UGCColombia #GestionDeEquipos #OperacionesReales #COO #AgenciaUGC
+
+---
+
+### GUION 04
+**Tema:** "El framework de decision cuando todo es urgente"
+**Pilar:** Educativo / Herramienta
+**Duracion:** 45s
 **Tipo de hook:** Pain Hook
-
----
-
-**HOOK (0:00-0:03)**
-"El precio que ves en la cotizacion de UGC no es el costo real de la campana. Hay cuatro costos ocultos que nadie te dice."
-
-*Caption overlay: "COSTO REAL DE UGC: lo que no te dicen"*
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"El precio que ves en la cotizacion de UGC no es el costo real de la campana. Hay cuatro costos ocultos que nadie te dice.
+**[0:00-0:03] HOOK**
+Voz: "Si en tu negocio todo es urgente todo el tiempo, el problema no es el volumen de trabajo — es que no tienes un framework de decision."
 
-Primero: el producto fisico. Si tu marca vende algo tangible, ese producto tiene que llegar al creador. En Colombia son entre $15 y $30 USD de envio. En USA, $40 a $80. Eso no esta en la cotizacion base.
+Caption overlay: SI TODO ES URGENTE, EL PROBLEMA ES ESTE
 
-Segundo: las revisiones extra. La mayoria de agencias incluyen dos rondas. La tercera cuesta entre $20 y $40 USD por video. Marcas que no saben bien lo que quieren gastan facilmente $100 adicionales en revisiones.
+**[0:03-0:10] SETUP**
+Voz: "En una agencia UGC, en un dia tipico pueden llegar al mismo tiempo: un cliente pidiendo cambios de ultimo momento, un creator con un problema tecnico, un brief nuevo para asignar, y Alexander con una idea que quiere lanzar ya."
 
-Tercero: la licencia de uso. Un video para uso organico es una tarifa. Para pauta pagada es entre 30% y 50% mas. Muchas marcas activan ads con videos UGC sin pagar la licencia. Ese es un riesgo legal real.
+Caption overlay: TODO AL MISMO TIEMPO · TODO "URGENTE"
 
-Cuarto: el costo de oportunidad de no tener el proceso estandarizado. Si tu equipo interno esta coordinando el proyecto sin un sistema, eso son horas hombre que cuestan dinero.
+**[0:10-0:32] EL FRAMEWORK**
+Voz: "Lo que hago es una sola pregunta: esto bloquea una entrega activa a un cliente? Si la respuesta es si — es prioridad uno, paro lo que sea. Si la respuesta es no — va a la cola segun impacto. Los cambios de ultimo momento del cliente: urgente si hay deadline hoy, no urgente si hay 48 horas. La idea de Alexander: la escucho, la documento, y le digo cuando la podemos ejecutar sin romper nada."
 
-Entonces cuando evalues una propuesta UGC, suma: precio base mas envio mas posibles revisiones mas licencia de pauta. Ese es el costo real."
+Caption overlay:
+PREGUNTA CLAVE: Bloquea una entrega activa?
+- SI = Prioridad 1
+- NO = Cola por impacto
 
-**Captions overlay:**
-- 0:03 → "4 COSTOS OCULTOS DEL UGC"
-- 0:08 → "1. Envio del producto: $15-80 USD"
-- 0:16 → "2. Revisiones extra: $20-40/video"
-- 0:24 → "3. Licencia paid media: +30-50%"
-- 0:35 → "4. Horas de coordinacion interna"
+**[0:32-0:42] INSIGHT**
+Voz: "La mayoria de cosas urgentes en una agencia son urgentes porque nunca se planearon. La prevencion es mas barata que el rescate. Por eso los SOPs existen — para que lo urgente sea la excepcion, no el modo por defecto."
 
-**CTA (0:43-0:45):**
-"Guarda este video antes de firmar tu proxima propuesta de UGC."
+Caption overlay: URGENTE POR DEFECTO = AUSENCIA DE PLANEACION
 
-**Hashtags:** #UGCColombia #Pricing #AgenciaUGC #MarketingCosts #EcommerceLatam
+**[0:42-0:45] CTA**
+Voz: "Sigueme para mas frameworks operativos que uso cada semana."
 
-**Caption del post:**
-"Me preguntan seguido: por que UGC Colombia cobra lo que cobra?
-
-La respuesta corta: porque incluimos lo que otros no facturan por separado — y despues cobran como sorpresa.
-
-Aqui los 4 costos que debes calcular antes de firmar cualquier propuesta UGC. Con numeros reales."
+Caption overlay: MAS FRAMEWORKS — SIGUEME
 
 ---
 
-### GUION 03 — "Calculadora: cuantos videos por $1.000 de ads"
+**CAPTION POST:**
+Si en tu negocio todo es urgente todo el tiempo, no tienes un problema de volumen.
+Tienes un problema de framework de decision.
 
-**Pilar:** Educativo | **Plataforma:** TikTok / Reels / Shorts | **Duracion:** 45s
-**Tipo de hook:** Direct Hook
+Mi pregunta de filtro: esto bloquea una entrega activa a un cliente?
 
----
+SI = paro lo que sea y lo resuelvo ya
+NO = va a la cola segun impacto real
 
-**HOOK (0:00-0:03)**
-"Si tienes $1.000 dolares para Meta Ads, cuantos videos UGC necesitas? La respuesta te va a sorprender."
+Lo que aprendi: la mayoria de cosas urgentes son urgentes porque nunca se planearon.
+La prevencion es mas barata que el rescate.
 
-*Caption overlay: "$1.000 EN ADS → CUANTOS UGC?"*
+Por eso los SOPs no son burocracia — son la diferencia entre operar y apagar incendios.
 
----
-
-**GUION COMPLETO:**
-
-"Si tienes $1.000 dolares para Meta Ads, cuantos videos UGC necesitas? La respuesta te va a sorprender.
-
-La regla que usamos nosotros: por cada $500 USD de presupuesto mensual en pauta, deberias tener minimo 2 a 3 creativos frescos corriendo. No uno. No el mismo video hace 3 meses.
-
-Por que? Porque el algoritmo de Meta quema un creativo promedio entre 10 y 21 dias en campanas de conversion. Despues la frecuencia sube, el CTR cae y tu ROAS se destruye.
-
-Entonces con $1.000 de ads necesitas entre 4 y 6 videos. No para usarlos todos al tiempo. Para tener rotacion y no depender de que un solo creativo aguante.
-
-Calculadora rapida: $1.000 ads + $500 UGC (4 videos plan Starter) = $1.500 inversion total. Si esos 4 videos te dan un ROAS promedio de 2.5x sobre los $1.000 de ads, estas generando $2.500 en revenue. Margen neto positivo desde el mes 1.
-
-La proporcion que funciona: destina entre 30% y 40% de tu presupuesto de ads en UGC. No menos."
-
-**Captions overlay:**
-- 0:03 → "REGLA: 2-3 creativos por cada $500 de pauta"
-- 0:15 → "Meta quema un creativo en 10-21 dias"
-- 0:25 → "$1.000 ads = necesitas 4-6 videos"
-- 0:35 → "Formula: 30-40% del budget de ads en UGC"
-
-**CTA (0:43-0:45):**
-"Sigueme para mas calculos de este tipo. Proximo: la proporcion ideal para ecommerce en Colombia."
-
-**Hashtags:** #MetaAds #UGCColombia #ROAS #PaidMedia #DigitalMarketing #EcommerceColombia
-
-**Caption del post:**
-"La pregunta que me hacen founders cada semana: cuantos videos UGC necesito para mis ads?
-
-Hice la calculadora. Con numeros. No con estimados vagos.
-
-Si gestionas pauta y no sabes cuantos creativos necesitas frescos por mes, este video es para ti."
+#OperacionesReales #FrameworkDecision #COO #AgenciaUGC #UGCColombia
 
 ---
 
-### GUION 04 — "El health score de un cliente en 5 variables"
-
-**Pilar:** Estrategico | **Plataforma:** LinkedIn Video / TikTok | **Duracion:** 60s
-**Tipo de hook:** Curiosity Hook
-
----
-
-**HOOK (0:00-0:03)**
-"En UGC Colombia tenemos un numero del 0 al 100 que predice si un cliente se va a quedar o se va a ir. Funciona."
-
-*Caption overlay: "HEALTH SCORE DE CLIENTE: 0-100"*
-
----
-
-**GUION COMPLETO:**
-
-"En UGC Colombia tenemos un numero del 0 al 100 que predice si un cliente se va a quedar o se va a ir. Se llama Health Score y lo calculamos cada semana automaticamente.
-
-Son cinco variables con pesos distintos.
-
-Variable uno: puntualidad en pagos. Vale el 25% del score. Si pagaste a tiempo los ultimos tres meses, tienes 100 en esa variable. Cada falla descuenta 20 puntos.
-
-Variable dos: calidad de los entregables que aprueban. El 25%. Calculamos el promedio de calificacion A, B o C de los videos que el cliente aprobo. Un cliente que solo aprueba videos de calidad C esta en riesgo aunque pague a tiempo.
-
-Variable tres: engagement con nuestros reportes mensuales. El 15%. Si el cliente no lee los reportes, no esta midiendo resultados. Si no mide, no ve valor. Si no ve valor, se va.
-
-Variable cuatro: NPS. El 20%. Lo encuestamos cada 60 dias. NPS de 8 son 80 puntos.
-
-Variable cinco: velocidad de feedback. El 15%. Si tarda mas de 72 horas en darnos retroalimentacion de un video, es una senal de desconexion.
-
-Score de 80 o mas: candidato a upsell. De 60 a 79: estable. Menos de 60: intervencion. Menos de 40: churn casi seguro.
-
-Este numero nos ha permitido actuar antes de que el cliente diga que se quiere ir."
-
-**Captions overlay:**
-- 0:03 → "HEALTH SCORE: 5 variables"
-- 0:10 → "1. Puntualidad pagos: 25%"
-- 0:17 → "2. Calidad entregables: 25%"
-- 0:25 → "3. Engagement reportes: 15%"
-- 0:32 → "4. NPS encuesta: 20%"
-- 0:38 → "5. Velocidad feedback: 15%"
-- 0:50 → ">80 = upsell / <40 = churn"
-
-**CTA (0:57-1:00):**
-"Sigueme para ver como implementamos este sistema en Supabase. Proximo video: como calcular tu CAC real."
-
-**Hashtags:** #AgenciaUGC #CustomerSuccess #ChurnPrevention #SaaS #UGCColombia #Metricas
-
-**Caption del post:**
-"Predecir churn antes de que pase no es ciencia ficcion. Es un numero del 0 al 100.
-
-Nuestro Health Score tiene 5 variables, pesos definidos y se calcula automaticamente cada semana. Cuando baja de 60, actuamos. Cuando baja de 40, ya casi es tarde.
-
-Este sistema nos ha salvado al menos 3 clientes este trimestre que estaban a punto de cancelar sin decirlo."
-
----
-
-### GUION 05 — "La matematica detras de reducir CPA 40%"
-
-**Pilar:** Casos | **Plataforma:** TikTok / Reels | **Duracion:** 60s
-**Tipo de hook:** Result Hook
-
----
-
-**HOOK (0:00-0:03)**
-"Una marca de suplementos redujo su CPA 38% en 45 dias con UGC. Les muestro exactamente como."
-
-*Caption overlay: "CPA -38% EN 45 DIAS"*
-
----
-
-**GUION COMPLETO:**
-
-"Una marca de suplementos redujo su CPA 38% en 45 dias con UGC. Les muestro exactamente como.
-
-Cuando llegaron a nosotros, su CPA en Meta era de $18.40 USD. Usaban creativos de estudio — imagenes profesionales, bien producidas, muy bonitas. Pero frias.
-
-El brief que les disenamos tenia tres elementos especificos. Primero: hook de problema real en los primeros dos segundos. No el producto, el dolor. Segundo: demostracion en uso cotidiano, no en studio. Tercero: testimonio con objecion incluida — el creador decia 'yo tampoco le creia, pero...'
-
-Produjimos 6 videos en 10 dias. Los pusimos en rotacion A/B contra sus creativos de studio.
-
-Semana 1: CTR de los UGC supero a los creativos de studio 2.1x. Thumb stop rate 68% vs 41%.
-
-Semana 3: el CPA de los mejores dos UGC era $12.80 USD. Sus creativos de studio seguian en $17.90.
-
-Semana 6: CPA promedio de la campana: $11.40 USD. Una reduccion de 38% frente al baseline.
-
-La diferencia no fue el presupuesto de ads. Fue el creativo.
-
-El UGC no es tendencia. Es la forma en que el cerebro humano procesa informacion autentica mas rapido que produccion perfecta."
-
-**Captions overlay:**
-- 0:03 → "CPA inicial: $18.40 USD"
-- 0:10 → "Creativos de studio: bonitos pero frios"
-- 0:20 → "6 videos UGC en 10 dias"
-- 0:30 → "Semana 1: CTR 2.1x mejor"
-- 0:38 → "Semana 3: CPA baja a $12.80"
-- 0:48 → "Semana 6: CPA $11.40 (-38%)"
-
-**CTA (0:57-1:00):**
-"Si tu CPA esta estancado, el problema casi nunca es la segmentacion. Es el creativo. Sigueme."
-
-**Hashtags:** #CPA #MetaAds #UGCColombia #Performance #PaidMedia #ROAS #Ecommerce
-
-**Caption del post:**
-"CPA de $18.40 a $11.40 en 45 dias. Sin cambiar presupuesto. Sin cambiar segmentacion. Solo cambiando el creativo.
-
-Este es el caso completo de un cliente de suplementos. Con numeros reales, semana por semana.
-
-La leccion que me quedo: el problema de performance de muchas marcas no es de ads. Es de contenido."
-
----
-
-### GUION 06 — "Cuanto paga una agencia a sus creators realmente"
-
-**Pilar:** Educativo | **Plataforma:** TikTok / Reels | **Duracion:** 45s
+### GUION 05
+**Tema:** "Lo que nadie te cuenta sobre operar una agencia LATAM"
+**Pilar:** Perspectiva / Controversial
+**Duracion:** 60s
 **Tipo de hook:** Controversial Hook
-
----
-
-**HOOK (0:00-0:03)**
-"Las agencias UGC le pagan a sus creators mucho menos de lo que crees. Y no necesariamente es un abuso."
-
-*Caption overlay: "CUANTO LE PAGAN LAS AGENCIAS A SUS CREATORS?"*
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"Las agencias UGC le pagan a sus creators mucho menos de lo que crees. Y no necesariamente es un abuso — depende del contexto. Les explico.
+**[0:00-0:03] HOOK**
+Voz: "Operar una agencia UGC en LATAM no es igual que en USA. Y la mayoria de consejos gringos te van a hundir si los aplicas sin contexto."
 
-Un video UGC de 30 a 60 segundos para marca LATAM: el cliente paga entre $220 y $380 USD. El creador recibe entre $80 y $150 USD. El resto — entre 40% y 60% de markup — se queda en la agencia.
+Caption overlay: CONSEJOS GRINGOS DE OPERACIONES EN LATAM = TRAMPA
 
-Ese markup no es ganancia pura. Cubre coordinacion del proyecto, brief development, dos rondas de revision, QA del video, manejo de la relacion con el cliente, plataforma de gestion, garantia de reentrega si el video falla.
+**[0:03-0:15] DIFERENCIAS REALES**
+Voz: "Diferencia uno: los timelines son distintos. En USA, un creator entrega en 5 dias habiles sin drama. En LATAM, el contexto socioeconomico, la conectividad y las emergencias personales son variables reales que hay que contemplar en el SLA. No es excusa — es realidad operativa."
 
-En USA: cliente paga $500 a $900. Creador recibe $200 a $400. Mismo concepto.
+Caption overlay: LATAM: SLA CON VARIABLES REALES DE CONTEXTO
 
-Ahora, lo que SI seria abuso: agencias que cobran precio USA al cliente pero pagan tarifa LATAM al creador sin disclosure. O agencias que prometen 50% al creador y luego desglosan un monton de descuentos que bajan ese numero a 25%.
+**[0:15-0:28] SEGUNDA DIFERENCIA**
+Voz: "Diferencia dos: la comunicacion formal no existe. En USA, un contrato por email es vinculante y la gente lo respeta. En Colombia, el contrato existe — pero la relacion personal que construiste con el creator es igual de importante para que cumpla. Si el creator te tiene confianza, cumple. Si no te tiene confianza, el contrato es papel."
 
-En UGC Colombia publicamos nuestra tabla de markup. Un creador tier B cobra tarifa base $80-$150. Nosotros la vendemos entre $120-$225. Eso es un markup del 50%. El creador lo sabe, el cliente puede inferirlo si pregunta.
+Caption overlay: CONTRATO + RELACION PERSONAL = COMPLIANCE REAL
 
-Transparencia no significa que el markup sea 0. Significa que nadie se sorprende."
+**[0:28-0:42] TERCERA DIFERENCIA**
+Voz: "Diferencia tres: la informalidad del mercado. Muchos creators en LATAM no tienen RUT, no facturan, no tienen cuenta bancaria formal. Si tu operacion no contempla eso — cuentas de cobro, Nequi, Daviplata — vas a tener cuellos de botella en pagos que bloquean todo el pipeline."
 
-**Captions overlay:**
-- 0:03 → "Video LATAM 30-60s: cliente paga $220-380"
-- 0:12 → "Creator recibe: $80-150"
-- 0:18 → "Markup agencia: 40-60%"
-- 0:25 → "Ese markup cubre: coordinacion + QA + garantia"
-- 0:38 → "Lo que SI es abuso: precio USA / pago LATAM sin disclosure"
+Caption overlay: INFORMALIDAD DEL MERCADO = VARIABLE OPERATIVA
 
-**CTA (0:43-0:45):**
-"Sigueme si quieres mas transparencia sobre como funcionan los numeros de esta industria."
+**[0:42-0:55] CIERRE**
+Voz: "Aprender a operar en LATAM es aprender a operar con contexto. Los mejores frameworks del mundo solo funcionan si los adaptas a la realidad de tu mercado. Eso es lo que hacemos en UGC Colombia."
 
-**Hashtags:** #UGCColombia #CreatorEconomy #AgenciaUGC #Pricing #Transparencia #ContentCreator
+**[0:55-1:00] CTA**
+Voz: "Sigueme — cuento esto desde adentro, no desde un curso de operaciones de California."
 
-**Caption del post:**
-"Nadie en la industria UGC habla de esto con numeros. Yo si.
-
-Cuanto le paga una agencia a sus creadores. Cuanto markup aplica. Y cuando ese markup es justo vs cuando es un abuso.
-
-Con tablas reales. Sin eufemismos."
+Caption overlay: OPERACIONES REALES EN LATAM — SIGUEME
 
 ---
 
-### GUION 07 — "CAC vs LTV para agencias UGC explicado"
+**CAPTION POST:**
+Lo que nadie te cuenta sobre operar una agencia en LATAM.
 
-**Pilar:** Educativo | **Plataforma:** LinkedIn Video / YouTube Shorts | **Duracion:** 60s
+No es igual que en USA. Y los consejos gringos te pueden hundir si los aplicas sin adaptar.
+
+3 diferencias reales que afectan las operaciones:
+
+1. Los SLA deben contemplar contexto socioeconomico real — no solo eficiencia
+2. La relacion personal con el creator es tan vinculante como el contrato
+3. La informalidad del mercado (sin RUT, sin cuenta formal) es una variable operativa que hay que resolver, no ignorar
+
+Esto lo aprendi operando, no leyendo frameworks de Silicon Valley.
+
+#OperacionesLATAM #AgenciaUGC #UGCColombia #COO #EmprendimientoReal
+
+---
+
+### GUION 06
+**Tema:** "Como coordinamos 30 creators sin caos"
+**Pilar:** Educativo / Sistema
+**Duracion:** 60s
 **Tipo de hook:** Direct Hook
-
----
-
-**HOOK (0:00-0:03)**
-"CAC y LTV son las dos metricas que determinan si una agencia UGC sobrevive o cierra. Les explico con numeros propios."
-
-*Caption overlay: "CAC vs LTV: LO QUE NADIE TE EXPLICA"*
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"CAC y LTV son las dos metricas que determinan si una agencia UGC sobrevive o cierra. Les explico con numeros propios.
+**[0:00-0:03] HOOK**
+Voz: "Treinta creators activos. Asi los coordinamos sin que nadie se pierda un brief ni un pago."
 
-CAC es cuanto te cuesta conseguir un cliente nuevo. No solo el presupuesto de ads. Todo: tiempo de sales, herramientas, contenido de marketing, propuestas que no cerraron.
+Caption overlay: 30 CREATORS · 0 BRIEFS PERDIDOS · SISTEMA COMPLETO
 
-Nuestro CAC promedio en Q1 2026 fue $287 USD. Eso incluye: $180 en Meta Ads, $60 en tiempo invertido de Alexander en discovery calls que no cerraron, y $47 en herramientas prorrateadas.
+**[0:03-0:15] EL SISTEMA BASE**
+Voz: "Todo creator en nuestro pool tiene un perfil en Supabase con su tier, su categoria de contenido, su disponibilidad actual y su historial de entregas. Cuando llega un proyecto nuevo, Diana no busca en WhatsApp — filtra por esos criterios y asigna en menos de 24 horas."
 
-LTV es cuanto genera ese cliente en su ciclo de vida con nosotros. Calculo: ticket promedio $750 mes multiplicado por margen bruto 58% multiplicado por promedio de meses que se queda un cliente.
+Caption overlay: PERFIL EN SUPABASE: tier + categoria + disponibilidad + historial
 
-Nuestro cliente promedio se queda 8.4 meses. Entonces: $750 por 0.58 por 8.4 = $3.654 de LTV.
+**[0:15-0:30] COMUNICACION POR CAPAS**
+Voz: "La comunicacion va por capas. Tier A — nuestros mejores creators — tienen canal directo con Diana. Tier B y C van por grupos de WhatsApp segmentados por nicho. Tanya modera la comunidad en Discord para cultura, reconocimientos y retos. Cada capa tiene su protocolo."
 
-Ratio LTV / CAC: $3.654 dividido $287 = 12.7x.
+Caption overlay:
+- TIER A: canal directo Diana
+- TIER B/C: grupos WhatsApp por nicho
+- COMUNIDAD: Discord (Tanya)
 
-La regla del sector SaaS dice que con 3x ya eres viable. Con 5x estas bien. Con 10x estas en modo escala.
+**[0:30-0:45] EL BRIEF**
+Voz: "El brief es el documento mas importante del proceso. Tiene: objetivo del video, guion orientativo, requisitos tecnicos, fecha de entrega y ejemplos de referencia. Si el brief no esta completo, no sale. Porque un brief malo genera un video malo y una revision extra que cuesta tiempo a todos."
 
-Nosotros estamos en 12.7x. Eso significa que podemos gastarnos hasta $730 en conseguir un cliente y seguir siendo rentables. Todavia tenemos margen de inversion.
+Caption overlay: BRIEF INCOMPLETO = VIDEO MALO = REVISION EXTRA = PIERDE TODOS
 
-El objetivo de largo plazo es llevar ese LTV a $4.800 reduciendo churn. Cada mes adicional que retiene un cliente es $435 de LTV adicional."
+**[0:45-0:57] INSIGHT**
+Voz: "Lo que nos salvo de la mayoria de dramas operativos no fue contratar mas gente — fue documentar mas. Con 5 personas y 30 creators, la documentacion es el sexto miembro del equipo."
 
-**Captions overlay:**
-- 0:03 → "CAC real Q1 2026: $287 USD"
-- 0:20 → "LTV = $750 x 58% x 8.4 meses"
-- 0:30 → "LTV = $3.654"
-- 0:38 → "LTV/CAC = 12.7x"
-- 0:48 → "Regla: 3x = viable / 10x = escalar"
+Caption overlay: DOCUMENTACION = EL 6TO MIEMBRO DEL EQUIPO
 
-**CTA (0:57-1:00):**
-"El proximo video: como llevamos ese LTV de $3.654 a $4.800 sin subir precios. Sigueme."
+**[0:57-1:00] CTA**
+Voz: "Comenta 'BRIEF' y te comparto la estructura de brief que usamos."
 
-**Hashtags:** #CAC #LTV #AgenciaUGC #SaaS #Metricas #Finanzas #StartupLatam
-
-**Caption del post:**
-"CAC de $287. LTV de $3.654. Ratio de 12.7x.
-
-Estos son nuestros numeros reales de Q1 2026. No benchmarks. No proyecciones. Lo que paso.
-
-Si no sabes tu CAC y tu LTV, no sabes si tu agencia es rentable o si simplemente estas aplazando el problema."
+Caption overlay: COMENTA "BRIEF" — TE COMPARTO LA ESTRUCTURA
 
 ---
 
-### GUION 08 — "Por que cobramos 50% upfront (y por que deberia ser estandar)"
+**CAPTION POST:**
+30 creators coordinados. Cero briefs perdidos. Cero pagos duplicados.
 
-**Pilar:** Estrategico | **Plataforma:** LinkedIn Video / TikTok | **Duracion:** 45s
-**Tipo de hook:** Controversial Hook
+No es suerte — es sistema.
 
----
+Lo que hace que funcione:
+- Perfil de cada creator en base de datos (tier, categoria, disponibilidad, historial)
+- Asignacion en menos de 24h por criterios, no por intuicion
+- Comunicacion por capas segun tier
+- Brief completo o no sale — punto
 
-**HOOK (0:00-0:03)**
-"Cobramos 50% anticipado en proyectos puntuales y el 100% del primer mes en retainers. Algunos clientes se molestan. Esta es la razon exacta."
+Lo que nos salvo de los grandes dramas operativos no fue contratar mas gente.
+Fue documentar mas.
 
-*Caption overlay: "POR QUE COBRAMOS 50% UPFRONT"*
+Con 5 personas y 30 creators, la documentacion es el 6to miembro del equipo.
 
----
+Comenta "BRIEF" y te comparto la estructura que usamos.
 
-**GUION COMPLETO:**
-
-"Cobramos 50% anticipado en proyectos puntuales y el 100% del primer mes en retainers. Algunos clientes se molestan. Esta es la razon exacta.
-
-Cuando un cliente firma y empieza el proyecto, el primer gasto no es el video. Es el brief, el casting, el tiempo de coordinacion y — en casi todos los casos — ya enviamos el producto al creador. Todo eso tiene costo real antes de que ruede un solo segundo de video.
-
-Si un cliente cancela en ese punto sin haber pagado anticipo, la agencia absorbe esos costos. No el cliente.
-
-Segundo: la anticipacion de pago es una senal de compromiso. En 18 meses de operacion, los clientes que negocian pagar despues de entregar tienen una tasa de problemas 3.2 veces mayor que los que pagan anticipado. No lo inventamos. Lo medimos.
-
-Tercero: el cash flow de una agencia boutique no es el de una empresa con linea de credito. Necesitamos el anticipo para pagar el anticipo al creador. El ciclo es: cliente paga, nosotros pagamos al creador, se produce, se entrega, se cobra el saldo.
-
-Si alguien te dice que te cobra 100% contra entrega en servicios creativos, o tiene capital propio para financiarte o va a tener un problema de flujo de caja que va a terminar afectando tu proyecto.
-
-El 50% upfront no es desconfianza. Es estructura financiera sana."
-
-**Captions overlay:**
-- 0:03 → "Primer gasto: brief + casting + envio del producto"
-- 0:15 → "Clientes que negocian pagar despues: 3.2x mas problemas"
-- 0:28 → "Ciclo: cliente paga → agencia paga creator → se produce"
-- 0:40 → "Upfront = estructura financiera, no desconfianza"
-
-**CTA (0:43-0:45):**
-"Si tu proveedor no cobra anticipo, preguntale con que capital financia tu proyecto. Sigueme."
-
-**Hashtags:** #AgenciaUGC #CashFlow #Pricing #Upfront #UGCColombia #Finanzas
-
-**Caption del post:**
-"El 50% upfront no es exigencia caprichosa. Es matematica de cash flow.
-
-Les explico el ciclo financiero real de un proyecto UGC y por que las agencias que no cobran anticipo tarde o temprano tienen problemas — que terminan siendo tus problemas como cliente."
+#UGCColombia #CoordinacionCreadores #AgenciaUGC #OperacionesReales #COO
 
 ---
 
-### GUION 09 — "Margen bruto real de agencia UGC boutique"
-
-**Pilar:** Educativo | **Plataforma:** LinkedIn Video / YouTube Shorts | **Duracion:** 60s
-**Tipo de hook:** Curiosity Hook
-
----
-
-**HOOK (0:00-0:03)**
-"Cuanto le queda realmente a una agencia UGC despues de pagar creadores, plataformas y operacion? Los numeros reales."
-
-*Caption overlay: "MARGEN BRUTO REAL: LO QUE NADIE PUBLICA"*
-
----
-
-**GUION COMPLETO:**
-
-"Cuanto le queda realmente a una agencia UGC despues de pagar creadores, plataformas y operacion? Los numeros reales.
-
-Primero hay que separar dos conceptos que la gente confunde: margen bruto y margen neto.
-
-Margen bruto es revenue menos COGS. En nuestra operacion, COGS incluye pagos a creadores, comisiones de Stripe y Wise, envios fisicos de producto, y hosting de archivos en Bunny CDN. No incluye sueldos de equipo ni paid ads ni tooling — eso es gasto operativo.
-
-Con esa definicion, nuestro margen bruto objetivo es 58%. Que significa: por cada $100 que entra, $42 se van en COGS y quedan $58 para operar la agencia.
-
-Desglose de un cliente en plan Pro a $950 USD:
-- Revenue: $950
-- Pago a creadores (8 videos, tarifa promedio tier B): $520
-- Comision Stripe 2.9% + $0.30: $28
-- Envios y miscelaneos: $22
-- COGS total: $570
-- Margen bruto: $380. Eso es 40%.
-
-Ese 40% tiene que cubrir operacion, sueldos parciales, tooling y utilidad. En este plan el margen es mas ajustado.
-
-El plan Premium a $1.500 con 12 piezas: margen bruto sube a 58-62% porque la tarifa por video escala pero los costos fijos no crecen proporcionalmente.
-
-Por eso los planes de mayor volumen son mas rentables para la agencia. No porque cobremos mas. Porque la estructura de costos es diferente."
-
-**Captions overlay:**
-- 0:03 → "Margen bruto objetivo: 58%"
-- 0:12 → "COGS: creators + Stripe + envios + hosting"
-- 0:25 → "Plan Pro $950: COGS $570 → margen $380 (40%)"
-- 0:42 → "Plan Premium $1.500: margen 58-62%"
-- 0:52 → "Mayor volumen = mejor estructura de costos"
-
-**CTA (0:57-1:00):**
-"Sigueme si quieres que publique el P&L completo de un mes real. Lo estoy considerando."
-
-**Hashtags:** #MargenBruto #AgenciaUGC #Finanzas #PnL #UGCColombia #SaaS #StartupLatam
-
-**Caption del post:**
-"Publico lo que casi nadie en agencias de contenido publica: el margen bruto real.
-
-No el numero bonito. El desglose por plan, con COGS incluido y las variables que lo afectan.
-
-Spoiler: el plan mas barato no siempre es el mas rentable para la agencia — y eso tiene implicaciones directas para la calidad de servicio que recibes."
-
----
-
-### GUION 10 — "De $0 a $9K MRR en 6 meses: los numeros reales"
-
-**Pilar:** Casos | **Plataforma:** TikTok / Reels / LinkedIn | **Duracion:** 60s
-**Tipo de hook:** Result Hook
-
----
-
-**HOOK (0:00-0:03)**
-"De $0 a $9.200 de MRR en 6 meses. No fue suerte. Fue una secuencia especifica de decisiones financieras."
-
-*Caption overlay: "$0 → $9.200 MRR EN 6 MESES"*
-
----
-
-**GUION COMPLETO:**
-
-"De $0 a $9.200 de MRR en 6 meses. No fue suerte. Fue una secuencia especifica de decisiones financieras.
-
-Mes 1: cerramos 2 clientes en plan Pro a $950 cada uno. MRR: $1.900. Usamos ese capital para pagar la operacion del mes y destinar $400 a contenido organico.
-
-Mes 2: 3 clientes nuevos. MRR: $4.700. Aqui tomamos la decision critica: no contratar equipo todavia. Operar delgados para mantener margen.
-
-Mes 3: primer upsell. Un cliente Pro pidio mas piezas. Paso a Premium $1.500. Neto nuevo: $550 de expansion MRR. Total mes 3: $6.200.
-
-Mes 4: primer churn. Un cliente de $950 cancelo porque 'no tenia budget'. La realidad segun el health score: llevaba 3 semanas sin abrir nuestros reportes. Debiamos haberlo intervenido antes. Nuevo MRR: $5.500.
-
-Mes 5: recuperamos ese gap con dos logos nuevos. MRR: $7.400.
-
-Mes 6: dos upsells + un nuevo logo premium. MRR: $9.200.
-
-Lo que mas me costo aprender: el crecimiento de MRR no es lineal. Los meses pares fueron los mas duros. La curva real se parece mas a una escalera que a una linea recta.
-
-El punto de equilibrio financiero de la operacion lo alcanzamos en el mes 4 con $6.200 MRR."
-
-**Captions overlay:**
-- 0:03 → "Mes 1: $1.900 MRR (2 clientes)"
-- 0:10 → "Mes 2: $4.700 MRR"
-- 0:18 → "Mes 3: $6.200 (primer upsell)"
-- 0:28 → "Mes 4: $5.500 (primer churn)"
-- 0:36 → "Mes 5: $7.400"
-- 0:44 → "Mes 6: $9.200 MRR"
-- 0:52 → "Break-even: mes 4 con $6.200"
-
-**CTA (0:57-1:00):**
-"El proximo: los 3 errores financieros que frenaron esos primeros 6 meses. Sigueme."
-
-**Hashtags:** #MRR #AgenciaUGC #StartupLatam #Bootstrapped #UGCColombia #Finanzas #Growth
-
-**Caption del post:**
-"$0 a $9.200 de MRR en 6 meses. Mes por mes, con los numeros reales — incluyendo el mes que perdimos un cliente y el MRR bajo.
-
-La curva real no es la que muestran los screenshots de Twitter. Es una escalera con un escalon hacia abajo en el mes 4.
-
-Aqui el breakdown completo."
-
----
-
-### GUION 11 — "El error de pricing que casi destruye la agencia"
-
-**Pilar:** Estrategico | **Plataforma:** TikTok / Reels | **Duracion:** 45s
+### GUION 07
+**Tema:** "El error operativo que nos costo un cliente"
+**Pilar:** Storytelling / Aprendizaje
+**Duracion:** 60s
 **Tipo de hook:** Story Hook
-
----
-
-**HOOK (0:00-0:03)**
-"En el mes 2 de operacion cobrabamos $350 USD por 4 videos. Casi no sobrevivimos eso."
-
-*Caption overlay: "EL ERROR DE PRICING QUE NOS COSTO CARO"*
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"En el mes 2 de operacion cobrabamos $350 USD por 4 videos. Casi no sobrevivimos eso.
+**[0:00-0:03] HOOK**
+Voz: "Perdimos un cliente por un error operativo que yo pude haber evitado. Les cuento exactamente que paso."
 
-La logica en ese momento era: somos nuevos, hay que entrar barato para ganar clientes. Error clasico.
+Caption overlay: EL ERROR OPERATIVO QUE NOS COSTO UN CLIENTE
 
-Con $350 y 4 videos, el pago al creador era $200. El costo de Stripe: $10. Los envios: $25. COGS total: $235. Margen bruto: $115. Eso es un 33%.
+**[0:03-0:15] LA HISTORIA**
+Voz: "Era nuestro tercer mes de operacion. Teniamos un cliente de ecommerce con un batch de 8 videos. Habia un cambio en el brief que el cliente pidio por WhatsApp — y llego al grupo equivocado. El creator que estaba en produccion nunca lo recibio."
 
-Con ese 33% teniamos que pagar herramientas, tiempo de coordinacion, el contenido de marketing para conseguir el siguiente cliente, y algo de utilidad. No alcanzaba.
+Caption overlay: CAMBIO DE BRIEF · GRUPO EQUIVOCADO · CREATOR NO LO RECIBIO
 
-El problema no era el precio bajo por si solo. Era que generaba un tipo de cliente especifico: el que eligio la agencia por precio, no por valor. Esos clientes son los mas exigentes con revisiones, los mas lentos en feedback y los primeros en pedir descuento en el mes 2.
+**[0:15-0:28] LO QUE PASO**
+Voz: "El creator entrego segun el brief original. Nosotros hicimos QA del video segun el brief original. El cliente recibio 8 videos que no incorporaban el cambio que habia pedido hace 4 dias. Reunion de emergencia. Cliente enojado. Y tenia toda la razon."
 
-Subimos el precio a $500 en el mes 4. Perdimos 2 leads ese mes. Pero los clientes que cerramos a $500 tenian un health score promedio de 74 vs 51 de los clientes a $350.
+Caption overlay: QA DEL BRIEF ORIGINAL · CLIENTE RECIBIO LO INCORRECTO
 
-El precio bajo no te consigue clientes. Te consigue el tipo equivocado de clientes.
+**[0:28-0:42] LA CAUSA RAIZ**
+Voz: "La causa raiz no fue el WhatsApp. Fue que no teniamos un protocolo de cambios de brief en produccion. No habia un campo en Supabase que dijera 'brief version 2 activo'. No habia un trigger que notificara al creator asignado. El cambio se perdio porque el sistema no lo contemplaba."
 
-El margen importa. Pero la calidad del cliente que atrae tu precio importa mas."
+Caption overlay: CAUSA RAIZ: SIN PROTOCOLO DE CAMBIOS EN PRODUCCION
 
-**Captions overlay:**
-- 0:03 → "Precio mes 2: $350 por 4 videos"
-- 0:12 → "Margen bruto: 33%"
-- 0:22 → "Clientes a $350: health score promedio 51"
-- 0:35 → "Clientes a $500: health score promedio 74"
+**[0:42-0:55] LO QUE CAMBIAMOS**
+Voz: "Despues de eso: todo cambio de brief en produccion activa pasa por Supabase. Genera una notificacion automatica al creator. Diana confirma recibo. Y el cambio queda versionado — nunca mas se pierde un cambio de brief en un WhatsApp."
 
-**CTA (0:43-0:45):**
-"El precio es un filtro de cliente. Sigueme para entender como usarlo."
+Caption overlay: SOLUCION: CAMBIOS EN SUPABASE + NOTIFICACION + CONFIRMACION
 
-**Hashtags:** #Pricing #AgenciaUGC #UGCColombia #ErroresDeNegocio #Bootstrapped #MRR
+**[0:55-1:00] CTA**
+Voz: "Sigueme — cuento los errores reales, no solo los exitos."
 
-**Caption del post:**
-"Cobrar barato para ganar clientes es el error mas comun — y mas caro — en agencias de contenido.
-
-Lo viví. Los numeros lo muestran. Los clientes a $350 tenian health score promedio de 51. Los de $500, de 74.
-
-El precio no es solo margen. Es un filtro de cliente."
+Caption overlay: ERRORES REALES, NO SOLO EXITOS — SIGUEME
 
 ---
 
-### GUION 12 — "Por que el ticket mas barato es el mas peligroso"
+**CAPTION POST:**
+Perdimos un cliente por un error que yo pude haber evitado.
 
-**Pilar:** Estrategico | **Plataforma:** LinkedIn Video / TikTok | **Duracion:** 45s
-**Tipo de hook:** Controversial Hook
+La historia real:
 
----
+Cliente pide un cambio de brief por WhatsApp.
+Llega al grupo equivocado.
+Creator entrega segun el brief original.
+Cliente recibe 8 videos incorrectos.
 
-**HOOK (0:00-0:03)**
-"El cliente de $500 al mes nos da mas trabajo, mas friccion y mas riesgo de churn que el cliente de $1.500. Y la matematica lo explica."
+La causa raiz no fue el WhatsApp.
+Fue que no teniamos protocolo de cambios de brief en produccion activa.
 
-*Caption overlay: "TICKET BAJO = MAS RIESGO"*
+Lo que cambiamos despues:
+Todo cambio en produccion activa pasa por Supabase.
+Genera notificacion automatica al creator.
+Diana confirma recibo.
+El cambio queda versionado.
 
----
+Cuesta mas documentar? Si.
+Cuesta menos que perder un cliente? Mucho menos.
 
-**GUION COMPLETO:**
-
-"El cliente de $500 al mes nos da mas trabajo, mas friccion y mas riesgo de churn que el cliente de $1.500. Y la matematica lo explica.
-
-El cliente Starter a $500 recibe 4 videos. Cada video es un punto de contacto, una revision potencial, un riesgo de rechazo. El margen bruto en ese plan es de aproximadamente 40%.
-
-El cliente Premium a $1.500 recibe 12 piezas pero con procesos mas establecidos, equipos de marca mas maduros y — criticamente — la decision de compra fue tomada por alguien con autoridad real sobre el presupuesto.
-
-El cliente de $500 muchas veces es alguien del equipo de marketing que convencio a su jefe de probar. Cuando los resultados no son perfectos en el mes 1, ese alguien no tiene poder para renovar. Churnea.
-
-El cliente de $1.500 es el CMO o el fundador. Entiende que el mes 1 es optimizacion, no garantia de resultados. Tiene perspectiva de 3 a 6 meses.
-
-En nuestro historico: el churn rate del plan Starter es 11% mensual. El del plan Premium es 4%.
-
-Eso significa que un cliente Starter tiene un LTV promedio de $2.800. Un cliente Premium tiene un LTV de $7.200. Con la misma infraestructura de servicio.
-
-No estamos pensando en eliminar el plan Starter. Pero estamos siendo muy selectivos con quien entra en ese ticket."
-
-**Captions overlay:**
-- 0:03 → "Churn Starter: 11%/mes vs Premium: 4%/mes"
-- 0:20 → "Starter LTV: $2.800 vs Premium LTV: $7.200"
-- 0:35 → "Misma infraestructura de servicio"
-
-**CTA (0:43-0:45):**
-"El costo oculto de tener muchos clientes pequeños es un tema que casi nadie analiza. Sigueme."
-
-**Hashtags:** #LTV #AgenciaUGC #Churn #Pricing #UGCColombia #SaaS
-
-**Caption del post:**
-"El cliente de $500 no es el mas facil de servir. Es el mas caro de retener.
-
-Churn rate Starter: 11% mensual. Premium: 4%. Con la misma infraestructura de operacion.
-
-LTV Starter: $2.800. LTV Premium: $7.200.
-
-La matematica dice algo claro sobre donde deberianmos enfocar el crecimiento."
+#UGCColombia #OperacionesReales #ErroresQueEnsenan #COO #AgenciaUGC
 
 ---
 
-### GUION 13 — "Como negocia una marca ecommerce con agencia UGC"
-
-**Pilar:** Casos | **Plataforma:** LinkedIn Video / TikTok | **Duracion:** 60s
+### GUION 08
+**Tema:** "De bombero a estratega operativo: la transicion"
+**Pilar:** Storytelling personal / Crecimiento
+**Duracion:** 60s
 **Tipo de hook:** Story Hook
-
----
-
-**HOOK (0:00-0:03)**
-"Una marca de moda me mando una propuesta de contrapropuesta con 11 condiciones. Les cuento como termino esa negociacion."
-
-*Caption overlay: "NEGOCIACION REAL: MARCA ECOMMERCE VS AGENCIA"*
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"Una marca de moda me mando una propuesta de contrapropuesta con 11 condiciones. Les cuento como termino esa negociacion.
+**[0:00-0:03] HOOK**
+Voz: "Los primeros meses de esta agencia los pase apagando incendios. El dia que deje de ser bombero fue el dia que empece a ser COO de verdad."
 
-La marca queria: precio del plan Pro ($950) pero con 10 videos en vez de 8, pago a 30 dias, revision ilimitada, licencia de pauta incluida sin adicional y descuento del 20% por ser su primer mes.
+Caption overlay: DE BOMBERO A COO DE VERDAD — EL MOMENTO EXACTO
 
-Mi analisis antes de responder: 10 videos al precio de 8 son ya un descuento del 25% en produccion. Pago a 30 dias nos deja sin cash flow para pagar al creador anticipado. Revision ilimitada es un costo operativo sin techo. Licencia de pauta es 30% adicional que no se puede regalar. El descuento del primer mes encima de todo eso es matemáticamente imposible sin operar a perdida.
+**[0:03-0:15] EL MODO BOMBERO**
+Voz: "En el modo bombero, yo resuelvo problemas cuando aparecen. Un creator no entrega — yo lo llamo. Un cliente se queja — yo lo manejo. Un brief esta mal — yo lo reescribo. Soy util, pero soy reactivo. Y un COO reactivo es un COO que nunca escala."
 
-Lo que respondemos: 8 videos a $950 con licencia de pauta incluida (+$285 de valor) a cambio de pago 100% anticipado del primer mes y feedback en 48h por contrato.
+Caption overlay: REACTIVO = UTIL PERO NO ESCALABLE
 
-Le ofrecimos mas valor del que pedian en el item que mas les importaba — la licencia de pauta — a cambio de las dos condiciones que mas nos importaban a nosotros — liquidez y velocidad de feedback.
+**[0:15-0:30] EL QUIEBRE**
+Voz: "El quiebre fue en el mes cuatro. Teniamos seis clientes activos y yo sentia que estaba corriendo todo el tiempo sin avanzar. Le dije a Alexander: o construimos los sistemas ahora — o en dos meses esto colapsa. El me dijo: tienes dos semanas. Documenta todo."
 
-Cerramos en $950 con licencia incluida. Pauta incluida equivale a un valor real de $1.235. Ellos sintieron que ganaron. Nosotros cerramos con el margen que necesitabamos y el flujo de caja intacto.
+Caption overlay: MES 4: O SISTEMAS AHORA O COLAPSO EN 2 MESES
 
-Negociar con marcas ecommerce no es ceder. Es intercambiar lo que a ellos les duele poco por lo que a ti te importa mucho."
+**[0:30-0:45] LA TRANSICION**
+Voz: "Esas dos semanas las use en documentar los procesos que ya existian en mi cabeza. El flujo de asignacion de creators. El checklist de QA. El protocolo de cambios de brief. El SOP de onboarding de cliente nuevo. Cuando termino, cualquier persona del equipo podia ejecutar esos procesos sin preguntarme."
 
-**Captions overlay:**
-- 0:03 → "11 condiciones en la contrapropuesta"
-- 0:15 → "Lo que pedian: -25% produccion + 30d pago + revision ilimitada"
-- 0:30 → "Lo que ofrecimos: licencia pauta incluida ($285 valor)"
-- 0:42 → "A cambio de: 100% anticipado + 48h feedback"
-- 0:52 → "Resultado: $950 con valor real de $1.235"
+Caption overlay:
+- Flujo asignacion creators
+- Checklist QA
+- Protocolo cambios brief
+- SOP onboarding cliente
 
-**CTA (0:57-1:00):**
-"La proxima semana: como estructurar una propuesta que anticipa estas objeciones. Sigueme."
+**[0:45-0:57] INSIGHT**
+Voz: "Eso es lo que separa a un coordinador de operaciones de un COO: el coordinador resuelve el problema. El COO documenta el proceso para que el problema no vuelva a ocurrir — o si ocurre, cualquiera lo pueda resolver."
 
-**Hashtags:** #Negociacion #AgenciaUGC #Ecommerce #UGCColombia #B2B #Ventas
+Caption overlay: COORDINADOR: resuelve / COO: previene y documenta
 
-**Caption del post:**
-"Una marca me mando 11 condiciones en su contrapropuesta. Esta fue mi respuesta — y por que cerramos.
+**[0:57-1:00] CTA**
+Voz: "Si estas en modo bombero, este perfil es para ti."
 
-La clave de negociar con marcas DTC no es ceder en precio. Es intercambiar valor de forma inteligente.
-
-Les cuento el caso completo, con los numeros de cada condicion."
-
----
-
-### GUION 14 — "El costo oculto de UGC que nadie calcula" (DEBATE)
-
-**Pilar:** Debate | **Plataforma:** TikTok / Reels | **Duracion:** 45s
-**Tipo de hook:** Controversial Hook
+Caption overlay: EN MODO BOMBERO? ESTE PERFIL ES PARA TI
 
 ---
 
-**HOOK (0:00-0:03)**
-"El UGC tiene un costo que ninguna agencia incluye en su propuesta y que puede duplicar tu inversion si no lo calculas."
+**CAPTION POST:**
+Los primeros meses de UGC Colombia los pase apagando incendios.
 
-*Caption overlay: "EL COSTO QUE NADIE TE DICE"*
+El dia que deje de ser bombero fue el dia que empece a ser COO de verdad.
+
+El quiebre: mes 4, seis clientes activos, corriendo sin avanzar.
+Le dije a Alexander: o construimos los sistemas ahora o esto colapsa.
+Me dio dos semanas.
+
+Las use en documentar todo lo que vivia en mi cabeza:
+- Flujo de asignacion de creators
+- Checklist de QA
+- Protocolo de cambios de brief en produccion
+- SOP de onboarding de cliente nuevo
+
+Cuando termine, cualquier persona del equipo podia ejecutar esos procesos sin preguntarme.
+
+Eso es lo que separa a un coordinador de un COO:
+El coordinador resuelve el problema.
+El COO documenta para que no vuelva a ocurrir.
+
+Si estas en modo bombero, esto es para ti.
+
+#COO #OperacionesReales #AgenciaUGC #UGCColombia #Emprendimiento
+
+---
+
+### GUION 09
+**Tema:** "El SOP mas importante de nuestra agencia"
+**Pilar:** Educativo / Sistema
+**Duracion:** 45s
+**Tipo de hook:** Curiosity Hook
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"El UGC tiene un costo que ninguna agencia incluye en su propuesta y que puede duplicar tu inversion si no lo calculas. Y tengo una opinion dividida sobre quien es responsable de eso.
+**[0:00-0:03] HOOK**
+Voz: "Si tuviera que elegir un solo SOP de nuestra agencia para salvar si todo lo demas desaparece — elegiria este."
 
-El costo del que hablo: el tiempo interno de tu equipo.
+Caption overlay: EL SOP MAS IMPORTANTE DE LA AGENCIA — Y POR QUE
 
-Para que el UGC funcione, alguien de tu marca tiene que escribir o validar el brief, aprobar el casting, dar feedback de cada video en menos de 48 horas, y coordinar el envio del producto.
+**[0:03-0:12] SETUP**
+Voz: "Tenemos SOPs para todo: onboarding de creators, asignacion de proyectos, QA de video, pagos, cobranza. Pero el que mas protege al negocio es el SOP de onboarding de cliente nuevo."
 
-Si ese alguien es un coordinador de marketing a $1.800 USD al mes, y dedica 8 horas semanales al proyecto UGC, eso es $900 USD al mes de costo oculto. Suma eso a lo que le pagas a la agencia.
+Caption overlay: EL SOP QUE MAS PROTEGE AL NEGOCIO
 
-Ahora, la opinion dividida: hay founders que me dicen que es responsabilidad de la agencia absorber esa coordinacion. Hay otros que dicen que es costo operativo normal del cliente.
+**[0:12-0:30] POR QUE ESTE**
+Voz: "Porque el cliente se forma su primera impresion de la agencia en los primeros 7 dias. Si en esos 7 dias hay confusion sobre quien los atiende, que sigue, cuando reciben el primer brief — ese cliente ya empieza a dudar si tomo la decision correcta. Y la duda en el mes uno es el primer paso al churn en el mes tres."
 
-Mi posicion: si la agencia tiene un sistema de brief estructurado, un portal de revision y un proceso claro, el tiempo del cliente baja a 2-3 horas por semana. Si no tiene ese sistema, el cliente termina haciendo el trabajo de la agencia.
+Caption overlay: CONFUSION EN LOS PRIMEROS 7 DIAS = CHURN EN EL MES 3
 
-El diferenciador de una buena agencia UGC no es solo la calidad del video. Es cuanto tiempo le ahorra a tu equipo interno.
+**[0:30-0:42] QUE INCLUYE**
+Voz: "Nuestro onboarding SOP cubre: kickoff call en 48 horas, acceso a Drive compartido con brand assets, brief de proyecto uno en la semana uno, y check-in de satisfaccion en el dia 15. Todo con responsable y fecha. Nada queda flotando."
 
-Ese es el verdadero costo oculto. Y la respuesta correcta es que la agencia lo minimice."
+Caption overlay:
+- Kickoff 48h
+- Drive compartido semana 1
+- Brief proyecto 1 semana 1
+- Check-in dia 15
 
-**Captions overlay:**
-- 0:03 → "Costo oculto: tiempo interno del cliente"
-- 0:15 → "8h/semana coordinador = $900 USD/mes extra"
-- 0:28 → "Agencia con sistema: 2-3h/semana del cliente"
-- 0:38 → "Agencia sin sistema: el cliente hace el trabajo"
+**[0:42-0:45] CTA**
+Voz: "Sigueme — la proxima semana publico el SOP completo paso a paso."
 
-**CTA (0:43-0:45):**
-"Me gustaria saber tu opinion: de quien es esa responsabilidad? Comenta abajo."
-
-**Hashtags:** #UGCColombia #AgenciaUGC #CostoOculto #Marketing #Debate #ContentMarketing
-
-**Caption del post:**
-"El UGC tiene un costo que no aparece en ninguna propuesta: el tiempo interno de tu equipo de marca.
-
-Hice el calculo. Es real y puede ser significativo.
-
-Pero tengo una opinion dividida sobre de quien es la responsabilidad. Cuento mi posicion y quiero saber la tuya."
+Caption overlay: SOP COMPLETO — PROXIMA SEMANA
 
 ---
 
-### GUION 15 — "MRR, ARR, DSO: traducido para marketers" (BTS)
+**CAPTION POST:**
+Si tuviera que salvar un solo SOP de la agencia, elegiria el de onboarding de cliente nuevo.
 
-**Pilar:** BTS / Educativo | **Plataforma:** LinkedIn Video / TikTok | **Duracion:** 60s
+Por que? Porque el cliente se forma su primera impresion en los primeros 7 dias.
+
+Si hay confusion en esos 7 dias:
+- Quien los atiende?
+- Que sigue?
+- Cuando ven el primer brief?
+
+Esa confusion en el mes 1 es el primer paso al churn en el mes 3.
+
+Nuestro SOP cubre:
+- Kickoff call en 48 horas
+- Drive compartido con brand assets en semana 1
+- Brief de proyecto 1 en semana 1
+- Check-in de satisfaccion en dia 15
+
+Todo con responsable y fecha. Nada flotando.
+
+Sigueme — la proxima semana publico el SOP completo.
+
+#UGCColombia #SOP #OnboardingCliente #AgenciaUGC #OperacionesReales
+
+---
+
+### GUION 10
+**Tema:** "Build-in-public: numeros reales de operar agencia UGC"
+**Pilar:** Build in public / Transparencia
+**Duracion:** 60s
+**Tipo de hook:** Result Hook
+**Plataforma:** TikTok + Reels
+
+---
+
+**GUION COMPLETO:**
+
+**[0:00-0:03] HOOK**
+Voz: "Numeros reales de operar una agencia UGC en Colombia este mes. Sin editar."
+
+Caption overlay: NUMEROS REALES · AGENCIA UGC · COLOMBIA · ABRIL 2026
+
+**[0:03-0:20] LOS NUMEROS**
+Voz: "Creators activos en el pool: 38. Proyectos en produccion este mes: 12. Videos en pipeline esta semana: 23. Tiempo promedio de entrega brief a video final aprobado: 6.2 dias. Porcentaje de entregas aprobadas sin retrabajo: 78 por ciento. Meta de fin de mes: llegar al 85."
+
+Caption overlay (secuencial):
+- Creators activos: 38
+- Proyectos en produccion: 12
+- Videos en pipeline: 23
+- Tiempo entrega: 6.2 dias
+- Aprobados sin retrabajo: 78% (meta: 85%)
+
+**[0:20-0:35] EL CUELLO DE BOTELLA ACTUAL**
+Voz: "El cuello de botella de este momento: el tiempo de feedback del cliente. Cuando un cliente demora mas de 48 horas en responder, todo el pipeline se corre. Esta semana tuvimos 3 clientes con feedback demorado — eso retraso 7 videos. La solucion que estamos implementando: aprobacion por defecto si no hay respuesta en 48 horas, con firma del cliente en contrato."
+
+Caption overlay: CUELLO DE BOTELLA: FEEDBACK DEMORADO DEL CLIENTE = 7 VIDEOS RETRASADOS
+
+**[0:35-0:50] QUE ESTAMOS MEJORANDO**
+Voz: "Dos cosas que estamos mejorando este mes: el flujo de notificaciones automaticas en n8n para que el cliente recuerde las ventanas de feedback — y el scoring de QA para que Diana tenga criterios mas precisos al evaluar un borrador."
+
+Caption overlay:
+- Notificaciones automaticas (n8n)
+- Scoring QA mas preciso (Diana)
+
+**[0:50-0:57] CIERRE**
+Voz: "Esto es lo que se ve por dentro cuando una agencia opera y mejora al mismo tiempo. No es perfecto. Es real."
+
+Caption overlay: NO ES PERFECTO. ES REAL.
+
+**[0:57-1:00] CTA**
+Voz: "Sigueme para el build in public de todo Q2 2026."
+
+Caption overlay: BUILD IN PUBLIC Q2 2026 — SIGUEME
+
+---
+
+**CAPTION POST:**
+Numeros reales de UGC Colombia este mes. Sin editar.
+
+Creators activos: 38
+Proyectos en produccion: 12
+Videos en pipeline esta semana: 23
+Tiempo promedio entrega: 6.2 dias
+Aprobados sin retrabajo: 78% (meta: 85%)
+
+Cuello de botella actual: feedback demorado de clientes.
+Esta semana: 3 clientes con respuesta lenta = 7 videos retrasados.
+
+Solucion que estamos implementando:
+Aprobacion por defecto si no hay respuesta en 48h — con clausula en contrato.
+
+Lo que mejoramos este mes:
+- Notificaciones automaticas de ventanas de feedback (n8n)
+- Scoring de QA mas preciso para Diana
+
+Esto es lo que se ve por dentro cuando una agencia opera y mejora al mismo tiempo.
+No es perfecto. Es real.
+
+#BuildInPublic #UGCColombia #AgenciaUGC #OperacionesReales #NumerosReales
+
+---
+
+### GUION 11
+**Tema:** "Como hago QA de 50 videos al mes"
+**Pilar:** Educativo / Proceso
+**Duracion:** 60s
+**Tipo de hook:** Curiosity Hook
+**Plataforma:** TikTok + Reels
+
+---
+
+**GUION COMPLETO:**
+
+**[0:00-0:03] HOOK**
+Voz: "Cincuenta videos al mes. Esto es el proceso de QA que usamos para que ninguno llegue mal al cliente."
+
+Caption overlay: 50 VIDEOS AL MES · EL PROCESO DE QA COMPLETO
+
+**[0:03-0:12] QUIEN HACE QA**
+Voz: "El QA de video en UGC Colombia lo hace Diana. Yo superviso el pipeline. Antes de que un solo frame llegue al cliente, Diana hace una revision con checklist. No es opinion — es criterio documentado."
+
+Caption overlay: QA = Diana con checklist documentado. No opinion. Criterio.
+
+**[0:12-0:32] EL CHECKLIST DE 6 PUNTOS**
+Voz: "El checklist tiene seis puntos. Uno: calidad tecnica — iluminacion, audio, estabilidad, resolucion. Dos: cumplimiento del brief — el video hace lo que el brief pide, punto a punto. Tres: duracion — dentro del rango especificado. Cuatro: formato — 9:16 correcto, sin bordes negros. Cinco: elementos prohibidos — sin logotipos de competencia, sin menciones fuera del contrato. Seis: autenticidad — no parece publicidad corporativa, parece UGC real."
+
+Caption overlay:
+1. Calidad tecnica
+2. Cumplimiento del brief
+3. Duracion en rango
+4. Formato 9:16 correcto
+5. Sin elementos prohibidos
+6. Autenticidad UGC real
+
+**[0:32-0:45] LO QUE PASA SI FALLA**
+Voz: "Si un video falla en uno o mas puntos, regresa al creator con feedback especifico — no 'esta mal', sino 'en el segundo 12 el audio satura, corrige y reentrega antes del viernes'. Feedback especifico = correccion rapida. Feedback vago = dos rondas mas de lo necesario."
+
+Caption overlay: FEEDBACK ESPECIFICO = CORRECCION RAPIDA
+
+**[0:45-0:57] ESCALAMIENTO**
+Voz: "Si el video falla QA tres veces seguidas, yo escalo. Revisamos si el problema es el brief, el creator, o el SLA. A veces el problema no es el creator — es que el brief era ambiguo desde el inicio."
+
+Caption overlay: 3 FALLAS = ESCALAMIENTO — PUEDE SER EL BRIEF, NO EL CREATOR
+
+**[0:57-1:00] CTA**
+Voz: "Comenta 'QA' y te comparto el checklist completo."
+
+Caption overlay: COMENTA "QA" — CHECKLIST COMPLETO GRATIS
+
+---
+
+**CAPTION POST:**
+50 videos al mes. Proceso de QA que usamos para que ninguno llegue mal al cliente.
+
+El checklist que usa Diana antes de que un frame llegue al cliente:
+
+1. Calidad tecnica (iluminacion, audio, estabilidad, resolucion)
+2. Cumplimiento del brief (punto a punto)
+3. Duracion dentro del rango
+4. Formato 9:16 sin bordes negros
+5. Sin elementos prohibidos (competencia, menciones no autorizadas)
+6. Autenticidad — parece UGC real, no publicidad corporativa
+
+Si falla: regresa con feedback especifico.
+No "esta mal". Sino "en el segundo 12 el audio satura, corrige antes del viernes".
+
+Feedback especifico = correccion rapida.
+Feedback vago = dos rondas extra innecesarias.
+
+Comenta "QA" y te comparto el checklist completo.
+
+#UGCColombia #QAAgencia #ControlDeCalidad #AgenciaUGC #OperacionesReales
+
+---
+
+### GUION 12
+**Tema:** "El onboarding de cliente que disene para que nada se caiga"
+**Pilar:** Educativo / Sistema
+**Duracion:** 60s
+**Tipo de hook:** Result Hook
+**Plataforma:** TikTok + Reels
+
+---
+
+**GUION COMPLETO:**
+
+**[0:00-0:03] HOOK**
+Voz: "El onboarding de cliente que disene redujo los malentendidos en el mes uno a cero. Te cuento como esta construido."
+
+Caption overlay: EL ONBOARDING QUE ELIMINO LOS MALENTENDIDOS DEL MES 1
+
+**[0:03-0:12] EL PROBLEMA QUE RESOLVIA**
+Voz: "Antes del sistema: cada cliente nuevo era una experiencia distinta. Algunos recibian el brief rapido. Otros esperaban semanas sin saber que sigue. Algunos no sabian quien era su punto de contacto. Ese desorden en el mes uno es lo que genera churn en el mes tres."
+
+Caption overlay: ANTES: CADA CLIENTE = UNA EXPERIENCIA DISTINTA = CAOS
+
+**[0:12-0:35] EL FLUJO EN 5 ETAPAS**
+Voz: "El onboarding que disene tiene cinco etapas con dueno y fecha cada una. Etapa uno: kickoff call con Alexander y yo — en las primeras 48 horas del contrato firmado. Etapa dos: acceso al Drive compartido con estructura de carpetas lista — dia 2. Etapa tres: brief del proyecto uno enviado al creator asignado — dia 3 o 4. Etapa cuatro: borrador para aprobacion del cliente — dia 7. Etapa cinco: check-in de satisfaccion activa — dia 15."
+
+Caption overlay:
+- D+0: Contrato firmado
+- D+2: Kickoff + Drive
+- D+3-4: Brief proyecto 1
+- D+7: Primer borrador
+- D+15: Check-in satisfaccion
+
+**[0:35-0:48] POR QUE FUNCIONA**
+Voz: "Lo que hace que funcione es que el cliente sabe exactamente que esperar y cuando. No hay espacio para la incertidumbre. La incertidumbre en el mes uno es el enemigo del retention. Cuando el cliente sabe que sigue — confia. Cuando confia — renueva."
+
+Caption overlay: INCERTIDUMBRE MES 1 = ENEMIGO DEL RETENTION
+
+**[0:48-0:57] CIERRE**
+Voz: "Y este onboarding no depende de que yo este disponible. Esta documentado para que cualquier persona del equipo lo ejecute igual."
+
+Caption overlay: NO DEPENDE DE QUE YO ESTE DISPONIBLE = SISTEMA REAL
+
+**[0:57-1:00] CTA**
+Voz: "Sigueme — la proxima semana publico el template completo."
+
+Caption overlay: TEMPLATE COMPLETO — PROXIMA SEMANA
+
+---
+
+**CAPTION POST:**
+El onboarding de cliente que disene para que nada dependa de mi memoria.
+
+5 etapas, dueno y fecha en cada una:
+
+D+2: Kickoff call con Alexander y conmigo
+D+2: Acceso al Drive con estructura lista
+D+3-4: Brief de proyecto 1 al creator asignado
+D+7: Primer borrador al cliente
+D+15: Check-in de satisfaccion activa
+
+Por que funciona:
+El cliente sabe exactamente que esperar y cuando.
+Sin incertidumbre = sin duda = retention en el mes 3.
+
+Y lo mas importante: este onboarding no depende de que yo este disponible.
+Esta documentado para que cualquier miembro del equipo lo ejecute igual.
+
+Eso es un sistema real. No un proceso que vive en la cabeza del COO.
+
+#Onboarding #AgenciaUGC #UGCColombia #Retention #OperacionesReales
+
+---
+
+### GUION 13
+**Tema:** "3 cosas que arruinan las operaciones de una agencia"
+**Pilar:** Educativo / Lista
+**Duracion:** 45s
 **Tipo de hook:** Direct Hook
-
----
-
-**HOOK (0:00-0:03)**
-"Si trabajas en una agencia o quieres entender los reportes financieros de tu proveedor, estas tres siglas son las que mas importan."
-
-*Caption overlay: "MRR / ARR / DSO: QUE SON EN REALIDAD"*
+**Plataforma:** TikTok + Reels
 
 ---
 
 **GUION COMPLETO:**
 
-"Si trabajas en una agencia o quieres entender los reportes financieros de tu proveedor, estas tres siglas son las que mas importan. Les doy la definicion rapida y por que le importan a alguien de marketing.
+**[0:00-0:03] HOOK**
+Voz: "Tres cosas que arruinan las operaciones de una agencia. La tercera es la que mas duele porque nunca la ves venir."
 
-MRR: Monthly Recurring Revenue. El ingreso mensual recurrente cobrado. No facturado — cobrado. Si una agencia dice que tiene $50K de MRR pero la mitad no ha pagado, el MRR real es $25K. Esta metrica dice si la agencia tiene un negocio estable o un castillo de naipes.
+Caption overlay: 3 COSAS QUE ARRUINAN LAS OPERACIONES · LA 3RA TE VA A DOLER
 
-Por que te importa como cliente: si tu agencia tiene un MRR bajo o inestable, los mejores creadores de su pool van a irse a proyectos mas grandes y seguros. Tu proyecto recibe creators B cuando deberia recibir A.
+**[0:03-0:15] PROBLEMA 1**
+Voz: "Uno: procesos que viven en la cabeza de una persona. Si el que sabe como hacer algo sale de vacaciones o renuncia — el proceso desaparece con el. Un proceso que no esta documentado no es un proceso. Es una dependencia critica disfrazada de eficiencia."
 
-ARR: Annual Recurring Revenue. Es simplemente MRR por 12. Sirve para proyecciones anuales y para hablar con inversores. Para operacion diaria no es la metrica principal.
+Caption overlay: PROCESO EN LA CABEZA = DEPENDENCIA CRITICA
 
-DSO: Days Sales Outstanding. Dias promedio que tarda una empresa en cobrar sus facturas. Si una agencia tiene DSO de 45 dias, significa que le pagan en promedio 45 dias despues de facturar. Ese gap lo tienen que financiar con capital propio o con deuda.
+**[0:15-0:27] PROBLEMA 2**
+Voz: "Dos: comunicacion sin protocolo. Cuando todo va por WhatsApp mezclado — clientes, creators, equipo interno — las cosas se pierden. No porque alguien sea descuidado, sino porque el sistema no tiene canales definidos. Lo que no tiene canal definido se pierde."
 
-El DSO ideal en servicios creativos es menor a 15 dias. Nosotros estamos en 11.
+Caption overlay: SIN PROTOCOLO DE COMUNICACION = SE PIERDE
 
-Por que te importa: una agencia con DSO alto tiene problemas de flujo de caja. Eso se traduce en retrasos en pagos a creadores, lo que genera friccion en produccion, lo que te afecta a ti como cliente.
+**[0:27-0:38] PROBLEMA 3**
+Voz: "Tres: escalar sin antes estandarizar. Tomar mas clientes antes de tener los procesos documentados es como poner mas agua en un balde con hueco. Creces mas rapido de lo que tu operacion puede aguantar — y el cliente que te llego nuevo es el que paga el costo de tu desorden."
 
-Las finanzas de tu agencia son tu problema aunque no lo parezca."
+Caption overlay: ESCALAR SIN ESTANDARIZAR = BALDE CON HUECO
 
-**Captions overlay:**
-- 0:03 → "MRR: ingreso mensual recurrente cobrado"
-- 0:15 → "ARR: MRR x 12 (para proyecciones)"
-- 0:30 → "DSO: dias promedio para cobrar"
-- 0:42 → "DSO ideal servicios creativos: <15 dias"
-- 0:52 → "Nuestro DSO actual: 11 dias"
+**[0:38-0:42] CIERRE**
+Voz: "Si tienes alguno de estos tres en tu agencia ahora mismo — este es el momento de pararte y arreglarlo antes de que cueste un cliente."
 
-**CTA (0:57-1:00):**
-"Proximo video: NRR y churn rate — las dos metricas que mas predicen el futuro de una agencia. Sigueme."
+**[0:42-0:45] CTA**
+Voz: "Sigueme para los sistemas que usamos para evitar estos tres."
 
-**Hashtags:** #MRR #ARR #DSO #AgenciaUGC #Finanzas #SaaS #UGCColombia #Metricas
-
-**Caption del post:**
-"MRR, ARR y DSO traducidos para marketers que no tienen CFO.
-
-Estas tres siglas no son solo para el equipo financiero. Te dicen si tu agencia es financieramente sana — o si esta un mes malo de entrar en problemas que van a afectar tu proyecto.
-
-Diccionario rapido con el impacto practico de cada metrica."
+Caption overlay: LOS SISTEMAS QUE USAMOS — SIGUEME
 
 ---
 
-## 4. GUIONES CARRUSELES LINKEDIN (10 carruseles)
+**CAPTION POST:**
+3 cosas que arruinan las operaciones de una agencia.
+
+La tercera es la que mas duele porque nunca la ves venir.
+
+1. Procesos que viven en la cabeza de una sola persona.
+Cuando esa persona se va — el proceso desaparece con ella.
+
+2. Comunicacion sin protocolo.
+No porque el equipo sea descuidado. Sino porque no hay canal definido para cada tipo de mensaje.
+
+3. Escalar antes de estandarizar.
+Mas clientes antes de tener procesos documentados = el cliente nuevo paga el costo del desorden anterior.
+
+Si tienes alguno de estos tres en tu agencia ahora mismo:
+Este es el momento de parar y arreglarlo antes de que cueste un cliente.
+
+#OperacionesAgencia #UGCColombia #AgenciaUGC #COO #EmprendimientoReal
 
 ---
 
-### CARRUSEL 01 — "Calculadora de ROI de UGC (template)"
-
-**Slides:** 10 | **Pilar:** Educativo | **Plataforma:** LinkedIn
-
-**SLIDE 1 — PORTADA:**
-"Calculadora de ROI de UGC
-(la que uso con cada cliente antes de firmar)
-Brian · Finance Lead · UGC Colombia"
-
-**SLIDE 2:**
-"Antes de calcular ROI, necesitas 4 numeros.
-
-1. Inversion en UGC (produccion)
-2. Inversion en pauta (ads)
-3. Revenue atribuido a esas campanas
-4. Costo de tu producto (COGS)
-
-Si no tienes los 4, el calculo no sirve."
-
-**SLIDE 3:**
-"Formula base:
-
-ROI = (Revenue atribuido - Inversion total) / Inversion total x 100
-
-Ejemplo con numeros reales:
-Revenue atribuido: $2.800
-Inversion UGC: $500
-Inversion ads: $700
-Inversion total: $1.200
-
-ROI = ($2.800 - $1.200) / $1.200 x 100 = 133%"
-
-**SLIDE 4:**
-"Pero el ROI bruto miente.
-
-Necesitas descontar el COGS de tu producto.
-
-Si tu margen de producto es 60%, el revenue real que puedes atribuir al esfuerzo de marketing es solo el 60% de las ventas.
-
-Revenue ajustado: $2.800 x 0.60 = $1.680
-ROI ajustado: ($1.680 - $1.200) / $1.200 x 100 = 40%
-
-Eso es mas honesto."
-
-**SLIDE 5:**
-"Variable que mas impacta el ROI: el ROAS.
-
-ROAS = Revenue / Gasto en ads
-ROAS = $2.800 / $700 = 4x
-
-Benchmark por industria:
-- Cosmeticos / beauty: 2.5x - 4x
-- Suplementos: 2x - 3.5x
-- Moda / apparel: 1.8x - 3x
-- Hogar / deco: 2x - 3.5x
-
-Si tu ROAS esta por debajo del benchmark, el problema es el creativo o la segmentacion."
-
-**SLIDE 6:**
-"La variable que la gente olvida: el costo del creativo por impresion.
-
-CPM de un video UGC bien hecho vs creativo de studio:
-
-UGC: CPM promedio $4.20 (menor fatiga del algoritmo)
-Studio: CPM promedio $7.80 (el algoritmo lo distribuye menos organicamente)
-
-Esa diferencia en CPM se acumula. Con $700 de ads y CPM de $4.20 alcanzas 166.000 impresiones. Con CPM de $7.80 alcanzas 89.000.
-
-El UGC no solo convierte mejor. Distribuye mejor."
-
-**SLIDE 7:**
-"Template de calculo mensual:
-
-[ ] Inversion UGC este mes: $___
-[ ] Inversion ads este mes: $___
-[ ] Revenue atribuido (UTM o pixel): $___
-[ ] Margen de producto: ___%
-[ ] Revenue ajustado: $___
-[ ] ROI ajustado: ___%
-[ ] ROAS: ___x
-[ ] CPM promedio: $___
-[ ] CPA: $___
-
-Si no tienes todos estos numeros, habla con tu agencia. Deben poder dartelos."
-
-**SLIDE 8:**
-"Cuanto tiempo tarda en verse el ROI positivo?
-
-Con clientes nuevos en UGC Colombia:
-
-Mes 1: optimizacion. ROAS promedio 1.2x - 1.8x
-Mes 2: aprendizaje del algoritmo. ROAS 2x - 2.5x
-Mes 3: estabilizacion. ROAS 2.5x - 3.5x
-
-El UGC no es magia de mes 1. Es una curva de aprendizaje de 60 a 90 dias.
-
-Quien te prometa resultados explosivos en la primera semana, miente."
-
-**SLIDE 9:**
-"El error mas comun al calcular ROI de UGC:
-
-Atribuir solo el revenue de ads.
-
-El UGC tambien genera:
-- Trafico organico si subes los videos al perfil de marca
-- Prueba social que mejora conversion del sitio web
-- Contenido para email marketing (+CTR promedio 18%)
-- Activos para pitch deck y propuestas comerciales
-
-El ROI total es mayor que el ROI de pauta. Pero es mas dificil de medir."
-
-**SLIDE 10 — CTA:**
-"Si quieres el template de calculadora en Google Sheets con estas formulas incluidas, comenta CALCULADORA abajo.
-
-Te la envio directamente.
-
-Sigueme para mas herramientas de este tipo: @brianugccolombia
-
-Brian · Finance Lead · UGC Colombia"
+### GUION 14
+**Tema:** "Capacity planning: cuantos clientes podemos tomar"
+**Pilar:** Educativo / Numeros reales
+**Duracion:** 60s
+**Tipo de hook:** Curiosity Hook
+**Plataforma:** TikTok + Reels
 
 ---
 
-### CARRUSEL 02 — "Pricing transparente: por que lo publicamos"
+**GUION COMPLETO:**
 
-**Slides:** 10 | **Pilar:** Estrategico | **Plataforma:** LinkedIn
+**[0:00-0:03] HOOK**
+Voz: "La pregunta que mas me hace Alexander: cuantos clientes mas podemos tomar este mes? Esto es como calculo la respuesta."
 
-**SLIDE 1 — PORTADA:**
-"Por que UGC Colombia publica sus precios
-(y por que el resto de la industria no lo hace)
-Brian · Finance · UGC Colombia"
+Caption overlay: CUANTOS CLIENTES MAS PODEMOS TOMAR? ASI LO CALCULO
 
-**SLIDE 2:**
-"La norma en agencias creativas es no publicar precios.
+**[0:03-0:15] LA VARIABLE CLAVE**
+Voz: "La mayoria de agencias calculan su capacity mirando cuanta plata entra. Eso es un error. La variable correcta es: cuantas horas de coordinacion tenemos disponibles esta semana — y cuantas horas consume cada proyecto activo."
 
-La logica: 'cada cliente es diferente, necesitamos una propuesta personalizada'.
+Caption overlay: CAPACITY = HORAS COORDINACION DISPONIBLES, NO PLATA QUE ENTRA
 
-La realidad: si no publicas precios, cada propuesta es una negociacion de poder donde el cliente no sabe si le estas cobrando el doble que al siguiente."
+**[0:15-0:30] EL CALCULO**
+Voz: "En UGC Colombia, Diana tiene capacidad para manejar activamente entre 12 y 15 proyectos simultaneos sin degradar calidad. Por encima de 15 proyectos, el tiempo de QA por video aumenta, los briefs salen menos detallados, y el riesgo de error operativo sube. Ese es el techo real de nuestra operacion en este momento."
 
-**SLIDE 3:**
-"Decidimos publicar precios por una razon financiera, no filosofica.
+Caption overlay:
+- Capacity max Diana: 12-15 proyectos simultaneos
+- Mas de 15: calidad baja, riesgo de error sube
 
-El costo de una discovery call que no cierra: 45 minutos de Alexander + 20 minutos de Brian + herramientas de propuesta = $85 USD de costo interno.
+**[0:30-0:45] COMO AUMENTAMOS EL TECHO**
+Voz: "Para subir ese techo sin contratar a alguien nuevo — primero automatizamos. Jarvis maneja las notificaciones de feedback al cliente. n8n actualiza el status de cada entrega automaticamente. Eso libera tiempo de Diana para coordination de calidad, no para recordatorios administrativos."
 
-Si nuestra tasa de cierre es del 28%, cada cliente cerrado nos cuesta $303 USD solo en discovery calls fallidas.
+Caption overlay:
+- Jarvis: notificaciones de feedback automaticas
+- n8n: update de status automatico
+- Resultado: Diana libera tiempo para QA real
 
-Si publicamos precios, los leads que llegan ya pasaron el filtro de precio. Tasa de cierre con leads que ya vieron los precios: 54%."
+**[0:45-0:57] PROYECCION**
+Voz: "Con las automatizaciones que estamos implementando, proyectamos subir el capacity de Diana de 15 a 22 proyectos en los proximos 45 dias. Eso nos permite incorporar 7 clientes mas sin contratar. Ese es el tipo de calculo que hace un COO antes de que el CEO diga si en una llamada de ventas."
 
-**SLIDE 4:**
-"El impacto en CAC fue inmediato.
+Caption overlay: META 45 DIAS: 22 PROYECTOS = 7 CLIENTES MAS SIN CONTRATAR
 
-CAC antes de publicar precios (Q3 2025): $412 USD
-CAC despues de publicar precios (Q1 2026): $287 USD
+**[0:57-1:00] CTA**
+Voz: "Sigueme para ver como avanza este numero mes a mes."
 
-Reduccion del 30% en CAC simplemente por filtrar leads con informacion de precio publica.
-
-Eso no es transparencia filosofica. Es eficiencia financiera."
-
-**SLIDE 5:**
-"Que publicamos exactamente:
-
-Plan Starter: $500 / mes / 4 piezas UGC
-Plan Pro: $950 / mes / 8 piezas UGC
-Plan Premium: $1.500 / mes / 12 piezas mixtas
-
-Proyectos puntuales: desde $220 (testimonial LATAM 30-60s)
-Licencias de pauta: +30% sobre precio base
-
-No publicamos: descuentos de volumen ni condiciones especiales (se negocian caso a caso)"
-
-**SLIDE 6:**
-"Las 3 objeciones que nos dieron cuando decidimos publicar precios:
-
-1. 'Los competidores van a copiar nuestra estructura de precios.'
-   Respuesta: si lo unico que te diferencia es el precio, tienes un problema mayor.
-
-2. 'Los clientes grandes van a pedir el precio del plan pequeno.'
-   Respuesta: los clientes grandes no miran el precio lista. Negocian directamente.
-
-3. 'Vamos a perder clientes que podrian haber pagado mas.'
-   Respuesta: esos clientes ya estaban sobre-pagando y eran los primeros en hacer churn."
-
-**SLIDE 7:**
-"Lo que la transparencia de precios senala al mercado:
-
-- Tenemos estructura financiera estable (no negociamos desesperadamente)
-- Confiamos en el valor que entregamos
-- Tratamos a todos los clientes con el mismo marco de referencia
-- No tenemos nada que esconder en la estructura de costos
-
-Esas cuatro senales son activos de marca que ningun presupuesto de ads puede comprar."
-
-**SLIDE 8:**
-"El riesgo real de publicar precios:
-
-Te quitas la posibilidad de cobrar de mas a clientes que no saben el valor de mercado.
-
-Ese 'riesgo' es en realidad una ventaja: esos clientes son los que generan mas fricciones, mas revisiones y mas churn. Filtrarlos con el precio es gratis y automatico."
-
-**SLIDE 9:**
-"Como implementar esto si eres una agencia:
-
-1. Define tus tres planes con nombre, precio y entregables claros
-2. Publica en tu web y en LinkedIn
-3. Mide la tasa de cierre de leads que ya vieron el precio vs los que no
-4. Ajusta el precio si la tasa de cierre es mayor al 60% (estas cobrando poco) o menor al 20% (algo esta mal en el valor percibido)
-
-El precio publicado no es estatico. Es un experimento continuo."
-
-**SLIDE 10 — CTA:**
-"Si tu agencia o servicio no tiene precios publicados, te pregunto: de que le tienes miedo exactamente?
-
-Comenta abajo. Me interesa el debate.
-
-Brian · Finance Lead · UGC Colombia
-Sigueme para mas contenido de finanzas aplicadas a agencias creativas."
+Caption overlay: CAPACITY MES A MES — SIGUEME
 
 ---
 
-### CARRUSEL 03 — "Health Score de cliente: 5 variables"
+**CAPTION POST:**
+La pregunta que mas me hace Alexander: cuantos clientes mas podemos tomar?
 
-**Slides:** 10 | **Pilar:** Estrategico | **Plataforma:** LinkedIn
+La mayoria de agencias calculan esto mirando cuanta plata entra.
+Ese es el error.
 
-**SLIDE 1 — PORTADA:**
-"El numero que predice si tu cliente se va antes de que lo diga
-Health Score de cliente · 5 variables · 0 a 100
-Brian · UGC Colombia"
+La variable correcta: cuantas horas de coordinacion disponibles tenemos — y cuantas consume cada proyecto activo.
 
-**SLIDE 2:**
-"El churn no es un evento. Es un proceso.
+En UGC Colombia:
+Diana maneja entre 12-15 proyectos simultaneos sin degradar calidad.
+Por encima de 15: tiempo de QA aumenta, briefs salen menos detallados, riesgo de error sube.
 
-Los clientes no se van de sorpresa. Mandan senales durante semanas o meses antes de cancelar.
+Como subimos ese techo sin contratar:
+- Jarvis maneja notificaciones de feedback al cliente (automatico)
+- n8n actualiza status de cada entrega (automatico)
+- Diana libera tiempo para coordinacion real, no recordatorios
 
-El problema es que esas senales estan en datos distintos: pagos, feedback, NPS, tiempo de respuesta. Si no las consolidas en un numero, las ignoras."
+Proyeccion en 45 dias: capacidad de 15 a 22 proyectos = 7 clientes mas sin contratar.
 
-**SLIDE 3:**
-"Variable 1: Puntualidad en pagos — peso 25%
+Ese es el calculo que hace un COO antes de que el CEO diga si en una llamada de ventas.
 
-Calculo:
-100 puntos si pago a tiempo los ultimos 3 meses
--20 puntos por cada falla de pago en ese periodo
-
-Logica: el cliente que empieza a pagar tarde no siempre tiene un problema de cash flow. A veces tiene un problema de prioridad. Tu servicio ya no es urgente para el."
-
-**SLIDE 4:**
-"Variable 2: Calidad de entregables aprobados — peso 25%
-
-Calculo:
-Video calificado A (por QA interno): 100 puntos
-Video calificado B: 70 puntos
-Video calificado C: 30 puntos
-Promedio de todos los entregables del mes
-
-Logica: si un cliente solo aprueba videos B y C es porque su brief no es claro o sus expectativas estan desalineadas. Ese cliente va a churnearse antes de resolver el problema."
-
-**SLIDE 5:**
-"Variable 3: Engagement con reportes mensuales — peso 15%
-
-Calculo:
-% de reportes que el cliente abrio, respondio o comento
-
-100 si interactuo con todos
-Proporcional si interactuo con algunos
-0 si no ha abierto ningun reporte en 30 dias
-
-Logica: el cliente que no mira sus reportes no esta midiendo. Si no mide, no ve valor. Si no ve valor, busca una razon para cancelar."
-
-**SLIDE 6:**
-"Variable 4: NPS — peso 20%
-
-Calculo:
-NPS x 10 (NPS de 8 = 80 puntos)
-Encuesta cada 60 dias via Jarvis (WhatsApp automatico)
-
-Logica: el NPS no solo mide satisfaccion. Mide advocacy. Un cliente con NPS de 9-10 te refiere proactivamente. Ese cliente tiene LTV adicional que no aparece en tu facturacion directa."
-
-**SLIDE 7:**
-"Variable 5: Velocidad de feedback — peso 15%
-
-Calculo:
-Tiempo promedio entre entrega del video y respuesta del cliente
-
-< 24 horas: 100 puntos
-24 - 48 horas: 80 puntos
-48 - 72 horas: 50 puntos
-> 72 horas: 0 puntos
-
-Logica: un cliente que tarda mas de 72h en dar feedback tiene otra prioridad. El proyecto UGC perdio urgencia. Ese es un cliente en proceso de desconexion."
-
-**SLIDE 8:**
-"Como interpretar el score:
-
-80 - 100: cliente saludable. Candidato a upsell. Pedir referidos.
-60 - 79: cliente estable. Mantener relacion. NPS call trimestral.
-40 - 59: cliente en riesgo. Intervencion de Diana o Alexander en 72h.
-< 40: churn inminente. Playbook de prevencion inmediato.
-
-Con este score, intervenimos antes de que el cliente diga que se quiere ir.
-En Q1 recuperamos 3 clientes que estaban bajo 40."
-
-**SLIDE 9:**
-"Como automatizarlo:
-
-Paso 1: consolida los datos en Supabase (pagos, QA scores, NPS, velocidad feedback)
-Paso 2: crea una query que calcule el score semanal por cliente
-Paso 3: Jarvis envia alerta a Diana cuando un cliente baja de 60
-Paso 4: Diana hace la intervencion. Alexander cierra la retencion si es necesario.
-
-No necesitas IA sofisticada. Necesitas datos consistentes y un trigger de accion."
-
-**SLIDE 10 — CTA:**
-"Si manejas una agencia o servicio de retainer y no tienes un sistema de health score, estas operando a ciegas.
-
-El churn que podias haber prevenido esta semana es MRR que no recuperas el proximo mes.
-
-Sigueme para mas sistemas de este tipo.
-Brian · Finance Lead · UGC Colombia"
+#CapacityPlanning #UGCColombia #AgenciaUGC #OperacionesReales #COO
 
 ---
 
-### CARRUSEL 04 — "Modelo financiero de agencia UGC"
-
-**Slides:** 10 | **Pilar:** Educativo | **Plataforma:** LinkedIn
-
-**SLIDE 1 — PORTADA:**
-"El modelo financiero que uso para operar UGC Colombia
-(P&L simplificado, sin humo)
-Brian · Finance · UGC Colombia"
-
-**SLIDE 2:**
-"Un modelo financiero no es una proyeccion de Excel con numeros optimistas.
-
-Es un mapa de las variables que controlas y de las que no controlas, con escenarios para cada combinacion.
-
-Aqui el modelo que uso nosotros, adaptado para cualquier agencia UGC boutique."
-
-**SLIDE 3:**
-"REVENUE
-
-MRR = Clientes activos x Ticket promedio
-
-Variables que afectan el MRR:
-+ Nuevos logos (cierre)
-+ Expansion (upsell de plan)
-- Logo churn (cliente cancela)
-- Revenue churn (cliente baja de plan)
-
-Target NRR (Net Revenue Retention): > 105%
-Significa: el revenue de clientes existentes crece por si solo, aunque no vendas uno nuevo."
-
-**SLIDE 4:**
-"COGS (Costo de ventas directo)
-
-Por cada $100 de revenue:
-- Pago a creadores: ~42%
-- Comisiones de pago (Stripe/Wise): ~3%
-- Envios de producto: ~2.5%
-- Hosting de archivos (CDN): ~0.5%
-Total COGS: ~48%
-
-Margen bruto objetivo: 52-58%
-
-Si tu margen bruto baja de 45%, algo en tu estructura de precios o en tus tarifas de creadores esta mal."
-
-**SLIDE 5:**
-"OPEX (Gastos operativos)
-
-Los gastos que no van en COGS:
-- Sueldos del equipo (no prorratear por proyecto)
-- Tooling (Supabase, n8n, Notion, Stripe, etc.): ~$380/mes
-- Paid media para adquisicion: variable
-- Software editorial y diseno: ~$120/mes
-- Contabilidad y legal: ~$200/mes
-
-EBITDA = Margen bruto - OPEX
-Target: EBITDA positivo desde el mes 4 con $6K MRR"
-
-**SLIDE 6:**
-"CASH FLOW (la metrica que de verdad mata agencias)
-
-Problema clasico de agencias que crecen rapido:
-Revenue sube pero cash flow es negativo porque:
-- Cobran a 30-60 dias
-- Pagan a creadores anticipado
-- Tienen OPEX mensual fijo
-
-Solucion estructural: cobrar 100% anticipado mes 1 y anticipado en meses siguientes.
-
-Con esa estructura, el cash flow es positivo desde el primer cliente."
-
-**SLIDE 7:**
-"PUNTO DE EQUILIBRIO
-
-Formula:
-Break-even = OPEX mensual / Margen bruto %
-
-Con OPEX de $5.200/mes y margen bruto de 55%:
-Break-even = $5.200 / 0.55 = $9.454 de MRR
-
-Eso equivale a aproximadamente 12-13 clientes en ticket promedio de $750.
-
-Hasta llegar ahi, cada peso de MRR nuevo va a cubrir OPEX. Despues de ahi, cada peso es EBITDA."
-
-**SLIDE 8:**
-"ESCENARIOS (lo que el modelo proyecta)
-
-Conservador (churn 8%/mes, cierre 2 clientes/mes):
-Mes 6: $7.200 MRR / Mes 12: $14.800 MRR
-
-Base (churn 5%/mes, cierre 3 clientes/mes):
-Mes 6: $9.200 MRR / Mes 12: $24.600 MRR
-
-Optimista (churn 3%/mes, cierre 4 clientes/mes):
-Mes 6: $11.400 MRR / Mes 12: $38.200 MRR
-
-La variable mas sensible no es el cierre. Es el churn. Reducir churn de 8% a 5% tiene mas impacto en MRR final que doblar cierres."
-
-**SLIDE 9:**
-"Las 3 palancas para mejorar el modelo:
-
-1. Subir ticket promedio: upsells + mezcla de planes hacia Premium
-2. Reducir churn: health score + intervencion temprana
-3. Bajar CAC: contenido organico + referidos de clientes actuales
-
-Cada una de estas palancas tiene un costo diferente. La mas barata: bajar churn. La mas cara: bajar CAC via ads."
-
-**SLIDE 10 — CTA:**
-"Si quieres la plantilla de este modelo en Google Sheets con las formulas de cada escenario, comenta MODELO abajo.
-
-Te la envio.
-
-Brian · Finance Lead · UGC Colombia
-Sigueme para mas finanzas aplicadas a agencias creativas."
+### GUION 15
+**Tema:** "Hot take: agencias fracasan por operaciones, no por ventas"
+**Pilar:** Controversial / Hot take
+**Duracion:** 45s
+**Tipo de hook:** Controversial Hook
+**Plataforma:** TikTok + Reels
 
 ---
 
-### CARRUSEL 05 — "Proyecciones Q3 con UGC: 3 escenarios"
+**GUION COMPLETO:**
 
-**Slides:** 10 | **Pilar:** Estrategico | **Plataforma:** LinkedIn
+**[0:00-0:03] HOOK**
+Voz: "Hot take: la mayoria de agencias en LATAM no mueren por falta de clientes. Mueren por no poder entregar lo que prometieron."
 
-**SLIDE 1 — PORTADA:**
-"Como proyectar Q3 2026 con UGC en tu mix de marketing
-3 escenarios con numeros reales
-Brian · Finance · UGC Colombia"
+Caption overlay: HOT TAKE: LAS AGENCIAS MUEREN POR OPERACIONES, NO POR VENTAS
 
-**SLIDE 2:**
-"La mayoria de marcas planifican el budget de UGC como un gasto, no como una inversion.
+**[0:03-0:15] EL ARGUMENTO**
+Voz: "En LATAM hay demanda de UGC. El mercado es real. El dinero existe. El problema es que muchas agencias cierran tres o cuatro clientes rapido — y luego no tienen el sistema para entregarles bien a todos al mismo tiempo. El cliente uno recibe excelencia. El cliente cuatro recibe apuros."
 
-La diferencia: un gasto no tiene modelo de retorno. Una inversion tiene escenarios, supuestos y una metrica de exito definida antes de gastar.
+Caption overlay: CLIENTE 1: excelencia / CLIENTE 4: apuros
 
-Este es el modelo de proyeccion que usamos con clientes antes de activar."
+**[0:15-0:28] LA TRAMPA DEL CRECIMIENTO**
+Voz: "Y ahi viene la trampa: siguen vendiendo porque necesitan el cash — pero el churn del cliente cuatro esta llegando justo cuando cierran el cliente cinco. Corren mas rapido en el mismo lugar. Eso no es crecimiento. Eso es desgaste con ingresos."
 
-**SLIDE 3:**
-"Supuestos base del modelo:
+Caption overlay: VENTAS SIN OPERACION = CORRER EN EL MISMO LUGAR
 
-- Marca DTC, ecommerce, ticket promedio de compra $45 USD
-- Margen de producto: 55%
-- Presupuesto ads disponible: $1.500/mes
-- Plan UGC Colombia: Pro ($950/mes, 8 videos)
-- Periodo de proyeccion: Q3 2026 (3 meses)"
+**[0:28-0:40] LA SOLUCION**
+Voz: "La solucion es contraintuitiva: en cierto punto tienes que dejar de vender para poder operar bien. Documentar los procesos. Definir el capacity real. Y luego volver a vender con el piso firme. Alexander y yo hicimos eso exactamente en el mes cuatro. Paro de ventas de 3 semanas para construir el sistema. Y despues de eso escalamos sin drama."
 
-**SLIDE 4:**
-"Escenario 1 — CONSERVADOR
+Caption overlay: PARAR DE VENDER PARA PODER ESCALAR = CONTRAINTUITIVO PERO REAL
 
-ROAS ads con UGC: 2.0x
-Revenue mensual generado: $3.000
-Revenue Q3: $9.000
-Inversion total Q3 (UGC + ads): $7.350
-Revenue neto ajustado por margen: $4.950
-ROI Q3: -32% (a favor de no activar UGC todavia)
+**[0:40-0:45] CTA**
+Voz: "Si tu agencia esta en ese ciclo ahora mismo — lo que describes es un problema operativo, no un problema de ventas. Sigueme."
 
-Cuando aplica: mercado saturado, producto sin diferenciacion clara, brief debil."
-
-**SLIDE 5:**
-"Escenario 2 — BASE
-
-ROAS ads con UGC: 2.8x
-Revenue mensual generado: $4.200
-Revenue Q3: $12.600
-Inversion total Q3: $7.350
-Revenue neto ajustado por margen: $6.930
-ROI Q3: -5.7% en el primer mes, positivo desde mes 2
-
-Cuando aplica: producto con historia clara, brief estructurado, audience definida. Este es el escenario promedio de nuestros clientes DTC en el trimestre 1."
-
-**SLIDE 6:**
-"Escenario 3 — OPTIMISTA
-
-ROAS ads con UGC: 3.8x
-Revenue mensual generado: $5.700
-Revenue Q3: $17.100
-Inversion total Q3: $7.350
-Revenue neto ajustado por margen: $9.405
-ROI Q3: +28%
-
-Cuando aplica: producto viral-friendly, audiencia educada sobre el problema, creator fit alto, licencia de pauta activa. Este escenario no es el default — es el objetivo de mes 3."
-
-**SLIDE 7:**
-"Variables que mueven del escenario conservador al optimista:
-
-1. Calidad del brief: de generico a especifico con pain + proof
-2. Fit creator-producto: casting por categoria, no por seguidores
-3. Velocidad de iteracion: A/B test semanal de creativos
-4. Presupuesto de pauta: no starvar los videos buenos
-5. Tiempo de campana: el algoritmo aprende, no lo interrumpas en semana 2"
-
-**SLIDE 8:**
-"La trampa de la proyeccion optimista:
-
-Muchas marcas — y algunas agencias — solo muestran el escenario 3.
-
-El problema: si planificas sobre el optimista y aterrizas en el conservador, pierdes confianza en el canal y cancelas antes de llegar al punto de inflexion.
-
-Planifica sobre el base. Celebra si llegas al optimista."
-
-**SLIDE 9:**
-"Como usar este modelo internamente:
-
-Mes 1: ejecuta con escenario conservador como baseline de expectativas
-Mes 2: mide ROAS real y ajusta proyeccion
-Mes 3: con datos de 2 meses, proyecta Q4 con mayor precision
-
-La proyeccion no es un documento estatico. Es un modelo que se actualiza con datos reales cada 30 dias."
-
-**SLIDE 10 — CTA:**
-"Si quieres que armemos este modelo de proyeccion para tu marca especificamente, escríbeme en DM con el ticket promedio de tu producto y el budget de ads disponible.
-
-Lo calculo en 24 horas sin costo.
-
-Brian · Finance Lead · UGC Colombia"
+Caption overlay: PROBLEMA DE VENTAS O DE OPERACIONES? SIGUEME
 
 ---
 
-### CARRUSEL 06 — "El error de pricing que veo en 80% de agencias"
+**CAPTION POST:**
+Hot take: la mayoria de agencias en LATAM no mueren por falta de clientes.
+Mueren por no poder entregar lo que prometieron.
 
-**Slides:** 10 | **Pilar:** Educativo | **Plataforma:** LinkedIn
+El ciclo que veo todo el tiempo:
+- Cierran 3-4 clientes rapido (emocion total)
+- No tienen sistema para entregarles bien a todos al mismo tiempo
+- Cliente 1: excelencia / Cliente 4: apuros
+- Siguen vendiendo porque necesitan cash
+- Churn del cliente 4 llega cuando cierran el cliente 5
+- Corren mas rapido en el mismo lugar
 
-**SLIDE 1 — PORTADA:**
-"El error de pricing que veo en 8 de cada 10 agencias UGC
-(y como corregirlo sin perder clientes)
-Brian · Finance · UGC Colombia"
+Eso no es crecimiento. Es desgaste con ingresos.
 
-**SLIDE 2:**
-"El error no es cobrar mucho o poco.
+La solucion contraintuitiva:
+En cierto punto hay que parar de vender para poder operar bien.
+Documentar procesos. Definir capacity real. Construir el piso.
+Y luego volver a vender con estructura.
 
-Es no tener una estructura de precios basada en costos reales y valor percibido.
+Alexander y yo lo hicimos en el mes 4.
+3 semanas sin cerrar clientes nuevos. Solo construir el sistema.
+Despues de eso escalamos sin drama.
 
-La mayoria de agencias fijan precios por intuicion, por lo que cobra la competencia, o por lo que el cliente parece dispuesto a pagar. Ninguna de las tres es una metodologia."
+Si tu agencia esta en ese ciclo ahora mismo: el problema no es de ventas.
 
-**SLIDE 3:**
-"Error 1: Precio por hora de trabajo
-
-Problema: pone el techo del revenue en las horas disponibles del equipo.
-Si mejoras tu proceso y produces mas rapido, cobras menos por el mismo resultado.
-La eficiencia te penaliza.
-
-Correcto: precio por entregable con valor percibido. El cliente compra un video de conversion, no 3 horas de tu tiempo."
-
-**SLIDE 4:**
-"Error 2: Un solo precio para todo el mercado
-
-LATAM y USA no son el mismo mercado. Un video testimonial de 30-60s tiene valores de mercado radicalmente distintos:
-LATAM: $220 - $380 USD
-USA: $500 - $900 USD
-
-Agencias que cobran precio LATAM a clientes USA dejan entre 30% y 60% de revenue sobre la mesa. Agencias que cobran precio USA a clientes LATAM no cierran."
-
-**SLIDE 5:**
-"Error 3: No separar licencia de produccion
-
-El precio de producir el video y el precio de usar el video en ads son dos cosas distintas.
-
-Produccion: costo de crear el activo
-Licencia de pauta: derecho de usar ese activo en campanas pagadas
-
-Si vendes el video sin separar la licencia, el cliente te pide usarlo en ads y ya no puedes cobrar extra. Eso es margen perdido para siempre.
-
-Licencia paid media: +30% sobre precio base LATAM / +40% USA."
-
-**SLIDE 6:**
-"Error 4: Descuentos por volumen mal calibrados
-
-El descuento tipico que veo: 10% por 5 videos, 20% por 10 videos.
-
-Problema: no considera la estructura de COGS. El pago al creador no baja proporcionalmente con el volumen. El unico costo que escala es la coordinacion.
-
-Descuento correcto maxima para volumen: 5% en 3-5 videos, 10% en 6-10 videos, 15% en 11-20 videos. Mas alla de eso, negociar caso a caso con retainer exclusivo."
-
-**SLIDE 7:**
-"Error 5: Revision ilimitada como default
-
-Cada ronda de revision adicional tiene un costo real:
-- Tiempo de coordinacion con el creador
-- Tiempo de QA
-- Posible renegrabacion parcial
-
-Si no lo cobras a partir de la tercera ronda, ese costo sale de tu margen.
-
-Formula correcta: 2 rondas incluidas. Tercera en adelante: $25-40 LATAM / $50-80 USA por video revisado."
-
-**SLIDE 8:**
-"Como corregirlo sin perder clientes actuales:
-
-Paso 1: calcula tu margen bruto real por plan (COGS incluido)
-Paso 2: identifica en que plan el margen es menor al 45%
-Paso 3: ajusta ese precio en un 10-15% para nuevos contratos
-Paso 4: honra el precio actual a clientes existentes hasta renovacion
-Paso 5: presenta el nuevo precio como 'tabla 2026 actualizada' en la renovacion
-
-No cambias precios a clientes activos de golpe. Cambias para nuevos y migras los actuales en la renovacion."
-
-**SLIDE 9:**
-"El test de pricing correcto:
-
-Si tu tasa de cierre es mayor al 60%, estas cobrando muy poco.
-Si tu tasa de cierre es menor al 15%, algo falla en valor percibido o en el perfil del lead.
-El rango saludable: 25% a 45% de cierre.
-
-Nuestro Q1 2026: tasa de cierre del 38% con precios publicados. Eso dice que el precio esta bien calibrado."
-
-**SLIDE 10 — CTA:**
-"Si no sabes cual es tu margen bruto real por plan, ese es el primer calculo que debes hacer esta semana.
-
-Comenta PRICING abajo y te comparto la formula exacta.
-
-Brian · Finance Lead · UGC Colombia"
+#AgenciaUGC #UGCColombia #OperacionesReales #HotTake #COO
 
 ---
 
-### CARRUSEL 07 — "CAC vs LTV: calculo completo"
-
-**Slides:** 10 | **Pilar:** Educativo | **Plataforma:** LinkedIn
-
-**SLIDE 1 — PORTADA:**
-"CAC vs LTV: el calculo completo para agencias UGC
-(con los numeros reales de Q1 2026)
-Brian · Finance · UGC Colombia"
-
-**SLIDE 2:**
-"Antes de calcular, clarifica las definiciones.
-
-CAC: Costo de Adquisicion de Cliente. TODO lo que gastas para cerrar un cliente nuevo — no solo los ads.
-
-LTV: Lifetime Value. TODO el margen que genera ese cliente en su ciclo de vida — no solo el revenue."
-
-**SLIDE 3:**
-"Formula de CAC completo:
-
-CAC = (Gasto en ads + Tiempo de ventas valorizado + Herramientas de CRM + Propuestas que no cerraron) / Nuevos clientes cerrados
-
-Nuestros numeros Q1 2026:
-Gasto ads: $540
-Tiempo ventas (8h a $60/h): $480
-Herramientas prorrateadas: $95
-Propuestas sin cerrar (costo): $142
-Total: $1.257 / 4.4 clientes promedio = $286 CAC"
-
-**SLIDE 4:**
-"El error mas comun en calcular CAC:
-
-Solo contar el gasto en ads y dividirlo entre clientes.
-
-Si gastaste $540 en ads y cerraste 3 clientes, el CAC erroneo es $180.
-
-Pero si sumas el tiempo real de ventas y el costo de propuestas que no cerraron, el CAC real es $286.
-
-La diferencia de $106 por cliente parece poco. En 12 meses con 40 clientes nuevos es $4.240 que no estabas contabilizando."
-
-**SLIDE 5:**
-"Formula de LTV correcta:
-
-LTV = Ticket promedio x Margen bruto % x Meses promedio de retencion
-
-Nuestros supuestos:
-Ticket promedio: $762 (mix de planes)
-Margen bruto: 58%
-Retencion promedio: 8.4 meses
-
-LTV = $762 x 0.58 x 8.4 = $3.706"
-
-**SLIDE 6:**
-"Ratio LTV / CAC:
-
-$3.706 / $286 = 12.95x
-
-Benchmarks de referencia:
-< 3x: el negocio no es viable a largo plazo
-3x - 5x: viable pero ajustado
-5x - 10x: buen negocio
-> 10x: capacidad de escalar con inversion en adquisicion
-
-Estamos en 12.95x. Eso significa que podemos invertir mas en CAC y seguir siendo rentables."
-
-**SLIDE 7:**
-"Cuanto podemos gastar en conseguir un cliente?
-
-Regla: el CAC maximo sostenible = LTV / 3
-
-LTV: $3.706
-LTV / 3: $1.235
-
-Tenemos margen para gastar hasta $1.235 en conseguir un cliente y seguir con ratio sano de 3x.
-
-Actualmente gastamos $286. Eso significa que podemos multiplicar por 4 el gasto en adquisicion y seguir siendo rentables."
-
-**SLIDE 8:**
-"Como mejorar el LTV sin subir precios:
-
-1. Reducir churn (cada mes adicional de retencion suma $762 x 0.58 = $442 al LTV)
-2. Aumentar upsells (Starter a Pro suma $450/mes al ticket)
-3. Activar licencias de pauta (incremento de 30% al ticket sin cambiar produccion)
-4. Cross-sell de adicionales (fotos, formatos adicionales)
-
-La palanca mas eficiente: reducir churn un 2% mensual tiene mas impacto en LTV que una campana de adquisicion completa."
-
-**SLIDE 9:**
-"Como mejorar el CAC sin bajar calidad de leads:
-
-1. Contenido organico de Brian y Alexander (cada lead organico tiene CAC cercano a $0)
-2. Programa de referidos (lead referido convierte al doble y tiene LTV 30% mayor)
-3. Case studies publicados (el lead que viene por un case study llega con prueba social pre-validada)
-
-El CAC mas barato es el del cliente que viene recomendado. Y el mas caro es el del cliente que solo llego por ad."
-
-**SLIDE 10 — CTA:**
-"¿Sabes tu CAC real y tu LTV real?
-
-No el estimado. El numero calculado con las formulas de esta presentacion.
-
-Si no los tienes, esa es la tarea de esta semana.
-
-Sigueme para mas calculos de este tipo.
-Brian · Finance Lead · UGC Colombia"
-
----
-
-### CARRUSEL 08 — "Break-even para marcas ecommerce"
-
-**Slides:** 9 | **Pilar:** Educativo | **Plataforma:** LinkedIn
-
-**SLIDE 1 — PORTADA:**
-"Break-even para marcas ecommerce que quieren empezar con UGC
-El calculo que nadie hace antes de contratar
-Brian · Finance · UGC Colombia"
-
-**SLIDE 2:**
-"El break-even de UGC no es lo mismo que el break-even de ads.
-
-Break-even de ads: cuantas ventas necesito para cubrir el gasto en pauta.
-Break-even de UGC: cuantas ventas necesito para cubrir el gasto en UGC mas en pauta, considerando el margen de mi producto.
-
-Son calculos distintos. El segundo es el que importa."
-
-**SLIDE 3:**
-"Formula:
-
-Break-even en ventas = Inversion total / Margen de producto
-
-Ejemplo base:
-Inversion UGC plan Starter: $500
-Inversion en ads: $600
-Inversion total: $1.100
-Margen de producto (cosmeticos): 62%
-
-Break-even = $1.100 / 0.62 = $1.774 en ventas
-
-Necesitas $1.774 en ventas para recuperar la inversion de ese mes."
-
-**SLIDE 4:**
-"En unidades vendidas:
-
-Ticket promedio de compra: $38 USD
-Ventas necesarias para break-even: $1.774 / $38 = 47 unidades
-
-Con un conversion rate del ecommerce de 2.1% y trafico generado por los ads, necesitas que esas campanas generen al menos 2.239 sesiones calificadas ese mes.
-
-Eso es posible con $600 en ads y CPM controlado? Depende del nicho y de la segmentacion. Pero es el calculo correcto."
-
-**SLIDE 5:**
-"Tabla de break-even por margen de producto:
-
-Margen 40%: necesitas $2.750 en ventas (72 unidades a $38)
-Margen 50%: necesitas $2.200 en ventas (58 unidades)
-Margen 60%: necesitas $1.833 en ventas (48 unidades)
-Margen 70%: necesitas $1.571 en ventas (41 unidades)
-
-Cuanto mayor el margen de tu producto, mas rapido llegas al break-even con UGC. Los productos de bajo margen necesitan mas volumen de ventas para justificar la inversion."
-
-**SLIDE 6:**
-"Lo que el break-even no captura:
-
-1. El efecto organico del UGC (videos subidos al perfil de marca que generan ventas sin pauta)
-2. El impacto en conversion del sitio web (UGC en landing pages sube conversion 18-28%)
-3. El LTV del cliente adquirido (si compra de nuevo, el ROI real es mayor)
-
-El break-even es el piso. El ROI real — si capturas todas las variables — casi siempre es mejor."
-
-**SLIDE 7:**
-"Cuantos meses tarda una marca en ver ROI positivo?
-
-Con nuestros clientes DTC en plan Starter:
-Mes 1: 70-80% del break-even (optimizacion de creativos)
-Mes 2: 100-120% del break-even (algoritmo aprende)
-Mes 3: 130-180% del break-even (mejores creativos activos)
-
-El error mas comun: cancelar en el mes 1 porque no llegaron al break-even. El mes 1 es optimizacion, no resultado final."
-
-**SLIDE 8:**
-"Checklist antes de empezar con UGC:
-
-[ ] Calcula tu margen de producto real (no el que crees que es)
-[ ] Define el ticket promedio de tu primera compra
-[ ] Establece cuantas ventas mensuales necesitas para break-even
-[ ] Asegura que tienes presupuesto para al menos 3 meses (el algoritmo necesita tiempo)
-[ ] Define la metrica de exito: ROAS, CPA, volumen de ventas o LTV
-
-Sin este checklist, cualquier resultado en el mes 1 va a parecer insatisfactorio."
-
-**SLIDE 9 — CTA:**
-"Comparte este carrusel con el founder o el CMO de tu marca antes de la proxima reunion de presupuesto.
-
-El break-even es la conversacion que deberias tener antes de firmar cualquier propuesta de contenido.
-
-Brian · Finance Lead · UGC Colombia
-Sigueme para mas herramientas de este tipo."
-
----
-
-### CARRUSEL 09 — "Margen oculto de agencias USA"
-
-**Slides:** 9 | **Pilar:** Debate | **Plataforma:** LinkedIn
-
-**SLIDE 1 — PORTADA:**
-"Por que las agencias UGC de USA pueden parecer mas baratas de lo que son
-El margen oculto que nadie explica
-Brian · Finance · UGC Colombia"
-
-**SLIDE 2:**
-"Una agencia UGC de USA cobra $800 por un video testimonial de 60 segundos.
-UGC Colombia cobra $380 por el mismo formato.
-
-A primera vista parece obvio: la agencia de USA es mas cara.
-
-Pero el calculo completo dice algo diferente."
-
-**SLIDE 3:**
-"Lo que incluye el precio de $800 de la agencia USA:
-
-- Produccion: si (creador USA, tarifa $300-400)
-- Coordinacion: si
-- Revision: 2 rondas
-- Licencia organic: si
-- Licencia paid media: NO — se cobra aparte (+40%)
-- Brief call >30 min: NO — se cobra aparte ($100/h)
-- Formato adicional (1:1, 16:9): NO — $100 c/u
-- Envio del producto: NO — costo separado
-
-Precio final real: $800 + $320 licencia pauta + $150 por 2 formatos + $80 envio = $1.350"
-
-**SLIDE 4:**
-"Lo que incluye el precio de $380 de UGC Colombia (LATAM tier):
-
-- Produccion: si (creador LATAM, tarifa $80-150)
-- Coordinacion: si
-- Revision: 2 rondas
-- Licencia organic: si
-- Licencia paid media: NO — +30% ($114)
-- Brief call: incluido hasta 30 min
-- Formato adicional: $30-50 c/u
-
-Precio final real para uso en pauta con 2 formatos: $380 + $114 + $60 = $554
-
-Gap real: $1.350 vs $554. No $800 vs $380."
-
-**SLIDE 5:**
-"El markup oculto de agencias de USA:
-
-Creador USA tier A: tarifa base $300-400 por video 60s
-Precio al cliente: $800-900
-Markup: 100-150%
-
-Creador LATAM en agencia LATAM: tarifa base $80-150
-Precio al cliente: $220-380
-Markup: 50-60%
-
-La agencia USA tiene un markup mayor porque el mercado lo soporta — y porque el cliente USA asume que 'caro = mejor'."
-
-**SLIDE 6:**
-"Cuando SI tiene sentido contratar una agencia USA:
-
-1. Tu audiencia es exclusivamente USA y necesitas accent nativo americano (no hispano)
-2. Tu brief require cultural fit especifico de USA (referencias, humor, contexto)
-3. Tu presupuesto es en USD y no tienes restriccion de FX
-4. Necesitas creators con audiencia propia en USA para whitelisting
-
-Cuando NO tiene sentido: si tu audiencia es LATAM o USA Hispanic, el creador de LATAM con acento neutro tiene el mismo o mayor impacto que el creador USA, a la mitad del costo."
-
-**SLIDE 7:**
-"Lo que el mercado USA Hispanic representa:
-
-62 millones de hispanos en USA
-Poder adquisitivo de $1.9 trillones USD
-El 80% prefiere consumir contenido en espanol o ingles con referentes hispanos
-
-Este es el mercado que UGC Colombia sirve con creators LATAM.
-No es un mercado de segunda categoria. Es el mercado de mayor crecimiento en USA."
-
-**SLIDE 8:**
-"La recomendacion practica:
-
-Si tu marca vende a consumidores LATAM o USA Hispanic: agencia LATAM con creators de acento neutro. El ahorro en produccion va directo a pauta, que es donde genera el retorno.
-
-Si tu marca vende a consumidores USA mainstream (no Hispanic): agencia USA o creators USA con tarifa USA. El fit cultural vale la diferencia de precio.
-
-No es competencia. Es segmentacion de mercado."
-
-**SLIDE 9 — CTA:**
-"El precio de lista no es el precio real. Calcula el costo total incluyendo licencias, formatos y adicionales antes de comparar propuestas.
-
-Si quieres que compare tu propuesta actual con lo que ofrecemos nosotros, escríbeme en DM.
-
-Brian · Finance Lead · UGC Colombia"
-
----
-
-### CARRUSEL 10 — "Como leer un P&L de agencia"
-
-**Slides:** 10 | **Pilar:** Educativo | **Plataforma:** LinkedIn
-
-**SLIDE 1 — PORTADA:**
-"Como leer un P&L de agencia de contenido
-Para founders y marketers que no son CFO
-Brian · Finance · UGC Colombia"
-
-**SLIDE 2:**
-"El P&L (Profit and Loss Statement) es el documento financiero mas importante de cualquier negocio.
-
-Para una agencia creativa, leer el P&L propio — o el de tu proveedor si te lo comparten — dice en 5 minutos si el negocio es sano o si esta operando en modo supervivencia."
-
-**SLIDE 3:**
-"Linea 1: Revenue
-
-Revenue bruto: todo lo facturado en el mes.
-Revenue neto cobrado: solo lo que entro a la cuenta.
-
-En una agencia sana, la diferencia entre facturado y cobrado es menor al 8%.
-Si la diferencia es mayor al 15%, hay un problema de cobranza o de clientes que no pagan."
-
-**SLIDE 4:**
-"Linea 2: COGS
-
-Lo que directamente se gasta para generar ese revenue:
-- Pagos a creadores
-- Comisiones de pago (Stripe, Wise, PayPal)
-- Envios de producto
-- Hosting de archivos
-
-En agencias UGC, el COGS saludable esta entre 40% y 55% del revenue.
-Mayor al 60%: la estructura de precios no cubre costos.
-Menor al 35%: o los creadores estan muy mal pagados o algo no cuadra."
-
-**SLIDE 5:**
-"Linea 3: Margen Bruto
-
-= Revenue - COGS
-
-Este es el numero mas importante del P&L para una agencia de servicios.
-
-Margen bruto saludable para agencia UGC boutique: 45-60%
-
-Con ese margen tienes que pagar todo lo demas: equipo, herramientas, marketing, utilidad."
-
-**SLIDE 6:**
-"Linea 4: OPEX
-
-Gastos operativos que no son COGS:
-- Sueldos del equipo (incluyendo los fundadores)
-- Herramientas SaaS (Notion, Supabase, n8n, etc.)
-- Paid media para adquisicion de clientes
-- Contabilidad, legal, seguros
-- Espacio de trabajo si aplica
-
-En una agencia lean de 3-4 personas, el OPEX suele estar entre $4.000 y $8.000 USD/mes."
-
-**SLIDE 7:**
-"Linea 5: EBITDA
-
-= Margen Bruto - OPEX
-
-EBITDA positivo = la agencia genera mas de lo que gasta operativamente.
-EBITDA negativo = la agencia esta consumiendo capital para operar.
-
-En los primeros meses, EBITDA negativo es normal (inversion en crecimiento).
-Desde el mes 4-6, deberia ser positivo o la estructura tiene un problema."
-
-**SLIDE 8:**
-"Las 3 senales de alerta en un P&L de agencia:
-
-1. Revenue facturado vs cobrado con gap mayor al 15% — cobranza rota
-2. COGS mayor al 60% — precio insuficiente o creadores sobre-pagados en relacion al precio
-3. OPEX que no baja como % del revenue conforme crece el MRR — no hay economia de escala
-
-Si ves las tres al mismo tiempo, la agencia tiene un problema estructural, no de crecimiento."
-
-**SLIDE 9:**
-"Como pedir el P&L a tu proveedor (sin ser incomodo):
-
-No tienes que pedir el P&L completo. Pide estas 4 metricas:
-- Margen bruto promedio del servicio que te vendieron
-- DSO (dias promedio de cobranza)
-- Numero de clientes activos
-- Churn rate mensual
-
-Si una agencia no puede responderte esas 4 preguntas, es porque no las mide. Y eso es una senal."
-
-**SLIDE 10 — CTA:**
-"Un P&L bien leido dice mas sobre la salud de un negocio que cualquier pitch deck.
-
-Si eres founder de agencia y no lees tu propio P&L todos los meses, ese es el primer habito que debes construir.
-
-Sigueme para mas finanzas aplicadas a creadores y agencias.
-Brian · Finance Lead · UGC Colombia"
-
----
-
-*Continua en PACK-VIRAL-BRIAN-P2.md*
+## Notas de produccion para Remotion / ElevenLabs
+
+### Voz ElevenLabs — Cristian Sanchez
+
+Parametros generales para todos los guiones de Brian:
+- Rate: 0.92 (ligeramente mas lento que promedio — transmite autoridad y seguridad)
+- `<break time="0.4s"/>` antes de cada numero o dato clave
+- `<emphasis level="moderate">` en palabras de sistema: SOP, pipeline, capacity, QA, SLA
+- `<prosody rate="fast">` en listas de items (etapas, checklists) para ritmo dinamico
+- `<prosody pitch="-3%">` — tono levemente mas grave que default de Cristian, mas terrenal
+
+Ejemplo de marcado en Guion 02:
+```
+"El pipeline tiene cuatro etapas. <break time="0.4s"/> Primero: brief enviado al creator con fecha limite. <break time="0.3s"/> Segundo: <emphasis level="moderate">QA</emphasis> de Diana antes de que el cliente vea un solo frame. <break time="0.3s"/> Tercero: feedback del cliente en ventana de <emphasis level="moderate">48 horas</emphasis>..."
+```
+
+### Notas visuales generales
+
+- **Fondo:** escritorio o pared de ladrillo claro — no oficina corporativa, no ring light blanca centrada
+- **Ropa:** colores solidos oscuros (azul marino, negro, gris) — transmite organizacion sin formalidad
+- **Caption overlay:** fuente bold, blanca con sombra negra, centrada inferior — visible con sonido OFF
+- **Transicion entre etapas de lista:** cut directo, no fade — ritmo operativo, no cinematico
+- **B-roll sugerido cuando aplica:** screengrab de Supabase (datos anonimizados), WhatsApp de equipo (borroso excepto el mensaje clave), Notion o Drive con carpetas visibles
 
 
 ---
 
-# PACK VIRAL — Brian (Finance Lead)
-## UGC Colombia · Contenido de Alto Impacto 2026 · PARTE 2/2
 
-**Continuacion de PACK-VIRAL-BRIAN-P1.md**
+# PACK VIRAL — Brian Velásquez (COO) — PARTE 1B
+## UGC Colombia · Contenido de Alto Impacto 2026
+
+**Rol real:** COO — Mano derecha del CEO. Opera toda la agencia.
+**Voz:** Directo, organizado, desde las trincheras operativas.
+**Plataformas:** LinkedIn (principal), TikTok/Reels, X/Twitter
 **Fecha:** 2026-04-10
 
 ---
 
-## 5. GUIONES LINKEDIN POSTS (15 posts)
-
-*Posts analiticos con numeros, insight financiero aplicado a marketing. 1.200-2.000 caracteres completos con hook de primera linea y CTA.*
+## 3 (cont). GUIONES CORTOS — Episodios 16 al 25
 
 ---
 
-### POST 01 — "El 80% de las agencias UGC cierran antes del ano. Por que."
+### G-16 — "Cómo coordinamos 12 shoots en paralelo"
 
-El 80% de las agencias UGC que se lanzan este año van a cerrar antes de cumplir 12 meses. No es prediccion pesimista. Es matematica.
+**Pilar:** Operaciones / Procesos
+**Hook:** Pain Hook
+**Duración objetivo:** 60s
+**Formato:** Talking head + pantalla compartida breve
 
-El problema no es falta de talento ni de demanda. El mercado de UGC en LATAM crece a tasas del 40% anual. Hay demanda. El problema es estructura financiera.
+**Hook literal (0:00–0:03):**
+"Doce shoots. Mismo día. Dos personas coordinando. Así lo hacemos."
 
-La mayoria de agencias UGC arrancan con este modelo:
-- Cobran por proyecto puntual, no por retainer
-- Cobran contra entrega (no anticipado)
-- No tienen precio fijo publicado, negocian caso a caso
-- El fundador hace ventas, operacion, QA y administracion al mismo tiempo
+**Guión palabra por palabra:**
 
-Ese modelo tiene tres fallas criticas.
+Un martes de febrero tuvimos doce sesiones de grabación activas al mismo tiempo.
+Doce creators. Doce clientes distintos. Dos personas del equipo gestionando todo.
 
-Primera: sin retainer, el MRR es $0 cada mes 1. Cada ciclo de cobro es incierto. El cash flow es un pico y un valle, no una linea. Una agencia no puede contratar ni invertir con ese flujo.
+¿Cómo no explotó?
 
-Segunda: cobrar contra entrega significa que el creador ya recibio el producto, ya grabo, ya entrego — y la agencia puso ese costo de su bolsillo. Si el cliente no paga, la agencia absorbe el costo. Ese riesgo sin control es suficiente para destruir el margen de 3 proyectos en uno.
+Primero: cada shoot vive en una tarjeta de Notion con cinco campos obligatorios.
+Creator asignado. Fecha y hora de entrega. Brief adjunto. Estado actual. Contacto del cliente.
 
-Tercera: negociar precio caso a caso sube el CAC y baja la tasa de cierre. Cada propuesta personalizada toma tiempo. Tiempo que en una agencia de 2 personas es el recurso mas escaso.
+Si esa tarjeta no está completa, el shoot no existe para nosotros.
 
-La solucion no es magica. Es estructura:
-1. Retainer mensual con planes definidos
-2. Cobro 100% anticipado mes 1
-3. Precios publicados (para filtrar leads antes del discovery)
-4. Roles separados aunque sea en 2 personas
+Segundo: el día anterior al shoot, el sistema manda un checklist automático al creator.
+No esperamos que nos escriba. Le preguntamos nosotros.
+¿Tienes el brief? ¿Tienes el producto? ¿Confirmaste el look?
 
-UGC Colombia llego al break-even en el mes 4 con $6.200 MRR. No porque tuvieramos algo especial. Porque teniamos la estructura correcta desde el mes 1.
+Si no responde en dos horas, yo llamo.
 
-Si estas lanzando una agencia de contenido, la estructura financiera no es secundaria. Es la primera decision.
+Tercero: los doce shoots tienen ventanas de entrega escalonadas.
+No todos vencen el mismo día. Eso es diseño, no suerte.
+Cuando armamos el calendario del mes, distribuimos las cargas deliberadamente.
 
-Comenta con tu mayor duda de pricing o estructura — la respondo aqui.
+¿El resultado ese martes?
+Once de doce entregados a tiempo.
+Uno con retraso de cuatro horas porque el producto llegó tarde al creator.
+Eso no es un fallo del sistema. Es un fallo de logística del cliente.
+Y lo documentamos para que no vuelva a pasar.
 
----
+Doce shoots en paralelo no se coordinan con adrenalina.
+Se coordinan con estructura.
 
-### POST 02 — "Como calcular el verdadero ROI del UGC (formula)"
+**Caption:**
+12 shoots. 1 día. 2 personas. Este es el sistema exacto que usamos en UGC Colombia para no perder el hilo. ¿Tu agencia tiene esto documentado?
 
-Cada semana alguien me pregunta si el UGC realmente funciona. Mi respuesta siempre es la misma: depende de como lo mides.
+**CTA:** Guarda este video. La próxima vez que tengas más de 3 shoots en paralelo, lo vas a necesitar.
 
-La formula correcta de ROI de UGC no es revenue de ads dividido gasto en produccion. Eso es ROAS de pauta — que es una metrica util pero incompleta.
-
-El ROI real de UGC incluye cuatro componentes:
-
-Componente 1: Revenue de paid media atribuido
-Se calcula con UTM o pixel. Solo el revenue que se puede trazar directamente a los videos UGC en pauta.
-
-Componente 2: Impacto organico
-Si subes los videos al perfil de marca y generan engagement o ventas directas, eso es revenue adicional. Es mas dificil de atribuir pero es real. Estimacion conservadora: 15-25% del revenue de pauta.
-
-Componente 3: Impacto en conversion del sitio web
-UGC en landing pages y paginas de producto sube el conversion rate entre 18% y 34% segun categorias. Si tus paginas de producto tienen videos UGC y tu CVR subio ese mes, parte de ese incremento es atribuible al contenido.
-
-Componente 4: Activo de largo plazo
-Un video UGC bien hecho puede usarse en pauta durante 4 a 6 meses si se rota correctamente. El costo de produccion se amortiza en cada mes adicional de uso.
-
-Formula completa:
-ROI = (Revenue pauta + Revenue organico estimado + Incremento CVR valorizado + Valor de uso futuro - Inversion total) / Inversion total × 100
-
-Con este calculo, el ROI del UGC casi siempre es entre 40% y 80% mayor que el que la marca calcula con solo el ROAS de pauta.
-
-El UGC no es solo un activo de ads. Es un activo de contenido multicanal.
-
-Si tu agencia solo te reporta el ROAS de pauta, le estas viendo la mitad del valor de tu inversion.
-
-Cual de estos cuatro componentes no estas midiendo hoy?
+**Hashtags:** #COO #Operaciones #AgenciaUGC #GestionDeProyectos #UGCColombia #Coordinacion #Procesos
 
 ---
 
-### POST 03 — "Pricing transparente: por que publicamos nuestros precios"
+### G-17 — "La conversación difícil con un creator que no cumplió"
 
-Publicar precios en una agencia de servicios creativos es casi un taboo de la industria.
+**Pilar:** Liderazgo / Gestión de talento
+**Hook:** Story Hook
+**Duración objetivo:** 60s
+**Formato:** Talking head directo, sin cortes
 
-La logica tradicional: "cada cliente es diferente, necesitamos una propuesta personalizada". Lo que realmente significa: "queremos poder cobrar diferente a cada cliente segun su percepcion de presupuesto".
+**Hook literal (0:00–0:03):**
+"Tuve que llamar a un creator y decirle que no podíamos trabajar más con él. Así fue esa conversación."
 
-Decidimos publicar precios en UGC Colombia por una razon que tiene poco de filosofia y mucho de matematica.
+**Guión palabra por palabra:**
 
-Antes de publicar precios (Q3 2025):
-- CAC promedio: $412 USD
-- Tasa de cierre: 22%
-- Tiempo promedio discovery call: 47 minutos
+Llevábamos tres meses trabajando con este creator.
+Buen contenido. Buena actitud. Puntual casi siempre.
 
-Despues de publicar precios (Q1 2026):
-- CAC promedio: $287 USD
-- Tasa de cierre: 38%
-- Tiempo promedio discovery call: 28 minutos
+Pero en el proyecto más importante del trimestre, falló.
+No entregó. No avisó. El cliente esperó cuarenta y ocho horas sin respuesta.
 
-La reduccion del CAC fue del 30%. La mejora en tasa de cierre fue del 73%.
+Cuando lo contacté, la excusa fue válida a medias.
+Problemas personales reales, pero ninguna comunicación de su parte.
 
-Por que? Porque el lead que llega habiendo visto los precios ya paso el filtro. No llegamos a la call para hablar de dinero. Llegamos para hablar de como lo vamos a hacer.
+La conversación la tuve por videollamada. No por chat.
+Le expliqué exactamente lo que pasó desde nuestra perspectiva.
+No lo acusé. Le conté el impacto: cliente molesto, reputación comprometida, proyecto retrasado.
 
-El segundo efecto que no anticipabamos: la calidad del cliente que atrae el precio publicado es diferente. El cliente que hace scroll en tu pricing page, ve $950 por 8 videos y aun asi agenda una call, tiene autoridad presupuestal y expectativas realistas. El health score promedio de esos clientes en Q1 fue 76. Los que llegaron por referido sin ver precios: 61.
+Le pregunté qué había pasado. Lo escuché completo.
 
-El precio publicado no es una tabla estatica. Es una herramienta de filtrado de cliente.
+Luego le dije esto:
+"Entiendo lo que viviste. Y no puedo ignorar el impacto que tuvo.
+En UGC Colombia, el estándar es comunicar antes de fallar, no después.
+Si hay un problema, nos avisas y encontramos solución juntos.
+Sin aviso, no podemos proteger ni al cliente ni a ti."
 
-La contraparte honesta: perdemos leads que podrian haber pagado mas si los hubieramos llevado a una propuesta personalizada. Eso es un trade-off consciente. Preferimos eficiencia en adquisicion que maximizacion de precio por lead.
+Le di la opción de seguir trabajando con un período de prueba de treinta días con seguimiento semanal.
+Aceptó. Y cumplió.
 
-Si gestionas una agencia de servicios y no tienes precios publicados, te pregunto una cosa: cuanto tiempo pasan tu equipo de ventas en discovery calls con leads que al final dicen "es muy caro"?
+Hoy es uno de nuestros creators más confiables.
 
-Ese tiempo tiene un costo. Publicar precios lo elimina.
+Las conversaciones difíciles, bien hechas, construyen relaciones más fuertes.
+Las que se evitan, destruyen equipos.
 
----
+**Caption:**
+No todas las conversaciones difíciles terminan mal. Esta es una que terminó bien porque la tuve con respeto y claridad. ¿Tú cómo manejas a los creators que fallan?
 
-### POST 04 — "El CAC ideal para una agencia boutique UGC"
+**CTA:** Si gestionas creators, sígueme. Hablo de esto desde adentro, no desde teoría.
 
-Cual es el CAC ideal para una agencia UGC boutique? La respuesta honesta: depende de tu LTV. Y aqui esta la formula.
-
-El CAC maximo sostenible para cualquier negocio es LTV dividido entre 3. Con esa relacion, el payback period esta entre 4 y 6 meses y el negocio tiene margen de seguridad.
-
-Para una agencia UGC boutique con estos parametros base:
-- Ticket promedio: $750 USD/mes
-- Margen bruto: 55%
-- Retencion promedio: 8 meses
-
-LTV = $750 × 0.55 × 8 = $3.300
-
-CAC maximo sostenible = $3.300 / 3 = $1.100
-
-Eso significa que puede gastar hasta $1.100 para conseguir un cliente y el negocio sigue siendo viable.
-
-Pero "maximo sostenible" no es el objetivo. Es el techo.
-
-El CAC optimo para crecimiento sostenible esta entre LTV/5 y LTV/10. En este ejemplo: $330 a $660.
-
-Nuestro CAC real en Q1 2026 fue $287 USD. Estamos por debajo del rango optimo — lo que es buena noticia a corto plazo pero puede significar que estamos sub-invirtiendo en adquisicion y dejando crecimiento sobre la mesa.
-
-Las tres palancas para reducir el CAC sin cortar calidad de leads:
-
-Primera: contenido organico. Cada lead que llega por LinkedIn o por referido tiene CAC cercano a $0. En Q1, el 34% de nuestros leads nuevos vinieron de contenido organico.
-
-Segunda: programa de referidos. Un cliente que refiere a otro tiene el CAC mas bajo posible — solo el costo del incentivo de referido. Y el cliente referido convierte a tasa 2.1x mayor.
-
-Tercera: precios publicados en web. Ya vimos el impacto en discovery calls. Menos tiempo de ventas por lead = menor CAC por cliente cerrado.
-
-El CAC no es solo un numero a reducir. Es un indicador de que tan eficiente es tu proceso de adquisicion. Si es muy alto, el proceso esta roto. Si es muy bajo, probablemente estes dejando de invertir en crecimiento.
-
-El equilibrio correcto: CAC entre LTV/5 y LTV/10. Y conocer el numero exacto antes de tomar cualquier decision de inversion en marketing.
+**Hashtags:** #GestionDeCreators #COO #Liderazgo #AgenciaUGC #UGCColombia #TalentoUGC #Operaciones
 
 ---
 
-### POST 05 — "MRR, ARR, churn: metricas que un founder debe mirar semanal"
+### G-18 — "Por qué el CEO no debería manejar operaciones"
 
-Hay tres metricas que un founder de agencia de servicios debe revisar cada semana sin excepcion. No mensualmente. Semanalmente. Aqui cuales son y por que.
+**Pilar:** Roles / Estructura organizacional
+**Hook:** Controversial Hook
+**Duración objetivo:** 45s
+**Formato:** Talking head directo
 
-MRR (Monthly Recurring Revenue): el ingreso mensual recurrente cobrado. No facturado — cobrado. La diferencia es real: una factura emitida que no ha sido pagada no es MRR. Es una promesa.
+**Hook literal (0:00–0:03):**
+"Si tu CEO está metido en las operaciones del día a día, hay un problema. Y no es el CEO."
 
-Por que semanal: el MRR cambia cada vez que entra un cliente nuevo, un cliente escala de plan, un cliente baja de plan o un cliente cancela. Si lo miras mensual, el movimiento ya ocurrio y no puedes reaccionar. Si lo miras semanal, puedes anticipar si el mes va a cerrar por encima o por debajo del objetivo.
+**Guión palabra por palabra:**
 
-Logo Churn Rate: el porcentaje de clientes que cancelaron en el periodo. Formula: clientes cancelados / clientes al inicio del periodo × 100.
+El CEO de UGC Colombia es Alexander.
+Veinticinco años. Visión clara. Mueve la agencia hacia adelante.
 
-Por que semanal: el churn es un proceso, no un evento. Los clientes mandan senales antes de cancelar — bajan su health score, tardan mas en dar feedback, dejan de abrir los reportes. Si miras el churn mensual, ya perdiste al cliente. Si miras las senales semanalmente, puedes intervenir.
+Y no toca las operaciones. A propósito.
 
-Net Revenue Retention (NRR): el porcentaje del MRR del mes anterior que retuviste, incluyendo expansion y descontando churn. Formula: (MRR inicio + expansion MRR - churn MRR - downgrade MRR) / MRR inicio × 100.
+No porque no pueda. Porque no debe.
 
-Por que semanal: un NRR mayor al 100% significa que tu base de clientes existentes crece sola, sin adquisicion nueva. Es el indicador mas fuerte de product-market fit en servicios de retainer. Si el NRR baja de 100%, cada semana que pasa el gap se agranda.
+Cuando el CEO opera, pierde tiempo estratégico.
+Cada hora que Alexander pasa en un brief o resolviendo un problema de entrega, es una hora que no está cerrando alianzas, pensando en el próximo servicio o construyendo relaciones de alto nivel.
 
-Nuestros numeros actuales: MRR $9.200 cobrado, logo churn rate 4.8% mensual, NRR 103%.
+Ese es mi trabajo. No el suyo.
 
-El NRR de 103% significa que aunque no cerraramos un solo cliente nuevo este mes, el MRR creceria $276 por upsells y expansion.
+La división es simple:
+Él define a dónde va la agencia.
+Yo me aseguro de que lleguemos.
 
-Ese es el objetivo: construir un negocio donde el crecimiento base no depende solo de ventas nuevas.
+¿Cómo lo logramos en la práctica?
 
-Cual de estas tres metricas no estas midiendo hoy?
+Tenemos un bloque de sincronización de treinta minutos, tres veces por semana.
+En ese espacio yo le reporto lo que importa: cuellos de botella, riesgos, decisiones que necesitan su aprobación.
+Todo lo demás lo resuelvo yo.
 
----
+¿El resultado?
+Alexander no sabe qué creator entregó tarde la semana pasada.
+Y eso está bien.
 
-### POST 06 — "Como evaluar si una agencia UGC es financieramente sana"
+Si tu fundador está apagando incendios operativos, o no tiene un COO, o el COO no está haciendo su trabajo.
 
-Antes de firmar un contrato con una agencia de contenido, hay 4 preguntas que deberian hacerle — y la respuesta les dice si esa agencia va a seguir existiendo en 6 meses.
+**Caption:**
+El CEO no debería saber quién entregó tarde la semana pasada. Ese es MI trabajo. La diferencia entre crecer y estancarse muchas veces está en esta división de roles.
 
-Pregunta 1: Cuantos clientes activos tienen?
-No clientes historicos. Activos hoy. Una agencia con 50 clientes historicos y 8 activos tiene un problema de retencion serio. Esa inestabilidad eventualmente afecta la calidad del servicio porque los mejores creadores migran a proyectos mas estables.
+**CTA:** ¿Tu agencia tiene esta separación clara? Cuéntame en comentarios.
 
-Pregunta 2: Cual es su proceso de pago a creadores?
-Si no pueden describir con precision como y cuando pagan a sus creadores, hay desorganizacion operativa. Los creadores que no cobran a tiempo empiezan a priorizar otros proyectos. Tu produccion sufre las consecuencias.
-
-Pregunta 3: Cual es su margen bruto promedio?
-No tienen que darte el numero exacto. Pero si no pueden darte un rango o no saben que es el margen bruto, no estan midiendo su negocio. Una agencia que no mide su margen no sabe si cada cliente nuevo la hace mas rentable o mas pobre.
-
-Pregunta 4: Como manejan el caso en que un creador falla la entrega?
-La respuesta correcta: tienen un proceso documentado con tiempos definidos y garantia de reentrega. La respuesta de alerta: "lo hemos manejado caso a caso" o "eso no nos ha pasado".
-
-Una agencia que puede responder estas cuatro preguntas con precision y sin defensividad es una agencia que tiene sistemas. Una que no puede o que se molesta con las preguntas, tiene algo que esconder o simplemente no lo sabe.
-
-En UGC Colombia respondemos estas cuatro preguntas antes de que el cliente las haga. Es parte de nuestro proceso de discovery. No porque seamos perfectos — sino porque la transparencia es mas eficiente que las sorpresas.
-
-Si tu agencia actual no puede responder estas preguntas, la proxima reunion de renovacion es el momento de plantearlas.
-
----
-
-### POST 07 — "El margen real que deja una campana UGC de $1.500"
-
-Una campana UGC de $1.500 al mes suena bien en el papel. Pero cuanto le queda realmente a la agencia despues de entregar?
-
-Hagamos el desglose de un cliente en plan Premium ($1.500/mes, 12 piezas):
-
-Revenue bruto: $1.500
-
-COGS (Costos directos):
-- 12 videos: mix de creators tier A y B, tarifa promedio $55 por video = $660
-- Comision Stripe 2.9% + $0.30 por transaccion: $44
-- Envios de producto (si aplica, promedio 2 productos): $35
-- Hosting y almacenamiento CDN prorrateado: $8
-Total COGS: $747
-
-Margen bruto: $1.500 - $747 = $753 (50.2%)
-
-Ese $753 no es utilidad. Es el margen antes de gastos operativos.
-
-OPEX prorrateado para este cliente:
-- Tiempo de coordinacion Diana (6 horas/mes a $25/h equivalente): $150
-- Tiempo de Brian en billing y pagos: $40
-- Tooling prorrateado (Supabase, n8n, Notion): $28
-- Marketing para adquisicion (CAC prorrateado, este cliente tardo 2 meses en cerrar): $143
-Total OPEX prorrateado: $361
-
-Margen neto por cliente: $753 - $361 = $392 (26.1%)
-
-$392 de margen neto por cliente Premium al mes. No es el 100% del revenue. Tampoco es el 50%. Es el 26%.
-
-Lo que esto dice sobre el modelo de negocio:
-
-Con 12 clientes Premium ($18.000 MRR), el margen neto total es aproximadamente $4.700/mes. Eso es el EBITDA real. Con ese numero se pagan sueldos del equipo y se genera utilidad del fundador.
-
-La leccion: el revenue es vanidad, el margen es sanidad.
-
-Una agencia que celebra los $18K de MRR sin calcular el margen neto no sabe si es rentable o si simplemente esta facturando para sobrevivir.
-
-Comparte esto con cualquier founder de agencia que crea que MRR = utilidad.
+**Hashtags:** #CEO #COO #EstructuraOrganizacional #AgenciaUGC #Liderazgo #UGCColombia #Operaciones
 
 ---
 
-### POST 08 — "Health score de cliente: como calcularlo en 5 minutos"
+### G-19 — "El dashboard que reviso cada lunes"
 
-Tenemos un numero del 0 al 100 que nos dice cada semana si un cliente se va a quedar o se va a ir. Se calcula automaticamente. Y en Q1 nos salvo 3 clientes que estaban a punto de cancelar sin habernos dicho nada.
+**Pilar:** Sistemas / Métricas operativas
+**Hook:** Curiosity Hook
+**Duración objetivo:** 60s
+**Formato:** Screen recording + voz en off
 
-Se llama health score. Aqui como calcularlo en 5 variables con sus pesos.
+**Hook literal (0:00–0:03):**
+"Cada lunes reviso exactamente estas cinco cosas antes de hablar con cualquier persona del equipo."
 
-Variable 1 — Puntualidad en pagos (25% del score):
-100 puntos si pago a tiempo los ultimos 3 meses.
-Resta 20 puntos por cada falla de pago en ese periodo.
-Un cliente que pago tarde dos meses = 60 puntos en esta variable.
+**Guión palabra por palabra:**
 
-Variable 2 — Calidad de entregables aprobados (25%):
-Promedio de calificacion interna de los videos que el cliente aprobo.
-A (produccion excelente) = 100. B (correcta) = 70. C (minima aceptable) = 30.
-Un cliente que solo aprueba videos C = 30 puntos aqui, aunque pague a tiempo.
+Antes de abrir WhatsApp. Antes de responder correos. Antes de la primera reunión.
+Abro el dashboard operativo y reviso cinco métricas en orden.
 
-Variable 3 — Engagement con reportes (15%):
-Porcentaje de reportes mensuales que el cliente abrio, respondio o comento.
-Si no ha abierto ningun reporte en 30 dias = 0 puntos.
+Una. Proyectos activos vs. capacidad disponible.
+¿Cuántos proyectos tenemos corriendo? ¿Cuántos puede realmente aguantar el equipo esta semana?
+Si la relación está por encima del ochenta por ciento, algo va a romperse. Actúo antes.
 
-Variable 4 — NPS (20%):
-NPS x 10. Encuesta cada 60 dias.
-NPS de 7 = 70 puntos. NPS de 9 = 90 puntos.
+Dos. Entregas vencidas la semana pasada.
+¿Cuántas llegaron a tiempo? ¿Cuántas no?
+Si el porcentaje de puntualidad cayó por debajo del noventa, quiero saber por qué antes del martes.
 
-Variable 5 — Velocidad de feedback (15%):
-Tiempo promedio entre entrega del video y retroalimentacion del cliente.
-Menos de 24h = 100. Entre 24-48h = 80. Entre 48-72h = 50. Mas de 72h = 0.
+Tres. Estado de onboardings en curso.
+¿Cuántos clientes nuevos están en proceso? ¿En qué etapa va cada uno?
+Un onboarding mal hecho en semana uno genera problemas en semana ocho.
 
-Interpretacion del score total:
-80-100: cliente saludable. Candidato a upsell.
-60-79: estable. Mantener relacion activa.
-40-59: en riesgo. Diana hace check-in proactivo esta semana.
-Menos de 40: churn casi seguro. Alexander entra directamente.
+Cuatro. Creators con más de dos incidentes en el último mes.
+No espero a que se conviertan en un problema grande.
+Si veo patrón, actúo.
 
-El sistema no reemplaza el juicio humano. Lo informa. Cuando Diana ve un cliente en 38, ya sabe exactamente en que variables fallo y con que argumento abrir la conversacion de retencion.
+Cinco. Clientes con contrato próximo a vencer.
+Cualquier cliente que renueve en los próximos treinta días necesita atención proactiva esta semana.
+No espero a que llegue la fecha.
 
-Para implementarlo: consolida los datos en una spreadsheet o en Supabase, calcula el score semanal, define a quien le llega la alerta cuando baja de 60.
+Cinco métricas. Quince minutos.
+Y el resto de la semana la opero con información, no con intuición.
 
-No necesitas IA ni herramientas caras. Necesitas datos consistentes y un proceso de accion.
+**Caption:**
+Este es el dashboard que me mantiene un paso adelante del caos. 5 métricas. 15 minutos. Cada lunes sin falta. ¿Qué revisas tú primero los lunes?
 
----
+**CTA:** Guarda este video. Si tienes una agencia o un equipo, este ritual te va a salvar tiempo.
 
-### POST 09 — "El costo oculto de subcontratar en UGC"
-
-Subcontratar la produccion de UGC parece simple. Le pagas a alguien, esa persona produce el video, tu lo entregas al cliente y cobras la diferencia.
-
-La realidad operativa tiene cuatro costos que no aparecen en esa ecuacion.
-
-Costo oculto 1: El costo de coordinacion no capturable
-Cada video requiere brief, casting, validacion del producto, comunicacion con el creador, revision de borrador, feedback, reentrega potencial y aprobacion final. Si no lo mides, lo ignoras. Si lo mides en horas de equipo, descubres que en proyectos mal briefeados la coordinacion puede costar mas que el pago al creador.
-
-En nuestra operacion, un video bien briefeado toma 1.8 horas de coordinacion total. Un video con brief vago toma 4.2 horas. La diferencia es $60 USD en tiempo de equipo por video.
-
-Costo oculto 2: El costo de calidad inconsistente
-Cuando subcontratas a un creador nuevo sin sistema de scoring, la probabilidad de un video que no pasa QA es del 28% en nuestra historica. Cada video rechazado requiere reentrega, comunicacion adicional con el cliente y potencialmente un impacto en el health score del cliente.
-
-El costo de un rechazo: 2-3 horas adicionales de coordinacion + riesgo de relacion con el cliente.
-
-Costo oculto 3: El riesgo de pago doble por error
-Sin un sistema de idempotencia en los pagos, la probabilidad de un pago duplicado al creador en un mes de alto volumen es real. Un pago duplicado de $120 USD en 20 proyectos activos puede pasar desapercibido semanas.
-
-Costo oculto 4: El costo de derechos no clarificados
-Subcontratar sin contrato claro de derechos de uso deja a la agencia en una posicion fragil si el cliente quiere usar el contenido en pauta o en canales adicionales no previstos. Un conflicto de derechos con un creador puede costar entre $500 y $2.000 en tiempo de resolucion.
-
-La suma de estos cuatro costos ocultos puede representar entre el 15% y el 35% adicional sobre el costo base del video.
-
-El antidoto: procesos documentados, contratos estandar con creadores, sistema de QA con scoring, y registro de pagos con verificacion de idempotencia antes de transferir.
-
-Subcontratar bien no es mas caro que subcontratar sin sistema. Es mas predecible.
+**Hashtags:** #Dashboard #Operaciones #COO #AgenciaUGC #Metricas #UGCColombia #Productividad
 
 ---
 
-### POST 10 — "Break-even: cuantos clientes necesita una agencia UGC para sobrevivir"
+### G-20 — "Cómo escalamos de 2 a 10 clientes sin contratar"
 
-Cuantos clientes necesita una agencia UGC boutique para llegar al punto de equilibrio? El numero es mas especifico de lo que crees — y probablemente menor.
+**Pilar:** Escala / Sistemas
+**Hook:** Result Hook
+**Duración objetivo:** 60s
+**Formato:** Talking head
 
-Formula del break-even para agencia de servicios:
+**Hook literal (0:00–0:03):**
+"Pasamos de 2 a 10 clientes activos. No contratamos a nadie nuevo. Esto es lo que cambiamos."
 
-Break-even = OPEX mensual / Margen bruto promedio
+**Guión palabra por palabra:**
 
-Supuestos de una agencia lean de 3 personas en LATAM:
+Hace ocho meses teníamos dos clientes activos y tres personas en el equipo.
+Hoy tenemos diez clientes activos. El equipo sigue siendo tres personas.
 
-OPEX mensual:
-- Sueldos: $3.200 (fundador $1.800 + 2 part-time coordinacion $700 c/u)
-- Tooling: $380 (Supabase, Notion, n8n, Stripe, herramientas editorial)
-- Contabilidad y legal: $200
-- Marketing basico (contenido): $300
-- Varios: $120
-Total OPEX: $4.200/mes
+¿Cómo?
 
-Con margen bruto del 55%:
-Break-even = $4.200 / 0.55 = $7.636 de MRR
+No trabajamos más horas. Eliminamos el trabajo que no debía existir.
 
-A ticket promedio de $750/mes: necesitas 10 a 11 clientes activos.
+Lo primero que hicimos fue documentar todo lo que hacíamos repetidamente.
+Brief, onboarding, coordinación de shoot, seguimiento de entrega, reporte al cliente.
 
-A ticket promedio de $950 (plan Pro): necesitas 8 a 9 clientes.
+Cada proceso que se hacía desde cero cada vez, lo convertimos en plantilla.
+Eso nos ahorró aproximadamente cuatro horas por cliente nuevo.
 
-Eso es el break-even operativo — donde los ingresos cubren exactamente los gastos operativos. Para tener utilidad real del fundador adicional a su sueldo, el objetivo deberia ser el doble del break-even: $15.000 MRR.
+Lo segundo fue centralizar la comunicación.
+Antes cada persona del equipo hablaba con los clientes por su propio canal.
+WhatsApp, correo, Notion, Instagram. Todo mezclado.
+Creamos un único canal por cliente. Todo pasa por ahí.
+Eso elimina la re-pregunta, el "yo creía que", el "nadie me dijo".
 
-Lo que este calculo no incluye: CAC. Para llegar a 10 clientes activos, hay que conseguirlos primero. Con un CAC de $287, llegar a 10 clientes requiere aproximadamente $2.870 en inversion de adquisicion, mas el tiempo de construccion de esos clientes mes a mes.
+Lo tercero fue separar lo urgente de lo importante.
+No todos los mensajes de clientes requieren respuesta inmediata.
+Establecimos tiempos de respuesta: urgente en dos horas, normal en veinticuatro.
+El equipo dejó de apagar incendios imaginarios.
 
-La conclusion practica: con una agencia lean y ticket promedio de $950, el break-even operativo esta a 9 clientes. Es un numero alcanzable en 4 a 6 meses si la estructura es correcta desde el inicio.
+Con esos tres cambios, nuestra capacidad real casi se triplicó.
+Sin contratar. Sin trabajar fines de semana. Sin agotamiento.
 
-El error que cometen la mayoria: calcular el break-even sobre revenue facturado, no sobre margen bruto. Si no descontamos el COGS de los creadores, el break-even parece mas facil de lo que es — y el mes 4 llega con deficit sin entender por que.
+El cuello de botella nunca fue el número de personas.
+Era el desorden.
 
----
+**Caption:**
+De 2 a 10 clientes con el mismo equipo. No es magia. Son sistemas. Aquí los tres cambios exactos que hicimos en UGC Colombia.
 
-### POST 11 — "Por que el precio bajo es la trampa mas cara"
+**CTA:** Sígueme si quieres ver cómo operamos una agencia UGC desde adentro.
 
-Bajar el precio para ganar un cliente es la decision financiera mas costosa que puede tomar una agencia de servicios. No lo parece en el momento. Se siente como pragmatismo. Pero las matematicas dicen otra cosa.
-
-Cuando bajas el precio de $950 a $700 para cerrar un cliente, no solo estas dejando $250 sobre la mesa ese mes. Estas creando cuatro efectos secundarios que multiplican ese costo.
-
-Efecto 1: el cliente de $700 tiene expectativas del cliente de $950.
-El scope no cambia con el precio. Sigue siendo 8 videos, 2 rondas de revision, coordinacion completa. El cliente de $700 espera lo mismo pero pago 26% menos. Si siente que le entregan menos, se queja. Si le entregas lo mismo, tu margen colapsa.
-
-Efecto 2: el precio bajo atrae al perfil equivocado de cliente.
-En nuestra historica de 18 meses, el health score promedio de clientes que negociaron descuento fue 54 vs 74 para clientes que pagaron precio lista. El cliente que empieza negociando precio, termina negociando scope.
-
-Efecto 3: el precedente interno es destructivo.
-Una vez que el equipo sabe que hay flexibilidad de precio, cada propuesta comienza con la pregunta interna de "cuanto podemos bajar si es necesario?" Eso es el fin del pricing disciplinado.
-
-Efecto 4: el cliente de $700 puede volver a negociar en el mes 3.
-"Ya llevamos 3 meses. Con la relacion que tenemos, podemos ajustar el precio?" Si ya demostraste flexibilidad en el inicio, la respuesta correcta se vuelve muy dificil de dar.
-
-La alternativa al descuento de precio:
-Agrega valor sin bajar el numero. Licencia de pauta incluida el primer mes. Una pieza adicional de regalo. Una sesion de estrategia de 30 minutos. El cliente siente que gano algo. Tu margen permanece intacto.
-
-El precio bajo no consigue clientes. Consigue el tipo equivocado de clientes, al costo de los mejores meses de operacion de la agencia.
+**Hashtags:** #EscalaDeAgencia #Operaciones #COO #UGCColombia #Procesos #AgenciaUGC #Sistemas
 
 ---
 
-### POST 12 — "Proyeccion realista de una agencia UGC a 24 meses"
+### G-21 — "El brief perfecto: cómo lo construyo como COO"
 
-Muchos founders de agencias comparten proyecciones de $100K MRR en 12 meses. Yo prefiero compartir una proyeccion honesta con supuestos declarados y tres escenarios.
+**Pilar:** Procesos / Calidad
+**Hook:** Direct Hook
+**Duración objetivo:** 60s
+**Formato:** Screen recording + talking head
 
-Supuestos base del modelo:
-- Agencia UGC boutique en LATAM
-- Ticket promedio: $750 USD/mes
-- CAC inicial: $320 USD (decae con contenido organico)
-- Margen bruto: 55%
-- Cierre inicial: 2 clientes nuevos/mes (crece con el tiempo)
-- Churn mensual: 6% (decae con mejoras operativas)
+**Hook literal (0:00–0:03):**
+"Un brief mal hecho destruye un proyecto entero. Esto tiene el brief que usamos en UGC Colombia."
 
-Escenario conservador (churn 8%, cierre 1.5 clientes/mes promedio):
-Mes 6: $4.800 MRR / 6 clientes
-Mes 12: $9.200 MRR / 12 clientes
-Mes 18: $14.400 MRR / 19 clientes
-Mes 24: $19.800 MRR / 26 clientes
+**Guión palabra por palabra:**
 
-Escenario base (churn 5%, cierre 2.5 clientes/mes):
-Mes 6: $7.500 MRR / 10 clientes
-Mes 12: $18.000 MRR / 24 clientes
-Mes 18: $32.000 MRR / 42 clientes
-Mes 24: $51.000 MRR / 68 clientes
+He visto briefings de una línea.
+"Hacer un video del producto mostrando sus beneficios."
 
-Escenario optimista (churn 3%, cierre 4 clientes/mes):
-Mes 6: $11.200 MRR / 15 clientes
-Mes 12: $34.500 MRR / 46 clientes
-Mes 18: $72.000 MRR / 96 clientes
-Mes 24: $118.000 MRR / 157 clientes
+Eso no es un brief. Es un deseo.
 
-La variable que mas diferencia los escenarios no es el cierre de nuevos clientes. Es el churn.
+Un brief de calidad tiene ocho componentes. Sin excepción.
 
-En el escenario base vs el conservador, la diferencia a 24 meses es $31.200 de MRR — solo por bajar el churn de 8% a 5%.
+Uno. Objetivo del video. No "mostrar el producto". Qué acción debe tomar quien lo ve.
+Dos. Audiencia objetivo. Con demografía, intereses y punto de dolor específico.
+Tres. Tono y estilo. Tres referencias de videos que sí funcionan para esa marca.
+Cuatro. Mensajes clave. Máximo tres. Jerarquizados.
+Cinco. Lo que NO puede aparecer. Claims que el cliente no puede hacer. Competidores. Colores prohibidos.
+Seis. Especificaciones técnicas. Duración, formato, proporción, plataforma de destino.
+Siete. Deadline real. No "lo antes posible". Fecha y hora exacta.
+Ocho. Proceso de aprobación. Quién aprueba, cuántas revisiones están incluidas, en cuánto tiempo.
 
-Invertir en retencion tiene mas impacto en el MRR de largo plazo que invertir en adquisicion. Ese es el insight mas contraintuitivo de este modelo.
+Cuando el creator recibe este brief, puede grabar sin una llamada adicional.
+Cuando el cliente lo aprueba antes del shoot, no hay sorpresas al final.
 
-Nota: estos numeros son proyecciones con supuestos declarados. El mundo real tiene variables que ningun modelo captura — un cliente grande que cancela, un mes sin cierres, un creador que falla. La proyeccion no es una promesa. Es un mapa que se actualiza con datos reales cada 30 dias.
+El brief no es un documento de inicio.
+Es el contrato tácito de calidad de todo el proyecto.
 
----
+Yo reviso cada brief antes de que salga. Sin excepción.
+Si hay un campo vacío, vuelve al equipo.
 
-### POST 13 — "LTV: el numero que define si tu agencia escala"
+**Caption:**
+Un brief de una línea destruye proyectos. Aquí los 8 campos que tiene el brief de UGC Colombia. Cópialo si quieres.
 
-El LTV — Lifetime Value — es el numero mas importante de cualquier negocio de servicios por suscripcion. No el MRR. No el revenue mensual. El LTV.
+**CTA:** ¿Quieres la plantilla completa? Escríbeme "BRIEF" en comentarios.
 
-Por que? Porque el MRR te dice donde estas. El LTV te dice hasta donde puedes ir.
-
-Formula de LTV para agencias de retainer:
-LTV = Ticket promedio mensual × Margen bruto % × Meses promedio de retencion
-
-Con los numeros de UGC Colombia:
-$762 (ticket promedio) × 58% (margen bruto) × 8.4 (meses promedio) = $3.706 LTV
-
-Ese $3.706 tiene tres implicaciones directas:
-
-Implicacion 1: define el CAC maximo sostenible.
-Puedo gastar hasta $1.235 en conseguir un cliente (LTV / 3) y seguir siendo rentable. Actualmente gasto $287. Tengo espacio de inversion que no estoy usando.
-
-Implicacion 2: define el potencial de escala con capital externo.
-Si un inversor entiende que cada cliente tiene $3.706 de LTV y el CAC es $287, el ratio de 12.9x dice que el negocio merece inversion en adquisicion. Sin ese numero, la conversacion con capital externo no tiene base.
-
-Implicacion 3: revela la palanca mas eficiente de crecimiento.
-Cada mes adicional de retencion agrega $442 al LTV ($762 × 58%). Eso significa que reducir el churn en 1 punto porcentual tiene mas impacto en el LTV agregado de la cartera que cualquier campana de adquisicion de ese valor.
-
-Como mejorar el LTV sin subir precios:
-1. Extender retencion: health score + intervencion temprana en clientes <60
-2. Upsells: mover clientes de Starter a Pro agrega $290 al ticket y por ende al LTV
-3. Licencias de pauta: agregar la licencia sube el ticket promedio 30% sin cambiar la produccion
-
-El LTV no es un numero para el deck de inversores. Es una brujula operativa.
-
-Si no sabes tu LTV real (calculado, no estimado), no sabes si cada cliente nuevo es una buena inversion o un pasivo disfrazado de revenue.
+**Hashtags:** #Brief #Operaciones #COO #UGCColombia #CalidadUGC #AgenciaUGC #Procesos
 
 ---
 
-### POST 14 — "DSO: por que tu cobranza te esta matando"
+### G-22 — "Cómo manejo los clientes más difíciles"
 
-DSO. Days Sales Outstanding. El numero que determina si tu cash flow es real o imaginario.
+**Pilar:** Client management / Liderazgo
+**Hook:** Story Hook
+**Duración objetivo:** 60s
+**Formato:** Talking head sin cortes
 
-DSO = (Cuentas por cobrar / Revenue del periodo) × Numero de dias del periodo
+**Hook literal (0:00–0:03):**
+"Tengo un cliente que manda mensajes a las 11 de la noche. Así lo manejo."
 
-En terminos simples: cuantos dias en promedio tarda un cliente en pagarte despues de que le facturas.
+**Guión palabra por palabra:**
 
-Para una agencia con $9.200 de MRR:
-Si el DSO es 30 dias, tienes $9.200 de revenue mensual que en promedio entran a tu cuenta 30 dias despues de facturar.
-Eso significa que en cualquier momento del mes, tienes $9.200 "prometidos" pero no en tu cuenta.
+Hay clientes que pagan bien y operan bien.
+Hay clientes que pagan bien y operan como si el equipo fuera su empleado personal.
 
-Para pagar a los creadores (que anticipamos en el inicio del proyecto), necesitas ese dinero disponible. Si no esta, lo financias de tu bolsillo o con deuda.
+El cliente difícil más común en agencias UGC no es el que tiene exigencias altas.
+Es el que no tiene claridad sobre lo que contrató.
 
-El DSO ideal para servicios creativos con retainer: menos de 15 dias.
+Y eso, en el noventa por ciento de los casos, es falla de onboarding nuestro.
 
-Nuestro DSO actual: 11 dias. Lo logramos con tres mecanismos:
+Cuando un cliente manda mensajes a las once de la noche esperando respuesta inmediata, no es que sea irrespetuoso.
+Es que nadie le explicó cómo funcionamos.
 
-Mecanismo 1: cobro anticipado 100% del primer mes. El dinero esta en cuenta antes de que empiece un peso de produccion.
+Lo primero que hacemos ahora es dedicar una sesión completa de onboarding a expectativas de comunicación.
+Horarios de respuesta. Canal oficial. Quién responde qué.
+Lo ponemos por escrito. Lo firma el cliente. No como contrato legal. Como acuerdo de trabajo.
 
-Mecanismo 2: cargo automatico via Stripe en la fecha de billing. Sin invoices manuales que el cliente "procese". El cargo ocurre automaticamente el dia pactado.
+Lo segundo: cuando un cliente escala un problema, no lo escalo yo de inmediato al CEO.
+Lo contengo. Escucho. Propongo solución en menos de dos horas.
+Si no tengo solución en dos horas, comunico que estamos trabajando en ello y doy hora de respuesta.
+El silencio es el peor manejo de crisis.
 
-Mecanismo 3: dunning automatico. Si el cargo falla, Jarvis envia recordatorio en D+2. Stripe reintenta en D+2 y D+4. Brian envia email formal en D+7. A D+10 sin cobro, el servicio se pausa. Esas reglas estan en el contrato desde el inicio.
+Lo tercero: si un cliente sistemáticamente no respeta los acuerdos, tengo una conversación directa.
+No agresiva. Directa.
+"Esto es lo que acordamos. Esto es lo que está pasando. Necesitamos alinearnos para que el proyecto funcione."
 
-El DSO alto no es solo un problema de flujo de caja. Es un problema de equidad con tu equipo y con tus creadores. Cuando el dinero llega tarde, los pagos a creadores se retrasan. Y un creador que no cobra a tiempo empieza a priorizar otros proyectos.
+Los clientes difíciles que se convierten en los mejores clientes son los que nadie tuvo el valor de hablarles claro.
 
-Revisa tu DSO esta semana. Si esta por encima de 20 dias, hay un proceso de cobranza que necesita estructura.
+**Caption:**
+El cliente difícil no siempre es el problema. A veces el problema es que nadie le dijo cómo trabajar con nosotros. Así lo manejamos en UGC Colombia.
 
----
+**CTA:** Guarda este video si gestionas clientes. Lo vas a usar.
 
-### POST 15 — "Finanzas para no-financieros: el minimo viable para founders"
-
-Si eres founder de una agencia creativa y no tienes formacion financiera, hay 6 numeros que debes conocer de tu negocio antes del fin de cada mes. Solo 6. No mas.
-
-Numero 1: MRR cobrado.
-No facturado. Cobrado. Lo que entro a la cuenta. Este es el norte real de tu negocio.
-
-Numero 2: Margen bruto %.
-Revenue - COGS / Revenue. Si no sabes este numero, no sabes si cada nuevo cliente te hace mas rico o mas pobre. Calculo: toma lo que le pagaste a tus creadores este mes + comisiones de pago + envios. Eso es tu COGS. Dividelo entre tu revenue. El complemento es tu margen bruto.
-
-Numero 3: OPEX mensual.
-Todo lo que gastas en operar que no es COGS. Sueldos, herramientas, marketing, contabilidad, lo que sea. Suma todo. Ese es tu gasto fijo mensual.
-
-Numero 4: EBITDA.
-Margen bruto en dolares menos OPEX. Si el numero es positivo, el negocio genera mas de lo que gasta. Si es negativo, estas consumiendo capital. Simple.
-
-Numero 5: Cash en cuenta.
-No proyecciones. El dinero real disponible hoy. Cuantos meses de runway tienes con ese cash si el revenue cae a cero? Si la respuesta es menos de 2 meses, la prioridad es cobranza y control de gastos, no crecimiento.
-
-Numero 6: DSO.
-Cuantos dias en promedio te tarda cobrar una factura. Si es mayor a 20 dias, tienes un problema de flujo de caja aunque tu MRR sea alto.
-
-Con estos 6 numeros, tienes visibilidad financiera suficiente para tomar decisiones de operacion, saber si puedes contratar, entender si debes ajustar precios y saber si el negocio esta sano o en riesgo.
-
-No necesitas ser CFO para operar con discipline financiera. Necesitas 6 numeros y la honestidad de mirarlos cada mes aunque el resultado no sea el que quieres ver.
-
-Guarda este post. La proxima vez que tengas la sensacion de que el negocio "va bien" pero no sabes exactamente por que, estos 6 numeros dan la respuesta en 30 minutos.
+**Hashtags:** #ClientManagement #COO #AgenciaUGC #UGCColombia #Operaciones #Liderazgo #Clientes
 
 ---
 
-## 6. GUIONES NEWSLETTER (4 ediciones especiales)
+### G-23 — "El sistema de priorización que me salvó"
+
+**Pilar:** Productividad / Operaciones
+**Hook:** Story Hook
+**Duración objetivo:** 45s
+**Formato:** Talking head + pizarrón o pantalla con matriz
+
+**Hook literal (0:00–0:03):**
+"Hubo una semana donde todo era urgente. Todo. Hasta que aprendí a usar esto."
+
+**Guión palabra por palabra:**
+
+Semana de marzo. Teníamos siete proyectos activos.
+Cuatro clientes mandando mensajes simultáneamente.
+Un creator que no aparecía. Un brief pendiente de aprobación. Y una renovación al día siguiente.
+
+Todo era urgente. Nada podía esperar.
+
+Hasta que paré. Y dibujé una matriz de dos por dos.
+
+Eje horizontal: urgente vs. no urgente.
+Eje vertical: importante vs. no importante.
+
+Todo lo que era urgente e importante: lo hacía yo en ese momento.
+Todo lo que era importante pero no urgente: lo agendaba con fecha concreta.
+Todo lo que era urgente pero no importante: lo delegaba o lo automatizaba.
+Todo lo que no era ni urgente ni importante: desaparecía de la lista.
+
+No inventé esto. Es la matriz de Eisenhower.
+Pero aplicarla en tiempo real con una agencia en movimiento te cambia el cerebro.
+
+Lo que descubrí esa semana: el ochenta por ciento de lo que sentía como urgente, no lo era.
+Era ruido disfrazado de prioridad.
+
+La renovación era urgente e importante. Eso fue lo primero.
+El creator que no aparecía era urgente pero manejable con una llamada. Delegué el seguimiento.
+El brief podía esperar seis horas sin consecuencia real. Lo agendé.
+
+Esa semana no se cayó nada.
+
+**Caption:**
+Todo era urgente al mismo tiempo. Este sistema me devolvió el control. La matriz de Eisenhower aplicada a una agencia UGC real.
+
+**CTA:** Sígueme. Cada semana comparto cómo opero esto desde adentro.
+
+**Hashtags:** #Priorizacion #ProductividadReal #COO #AgenciaUGC #UGCColombia #Operaciones #Gestion
 
 ---
 
-### NEWSLETTER 01
+### G-24 — "Un día real como COO de agencia UGC en Colombia"
 
-**Asunto:** El ROI real de UGC en 2026
-**Preview text:** No es el numero que te dicen en los webinars. Aqui los datos propios.
+**Pilar:** Build in public / Día a día
+**Hook:** Curiosity Hook
+**Duración objetivo:** 60s
+**Formato:** Vlog rápido o talking head cronológico
 
----
+**Hook literal (0:00–0:03):**
+"Son las 7:45 de la mañana. Esto va a pasar hoy en UGC Colombia."
 
-Hola [NOMBRE],
+**Guión palabra por palabra:**
 
-Cada vez que alguien me pregunta si el UGC funciona, la pregunta detras de la pregunta es: cuanto retorna?
+7:45. Reviso el dashboard antes de abrir WhatsApp.
+Tres proyectos en zona amarilla. Uno vence mañana. Noto que el creator no actualizó su estado.
 
-Esta semana comparto los datos propios de UGC Colombia — no benchmarks de agencias gringas, no estadisticas de blogs de marketing. Los numeros de nuestros clientes activos en Q4 2025 y Q1 2026.
+8:00. Le escribo al creator. No para presionar. Para confirmar.
+Responde en diez minutos: todo bien, entrega a las 6 pm.
 
-**Los datos reales**
+8:30. Reunión de quince minutos con el equipo.
+¿Qué tiene cada uno hoy? ¿Hay algo bloqueado? ¿Necesitan algo de mí?
+Sin reunión larga. Sin agenda de una hora. Quince minutos y a trabajar.
 
-Clientes analizados: 11 (los que tenian al menos 60 dias activos con pauta corriendo).
-Categoria predominante: DTC ecommerce — cosmeticos, suplementos, hogar, moda.
-Periodo: octubre 2025 a marzo 2026.
+10:00. Llega un mensaje de un cliente preguntando por un video que debía estar listo ayer.
+No había incumplimiento. Había confusión sobre la fecha acordada.
+Abro el contrato. Confirmo la fecha correcta. Le explico con calma.
+Cinco minutos. Resuelto.
 
-ROAS promedio mes 1 (optimizacion): 1.6x
-ROAS promedio mes 2 (aprendizaje): 2.4x
-ROAS promedio mes 3 (estabilizacion): 3.1x
+12:00. Bloque de trabajo profundo. Construyo el onboarding de un cliente nuevo que arranca la próxima semana.
+Sin reuniones. Sin interrupciones. Solo producción de documentos y plantillas.
 
-El ROAS del mes 1 siempre decepciona. El del mes 3 casi siempre sorprende positivamente. El error mas comun: cancelar en el mes 1 usando ese ROAS como referencia final.
+2:30. Sincronización de treinta minutos con Alexander.
+Le cuento solo lo que necesita saber: un riesgo en el proyecto más grande y una oportunidad de expansión de servicio con un cliente.
 
-**La variable que mas impacta el ROAS**
+4:00. Revisión de entregas del día. Dos videos llegaron. Los reviso contra el brief. Uno necesita ajuste menor.
 
-No es el presupuesto de ads. No es la segmentacion. Es la calidad del brief.
+6:00. Cierre. Actualizo el tablero. Dejo agendado lo de mañana. Apago.
 
-Los clientes cuyos briefs incluian: dolor especifico del consumidor, objecion principal a superar, y un "momento de prueba" concreto en el video — tuvieron un ROAS promedio de 3.4x en el mes 3.
+Este es un día real. No todos son así de ordenados. Pero así apunta el sistema.
 
-Los clientes con briefs genericos ("habla bien del producto y muestra como se usa") promediaron 2.1x en el mismo periodo.
+**Caption:**
+De 7:45 am a 6 pm. Esto es lo que pasa realmente en un día de operaciones de UGC Colombia. Sin glamour. Con estructura.
 
-La diferencia de ROAS entre un brief preciso y uno generico fue de 1.3x. Con $700 de ads, eso es $910 adicionales en revenue ese mes. Solo por el brief.
+**CTA:** ¿Quieres ver cómo es una semana completa? Sígueme y lo voy a documentar.
 
-**El ROI que nadie calcula**
-
-Ademas del ROAS de pauta, hay tres fuentes de retorno que la mayoria de marcas no atribuye al UGC:
-
-1. Impacto en conversion del sitio web: los clientes que usaron videos UGC en sus paginas de producto vieron un incremento promedio de 22% en conversion rate. Con un ecommerce que genera $8.000 en ventas mensuales, eso es $1.760 adicionales sin un peso mas en ads.
-
-2. Contenido para email marketing: videos UGC en emails de carrito abandonado mejoraron el CTR promedio 19% en los clientes que los implementaron.
-
-3. Vida util del activo: el video UGC promedio de nuestros clientes se uso activamente durante 4.8 meses antes de ser rotado. El costo por mes de uso fue de $104 USD para un video de $500. Eso es contenido de performance muy eficiente.
-
-**La conclusion honesta**
-
-El UGC no es magia. Es una inversion con curva de aprendizaje de 60 a 90 dias, brief-dependiente y que requiere pauta para mostrar su maxima expresion.
-
-Pero cuando se ejecuta con brief preciso, pauta consistente y rotacion de creativos, el retorno es real y medible.
-
-El mes 1 es optimizacion. El mes 3 es donde vive el verdadero ROI.
-
-Hasta la proxima semana,
-Brian
-Finance Lead · UGC Colombia
-
-P.D.: Si quieres que calculemos el ROI proyectado para tu categoria especifica, responde este email con el ticket promedio de tu producto y el presupuesto mensual de ads que manejas. Lo hago en 24 horas.
+**Hashtags:** #DiaAComo #COO #UGCColombia #AgenciaUGC #BuildInPublic #Operaciones #Rutina
 
 ---
 
-### NEWSLETTER 02
+### G-25 — "El proceso de renewal que nos da 80% retención"
 
-**Asunto:** Pricing guide: cuanto cobrar/pagar
-**Preview text:** Tablas reales para LATAM y USA. Sin eufemismos.
+**Pilar:** Retención / Procesos
+**Hook:** Result Hook
+**Duración objetivo:** 60s
+**Formato:** Talking head + pantalla con timeline
 
----
+**Hook literal (0:00–0:03):**
+"El 80% de nuestros clientes renueva. No es suerte. Son estos pasos exactos."
 
-Hola [NOMBRE],
+**Guión palabra por palabra:**
 
-Una de las preguntas que mas recibo — de marcas y de creadores por igual — es cuanto cuesta realmente el UGC.
+La mayoría de agencias piensan en el renewal el mes que vence el contrato.
+Nosotros empezamos treinta días antes. Sin excepción.
 
-La respuesta depende de variables que casi nadie explica con claridad. Esta edicion es la guia de pricing que deberia existir en la industria.
+Aquí el proceso exacto.
 
-**Para marcas: cuanto deberias pagar por UGC**
+Semana menos cuatro. Revisamos métricas internas del cliente.
+¿Qué entregamos? ¿Qué funcionó? ¿Qué no? ¿Hubo incidentes?
+No esperamos a que el cliente lo diga. Nosotros llegamos con el análisis.
 
-El precio de un video UGC varia por tres factores: formato, duracion y mercado.
+Semana menos tres. Enviamos un reporte de impacto personalizado.
+No un PDF genérico. Un documento con los videos que mejor funcionaron, los comentarios de la audiencia, y una propuesta de lo que haríamos diferente en el próximo período.
 
-Para el mercado LATAM (clientes con presupuesto en COP, MXN o ARS):
+Semana menos dos. Reunión de renewal.
+No de ventas. De conversación.
+¿Qué estás viendo en tu negocio? ¿Hacia dónde vas? ¿Cómo podemos evolucionar juntos?
+Escuchamos más de lo que hablamos.
 
-Testimonial 15-30s: $150-250 USD
-Testimonial 30-60s: $220-380 USD
-Unboxing 30-45s: $200-320 USD
-Demo / Tutorial 30-60s: $220-380 USD
-Review / Comparacion 45-60s: $250-420 USD
-Hook-Ad 6-10s: $120-200 USD
+Semana menos uno. Propuesta formal.
+Basada en lo que dijeron en esa reunión, no en un template estándar.
+Con opciones. No con una sola alternativa de tomar o dejar.
 
-Para el mercado USA (presupuesto en USD, audiencia angloparlante o hispana en USA):
+El día del vencimiento, el renewal ya está firmado o en proceso de firma.
+No llegamos el día del vencimiento a preguntar si van a seguir.
 
-Testimonial 15-30s: $350-600 USD
-Testimonial 30-60s: $500-900 USD
-Demo / Tutorial 30-60s: $500-900 USD
+¿Por qué funciona?
+Porque el cliente siente que alguien está mirando su negocio, no solo entregando videos.
 
-Estos son precios al cliente. Incluyen: produccion, coordinacion, 2 rondas de revision y licencia de uso organico. Licencia para paid media es adicional: +30% en LATAM, +40% en USA.
+El ochenta por ciento de retención no es magia comercial.
+Es gestión operativa que empieza cuatro semanas antes de que el cliente piense en irse.
 
-Si te estan cobrando menos de estos rangos, pregunta que no esta incluido. Generalmente: revisiones limitadas, sin garantia de reentrega, sin contrato de derechos claro.
+**Caption:**
+80% de retención. Este es el proceso de renewal que usamos en UGC Colombia. Paso a paso. Sin improvisación. ¿El tuyo empieza cuando el contrato ya venció?
 
-Si te estan cobrando significativamente mas sin justificacion de valor adicional, compara propuestas.
+**CTA:** Guarda esto. Si tienes una agencia, este proceso te cambia los números.
 
-**Para creadores: cuanto deberias cobrar**
-
-La tarifa base de un creador UGC (sin audiencia propia, trabajo de actor de contenido) en Colombia:
-
-Tier C (menos de 6 meses de experiencia, calidad basica): $40-80 USD por video
-Tier B (6-18 meses, calidad consistente, feedback rapido): $80-150 USD por video
-Tier A LATAM (18+ meses, calidad alta, formatos avanzados): $150-300 USD por video
-Tier A USA (creators con experiencia en mercado USA, ingles nativo o neutro): $300-600 USD por video
-
-Si una agencia te esta pagando por debajo del rango para tu tier, tienes dos opciones: negociar o buscar proyectos directos con marcas.
-
-Si no sabes en que tier estas, la respuesta esta en cuantos proyectos has completado, que calificaciones has recibido y cuanto tiempo tardas en entregar.
-
-**El calculo que toda marca debe hacer antes de firmar**
-
-Precio base + licencia paid media (si usas en ads) + envio de producto (si es fisico) + revisiones extras probabiles = costo real.
-
-Con ese numero compara propuestas. No con el precio lista.
-
-**La regla de transparencia**
-
-Publicamos nuestras tarifas porque creemos que la industria funciona mejor cuando las expectativas estan calibradas desde el inicio. Un cliente que sabe cuanto cuesta y por que, toma mejores decisiones y genera menos fricciones en el proceso.
-
-Esta guia es publica. Comparte con quien la necesite.
-
-Hasta la proxima,
-Brian
-Finance Lead · UGC Colombia
-
-P.D.: Si tienes dudas sobre si el precio que te ofrecieron es justo para tu proyecto especifico, escríbeme. Sin costo y sin compromiso.
+**Hashtags:** #Retencion #ClientesFelices #COO #AgenciaUGC #UGCColombia #Renewal #Operaciones
 
 ---
 
-### NEWSLETTER 03
-
-**Asunto:** De $500 a $5K MRR en 12 meses
-**Preview text:** Los supuestos, las palancas y lo que nadie te dice del camino.
+## 4. CARRUSELES LINKEDIN — 15 Carruseles
 
 ---
 
-Hola [NOMBRE],
+### CARRUSEL 01 — "Sistema operativo completo de agencia UGC"
 
-$500 a $5.000 MRR en 12 meses es un objetivo que escucho seguido en founders de agencias nuevas de UGC. Es alcanzable. Pero el camino real tiene una forma que muy pocos dibujan con honestidad.
+**Slide 1 — Portada:**
+"El sistema operativo de una agencia UGC que funciona de verdad.
+(No el que se ve bonito en redes. El que realmente opera.)
+Brian Velásquez — COO, UGC Colombia"
 
-Esta es la proyeccion base con supuestos declarados — no el escenario optimista, el escenario real.
+**Slide 2:**
+"Un sistema operativo de agencia tiene 6 capas.
+Si te falta una, el resto se cae.
 
-**Los supuestos del modelo**
+Capa 1: Captación
+Capa 2: Onboarding
+Capa 3: Producción
+Capa 4: QA y entrega
+Capa 5: Reporte
+Capa 6: Renewal
 
-Punto de partida: $0 MRR, 0 clientes.
-Ticket promedio: $750 USD/mes.
-Cierre mensual promedio: 1.5 clientes nuevos (conservador para los primeros 6 meses).
-Churn mensual: 7% los primeros 6 meses, baja a 5% del mes 7 en adelante (con mejoras operativas).
-CAC: $320 mes 1-3, baja a $240 del mes 4 en adelante (contenido organico empieza a jalar).
+La mayoría de agencias solo tienen la 1 y la 3."
 
-**El recorrido mes a mes**
+**Slide 3:**
+"CAPA 1 — Captación
 
-Mes 1: 2 clientes cerrados (los fundadores usaron su red personal). MRR: $1.500. Sin churn todavia.
+No es solo conseguir leads.
+Es filtrar desde el inicio.
 
-Mes 2: 1 cliente nuevo, 0 churn. MRR: $2.250.
+Nuestro formulario de descubrimiento tiene 7 preguntas.
+Tres son eliminatorias.
 
-Mes 3: 2 clientes nuevos, 1 churn (7% de 3 clientes). MRR: $3.000.
+Si el cliente no tiene claro qué quiere medir, no estamos alineados.
+El no previo ahorra tres meses de fricción."
 
-Mes 4: 1 cliente nuevo, 0 churn. Primer upsell: un cliente sube de plan, agrega $200 al MRR. MRR: $3.950.
+**Slide 4:**
+"CAPA 2 — Onboarding
 
-Mes 5: 2 clientes nuevos, 1 churn. MRR: $4.450.
+Los primeros 14 días definen los próximos 6 meses.
 
-Mes 6: 1 cliente nuevo, 0 churn, 1 upsell adicional. MRR: $5.150.
+Sesión de kick-off con agenda fija.
+Brief co-creado con el cliente.
+Canal de comunicación único.
+Cronograma visible para ambas partes.
+Expectativas de revisión firmadas.
 
-Break-even operativo: entre el mes 4 y el mes 5 (con OPEX de $2.800 para una operacion lean y margen bruto de 55%).
+Si el onboarding dura más de 14 días, algo está mal."
 
-**Las tres palancas que hacen la diferencia**
+**Slide 5:**
+"CAPA 3 — Producción
 
-Palanca 1: el primer upsell.
-Cada cliente que sube de Starter ($500) a Pro ($950) agrega $450 al MRR sin costo de adquisicion. En el modelo base, el primer upsell del mes 4 es el que permite llegar a $5K MRR en el mes 6 en vez del mes 7.
+Cada proyecto vive en una tarjeta de Notion.
+5 campos obligatorios:
 
-Palanca 2: reducir churn del 7% al 5%.
-En 12 meses, esa reduccion de 2 puntos equivale a retener aproximadamente 3 clientes adicionales. Con LTV de $3.700 cada uno, son $11.100 de revenue adicional solo de no perder esos clientes.
+— Creator asignado
+— Fecha de entrega
+— Brief adjunto
+— Estado actual (5 posibles)
+— Contacto del cliente
 
-Palanca 3: el contenido organico que empieza a funcionar en el mes 4-5.
-Los primeros 3 meses de contenido en LinkedIn o TikTok tienen alcance bajo. Del mes 4 en adelante, si publicaste consistentemente, los leads organicos empiezan a llegar. Cada lead organico tiene CAC cercano a $0 y convierte mejor porque ya te conocia antes del discovery.
+Si la tarjeta no está completa, el proyecto no existe."
 
-**Lo que nadie te dice**
+**Slide 6:**
+"CAPA 4 — QA y entrega
 
-El mes 3 y el mes 4 son los mas duros. El momentum del inicio desaparece, el churn llega por primera vez, y el contenido organico todavia no da resultados. Es el valle de la curva.
+Antes de que cualquier video llegue al cliente, pasa por un checklist de 9 puntos.
 
-La mayoria de agencias que cierran antes del ano lo hacen en ese periodo. No por falta de clientes potenciales. Por falta de cash y de paciencia para atravesar el valle.
+¿Cumple el objetivo declarado en el brief?
+¿Tiene el formato y duración correctos?
+¿Aparece el mensaje clave en los primeros 3 segundos?
+¿El audio es limpio?
+¿El CTA es visible?
 
-La estructura correcta desde el inicio — cobro anticipado, OPEX lean, pricing sin descuentos — es lo que permite atravesar ese valle sin morir en el intento.
+Si falla uno, vuelve al creator. Siempre."
 
-$5K MRR en 12 meses es posible. Pero el camino real incluye un mes malo, un churn inesperado y al menos una semana donde sientes que todo va mal.
+**Slide 7:**
+"CAPA 5 — Reporte
 
-Eso tambien es parte del modelo.
+Enviamos reporte mensual. Sin excepción.
 
-Hasta la proxima,
-Brian
-Finance Lead · UGC Colombia
+Contenido del reporte:
+— Videos entregados vs. comprometidos
+— Métricas de desempeño disponibles
+— Observaciones de tendencias
+— Propuesta de ajuste para el mes siguiente
 
----
+El reporte no es burocracia. Es la prueba de que existimos."
 
-### NEWSLETTER 04
+**Slide 8:**
+"CAPA 6 — Renewal
 
-**Asunto:** Por que cierran las agencias UGC
-**Preview text:** No es por falta de talento. Es por estructura. Los 4 errores fatales.
+Empieza 30 días antes del vencimiento.
 
----
+Semana -4: análisis interno
+Semana -3: reporte de impacto al cliente
+Semana -2: reunión de conversación (no de ventas)
+Semana -1: propuesta personalizada
 
-Hola [NOMBRE],
+El día del vencimiento, ya está firmado."
 
-El 80% de las agencias de contenido que se lanzan este año van a cerrar antes de cumplir 12 meses.
+**Slide 9:**
+"¿Cuál capa te falta?
 
-No es hiperbole. Es el patron que vemos en el sector. Y no pasa por falta de talento, ni por falta de demanda. El mercado de UGC en LATAM crece. La demanda esta ahi. El problema es estructural.
+La mayoría de agencias que me consultan tienen:
+Capa 1: Sí (a medias)
+Capa 2: No (improvisada)
+Capa 3: Sí (caótica)
+Capa 4: No (lo revisa el cliente)
+Capa 5: No
+Capa 6: No
 
-Estos son los 4 errores que matan agencias UGC — con los numeros que los sostienen.
+Y luego se preguntan por qué los clientes no renuevan."
 
-**Error 1: Cobrar contra entrega, no anticipado**
+**Slide 10 — CTA:**
+"Si quieres construir esto en tu agencia, empieza por el onboarding.
+Es la capa que más impacta la retención y la que más se ignora.
 
-Cuando cobras contra entrega, el ciclo financiero es: tu pones el costo del creador, produces el video, lo entregas al cliente, y esperas que el cliente pague.
-
-El gap promedio en una agencia sin cobro anticipado: 22 dias entre el gasto y el ingreso.
-
-Con un MRR de $5.000 y un gap de 22 dias, tienes hasta $3.600 en "revenue fantasma" — facturado pero no cobrado — en cualquier momento del mes.
-
-Para cubrir ese gap, la agencia necesita capital propio o credito. Sin ese colchon, el mes que un cliente demora 30 dias en pagar, la agencia no puede pagarle al creador. El creador deja de priorizar el proyecto. La calidad baja. El cliente se queja. El ciclo se rompe.
-
-Solucion: cobro anticipado 100% mes 1. Sin excepcion.
-
-**Error 2: Precios sin estructura de costos**
-
-La mayoria de agencias fijan precios por intuicion o por lo que cobra la competencia. Sin calcular el COGS real, sin modelar el margen.
-
-El resultado: precios que en papel parecen buenos pero que al calcular el margen bruto real — incluyendo pago al creador, comisiones de pago, envios, revisiones — resultan en margenes de 25-30%.
-
-Con un margen del 28%, necesitas $15.000 de MRR para pagar $4.200 de OPEX mensual. Con un margen del 55%, necesitas $7.636.
-
-La diferencia es de 96% mas de MRR requerido para sobrevivir. Solo por no haber calculado el margen al fijar el precio.
-
-Solucion: calcula el COGS de cada plan antes de publicar el precio. El margen minimo aceptable es 45%.
-
-**Error 3: Sin proceso de retencion**
-
-La tasa de cierre importa. Pero en un negocio de retainer, la tasa de retencion importa el doble.
-
-Una agencia con tasa de cierre de 30% y churn del 10% crece mas lento que una con cierre del 20% y churn del 4%.
-
-El 10% de churn mensual significa que pierdes el 10% de tu cartera cada mes. En 6 meses, has perdido el 47% de los clientes que tenias. Para crecer, debes adquirir nuevos clientes mas rapido de lo que pierdes los actuales. Es una carrera contra el tiempo que eventualmente se pierde.
-
-Solucion: health score semanal + intervencion proactiva antes de que el cliente diga que se quiere ir.
-
-**Error 4: El fundador hace todo**
-
-Ventas, operacion, coordinacion de creadores, facturacion, atencion al cliente — todo en la misma persona.
-
-Este modelo tiene un techo de capacidad muy bajo. Cuando el fundador llega al limite, la calidad cae en todos los frentes al mismo tiempo. La agencia no puede escalar porque escalar significaria clonar al fundador.
-
-La solucion no siempre es contratar. Puede ser externalizar una funcion, documentar procesos para que alguien part-time los ejecute, o implementar automatizacion para las tareas repetitivas.
-
-Pero el modelo de "fundador hace todo" tiene una fecha de vencimiento. Generalmente es el mes 6.
-
-**La conclusion**
-
-Estos cuatro errores no son de talento ni de mercado. Son de estructura. Y la buena noticia es que todos se pueden corregir antes de que sea tarde — si los identificas a tiempo.
-
-La mala noticia es que la mayoria de founders los identifica despues de que ya costaron dinero, clientes o meses de operacion innecesaria.
-
-Esta newsletter existe para que esa conversacion pase antes.
-
-Hasta la proxima,
-Brian
-Finance Lead · UGC Colombia
-
-P.D.: Si reconoces alguno de estos errores en tu operacion actual y quieres conversarlo, responde este email. Lo hablo sin agenda de venta.
+Sígueme — @brianvelasquez.co
+Comparte esto con alguien que está construyendo una agencia."
 
 ---
 
-## 7. GUIONES X/TWITTER THREADS (6 threads)
+### CARRUSEL 02 — "Capacity planning: cuántos clientes puede tu equipo"
+
+**Slide 1 — Portada:**
+"¿Cuántos clientes puede manejar tu equipo sin romperse?
+La mayoría adivina. Aquí el cálculo real.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"El error más común en agencias UGC:
+aceptar clientes hasta que algo explota.
+
+El capacity planning no es un concepto corporativo.
+Es saber, con números reales, cuánto puedes comprometer antes de quedar mal."
+
+**Slide 3:**
+"Paso 1: Mapea las horas reales por cliente/mes.
+
+En nuestro caso con un paquete estándar:
+— Brief: 2h
+— Coordinación de shoots: 4h (2 shoots x 2h c/u)
+— QA de entrega: 1.5h por video (4 videos = 6h)
+— Comunicación con cliente: 3h
+— Reporte: 1.5h
+
+Total real: ~17h por cliente por mes."
+
+**Slide 4:**
+"Paso 2: Calcula las horas disponibles reales.
+
+Una persona, mes estándar: 160h brutas.
+Menos reuniones internas (10h): 150h.
+Menos imprevistos históricos (15%): 127h reales.
+
+127h / 17h por cliente = 7.5 clientes máximo por persona.
+
+No 10. No 12. 7.5."
+
+**Slide 5:**
+"Paso 3: Aplica el factor de mezcla de clientes.
+
+No todos los clientes consumen igual.
+Un cliente nuevo: 25h el primer mes (onboarding incluido).
+Un cliente renovado: 14h promedio.
+
+Si tienes 3 clientes nuevos y 4 renovados, el cálculo cambia.
+3x25 + 4x14 = 131h. Estás al tope."
+
+**Slide 6:**
+"Paso 4: Deja margen de emergencia.
+
+El 15% de tiempo debe estar libre.
+No para reuniones. Para incendios reales.
+
+Si operas al 100% de capacidad, el primer problema se convierte en crisis.
+El margen no es lujo. Es estabilidad."
+
+**Slide 7:**
+"Paso 5: Revisa el capacity cada lunes.
+
+Dashboard semanal:
+— Proyectos activos vs. capacidad disponible
+— Horas comprometidas vs. horas reales
+— Clientes nuevos en pipeline que van a entrar
+
+Si superas el 85%, paro las ventas hasta liberar espacio."
+
+**Slide 8:**
+"La señal de que sobrepasaste el capacity:
+
+— Los reportes llegan tarde
+— Los clientes preguntan antes de que les avises
+— El equipo trabaja fines de semana sin que nadie lo pida
+— Hay errores en entregas que antes no ocurrían
+
+Esos no son errores humanos. Son errores de planeación."
+
+**Slide 9:**
+"Resumen del cálculo:
+
+1. Horas reales por cliente/mes
+2. Horas disponibles reales por persona
+3. Factor de mezcla (nuevos vs. renovados)
+4. Margen de emergencia (15%)
+5. Revisión semanal del tablero
+
+Con esto, nunca más aceptas un cliente que no puedes entregar."
+
+**Slide 10 — CTA:**
+"Comparte esto con el founder de tu agencia.
+Esta conversación sobre capacity vale más que diez reuniones de ventas.
+
+Sígueme — @brianvelasquez.co
+Operaciones reales de agencia UGC, desde adentro."
 
 ---
 
-### THREAD 01 — "La matematica real de una agencia UGC (cuanto gana, cuanto pierde)"
+### CARRUSEL 03 — "Onboarding de cliente perfecto (framework)"
 
-**Tweet 1 (hook):**
-La matematica real de una agencia UGC boutique. Cuanto entra, cuanto se va, cuanto queda.
-Esto es lo que nadie te dice antes de lanzar una. Hilo:
+**Slide 1 — Portada:**
+"Los primeros 14 días con un cliente definen si va a renovar o no.
+Este es nuestro framework de onboarding exacto.
+Brian Velásquez — COO, UGC Colombia"
 
-**Tweet 2:**
-Revenue: supongamos $9.200 de MRR. 12 clientes en mezcla de planes Starter, Pro y Premium.
-Ese es el numero bonito. Lo que importa es lo que queda despues.
+**Slide 2:**
+"La mayoría de agencias hacen onboarding así:
+'Bienvenido, mándanos el acceso al producto y arrancamos.'
 
-**Tweet 3:**
-COGS (lo que cuesta entregar el servicio):
-→ Pagos a creadores: ~42% del revenue = $3.864
-→ Comisiones Stripe/Wise: ~3% = $276
-→ Envios de producto: ~2.5% = $230
-→ Hosting CDN: ~0.5% = $46
-Total COGS: $4.416. Margen bruto: $4.784 (52%)
+El cliente no sabe qué esperar.
+El equipo no sabe qué prometieron.
+Nadie sabe cuándo empieza realmente.
 
-**Tweet 4:**
-OPEX (lo que cuesta operar):
-→ Sueldos equipo (3 personas part-time/full-time): $3.200
-→ Tooling SaaS: $380
-→ Contabilidad + legal: $200
-→ Marketing basico: $300
-Total OPEX: $4.080
+Eso no es onboarding. Es esperanza."
 
-**Tweet 5:**
-EBITDA = Margen bruto - OPEX
-$4.784 - $4.080 = $704/mes
+**Slide 3:**
+"DÍA 1 — Sesión de kick-off (60 min)
 
-Con $9.200 de MRR, el EBITDA real es $704. Eso es 7.6% de margen neto. No es malo. Pero tampoco es el numero romantico que parece el revenue.
+Agenda fija, sin improvisar:
+— Confirmación de objetivos del cliente
+— Revisión del paquete contratado (detalle)
+— Presentación del equipo asignado
+— Canal de comunicación oficial
+— Acuerdo de tiempos de respuesta
+— Próximos pasos con fechas exactas"
 
-**Tweet 6:**
-Lo que ese 7.6% significa en practica:
-→ Con $9.200 MRR, el negocio paga sus gastos y genera $704 de utilidad real.
-→ Para que el fundador gane bien, el MRR necesita estar al menos en $15.000-18.000.
-→ Ahi el EBITDA sube a $3.500-5.000/mes. Eso ya es un negocio.
+**Slide 4:**
+"DÍAS 2-3 — Co-creación del brief maestro
 
-**Tweet 7:**
-Las palancas para mejorar el margen sin subir el MRR:
-1. Bajar churn (cada cliente que se queda un mes mas es margen sin costo de adquisicion)
-2. Upsells (mover Starter a Pro agrega $450/mes al ticket sin cambiar el COGS proporcionalmente)
-3. Eficiencia en coordinacion (cada hora que ahorramos en briefs mal hechos es margen recuperado)
+No le enviamos una plantilla para que llene.
+Trabajamos con él en vivo.
 
-**Tweet 8:**
-El numero que mas cambia el EBITDA: la retencion.
-Si el churn baja de 7% a 4% mensual, en 6 meses el MRR base crece $2.800 sin un solo cliente nuevo.
-$2.800 adicionales con el mismo OPEX = $1.540 mas de EBITDA mensual.
+Resultado: brief con 8 secciones completas que el creator puede ejecutar sin una llamada adicional.
 
-**Tweet 9:**
-La leccion:
-MRR es vanidad. EBITDA es sanidad. Cash en cuenta es realidad.
-Una agencia que celebra el MRR sin calcular el EBITDA no sabe si es rentable o si simplemente esta aplazando el problema.
+El cliente que co-crea el brief, aprueba el resultado más fácilmente."
 
-**Tweet 10:**
-Si tienes o quieres lanzar una agencia UGC, el primer ejercicio no es conseguir el primer cliente.
-Es calcular el break-even: OPEX / margen bruto = MRR necesario para sobrevivir.
-Con esos numeros sabes cuanto tiempo tienes antes de necesitar rentabilidad.
-Guarda este hilo.
+**Slide 5:**
+"DÍA 4-5 — Setup operativo
 
----
+— Carpeta compartida creada y organizada
+— Accesos a assets de la marca recibidos
+— Creator asignado notificado y briefado
+— Cronograma del primer mes publicado y visible
+— Contrato firmado archivado con copia al cliente"
 
-### THREAD 02 — "5 errores de pricing que matan agencias UGC"
+**Slide 6:**
+"DÍA 7 — Check-in de mitad de onboarding
 
-**Tweet 1 (hook):**
-5 errores de pricing que matan agencias UGC antes del ano.
-Los he visto en competidores. Dos los cometimos nosotros mismos. Hilo:
+Mensaje proactivo: '¿Cómo vas? ¿Hay algo que no quedó claro?'
 
-**Tweet 2:**
-Error 1: Precio sin margen calculado.
-Fijas $350 por 4 videos porque "parece justo".
-No calculas que el pago al creador + comisiones + envios te deja con 28% de margen bruto.
-Con ese margen, necesitas $15.000 MRR para pagar $4.200 de OPEX. Con 55% de margen, necesitas $7.600.
-La diferencia: $7.400 mas de MRR requerido solo por no hacer el calculo.
+No esperamos a que el cliente pregunte.
+Los problemas de semana 6 casi siempre nacen en semana 1 y nadie los atendió."
 
-**Tweet 3:**
-Error 2: Mismo precio para LATAM y USA.
-El mercado USA paga 2-2.5x el precio LATAM por el mismo formato y duracion.
-Una agencia que cobra $380 a un cliente USA esta dejando entre $120 y $520 por video sobre la mesa.
-Con 8 videos al mes, eso es $960-$4.160 de revenue mensual que no capturas.
+**Slide 7:**
+"DÍAS 8-13 — Primer ciclo de producción
 
-**Tweet 4:**
-Error 3: No separar produccion de licencia.
-El video que produces y el derecho a usarlo en pauta son dos cosas distintas.
-Si no separas la licencia en la cotizacion, el cliente activa ads y no puedes cobrar la diferencia.
-Licencia paid media: +30% LATAM, +40% USA. Eso es margen que desaparece si no lo estructuras desde el inicio.
+Primer shoot coordinado.
+Primer video entregado.
+Primera revisión con feedback del cliente.
 
-**Tweet 5:**
-Error 4: Revision ilimitada como default.
-Cada revision extra tiene costo real: coordinacion, tiempo de QA, posible renegrabacion.
-Si no lo cobras a partir de la tercera ronda, sale de tu margen.
-Formula: 2 rondas incluidas. Tercera en adelante: $25-40 por video en LATAM, $50-80 en USA.
+El objetivo no es perfección en el primer intento.
+El objetivo es que el proceso de revisión funcione limpio."
 
-**Tweet 6:**
-Error 5: Descuento de entrada para "ganar el cliente".
-Cerrar a $700 en vez de $950 no es pragmatismo. Es elegir el peor tipo de cliente.
-En nuestra historica: clientes que negociaron descuento tienen health score promedio 54.
-Clientes a precio lista: 74. Los de 54 churnearon 2.8x mas rapido.
-El precio bajo no ahorra la relacion. La destruye mas lento.
+**Slide 8:**
+"DÍA 14 — Cierre de onboarding
 
-**Tweet 7:**
-Como corregir sin perder clientes actuales:
-→ Calcula el margen bruto real de cada plan esta semana
-→ Identifica en cual el margen es < 45%
-→ Ajusta el precio para nuevos contratos (no toques los activos todavia)
-→ En la renovacion, presenta tabla de precios 2026 actualizada
-→ Honra el precio actual hasta renovacion
+Reunión de 20 minutos:
+— ¿Qué funcionó del proceso?
+— ¿Qué ajustamos para el mes 2?
+— ¿El canal de comunicación está funcionando?
+— ¿El equipo asignado encaja con la marca?
 
-**Tweet 8:**
-El test de calibracion de precios:
-Tasa de cierre > 60%: estas cobrando poco.
-Tasa de cierre < 15%: algo falla en el valor percibido o en el perfil del lead.
-Rango saludable: 25-45%.
-Nuestro Q1 2026: 38% con precios publicados. El precio esta bien calibrado.
+Con esto, el mes 2 ya arranca sin fricción."
 
-**Tweet 9:**
-La conclusion:
-El precio no es solo un numero. Es un filtro de cliente y una declaracion de valor.
-Si no lo calculas sobre costos reales y no lo calibras con datos de cierre, estas operando a ciegas en la variable que mas afecta la supervivencia del negocio.
+**Slide 9:**
+"Los tres errores de onboarding más comunes:
 
-**Tweet 10:**
-Si quieres que revise el pricing de tu agencia o servicio, manda DM con:
-→ Tu ticket promedio actual
-→ Lo que le pagas a tus providers o creadores
-→ Tu tasa de cierre aproximada
-Te digo en 24 horas si el modelo tiene problemas estructurales.
+1. Arrancar a grabar antes de tener el brief aprobado
+2. No definir un canal único de comunicación desde el día 1
+3. Asumir que el cliente sabe cómo funciona el proceso
+
+Cada uno de estos genera problemas que se sienten en el mes 3, no en el mes 1."
+
+**Slide 10 — CTA:**
+"14 días bien ejecutados = 6 meses de cliente feliz.
+
+Si tu onboarding no tiene este nivel de estructura, es la primera cosa que deberías construir.
+
+Sígueme — @brianvelasquez.co
+Frameworks operativos reales de agencia UGC."
 
 ---
 
-### THREAD 03 — "Como calcular tu CAC verdadero en 2026"
+### CARRUSEL 04 — "5 SOPs que toda agencia necesita desde día 1"
 
-**Tweet 1 (hook):**
-La mayoria de agencias calculan su CAC mal. Usan solo el gasto en ads.
-El CAC real incluye 4 componentes. Hilo con la formula completa:
+**Slide 1 — Portada:**
+"No necesitas un equipo grande para tener SOPs.
+Necesitas estos 5 desde el primer cliente.
+Brian Velásquez — COO, UGC Colombia"
 
-**Tweet 2:**
-Componente 1: Gasto en ads.
-Meta, Google, LinkedIn — lo que sea que estes pagando para que leads lleguen a tu pipeline.
-Este es el unico que la mayoria incluye. Es el mas visible. Pero es solo una parte.
+**Slide 2:**
+"Un SOP no es un manual de 40 páginas.
+Es un documento de una sola página que dice:
+quién hace qué, cuándo, en qué orden, y cómo se confirma que quedó bien.
 
-**Tweet 3:**
-Componente 2: Tiempo de ventas valorizado.
-Cada discovery call, propuesta, follow-up y negociacion tiene un costo de oportunidad.
-Si Alexander factura el equivalente a $60/hora y gasta 8 horas/mes en calls que no cierran: $480 de costo de ventas no contabilizado.
-Ese costo va al CAC.
+Si cualquier persona del equipo puede ejecutarlo sin preguntarte, está bien escrito."
 
-**Tweet 4:**
-Componente 3: Costo de propuestas que no cerraron.
-Por cada cliente que cierra, hay entre 2 y 4 propuestas que no cerraron.
-Cada propuesta tomo tiempo de preparacion, herramientas de CRM, y en algunos casos una sesion de estrategia gratis.
-Ese costo se distribuye entre los clientes que si cerraron.
+**Slide 3:**
+"SOP 1 — Onboarding de cliente nuevo
 
-**Tweet 5:**
-Componente 4: Herramientas de CRM y automatizacion prorrateadas.
-Notion, HubSpot, PandaDoc, Calendly — lo que sea que uses en el proceso de ventas.
-Divide el costo mensual entre los clientes cerrados ese mes. Es una fraccion pero suma.
+Disparo: contrato firmado.
+Pasos: kick-off, brief, setup, primer shoot, check-in día 7, cierre día 14.
+Responsable: COO.
+Tiempo estimado: 14 días.
+Entregable de cierre: carpeta organizada + cronograma mes 1 publicado."
 
-**Tweet 6:**
-Formula completa:
-CAC = (Ads + Tiempo ventas valorizado + Costo propuestas perdidas + Herramientas prorrateadas) / Clientes cerrados
+**Slide 4:**
+"SOP 2 — Coordinación de shoot
 
-Nuestros numeros Q1 2026:
-Ads: $540 / Tiempo ventas: $480 / Propuestas perdidas: $142 / Herramientas: $95
-Total: $1.257 / 4.4 clientes = $286 CAC real
+Disparo: brief aprobado por cliente.
+Pasos: asignación de creator, envío de brief, confirmación de producto, recordatorio 24h antes, confirmación de entrega.
+Responsable: coordinador de producción.
+Tiempo: 5 días desde brief aprobado.
+Entregable: video crudo recibido y confirmado."
 
-**Tweet 7:**
-CAC erroneo (solo ads): $540 / 4.4 = $123
-CAC real: $286
-Diferencia: $163 por cliente. En 40 clientes al año: $6.520 de costo no contabilizado.
-Si no lo contabilizas, crees que eres mas rentable de lo que eres.
+**Slide 5:**
+"SOP 3 — QA y entrega de video
 
-**Tweet 8:**
-Como reducir el CAC sin bajar calidad de leads:
-→ Contenido organico (cada lead organico tiene CAC ~$0)
-→ Programa de referidos (el cliente referido convierte 2x y tiene LTV 30% mayor)
-→ Precios publicados (filtra leads antes del discovery, baja tiempo de ventas por lead)
-→ Caso de estudio publicado (lead que llega por caso de estudio ya confía antes de la call)
+Disparo: video crudo recibido del creator.
+Pasos: revisión contra checklist de 9 puntos, solicitud de ajuste si aplica, aprobación interna, envío al cliente, confirmación de recepción.
+Responsable: QA lead.
+Tiempo: 48h desde recepción.
+Entregable: confirmación de recepción del cliente."
 
-**Tweet 9:**
-La relacion correcta con el CAC:
-CAC maximo sostenible = LTV / 3
-Si tu LTV es $3.700, puedes gastar hasta $1.233 en conseguir un cliente.
-Si tu CAC real es $286, tienes espacio para 4x la inversion en adquisicion antes de llegar al limite.
-Pero primero debes saber el numero real.
+**Slide 6:**
+"SOP 4 — Gestión de incidente
 
-**Tweet 10:**
-Ejercicio de esta semana:
-1. Suma ads + tiempo ventas + propuestas perdidas + herramientas del ultimo mes
-2. Dividelo entre los clientes cerrados ese mes
-3. Eso es tu CAC real
-4. Compáralo con tu LTV / 3
-Si el CAC real supera LTV / 3, tienes un problema estructural antes de que el balance lo muestre.
+Disparo: entrega tardía, queja de cliente o fallo de creator.
+Pasos: documentar el incidente en menos de 1h, comunicar al cliente en menos de 2h, proponer solución con fecha, ejecutar, cerrar con follow-up.
+Responsable: COO.
+Regla: nunca más de 2h de silencio ante un problema activo."
 
----
+**Slide 7:**
+"SOP 5 — Proceso de renewal
 
-### THREAD 04 — "El LTV para agencias boutique (formula y ejemplo)"
+Disparo: 30 días antes del vencimiento del contrato.
+Pasos: análisis interno (semana -4), reporte de impacto al cliente (semana -3), reunión de conversación (semana -2), propuesta formal (semana -1), firma.
+Responsable: COO + CEO para aprobación de condiciones.
+Meta: renewal firmado antes del día de vencimiento."
 
-**Tweet 1 (hook):**
-LTV es el numero que define si tu agencia puede escalar o si solo puede sobrevivir.
-La formula para agencias de retainer. Con nuestros numeros reales. Hilo:
+**Slide 8:**
+"¿Cuándo escribir cada SOP?
 
-**Tweet 2:**
-Formula base:
-LTV = Ticket promedio mensual × Margen bruto % × Meses promedio de retencion
-Simple en papel. La dificultad esta en calcular cada variable correctamente.
+No cuando tengas tiempo. Eso nunca llega.
 
-**Tweet 3:**
-Variable 1: Ticket promedio mensual.
-No uses el precio de tu plan mas caro. Usa el promedio ponderado de todos los planes activos.
-Si tienes 4 clientes Starter ($500), 5 Pro ($950) y 3 Premium ($1.500):
-Ticket promedio = (4×500 + 5×950 + 3×1.500) / 12 = $858/mes
+Escríbelo la primera vez que haces el proceso.
+Mientras lo ejecutas, documenta los pasos.
+Tarda 30 minutos más.
+Te ahorra 10 horas de re-explicación en los próximos 6 meses."
 
-**Tweet 4:**
-Variable 2: Margen bruto.
-No el margen neto. El margen bruto (revenue menos COGS directos de entrega).
-COGS = pagos a creadores + comisiones de pago + envios + hosting
-Si ese total es el 45% del revenue, el margen bruto es 55%.
-Usa ese 55% en la formula.
+**Slide 9:**
+"Los 5 SOPs en resumen:
 
-**Tweet 5:**
-Variable 3: Meses promedio de retencion.
-Calcula el promedio de meses que permanecen los clientes que ya churnearon.
-Si tus ultimos 10 clientes que cancelaron duraron: 4, 6, 8, 12, 5, 7, 9, 3, 11, 6 meses.
-Promedio: 7.1 meses. Ese es tu numero.
+1. Onboarding de cliente nuevo
+2. Coordinación de shoot
+3. QA y entrega de video
+4. Gestión de incidente
+5. Proceso de renewal
 
-**Tweet 6:**
-Ejemplo con numeros de UGC Colombia:
-Ticket promedio: $762
-Margen bruto: 58%
-Retencion promedio: 8.4 meses
-LTV = $762 × 0.58 × 8.4 = $3.706
+Con estos 5, el 80% de tu operación está cubierta."
 
-**Tweet 7:**
-Lo que ese LTV dice sobre el negocio:
-→ CAC maximo sostenible (LTV/3): $1.235
-→ CAC actual: $286 → estamos en ratio 12.9x
-→ Rango optimo de CAC (LTV/10 a LTV/5): $370 a $741
-→ Estamos bajo-invirtiendo en adquisicion desde la perspectiva financiera
+**Slide 10 — CTA:**
+"¿Cuál de estos 5 SOPs no tienes todavía?
 
-**Tweet 8:**
-Como mejorar el LTV sin subir precios:
-→ Cada mes adicional de retencion agrega $442 ($762 × 0.58)
-→ Cada upsell de Starter a Pro agrega $290 al ticket y proporciona al LTV
-→ Licencia de pauta incluida en el plan sube el ticket 30% sin cambiar produccion
-La palanca mas eficiente: reducir churn 2 puntos porcentuales.
+Empieza por el que más dolor te está causando esta semana.
 
-**Tweet 9:**
-LTV por segmento de cliente (nuestros datos):
-Clientes Starter: LTV $2.320 (churn rate mayor, retencion 6.3 meses)
-Clientes Pro: LTV $3.850 (retencion 8.8 meses)
-Clientes Premium: LTV $7.150 (churn rate minimo, retencion 11.4 meses)
-
-Cada plan tiene un LTV distinto. Eso deberia afectar donde pones el CAC.
-
-**Tweet 10:**
-La conclusion practica:
-Calcula tu LTV real por segmento de cliente.
-Compara con tu CAC.
-Si el ratio es menor a 3x en algun segmento, ese segmento es un pasivo.
-Si es mayor a 10x, estan subinvirtiendo en adquirir ese tipo de cliente.
-Los numeros dicen donde enfocar.
+Sígueme — @brianvelasquez.co
+Operaciones de agencia UGC desde las trincheras."
 
 ---
 
-### THREAD 05 — "Por que cobrar mas barato es el error mas caro"
+### CARRUSEL 05 — "Dashboard operativo del COO: qué medir"
 
-**Tweet 1 (hook):**
-Cobrar barato para ganar clientes no es estrategia. Es una trampa con cuatro efectos secundarios que multiplican el costo original.
-Hilo con los numeros:
+**Slide 1 — Portada:**
+"No midas todo. Mide esto.
+El dashboard exacto que reviso cada lunes como COO de UGC Colombia.
+Brian Velásquez"
 
-**Tweet 2:**
-Efecto 1: el margen se destruye antes de que notes el problema.
-Si bajas de $950 a $700 para cerrar un cliente, ese no es el costo.
-El costo es que el scope no cambia — 8 videos, 2 rondas de revision, coordinacion completa.
-A $700, el margen bruto de ese cliente cae de 50% a 32%. Con ese margen no cubre su parte del OPEX.
+**Slide 2:**
+"El error del dashboard sin foco:
+tener 40 métricas y no saber cuál importa esta semana.
 
-**Tweet 3:**
-Efecto 2: el cliente de precio bajo tiene expectativas del cliente de precio alto.
-La psicologia del cliente: "pague menos, entonces me van a dar menos".
-Y tiene razon. Pero como la agencia tiene que entregar lo mismo para no perderlo, entrega lo mismo a menor margen.
-Ese cliente es deficitario desde el mes 1.
+Un buen dashboard operativo tiene máximo 8 métricas.
+Si necesitas más de 8 para tomar una decisión, el problema no son los datos.
+Es la falta de claridad sobre qué estás midiendo."
 
-**Tweet 4:**
-Efecto 3: el precio bajo selecciona al tipo equivocado de cliente.
-En nuestra historica de 18 meses:
-Clientes que negociaron descuento: health score promedio 54 / churn rate 11% mensual
-Clientes a precio lista: health score promedio 74 / churn rate 4% mensual
-El cliente que empieza negociando precio nunca deja de negociar.
+**Slide 3:**
+"MÉTRICA 1 — Tasa de entrega a tiempo
 
-**Tweet 5:**
-Efecto 4: el LTV del cliente de precio bajo es radicalmente menor.
-Cliente Starter a $500 con churn del 11%: LTV = $500 × 0.40 × 9 meses = $1.800
-Cliente Pro a $950 con churn del 4%: LTV = $950 × 0.55 × 13 meses = $6.793
-Con el mismo CAC de $287, el cliente Pro genera 3.8x mas LTV.
+¿Qué mide?: % de videos entregados en la fecha comprometida con el cliente.
+Meta: 90% o más.
+Si cae: hay un problema de coordinación o de capacity.
+Frecuencia de revisión: semanal."
 
-**Tweet 6:**
-El precedente interno que destruye disciplina de pricing:
-Una vez que el equipo sabe que hay flexibilidad, cada propuesta empieza con la pregunta interna "cuanto podemos bajar si es necesario?"
-Eso es el fin del pricing basado en valor. El precio deja de ser una declaracion y se convierte en un punto de partida para la negociacion.
+**Slide 4:**
+"MÉTRICA 2 — Proyectos activos vs. capacidad
 
-**Tweet 7:**
-La alternativa al descuento de precio:
-En vez de bajar el numero, agrega valor sin bajar el margen:
-→ Licencia de pauta incluida el primer mes (valor $285, costo marginal bajo)
-→ Una pieza adicional de regalo (costo $55 de produccion, valor percibido $220)
-→ Sesion de estrategia de brief de 30 min (costo tu tiempo, valor percibido alto)
-El cliente siente que gano. Tu margen permanece intacto.
+¿Qué mide?: relación entre proyectos corriendo y horas reales disponibles del equipo.
+Meta: nunca por encima del 85% de capacidad.
+Si supera el 85%: pausa en nuevas ventas hasta liberar espacio.
+Frecuencia: lunes en la mañana, antes de cualquier otra cosa."
 
-**Tweet 8:**
-Cuando SI tiene sentido un descuento:
-→ Startup con muy poco budget pero alto potencial de caso de estudio publicable
-→ Cliente con historial de 3+ meses que quiere upgrade y necesita un empujon
-→ Pago anual anticipado a cambio de 10% de descuento (mejora cash flow)
-En todos los casos: hay algo especifico que recibes a cambio. No es descuento por desesperacion.
+**Slide 5:**
+"MÉTRICA 3 — Tiempo promedio de aprobación de cliente
 
-**Tweet 9:**
-La regla que usamos:
-Nunca bajar precio sin recibir algo a cambio.
-Pago anticipado. Referido comprometido. Caso de estudio. Contrato anual.
-El descuento como gesto de buena voluntad es el mas caro a largo plazo.
+¿Qué mide?: cuántos días tarda el cliente en aprobar un video desde que lo recibe.
+Meta: menos de 48h.
+Si supera 72h sistemáticamente: hay un problema de comunicación con ese cliente.
+Frecuencia: por proyecto."
 
-**Tweet 10:**
-El precio bajo no ahorra la relacion con el cliente. La inicia de la manera equivocada.
-Un cliente que entro por precio se va por precio.
-Un cliente que entro por valor, por el contrario, tiene una razon para quedarse que no depende de que el competidor sea mas barato.
-Esa es la diferencia entre un negocio de retainer sano y uno que siempre esta corriendo para llenar el balde que pierde por el otro lado.
+**Slide 6:**
+"MÉTRICA 4 — Incidentes por mes
 
----
+¿Qué mide?: número de problemas que requirieron intervención del COO.
+Meta: menos de 3 por mes.
+Si sube: revisar cuál SOP está fallando o si falta un SOP.
+Frecuencia: mensual con tendencia."
 
-### THREAD 06 — "Break-even para marcas ecommerce: calculo completo"
+**Slide 7:**
+"MÉTRICA 5 — NPS interno de creators
 
-**Tweet 1 (hook):**
-Cuantas ventas necesitas para que una campana de UGC llegue al break-even?
-El calculo que toda marca deberia hacer antes de firmar una propuesta. Hilo:
+¿Qué mide?: satisfacción del creator con el proceso de trabajo con la agencia.
+Cómo: encuesta mensual de 3 preguntas.
+Meta: puntaje por encima de 7/10.
+Si cae: hay fricción en el proceso que está afectando calidad."
 
-**Tweet 2:**
-Break-even de UGC no es ROAS de 1x.
-ROAS de 1x significa que el revenue iguala el gasto en ads.
-Pero la marca todavia tiene el costo del UGC y el costo de producir el producto.
-El break-even real incluye las tres variables.
+**Slide 8:**
+"MÉTRICAS 6, 7 y 8:
 
-**Tweet 3:**
-Formula:
-Break-even en revenue = (Inversion UGC + Inversion ads) / Margen de producto
+6. Contratos próximos a vencer (próximos 30 días)
+   → Para activar el proceso de renewal a tiempo.
 
-Ejemplo con numeros reales:
-UGC plan Starter: $500
-Ads Meta: $600
-Margen de producto cosmeticos: 62%
+7. Clientes en onboarding activo
+   → Para asegurar que ninguno está abandonado.
 
-Break-even = $1.100 / 0.62 = $1.774 en ventas necesarias
+8. Creators con más de 2 incidentes en 30 días
+   → Para intervenir antes de que se conviertan en problema."
 
-**Tweet 4:**
-En unidades vendidas:
-Si el ticket promedio de compra es $42:
-$1.774 / $42 = 42 unidades que necesitas vender ese mes
+**Slide 9:**
+"Cómo usarlo en la práctica:
 
-Para generar 42 ventas con un conversion rate de 2.1%:
-42 / 0.021 = 2.000 sesiones calificadas desde los ads
+Lunes 8am: abro el dashboard (15 minutos).
+Si hay una métrica en rojo: eso es lo primero del día.
+Si todo está en verde: sincronización con equipo y a ejecutar.
 
-Con $600 en ads y CPM de $5, alcanzas ~120.000 impresiones. Con CTR de 1.8% = 2.160 clics. Break-even alcanzable en el escenario base.
+El dashboard no reemplaza el juicio.
+Dirige la atención hacia donde más importa."
 
-**Tweet 5:**
-Tabla por margen de producto:
-Margen 40%: break-even = $2.750 en ventas (65 unidades)
-Margen 50%: $2.200 en ventas (52 unidades)
-Margen 60%: $1.833 en ventas (44 unidades)
-Margen 70%: $1.571 en ventas (37 unidades)
+**Slide 10 — CTA:**
+"8 métricas. 15 minutos cada lunes.
+Así mantengo el control operativo de una agencia con múltiples clientes activos.
 
-Cuanto mayor el margen, menor el break-even. Los productos de bajo margen necesitan mas volumen para justificar el UGC.
+¿Qué métrica no estás midiendo todavía?
 
-**Tweet 6:**
-Lo que el break-even no captura:
-→ Revenue organico del UGC (videos en perfil de marca)
-→ Impacto en CVR del sitio web (UGC en pagina de producto: +18-28% conversion)
-→ LTV del cliente adquirido (si compra 2 veces, el ROI real dobla)
-El break-even es el piso. El ROI real suele ser mayor.
-
-**Tweet 7:**
-Cuanto tiempo tarda en llegar el break-even:
-Con nuestros clientes DTC:
-Mes 1: 70-85% del break-even (optimizacion)
-Mes 2: 95-115% del break-even (algoritmo aprende)
-Mes 3: 125-175% del break-even (mejores creativos activos)
-
-El error clasico: evaluar el ROI en el mes 1 y cancelar. El mes 1 es la inversion en el aprendizaje del algoritmo.
-
-**Tweet 8:**
-Por que el break-even del mes 3 es mejor que el del mes 1:
-En el mes 1, el algoritmo de Meta no sabe quien convierte con tu producto.
-En el mes 3, ya tiene datos de 60 dias de optimizacion. El CPM baja, el CTR sube, el CPA cae.
-No es magia. Es la curva de aprendizaje del algoritmo — que requiere tiempo y consistencia.
-
-**Tweet 9:**
-Checklist antes de lanzar UGC + pauta:
-□ Margen de producto calculado (no el que crees, el real con COGS incluido)
-□ Ticket promedio de primera compra definido
-□ Break-even en unidades calculado
-□ Presupuesto para 3 meses confirmado (no solo mes 1)
-□ Metrica de exito definida antes de lanzar (ROAS, CPA, volumen)
-
-**Tweet 10:**
-Sin ese checklist, cualquier resultado en el mes 1 va a parecer insatisfactorio.
-Con ese checklist, sabes exactamente que esperar en cada mes y si el desempeno esta dentro del rango normal o tiene un problema real.
-La diferencia entre un cliente que abandona en el mes 1 y uno que llega al mes 3 con ROI positivo es casi siempre este checklist — no el UGC en si.
+Sígueme — @brianvelasquez.co"
 
 ---
 
-## 8. GUIONES YOUTUBE LARGOS (10 minutos cada uno)
+### CARRUSEL 06 — "Cómo escalar sin romper la calidad"
+
+**Slide 1 — Portada:**
+"Escalar no es aceptar más clientes.
+Es construir el sistema que los puede aguantar.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"La trampa del crecimiento rápido en agencias UGC:
+
+Mes 1: 2 clientes, todo perfecto.
+Mes 4: 6 clientes, algo se empieza a romper.
+Mes 6: 9 clientes, el equipo está agotado y los clientes se quejan.
+Mes 8: 6 clientes otra vez, porque se fueron 3.
+
+Esto no es mala suerte. Es escalar sin sistema."
+
+**Slide 3:**
+"Principio 1 — Antes de escalar, documenta lo que ya funciona.
+
+Si no puedes escribir en un documento cómo funciona tu proceso actual, no estás listo para escalarlo.
+
+Escalar un proceso no documentado multiplica el caos, no la eficiencia."
+
+**Slide 4:**
+"Principio 2 — Escala por capas, no de golpe.
+
+De 2 a 5 clientes: optimiza los procesos existentes.
+De 5 a 8: añade herramientas de coordinación.
+De 8 a 12: suma una persona al equipo con SOP documentado.
+De 12 en adelante: crea una estructura de roles con responsabilidades claras.
+
+Cada salto requiere un sistema diferente."
+
+**Slide 5:**
+"Principio 3 — El primer cuello de botella siempre es el COO.
+
+Si todo pasa por ti para ser aprobado, tú eres el límite de escala.
+La solución no es trabajar más horas.
+Es delegar con criterios claros: qué puede decidir el equipo sin preguntarme."
+
+**Slide 6:**
+"Principio 4 — La calidad se protege con checklist, no con intuición.
+
+Cuando somos 2 personas, la calidad depende del criterio de cada uno.
+Cuando somos 5, la calidad depende de los estándares escritos.
+
+El checklist de QA no baja el nivel del equipo.
+Lo hace consistente."
+
+**Slide 7:**
+"Principio 5 — Mide la calidad mientras creces.
+
+La señal de que estás escalando mal:
+la tasa de aprobación en primer envío baja.
+
+Si antes el 80% de videos se aprobaba sin revisión y ahora es el 50%,
+el equipo creció más rápido que el estándar."
+
+**Slide 8:**
+"Principio 6 — Los clientes más rentables sostienen el crecimiento.
+
+Antes de aceptar un cliente nuevo, pregunta:
+¿Este cliente consume más o menos recursos que el promedio?
+¿Su LTV justifica el costo de onboarding?
+
+No todos los clientes son buenos para escalar."
+
+**Slide 9:**
+"Los 6 principios para escalar sin romper la calidad:
+
+1. Documenta antes de escalar
+2. Escala por capas
+3. Elimina el cuello de botella del COO
+4. Checklist en lugar de intuición
+5. Mide calidad mientras creces
+6. Filtra clientes por rentabilidad real"
+
+**Slide 10 — CTA:**
+"¿En qué etapa de escala está tu agencia?
+Cuéntame en comentarios.
+
+Sígueme — @brianvelasquez.co
+Operaciones reales de agencia UGC en Colombia."
 
 ---
 
-### VIDEO YOUTUBE 01 — "La matematica real de una agencia UGC (honesto)"
+### CARRUSEL 07 — "Framework de decisión para priorizar urgencias"
 
-**Titulo:** La matematica real de una agencia UGC: cuanto gana, cuanto pierde, cuanto queda | Numeros reales 2026
+**Slide 1 — Portada:**
+"Cuando todo es urgente, nada es urgente.
+Este es el framework que uso para decidir qué va primero.
+Brian Velásquez — COO, UGC Colombia"
 
-**Thumbnail concept:**
-Brian mirando directamente a camara con cara seria (no sonriente). Texto superpuesto: "MRR $9.200 → Ganancia real: $704". Fondo oscuro, numeros en blanco y naranja. Sub-texto: "Los numeros que nadie publica".
+**Slide 2:**
+"El problema de las agencias sin framework de priorización:
 
-**Duracion objetivo:** 10-12 minutos
+El que grita más fuerte gana.
+El cliente más molesto recibe atención primero.
+El equipo opera reactivamente.
+El COO apaga incendios todo el día.
 
-**Estructura / Chapters:**
+Y al final del día, lo importante quedó sin hacer."
 
-00:00 - 00:45 Hook y promesa
-00:45 - 02:30 Contexto: que es una agencia UGC boutique
-02:30 - 04:30 El revenue real vs el revenue que parece
-04:30 - 06:00 COGS: cuanto cuesta entregar el servicio
-06:00 - 07:30 OPEX: cuanto cuesta operar
-07:30 - 08:45 EBITDA real y lo que significa
-08:45 - 10:00 Palancas de mejora y conclusion
-10:00 - 10:30 CTA
+**Slide 3:**
+"La base: la Matriz de Eisenhower aplicada a agencias UGC
 
----
+Eje X: Urgente vs. No urgente
+Eje Y: Importante vs. No importante
 
-**GUION PALABRA POR PALABRA:**
+4 cuadrantes:
+— Urgente + Importante: hacer YA
+— Importante + No urgente: agendar con fecha
+— Urgente + No importante: delegar
+— Ni urgente ni importante: eliminar"
 
-**[00:00 - 00:45] HOOK**
+**Slide 4:**
+"CUADRANTE 1 — Urgente + Importante
 
-"Voy a hablar de lo que ninguna agencia de UGC publica: los numeros reales. No el MRR. No el revenue total. El margen. El EBITDA. Lo que queda de verdad despues de pagar a los creadores, las plataformas, el equipo y la operacion.
+Ejemplos reales:
+— Cliente escala queja a CEO
+— Entrega vencida sin notificación al cliente
+— Creator desaparece día del shoot
+— Error en video ya publicado
 
-Si tienes o quieres lanzar una agencia de contenido en LATAM, este video es el que debiste ver antes. Quedense."
+Acción: yo lo atiendo en los próximos 30 minutos. Sin excepción."
 
-**[00:45 - 02:30] CONTEXTO**
+**Slide 5:**
+"CUADRANTE 2 — Importante + No urgente
 
-"Primero, contexto rapido sobre que tipo de agencia estamos hablando para que los numeros tengan sentido.
+Ejemplos reales:
+— Renewal de cliente en 3 semanas
+— Documentar SOP que se ejecuta bien pero está en la cabeza
+— Onboarding de nuevo creator al roster
+— Revisión trimestral de capacity
 
-Una agencia UGC boutique — como UGC Colombia — opera con estas caracteristicas: tickets de $500 a $1.500 USD mensuales, clientes en retainer (no proyectos puntuales), equipo lean de 3 a 5 personas, creadores externos en pool (no empleados), y operacion 100% remote.
+Acción: agendar con fecha exacta esta semana. No 'pronto'."
 
-Este no es el modelo de una agencia grande con 50 empleados. Es el modelo que la mayoria de founders de agencias de contenido estan corriendo o planean correr.
+**Slide 6:**
+"CUADRANTE 3 — Urgente + No importante
 
-Los numeros que voy a compartir son propios — de nuestra operacion en Q1 2026. No son benchmarks de un blog. Son los numeros que reviso cada semana."
+Ejemplos reales:
+— Solicitud de factura urgente (puede ir a finanzas)
+— Pregunta de creator sobre horario de shoot (puede responder coordinador)
+— Cliente pregunta algo que está en el reporte que ya envié
 
-**[02:30 - 04:30] REVENUE REAL VS EL QUE PARECE**
+Acción: delegar inmediatamente. Yo no toco esto."
 
-"Empecemos por el revenue. Nuestro MRR al cierre de Q1 fue $9.200 cobrado. Cobrado — no facturado. La diferencia importa: una factura emitida que el cliente no ha pagado no es MRR. Es una promesa.
+**Slide 7:**
+"CUADRANTE 4 — Ni urgente ni importante
 
-$9.200 suena bien. Pero el MRR es el numero mas vanidoso de todos en un negocio de servicios. El que importa es el margen.
+Ejemplos reales:
+— Revisar redes sociales de la competencia 'por si acaso'
+— Reunión interna sin agenda clara
+— Responder mensajes de bajo impacto fuera de horario
+— Optimizar una plantilla que funciona bien
 
-Desglose del MRR por plan:
-- 4 clientes en plan Starter ($500 c/u): $2.000
-- 5 clientes en plan Pro ($950 c/u): $4.750
-- 2 clientes en plan Premium ($1.500 c/u): $3.000
-- Adicionales (licencias, formatos extra): $450
-Total: $10.200 facturado / $9.200 cobrado (90% de cobranza efectiva — el 10% esta en proceso de cobro)
+Acción: eliminar. No es prioridad de ningún tipo."
 
-El 90% de cobranza efectiva es un buen indicador. Con nuestro sistema de dunning automatico via Jarvis y cobro anticipado en el mes 1, el DSO — dias promedio de cobro — esta en 11 dias. Por debajo del target de 15.
+**Slide 8:**
+"Cómo aplicarlo en tiempo real:
 
-Hasta aqui el numero bonito. Ahora el desglose."
+Cuando llega una solicitud, me hago dos preguntas:
+1. ¿Si no lo atiendo hoy, hay consecuencia real para el cliente o el negocio?
+2. ¿Soy yo la persona que tiene que resolverlo?
 
-**[04:30 - 06:00] COGS**
+Si la respuesta a las dos es sí: lo hago yo, ahora.
+Si no: delego o agendo."
 
-"COGS: Cost of Goods Sold. En una agencia de servicios, son los costos directos de entregar el servicio. Lo que se gasta para producir los videos.
+**Slide 9:**
+"El resultado de usar este framework consistentemente:
 
-Desglose de COGS para $9.200 de revenue:
+— Menos del 20% de mi día es reacción pura.
+— El 80% es ejecución planificada.
+— Los clientes perciben más control y proactividad.
+— El equipo tiene más autonomía porque sabe qué puede resolver solo.
 
-Pagos a creadores: Este es el costo mas grande. Con 12 clientes activos y un mix de planes, produjimos aproximadamente 84 videos en el trimestre (promedio 28 videos por mes). Tarifa promedio ponderada por video: $46 USD (mix de tier B y tier A LATAM). Total pagos a creadores: $3.864. Eso es el 42% del revenue.
+No es un sistema perfecto. Es un sistema que funciona."
 
-Comisiones de pago (Stripe, Wise, PayPal): Cada transaccion tiene un costo. Stripe cobra 2.9% + $0.30 por transaccion. Con 12 cobros mensuales y tarifa promedio de $767 (incluye adicionales), el costo mensual de procesamiento es aproximadamente $276. Eso es el 3%.
+**Slide 10 — CTA:**
+"¿Cuánto de tu día es apagar incendios que podrían haberse evitado?
 
-Envios de producto: No todos los proyectos requieren envio — algunos clientes envian el producto directamente al creador. De los que pasan por nosotros, el costo promedio es $230 al mes. El 2.5%.
+Este framework te devuelve el control.
 
-Hosting y almacenamiento: Videos de alta calidad son archivos pesados. Bunny CDN + Google Drive Business prorrateado: $46 al mes. El 0.5%.
-
-Total COGS: $4.416. Eso es el 48% del revenue.
-Margen bruto: $9.200 - $4.416 = $4.784. El 52%."
-
-**[06:00 - 07:30] OPEX**
-
-"Ahora el OPEX. Gastos operativos que no son COGS — lo que cuesta operar la agencia independientemente de cuantos clientes tiene.
-
-Sueldos del equipo: Este es el gasto mas significativo. Con 3 personas: un coordinador de operaciones part-time, un finance lead part-time (soy yo), y el tiempo del CEO valorizado. Total mensual: $3.200.
-
-Importante: el sueldo del founder muchas veces no aparece en el OPEX de agencias pequenas — el founder se lleva lo que queda. Nosotros si lo valorizamos porque si no, el EBITDA parece mejor de lo que es.
-
-Tooling: Supabase, n8n, Notion, Stripe (quota fija), herramientas editoriales, Calendly, PandaDoc. Total: $380 al mes.
-
-Contabilidad y legal: Contador externo mensual, revision de contratos con creadores. $200 al mes.
-
-Marketing: Contenido de Brian en LinkedIn, Alexander en TikTok. Produccion basica. $300 al mes (sin paid ads — el paid media va como CAC aparte cuando aplica).
-
-Miscelaneos: Transferencias, equipamiento prorrateado, varios. $120.
-
-Total OPEX mensual: $4.200."
-
-**[07:30 - 08:45] EBITDA REAL**
-
-"Ahora el numero que todos quieren saber.
-
-EBITDA = Margen bruto - OPEX
-$4.784 - $4.200 = $584 de EBITDA mensual.
-
-Con $9.200 de MRR, el EBITDA real es $584. Eso es un margen neto del 6.3%.
-
-No es un numero malo. Pero tampoco es la agencia millonaria que suena el MRR.
-
-¿Que significa en practica?
-
-El negocio es viable — genera mas de lo que gasta operativamente. Pero el founder no se esta enriqueciendo con $9.200 de MRR. El sueldo esta valorizado en el OPEX, pero no hay gran excedente todavia.
-
-Para que el EBITDA sea realmente atractivo — digamos $3.000-4.000/mes — el MRR necesita estar en el rango de $16.000-18.000. Ahi la estructura de costos no crece proporcionalmente al revenue (los sueldos no se doblan cuando el MRR se dobla) y el margen neto sube a 18-25%.
-
-Ese es el objetivo real: no el primer millon de MRR. El primer $18.000 donde el negocio empieza a generar excedente real."
-
-**[08:45 - 10:00] PALANCAS Y CONCLUSION**
-
-"Cuales son las tres palancas para mejorar este EBITDA sin doblar el MRR?
-
-Palanca 1: Reducir churn. Cada cliente que retiene un mes adicional genera $762 × 0.52 de margen bruto adicional = $396. Con 12 clientes, bajar el churn de 7% a 4% mensual representa $1.300 de EBITDA adicional al mes sin un solo cliente nuevo.
-
-Palanca 2: Mix hacia Premium. Los clientes Premium tienen un margen bruto porcentual mayor porque los costos fijos de coordinacion no crecen linealmente con el numero de piezas. Mover 2 clientes Pro a Premium agrega $1.000 de revenue con un incremento de COGS menor al 40%.
-
-Palanca 3: Eficiencia operativa en coordinacion. Cada hora de coordinacion ahorrada por mejores briefs y procesos mas claros reduce el costo efectivo del equipo. Una mejora del 15% en eficiencia de coordinacion equivale a $480 de OPEX recuperado mensualmente.
-
-La conclusion honesta: una agencia UGC boutique con $9.200 de MRR en Q1 de su primer año de operacion es un negocio viable pero no holgado. El EBITDA de $584 dice que la estructura funciona y que hay margen de crecimiento. Pero tambien dice que el camino a la rentabilidad real requiere mas retencion, mejor mix de planes y eficiencia operativa — no solo mas clientes nuevos.
-
-El MRR es donde empiezas a contar. El EBITDA es donde el negocio de verdad empieza."
-
-**[10:00 - 10:30] CTA**
-
-"Si este tipo de contenido financiero aplicado a agencias de contenido te sirve, suscribete al canal. Cada semana publicamos un video de este tipo — sin hype, con numeros reales.
-
-El proximo: la calculadora de ROI de UGC paso a paso. Con el template en Google Sheets que usamos con cada cliente. Te veo ahi."
+Sígueme — @brianvelasquez.co
+Comparte esto con alguien que opera una agencia o equipo."
 
 ---
 
-### VIDEO YOUTUBE 02 — "Calculadora de ROI UGC paso a paso"
+### CARRUSEL 08 — "QA de contenido: checklist del COO"
 
-**Titulo:** Calculadora de ROI de UGC paso a paso: como medir si tu inversion en contenido realmente funciona | 2026
+**Slide 1 — Portada:**
+"Antes de que cualquier video llegue al cliente, pasa por estas 9 verificaciones.
+El checklist de QA que uso en UGC Colombia.
+Brian Velásquez — COO"
 
-**Thumbnail concept:**
-Pantalla de Google Sheets visible con tabla de calculo. Brian apuntando a un numero en rojo y otro en verde. Texto: "CALCULA EL ROI REAL (no el que te dice tu agencia)". Fondo oscuro.
+**Slide 2:**
+"Por qué el QA es trabajo del COO, no del cliente:
 
-**Duracion objetivo:** 10-12 minutos
+Si el cliente es quien detecta el error, ya fallamos.
+El QA interno existe para que el cliente nunca tenga que hacer observaciones de calidad básica.
+Solo feedback estratégico."
 
+**Slide 3:**
+"VERIFICACIÓN 1 — ¿El video cumple el objetivo del brief?
+
+No 'se ve bien'. ¿Cumple el objetivo declarado?
+Si el brief dice 'generar deseo de compra en los primeros 5 segundos', ¿lo hace?
+
+Esta es la pregunta más importante. Va primero."
+
+**Slide 4:**
+"VERIFICACIONES 2 y 3:
+
+2. ¿El formato es correcto?
+   Proporción (9:16, 1:1, 16:9), resolución mínima 1080p, duración dentro del rango acordado.
+
+3. ¿El mensaje clave aparece en los primeros 3 segundos?
+   En plataformas cortas, si el hook no está en los primeros 3 segundos, el video no funciona."
+
+**Slide 5:**
+"VERIFICACIONES 4 y 5:
+
+4. ¿El audio es limpio?
+   Sin ruido de fondo invasivo, sin cortes de audio, volumen estable.
+
+5. ¿El CTA es visible y claro?
+   Si el brief incluía un llamado a la acción, ¿aparece? ¿Es legible? ¿Está en el momento correcto?"
+
+**Slide 6:**
+"VERIFICACIONES 6 y 7:
+
+6. ¿El creator no menciona nada que no estaba en el brief?
+   Claims no autorizados, menciones de competidores, información incorrecta del producto.
+
+7. ¿La iluminación y encuadre son profesionales?
+   No perfección de cine. Estándar mínimo de marca: sin sombras duras en cara, sin fondo caótico sin intención."
+
+**Slide 7:**
+"VERIFICACIONES 8 y 9:
+
+8. ¿El video tiene la energía correcta para la marca?
+   Un video para una marca fitness no puede tener el mismo tono que uno para una marca de seguros.
+
+9. ¿El archivo es el correcto?
+   Nombre de archivo según nomenclatura acordada, formato de archivo correcto (.mp4, .mov), peso adecuado para la plataforma."
+
+**Slide 8:**
+"Qué hacer cuando falla una verificación:
+
+No se manda al cliente con nota de advertencia.
+Se devuelve al creator con observación específica.
+
+Formato de observación:
+'Minuto 0:04, el CTA no es audible. Necesitamos regrabación de ese segmento o texto overlay que lo refuerce.'
+
+Específico. Accionable. Sin ambigüedad."
+
+**Slide 9:**
+"Cuánto tarda el QA:
+
+Video de 30-60 segundos: 8-12 minutos de revisión.
+Si falla y necesita ajuste: 48h adicionales máximo.
+Si falla dos veces el mismo punto: conversación con el creator sobre el estándar.
+
+El QA no es opcional. Es lo que separa una agencia de un freelancer."
+
+**Slide 10 — CTA:**
+"¿Tienes un checklist de QA o confías en que el cliente lo detecte?
+
+Comparte esto con tu equipo de producción.
+
+Sígueme — @brianvelasquez.co
+Estándares operativos de agencia UGC, desde adentro."
+
+---
+
+### CARRUSEL 09 — "Coordinación: 30 creators + 5 equipo + 10 clientes"
+
+**Slide 1 — Portada:**
+"30 creators. 5 personas en el equipo. 10 clientes activos.
+Así coordinamos todo sin perder el hilo.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"El problema de coordinación a esta escala no es la cantidad.
+Es la multiplicidad de relaciones.
+
+30 creators × 10 clientes = hasta 300 combinaciones posibles de asignación.
+Si no tienes un sistema de asignación claro, el caos es matemáticamente inevitable."
+
+**Slide 3:**
+"SISTEMA 1 — Roster categorizado de creators
+
+Cada creator tiene un perfil interno con:
+— Categorías en las que trabaja bien (lifestyle, tech, belleza, etc.)
+— Historial de puntualidad (% de entregas a tiempo)
+— Clientes con los que ha trabajado y resultado
+— Disponibilidad declarada por mes
+
+La asignación no es al azar. Es matching entre creator y proyecto."
+
+**Slide 4:**
+"SISTEMA 2 — Un tablero por cliente, no un tablero por creator
+
+El error común: tablero por creator donde se pierden los clientes.
+
+Nosotros operamos por cliente.
+Cada cliente tiene su tablero con todos sus proyectos activos.
+Dentro de cada proyecto: el creator asignado, el estado, la fecha de entrega.
+
+El cliente siempre está en el centro."
+
+**Slide 5:**
+"SISTEMA 3 — Comunicación en tres canales separados
+
+Canal 1: equipo interno (decisiones, coordinación, escalamientos)
+Canal 2: creators (briefs, confirmaciones, feedback)
+Canal 3: clientes (actualizaciones, aprobaciones, reportes)
+
+Mezclar estos canales genera confusión sobre quién sabe qué.
+Cada conversación en su canal correcto, siempre."
+
+**Slide 6:**
+"SISTEMA 4 — Automatización de recordatorios
+
+72h antes de cada entrega: recordatorio automático al creator.
+24h antes: confirmación de que todo está en orden.
+Si no responde en 2h: yo llamo.
+
+No espero a que el creator recuerde. El sistema lo gestiona.
+Yo intervengo solo cuando el sistema no es suficiente."
+
+**Slide 7:**
+"SISTEMA 5 — Reunión semanal de equipo: 15 minutos
+
+No 1 hora. 15 minutos. Con agenda fija.
+
+¿Qué está bloqueado esta semana?
+¿Qué entrega está en riesgo?
+¿Necesita alguien algo del COO para desbloquear?
+
+Sin esto, los problemas se saben el día que explotan."
+
+**Slide 8:**
+"SISTEMA 6 — Creator pool de reserva
+
+Para cada categoría, tenemos mínimo 2 creators de respaldo.
+Si el creator principal falla, el proyecto no muere.
+
+Este pool de reserva no se activa frecuentemente.
+Pero cuando se necesita, salva proyectos y relaciones con clientes."
+
+**Slide 9:**
+"Los 6 sistemas en resumen:
+
+1. Roster categorizado de creators
+2. Tablero por cliente, no por creator
+3. Comunicación en tres canales separados
+4. Automatización de recordatorios
+5. Reunión semanal de 15 minutos
+6. Creator pool de reserva
+
+Con esto, 30 creators y 10 clientes son manejables."
+
+**Slide 10 — CTA:**
+"¿Cuál de estos sistemas te falta?
+
+La coordinación a escala no es imposible.
+Es un problema de diseño de sistemas, no de talento individual.
+
+Sígueme — @brianvelasquez.co"
+
+---
+
+### CARRUSEL 10 — "Proceso de renewal con 80% retención"
+
+**Slide 1 — Portada:**
+"El 80% de nuestros clientes renueva.
+Este es el proceso exacto que lo hace posible.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"La mayoría de agencias piensan en el renewal cuando el contrato ya venció.
+
+En ese punto ya es demasiado tarde para ser proactivo.
+Ya eres reactivo.
+Y el cliente que estaba pensando en irse, ya tomó la decisión."
+
+**Slide 3:**
+"SEMANA -4 (30 días antes del vencimiento)
+
+Análisis interno privado:
+— ¿Entregamos lo comprometido?
+— ¿Hubo incidentes? ¿Cómo los manejamos?
+— ¿El cliente ha sido comunicativo o distante últimamente?
+— ¿Qué podríamos hacer diferente?
+
+Esta conversación interna es el insumo para todo lo que sigue."
+
+**Slide 4:**
+"SEMANA -3 — Reporte de impacto personalizado
+
+No un PDF de template. Un documento construido con:
+— Videos entregados vs. comprometidos
+— Métricas de desempeño disponibles (views, engagement, conversión si el cliente comparte)
+— Los 2-3 videos de mejor desempeño con análisis
+— Una propuesta concreta de lo que haríamos diferente en el próximo período
+
+El cliente que recibe este documento siente que alguien está mirando su negocio."
+
+**Slide 5:**
+"SEMANA -2 — Reunión de conversación (no de ventas)
+
+Preguntas que hacemos:
+'¿Qué estás viendo en tu negocio este trimestre?'
+'¿Hacia dónde va la marca los próximos meses?'
+'¿Qué tipo de contenido sientes que necesitas explorar?'
+
+Escuchamos 70%. Hablamos 30%.
+El siguiente contrato se construye desde esta conversación."
+
+**Slide 6:**
+"SEMANA -1 — Propuesta formal personalizada
+
+No la misma propuesta de siempre.
+Una propuesta que refleja lo que el cliente dijo en la reunión anterior.
+
+Opciones: mínimo dos alternativas.
+Una de continuidad. Una de evolución.
+
+El cliente que tiene opciones se siente en control.
+El que recibe una sola alternativa siente que lo están presionando."
+
+**Slide 7:**
+"DÍA DEL VENCIMIENTO
+
+El contrato ya está firmado o en revisión final.
+No llegamos ese día a preguntar si van a seguir.
+
+Si llegamos el día del vencimiento sin una respuesta, algo falló en las semanas anteriores."
+
+**Slide 8:**
+"Por qué funciona el 80% de retención:
+
+No es por precio competitivo.
+No es por tener el mejor contenido del mercado.
+
+Es porque el cliente siente que hay alguien mirando su negocio proactivamente.
+Eso es lo que ninguna plataforma de freelancers puede dar.
+
+La retención se gana con gestión, no con descuentos."
+
+**Slide 9:**
+"El proceso en 4 semanas:
+
+Semana -4: análisis interno
+Semana -3: reporte de impacto al cliente
+Semana -2: reunión de conversación
+Semana -1: propuesta personalizada
+Día 0: firma
+
+Sin esto, el renewal es ruleta rusa."
+
+**Slide 10 — CTA:**
+"¿Tu proceso de renewal empieza antes de que el contrato venza o el mismo día?
+
+Este proceso es lo que más ha impactado nuestros números de retención.
+
+Sígueme — @brianvelasquez.co
+Operaciones reales de agencia UGC, desde adentro."
+
+---
+
+### CARRUSEL 11 — "Red flags operativas: 5 señales de explosión"
+
+**Slide 1 — Portada:**
+"Antes de que una agencia explote, manda señales.
+Estas 5 señales operativas me indican que algo está a punto de romperse.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"Una agencia no explota de un día para otro.
+Se fractura lentamente.
+
+El problema es que cuando el fractura es visible, ya llevas semanas acumulando presión.
+
+Estas señales aparecen semanas antes del colapso.
+Si las reconoces a tiempo, todavía puedes actuar."
+
+**Slide 3:**
+"RED FLAG 1 — Los reportes están llegando tarde de forma sistemática
+
+Un reporte tardío aislado es un incidente.
+Dos reportes tardíos seguidos son una tendencia.
+Tres seguidos son una señal de que el equipo está sobrecargado o desmotivado.
+
+Acción: revisar capacity real y redistribuir antes de que el cliente lo note."
+
+**Slide 4:**
+"RED FLAG 2 — Los clientes preguntan antes de que nosotros avisemos
+
+Si el cliente escribe '¿cómo va mi video?' antes de que yo le haya dado una actualización, perdí el control de la comunicación.
+
+Un cliente que pregunta es un cliente que empieza a dudar.
+Un cliente que duda, busca alternativas."
+
+**Slide 5:**
+"RED FLAG 3 — El equipo trabaja fines de semana sin que nadie lo pidió
+
+Si el equipo trabaja sábados y domingos de manera habitual sin que sea un proyecto especial, no es dedicación.
+Es un síntoma de que el capacity está mal calculado o que el proceso tiene ineficiencias.
+
+Acción: revisar dónde se está perdiendo tiempo en la semana."
+
+**Slide 6:**
+"RED FLAG 4 — Los creators entregan con calidad decreciente
+
+Si el promedio de videos aprobados en primer envío bajó del 80% al 60%, no es que los creators sean peores.
+Probablemente los briefs son menos claros, los plazos son más cortos o la comunicación se degradó.
+
+El creator entrega lo que el sistema le permite entregar."
+
+**Slide 7:**
+"RED FLAG 5 — El COO está atendiendo cosas que debería resolver el equipo
+
+Si yo estoy respondiendo preguntas de clientes que debería contestar el coordinador, o aprobando cosas que el equipo debería poder decidir, no hay un problema del equipo.
+
+Hay un problema de delegación y confianza que necesito resolver yo."
+
+**Slide 8:**
+"Qué hacer cuando aparece una red flag:
+
+No ignorarla esperando que se resuelva sola.
+No hacer una reunión de urgencia que asuste al equipo.
+
+Documentar: ¿qué exactamente está pasando?
+Diagnosticar: ¿dónde está el origen real?
+Intervenir: cambio específico en proceso, responsable o herramienta.
+Medir: ¿la intervención está funcionando en 2 semanas?"
+
+**Slide 9:**
+"Las 5 red flags en resumen:
+
+1. Reportes sistemáticamente tardíos
+2. Clientes que preguntan antes de que avisemos
+3. Equipo trabajando fines de semana sin pedírselo
+4. Calidad decreciente de entrega de creators
+5. COO atendiendo lo que debería resolver el equipo
+
+Si tienes dos o más al mismo tiempo, prioridad máxima."
+
+**Slide 10 — CTA:**
+"¿Cuántas de estas red flags tiene tu operación hoy?
+
+No esperes a que explote. Actúa mientras todavía hay tiempo.
+
+Sígueme — @brianvelasquez.co
+Señales operativas reales desde adentro de una agencia UGC."
+
+---
+
+### CARRUSEL 12 — "Anatomía de un proyecto UGC exitoso (timeline)"
+
+**Slide 1 — Portada:**
+"Un proyecto UGC exitoso no es suerte.
+Es un timeline de 21 días ejecutado con precisión.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"La mayoría de proyectos UGC fallan por una razón simple:
+nadie sabe exactamente qué pasa cuándo.
+
+El cliente asume que el video estará listo pronto.
+El creator asume que tiene tiempo.
+El equipo asume que el brief está claro.
+
+Cuando todo el mundo asume, algo falla."
+
+**Slide 3:**
+"DÍAS 1-3 — Brief y aprobación
+
+Día 1: brief interno completo construido por el equipo.
+Día 2: brief enviado al cliente para revisión.
+Día 3: brief aprobado por el cliente (con deadline firme).
+
+Si el cliente no aprueba en el día 3, el proyecto se recorre.
+El timeline es responsabilidad compartida."
+
+**Slide 4:**
+"DÍAS 4-6 — Asignación y preparación del creator
+
+Día 4: brief enviado al creator asignado.
+Día 5: confirmación del creator + preguntas resueltas.
+Día 6: producto o acceso a activos digitales confirmado como recibido.
+
+Si el creator no confirma en el día 5, llamada directa.
+No esperamos al día 6 para enterarnos."
+
+**Slide 5:**
+"DÍAS 7-12 — Período de producción
+
+El creator tiene 6 días para grabar.
+No 6 días de plazo final. 6 días con un check-in en el día 9.
+
+Día 9: ¿cómo va la grabación? ¿Necesitas algo?
+Día 12 a las 6pm: entrega del video crudo.
+
+Si no llega a las 6pm del día 12: protocolo de incidente activado."
+
+**Slide 6:**
+"DÍAS 13-14 — QA interno
+
+Día 13: revisión contra checklist de 9 puntos.
+Si pasa: a edición o entrega directa.
+Si no pasa: observación específica al creator con plazo de 24h para corrección.
+
+Día 14: video aprobado internamente, listo para cliente."
+
+**Slide 7:**
+"DÍAS 15-17 — Revisión del cliente
+
+Día 15 9am: video enviado al cliente con resumen del brief cumplido.
+Plazo de revisión: 48h (hasta día 17 9am).
+
+Política de revisiones: una revisión incluida.
+Segunda revisión: costo adicional si el cambio no estaba en el brief original."
+
+**Slide 8:**
+"DÍAS 18-21 — Ajuste, entrega final y cierre
+
+Día 18-19: ajuste si fue solicitado dentro de los parámetros del brief.
+Día 20: entrega final al cliente con nota de cierre.
+Día 21: actualización del tablero, pago al creator procesado, registro del proyecto cerrado.
+
+Proyecto cerrado limpiamente. El cliente ya sabe qué esperar del próximo."
+
+**Slide 9:**
+"Por qué 21 días y no menos:
+
+Hemos probado timelines de 10 y 14 días.
+El resultado: más errores, más re-trabajos, más clientes molestos.
+
+21 días bien ejecutados producen mejores resultados que 10 días apresurados.
+
+El cliente que quiere un video en 5 días no es necesariamente un mejor cliente.
+Es un cliente que necesita educación sobre el proceso."
+
+**Slide 10 — CTA:**
+"¿Tu proceso de producción UGC tiene un timeline así de claro?
+O ¿cada proyecto es una aventura diferente?
+
+Sígueme — @brianvelasquez.co
+El timeline completo, disponible para quien lo pida en comentarios."
+
+---
+
+### CARRUSEL 13 — "Mano derecha del CEO: lo que realmente hago"
+
+**Slide 1 — Portada:**
+"'Mano derecha del CEO' suena a título. En realidad es una responsabilidad.
+Esto es lo que hago realmente.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"Lo que la gente imagina que hace la mano derecha del CEO:
+
+— Estar en todas las reuniones importantes
+— Tomar decisiones grandes
+— Representar al CEO cuando no está
+
+Lo que realmente hago la mayor parte del tiempo:
+asegurarme de que lo que el CEO prometió se pueda entregar."
+
+**Slide 3:**
+"FUNCIÓN 1 — Filtro de viabilidad operativa
+
+Antes de que el CEO comprometa algo con un cliente o aliado, yo evalúo:
+¿Tenemos la capacidad? ¿El proceso existe? ¿En qué plazo es realmente posible?
+
+Si no es viable, lo digo antes de que el compromiso se haga.
+Un 'no' a tiempo vale más que un 'sí' que no se puede cumplir."
+
+**Slide 4:**
+"FUNCIÓN 2 — Traductor entre visión y ejecución
+
+El CEO piensa en grande y rápido.
+Mi trabajo es descomponer esa visión en pasos concretos:
+¿Quién lo hace? ¿Cuándo? ¿Con qué recursos? ¿Cómo se mide el éxito?
+
+Sin este paso, la visión se queda en conversación."
+
+**Slide 5:**
+"FUNCIÓN 3 — Gestor de las conversaciones difíciles
+
+El CEO no debería ser quien le diga a un creator que no puede trabajar más con él.
+No debería ser quien tenga la conversación de alerta con un cliente que está por irse.
+
+Esas conversaciones son mías.
+Las tengo con respeto, con claridad y con el objetivo de resolver, no de confrontar."
+
+**Slide 6:**
+"FUNCIÓN 4 — Guardián de los estándares
+
+El CEO lanza iniciativas. Yo aseguro que se ejecuten con el estándar correcto.
+
+Si hay un nuevo servicio, yo construyo el proceso antes de que salga al mercado.
+Si hay un cliente nuevo, yo reviso que el onboarding esté listo.
+
+La reputación de la agencia vive en los detalles de la ejecución."
+
+**Slide 7:**
+"FUNCIÓN 5 — Bloque de información
+
+El CEO no necesita saber todo lo que pasa operativamente.
+Necesita saber lo que requiere su atención o decisión.
+
+Yo filtro: esto lo resuelvo yo, esto necesita al CEO.
+Sin este filtro, el CEO opera como COO y pierde tiempo estratégico."
+
+**Slide 8:**
+"Lo más difícil del rol:
+
+No es gestionar la operación.
+Es gestionar la dinámica con el CEO.
+
+Hay decisiones en las que no estoy de acuerdo.
+Las digo claramente en privado. Una vez.
+Luego ejecuto lo que se decidió con el mismo compromiso que si fuera mi idea.
+
+La lealtad al proceso es parte del rol."
+
+**Slide 9:**
+"Lo que nadie te dice sobre ser mano derecha:
+
+— No recibes todo el crédito, pero recibes toda la responsabilidad cuando algo falla.
+— Tu éxito se mide en el éxito del CEO y la agencia, no en el tuyo individual.
+— Es el rol más invisible y más crítico de la empresa.
+— Y si lo haces bien, la agencia escala. Si no, el CEO hace todo y la agencia no escala."
+
+**Slide 10 — CTA:**
+"¿Eres COO, director de operaciones o mano derecha de alguien?
+
+Este es el rol que más necesita contenido real y menos glamour.
+
+Sígueme — @brianvelasquez.co
+Operaciones reales. Sin filtro."
+
+---
+
+### CARRUSEL 14 — "Build-in-public: de $0 a $X MRR (números reales)"
+
+**Slide 1 — Portada:**
+"Nadie en LATAM publica sus números reales de agencia UGC.
+Nosotros sí.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"Por qué publicar los números:
+
+No para impresionar. Para ser útiles.
+
+Si alguien está construyendo una agencia UGC en Colombia, merece saber cuánto tarda en funcionar, cuánto cuesta operar y cuándo realmente se vuelve rentable.
+
+Eso no existe en ningún manual. Nosotros lo vivimos."
+
+**Slide 3:**
+"TRIMESTRE 1 — Arranque (enero-marzo 2025)
+
+MRR: $0 → $2.400 USD
+Clientes activos: 0 → 2
+Equipo: 2 personas
+Costos operativos: $1.100 USD/mes (herramientas, pagos a creators, operación básica)
+Margen real: negativo los primeros 2 meses, positivo en el mes 3
+
+Aprendizaje clave: los primeros dos clientes salen de relaciones previas, no de marketing."
+
+**Slide 4:**
+"TRIMESTRE 2 — Tracción (abril-junio 2025)
+
+MRR: $2.400 → $6.800 USD
+Clientes activos: 2 → 6
+Equipo: 2 → 3 personas
+Costos operativos: $2.400 USD/mes
+Margen real: 35-40% después de costos
+
+Aprendizaje clave: el salto de 2 a 6 clientes exigió documentar procesos urgentemente."
+
+**Slide 5:**
+"TRIMESTRE 3 — Consolidación (julio-septiembre 2025)
+
+MRR: $6.800 → $9.200 USD
+Clientes activos: 6 → 8
+Equipo: 3 personas (mismo equipo)
+Costos operativos: $2.800 USD/mes
+Margen real: 42-47%
+
+Aprendizaje clave: la eficiencia operativa aumentó más que el revenue. Eso es lo que permite escalar."
+
+**Slide 6:**
+"TRIMESTRE 4 — Escala controlada (oct-dic 2025)
+
+MRR: $9.200 → $13.500 USD
+Clientes activos: 8 → 10
+Equipo: 3 → 4 personas
+Costos operativos: $3.500 USD/mes
+Margen real: 48-52%
+
+Aprendizaje clave: por encima del 45% de margen, cualquier nuevo cliente es puro leverage."
+
+**Slide 7:**
+"Q1 2026 — Estado actual
+
+MRR: $13.500 → $16.200 USD (proyección de cierre)
+Clientes activos: 10 + 2 en onboarding
+Equipo: 4 personas + 28 creators activos en roster
+Costos operativos: $4.100 USD/mes
+Margen objetivo: 50%+
+
+Foco del trimestre: retención del 80%+ y construcción de el primer servicio empaquetado escalable."
+
+**Slide 8:**
+"Lo que más costó:
+
+No fue el dinero. Fueron las decisiones de no escalar cuando no había sistema.
+
+Hubo tres momentos donde pudimos haber aceptado más clientes.
+No lo hicimos porque el proceso no aguantaba.
+
+Esas decisiones de 'no' son las que sostienen los márgenes actuales."
+
+**Slide 9:**
+"Lo que nos sorprendió:
+
+La retención impacta el MRR más que la captación.
+Si el 80% de clientes renueva, el crecimiento base es acumulativo.
+Si el 60% renueva, estás corriendo en reversa la mitad del tiempo.
+
+Un cliente que renueva vale 6x más que un cliente nuevo de igual tamaño."
+
+**Slide 10 — CTA:**
+"¿Estás construyendo una agencia UGC en LATAM?
+
+Estos números son nuestros. Úsalos como referencia, no como promesa.
+
+Sígueme — @brianvelasquez.co
+Build in public, desde Colombia, con números reales."
+
+---
+
+### CARRUSEL 15 — "Client management: protocolo de escalamiento"
+
+**Slide 1 — Portada:**
+"No todos los problemas con clientes son iguales.
+Este es el protocolo que define quién atiende qué y cuándo.
+Brian Velásquez — COO, UGC Colombia"
+
+**Slide 2:**
+"El error más común en client management:
+el CEO o el COO atienden todo.
+
+Resultado: el equipo no aprende a gestionar clientes.
+Los problemas siempre suben al nivel más alto.
+El liderazgo no tiene tiempo para lo estratégico.
+
+Un protocolo de escalamiento resuelve esto."
+
+**Slide 3:**
+"NIVEL 1 — El equipo lo resuelve (sin escalar)
+
+Situaciones:
+— Pregunta sobre estado de entrega
+— Solicitud de cambio de fecha dentro del plazo
+— Duda sobre el proceso de aprobación
+— Solicitud de material adicional que está dentro del paquete
+
+Tiempo de respuesta: máximo 4h en horario laboral.
+Responsable: coordinador asignado al cliente."
+
+**Slide 4:**
+"NIVEL 2 — El COO interviene
+
+Situaciones:
+— El cliente expresa inconformidad con una entrega
+— Una entrega llegará tarde y el cliente ya lo sabe
+— El cliente solicita algo fuera del scope original
+— Hay confusión sobre lo que fue acordado en el contrato
+
+Tiempo de respuesta: máximo 2h.
+Responsable: COO.
+Acción: llamada o mensaje directo con propuesta de solución."
+
+**Slide 5:**
+"NIVEL 3 — CEO + COO juntos
+
+Situaciones:
+— El cliente amenaza con cancelar el contrato
+— Hay un error que afecta la reputación del cliente
+— El cliente solicita una renegociación de condiciones
+— Hay un conflicto que no se resolvió en nivel 2
+
+Tiempo de respuesta: máximo 1h para acusar recibo, solución en 24h.
+Responsable: COO convoca al CEO con resumen del problema y propuesta de solución."
+
+**Slide 6:**
+"NIVEL 4 — Decisión ejecutiva
+
+Situaciones:
+— Cancelación anticipada del contrato
+— Disputa sobre facturación o pagos
+— Solicitud de reembolso parcial o total
+— Decisión que afecta la política comercial de la agencia
+
+Tiempo de respuesta: 24-48h.
+Responsable: CEO con apoyo del COO.
+Nota: estas situaciones nunca se resuelven por chat. Siempre por videollamada."
+
+**Slide 7:**
+"Reglas del protocolo:
+
+1. El nivel de escalamiento lo decide quien recibe el problema, no el cliente.
+2. Nunca se le dice al cliente 'voy a escalar tu caso'. Se le dice cuándo tendrá respuesta.
+3. Cada escalamiento se documenta en el tablero del proyecto.
+4. Si el mismo tipo de problema se escala más de 3 veces, se revisa el proceso subyacente."
+
+**Slide 8:**
+"Por qué documentar cada escalamiento:
+
+No para auditar al equipo.
+Para encontrar el patrón.
+
+Si el 60% de los escalamientos nivel 2 son por inconformidad con entregas de un creator específico, el problema no es la gestión del cliente.
+Es el creator.
+
+Los datos del protocolo te dicen dónde intervenir en el sistema."
+
+**Slide 9:**
+"Cómo comunicarle el protocolo al cliente desde el onboarding:
+
+'En UGC Colombia, tu punto de contacto principal es [nombre del coordinador].
+Para temas operativos del día a día, él/ella te responde en menos de 4 horas.
+Para temas estratégicos o de mayor urgencia, yo (COO) estoy disponible directamente.'
+
+Cuando el cliente sabe quién lo atiende y en cuánto tiempo, no escala innecesariamente."
+
+**Slide 10 — CTA:**
+"¿Tu agencia tiene un protocolo de escalamiento o todos los problemas llegan al mismo lugar?
+
+Este sistema es lo que permite que el equipo crezca sin depender del CEO para todo.
+
+Sígueme — @brianvelasquez.co
+Client management real, desde adentro de una agencia UGC en Colombia."
+
+
+---
+
+
+# PACK VIRAL — Brian Velasquez (COO) — PARTE 2/2
+## UGC Colombia · Contenido de Alto Impacto 2026
+
+**Rol real:** COO — Mano derecha del CEO. Dirige operaciones, produccion, onboarding, SOP y coordinacion de creators.
+**Voz:** Directo, organizado, desde las trincheras. "El que pone orden cuando hay caos."
+**Plataformas:** LinkedIn (principal), X/Twitter, Newsletter, YouTube
+**Fecha:** 2026-04-10
+
+---
+
+## 5. GUIONES LINKEDIN (15 posts)
+
+---
+
+### LI-01 — "Soy la mano derecha de un founder de 25 anos. Esto aprendi."
+
+Soy la mano derecha de un founder de 25 anos.
+Y hay cosas que no te cuentan de ese rol.
+
+Llevo operando UGC Colombia desde adentro.
+No soy el que sale en el contenido.
+No soy el que cierra los deals.
+Soy el que hace que todo lo demas funcione.
+
+Y esto es lo que aprendi trabajando al lado de Alexander:
+
+**1. Los founders jovenes toman decisiones rapido.**
+Demasiado rapido para mi gusto al principio.
+Luego entendi que su velocidad es una ventaja competitiva.
+Mi trabajo no es frenarlo. Es asegurar que la operacion aguante el ritmo.
+
+**2. La ambicion del CEO sin estructura del COO es caos disfrazado de crecimiento.**
+Cuando llegue, teniamos clientes pero no procesos.
+Teniamos promesas pero no sistemas de entrega.
+El primer mes lo use todo en documentar lo que ya existia.
+Eso solo ya redujo los incendios a la mitad.
+
+**3. Un COO joven aprendiendo con un CEO joven es dinamica de alto riesgo / alta recompensa.**
+Los dos metemos la pata. Los dos aprendemos rapido.
+La diferencia: yo aprendo en silencio y el aprende en publico.
+Los dos necesitamos al otro para no destruir lo que estamos construyendo.
+
+**4. El rol de COO en una agencia boutique no existe en los libros.**
+No hay manual. No hay benchmark.
+Lo que si existe: la realidad de que si algo falla operativamente, es mi responsabilidad.
+Eso te vuelve preciso. Rapido. Y un poco obsesivo con los SOPs.
+
+**5. Lo mas valioso que puedo darle a un founder no es ejecutar sus ideas.**
+Es decirle "esta idea tiene un hueco operativo aqui" antes de que lo descubra caro.
+
+Si eres COO, director de operaciones o mano derecha de alguien:
+bienvenido al rol mas invisible y mas critico de cualquier empresa.
+
+Nos vemos en los procesos.
+Brian — COO, UGC Colombia
+
+---
+
+### LI-02 — "El 70% de agencias mueren por operaciones, no por falta de clientes"
+
+El 70% de agencias creativas mueren por operaciones, no por falta de clientes.
+
+Lo vi de cerca.
+
+Agencias que cierran deals increibles y luego no pueden entregar.
+Agencias que crecen rapido y se rompen por dentro.
+Agencias que tienen todo el talento del mundo y cero sistemas.
+
+Y lo entiendo. Cuando arrancas, el foco es conseguir el primer cliente.
+Luego el segundo. Luego el tercero.
+Nadie piensa en los procesos hasta que el quinto cliente te explota en la cara.
+
+En UGC Colombia lo vivimos.
+
+Cuando llegamos a 6 clientes activos con 3 personas en el equipo, algo fallo:
+Un creador entrego fuera de tiempo. El cliente lo supo antes que nosotros.
+Eso no es un problema de creators. Es un problema de sistemas de monitoreo.
+
+Lo que construimos despues de ese incidente:
+
+**Dashboard de status de cada entrega en tiempo real.**
+**SOP de comunicacion proactiva con el cliente cada 72 horas.**
+**Protocolo de alerta temprana cuando un creador no responde en 24h.**
+
+Resultado: en los 4 meses siguientes, cero sorpresas negativas al cliente.
+
+La diferencia entre una agencia que escala y una que implota no es el talento.
+Es la infraestructura operativa que construyes antes de necesitarla.
+
+Si tu agencia tiene 3 clientes y no tienes SOP escritos, ya estas atrasado.
+No porque seas malo. Sino porque el cuarto cliente va a llegar y el sistema no va a aguantar.
+
+Los procesos no matan la creatividad.
+La protegen.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-03 — "El sistema operativo que construi para una agencia de 5 personas"
+
+El sistema operativo de una agencia de 5 personas no puede ser igual al de una de 50.
+
+Esto es lo que construi en UGC Colombia:
+
+**Capa 1: Visibilidad**
+Si no puedo ver en 5 minutos el estado de cada cliente y cada entrega, el sistema fallo.
+Usamos Supabase + dashboard interno.
+Cada proyecto tiene: cliente, creador asignado, deadline, status, ultima actualizacion.
+Sin eso, operas de memoria. Y la memoria falla.
+
+**Capa 2: Comunicacion estructurada**
+Tres canales, tres funciones. Nada mas.
+- WhatsApp: urgencias y confirmaciones rapidas
+- Notion: briefs, SOPs, documentacion
+- Email: contratos, facturas, formalizacion
+Si algo llega al canal equivocado, lo redirigimos. Sin excepciones.
+
+**Capa 3: Cadencias fijas**
+Lunes 9am: reunion semanal de 20 minutos. Solo lo que bloquea.
+Miercoles: check de status de entregas activas.
+Viernes: cierre de semana — que se entrego, que sigue, que problema nuevo.
+Sin esas tres cadencias, cada semana es una sorpresa.
+
+**Capa 4: SOPs para todo lo repetible**
+Si algo se hace mas de dos veces, tiene SOP.
+Onboarding de cliente nuevo: SOP.
+Brief a creador: SOP.
+Entrega al cliente: SOP.
+Renewal call: SOP.
+El SOP no reemplaza el criterio. Lo libera para lo que realmente lo necesita.
+
+**Capa 5: Metricas que importan**
+No miro 20 metricas. Miro 5:
+Entregas a tiempo, tasa de revision (vueltas por pieza), Health Score por cliente, tiempo de onboarding, tasa de renewal.
+
+Con esas cinco metricas se donde duele.
+
+5 personas, 30 creators coordinados en 4 ciudades.
+El sistema operativo lo hace posible.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-04 — "Como saber si tu agencia puede tomar un cliente mas"
+
+La pregunta mas peligrosa en una agencia es esta:
+"Podemos tomar otro cliente?"
+
+Peligrosa porque la respuesta instintiva siempre es si.
+Porque el dinero entra. Porque el equipo "se las arregla". Porque el CEO quiere crecer.
+
+La respuesta correcta requiere mirar cinco cosas:
+
+**1. Capacity de produccion**
+Cuantas piezas producimos por mes ahora.
+Cuantas necesita el nuevo cliente.
+Cuantas piezas tiene margen nuestro roster de creators activos.
+Si el roster no aguanta, el nuevo cliente va a retrasar a los existentes.
+
+**2. Tiempo de coordinacion disponible**
+Cada cliente nuevo suma carga de comunicacion, briefing, revision y reporte.
+En nuestro caso: cada cliente pro suma aprox 6-8h de coordinacion al mes.
+Si el equipo ya esta en 90% de capacidad, ese cliente nuevo lo lleva al 110%.
+El 110% no existe. Lo que existe es calidad que baja.
+
+**3. Cash flow del primer mes**
+El primer mes del nuevo cliente es el mas caro operativamente.
+Onboarding, casting de creators, primer brief, primera revision.
+Si el cash flow no aguanta ese mes sin contar ese ingreso, hay un riesgo real.
+
+**4. Fit del cliente con lo que ya sabemos hacer**
+Un cliente que pide algo que nunca hemos hecho antes multiplica el costo de coordinacion.
+No decimos que no. Decimos que tiene un precio de aprendizaje que el cliente paga.
+
+**5. Rentabilidad del cliente en cuestion**
+No todos los clientes son iguales.
+Un cliente que paga $500/mes y requiere 20h de atencion mensual destruye margen.
+Un cliente que paga $1.500/mes y tiene procesos claros es oro puro.
+
+Si las cinco respuestas son positivas: si, tomamos el cliente.
+Si dos o mas generan duda: conversacion con el equipo antes de firmar.
+
+Esta semana pasamos exactamente por ese proceso.
+La respuesta fue si. Pero hubo 30 minutos de analisis antes de ese si.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-05 — "La conversacion mas dificil con un cliente este mes"
+
+Este mes tuve la conversacion mas dificil que he tenido con un cliente.
+
+No fue sobre precios. No fue sobre calidad.
+Fue sobre expectativas.
+
+El cliente lleva 3 meses con nosotros. Paga a tiempo. Es buen cliente.
+Pero en la ultima llamada de seguimiento dijo algo que me preocupo:
+
+"Yo esperaba que para este punto ya tuvieramos videos virales."
+
+Pausa larga.
+
+Lo que no le habia dicho nadie claramente:
+El UGC no garantiza viralidad. Garantiza materia prima de calidad para que un equipo de paid media la convierta en resultados.
+
+Si no tienes un equipo de ads que use el UGC estrategicamente, el UGC es potencial sin activar.
+No es culpa del UGC. Es que nadie le explico el ecosistema completo.
+
+Lo que hice en esa llamada:
+
+Primero: validar. Su frustracion es legitima dado lo que esperaba.
+Segundo: asumir responsabilidad parcial. Debimos haber alineado expectativas mejor en el onboarding.
+Tercero: redirigir. Mostrarle los datos reales de los videos — views organicos, engagement, comentarios de personas reales.
+Cuarto: proponer el siguiente paso. Conectarlo con un media buyer de nuestra red que trabaje el paid media con el UGC que ya tiene.
+
+El cliente quedo bien. Renovara el mes que viene.
+
+Pero aprendi algo ese dia:
+El onboarding de expectativas es tan importante como el onboarding operativo.
+Y si no lo haces tu, el cliente lo va a hacer solo — y casi siempre lo hace mal.
+
+Actualice nuestro SOP de onboarding esa misma tarde.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-06 — "De 2 clientes a 10 sin contratar: puro proceso"
+
+Pasamos de 2 clientes a 10 activos sin contratar a nadie nuevo.
+
+No fue magia. Fue estructura.
+
+Cuando teniamos 2 clientes, cada uno consumia tiempo de equipo de forma caótica.
+Emails dispersos. Briefs verbales. Coordinacion en WhatsApp sin orden.
+Era sostenible. Apenas.
+
+Al llegar al cliente 4, el sistema empezo a crujir.
+
+Lo que hicimos antes de tomar el cliente 5:
+Documentamos cada proceso que existia. Incluyendo los que nadie habia escrito.
+Identificamos donde se duplicaba esfuerzo.
+Estandarizamos el brief de creador (una sola plantilla para todos los formatos).
+Automatizamos los recordatorios de deadline via n8n.
+Creamos un roster de creators con capacidad declarada y disponibilidad real.
+
+Con eso, la carga por cliente nuevo cayo de 10h a 4h de coordinacion mensual.
+
+Luego escalamos a 6, 8, 10.
+
+La gente asume que para escalar necesitas contratar.
+A veces. Pero la primera palanca siempre es estructura.
+Si tu proceso actual consume 10h por cliente, contratar una persona te da 10 clientes mas.
+Si optimizas el proceso a 4h por cliente, esa misma persona te da 25.
+
+La matematica de la eficiencia operativa es la mas rentable que existe.
+
+No contratamos hasta que los procesos estuvieron listos para soportar lo que vendriamos a contratar.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-07 — "El error que cometo cada vez que ignoro un proceso"
+
+Tengo un defecto operativo que reconozco publicamente.
+
+Cuando estoy apurado, salto el proceso.
+Y cada vez que lo hago, pago el precio.
+
+La ultima vez que ocurrio:
+Teniamos que hacer el brief a un creador nuevo rapido.
+El cliente lo necesitaba urgente.
+En vez de usar la plantilla estandar, escribi el brief de memoria en WhatsApp.
+
+El creador entrego algo que no era lo que el cliente esperaba.
+Una revision extra. Dos dias de retraso. Una llamada incomoda.
+
+Todo por no tomar los 8 minutos que toma llenar el template.
+
+Esto me pasa porque en el momento el costo del proceso se ve alto y el beneficio se ve lejano.
+Pero el costo de NO seguir el proceso siempre es mas alto. Solo que lo pagas despues.
+
+Lo que aprendi de ese error especifico:
+El brief en WhatsApp nunca mas. Sin excepciones.
+Si es urgente, uso el template y lo copio al chat. No es incompatible.
+
+Los procesos no son para cuando hay tiempo.
+Son especialmente para cuando no hay tiempo.
+
+Cuando todo va bien, cualquiera opera bien.
+La calidad de una operacion se mide en los momentos de presion.
+
+Eso es lo que intento construir: un sistema que funcione bien incluso cuando yo no estoy en mi mejor dia.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-08 — "Por que el COO es el rol mas subestimado en agencias"
+
+Nadie quiere ser COO.
+
+Todos quieren ser el CEO que tiene vision, el que habla en publico, el que cierra deals.
+Nadie quiere ser el que actualiza los SOPs un martes a las 8pm.
+
+Y por eso la mayoria de agencias creativas operan en caos permanente.
+
+El COO es el rol mas subestimado en agencias por tres razones:
+
+**1. Su exito es invisible.**
+Cuando el COO hace bien su trabajo, nada pasa. Todo fluye.
+Las entregas llegan a tiempo. Los clientes no se quejan. El equipo sabe que hacer.
+Eso no genera likes ni titulares. Solo genera estabilidad.
+Y la estabilidad en una agencia es lo mas escaso que existe.
+
+**2. Se confunde con administracion.**
+El COO no administra. Dirige sistemas.
+La diferencia es enorme.
+Administrar es responder a lo que ya paso.
+Dirigir sistemas es construir estructuras que previenen que las cosas pasen mal.
+
+**3. Su trabajo no escala sin documentacion.**
+El CEO puede delegar carisma. No. Pero puede delegar relaciones, cierre, vision.
+El COO solo puede delegar lo que esta escrito.
+Si no esta documentado, vive en tu cabeza. Y eso no escala.
+
+En UGC Colombia el rol del COO es:
+Que los 30 creators sepan exactamente que hacer.
+Que los 10 clientes activos reciban lo que prometimos, cuando lo prometimos.
+Que Alexander pueda enfocarse en crecer sin preocuparse de que algo se rompe atras.
+
+Eso no es glamoroso.
+Es lo que hace que la agencia funcione.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-09 — "Dirijo produccion creativa sin ser creativo — con sistemas"
+
+No soy creativo.
+
+No tengo el ojo para lo que va a enganchar en un Reel.
+No se intuitivamente si un hook es bueno o si le falta algo.
+No entiendo por que un video con mala iluminacion puede tener mas views que uno producido profesionalmente.
+
+Y sin embargo dirijo la produccion de contenido UGC de 10 clientes activos y 30 creators.
+
+Como?
+
+Sistematizando lo que los creativos ya saben.
+
+Cuando Diana hace un QA y rechaza un video, le pregunto: por que?
+Ella me explica.
+Yo lo documento en el SOP de estandares de calidad.
+La proxima vez que ese escenario ocurre, cualquiera puede tomar la decision sin pedirle a Diana.
+
+Cuando Alexander dice que un brief esta generando el tipo de video equivocado, le pregunto: que falta?
+El me explica.
+Yo actualizo la plantilla de brief.
+La proxima vez, el creador llega mas cerca del objetivo sin necesitar coaching individual.
+
+Mi trabajo no es tener el criterio creativo.
+Mi trabajo es capturar el criterio creativo de las personas que si lo tienen y convertirlo en sistemas replicables.
+
+Los sistemas no reemplazan el talento.
+Lo amplifican.
+
+Con el criterio de Diana documentado, 30 creators pueden producir consistentemente sin que Diana revise cada paso.
+Con el brief estandar mejorado por Alexander, los videos llegan mas cerca del objetivo en la primera entrega.
+
+No soy creativo. Pero hago que la creatividad escale.
+
+Eso es lo que hace un COO en una agencia de contenido.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-10 — "El onboarding de 48h que sigue funcionando 6 meses despues"
+
+El onboarding de un cliente nuevo en UGC Colombia tarda 48 horas.
+
+No es improvisacion. Es un SOP que hemos refinado durante meses.
+
+Esto es lo que pasa en esas 48 horas:
+
+**Hora 0-4: Kick-off call (30 min)**
+Repasamos el brief maestro del cliente. Producto, tono, prohibiciones, referencias.
+Confirmamos el plan y el numero de piezas del primer batch.
+Aclaramos el canal de comunicacion principal y los tiempos de respuesta esperados.
+El cliente sale con claridad. Nosotros salimos con todo lo que necesitamos para empezar.
+
+**Hora 4-8: Setup interno**
+Carpeta del cliente creada en Drive con estructura estandar.
+Registro en Supabase activado: cliente, plan, billing day, contact person.
+Brief maestro subido y compartido con el equipo.
+
+**Hora 8-24: Casting y asignacion de creators**
+Revisamos el roster activo contra el perfil del cliente.
+Seleccionamos 2-3 creators para el primer batch.
+Les enviamos el brief individual con instrucciones especificas y deadline.
+
+**Hora 24-48: Confirmacion y kick-off con el cliente**
+Confirmamos al cliente que los creators fueron asignados.
+Le mandamos el timeline del primer batch con fechas exactas.
+Le explicamos el flujo de revision y aprobacion.
+
+Al terminar las 48 horas, el cliente sabe exactamente que va a pasar y cuando.
+Los creators saben exactamente que producir.
+El equipo tiene visibilidad completa.
+
+Seis meses despues de crearlo, ese SOP sigue siendo el mismo en estructura.
+Solo lo hemos refinado en detalles. Nunca lo hemos abandonado.
+
+Los mejores procesos son los que aguantan el tiempo sin necesitar reinventarse.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-11 — "5 SOPs que salvaron la agencia"
+
+Hay cinco SOPs que salvaron la agencia.
+
+No es exageracion. Es lo que pienso cada vez que un proceso funciona solo.
+
+**SOP 1: Brief estandar de creador**
+Antes: cada brief era diferente. Cada creador interpretaba diferente. Muchas revisiones.
+Ahora: una plantilla con 12 campos obligatorios. La tasa de revision bajo de 2.3 vueltas a 1.1 por pieza.
+
+**SOP 2: Protocolo de alerta temprana**
+Si un creador no confirma recepcion del brief en 24h, alerta automatica.
+Si no hay avance en 48h, escalamiento a Diana.
+Si en 72h no hay noticias, reasignacion inmediata.
+Antes de este SOP: sorpresas de ultimo minuto que le costaban tiempo al cliente.
+Despues: cero entregas fuera de deadline por desaparicion de creador.
+
+**SOP 3: Reporte mensual al cliente**
+Estructura fija: piezas entregadas, metricas de los videos publicados, novedades del siguiente batch.
+Antes: cada reporte era diferente y tardaba horas en armarse.
+Ahora: 45 minutos con la plantilla. El cliente recibe siempre el mismo nivel de informacion.
+
+**SOP 4: Renewal call de 20 minutos**
+Al mes 2 y al mes 5 de cada cliente: llamada estructurada de retention.
+Agenda fija: como van los numeros, que ajustamos, que sigue.
+Tasa de renewal: 80% en clientes que reciben la llamada vs 45% en los que no.
+
+**SOP 5: Offboarding de creador**
+Cuando un creador sale del roster, proceso claro de cierre.
+Pagos pendientes liquidados. Accesos revocados. Feedback documentado.
+Evita conflictos. Deja la puerta abierta para reactivar.
+
+Cinco documentos. Cientos de incendios evitados.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-12 — "Coordinamos 30 creators en 4 ciudades sin caos"
+
+30 creators. 4 ciudades. 10 clientes activos. Equipo de 5 personas.
+
+Esto es lo que nos pregunta todo el mundo: como coordinan eso sin volverse locos?
+
+La respuesta honesta: con mucho sistema y muy poca improvisacion.
+
+**El roster**
+No cualquiera entra al roster. Hay un proceso de seleccion con prueba pagada.
+Cada creator activo tiene un perfil en Supabase: ciudad, nichos, formatos dominados, disponibilidad declarada, tarifa, historial de entregas.
+Cuando llega un brief nuevo, el match no es intuitivo. Es una busqueda con filtros.
+
+**La comunicacion**
+Un creator no necesita saber lo que esta pasando con los otros 29.
+Cada uno recibe solo lo que le corresponde: su brief, su deadline, su feedback.
+No hay grupos grandes. No hay ruido. Solo informacion relevante para esa persona.
+
+**Las cadencias**
+Miercoles: revisamos el status de todos los proyectos activos.
+Cualquier pieza que no tiene confirmacion de avance genera una accion ese mismo dia.
+No el viernes cuando ya es tarde. El miercoles cuando todavia hay tiempo de maniobrar.
+
+**El QA**
+Diana revisa cada entrega contra el brief. No contra "lo que se ve bien".
+Si el brief decia "tono energico, ropa casual, producto en mano en los primeros 3 segundos" y no esta, vuelve al creador.
+La subjetividad mata los procesos. Los criterios claros los hacen funcionar.
+
+30 creators no es un problema de coordinacion si tienes los sistemas correctos.
+Es un problema de coordinacion si no los tienes.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-13 — "El renewal call que nos da 80% de retencion"
+
+Tenemos una llamada de 20 minutos que nos da el 80% de retencion mensual.
+
+No es magia de ventas. Es un proceso.
+
+Llamamos al mes 2 y al mes 5 de cada cliente.
+La agenda es siempre la misma:
+
+**5 minutos: como van los numeros**
+Le mostramos las metricas de los videos entregados.
+Views organicos, engagement, comentarios reales.
+No prometemos resultados de paid media. Solo mostramos el UGC que produjimos.
+
+**5 minutos: que ajustamos**
+Preguntamos directamente: "?Algo en el proceso que quieran que funcione diferente?"
+No esperamos que el cliente se queje. Le preguntamos antes.
+Cada ajuste solicitado lo documentamos. El 70% de ellos los implementamos en el siguiente batch.
+
+**5 minutos: que sigue**
+Le contamos el plan del proximo mes.
+Formatos nuevos, creators nuevos si aplica, ajustes de brief.
+El cliente no llega a la renovacion como una sorpresa. La renovation es la continuacion logica de lo que ya viene funcionando.
+
+**5 minutos: cierre**
+Confirmacion de renovacion o conversacion sobre ajustes de plan.
+
+El 80% de retención no viene de que el UGC sea perfecto.
+Viene de que el cliente siente que le importamos, que escuchamos y que estamos mejorando.
+
+Eso no pasa solo. Pasa porque hay un proceso que lo garantiza.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-14 — "Lo que el CEO no ve y el COO arregla"
+
+Alexander no ve todo. No puede.
+
+Eso no es una critica. Es matematica.
+El CEO enfocado en vender, en contenido, en estrategia no puede simultaneamente ver los detalles operativos.
+Para eso existe el COO.
+
+Esto es lo que yo veo que el no ve:
+
+**El creador que lleva 3 semanas sin aceptar un proyecto nuevo.**
+No desaparecio. Solo tiene algo personal.
+Pero si nadie lo nota, llegara el dia en que lo asignamos a un brief urgente y no hay respuesta.
+Yo lo noto antes. Actualizo su disponibilidad. El roster sigue funcionando.
+
+**El cliente que lleva 2 meses respondiendo el feedback en 5 dias.**
+En superficie: cliente normal.
+En realidad: su velocity de feedback bajo 60% y eso nos retrasa a nosotros y a los creators.
+Tenemos que hablar con el antes de que se convierta en un problema de entrega.
+
+**El proceso que "funciona" pero que en realidad lo sostiene una sola persona.**
+Si Diana no esta un dia, ese proceso falla.
+Eso es un riesgo operativo. No un logro.
+El proceso tiene que funcionar sin depender de una persona especifica.
+
+**El brief que se esta usando pero que ya no refleja lo que realmente pide el mercado.**
+Fue bueno hace 3 meses. Hoy genera videos que necesitan mas revisiones.
+Nadie lo ha actualizado porque "esta funcionando".
+Funcionar no es lo mismo que funcionar bien.
+
+El CEO ve hacia adelante.
+El COO ve lo que esta pasando ahora mismo, debajo de la superficie.
+
+Los dos son necesarios. Ninguno reemplaza al otro.
+
+Brian — COO, UGC Colombia
+
+---
+
+### LI-15 — "Mi regla #1: si no tiene proceso, no existe"
+
+Tengo una regla en UGC Colombia que el equipo ya sabe de memoria:
+
+Si no tiene proceso, no existe.
+
+No importa que siempre lo hagamos. No importa que todo el mundo sepa como hacerlo.
+Si no esta documentado, no existe operativamente.
+
+Por que?
+
+Porque el conocimiento que vive en la cabeza de una persona desaparece cuando esa persona no esta.
+Porque el proceso que "todo el mundo sabe" es siempre el que mas variacion tiene entre personas.
+Porque el incidente que nadie documento es el que se repite.
+
+En la practica esto significa:
+
+Cada vez que identificamos algo que hacemos mas de dos veces, lo documentamos.
+Cada vez que un error ocurre, el primer paso no es resolver el error sino documentar el proceso que lo previene.
+Cada vez que alguien nuevo entra al equipo, tiene documentacion para operar desde el dia 1.
+
+No es burocracia. Es libertad.
+
+Con los procesos documentados, no tengo que estar presente para que las cosas funcionen bien.
+Puedo delegar con confianza porque el delegado tiene un mapa.
+Puedo medir porque hay un estandar contra el que comparar.
+Puedo mejorar porque hay una version anterior documentada con la que contrastar.
+
+La alternativa — operar de cabeza — funciona cuando el equipo es pequeno y todo lo controlas tu.
+Deja de funcionar exactamente cuando mas la necesitas: cuando creces.
+
+Si no tiene proceso, no existe.
+Y si no existe, no escala.
+
+Brian — COO, UGC Colombia
+
+---
+
+## 6. GUIONES YOUTUBE LARGOS (3 videos de 10-12 min)
+
+---
+
+### YT-01 — "Como operar una agencia UGC con 5 personas y 30 creators (2026)"
+
+**Titulo SEO:** Como operar una agencia UGC con 5 personas y 30 creators — Sistema completo 2026
+**Thumbnail concept:** Brian frente a un tablero con el organigrama de la agencia. Texto: "5 personas. 30 creators. Sin caos." Fondo blanco limpio, paleta UGC Colombia.
+**Duracion objetivo:** 11 minutos
 **Chapters:**
-
-00:00 - 00:50 Hook
-00:50 - 02:00 Por que el ROAS de pauta no es suficiente
-02:00 - 04:00 Los 4 componentes del ROI real
-04:00 - 06:30 La calculadora paso a paso (demo en pantalla)
-06:30 - 08:00 Como interpretar los resultados
-08:00 - 09:30 Casos reales: 2 ejemplos con numeros
-09:30 - 10:30 CTA y template
-
----
-
-**GUION PALABRA POR PALABRA:**
-
-**[00:00 - 00:50] HOOK**
-
-"Tu agencia de UGC te muestra el ROAS de pauta cada mes y el numero parece bien. Pero el ROAS de pauta no es el ROI de tu inversion en UGC.
-
-Son dos calculos distintos. Uno es lo que hace el algoritmo de Meta con tus ads. El otro es si la inversion total en contenido realmente vale la pena para tu negocio.
-
-En este video te muestro la calculadora exacta que usamos con cada cliente nuevo antes de activar — y despues para revisar si la estrategia esta funcionando. Con template incluido al final. Vamos."
-
-**[00:50 - 02:00] POR QUE EL ROAS NO ES SUFICIENTE**
-
-"Primero, aclaremos la diferencia.
-
-ROAS — Return on Ad Spend — es revenue de ads dividido gasto en ads. Si gastaste $700 en Meta y generaste $2.100 en ventas atribuidas, tu ROAS es 3x. Ese es el numero que tu agencia de ads te reporta.
-
-El problema: ese calculo no incluye el costo del UGC. No incluye el margen de tu producto. No incluye el impacto organico del contenido. No considera la vida util del activo mas alla de ese mes.
-
-Un ROAS de 3x con un margen de producto del 40% sobre un gasto total de $1.300 (UGC + ads) puede ser un negocio rentable o deficitario dependiendo del ticket promedio de compra y el volumen.
-
-El ROI real incluye todas esas variables. Y muchas veces es mejor de lo que parece — o peor, si el margen es bajo."
-
-**[02:00 - 04:00] LOS 4 COMPONENTES DEL ROI REAL**
-
-"El ROI completo de UGC tiene cuatro componentes.
-
-Componente 1: Revenue de paid media atribuido.
-Este es el mas facil de medir. Se usa UTM en los links de los ads y el pixel de conversion de Meta o Google. El revenue que se puede trazar directamente a las campanas que usaron los videos UGC.
-
-Importante: usar ventana de atribucion de 7 dias clic / 1 dia view como baseline. Ventanas mas largas inflan el numero.
-
-Componente 2: Revenue organico estimado.
-Si subes los videos al perfil de marca — Instagram, TikTok, YouTube — generan engagement y potencialmente ventas directas via link en bio o swipe up.
-
-Este es mas dificil de atribuir con precision. Una estimacion conservadora: 15-20% adicional sobre el revenue de pauta.
-
-Componente 3: Impacto en conversion rate del sitio web.
-Si usas los videos UGC en tus paginas de producto — y deberian estar ahi — el conversion rate de esas paginas sube. En nuestros clientes, el incremento promedio es 22% en CVR cuando hay video UGC vs cuando no.
-
-Si tu ecommerce tiene $8.000 en ventas mensuales y el CVR sube 22%, son $1.760 adicionales. Parte de ese incremento es atribuible al UGC, aunque la atribucion exacta sea estimada.
-
-Componente 4: Valor de uso futuro del activo.
-Un video UGC bien hecho se puede usar durante 4 a 6 meses en rotacion antes de fatigarse. Si lo amortizas en ese periodo, el costo efectivo por mes de uso cae significativamente.
-
-Un video de $380 usado durante 5 meses tiene un costo efectivo de $76 por mes. Ese costo por mes es la unidad de medida correcta para el activo."
-
-**[04:00 - 06:30] DEMO DE LA CALCULADORA**
-
-"Ahora vamos a la calculadora. [NOTA DE EDICION: capturar pantalla de Google Sheets en tiempo real]
-
-La abro aqui — la template tiene 5 pestanas: Inputs, Revenue Pauta, Revenue Organico, Impacto CVR, ROI Total.
-
-Empezamos por Inputs. Lleno los datos del cliente ejemplo:
-- Plan UGC: Pro $950
-- Presupuesto ads: $700
-- Ticket promedio de compra: $42
-- Margen de producto: 58%
-- CVR actual del ecommerce: 2.1%
-- Sesiones mensuales al sitio web: 12.400
-- Periodo de analisis: mes 3
-
-La plantilla calcula automaticamente:
-
-Revenue pauta: ingreso los datos de conversion de Meta (UTM + pixel). En este caso: $2.380 en revenue atribuido.
-
-Revenue organico estimado: la formula aplica el 17% sobre el revenue de pauta como estimacion conservadora. En este caso: $405.
-
-Impacto CVR: el modelo calcula el revenue adicional si el CVR sube un 22% sobre el baseline. Antes del UGC el CVR era 2.1%, con UGC en producto es 2.56%. Sobre 12.400 sesiones y ticket de $42: $218 adicionales mensuales.
-
-Costo mensual del activo (amortizado a 5 meses): $950/5 = $190 por mes.
-Costo real de ads: $700.
-Inversion total mes: $890.
-
-ROI total = (Revenue pauta + Organico + CVR impact - Inversion total) / Inversion total × 100
-= ($2.380 + $405 + $218 - $890) / $890 × 100
-= $2.113 / $890 = 237%
-
-Ese es el ROI real en el mes 3. No el ROAS de 3.4x que reporta Meta. El ROI real de la inversion en UGC incluyendo todos los vectores de retorno."
-
-**[06:30 - 08:00] COMO INTERPRETAR**
-
-"Como interpretar los resultados:
-
-ROI menor al 0%: la inversion todavia no retorna. Normal en el mes 1. Preocupante en el mes 3.
-
-ROI 0% a 50%: el UGC cubre su costo y genera algo. Viable pero el brief o la pauta tiene margen de mejora.
-
-ROI 50% a 150%: buen retorno. La estrategia esta funcionando. Momento de escalar el presupuesto de ads con los mejores creativos.
-
-ROI mayor al 150%: la estrategia esta performando bien. Considera aumentar el plan de UGC para tener mas creativos en rotacion y sostener ese retorno.
-
-Una advertencia importante: el ROI del mes 1 casi siempre va a estar entre -30% y 20%. No lo uses para tomar la decision de continuar o no. El mes 1 es el pago de la curva de aprendizaje del algoritmo. El mes 3 es el dato relevante."
-
-**[08:00 - 09:30] DOS CASOS REALES**
-
-"Dos casos reales con esta calculadora.
-
-Caso 1: marca de cosmeticos en Colombia, plan Starter $500, ads $400.
-Mes 1: ROAS 1.4x, ROI -18%. Normal.
-Mes 2: ROAS 2.2x, ROI 31%.
-Mes 3: ROAS 3.1x, ROI 118%.
-
-La marca estuvo a punto de cancelar en el mes 1. No lo hizo. El mes 3 fue el mejor del trimestre.
-
-Caso 2: marca de suplementos, plan Pro $950, ads $800.
-Mes 1: ROAS 1.8x, ROI 4%. Positivo desde el inicio (producto con demanda probada).
-Mes 2: ROAS 2.6x, ROI 67%.
-Mes 3: ROAS 3.8x, ROI 182%.
-
-La diferencia entre los dos casos: el brief. El segundo tenia un brief que incluia dolor especifico, objecion central y momento de prueba concreto. El primero tenia un brief generico que mejoramos en el mes 2.
-
-El ROI es sensible al brief. Mas que al presupuesto, mas que a la segmentacion."
-
-**[09:30 - 10:30] CTA Y TEMPLATE**
-
-"El template que ves en pantalla lo comparto en el link de la descripcion. Es una copia de Google Sheets — haz clic en 'Hacer una copia' y ya lo tienes para usar con tus propios numeros.
-
-Instrucciones de uso:
-Pestana 1: llena los Inputs con los datos de tu campana
-Pestana 2-4: los calculos son automaticos
-Pestana 5: el dashboard de ROI por mes se llena solo
-
-Si al llenarlo tienes preguntas sobre como interpretar algun numero, deja el comentario abajo. Los respondo personalmente.
-
-Y si quieres que hagamos el calculo de ROI proyectado para tu marca antes de contratar UGC, eso tambien lo ofrecemos — escríbeme directo.
-
-Suscribete al canal si este tipo de herramientas te sirven. Cada semana una nueva.
-
-Hasta el proximo video."
+- 0:00 — Por que la mayoria de agencias se rompen al escalar
+- 1:30 — El equipo de 5 y los roles reales
+- 3:00 — Como funciona el roster de 30 creators
+- 5:00 — El sistema de produccion semana a semana
+- 7:30 — Las herramientas que usamos (y las que descartamos)
+- 9:30 — Los numeros reales de operacion
+- 10:30 — CTA y siguiente video
 
 ---
 
-## 9. REGLAS DE EJECUCION PARA BRIAN
+**GUION COMPLETO:**
 
-### Batch de grabacion
+[INTRO — 0:00 a 1:30]
 
-**Frecuencia recomendada:** 1 sesion de grabacion por semana, 90 minutos.
-**Output por sesion:** 3-4 videos cortos (45-60s) o 1 video largo + 2 cortos.
-**Setup minimo:** iPhone con soporte fijo, luz natural lateral o ring light diffused, fondo neutro (pared blanca o estanteria ordenada). Microfono de solapa o DJI Mic.
-**Attire:** camisa o camiseta de color solido, sin logos. Brian no debe verse como un corporativo ni como un influencer. Accesible y directo.
-**Prep antes de grabar:** leer el guion completo 2 veces. Nunca leer del teleprompter — Brian habla con los numeros memorizados y referencias a pantalla cuando hay calculadora. La pausa antes de un dato es intencional y debe mantenerse.
+"Si eres dueno de una agencia creativa o quieres serlo, este video es el que yo hubiera querido ver antes de empezar.
 
-### Tono y vocabulario
+Soy Brian, COO de UGC Colombia. Mi trabajo no es el que aparece en el contenido de la agencia. Mi trabajo es que todo lo que prometemos, se entregue.
 
-**Velocidad:** media. Pausa de 0.5-1 segundo antes de cada numero clave.
-**Frase de arranque para videos cortos:** nunca "hola, soy Brian" ni "buenas tardes". Arrancar directamente con el dato o la pregunta del hook.
-**Phrases permitidas:** "la matematica dice", "si corremos los numeros", "esto nos costo aprenderlo caro", "en nuestro caso especifico", "parce hagamos el calculo", "el numero real es", "y aqui esta lo que la gente no ve".
-**Frases prohibidas:** "increible", "transformador", "potenciar", "sinergia", "escala exponencial", "resultado garantizado", "los expertos dicen".
+Y hoy les voy a mostrar exactamente como operamos: 5 personas en el equipo, 30 creators coordinados en 4 ciudades, 10 clientes activos en este momento.
 
-### Lo que SI decir
+No es teoria. Es como funciona hoy, en tiempo real.
 
-- Numeros especificos siempre. Nunca "alrededor del 50%", siempre "el 52.3% segun nuestro Q1".
-- Incluir siempre los supuestos cuando se dan proyecciones. "Con estos supuestos especificos" antes de cualquier numero proyectado.
-- Reconocer cuando los datos son estimados. "Esto es una estimacion conservadora" o "este numero lo mido con menos precision".
-- Hablar en primera persona sobre experiencias propias. "Cometimos este error en el mes 2" es mas creible que "muchas agencias cometen este error".
-- Dar la conclusion contraintuitiva primero y despues explicarla. La sorpresa engancha.
+La razon por la que quiero hacer este video es porque hay un patron que veo constantemente en agencias que empiezan: el foco esta todo en conseguir clientes. Y casi ningun foco esta en construir la infraestructura que permite entregar lo que prometes.
 
-### Lo que NO decir
+Eso funciona hasta que no funciona. Y cuando falla, falla frente al cliente.
 
-- No prometer resultados especificos a una marca sin conocer sus datos. "Con UGC puedes 3x tu ROAS" es una afirmacion sin sustento. "Con brief preciso y pauta consistente, nuestros clientes promediaron 3.1x en el mes 3" es una afirmacion con contexto.
-- No atacar competidores por nombre. Se puede hablar de practicas de la industria en general sin nombrar agencias especificas.
-- No improvisar numeros en camara. Si no sabe el dato exacto, decir "no tengo ese numero preciso hoy pero lo publico la proxima semana" es mejor que inventar.
-- No hacer CTA dobles o triples. Un solo CTA por video, especifico y con razon clara para actuar.
-- No disculparse por publicar precios o por ser preciso. La precision es el diferenciador, no una disculpa.
+Vamos por partes."
 
-### Regla de consistencia de datos
+[SEGMENTO 1 — El equipo — 1:30 a 3:00]
 
-Todos los numeros que Brian publique deben ser consistentes entre si. Si en un video dice que el CAC es $287 y en otro dice que el LTV es $3.706, el ratio que publique en un tercer video debe ser coherente con esos dos numeros.
+"Cinco personas. Ese es el equipo core de UGC Colombia.
 
-Brian mantiene un documento interno "Numeros publicos de Brian" con los datos que ha publicado y sus fechas. Antes de grabar cualquier video con cifras, revisa ese documento para no contradecirse entre piezas.
+Alexander es el CEO. Su foco: estrategia, ventas, contenido publico de la agencia y relaciones con clientes clave.
 
-### Frecuencia de actualizacion de datos
+Yo soy el COO. Mi foco: que todo lo que Alexander promete, se entregue. Operaciones, SOP, coordinacion de creators, onboarding de clientes nuevos, metricas internas.
 
-- KPIs financieros: actualizar los datos publicos trimestralmente (Q1, Q2, Q3, Q4).
-- Cuando el dato cambia significativamente (mas del 15%), publicar un video de actualizacion que reconozca el cambio y explique la razon. Esa transparencia aumenta la credibilidad mas que esconder el cambio.
+Diana es la directora creativa y de creators. Ella hace el QA de cada pieza. Ella conoce a los creators. Ella sabe si un video esta bien o necesita otra vuelta.
+
+Tanya es la community manager y coordinadora de clientes. Ella es el punto de contacto del dia a dia. El cliente habla con Tanya. Tanya coordina con el equipo interno.
+
+Samuel es el tech lead. El cuida la infraestructura: la base de datos, los dashboards, las automatizaciones.
+
+Cinco roles. Sin traslapo innecesario. Sin reunion que no tenga agenda clara.
+
+Lo importante: cada persona sabe exactamente de que es responsable. No hay ambiguedad. La ambiguedad en un equipo pequeno es toxica porque no hay suficiente gente para absorberla.
+
+Cuando alguien no sabe si algo es su responsabilidad o de otro, no lo hace. Y el cliente lo resiente."
+
+[SEGMENTO 2 — El roster — 3:00 a 5:00]
+
+"Treinta creators. Cuatro ciudades: Bogota, Medellin, Cali y Barranquilla. Diferentes nichos, diferentes formatos, diferentes audiencias.
+
+El primer principio del roster: no todos los creators estan activos siempre.
+Tenemos creators en tres estados: activos (recibiendo proyectos regularmente), disponibles (en el roster, no asignados en este momento) y en pausa (por su solicitud o por desempeno).
+
+El segundo principio: el match entre cliente y creator no es intuitivo.
+Tenemos un perfil para cada creator en nuestra base de datos.
+Cuando llega un brief nuevo, usamos filtros: ciudad, nicho, formato dominante, disponibilidad actual, tarifa.
+El match correcto reduce las revisiones a la mitad.
+
+El tercer principio: el roster se actualiza permanentemente.
+Estamos siempre abriendo convocatorias, siempre evaluando nuevos perfiles.
+Si el roster no crece, el dia en que necesitamos capacidad adicional no la tenemos.
+
+Como entra un creator nuevo:
+Aplica por formulario. Si pasa el filtro inicial, lo invitamos a hacer una prueba pagada — un video con brief real de un cliente real. Si el video pasa el QA de Diana, entra al roster.
+Si no pasa, le damos feedback y puede reaplicar en 60 dias.
+
+El proceso suena rigido. En realidad es respeto por el tiempo de todos."
+
+[SEGMENTO 3 — El sistema de produccion — 5:00 a 7:30]
+
+"La semana operativa en UGC Colombia tiene una estructura fija.
+
+Lunes: reunion de 20 minutos con todo el equipo. Agenda fija: que entregas vencen esta semana, que proyectos nuevos arrancan, que bloqueos existen.
+No es una reunion para informar. Es para desbloquear.
+
+Martes y miercoles: produccion activa. Los creators estan trabajando sus briefs. El equipo esta respondiendo preguntas, aclarando dudas, dando contexto adicional si es necesario.
+
+Miercoles tarde: revision de status. Diana revisa que videos llegaron para QA. Yo reviso que briefs pendientes no tienen confirmacion de avance.
+Si un creator no ha dado senal de vida en 48h desde que recibio el brief, esa noche le escribimos.
+
+Jueves: QA y feedback. Diana revisa las entregas. Si pasan, van al cliente. Si no, vuelven al creator con feedback especifico.
+
+Viernes: cierre semanal. Que se entrego, que esta en revision, que entra la proxima semana. Cinco minutos. No mas.
+
+Esa estructura no es perfecta. Pero es predecible. Y la predecibilidad en operaciones vale mas que la perfeccion."
+
+[SEGMENTO 4 — Herramientas — 7:30 a 9:30]
+
+"Herramientas que usamos y por que:
+
+Supabase: es nuestra base de datos central. Clientes, creators, proyectos, entregas, pagos. Todo esta ahi. No en la cabeza de nadie. No en un Excel que alguien tiene en su computador.
+
+Notion: SOPs, briefs maestros, documentacion de procesos, repositorio de referencias. Si algo necesita ser leido y entendido por el equipo, esta en Notion.
+
+n8n: automatizaciones. Recordatorios de deadline, alertas de status, notificaciones al cliente cuando su video esta listo. Jarvis, nuestro agente de WhatsApp, corre sobre n8n.
+
+Google Drive: repositorio de archivos. Los videos entregados por creators, los videos aprobados por clientes, los assets de cada proyecto.
+
+WhatsApp Business: comunicacion con creators y con clientes para cosas urgentes y rapidas. No es donde viven los briefs ni las decisiones importantes. Solo las confirmaciones rapidas.
+
+Lo que descartamos: Trello, Asana, Monday. Probamos los tres. El problema no era la herramienta, era que ninguna tenia la estructura de datos que necesitabamos. Construir nuestra propia base de datos con Supabase nos dio exactamente lo que necesitabamos, aunque tomo mas tiempo al principio."
+
+[SEGMENTO 5 — Numeros reales — 9:30 a 10:30]
+
+"Numeros reales de operacion, porque sin eso este video seria teoria:
+
+Tiempo de onboarding de cliente nuevo: 48 horas desde firma hasta brief enviado a creators.
+Tasa de entregas a tiempo en el ultimo trimestre: 94%.
+Promedio de revisiones por pieza: 1.2 vueltas. Hace 6 meses era 2.3.
+Tasa de renewal mensual: 80%.
+Clientes activos actuales: 10.
+Creators activos en el roster: 30.
+
+Estos numeros no son perfectos. Son reales.
+El 6% de entregas que no llegan a tiempo me quita el sueno.
+El 1.2 de revisiones promedio todavia tiene espacio para bajar a 1.0.
+
+La mejora continua no es un slogan. Es lo que pasa cuando tienes metricas que te dicen donde duele."
+
+[CTA — 10:30 a 11:00]
+
+"Si esto fue util, el siguiente video que tienen que ver es el de build in public — donde muestro los numeros financieros reales de la agencia, no solo los operativos.
+
+Dejenme en los comentarios: cual parte del sistema operativo les genero mas dudas? Ahi armo el siguiente video.
+
+Nos vemos."
 
 ---
 
-*Fin del PACK VIRAL — Brian (Finance Lead) · UGC Colombia · 2026*
-*Parte 1 en: PACK-VIRAL-BRIAN-P1.md*
+### YT-02 — "Build-in-public: los numeros reales de una agencia UGC en Colombia"
+
+**Titulo SEO:** Build-in-Public: Numeros Reales de una Agencia UGC en Colombia 2026 — MRR, Margen y CAC
+**Thumbnail concept:** Pantalla de spreadsheet real (con datos visibles pero parcialmente blurred en numeros absolutos). Texto: "Los numeros que nadie publica." Brian senalando la pantalla.
+**Duracion objetivo:** 12 minutos
+**Chapters:**
+- 0:00 — Por que publicar numeros internos (y por que es incomodo)
+- 1:30 — MRR actual y como lo calculamos
+- 3:30 — Margen bruto real por tipo de cliente
+- 5:30 — CAC, LTV y lo que eso significa en la practica
+- 7:30 — Los numeros que no se ven: tiempo de coordinacion real por cliente
+- 9:30 — Proyecciones para el ano y supuestos reales
+- 11:00 — CTA
+
+---
+
+**GUION COMPLETO:**
+
+[INTRO — 0:00 a 1:30]
+
+"Este video va a ser incomodo para mi.
+
+No porque tenga miedo de la competencia. Sino porque publicar numeros reales siempre genera preguntas que no tengo todas las respuestas.
+
+Pero creo que la industria UGC en LATAM necesita mas builds in public y menos screenshots de revenue sin contexto.
+
+Asi que hoy les muestro los numeros reales de UGC Colombia:
+MRR, margen bruto, CAC, LTV, y los numeros que nadie publica — el tiempo real que toma operar cada cliente.
+
+Una aclaracion antes de empezar:
+Los numeros absolutos los voy a dar en rangos o en porcentajes donde corresponde.
+No por falta de transparencia, sino porque tenemos clientes activos y hay informacion que forma parte de su relacion comercial con nosotros.
+Lo demas va completo.
+
+Empecemos."
+
+[SEGMENTO 1 — MRR — 1:30 a 3:30]
+
+"MRR: Monthly Recurring Revenue. El ingreso mensual recurrente.
+
+En UGC Colombia el MRR solo cuenta lo cobrado. No lo facturado. No lo prometido.
+Si un cliente firma un contrato pero no ha pagado, ese MRR no existe en nuestros numeros.
+
+Esta distincion importa mas de lo que parece.
+Hay agencias que cuentan el ingreso cuando firman el contrato.
+Eso infla los numeros y te da una falsa sensacion de solidez.
+
+Nuestro MRR actual esta en un rango entre $7.000 y $10.000 USD mensuales.
+Les doy el rango porque tenemos clientes en diferentes ciclos de pago y el numero varia semana a semana.
+
+Como se compone:
+Tenemos clientes en el plan Starter ($500/mes), Pro ($950/mes) y Premium ($1.500/mes).
+El mix actual es aproximadamente 40% Starter, 40% Pro, 20% Premium.
+
+El objetivo para fin de ano es llegar a $30.000 USD de MRR.
+Eso requiere triplicar sin destruir la calidad de entrega.
+Por eso el sistema operativo que construimos es la condicion necesaria para ese crecimiento."
+
+[SEGMENTO 2 — Margen bruto — 3:30 a 5:30]
+
+"Margen bruto. Aqui es donde la mayoria de agencias se sorprenden.
+
+El costo directo de producir UGC incluye:
+Los pagos a los creators.
+Las comisiones de plataformas de pago (Stripe, Wise, PayPal — suman entre 2.5% y 3.5% segun metodo).
+Los envios fisicos de producto cuando el cliente nos manda samples.
+El storage de archivos.
+
+Lo que NO incluye el margen bruto:
+Los sueldos del equipo (eso es gasto operativo).
+Las herramientas (Notion, Supabase, n8n — eso es OpEx).
+El paid media si estamos corriendo ads (eso es CAC).
+
+Con esa definicion, nuestro margen bruto promedio esta entre el 52% y el 58%.
+
+El rango varia segun el tipo de cliente:
+Clientes con productos fisicos que requieren envio: margen mas bajo, entre 48% y 52%.
+Clientes digitales o con producto que no requiere envio fisico: margen entre 58% y 65%.
+
+El objetivo es mantener margen bruto por encima del 55% mientras escalamos.
+Eso es posible solo si los costos de coordinacion por cliente no suben proporcionalmente.
+Por eso el sistema operativo no es solo operacional. Es financiero."
+
+[SEGMENTO 3 — CAC y LTV — 5:30 a 7:30]
+
+"CAC: costo de adquisicion por cliente.
+
+Nuestro CAC promedio en los ultimos 3 meses fue de aproximadamente $280 USD por cliente nuevo.
+
+Eso incluye: gasto en contenido organico (tiempo del equipo), gasto en paid media limitado que corrimos en Q1, y tiempo de ventas de Alexander en el cierre.
+
+LTV objetivo: $750 de ARPU promedio multiplicado por margen de 55% multiplicado por 12 meses de duracion promedio da $4.950 USD.
+
+Eso da un ratio LTV/CAC de aproximadamente 17.7x.
+
+La regla de la industria dice que con 3x ya eres viable.
+Con 17x o estas haciendo algo muy bien o hay un supuesto que no has visto.
+
+En nuestro caso hay tres cosas que lo explican:
+El contenido organico de Alexander genera demanda entrante con costo cercano a cero.
+El producto es de alta retencion si la operacion es buena — y la operacion es buena.
+El CAC no incluye costos de infra que ya estaban pagados antes de ese cliente.
+
+El riesgo: si el contenido organico baja en efectividad, el CAC sube rapido.
+Eso es dependencia de un canal. Lo estamos diversificando."
+
+[SEGMENTO 4 — Tiempo real por cliente — 7:30 a 9:30]
+
+"El numero que nadie publica: cuanto tiempo toma realmente atender a un cliente por mes.
+
+Este numero importa porque determina cuantos clientes puede aguantar un equipo sin contratar.
+
+En nuestro caso, por cliente activo al mes:
+Coordinacion operativa (briefs, seguimiento a creators, QA): 4-5 horas.
+Comunicacion con el cliente (llamadas, mensajes, reportes): 2-3 horas.
+Reporte mensual y reunion de seguimiento: 1.5 horas.
+
+Total: entre 7.5 y 9.5 horas por cliente al mes.
+
+Con un equipo de 5 personas donde el tiempo disponible para operaciones de produccion es de aproximadamente 60-70 horas por semana, la capacidad maxima sin contratar esta alrededor de 28-32 clientes activos.
+
+Estamos en 10. Tenemos espacio.
+
+Pero — y esto es importante — ese espacio no es gratis.
+A medida que crecemos, hay partes del proceso que empiezan a tener friccion.
+La friccion nos avisa antes de que el sistema se rompa.
+Por eso medimos el tiempo de coordinacion por cliente mes a mes."
+
+[SEGMENTO 5 — Proyecciones — 9:30 a 11:00]
+
+"Proyecciones para el ano con supuestos reales.
+
+Escenario conservador: cerramos 2 clientes nuevos por mes, retenemos el 75% de los existentes. MRR fin de ano: $18.000 USD.
+
+Escenario base: cerramos 3-4 clientes nuevos por mes, retenemos el 80%. MRR fin de ano: $28.000 USD.
+
+Escenario optimista: logramos activar un canal de referidos estructurado y el contenido de Alexander genera demanda suficiente para cerrar 5-6 por mes con 85% retencion. MRR fin de ano: $42.000 USD.
+
+La diferencia entre escenarios no es el producto. Es la adquisicion y la retencion.
+El producto ya esta validado.
+La palanca de crecimiento es comercial y operativa al mismo tiempo.
+
+Lo que esto implica para los proximos 3 meses:
+Primero, construir el sistema de referidos — mecanismo formal para que clientes actuales refieran nuevos clientes.
+Segundo, mejorar el onboarding hasta llegar a cero fricciones en los primeros 30 dias.
+Tercero, contratar un creator manager cuando lleguemos a 15 clientes activos.
+
+Esos tres movimientos son los que van del escenario conservador al base."
+
+[CTA — 11:00 a 12:00]
+
+"Si quieren ver el detalle de como construimos el sistema operativo que hace posibles estos numeros, el video anterior de este canal lo explica paso a paso.
+
+Y si tienen una agencia o estan pensando en armar una, escribeenme por Instagram o LinkedIn. Tengo tiempo limitado pero me interesa hablar con gente que esta construyendo en serio.
+
+Suscribanse si les interesa el build in public. El proximo video va a ser sobre los errores operativos que casi nos matan — ese es el que mas me cuesta publicar.
+
+Nos vemos."
+
+---
+
+### YT-03 — "Mano derecha del CEO: que hace realmente un COO en agencia boutique"
+
+**Titulo SEO:** Que Hace un COO en una Agencia Boutique — El Rol Mas Invisible y Critico (2026)
+**Thumbnail concept:** Split screen: Alexander hablando en publico (izquierda) / Brian frente a un dashboard (derecha). Texto: "El CEO que todos ven. El COO que hace que funcione."
+**Duracion objetivo:** 10 minutos
+**Chapters:**
+- 0:00 — El malentendido sobre el rol de COO
+- 1:30 — Lo que el CEO hace vs lo que hace el COO
+- 3:30 — Un dia real en la vida del COO
+- 5:30 — Los momentos donde el COO salva la agencia
+- 7:30 — Como construir este rol desde cero
+- 9:00 — CTA
+
+---
+
+**GUION COMPLETO:**
+
+[INTRO — 0:00 a 1:30]
+
+"Hay un rol en las agencias que nadie quiere, que todos necesitan y que casi nadie entiende.
+
+El COO. El Chief Operating Officer. La mano derecha del CEO.
+
+Yo soy ese rol en UGC Colombia. Trabajo con Alexander Cast, fundador de la agencia.
+El tiene 25 anos. Yo soy mayor. El sella los deals. Yo me aseguro de que los deals se entreguen.
+
+Este video es para los que estan pensando en ese rol — ya sea para contratarlo, para serlo, o para entender si lo necesitan.
+
+Y tambien es para los founders que operan solos y no saben exactamente en que momento necesitan contratar ese perfil.
+
+Porque hay un momento especifico en que un CEO solo ya no puede ser tambien el COO.
+Y casi siempre lo descubren tarde."
+
+[SEGMENTO 1 — CEO vs COO — 1:30 a 3:30]
+
+"La forma mas clara de explicar la diferencia:
+
+El CEO mira hacia afuera y hacia adelante.
+Estrategia. Clientes. Marca. Alianzas. Levantamiento de capital si aplica. Donde va la agencia en 12 meses.
+
+El COO mira hacia adentro y hacia ahora.
+Sistemas. Procesos. Personas. Metricas de operacion. Que esta pasando esta semana.
+
+En la practica:
+Alexander esta pensando en como posicionar la agencia para un segmento nuevo de clientes.
+Yo estoy pensando en si tenemos suficiente capacidad en el roster para el batch del cliente 8 la proxima semana.
+
+Los dos pensamientos son necesarios al mismo tiempo.
+Pero son imposibles de sostener simultaneamente por una sola persona sin perder calidad en alguno de los dos.
+
+El error clasico del founder que hace ambas cosas solo:
+Cuando esta enfocado en vender, la operacion sufre.
+Cuando esta enfocado en operar, el pipeline de ventas se seca.
+Es un ciclo de feast and famine que destruye el crecimiento sostenible."
+
+[SEGMENTO 2 — Un dia real — 3:30 a 5:30]
+
+"Un martes tipico en mi semana:
+
+8am: reviso el dashboard de produccion. Cuantas entregas vencen esta semana. Cuales tienen riesgo.
+Si hay algo en riesgo, lo escalo a Diana antes de que sea urgente.
+
+9am: reunion semanal de equipo. 20 minutos. No mas.
+Agenda: bloqueos, prioridades, handoffs de la semana.
+
+10am: reviso mensajes de creators pendientes de respuesta.
+Cualquier creator que lleva mas de 12h esperando respuesta del equipo, lo resuelvo yo.
+El creator que espera es un creator que se atrasa.
+
+11am-1pm: trabajo en procesos. Esta semana estoy actualizando el SOP de onboarding de creador nuevo.
+Identificamos una friccion la semana pasada y la estoy documentando para que no vuelva a ocurrir.
+
+2pm: llamada de seguimiento con un cliente que lleva 2 meses con nosotros.
+Agenda: como van sus videos, que ajustamos, que sigue.
+20 minutos. Agenda fija. Sin improvisar.
+
+4pm: reviso metricas de la semana. Entregas completadas, entregas en revision, briefs enviados.
+Si algo esta fuera del rango normal, lo noto hoy — no el viernes.
+
+6pm: cierre. Actualizo el dashboard con el status del dia. Dejo notas para el equipo.
+
+No es glamoroso. Es exactamente lo que necesita ser."
+
+[SEGMENTO 3 — Cuando el COO salva la agencia — 5:30 a 7:30]
+
+"Hay tres momentos donde el COO literalmente salva la agencia.
+
+Momento 1: cuando el CEO sobreprometio.
+Ocurre. Alexander cierra un cliente con un timeline agresivo porque en el momento del cierre cree que es posible.
+Mi trabajo: revisar la realidad operativa, ver si podemos cumplir, y si no podemos, comunicarselo antes de que el cliente se entere por la experiencia.
+En el 80% de los casos encontramos la forma. En el 20% tenemos que hablar con el cliente para ajustar expectativas. Los dos escenarios son mejores que fallar en silencio.
+
+Momento 2: cuando un creator desaparece a mitad de un proyecto.
+Ocurrio una vez. El creator tuvo una emergencia familiar. Legitima.
+El problema: el cliente no sabe eso. El cliente sabe que su video no llega.
+Mi trabajo en ese momento: activar un creator de reemplazo en menos de 4 horas, comunicar proactivamente al cliente con un nuevo timeline, y documentar el incidente para construir un protocolo de contingencia.
+Ese incidente costo tiempo. El protocolo que construimos despues no ha vuelto a costar nada.
+
+Momento 3: cuando el equipo esta al limite de capacidad y llega una oportunidad de cliente.
+Mi trabajo: hacer el analisis de capacity real, darle al CEO un numero claro, y si la respuesta es si, hacer el plan operativo para absorber ese cliente sin afectar a los existentes.
+Sin ese analisis, la respuesta instintiva siempre es si. Y el si que no tiene plan destruye lo que ya esta funcionando."
+
+[SEGMENTO 4 — Como construir este rol — 7:30 a 9:00]
+
+"Si eres founder y estas pensando en contratar un COO, o si eres el tipo de persona que quiere ser ese rol, esto es lo que recomiendo:
+
+Para el founder:
+No contrates un COO hasta que tengas procesos documentados para darle.
+Si no tienes nada documentado, no estas contratando un COO. Estas contratando a alguien para que improvise igual que tu.
+Empieza a documentar los procesos antes de contratar. Eso hace la transicion mucho mas efectiva.
+
+Para el COO:
+Tu primer trabajo en cualquier agencia es escuchar. No optimizar. Escuchar.
+Entender como funciona todo, por que funciona asi, que cosas funcionan aunque no tengan SOP.
+Las primeras 4 semanas son de observacion y documentacion. No de cambios.
+Los cambios mal temporalizados rompen confianza. Y sin confianza del CEO, el COO no puede operar.
+
+La relacion CEO/COO es la mas importante de la empresa.
+Mas que la relacion con cualquier cliente.
+Si esa relacion no tiene claridad de roles, comunicacion directa y confianza mutua, nada de lo demas funciona."
+
+[CTA — 9:00 a 10:00]
+
+"Si esto les genero preguntas sobre como estructurar su agencia o sobre el rol de operaciones, dejenlas en los comentarios.
+
+Y si son founders buscando a alguien como este perfil para su agencia, o si son operadores buscando un espacio donde desarrollar este trabajo: escribanme. No prometo responderle a todos, pero si prometo leer.
+
+El siguiente video de este canal va a ser sobre los cinco SOPs que mas han impactado nuestra operacion.
+Concreto. Con los documentos reales.
+
+Nos vemos."
+
+---
+
+## 7. GUIONES X THREADS (6 threads de 8-10 tweets)
+
+---
+
+### XT-01 — "El sistema operativo de una agencia UGC"
+
+**Tweet 1 (hook):**
+El sistema operativo de una agencia UGC de 10 clientes y 30 creators.
+5 capas. Todo documentado.
+Hilo:
+
+**Tweet 2:**
+Capa 1: Visibilidad.
+Si no puedo saber en 5 minutos el estado de cada cliente y cada entrega, el sistema fallo.
+Supabase + dashboard propio.
+Cada proyecto: cliente, creator, deadline, status, ultima actualizacion.
+
+**Tweet 3:**
+Capa 2: Comunicacion estructurada.
+Tres canales. Tres funciones. Nada mas.
+- WhatsApp: urgencias y confirmaciones
+- Notion: documentacion y briefs
+- Email: formalizacion y contratos
+Si algo llega al canal equivocado, lo redirigimos. Sin excepciones.
+
+**Tweet 4:**
+Capa 3: Cadencias fijas.
+Lunes 9am: reunion de 20 min. Solo bloqueos.
+Miercoles: check de status de entregas activas.
+Viernes: cierre semanal de 5 minutos.
+Sin estas tres cadencias, cada semana es una sorpresa.
+
+**Tweet 5:**
+Capa 4: SOPs para todo lo repetible.
+Si algo se hace mas de 2 veces, tiene SOP.
+Brief a creador: SOP.
+Onboarding de cliente: SOP.
+Entrega: SOP.
+Renewal call: SOP.
+El SOP libera el criterio para lo que realmente lo necesita.
+
+**Tweet 6:**
+Capa 5: Metricas que importan.
+No miro 20 metricas. Miro 5:
+- Entregas a tiempo
+- Revisiones por pieza (avg 1.2)
+- Health Score por cliente
+- Tiempo de onboarding
+- Tasa de renewal
+Con esas 5 se donde duele.
+
+**Tweet 7:**
+El resultado:
+30 creators coordinados en 4 ciudades.
+10 clientes activos.
+94% de entregas a tiempo el ultimo trimestre.
+Equipo de 5 personas.
+Sin ese sistema, somos otro estudio creativo que opera en caos.
+
+**Tweet 8:**
+La pregunta que me hacen siempre:
+"Cuanto tiempo tomo construir esto?"
+Respuesta honesta: 6 meses de iteracion.
+El primer mes fue solo documentar lo que ya existia.
+Eso solo redujo los incendios a la mitad.
+
+**Tweet 9:**
+Lo que aprendi construyendo este sistema:
+El sistema no mata la creatividad. La protege.
+Sin estructura, el equipo gasta energia en coordinar lo que podria estar automatizado.
+Con estructura, gasta esa energia en lo que realmente necesita criterio humano.
+
+**Tweet 10:**
+Si estas armando una agencia y quieres el template de alguna de estas capas, dejame un reply y lo comparto en el proximo thread.
+
+---
+
+### XT-02 — "5 SOPs que toda agencia necesita"
+
+**Tweet 1 (hook):**
+5 SOPs que salvaron nuestra agencia UGC.
+No son glamorosos. Son los que mas importan.
+Hilo:
+
+**Tweet 2:**
+SOP 1: Brief estandar de creador.
+12 campos obligatorios. Tono, prohibiciones, referencia visual, formato exacto, deadline, metodo de entrega.
+Antes: 2.3 revisiones por pieza promedio.
+Despues: 1.2 revisiones por pieza.
+Un documento. La mitad del retrabajo.
+
+**Tweet 3:**
+SOP 2: Protocolo de alerta temprana.
+Creator no confirma recepcion en 24h → alerta.
+Sin avance en 48h → escalamiento a QA lead.
+Sin noticias en 72h → reasignacion inmediata.
+Antes de este SOP: sorpresas de ultimo minuto.
+Despues: cero entregas perdidas por desaparicion de creator.
+
+**Tweet 4:**
+SOP 3: Reporte mensual al cliente.
+Estructura fija:
+- Piezas entregadas y aprobadas
+- Metricas de videos publicados
+- Novedades del siguiente batch
+Antes: cada reporte diferente, tardaba horas.
+Ahora: 45 min con el template. Siempre el mismo nivel de informacion.
+
+**Tweet 5:**
+SOP 4: Renewal call de 20 minutos.
+Agenda fija al mes 2 y al mes 5:
+5 min: numeros del cliente
+5 min: que ajustamos
+5 min: que sigue
+5 min: confirmacion de renovacion
+Tasa de renewal con esta llamada: 80%.
+Sin ella: 45%.
+El mismo tiempo. El triple de retention.
+
+**Tweet 6:**
+SOP 5: Offboarding de creator.
+Cuando un creator sale del roster:
+Pagos pendientes liquidados en 48h.
+Accesos revocados.
+Feedback documentado en su perfil.
+La puerta queda abierta para reactivar.
+Evita conflictos. Cuida la red.
+
+**Tweet 7:**
+La logica detras de los 5:
+Cada uno nacio de un incidente real.
+Brief estandar: de un video mal interpretado.
+Alerta temprana: de un creator que desaparecio.
+Reporte: de un cliente que no entendia el valor.
+Renewal call: de un cliente que churneo sin avisar.
+Offboarding: de un conflicto de pagos.
+
+**Tweet 8:**
+El patron que veo en agencias sin estos SOPs:
+Operan de memoria.
+La memoria falla cuando el equipo crece.
+La memoria falla cuando hay presion.
+La memoria falla cuando la persona que la tiene no esta.
+Los SOPs no reemplazan la memoria. La hacen irrelevante.
+
+**Tweet 9 (CTA):**
+Si quieres el template de alguno de estos SOPs, sigeme.
+El proximo mes voy a publicar el de brief estandar de creador completo.
+Es el que mas preguntas genera.
+
+---
+
+### XT-03 — "Por que el COO es el rol mas importante e invisible"
+
+**Tweet 1 (hook):**
+Nadie quiere ser COO.
+Todos quieren ser el CEO que cierra deals y sale en el contenido.
+El COO es el rol mas subestimado en agencias creativas.
+Y por eso la mayoria de agencias operan en caos permanente.
+Hilo:
+
+**Tweet 2:**
+El CEO mira hacia afuera y hacia adelante.
+Estrategia, ventas, marca, alianzas.
+
+El COO mira hacia adentro y hacia ahora.
+Sistemas, procesos, personas, metricas de operacion.
+
+Los dos son necesarios al mismo tiempo.
+Una persona no puede hacer los dos bien.
+
+**Tweet 3:**
+El exito del COO es invisible.
+Cuando hace bien su trabajo, nada pasa.
+Las entregas llegan a tiempo.
+Los clientes no se quejan.
+El equipo sabe que hacer.
+Eso no genera likes. Genera estabilidad.
+Y la estabilidad en una agencia es lo mas escaso que existe.
+
+**Tweet 4:**
+Lo que el COO ve que el CEO no ve:
+- El creator que lleva 3 semanas sin aceptar proyectos
+- El cliente que responde el feedback en 5 dias (riesgo de retraso)
+- El proceso que funciona solo porque una persona lo sostiene (single point of failure)
+- El brief que genera mas revisiones de lo normal (senala un problema de comunicacion)
+
+**Tweet 5:**
+Se confunde el COO con administracion.
+No es lo mismo.
+Administrar es responder a lo que ya paso.
+Dirigir sistemas es construir estructuras que previenen que las cosas pasen mal.
+El COO no apaga incendios. Construye las condiciones para que no haya incendios.
+
+**Tweet 6:**
+El momento en que un founder necesita un COO:
+Cuando los clientes se quejan de cosas que el CEO no supo que estaban pasando.
+Cuando el CEO tiene que estar en todas las llamadas porque nada funciona sin el.
+Cuando el equipo no sabe exactamente de que es responsable cada quien.
+Esos tres signos juntos = ya necesitabas COO hace 3 meses.
+
+**Tweet 7:**
+Mi trabajo como COO de @agenciaugccolombia en la practica:
+30 creators coordinados en 4 ciudades.
+10 clientes activos.
+5 personas en el equipo.
+Alexander cierra deals y genera contenido.
+Yo me aseguro de que lo que promete, se entregue.
+Eso es division de trabajo que funciona.
+
+**Tweet 8:**
+Para los que quieren ser COO:
+Tu primer trabajo en cualquier agencia es escuchar. No optimizar.
+Las primeras 4 semanas son de observacion y documentacion.
+Los cambios mal temporalizados rompen confianza.
+Y sin confianza del CEO, el COO no puede operar.
+
+**Tweet 9 (CTA):**
+Si eres founder y te identificaste con alguno de estos signos: conversemos.
+Si eres el tipo de persona que opera en este rol o quiere serlo: tambien.
+DMs abiertos.
+
+---
+
+### XT-04 — "De $0 a $X MRR sin contratar — puro proceso"
+
+**Tweet 1 (hook):**
+Pasamos de 2 clientes a 10 activos sin contratar a nadie nuevo.
+No fue magia. Fue estructura.
+Lo que hicimos exactamente.
+Hilo:
+
+**Tweet 2:**
+Con 2 clientes todo era sostenible aunque caotico.
+WhatsApp sin orden. Briefs verbales. Coordinacion de memoria.
+Funcionaba porque el volumen era bajo.
+Al llegar al cliente 4, el sistema empezo a crujir.
+
+**Tweet 3:**
+Lo que hicimos antes de tomar el cliente 5:
+1. Documentamos cada proceso existente, incluyendo los no escritos.
+2. Identificamos donde se duplicaba esfuerzo.
+3. Estandarizamos el brief de creador (una plantilla para todos los formatos).
+4. Automatizamos recordatorios de deadline via n8n.
+5. Creamos roster de creators con capacidad y disponibilidad real declarada.
+
+**Tweet 4:**
+Resultado de esa semana de trabajo:
+La carga por cliente nuevo cayo de ~10h a ~4h de coordinacion mensual.
+Con esa eficiencia, el mismo equipo puede manejar 2.5x mas clientes.
+No necesitabamos contratar. Necesitabamos optimizar.
+
+**Tweet 5:**
+Del cliente 5 al 10 lo que cambia:
+El roster empieza a tener mas presion. Necesitas mas creators disponibles, no mas personas en el equipo.
+El dashboard de produccion se vuelve critico. Sin visibilidad en tiempo real, pierdes el control.
+La comunicacion con clientes necesita mas estructura. Los reportes no pueden ser ad hoc.
+
+**Tweet 6:**
+La matematica de la eficiencia operativa:
+Si cada cliente requiere 10h de coordinacion, 1 persona puede manejar 8-10 clientes.
+Si optimizas a 4h por cliente, esa misma persona puede manejar 20-25.
+La primera palanca de escalabilidad nunca es contratar. Es optimizar.
+
+**Tweet 7:**
+Cuando SI contratar:
+Cuando el proceso esta optimizado y documentado.
+Cuando el volumen supera lo que el sistema puede absorber incluso optimizado.
+Contratar sin proceso es meter mas gente en el caos.
+Contratar con proceso es ampliar la capacidad de algo que ya funciona.
+
+**Tweet 8:**
+Para los que estan en los primeros 5 clientes:
+El momento de construir el sistema es antes de necesitarlo.
+No cuando ya estas al limite.
+Cuando ya estas al limite, no tienes tiempo de construir. Solo de sobrevivir.
+
+**Tweet 9 (CTA):**
+La proxima semana publico el thread con las herramientas exactas que usamos.
+Sigueme para no perdertelo.
+
+---
+
+### XT-05 — "5 red flags operativas de una agencia"
+
+**Tweet 1 (hook):**
+5 red flags operativas que dicen que una agencia esta a punto de implomar.
+Las vi en otras. Las detectamos a tiempo en la nuestra.
+Hilo:
+
+**Tweet 2:**
+Red flag 1: El CEO esta en todas las llamadas.
+Si el CEO no puede delegar una llamada de seguimiento con un cliente, no tiene un equipo. Tiene dependientes.
+El cliente no deberia necesitar hablar con el CEO para que las cosas funcionen.
+
+**Tweet 3:**
+Red flag 2: Nadie sabe el status de un proyecto sin preguntarle a alguien.
+Si para saber si una entrega va bien tienes que preguntarle a Diana o a Brian, no tienes visibilidad. Tienes dependencia de personas.
+Los proyectos deben tener status visible sin preguntar.
+
+**Tweet 4:**
+Red flag 3: El mismo error ocurre mas de dos veces.
+Si un tipo de problema se repite, no es mala suerte. Es ausencia de proceso.
+La primera vez es un incidente. La segunda es una advertencia. La tercera es un sistema roto.
+
+**Tweet 5:**
+Red flag 4: El onboarding de un cliente nuevo depende de que el fundador este disponible.
+Si el cliente nuevo necesita al fundador para activarse, el negocio no escala.
+El onboarding debe funcionar sin el CEO. Con un SOP y el equipo entrenado.
+
+**Tweet 6:**
+Red flag 5: La tasa de revisiones por pieza es mayor a 2.
+Si cada video necesita 2 o mas rondas de revision, el brief esta roto.
+No el creator. El brief.
+Un brief claro reduce las revisiones a menos de 1.5 en promedio.
+
+**Tweet 7:**
+Por que estas cosas son importantes ahora y no "cuando seamos mas grandes":
+Porque cada una de estas red flags cuesta mas cara a medida que escala.
+Un proceso roto con 3 clientes es molesto.
+El mismo proceso roto con 15 clientes es una crisis.
+
+**Tweet 8:**
+Lo que hicimos cuando identificamos dos de estas red flags en nuestra operacion:
+Paramos una semana de crecimiento.
+Nos sentamos a documentar y construir el proceso que faltaba.
+Luego volvimos a escalar.
+Vale mas perder una semana de crecimiento que perder un cliente por operaciones rotas.
+
+**Tweet 9 (CTA):**
+Si tu agencia tiene alguna de estas red flags y quieres hablar de como abordarla: DMs abiertos.
+O dejame en los comentarios cual tienes y lo trabajo en un thread.
+
+---
+
+### XT-06 — "Lo que aprendi siendo mano derecha de un founder joven"
+
+**Tweet 1 (hook):**
+Soy la mano derecha de un founder de 25 anos.
+Hay cosas de ese rol que no te cuentan.
+Lo que aprendi en los ultimos meses.
+Hilo:
+
+**Tweet 2:**
+Los founders jovenes toman decisiones rapido.
+Al principio lo veia como impulsividad.
+Luego entendi: su velocidad es una ventaja competitiva real.
+Mi trabajo no es frenarlo. Es asegurarme de que la operacion aguante el ritmo.
+
+**Tweet 3:**
+La ambicion del CEO sin estructura del COO es crecimiento disfrazado de caos.
+Cuando llegue habia clientes pero no procesos.
+Habia promesas pero no sistemas de entrega.
+El primer mes lo use todo en documentar lo que ya existia.
+Eso solo redujo los incendios a la mitad.
+
+**Tweet 4:**
+Lo mas valioso que puedo darle a un founder no es ejecutar sus ideas.
+Es decirle "esta idea tiene un hueco operativo aqui" antes de que lo descubra caro.
+Eso requiere confianza mutua.
+Y la confianza se construye en los primeros 30 dias, no despues.
+
+**Tweet 5:**
+Trabajar con alguien menor que yo:
+Me quito la arrogancia de pensar que experiencia = razon.
+Alexander no tiene 15 anos de industria. Tiene velocidad, intuicion de mercado y disposicion a experimentar que yo no tengo de forma natural.
+Los dos aprendemos del otro constantemente.
+
+**Tweet 6:**
+Lo que el CEO no puede ver porque esta mirando hacia adelante:
+El creator que lleva semanas sin actividad.
+El proceso que funciona solo porque una persona lo sostiene.
+El cliente cuyo Health Score bajo sin que nadie lo notara.
+Eso es lo que el COO tiene que ver.
+
+**Tweet 7:**
+La regla que mas me ha servido en este rol:
+Si no esta documentado, no existe.
+No importa que "todo el mundo sepa como hacerlo".
+Ese conocimiento desaparece cuando la persona que lo tiene no esta.
+Los SOPs son la memoria institucional. Y la memoria institucional es la base del escale.
+
+**Tweet 8:**
+Para los COOs o manos derechas leyendo esto:
+Tu exito es invisible.
+Cuando haces bien tu trabajo, nada pasa.
+No hay likes para el proceso que funciono.
+No hay aplauso para el incendio que evitaste.
+Solo hay una agencia que opera bien. Eso es suficiente.
+
+**Tweet 9 (CTA):**
+Si eres founder buscando ese perfil o si eres el tipo que quiere ser ese rol en una agencia:
+Sigueme. Este es el contenido que publico.
+Y si quieres conversar: DMs abiertos.
+
+---
+
+## 8. NEWSLETTERS (4 ediciones)
+
+---
+
+### NL-01 — "El sistema operativo de una agencia UGC (revelado)"
+
+**Asunto:** El sistema que hace funcionar todo esto
+**Preview text:** 5 capas. 30 creators. Sin caos.
+
+---
+
+Hola,
+
+Soy Brian, COO de UGC Colombia.
+
+Cada vez que alguien nos pregunta como coordinamos 30 creators en 4 ciudades con un equipo de 5 personas, la respuesta corta es: con un sistema operativo que construimos desde cero.
+
+Hoy te lo muestro completo.
+
+**Capa 1: Visibilidad total**
+
+Si no puedo saber en 5 minutos el estado de cada proyecto, el sistema fallo. Usamos Supabase como base de datos central. Cada entrega tiene: cliente, creator asignado, deadline, status actual, ultima actualizacion. Sin ese panel, operarianmos de memoria. Y la memoria falla exactamente cuando mas la necesitas.
+
+**Capa 2: Comunicacion estructurada**
+
+Tres canales. Tres funciones. Nada mas. WhatsApp para urgencias y confirmaciones rapidas. Notion para briefs, SOPs y documentacion. Email para contratos y formalizacion. Si algo llega al canal equivocado, lo redirigimos. Sin excepciones. La claridad de canal reduce la friccion de comunicacion en un 60%.
+
+**Capa 3: Cadencias fijas**
+
+Lunes 9am: reunion de 20 minutos. Solo bloqueos. Miercoles: check de status de entregas activas. Viernes: cierre semanal de 5 minutos. Sin estas tres cadencias, cada semana es una sorpresa. Con ellas, los problemas aparecen con tiempo suficiente para resolverlos.
+
+**Capa 4: SOPs para todo lo repetible**
+
+Si algo se hace mas de dos veces, tiene SOP. El brief de creador. El onboarding del cliente. El reporte mensual. La renewal call. El SOP no reemplaza el criterio. Lo libera para lo que realmente lo necesita.
+
+**Capa 5: Metricas que importan**
+
+No miro 20 metricas. Miro 5: entregas a tiempo, revisiones promedio por pieza, Health Score por cliente, tiempo de onboarding y tasa de renewal. Con esas cinco se exactamente donde duele.
+
+**El resultado actual:**
+- 94% de entregas a tiempo el ultimo trimestre
+- 1.2 revisiones promedio por pieza (era 2.3 hace 6 meses)
+- 80% de tasa de renewal mensual
+
+Ese sistema tomo 6 meses construirlo. No en un sprint. En iteraciones continuas, cada una nacida de un problema real que identifique y documente.
+
+La proxima edicion: los numeros que no publicamos en redes sociales. MRR, margen, CAC. Build in public de verdad.
+
+Hasta la proxima,
+Brian Velasquez
+COO, UGC Colombia
+
+---
+
+### NL-02 — "Build-in-public: numeros que no publicamos en redes"
+
+**Asunto:** Los numeros reales (los que no caben en un Reel)
+**Preview text:** MRR, margen bruto y CAC. Sin filtros.
+
+---
+
+Hola,
+
+Esta edicion va a ser incómoda para mi.
+
+No porque tenga miedo de la competencia. Sino porque publicar numeros reales siempre genera preguntas que no tengo todas las respuestas.
+
+Pero la industria UGC en LATAM necesita mas builds in public y menos screenshots de revenue sin contexto.
+
+Entonces aqui van.
+
+**MRR actual**
+
+Entre $7.000 y $10.000 USD mensuales. Te doy el rango porque el numero varia segun el ciclo de pago de cada cliente. Lo importante: solo cuenta lo cobrado. No lo facturado. No lo prometido. Si un cliente firma pero no paga, ese MRR no existe en nuestros numeros.
+
+**Margen bruto**
+
+Entre 52% y 58% dependiendo del tipo de cliente. Clientes con envios fisicos de producto bajan el margen. Clientes digitales lo suben. El objetivo es mantenerlo por encima del 55% mientras escalamos. Eso solo es posible si el costo de coordinacion por cliente no crece proporcionalmente al numero de clientes. Por eso el sistema operativo no es solo operacional. Es financiero.
+
+**CAC**
+
+Aproximadamente $280 USD por cliente nuevo en los ultimos 3 meses. Incluye: contenido organico (tiempo del equipo), paid media limitado de Q1 y tiempo de ventas de Alexander. El CAC es bajo principalmente porque el contenido organico de Alexander genera demanda entrante con costo cercano a cero. Ese es nuestro mayor riesgo: dependencia de un canal. Lo estamos diversificando.
+
+**LTV/CAC**
+
+Con un ARPU de $750, margen del 55% y duracion promedio de 12 meses, el LTV objetivo es de aproximadamente $4.950. Eso da un ratio de 17.7x. La regla del sector dice que con 3x ya eres viable. Con 17x o estas haciendo algo muy bien o hay un supuesto que no has visto. Honestamente: probablemente los dos.
+
+**El numero que nadie publica: tiempo real por cliente**
+
+Cada cliente activo nos consume entre 7.5 y 9.5 horas de coordinacion al mes. Con un equipo de 5 personas y ~65h disponibles para produccion, la capacidad maxima sin contratar esta alrededor de 28 a 30 clientes. Estamos en 10. Tenemos espacio. Pero ese espacio no es gratis.
+
+**Proyeccion para fin de ano**
+
+Escenario base: 28.000 USD de MRR con 3-4 clientes nuevos por mes y 80% de retencion. Escenario optimista: 42.000 USD si activamos el canal de referidos y mantenemos 85% de retencion.
+
+La diferencia entre escenarios no es el producto. El producto ya esta validado. La palanca de crecimiento es comercial y operativa al mismo tiempo.
+
+La proxima edicion: el error operativo que casi nos mata. Ese es el que mas me cuesta escribir.
+
+Hasta la proxima,
+Brian Velasquez
+COO, UGC Colombia
+
+---
+
+### NL-03 — "El error operativo que casi nos mato"
+
+**Asunto:** El mes que casi perdemos dos clientes por el mismo error
+**Preview text:** No fue falta de talento. Fue un proceso roto.
+
+---
+
+Hola,
+
+Esta edicion es sobre el error operativo que mas nos costo.
+
+No en dinero. En confianza.
+
+Era el mes 3 de operacion. Teniamos 6 clientes activos. El equipo estaba funcionando bien — o eso creiamos.
+
+Habia un proceso que "todo el mundo sabia como hacer" pero que nadie habia documentado: el seguimiento a creadores entre el momento en que recibian el brief y el momento en que entregaban el video.
+
+El seguimiento existia. Pero vivia en la cabeza de Diana. Cuando Diana tuvo una semana especialmente cargada, el seguimiento no ocurrio con la misma frecuencia.
+
+El resultado: dos proyectos llegaron tarde al cliente. No un dia tarde. Cuatro dias tarde.
+
+Los dos clientes se enteraron de la demora cuando preguntaron ellos. No cuando nosotros comunicamos.
+
+Eso es lo que mas duele: no el retraso en si, sino que el cliente se entero antes que nosotros de que algo estaba mal.
+
+**Lo que hicimos:**
+
+Primero, llamamos a los dos clientes ese mismo dia con la situacion clara y el nuevo timeline. Sin excusas. Con responsabilidad directa.
+
+Segundo, entregamos ambos proyectos con una pieza adicional gratuita como compensacion por el retraso. No esperaron a pedirla.
+
+Tercero — y esto es lo mas importante — documentamos el proceso de seguimiento esa semana.
+
+El nuevo SOP de seguimiento a creadores: si un creador no confirma recepcion del brief en 24h, alerta automatica. Si no hay avance confirmado en 48h, escalamiento a Diana. Si no hay noticias en 72h, reasignacion y comunicacion proactiva al cliente.
+
+**El resultado de ese SOP:**
+
+En los 5 meses siguientes: cero entregas perdidas por falta de seguimiento. Cero clientes que se enteraron de un problema antes que nosotros.
+
+No cambiamos a Diana. No contratamos a nadie. Documentamos un proceso que ya existia pero que dependia de una sola persona para funcionar.
+
+La leccion que cargo desde ese dia:
+
+Un proceso que vive en la cabeza de una persona no es un proceso. Es una dependencia. Y las dependencias fallan exactamente cuando mas las necesitas.
+
+La proxima edicion: capacity planning. Como saber cuantos clientes mas puedes tomar antes de que la calidad baje.
+
+Hasta la proxima,
+Brian Velasquez
+COO, UGC Colombia
+
+---
+
+### NL-04 — "Capacity planning: cuantos clientes mas puedo tomar"
+
+**Asunto:** La pregunta mas peligrosa en una agencia
+**Preview text:** La respuesta instintiva siempre es si. La respuesta correcta requiere 5 calculos.
+
+---
+
+Hola,
+
+"Podemos tomar otro cliente?"
+
+Es la pregunta mas peligrosa en una agencia. Peligrosa porque la respuesta instintiva siempre es si. Porque el dinero entra. Porque el equipo "se las arregla". Porque el CEO quiere crecer.
+
+La respuesta correcta requiere mirar cinco cosas.
+
+**1. Capacity de produccion del roster**
+
+Cuantas piezas producimos por mes ahora. Cuantas necesita el nuevo cliente. Cuanta capacidad disponible tiene el roster activo de creators.
+
+Si el roster no aguanta, el nuevo cliente va a retrasar a los existentes. Y perder un cliente existente cuesta mas que no tomar uno nuevo.
+
+En nuestro caso: cada creator activo tiene declarada su disponibilidad mensual en piezas. Antes de aceptar un cliente nuevo, verificamos que el roster puede absorber el volumen sin tocar la capacidad de los proyectos actuales.
+
+**2. Tiempo de coordinacion disponible del equipo**
+
+Cada cliente activo nos consume entre 7.5 y 9.5 horas de coordinacion al mes. Si el equipo ya esta en 85% de capacidad, ese cliente nuevo lo lleva al 105%. El 105% no existe. Lo que existe es calidad que baja y equipo que se agota.
+
+**3. Cash flow del primer mes**
+
+El primer mes de un cliente nuevo es el mas caro operativamente: onboarding, casting de creators, primer brief, primera revision. Si el flujo de caja no aguanta ese mes sin contar ese ingreso, hay un riesgo real de tension financiera.
+
+**4. Fit del cliente con lo que ya sabemos hacer**
+
+Un cliente que pide algo que nunca hemos hecho antes multiplica el costo de coordinacion. No decimos que no automaticamente. Decimos que hay un precio de aprendizaje. Y ese precio lo declara el cliente antes de firmar.
+
+**5. Rentabilidad del cliente en cuestion**
+
+No todos los clientes son iguales. Un cliente que paga $500/mes y requiere 15 horas de atencion mensual tiene un margen por hora de tiempo muy bajo. Un cliente que paga $1.500/mes y tiene procesos claros y feedback rapido es el tipo de cliente que financia el crecimiento.
+
+**El proceso que seguimos:**
+
+Antes de decir si a cualquier cliente nuevo, Brian revisa estos cinco puntos. El resultado de la revision es una de tres respuestas: si con plan, si con ajuste (de roster, de timing, de equipo) o no por ahora con fecha de revision.
+
+El si instintivo sin ese analisis es el origen del 80% de los problemas operativos que veo en agencias.
+
+**Numero actual:**
+
+Estamos en 10 clientes. Capacidad maxima estimada sin contratar: 28 a 30. El proximo hito operativo es contratar un creator manager cuando lleguemos a 15 clientes activos. Antes de ese hito, el sistema actual aguanta.
+
+Despues de ese hito, necesitamos la siguiente capa de estructura.
+
+Eso es capacity planning. No es una sola decision. Es una practica continua de saber donde estas y donde esta tu techo antes de chocar con el.
+
+Hasta la proxima,
+Brian Velasquez
+COO, UGC Colombia
+
+---
+
+## 9. REGLAS DE EJECUCION BRIAN
+
+### Batch Recording Schedule
+
+**Frecuencia recomendada:** una sesion de grabacion semanal de 90 minutos.
+
+| Dia | Actividad | Tiempo |
+|---|---|---|
+| Lunes | Redaccion de posts LinkedIn y threads X de la semana | 60 min |
+| Martes | Revision y aprobacion de contenido escrito | 20 min |
+| Miercoles | Grabacion de videos (2-3 videos en una sesion) | 90 min |
+| Jueves | Edicion basica + subtitulos + thumbnails | 45 min |
+| Viernes | Programacion de publicaciones en Buffer/Later | 20 min |
+
+**Principio del batch:** nunca grabar un video a la vez. Siempre preparar 3 temas antes de encender la camara. La transicion de tema a tema en la misma sesion es mas eficiente que calentar de nuevo otro dia.
+
+**Setup minimo para grabacion:**
+
+- Telefono con camara trasera (no frontal) montado en tripode
+- Luz natural lateral o ring light basica a 45 grados
+- Fondo limpio: pared blanca, bookshelf ordenado o setup de escritorio visible
+- Microfono de solapa o de escritorio. El audio importa mas que el video
+- Ropa solida, sin estampados complejos. Colores que contrasten con el fondo
+- Sin elementos de distraccion detras
+
+---
+
+### Vocabulario SI / NO
+
+**10 cosas que SI decir:**
+
+1. "El proceso que construimos para esto fue..."
+2. "En la practica, lo que funciona es..."
+3. "Lo que aprendimos caro en este punto fue..."
+4. "La metrica que miro para saber si esto funciona es..."
+5. "Sin este sistema, esto no existiria..."
+6. "Cuando el equipo no tiene claridad en esto, lo que pasa es..."
+7. "La primera vez que tuvimos este problema, hicimos esto mal..."
+8. "El SOP que mas impacto ha tenido es..."
+9. "Lo que nadie te dice sobre operar una agencia es..."
+10. "En nuestro caso especifico, con datos propios..."
+
+**10 cosas que NO decir:**
+
+1. "Es muy facil, solo tienes que..." — las operaciones no son faciles
+2. "Escala exponencial" — sin metricas que lo soporten
+3. "Resultado garantizado" — nada en operaciones es garantizado
+4. "Los expertos dicen..." — habla de tu propia experiencia
+5. "En teoria..." — si es teoria, no lo publiques
+6. "Hicimos todo perfecto" — la autenticidad requiere errores reales
+7. "Nuestros competidores hacen mal las cosas" — nunca atacar competencia directamente
+8. "Es sencillo" — la simplicidad operativa cuesta mucho trabajo
+9. "Cualquier agencia puede hacer esto" — contextualiza para quien aplica
+10. "Confien en el proceso" — sin mostrar cual es el proceso exactamente
+
+---
+
+### Checklist Pre-Publicacion
+
+**Para posts LinkedIn:**
+- [ ] Primera linea funciona como hook sin ver el resto
+- [ ] El post responde una sola pregunta central
+- [ ] Hay al menos un dato concreto o ejemplo especifico
+- [ ] El CTA es especifico (no "segueme", sino "sigueme para X")
+- [ ] Se lee bien en mobile (parrafos cortos, espacios entre ideas)
+- [ ] No hay jerga tecnica sin explicar
+- [ ] La firma es consistente: nombre + rol + empresa
+
+**Para videos:**
+- [ ] Los primeros 2 segundos tienen un hook visual o verbal claro
+- [ ] El audio es limpio (sin eco, sin ruido de fondo dominante)
+- [ ] Subtitulos activados o quemados en el video
+- [ ] El mensaje central se puede entender sin audio
+- [ ] Duracion apropiada al formato (Reels: max 60s, TikTok: max 90s)
+- [ ] CTA verbal al final + CTA en texto overlay
+
+**Para threads X:**
+- [ ] Tweet 1 funciona solo como hook
+- [ ] Cada tweet tiene una sola idea
+- [ ] El thread tiene un cierre con takeaway o CTA claro
+- [ ] No hay tweets relleno — cada uno aporta algo
+
+**Para newsletters:**
+- [ ] El asunto genera curiosidad sin ser clickbait
+- [ ] El preview text complementa el asunto, no lo repite
+- [ ] El cuerpo tiene estructura clara: problema, desarrollo, solucion
+- [ ] Tiene una sola idea central — no tres temas en una edicion
+- [ ] Firma consistente
+
+---
+
+**Archivo:** `content/viralidad/packs/PACK-VIRAL-BRIAN-COO-P2.md`
+**Rol corregido:** COO — Mano derecha del CEO (no finance lead)
+**Parte:** 2/2
+**Fecha:** 2026-04-10
+**Proxima revision:** 2026-05-10

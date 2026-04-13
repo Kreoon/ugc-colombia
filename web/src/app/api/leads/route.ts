@@ -159,6 +159,36 @@ export async function POST(req: NextRequest) {
           console.error("[leads] Supabase error:", error);
         }
         if (inserted) leadId = inserted.id;
+
+        // Enqueue nurturing email sequence
+        if (leadId) {
+          const steps = [
+            { key: "day_3_case_study", days: 3 },
+            { key: "day_8_tips", days: 8 },
+            { key: "day_15_contrafactual", days: 15 },
+            { key: "day_22_trends", days: 22 },
+            { key: "day_30_offer", days: 30 },
+          ];
+          const seqRows = steps.map((s) => ({
+            lead_id: leadId,
+            sequence_key: "nurturing",
+            step_key: s.key,
+            scheduled_at: new Date(Date.now() + s.days * 86400000).toISOString(),
+            status: "pending",
+          }));
+          await supabase.from("email_sequences").insert(seqRows);
+        }
+
+        // Auto-subscribe to newsletter
+        if (data.contact.email) {
+          await supabase.from("newsletter_subscribers").upsert({
+            email: data.contact.email,
+            full_name: info?.full_name || null,
+            industry: isBrand ? data.brand_info?.industry : null,
+            lead_id: leadId,
+            status: "active",
+          }, { onConflict: "email" });
+        }
       } catch (dbErr) {
         console.error("[leads] DB error:", dbErr);
       }

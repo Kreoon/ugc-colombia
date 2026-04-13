@@ -12,6 +12,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GeminiDiagnosisUpgrade } from "./GeminiDiagnosisUpgrade";
 import type { AuditData } from "../AuditModal";
 import type { LeadScore, AIDiagnosis } from "@/lib/lead-scoring";
 
@@ -158,6 +159,14 @@ export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Pr
         {diagnosis.urgency_message}
       </motion.p>
 
+      {/* Gemini IA upgrade — polling for real diagnosis */}
+      {data.lead_id && (
+        <GeminiDiagnosisUpgrade
+          leadId={data.lead_id}
+          instagramHandle={data.brand_info?.instagram_handle?.replace(/^@/, "")}
+        />
+      )}
+
       {/* CTA section */}
       <motion.div
         className="space-y-3"
@@ -212,6 +221,23 @@ export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Pr
             O escríbenos por WhatsApp
           </button>
         )}
+
+        {/* Community CTA */}
+        <div className="mt-4 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04]">
+          <p className="text-xs font-semibold text-emerald-400 mb-1">Comunidad gratuita</p>
+          <p className="text-[11px] text-brand-gray leading-relaxed mb-3">
+            Únete a +200 marcas y emprendedores aprendiendo sobre marketing, ventas y contenido.
+          </p>
+          <a
+            href={process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/ugccolombia"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/25 transition-colors"
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            Unirme al grupo de WhatsApp
+          </a>
+        </div>
 
         <button
           type="button"

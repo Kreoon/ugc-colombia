@@ -113,6 +113,15 @@ export function buildLeadEmail(
     <a href="https://ugccolombia.co" style="display:inline-block;background:${color};color:#000;font-weight:700;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;">AGENDAR LLAMADA →</a>
   </div>
 
+  <!-- Community -->
+  <div style="padding:0 24px 24px;text-align:center;">
+    <div style="border:1px solid #10B98130;border-radius:12px;padding:16px;background:#10B98108;">
+      <p style="color:#10B981;font-size:13px;font-weight:700;margin:0 0 4px;">Comunidad gratuita</p>
+      <p style="color:#BDBCBC;font-size:12px;margin:0 0 12px;">Únete a +200 marcas aprendiendo de marketing, ventas y contenido.</p>
+      <a href="https://chat.whatsapp.com/ugccolombia" style="display:inline-block;background:#10B98120;color:#10B981;font-weight:600;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:13px;">UNIRME AL GRUPO →</a>
+    </div>
+  </div>
+
   <!-- Footer -->
   <div style="padding:20px 24px;border-top:1px solid #222;">
     <p style="color:#3D3D3C;font-size:11px;margin:0;text-align:center;">

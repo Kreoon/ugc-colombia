@@ -137,6 +137,8 @@ export async function POST(req: NextRequest) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+    let leadId: string | null = null;
+
     if (
       supabaseUrl &&
       supabaseKey &&
@@ -147,11 +149,16 @@ export async function POST(req: NextRequest) {
         const { createClient } = await import("@supabase/supabase-js");
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        const { error } = await supabase.from("leads").insert(row);
+        const { data: inserted, error } = await supabase
+          .from("leads")
+          .insert(row)
+          .select("id")
+          .single();
 
         if (error && error.code !== "23505") {
           console.error("[leads] Supabase error:", error);
         }
+        if (inserted) leadId = inserted.id;
       } catch (dbErr) {
         console.error("[leads] DB error:", dbErr);
       }
@@ -159,43 +166,42 @@ export async function POST(req: NextRequest) {
       console.log("[leads] Mock insert:", JSON.stringify(row, null, 2));
     }
 
-    // Send notification email for hot leads
-    const resendKey = process.env.RESEND_API_KEY;
+    // Fire brand diagnosis pipeline in background for brands with IG handle
+    if (isBrand && data.brand_info) {
+      const diagnosisPayload = {
+        lead_id: leadId,
+        brand_name: data.brand_info.company_name,
+        instagram_handle: data.brand_info.instagram_handle || undefined,
+        website: data.brand_info.website || undefined,
+        industry: data.brand_info.industry,
+        biggest_pain: (data.brand_audit as Record<string, unknown>)?.biggest_pain as string | undefined,
+        full_name: data.brand_info.full_name,
+        email: data.contact.email,
+        whatsapp: data.contact.whatsapp,
+        qualification_score: data.qualification_score,
+        temperature: data.temperature,
+      };
 
-    if (
-      data.temperature === "hot" &&
-      resendKey &&
-      !resendKey.includes("placeholder")
-    ) {
-      try {
-        const { Resend } = await import("resend");
-        const resend = new Resend(resendKey);
+      // Fire and forget — don't block the response
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000";
 
-        await resend.emails.send({
-          from: "UGC Colombia <noreply@ugccolombia.co>",
-          to: "founder@kreoon.com",
-          subject: `🔥 Lead HOT: ${info?.full_name} — Score ${data.qualification_score}/100`,
-          html: `
-            <div style="font-family: Inter, sans-serif; background: #000; color: #fff; padding: 40px; max-width: 520px; margin: 0 auto;">
-              <h1 style="font-size: 24px; color: #F9B334; margin-bottom: 16px;">Nuevo lead calificado</h1>
-              <table style="color: #BDBCBC; font-size: 14px; line-height: 2;">
-                <tr><td style="color:#D4A017;padding-right:12px;">Nombre:</td><td>${info?.full_name}</td></tr>
-                <tr><td style="color:#D4A017;padding-right:12px;">Empresa:</td><td>${isBrand ? data.brand_info?.company_name : "Creador/a"}</td></tr>
-                <tr><td style="color:#D4A017;padding-right:12px;">Email:</td><td>${data.contact.email}</td></tr>
-                <tr><td style="color:#D4A017;padding-right:12px;">WhatsApp:</td><td>+57${data.contact.whatsapp}</td></tr>
-                <tr><td style="color:#D4A017;padding-right:12px;">Score:</td><td><strong>${data.qualification_score}/100</strong></td></tr>
-                <tr><td style="color:#D4A017;padding-right:12px;">Tipo:</td><td>${data.lead_type}</td></tr>
-              </table>
-              <p style="color: #3D3D3C; font-size: 12px; margin-top: 40px;">UGC Colombia — Lead Capture System</p>
-            </div>
-          `,
-        });
-      } catch (emailErr) {
-        console.error("[leads] Resend notification error:", emailErr);
-      }
+      fetch(`${baseUrl}/api/brand-diagnosis`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-internal-key": process.env.INTERNAL_API_KEY || "ugc-diagnosis-2026",
+        },
+        body: JSON.stringify(diagnosisPayload),
+      }).catch((err) => {
+        console.error("[leads] Failed to trigger diagnosis pipeline:", err);
+      });
+
+      console.log(`[leads] Brand diagnosis pipeline triggered for ${data.brand_info.company_name}`);
     }
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json({ success: true, lead_id: leadId }, { status: 200 });
   } catch (err) {
     console.error("[leads] Unexpected error:", err);
     return NextResponse.json(

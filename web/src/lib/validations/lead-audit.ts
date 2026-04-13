@@ -24,7 +24,7 @@ export const brandInfoSchema = z.object({
     "fintech",
     "otro",
   ], { required_error: "Selecciona tu industria" }),
-  instagram_handle: z.string().optional(),
+  instagram_handle: z.string().min(1, "Ingresa tu Instagram"),
 });
 
 // Step 2: Datos básicos de creador

@@ -65,8 +65,8 @@ export function StepBrandInfo({ onSubmit, onBack }: Props) {
 
   return (
     <StepLayout
-      title="Primero, cuéntanos de tu marca"
-      subtitle="Con esto personalizamos tu diagnóstico al 100%."
+      title="Cuéntanos de tu marca para generar tu análisis"
+      subtitle="Nuestra IA necesita estos datos para analizar tu presencia digital."
       onBack={onBack}
       onSubmit={handleSubmit}
     >

@@ -85,11 +85,11 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
 
   return (
     <StepLayout
-      title="Casi listo — ¿dónde te enviamos el diagnóstico?"
-      subtitle="Recibirás un análisis completo de tu marca por email."
+      title="¿Dónde te enviamos tu análisis gratuito?"
+      subtitle="Recibirás el diagnóstico completo por email + acceso a la comunidad."
       onBack={onBack}
       onSubmit={handleSubmit}
-      submitLabel="Ver mi diagnóstico →"
+      submitLabel="Obtener mi análisis gratis →"
       isSubmitting={isSubmitting}
     >
       <div className="space-y-4">
@@ -129,7 +129,7 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
         )}
 
         <p className="text-[11px] text-brand-gray/50 leading-relaxed">
-          Al enviar aceptas recibir tu diagnóstico por email y WhatsApp. Cero spam.
+          Recibirás: análisis de marca con IA + invitación a llamada de 30 min + acceso a la comunidad. Cero spam.
         </p>
       </div>
     </StepLayout>

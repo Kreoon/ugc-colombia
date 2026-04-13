@@ -175,70 +175,62 @@ export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Pr
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
       >
-        <p className="text-xs text-brand-gray uppercase tracking-wider font-semibold mb-2">
-          {diagnosis.cta_message}
+        {/* 3 regalos */}
+        <p className="text-xs text-brand-gray uppercase tracking-wider font-semibold mb-3">
+          Esto es gratis para ti
         </p>
 
-        {!isCold ? (
-          <>
-            {/* Hot/Warm: go to embedded calendar */}
-            <Button
-              size="xl"
-              className="w-full gap-3"
-              onClick={onBooking}
-            >
-              <Calendar className="w-5 h-5" />
-              {isHot ? "Agendar llamada prioritaria" : "Agendar llamada de diagnóstico"}
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            {isHot && (
-              <p className="text-center text-[11px] text-brand-yellow">
-                Tu score es alto — tienes slots prioritarios esta semana
-              </p>
-            )}
-          </>
-        ) : (
-          /* Cold: WhatsApp follow-up */
-          <Button
-            size="lg"
-            variant="outline"
-            className="w-full gap-3"
-            onClick={() => window.open(getWhatsAppUrl(data), "_blank")}
-          >
-            <MessageCircle className="w-5 h-5" />
-            Escríbenos por WhatsApp
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        )}
+        <div className="space-y-3">
+          {/* Regalo 1: Análisis por email */}
+          <div className="flex items-start gap-3 p-3 rounded-xl bg-brand-yellow/5 border border-brand-yellow/15">
+            <span className="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-[11px] text-brand-yellow font-bold flex-shrink-0 mt-0.5">1</span>
+            <div>
+              <p className="text-sm text-white font-medium">Análisis completo en tu email</p>
+              <p className="text-[11px] text-brand-gray">Score, brechas, recomendaciones y plan de acción personalizado.</p>
+            </div>
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1" />
+          </div>
 
-        {/* Secondary WhatsApp CTA for hot/warm */}
-        {!isCold && (
+          {/* Regalo 2: Llamada gratis */}
           <button
             type="button"
-            onClick={() => window.open(getWhatsAppUrl(data), "_blank")}
-            className="w-full flex items-center justify-center gap-2 text-sm text-brand-gray hover:text-white transition-colors py-2"
+            onClick={onBooking}
+            className="flex items-start gap-3 p-3 rounded-xl bg-brand-yellow/5 border border-brand-yellow/15 w-full text-left hover:bg-brand-yellow/10 transition-colors group"
           >
-            <MessageCircle className="w-4 h-4" />
-            O escríbenos por WhatsApp
+            <span className="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-[11px] text-brand-yellow font-bold flex-shrink-0 mt-0.5">2</span>
+            <div className="flex-1">
+              <p className="text-sm text-white font-medium">Llamada estratégica de 30 min gratis</p>
+              <p className="text-[11px] text-brand-gray">Un especialista revisa tu marca contigo y te da un plan concreto.</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-brand-yellow flex-shrink-0 mt-1 group-hover:translate-x-1 transition-transform" />
           </button>
-        )}
 
-        {/* Community CTA */}
-        <div className="mt-4 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04]">
-          <p className="text-xs font-semibold text-emerald-400 mb-1">Comunidad gratuita</p>
-          <p className="text-[11px] text-brand-gray leading-relaxed mb-3">
-            Únete a +200 marcas y emprendedores aprendiendo sobre marketing, ventas y contenido.
-          </p>
+          {/* Regalo 3: Comunidad */}
           <a
             href={process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/ugccolombia"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/25 transition-colors"
+            className="flex items-start gap-3 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 w-full text-left hover:bg-emerald-500/10 transition-colors group"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            Unirme al grupo de WhatsApp
+            <span className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-[11px] text-emerald-400 font-bold flex-shrink-0 mt-0.5">3</span>
+            <div className="flex-1">
+              <p className="text-sm text-white font-medium">Acceso a nuestra comunidad</p>
+              <p className="text-[11px] text-brand-gray">+200 marcas compartiendo estrategias de marketing, ventas y contenido.</p>
+            </div>
+            <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
           </a>
         </div>
+
+        {/* CTA principal */}
+        <Button
+          size="lg"
+          className="w-full gap-2 mt-4"
+          onClick={onBooking}
+        >
+          <Calendar className="w-5 h-5" />
+          {isHot ? "Agendar mi llamada gratis (prioritaria)" : "Agendar mi llamada gratis de 30 min"}
+          <ArrowRight className="w-5 h-5" />
+        </Button>
 
         <button
           type="button"

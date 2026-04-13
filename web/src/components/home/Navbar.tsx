@@ -159,8 +159,8 @@ export function Navbar() {
             )}
             aria-label="Iniciar diagnóstico gratuito"
           >
-            <span className="hidden sm:inline">Diagnóstico gratis →</span>
-            <span className="sm:hidden">Diagnóstico →</span>
+            <span className="hidden sm:inline">Análisis gratis →</span>
+            <span className="sm:hidden">Análisis →</span>
           </Button>
 
           {/* Botón hamburguesa mobile */}
@@ -267,7 +267,7 @@ export function Navbar() {
                 className="w-full min-h-[48px] text-base font-bold"
                 onClick={openAudit}
               >
-                Diagnóstico gratis →
+                Análisis gratis →
               </Button>
             </div>
           </DialogPrimitive.Content>

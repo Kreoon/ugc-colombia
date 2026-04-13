@@ -127,7 +127,7 @@ export function CTAFinal() {
                     "0 10px 40px -10px rgba(249,179,52,0.5), 0 0 80px -20px rgba(212,160,23,0.4)",
                 }}
               >
-                <span className="relative z-10">DIAGNÓSTICO GRATIS CON IA</span>
+                <span className="relative z-10">ANÁLISIS DE TU MARCA GRATIS</span>
                 <ArrowRight
                   className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1"
                   aria-hidden

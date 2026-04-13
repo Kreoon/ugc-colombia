@@ -27,14 +27,28 @@ export function StepType({ onSelect }: StepTypeProps) {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-[10px] font-semibold text-brand-yellow tracking-[0.2em] uppercase mb-4">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
-          Diagnóstico gratuito con IA
+          100% gratis
         </span>
         <h2 className="font-sans text-xl sm:text-2xl text-white font-bold mb-2">
-          Descubre qué necesita tu marca
+          Análisis de tu marca con IA
         </h2>
-        <p className="text-sm text-brand-gray/70 max-w-md mb-8">
-          En menos de 2 minutos recibirás un análisis personalizado con datos reales de tu industria.
+        <p className="text-sm text-brand-gray/70 max-w-md mb-4">
+          Recibe un diagnóstico completo de tu estrategia de contenido generado con inteligencia artificial.
         </p>
+        <div className="flex flex-col gap-1.5 mb-6 text-left max-w-sm">
+          <div className="flex items-center gap-2 text-xs text-brand-gray">
+            <span className="w-4 h-4 rounded-full bg-brand-yellow/15 flex items-center justify-center text-[10px] text-brand-yellow font-bold">1</span>
+            Análisis de marca con IA — datos reales de tu Instagram y ads
+          </div>
+          <div className="flex items-center gap-2 text-xs text-brand-gray">
+            <span className="w-4 h-4 rounded-full bg-brand-yellow/15 flex items-center justify-center text-[10px] text-brand-yellow font-bold">2</span>
+            Llamada de diagnóstico de 30 min — con un estratega de contenido
+          </div>
+          <div className="flex items-center gap-2 text-xs text-brand-gray">
+            <span className="w-4 h-4 rounded-full bg-brand-yellow/15 flex items-center justify-center text-[10px] text-brand-yellow font-bold">3</span>
+            Acceso a nuestra comunidad — +200 marcas aprendiendo juntas
+          </div>
+        </div>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">

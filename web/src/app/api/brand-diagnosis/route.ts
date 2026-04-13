@@ -89,6 +89,8 @@ export async function POST(req: NextRequest) {
         const { createClient } = await import("@supabase/supabase-js");
         const supabase = createClient(supabaseUrl, supabaseKey);
 
+        const slug = handle || data.brand_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
         await supabase
           .from("leads")
           .update({
@@ -104,6 +106,8 @@ export async function POST(req: NextRequest) {
               ads_found: ads.length,
               generated_at: new Date().toISOString(),
             },
+            diagnosis_slug: slug,
+            diagnosis_public: true,
           })
           .eq("id", data.lead_id);
 

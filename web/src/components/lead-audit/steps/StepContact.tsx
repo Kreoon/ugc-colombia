@@ -97,6 +97,7 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
           <label className={labelClass}>Email</label>
           <input
             type="email"
+            autoComplete="email"
             className={inputClass}
             placeholder="tu@email.com"
             value={form.email}
@@ -113,6 +114,7 @@ export function StepContact({ data, onSubmit, onBack }: Props) {
             </span>
             <input
               type="tel"
+              autoComplete="tel-national"
               className={inputClass}
               placeholder="3132947776"
               value={form.whatsapp}

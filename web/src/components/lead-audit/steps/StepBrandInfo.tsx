@@ -76,6 +76,7 @@ export function StepBrandInfo({ onSubmit, onBack }: Props) {
             <label className={labelClass}>Tu nombre</label>
             <input
               type="text"
+              autoComplete="name"
               className={inputClass}
               placeholder="Ej: Juan Pérez"
               value={form.full_name}
@@ -87,6 +88,7 @@ export function StepBrandInfo({ onSubmit, onBack }: Props) {
             <label className={labelClass}>Nombre de tu marca</label>
             <input
               type="text"
+              autoComplete="organization"
               className={inputClass}
               placeholder="Ej: Mi Tienda Online"
               value={form.company_name}
@@ -111,6 +113,7 @@ export function StepBrandInfo({ onSubmit, onBack }: Props) {
             <label className={labelClass}>Sitio web</label>
             <input
               type="url"
+              autoComplete="url"
               className={inputClass}
               placeholder="https://tumarca.com"
               value={form.website}

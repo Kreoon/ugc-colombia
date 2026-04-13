@@ -226,6 +226,7 @@ export function AgendarClient() {
                 <label className="block text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">Tu nombre</label>
                 <input
                   type="text"
+                  autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Juan Pérez"
@@ -236,6 +237,7 @@ export function AgendarClient() {
                 <label className="block text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">Tu email</label>
                 <input
                   type="email"
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"

@@ -118,7 +118,7 @@ export function buildLeadEmail(
     <div style="border:1px solid #10B98130;border-radius:12px;padding:16px;background:#10B98108;">
       <p style="color:#10B981;font-size:13px;font-weight:700;margin:0 0 4px;">Comunidad gratuita</p>
       <p style="color:#BDBCBC;font-size:12px;margin:0 0 12px;">Únete a +200 marcas aprendiendo de marketing, ventas y contenido.</p>
-      <a href="https://chat.whatsapp.com/ugccolombia" style="display:inline-block;background:#10B98120;color:#10B981;font-weight:600;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:13px;">UNIRME AL GRUPO →</a>
+      <a href="https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE" style="display:inline-block;background:#10B98120;color:#10B981;font-weight:600;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:13px;">UNIRME AL GRUPO →</a>
     </div>
   </div>
 

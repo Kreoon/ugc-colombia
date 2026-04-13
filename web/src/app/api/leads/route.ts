@@ -269,7 +269,7 @@ export async function POST(req: NextRequest) {
         const resend = new Resend(resendKey);
         const leadName = info?.full_name || "amigo/a";
         const companyName = isBrand ? data.brand_info?.company_name : "Creador/a";
-        const communityUrl = process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/ugccolombia";
+        const communityUrl = process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE";
 
         // Email al lead — bienvenida + comunidad + agenda
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ugccolombia.co";

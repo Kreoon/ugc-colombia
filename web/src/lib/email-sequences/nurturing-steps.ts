@@ -18,7 +18,7 @@ export interface LeadContext {
   diagnosis_slug?: string;
 }
 
-const COMMUNITY_URL = "https://chat.whatsapp.com/ugccolombia";
+const COMMUNITY_URL = "https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE";
 const SITE_URL = "https://ugccolombia.co";
 
 const communityFooter = `

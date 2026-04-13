@@ -207,7 +207,7 @@ export function StepDiagnosis({ data, score, diagnosis, onBooking, onClose }: Pr
 
           {/* Regalo 3: Comunidad */}
           <a
-            href={process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/ugccolombia"}
+            href={process.env.NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL || "https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE"}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-start gap-3 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 w-full text-left hover:bg-emerald-500/10 transition-colors group"

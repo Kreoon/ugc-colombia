@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAvailableSlots } from "@/lib/google-calendar";
 
-export const revalidate = 300; // cache for 5 min
+export const dynamic = "force-dynamic"; // siempre consulta Google Calendar en tiempo real
 
 export async function GET() {
   try {

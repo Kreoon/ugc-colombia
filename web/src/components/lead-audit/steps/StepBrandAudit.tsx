@@ -2,83 +2,219 @@
 
 import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Loader2 } from "lucide-react";
 import { SurveyQuestion, OptionCard } from "./shared";
-import { getNextQuestion, getTotalQuestions, getProgressLabel, getQuizPath, buildAuditFromQuiz } from "@/lib/quiz-engine";
+import { getNextQuestion, getProgressLabel, buildAuditFromQuiz } from "@/lib/quiz-engine";
 import { getInsight } from "@/lib/funnel-insights";
 import { brandAuditSchema } from "@/lib/validations/lead-audit";
-import type { BrandAudit } from "@/lib/validations/lead-audit";
+import { buildAuditFromAIQuiz, type AIAnswer, type AIQuizQuestion } from "@/lib/quiz-ai";
+import type { BrandAudit, BrandInfo } from "@/lib/validations/lead-audit";
+
+const MAX_QUESTIONS = 6;
 
 interface Props {
-  onSubmit: (data: BrandAudit) => void;
+  brandInfo?: BrandInfo;
+  onSubmit: (data: BrandAudit, askedFields?: Set<string>) => void;
   onBack: () => void;
 }
 
-export function StepBrandAudit({ onSubmit, onBack }: Props) {
-  const [qIndex, setQIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+export function StepBrandAudit({ brandInfo, onSubmit, onBack }: Props) {
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [answers, setAnswers] = useState<AIAnswer[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState<AIQuizQuestion | null>(null);
   const [showInsight, setShowInsight] = useState<{ text: string; emoji: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const isAdvancingRef = useRef(false);
+  const pendingQuestionRef = useRef<AIQuizQuestion | null>(null);
   const insightTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const currentQ = getNextQuestion(answers, qIndex);
-  const totalQ = getTotalQuestions(answers);
-  const progressLabel = getProgressLabel(qIndex, totalQ);
+  // Q1 is static (biggest_pain from quiz-engine)
+  const staticQ1 = getNextQuestion({}, 0)!;
+  const isFirstQuestion = questionNumber === 1;
+  const displayQuestion = isFirstQuestion ? staticQ1 : currentQuestion;
 
-  const handleSelect = useCallback(
-    (value: string) => {
-      if (!currentQ || isAdvancingRef.current) return;
-      isAdvancingRef.current = true;
+  const totalEstimate = Math.max(MAX_QUESTIONS, questionNumber);
 
-      const updated = { ...answers, [currentQ.key]: value };
+  // ─── Fetch next question from Gemini ───────────────────────────────
 
-      // Si cambió biggest_pain, limpiar respuestas del path anterior
-      if (currentQ.key === "biggest_pain" && answers.biggest_pain && answers.biggest_pain !== value) {
-        const oldPath = getQuizPath(answers);
-        const newPath = getQuizPath({ biggest_pain: value });
-        // Borrar respuestas de preguntas que ya no están en el nuevo path
-        for (const key of oldPath) {
-          if (key !== "biggest_pain" && !newPath.includes(key)) {
-            delete updated[key];
-          }
+  async function fetchNextQuestion(updatedAnswers: AIAnswer[]): Promise<AIQuizQuestion | null> {
+    try {
+      const res = await fetch("/api/quiz-next", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          brand_name: brandInfo?.company_name || "",
+          industry: brandInfo?.industry || "",
+          instagram_handle: brandInfo?.instagram_handle || "",
+          website: brandInfo?.website || "",
+          answers_so_far: updatedAnswers.map(a => ({
+            question_number: a.question_number,
+            question: a.question,
+            answer_value: a.answer_value,
+            answer_label: a.answer_label,
+            maps_to: a.maps_to,
+          })),
+          question_number: updatedAnswers.length + 1,
+        }),
+      });
+
+      if (!res.ok) return null;
+      return await res.json();
+    } catch {
+      return null;
+    }
+  }
+
+  // ─── Get static fallback question ──────────────────────────────────
+
+  function getStaticFallback(answersObj: Record<string, string>, idx: number): AIQuizQuestion | null {
+    const q = getNextQuestion(answersObj, idx);
+    if (!q) return null;
+    return {
+      question: q.question,
+      hint: q.hint || "",
+      options: q.options.map(o => ({
+        value: o.value,
+        label: o.label,
+        sublabel: o.sublabel,
+        maps_to: q.key,
+        maps_value: o.value,
+      })),
+      insight_for_previous: { text: "", emoji: "" },
+      is_last: false,
+      pain_level: "medium",
+    };
+  }
+
+  // ─── Handle answer selection ───────────────────────────────────────
+
+  const handleSelect = useCallback((value: string, label: string, mapsTo: string, mapsValue: string) => {
+    if (isAdvancingRef.current) return;
+    isAdvancingRef.current = true;
+
+    const question = isFirstQuestion ? staticQ1.question : currentQuestion?.question || "";
+
+    const newAnswer: AIAnswer = {
+      question_number: questionNumber,
+      question,
+      answer_value: value,
+      answer_label: label,
+      maps_to: mapsTo,
+      maps_value: mapsValue,
+    };
+
+    const updatedAnswers = [...answers, newAnswer];
+    setAnswers(updatedAnswers);
+
+    // Check if quiz should end
+    const shouldEnd = questionNumber >= MAX_QUESTIONS;
+
+    if (shouldEnd) {
+      finishQuiz(updatedAnswers);
+      return;
+    }
+
+    // Get insight for this answer
+    const staticInsight = isFirstQuestion ? getInsight("biggest_pain", value) : null;
+    const aiInsight = !isFirstQuestion && currentQuestion?.insight_for_previous?.text
+      ? currentQuestion.insight_for_previous
+      : null;
+    const insight = aiInsight || staticInsight;
+
+    // Start fetching next question in parallel
+    const fetchPromise = fetchNextQuestion(updatedAnswers);
+
+    if (insight?.text) {
+      setShowInsight(insight);
+
+      // Wait for insight to finish, then show next question
+      insightTimeoutRef.current = setTimeout(async () => {
+        setShowInsight(null);
+
+        const aiQuestion = pendingQuestionRef.current || await fetchPromise;
+
+        if (aiQuestion?.is_last) {
+          // Gemini says we should end
+          finishQuiz(updatedAnswers);
+          return;
         }
-      }
 
-      setAnswers(updated);
-
-      // Show micro-insight
-      const insight = getInsight(currentQ.key, value);
-
-      function advance() {
-        const nextQ = getNextQuestion(updated, qIndex + 1);
-        if (nextQ) {
-          setQIndex(qIndex + 1);
+        if (aiQuestion && aiQuestion.options?.length >= 2) {
+          setCurrentQuestion(aiQuestion);
+          setQuestionNumber(questionNumber + 1);
         } else {
-          // Quiz complete
-          const auditData = buildAuditFromQuiz(updated);
-          const parsed = brandAuditSchema.safeParse(auditData);
-          if (parsed.success) {
-            onSubmit(parsed.data);
+          // Fallback to static
+          const answersObj: Record<string, string> = {};
+          for (const a of updatedAnswers) answersObj[a.maps_to] = a.maps_value;
+          const fallback = getStaticFallback(answersObj, updatedAnswers.length);
+          if (fallback) {
+            setCurrentQuestion(fallback);
+            setQuestionNumber(questionNumber + 1);
           } else {
-            console.error("[quiz] Validation failed:", parsed.error.issues);
-            // Fallback: submit anyway with defaults
-            onSubmit(auditData as BrandAudit);
+            finishQuiz(updatedAnswers);
           }
         }
         isAdvancingRef.current = false;
-      }
+        pendingQuestionRef.current = null;
+      }, 1800);
 
-      if (insight) {
-        setShowInsight(insight);
-        insightTimeoutRef.current = setTimeout(() => {
-          setShowInsight(null);
-          setTimeout(advance, 100);
-        }, 1800);
-      } else {
-        setTimeout(advance, 350);
-      }
-    },
-    [answers, currentQ, qIndex, onSubmit]
-  );
+      // Pre-resolve fetch while insight is showing
+      fetchPromise.then(q => {
+        pendingQuestionRef.current = q;
+      });
+    } else {
+      // No insight — show loading briefly, then next question
+      setIsLoading(true);
+      fetchPromise.then(aiQuestion => {
+        setIsLoading(false);
+
+        if (aiQuestion?.is_last) {
+          finishQuiz(updatedAnswers);
+          return;
+        }
+
+        if (aiQuestion && aiQuestion.options?.length >= 2) {
+          setCurrentQuestion(aiQuestion);
+          setQuestionNumber(questionNumber + 1);
+        } else {
+          const answersObj: Record<string, string> = {};
+          for (const a of updatedAnswers) answersObj[a.maps_to] = a.maps_value;
+          const fallback = getStaticFallback(answersObj, updatedAnswers.length);
+          if (fallback) {
+            setCurrentQuestion(fallback);
+            setQuestionNumber(questionNumber + 1);
+          } else {
+            finishQuiz(updatedAnswers);
+          }
+        }
+        isAdvancingRef.current = false;
+      });
+    }
+  }, [answers, questionNumber, isFirstQuestion, currentQuestion, staticQ1, brandInfo]);
+
+  // ─── Finish quiz ───────────────────────────────────────────────────
+
+  function finishQuiz(finalAnswers: AIAnswer[]) {
+    const { audit, askedFields } = buildAuditFromAIQuiz(finalAnswers);
+    const parsed = brandAuditSchema.safeParse(audit);
+    if (parsed.success) {
+      onSubmit(parsed.data, askedFields);
+    } else {
+      // Fallback: try with static builder
+      const answersObj: Record<string, string> = {};
+      for (const a of finalAnswers) answersObj[a.maps_to] = a.maps_value;
+      const fallbackAudit = buildAuditFromQuiz(answersObj);
+      const fallbackParsed = brandAuditSchema.safeParse(fallbackAudit);
+      onSubmit(
+        fallbackParsed.success ? fallbackParsed.data : audit as unknown as BrandAudit,
+        askedFields
+      );
+    }
+    isAdvancingRef.current = false;
+  }
+
+  // ─── Skip insight ──────────────────────────────────────────────────
 
   function skipInsight() {
     if (insightTimeoutRef.current) {
@@ -86,53 +222,58 @@ export function StepBrandAudit({ onSubmit, onBack }: Props) {
       insightTimeoutRef.current = null;
     }
     setShowInsight(null);
-    // Advance after clearing insight
-    const nextQ = getNextQuestion(answers, qIndex + 1);
-    if (nextQ) {
-      setQIndex(qIndex + 1);
+    // If we have a pending question, show it
+    if (pendingQuestionRef.current) {
+      const q = pendingQuestionRef.current;
+      pendingQuestionRef.current = null;
+      if (q.is_last) {
+        finishQuiz(answers);
+      } else {
+        setCurrentQuestion(q);
+        setQuestionNumber(questionNumber + 1);
+      }
+      isAdvancingRef.current = false;
+    } else {
+      setIsLoading(true);
     }
-    isAdvancingRef.current = false;
   }
 
-  function handleBack() {
-    if (showInsight) {
-      skipInsight();
-      return;
-    }
-    if (isAdvancingRef.current) return;
+  // ─── Back ──────────────────────────────────────────────────────────
 
-    if (qIndex > 0) {
-      // Limpiar la respuesta de la pregunta actual al retroceder
-      const currentKey = currentQ?.key;
-      if (currentKey && answers[currentKey] !== undefined) {
-        const cleaned = { ...answers };
-        delete cleaned[currentKey];
-        setAnswers(cleaned);
+  function handleBack() {
+    if (showInsight) { skipInsight(); return; }
+    if (isAdvancingRef.current || isLoading) return;
+
+    if (questionNumber > 1) {
+      const prev = answers.slice(0, -1);
+      setAnswers(prev);
+      setQuestionNumber(questionNumber - 1);
+      if (questionNumber === 2) {
+        setCurrentQuestion(null); // Back to static Q1
       }
-      setQIndex(qIndex - 1);
     } else {
       onBack();
     }
   }
 
-  if (!currentQ) return null;
+  if (!displayQuestion && !isLoading) return null;
+
+  // ─── Render ────────────────────────────────────────────────────────
+
+  const progressLabel = getProgressLabel(questionNumber - 1, totalEstimate);
 
   return (
     <div>
-      {/* Progress bar + label */}
+      {/* Progress */}
       <div className="mb-5">
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-[11px] font-sans text-brand-gray/50">
-            {progressLabel}
-          </span>
-          <span className="text-[11px] font-sans text-brand-gray/30">
-            {qIndex + 1}/{totalQ}
-          </span>
+          <span className="text-[11px] font-sans text-brand-gray/50">{progressLabel}</span>
+          <span className="text-[11px] font-sans text-brand-gray/30">{questionNumber}/{MAX_QUESTIONS}</span>
         </div>
-        <div className="h-0.5 w-full bg-white/8 rounded-full overflow-hidden" role="progressbar" aria-valuenow={qIndex + 1} aria-valuemin={1} aria-valuemax={totalQ}>
+        <div className="h-0.5 w-full bg-white/8 rounded-full overflow-hidden" role="progressbar" aria-valuenow={questionNumber} aria-valuemax={MAX_QUESTIONS}>
           <motion.div
             className="h-full bg-brand-yellow/60 rounded-full"
-            animate={{ width: `${((qIndex + 1) / totalQ) * 100}%` }}
+            animate={{ width: `${(questionNumber / MAX_QUESTIONS) * 100}%` }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           />
         </div>
@@ -140,7 +281,6 @@ export function StepBrandAudit({ onSubmit, onBack }: Props) {
 
       <AnimatePresence mode="wait">
         {showInsight ? (
-          /* Micro-insight screen — clickable to skip */
           <motion.button
             key="insight"
             type="button"
@@ -153,35 +293,46 @@ export function StepBrandAudit({ onSubmit, onBack }: Props) {
             aria-live="polite"
           >
             <span className="text-4xl mb-4">{showInsight.emoji}</span>
-            <p className="text-sm sm:text-base text-brand-gray leading-relaxed max-w-md">
-              {showInsight.text}
-            </p>
-            <p className="text-[11px] text-brand-gray/30 mt-4">
-              Toca para continuar
-            </p>
+            <p className="text-sm sm:text-base text-brand-gray leading-relaxed max-w-md">{showInsight.text}</p>
+            <p className="text-[11px] text-brand-gray/30 mt-4">Toca para continuar</p>
           </motion.button>
-        ) : (
-          /* Question screen */
+        ) : isLoading ? (
+          <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center justify-center min-h-[200px] py-8"
+          >
+            <Loader2 className="w-6 h-6 text-brand-yellow animate-spin mb-3" />
+            <p className="text-sm text-brand-gray/60">Analizando tu respuesta...</p>
+          </motion.div>
+        ) : displayQuestion ? (
           <SurveyQuestion
-            key={currentQ.key}
-            question={currentQ.question}
-            hint={currentQ.hint}
+            key={`q-${questionNumber}`}
+            question={displayQuestion.question}
+            hint={"hint" in displayQuestion ? (displayQuestion as any).hint : undefined}
             onBack={handleBack}
             showSubmit={false}
           >
-            <div className="space-y-2" role="radiogroup" aria-label={currentQ.question}>
-              {currentQ.options.map((opt) => (
+            <div className="space-y-2" role="radiogroup" aria-label={displayQuestion.question}>
+              {displayQuestion.options.map((opt) => (
                 <OptionCard
                   key={opt.value}
-                  selected={answers[currentQ.key] === opt.value}
-                  onClick={() => handleSelect(opt.value)}
+                  selected={false}
+                  onClick={() => handleSelect(
+                    opt.value,
+                    opt.label,
+                    "maps_to" in opt ? (opt as any).maps_to : (displayQuestion as any).key || "biggest_pain",
+                    "maps_value" in opt ? (opt as any).maps_value : opt.value,
+                  )}
                   label={opt.label}
                   sublabel={opt.sublabel}
                 />
               ))}
             </div>
           </SurveyQuestion>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   );

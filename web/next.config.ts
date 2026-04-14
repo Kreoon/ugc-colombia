@@ -4,6 +4,35 @@ const nextConfig: NextConfig = {
   // Trailing slash desactivado (SEO canónico limpio)
   trailingSlash: false,
 
+  // Excluir assets pesados del bundle de serverless functions.
+  // public/ ya es servido como estático por Vercel, no necesita estar en las funciones.
+  outputFileTracingExcludes: {
+    "*": [
+      "public/brand/**/*",
+      "public/videos/**/*",
+      "public/images/**/*",
+      "public/fonts/**/*",
+      ".next/cache/**/*",
+      "node_modules/@next/swc-*/**/*",
+      "node_modules/@esbuild/**/*",
+    ],
+  },
+
+  // Incluir explícitamente los .md que cada ruta admin necesita leer del filesystem.
+  // Sin esto, Next no los incluye en el bundle de la función y getContentWithOverrides falla.
+  outputFileTracingIncludes: {
+    "/admin/marca/[slug]": ["./brand/**/*.md"],
+    "/admin/viralidad/modelo": ["./content/viralidad/*.md"],
+    "/admin/viralidad/benchmark": ["./content/viralidad/*.md"],
+    "/admin/viralidad/parrilla": ["./content/viralidad/*.md"],
+    "/admin/viralidad/calendarios/[mes]": ["./content/viralidad/*.md"],
+    "/admin/packs/[slug]": ["./content/viralidad/packs/**/*.md"],
+    "/admin/editor/[...path]": [
+      "./brand/**/*.md",
+      "./content/**/*.md",
+    ],
+  },
+
   // Optimización de imágenes
   images: {
     formats: ["image/avif", "image/webp"],

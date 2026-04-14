@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, type PointerEvent as ReactPointerEvent } from "react";
 import { motion } from "motion/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useIntersection } from "@/hooks/use-intersection";
 
 const MARCAS: { label: string; logo?: string; font?: string; className?: string }[] = [
@@ -15,48 +14,100 @@ const MARCAS: { label: string; logo?: string; font?: string; className?: string 
   { label: "Bioboosters", logo: "https://bioboosters.co/cdn/shop/files/Logo_Blanco.png?v=1758762956&width=290" },
 ];
 
-const SCROLL_AMOUNT = 280;
+// Triplicamos para tener buffer suficiente al wrap del loop infinito
+const LOOP = [...MARCAS, ...MARCAS, ...MARCAS];
+
+// pixels por milisegundo. ~90 px/seg (más rápido que el marquee anterior)
+const AUTO_SPEED = 0.09;
 
 export function Marcas() {
-  const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
+  const { ref: sectionRef, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.2,
     once: true,
   });
 
-  const scrollerRef = useRef<HTMLUListElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const trackRef = useRef<HTMLUListElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const offsetRef = useRef(0);
+  const trackWidthRef = useRef(0);
+  const draggingRef = useRef(false);
+  const hoveringRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartOffsetRef = useRef(0);
+  const lastTimeRef = useRef<number>(0);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
+    const track = trackRef.current;
+    if (!track) return;
 
-    function update() {
-      if (!el) return;
-      const { scrollLeft, scrollWidth, clientWidth } = el;
-      setCanScrollLeft(scrollLeft > 4);
-      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 4);
+    // Ancho del primer "set" (un tercio porque triplicamos)
+    function measure() {
+      if (!track) return;
+      trackWidthRef.current = track.scrollWidth / 3;
+    }
+    measure();
+    window.addEventListener("resize", measure);
+
+    function tick(time: number) {
+      if (!lastTimeRef.current) lastTimeRef.current = time;
+      const dt = Math.min(time - lastTimeRef.current, 64); // cap a ~15fps mínimo
+      lastTimeRef.current = time;
+
+      if (!draggingRef.current && !hoveringRef.current && trackWidthRef.current > 0) {
+        offsetRef.current -= AUTO_SPEED * dt;
+      }
+
+      // Wrap infinito
+      if (trackWidthRef.current > 0) {
+        while (offsetRef.current <= -trackWidthRef.current * 2) {
+          offsetRef.current += trackWidthRef.current;
+        }
+        while (offsetRef.current >= 0) {
+          offsetRef.current -= trackWidthRef.current;
+        }
+      }
+
+      if (track) {
+        track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
+      }
+      rafRef.current = requestAnimationFrame(tick);
     }
 
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    rafRef.current = requestAnimationFrame(tick);
+
     return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", measure);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
-  function scrollBy(direction: 1 | -1) {
-    scrollerRef.current?.scrollBy({
-      left: SCROLL_AMOUNT * direction,
-      behavior: "smooth",
-    });
+  function onPointerDown(e: ReactPointerEvent<HTMLDivElement>) {
+    draggingRef.current = true;
+    dragStartXRef.current = e.clientX;
+    dragStartOffsetRef.current = offsetRef.current;
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e: ReactPointerEvent<HTMLDivElement>) {
+    if (!draggingRef.current) return;
+    const dx = e.clientX - dragStartXRef.current;
+    offsetRef.current = dragStartOffsetRef.current + dx;
+  }
+
+  function onPointerUp(e: ReactPointerEvent<HTMLDivElement>) {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    lastTimeRef.current = 0;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
   }
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       aria-labelledby="marcas-title"
       className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-brand-black overflow-hidden"
     >
@@ -110,130 +161,86 @@ export function Marcas() {
           </h2>
         </motion.div>
 
-        {/* Carousel interactivo */}
-        <div className="relative rounded-2xl border border-brand-gold/15 bg-white/[0.015] py-10 sm:py-12">
-          {/* Botón izquierda */}
-          <button
-            type="button"
-            onClick={() => scrollBy(-1)}
-            aria-label="Marcas anteriores"
-            className={[
-              "absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full",
-              "bg-brand-black/85 backdrop-blur border border-brand-gold/30 text-brand-yellow",
-              "flex items-center justify-center transition-all duration-200",
-              "hover:bg-brand-yellow/15 hover:border-brand-gold hover:scale-110",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
-              canScrollLeft
-                ? "opacity-100 pointer-events-auto"
-                : "opacity-0 pointer-events-none",
-            ].join(" ")}
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          {/* Fade lateral izquierdo */}
+        {/* Marquee infinito + draggable */}
+        <div className="relative">
+          {/* Fades laterales */}
           <div
             aria-hidden="true"
-            className={[
-              "absolute inset-y-0 left-0 w-20 sm:w-28 z-20 pointer-events-none transition-opacity duration-300",
-              "bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent rounded-l-2xl",
-              canScrollLeft ? "opacity-100" : "opacity-0",
-            ].join(" ")}
+            className="absolute inset-y-0 left-0 w-24 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-brand-black to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 right-0 w-24 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-brand-black to-transparent"
           />
 
-          {/* Scroller */}
-          <ul
-            ref={scrollerRef}
-            className="flex items-center gap-12 sm:gap-20 overflow-x-auto scroll-smooth scrollbar-hide snap-x snap-mandatory px-14 sm:px-16"
-            style={{ scrollbarWidth: "none" }}
+          <div
+            ref={wrapperRef}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+            onMouseEnter={() => {
+              hoveringRef.current = true;
+            }}
+            onMouseLeave={() => {
+              hoveringRef.current = false;
+              lastTimeRef.current = 0;
+            }}
+            className="relative overflow-hidden rounded-2xl border border-brand-gold/15 bg-white/[0.015] py-10 sm:py-12 cursor-grab active:cursor-grabbing select-none touch-pan-x"
           >
-            {MARCAS.map((m, i) => (
-              <li
-                key={m.label}
-                className="flex items-center justify-center shrink-0 snap-center"
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isIntersecting ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-                  whileHover={{ scale: 1.18 }}
-                  className="group/brand relative inline-flex items-center justify-center cursor-default"
-                  title={m.label}
+            <ul
+              ref={trackRef}
+              className="flex items-center gap-12 sm:gap-20 whitespace-nowrap will-change-transform"
+              style={{ transform: "translate3d(0,0,0)" }}
+            >
+              {LOOP.map((m, i) => (
+                <li
+                  key={`${m.label}-${i}`}
+                  className="flex items-center justify-center shrink-0"
+                  aria-hidden={i >= MARCAS.length ? "true" : undefined}
                 >
-                  {m.logo ? (
-                    <img
-                      src={m.logo}
-                      alt={m.label}
-                      draggable={false}
-                      className={[
-                        "h-10 sm:h-12 lg:h-14 w-auto object-contain select-none",
-                        "brightness-0 invert opacity-55",
-                        "transition-all duration-300 ease-out",
-                        "group-hover/brand:opacity-100 group-hover/brand:brightness-100 group-hover/brand:invert-0",
-                        "group-hover/brand:drop-shadow-[0_0_22px_rgba(249,179,52,0.5)]",
-                      ].join(" ")}
-                    />
-                  ) : (
+                  <div
+                    className="group/brand relative inline-flex items-center justify-center transition-transform duration-300 ease-out hover:scale-[1.18]"
+                    title={m.label}
+                  >
+                    {m.logo ? (
+                      <img
+                        src={m.logo}
+                        alt={m.label}
+                        draggable={false}
+                        className="h-8 sm:h-10 lg:h-12 w-auto object-contain select-none brightness-0 invert opacity-50 group-hover/brand:opacity-100 transition-opacity duration-300"
+                      />
+                    ) : (
+                      <span
+                        className={[
+                          m.font,
+                          m.className,
+                          "text-2xl sm:text-3xl lg:text-[2rem] leading-none select-none",
+                          "text-white/45 group-hover/brand:text-white/100 transition-colors duration-300",
+                        ].join(" ")}
+                      >
+                        {m.label}
+                      </span>
+                    )}
+
+                    {/* Tooltip */}
                     <span
                       className={[
-                        m.font,
-                        m.className,
-                        "text-2xl sm:text-3xl lg:text-[2.25rem] leading-none select-none",
-                        "text-white/50 transition-all duration-300 ease-out",
-                        "group-hover/brand:text-brand-yellow",
-                        "group-hover/brand:drop-shadow-[0_0_22px_rgba(249,179,52,0.5)]",
+                        "pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap",
+                        "rounded-md bg-brand-black/95 px-2.5 py-1 text-[10px] font-sans font-medium uppercase tracking-wider text-brand-yellow",
+                        "border border-brand-gold/30 shadow-[0_4px_12px_-2px_rgba(249,179,52,0.3)]",
+                        "opacity-0 translate-y-1 group-hover/brand:opacity-100 group-hover/brand:translate-y-0",
+                        "transition-all duration-200",
                       ].join(" ")}
+                      aria-hidden="true"
                     >
                       {m.label}
                     </span>
-                  )}
-
-                  {/* Tooltip premium */}
-                  <span
-                    className={[
-                      "pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap",
-                      "rounded-md bg-brand-black/95 px-2.5 py-1 text-[10px] font-sans font-medium uppercase tracking-wider text-brand-yellow",
-                      "border border-brand-gold/40 shadow-[0_4px_12px_-2px_rgba(249,179,52,0.4)]",
-                      "opacity-0 translate-y-1 group-hover/brand:opacity-100 group-hover/brand:translate-y-0",
-                      "transition-all duration-200",
-                    ].join(" ")}
-                    aria-hidden="true"
-                  >
-                    {m.label}
-                  </span>
-                </motion.div>
-              </li>
-            ))}
-          </ul>
-
-          {/* Fade lateral derecho */}
-          <div
-            aria-hidden="true"
-            className={[
-              "absolute inset-y-0 right-0 w-20 sm:w-28 z-20 pointer-events-none transition-opacity duration-300",
-              "bg-gradient-to-l from-brand-black via-brand-black/80 to-transparent rounded-r-2xl",
-              canScrollRight ? "opacity-100" : "opacity-0",
-            ].join(" ")}
-          />
-
-          {/* Botón derecha */}
-          <button
-            type="button"
-            onClick={() => scrollBy(1)}
-            aria-label="Siguientes marcas"
-            className={[
-              "absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full",
-              "bg-brand-black/85 backdrop-blur border border-brand-gold/30 text-brand-yellow",
-              "flex items-center justify-center transition-all duration-200",
-              "hover:bg-brand-yellow/15 hover:border-brand-gold hover:scale-110",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold",
-              canScrollRight
-                ? "opacity-100 pointer-events-auto"
-                : "opacity-0 pointer-events-none",
-            ].join(" ")}
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Disclaimer discreto */}

@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { useAudit } from "@/components/lead-audit/AuditContext";
 import { ParticlesBg } from "@/components/home/ParticlesBg";
-import { ClientLogoBar } from "@/components/precios/ClientLogoBar";
 import { ApplicationCard } from "@/components/marketing/ApplicationCard";
 import { trackOfferApply } from "@/lib/tracking/events";
 import { useOfferCountdown } from "@/hooks/use-offer-countdown";
@@ -234,10 +233,6 @@ export function Hero() {
               ))}
             </motion.div>
 
-            {/* Logo bar clientes */}
-            <motion.div custom={6} variants={variants} initial="hidden" animate="visible" className="mt-12">
-              <ClientLogoBar />
-            </motion.div>
           </>
         )}
       </div>

@@ -14,6 +14,7 @@ const CLIENT_LOGOS: {
   { name: "Vitalcom", letters: "Vi", logo: "/brand/logos/vitalcom.png" },
   { name: "Shop Tokio", letters: "ST", logo: "https://shoptokio.co/cdn/shop/files/gempages_513541607190955198-297e6fa2-f0e0-455a-bdf4-12a9388c792d.webp?v=1728089603&width=260" },
   { name: "Soluna", letters: "So", logo: "https://laboratoriosoluna.com/cdn/shop/files/Diseno_sin_titulo_1.png?v=1738769608&width=300" },
+  { name: "Bioboosters", letters: "Bi", logo: "https://bioboosters.co/cdn/shop/files/Logo_Blanco.png?v=1758762956&width=290" },
 ];
 
 export function ClientLogoBar({ className }: { className?: string }) {

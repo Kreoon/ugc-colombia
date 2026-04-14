@@ -10,6 +10,7 @@ const MARCAS: { label: string; logo?: string; font?: string; className?: string 
   { label: "Vitalcom", logo: "/brand/logos/vitalcom.png" },
   { label: "Shop Tokio", logo: "https://shoptokio.co/cdn/shop/files/gempages_513541607190955198-297e6fa2-f0e0-455a-bdf4-12a9388c792d.webp?v=1728089603&width=260" },
   { label: "Soluna", logo: "https://laboratoriosoluna.com/cdn/shop/files/Diseno_sin_titulo_1.png?v=1738769608&width=300" },
+  { label: "Bioboosters", logo: "https://bioboosters.co/cdn/shop/files/Logo_Blanco.png?v=1758762956&width=290" },
 ];
 
 // Duplicamos para loop infinito sin corte visible.

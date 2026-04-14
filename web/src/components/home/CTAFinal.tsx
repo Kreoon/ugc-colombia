@@ -3,9 +3,21 @@
 import { motion } from "motion/react";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { useAudit } from "@/components/lead-audit/AuditContext";
+import { trackOfferApply } from "@/lib/tracking/events";
+import { useOfferCountdown } from "@/hooks/use-offer-countdown";
+import { OFFER_COPY, OPEN_SLOTS } from "@/lib/offer-config";
 
 export function CTAFinal() {
   const { openAudit } = useAudit();
+  const countdown = useOfferCountdown();
+
+  const handleApply = () => {
+    trackOfferApply("home_cta_final", {
+      hoursLeft: countdown.hoursLeft,
+      slotsLeft: OPEN_SLOTS,
+    });
+    openAudit("home_cta_final");
+  };
 
   return (
     <section
@@ -78,7 +90,7 @@ export function CTAFinal() {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
-              Cupos limitados este mes
+              {OFFER_COPY.slots_text}
             </motion.span>
 
             {/* Headline */}
@@ -117,7 +129,7 @@ export function CTAFinal() {
             >
               <motion.button
                 type="button"
-                onClick={() => openAudit("home_cta_final")}
+                onClick={handleApply}
                 className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-4 sm:py-5 rounded-xl bg-brand-yellow text-brand-black font-semibold text-base sm:text-lg tracking-wide overflow-hidden min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-yellow cursor-pointer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -127,7 +139,7 @@ export function CTAFinal() {
                     "0 10px 40px -10px rgba(249,179,52,0.5), 0 0 80px -20px rgba(212,160,23,0.4)",
                 }}
               >
-                <span className="relative z-10">ANÁLISIS DE TU MARCA GRATIS</span>
+                <span className="relative z-10">APLICA AHORA</span>
                 <ArrowRight
                   className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1"
                   aria-hidden
@@ -143,21 +155,9 @@ export function CTAFinal() {
                 />
               </motion.button>
 
-              <div className="flex items-center justify-center sm:justify-start gap-3 text-sm text-brand-gray">
-                <span className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
-                  30 min
-                </span>
-                <span
-                  className="w-1 h-1 rounded-full bg-brand-graphite"
-                  aria-hidden
-                />
-                <span>Gratis</span>
-                <span
-                  className="w-1 h-1 rounded-full bg-brand-graphite"
-                  aria-hidden
-                />
-                <span>Sin compromiso</span>
+              <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm text-brand-gray max-w-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+                <span>{OFFER_COPY.discount_text}</span>
               </div>
             </motion.div>
 

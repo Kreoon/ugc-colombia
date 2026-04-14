@@ -301,6 +301,23 @@ export function trackBookingComplete(source: string): void {
   });
 }
 
+// ─── Offer (urgencia + exclusividad) ───
+export interface OfferContext {
+  hoursLeft: number;
+  slotsLeft: number;
+}
+
+export function trackOfferApply(source: string, context: OfferContext): void {
+  trackEvent({
+    event: "offer_apply_click",
+    category: "conversion",
+    label: source,
+    offer_source: source,
+    offer_hours_left: context.hoursLeft,
+    offer_slots_left: context.slotsLeft,
+  });
+}
+
 // ─── Pricing ───
 export interface PlanPriceInfo {
   priceUSD?: number;

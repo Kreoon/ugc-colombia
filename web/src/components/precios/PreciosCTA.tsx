@@ -2,8 +2,11 @@
 
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, ShieldCheck, Users } from "lucide-react";
+import { CalendarDays, ShieldCheck } from "lucide-react";
 import { useAudit } from "@/components/lead-audit/AuditContext";
+import { trackOfferApply } from "@/lib/tracking/events";
+import { useOfferCountdown } from "@/hooks/use-offer-countdown";
+import { OFFER_COPY, OPEN_SLOTS } from "@/lib/offer-config";
 
 const RECENT_CLIENTS = [
   { initials: "ME", name: "Michel E." },
@@ -14,6 +17,15 @@ const RECENT_CLIENTS = [
 
 export function PreciosCTA() {
   const { openAudit } = useAudit();
+  const countdown = useOfferCountdown();
+
+  const handleApply = () => {
+    trackOfferApply("precios_cta_final", {
+      hoursLeft: countdown.hoursLeft,
+      slotsLeft: OPEN_SLOTS,
+    });
+    openAudit("precios_cta_final");
+  };
 
   return (
     <section
@@ -64,14 +76,14 @@ export function PreciosCTA() {
         {/* Badge urgencia — pill badge pattern */}
         <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-xs font-semibold text-brand-yellow tracking-[0.2em] uppercase mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
-          Solo quedan 3 espacios para Abril 2026
+          {OFFER_COPY.slots_text}
         </span>
 
         <h2
           id="cta-precios-title"
           className="font-display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95] text-white tracking-tight uppercase mb-6"
         >
-          Agenda tu{" "}
+          Aplica para{" "}
           <span
             style={{
               background: "linear-gradient(90deg, #f9b334, #d4a017)",
@@ -80,17 +92,16 @@ export function PreciosCTA() {
               backgroundClip: "text",
             }}
           >
-            diagnostico gratuito
+            ser partner
           </span>
           .
         </h2>
 
         <p className="text-base sm:text-lg text-brand-gray leading-relaxed mb-8 max-w-2xl mx-auto">
-          30 minutos por video llamada. Revisamos tu marca, tus ads y tus
-          objetivos. Salimos con una recomendacion clara del paquete que calza
-          —{" "}
+          Revisamos cada aplicación en 24h. Si tu marca encaja, te agendamos una
+          llamada de 30 min para alinear objetivos y cerrar el partnership —{" "}
           <span className="text-white font-semibold">
-            sin venta forzada, sin compromiso
+            {OFFER_COPY.discount_text}
           </span>
           .
         </p>
@@ -115,10 +126,10 @@ export function PreciosCTA() {
           <Button
             size="lg"
             className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
-            onClick={() => openAudit("precios_cta_final")}
+            onClick={handleApply}
           >
             <CalendarDays className="h-5 w-5 mr-2" aria-hidden />
-            AGENDA TU LLAMADA →
+            APLICA AHORA →
           </Button>
           <Button
             asChild

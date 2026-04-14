@@ -59,8 +59,9 @@ export function Navbar() {
   return (
     <header
       role="banner"
+      style={{ top: "var(--banner-h, 0px)" }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed left-0 right-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-black/92 backdrop-blur-md border-b border-brand-gold/20 shadow-[0_1px_20px_rgba(0,0,0,0.5)]"
           : "bg-black/60 backdrop-blur-sm border-b border-transparent"
@@ -159,10 +160,10 @@ export function Navbar() {
               "text-xs sm:text-sm",
               scrolled ? "px-3 sm:px-4 py-2" : "px-3 sm:px-5 py-2.5"
             )}
-            aria-label="Iniciar diagnóstico gratuito"
+            aria-label="Aplicar ahora a UGC Colombia"
           >
-            <span className="hidden sm:inline">Análisis gratis →</span>
-            <span className="sm:hidden">Análisis →</span>
+            <span className="hidden sm:inline">Aplica ahora →</span>
+            <span className="sm:hidden">Aplica →</span>
           </Button>
 
           {/* Botón hamburguesa mobile */}
@@ -270,7 +271,7 @@ export function Navbar() {
                 className="flex-1 min-h-[48px] text-base font-bold"
                 onClick={() => openAudit("navbar_mobile")}
               >
-                Análisis gratis →
+                Aplica ahora →
               </Button>
             </div>
           </DialogPrimitive.Content>

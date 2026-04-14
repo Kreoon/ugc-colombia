@@ -6,6 +6,7 @@ import { TrackingScripts } from "@/components/tracking/TrackingScripts";
 import { CookieConsent } from "@/components/tracking/CookieConsent";
 import { AuditProvider } from "@/components/lead-audit/AuditContext";
 import { AuditModal } from "@/components/lead-audit/AuditModal";
+import { UrgencyBanner } from "@/components/marketing/UrgencyBanner";
 import { CurrencyProvider } from "@/components/providers/CurrencyProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema } from "@/lib/seo/json-ld";
@@ -126,6 +127,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>
+        <UrgencyBanner />
         <PageLoader />
         <CurrencyProvider initialCurrency={currency} initialCountry={country}>
           <AuditProvider>

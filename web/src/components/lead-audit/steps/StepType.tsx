@@ -27,26 +27,27 @@ export function StepType({ onSelect }: StepTypeProps) {
       >
         <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-[10px] font-semibold text-brand-yellow tracking-[0.2em] uppercase mb-4">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
-          100% gratis
+          Aplicación de partnership
         </span>
         <h2 className="font-sans text-xl sm:text-2xl text-white font-bold mb-2">
-          Análisis de tu marca con IA
+          Aplica para ser partner de UGC Colombia
         </h2>
         <p className="text-sm text-brand-gray/70 max-w-md mb-4">
-          Recibe un diagnóstico completo de tu estrategia de contenido generado con inteligencia artificial.
+          Revisamos cada aplicación en 24h. Si completas tu aplicación hoy, obtienes{" "}
+          <span className="text-brand-yellow font-semibold">30% de descuento</span> en tu primer mes de partnership.
         </p>
         <div className="flex flex-col gap-1.5 mb-6 text-left max-w-sm">
           <div className="flex items-center gap-2 text-xs text-brand-gray">
             <span className="w-4 h-4 rounded-full bg-brand-yellow/15 flex items-center justify-center text-[10px] text-brand-yellow font-bold">1</span>
-            Análisis de marca con IA — datos reales de tu Instagram y ads
+            Análisis con IA de tu marca — insights accionables
           </div>
           <div className="flex items-center gap-2 text-xs text-brand-gray">
             <span className="w-4 h-4 rounded-full bg-brand-yellow/15 flex items-center justify-center text-[10px] text-brand-yellow font-bold">2</span>
-            Llamada de diagnóstico de 30 min — con un estratega de contenido
+            Llamada de 30 min con un estratega — solo si tu marca encaja
           </div>
           <div className="flex items-center gap-2 text-xs text-brand-gray">
             <span className="w-4 h-4 rounded-full bg-brand-yellow/15 flex items-center justify-center text-[10px] text-brand-yellow font-bold">3</span>
-            Acceso a nuestra comunidad — +200 marcas aprendiendo juntas
+            Propuesta de partnership personalizada con descuento activo
           </div>
         </div>
       </motion.div>

@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
 import { useAudit } from "@/components/lead-audit/AuditContext";
 import { ClientLogoBar } from "./ClientLogoBar";
+import { ApplicationCard } from "@/components/marketing/ApplicationCard";
+import { trackOfferApply } from "@/lib/tracking/events";
+import { useOfferCountdown } from "@/hooks/use-offer-countdown";
+import { OPEN_SLOTS, OFFER_COPY } from "@/lib/offer-config";
 
 interface KreoonStatsDTO {
   creators_count: number;
@@ -44,6 +47,15 @@ export function PreciosHero() {
   const reduced = useReducedMotion();
   const variants = reduced ? fadeUpReduced : fadeUp;
   const { openAudit } = useAudit();
+  const countdown = useOfferCountdown();
+
+  const handleApply = () => {
+    trackOfferApply("precios_hero_apply", {
+      hoursLeft: countdown.hoursLeft,
+      slotsLeft: OPEN_SLOTS,
+    });
+    openAudit("precios_hero_apply");
+  };
 
   const [stats, setStats] = useState(FALLBACK_STATS);
 
@@ -119,17 +131,16 @@ export function PreciosHero() {
       />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-20">
-        {/* Eyebrow pill badge — mismo patrón que ServiciosHero */}
-        <motion.span
+        {/* Application card: cupos + countdown + descuento */}
+        <motion.div
           custom={0}
           variants={variants}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-6 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40"
+          className="mb-6 flex justify-center"
         >
-          <Users className="h-3 w-3" aria-hidden />
-          Solo 3 espacios en Abril
-        </motion.span>
+          <ApplicationCard source="precios_hero_apply" />
+        </motion.div>
 
         {/* Título — mismos clamp que ServiciosHero */}
         <motion.h1
@@ -192,9 +203,9 @@ export function PreciosHero() {
             size="lg"
             variant="outline"
             className="w-full sm:w-auto text-sm sm:text-base min-h-[52px]"
-            onClick={() => openAudit("precios_hero")}
+            onClick={handleApply}
           >
-            AGENDA TU DIAGNÓSTICO
+            APLICA AHORA →
           </Button>
         </motion.div>
 
@@ -205,7 +216,7 @@ export function PreciosHero() {
           animate="visible"
           className="mt-5 text-xs text-brand-graphite tracking-wide"
         >
-          30 min · Gratis · Sin compromiso
+          {OFFER_COPY.application_note}
         </motion.p>
 
         {/* Stat ribbon */}

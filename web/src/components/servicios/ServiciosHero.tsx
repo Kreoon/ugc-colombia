@@ -126,7 +126,7 @@ export function ServiciosHero() {
             className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
             onClick={() => openAudit("servicios_hero")}
           >
-            AGENDA TU DIAGNÓSTICO →
+            APLICA AHORA →
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full sm:w-auto text-sm sm:text-base min-h-[52px]">
             <Link href="/registro">CREAR CUENTA GRATIS</Link>

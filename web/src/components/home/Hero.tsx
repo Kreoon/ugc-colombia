@@ -3,11 +3,14 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAudit } from "@/components/lead-audit/AuditContext";
 import { ParticlesBg } from "@/components/home/ParticlesBg";
 import { ClientLogoBar } from "@/components/precios/ClientLogoBar";
+import { ApplicationCard } from "@/components/marketing/ApplicationCard";
+import { trackOfferApply } from "@/lib/tracking/events";
+import { useOfferCountdown } from "@/hooks/use-offer-countdown";
+import { OPEN_SLOTS, OFFER_COPY } from "@/lib/offer-config";
 
 const STAGGER_DELAY = 0.12;
 
@@ -36,6 +39,15 @@ export function Hero() {
   const [mounted, setMounted] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const { openAudit } = useAudit();
+  const countdown = useOfferCountdown();
+
+  const handleApply = (source: string) => {
+    trackOfferApply(source, {
+      hoursLeft: countdown.hoursLeft,
+      slotsLeft: OPEN_SLOTS,
+    });
+    openAudit(source);
+  };
 
   useEffect(() => setMounted(true), []);
 
@@ -102,17 +114,16 @@ export function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 sm:py-24 lg:py-28">
         {mounted && (
           <>
-            {/* Pill badge urgencia */}
-            <motion.span
+            {/* Application card: cupos + countdown + descuento */}
+            <motion.div
               custom={0}
               variants={variants}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-6 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40"
+              className="mb-6 flex justify-center"
             >
-              <Users className="h-3 w-3" aria-hidden />
-              Cupos limitados este mes
-            </motion.span>
+              <ApplicationCard source="hero_home_apply" />
+            </motion.div>
 
             {/* Headline */}
             <motion.h1
@@ -165,11 +176,11 @@ export function Hero() {
             >
               <Button
                 size="lg"
-                onClick={() => openAudit("hero_home")}
+                onClick={() => handleApply("hero_home")}
                 className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)] focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                aria-label="Iniciar diagnóstico gratuito con UGC Colombia"
+                aria-label="Aplicar ahora a UGC Colombia"
               >
-                ANÁLISIS GRATIS CON IA →
+                APLICA AHORA →
               </Button>
               <Button
                 size="lg"
@@ -190,7 +201,7 @@ export function Hero() {
               animate="visible"
               className="mt-5 text-xs text-brand-graphite tracking-wide"
             >
-              30 min · Gratis · Sin compromiso
+              {OFFER_COPY.application_note}
             </motion.p>
 
             {/* Stat ribbon */}

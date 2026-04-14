@@ -127,10 +127,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="#main-content" className="skip-link">
           Saltar al contenido principal
         </a>
-        <UrgencyBanner />
         <PageLoader />
         <CurrencyProvider initialCurrency={currency} initialCountry={country}>
           <AuditProvider>
+            <UrgencyBanner />
             {children}
             <AuditModal />
           </AuditProvider>

@@ -9,7 +9,7 @@ export function LinkedInInsight() {
   return (
     <Script
       id="linkedin-insight"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `
           _linkedin_partner_id = "${LINKEDIN_PARTNER_ID}";

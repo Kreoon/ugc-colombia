@@ -9,7 +9,7 @@ export function TikTokPixel() {
   return (
     <Script
       id="tiktok-pixel"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `
           !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];

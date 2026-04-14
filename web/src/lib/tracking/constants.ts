@@ -2,7 +2,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://ugccolombia.co";
 
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-PT9JR4ZN";
-export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID ?? "G-2TRCVHXJBR";
+export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID ?? "G-B24MDLL0TX";
 export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
 export const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID ?? "";
 export const LINKEDIN_PARTNER_ID =

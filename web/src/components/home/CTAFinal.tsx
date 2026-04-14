@@ -186,17 +186,22 @@ export function CTAFinal() {
             >
               <div className="flex items-center -space-x-2.5">
                 {[
-                  { initials: "TK", name: "Tokio" },
-                  { initials: "EM", name: "Equi" },
-                  { initials: "ME", name: "Michel" },
-                  { initials: "Vi", name: "Vitalcom" },
+                  { name: "Shop Tokio", logo: "https://shoptokio.co/cdn/shop/files/gempages_513541607190955198-297e6fa2-f0e0-455a-bdf4-12a9388c792d.webp?v=1728089603&width=260" },
+                  { name: "Altevo", logo: "https://altevo.com.co/cdn/shop/files/Altevo_Logo.png?v=1758591345&width=150" },
+                  { name: "Vitalcom", logo: "/brand/logos/vitalcom.png" },
+                  { name: "Bioboosters", logo: "https://bioboosters.co/cdn/shop/files/Logo_Blanco.png?v=1758762956&width=290" },
                 ].map((c) => (
                   <div
-                    key={c.initials}
-                    className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border-2 border-brand-black flex items-center justify-center"
+                    key={c.name}
+                    className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-yellow/20 to-brand-gold/10 border-2 border-brand-black flex items-center justify-center overflow-hidden"
                     title={c.name}
                   >
-                    <span className="text-[10px] font-bold text-brand-yellow/80 font-sans">{c.initials}</span>
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      loading="lazy"
+                      className="w-full h-full object-contain p-1.5 brightness-0 invert opacity-80"
+                    />
                   </div>
                 ))}
                 <div className="w-9 h-9 rounded-full bg-brand-yellow/10 border-2 border-brand-black flex items-center justify-center">

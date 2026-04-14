@@ -12,6 +12,52 @@ declare global {
   }
 }
 
+// Mapeo a eventos estándar de TikTok para mejor optimización del algoritmo.
+// Eventos no mapeados se envían con su nombre original (evento custom).
+const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
+  lead_capture: "SubmitForm",
+  form_submit: "SubmitForm",
+  quiz_complete: "CompleteRegistration",
+  registration_complete: "CompleteRegistration",
+  waitlist_submit: "Subscribe",
+  booking_start: "Contact",
+  booking_complete: "CompletePayment",
+  whatsapp_click: "Contact",
+  plan_click: "AddToCart",
+  diagnosis_view: "ViewContent",
+  video_view: "ViewContent",
+};
+
+// Mapeo a eventos estándar de Meta Pixel. Eventos estándar permiten
+// optimización de campañas y coincidencia automática de conversiones.
+const META_STANDARD_EVENTS: Record<string, string> = {
+  lead_capture: "Lead",
+  form_submit: "Lead",
+  quiz_complete: "Lead",
+  registration_complete: "CompleteRegistration",
+  waitlist_submit: "Subscribe",
+  booking_start: "Schedule",
+  booking_complete: "Schedule",
+  whatsapp_click: "Contact",
+  plan_click: "AddToCart",
+  diagnosis_view: "ViewContent",
+  video_view: "ViewContent",
+};
+
+function mapToTiktokStandardEvent(eventName: string): string {
+  return TIKTOK_STANDARD_EVENTS[eventName] ?? eventName;
+}
+
+function mapToMetaStandardEvent(eventName: string): {
+  name: string;
+  isStandard: boolean;
+} {
+  const standard = META_STANDARD_EVENTS[eventName];
+  return standard
+    ? { name: standard, isStandard: true }
+    : { name: eventName, isStandard: false };
+}
+
 export function trackEvent(event: TrackingEvent): void {
   if (typeof window === "undefined") return;
 
@@ -32,17 +78,22 @@ export function trackEvent(event: TrackingEvent): void {
   }
 
   if (hasConsent("marketing") && window.fbq) {
-    window.fbq("trackCustom", event.event, {
-      category: event.category,
-      label: event.label,
-      value: event.value,
-    });
+    const meta = mapToMetaStandardEvent(event.event);
+    const params = {
+      content_name: event.label ?? event.event,
+      content_category: event.category,
+      value: event.value ?? 0,
+      currency: "COP",
+    };
+    window.fbq(meta.isStandard ? "track" : "trackCustom", meta.name, params);
   }
 
   if (hasConsent("marketing") && window.ttq) {
-    window.ttq.track(event.event, {
-      content_name: event.label,
-      value: event.value,
+    const tiktokStandardEvent = mapToTiktokStandardEvent(event.event);
+    window.ttq.track(tiktokStandardEvent, {
+      content_name: event.label ?? event.event,
+      value: event.value ?? 0,
+      currency: "COP",
     });
   }
 

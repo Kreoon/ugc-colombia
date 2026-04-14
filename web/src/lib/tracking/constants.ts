@@ -4,7 +4,8 @@ export const SITE_URL =
 export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-PT9JR4ZN";
 export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID ?? "G-B24MDLL0TX";
 export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
-export const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID ?? "";
+export const TIKTOK_PIXEL_ID =
+  process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID ?? "D7EKKNJC77U75VFHD5E0";
 export const LINKEDIN_PARTNER_ID =
   process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID ?? "";
 export const BING_UET_ID = process.env.NEXT_PUBLIC_BING_UET_ID ?? "";

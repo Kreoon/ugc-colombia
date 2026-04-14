@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { AuditData } from "../AuditModal";
 import type { LeadScore } from "@/lib/lead-scoring";
+import { trackBookingComplete, trackWhatsappClick } from "@/lib/tracking/events";
 
 const WHATSAPP_NUMBER = "573132947776";
 const DAY_NAMES = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
@@ -103,6 +104,9 @@ export function StepBooking({ data, score, onBack, onClose }: Props) {
       const result = await res.json();
 
       if (!res.ok) throw new Error(result.error || "Error al agendar");
+
+      // Dispara booking_complete + lead (2 eventos para pautas de venta Y leads)
+      trackBookingComplete(data.lead_type ?? "unknown");
 
       // Redirect to thank you page with meeting details
       const params = new URLSearchParams({
@@ -235,7 +239,10 @@ export function StepBooking({ data, score, onBack, onClose }: Props) {
           <p className="text-brand-gray mb-4">No hay horarios disponibles en este momento.</p>
           <Button
             variant="outline"
-            onClick={() => window.open(getWhatsAppUrl(data), "_blank")}
+            onClick={() => {
+            trackWhatsappClick("booking_step");
+            window.open(getWhatsAppUrl(data), "_blank");
+          }}
             className="gap-2"
           >
             <MessageCircle className="w-4 h-4" />
@@ -378,7 +385,10 @@ export function StepBooking({ data, score, onBack, onClose }: Props) {
         </button>
         <button
           type="button"
-          onClick={() => window.open(getWhatsAppUrl(data), "_blank")}
+          onClick={() => {
+            trackWhatsappClick("booking_step");
+            window.open(getWhatsAppUrl(data), "_blank");
+          }}
           className="flex items-center gap-2 text-sm text-brand-gray hover:text-white transition-colors"
         >
           <MessageCircle className="w-4 h-4" />

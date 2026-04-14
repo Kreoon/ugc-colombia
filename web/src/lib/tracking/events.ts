@@ -15,6 +15,7 @@ declare global {
 // Mapeo a eventos estándar de TikTok para mejor optimización del algoritmo.
 // Eventos no mapeados se envían con su nombre original (evento custom).
 const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
+  lead: "SubmitForm",
   lead_capture: "SubmitForm",
   form_submit: "SubmitForm",
   quiz_complete: "CompleteRegistration",
@@ -31,6 +32,7 @@ const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
 // Mapeo a eventos estándar de Meta Pixel. Eventos estándar permiten
 // optimización de campañas y coincidencia automática de conversiones.
 const META_STANDARD_EVENTS: Record<string, string> = {
+  lead: "Lead",
   lead_capture: "Lead",
   form_submit: "Lead",
   quiz_complete: "Lead",
@@ -224,6 +226,10 @@ export function trackDiagnosisView(type: "marca" | "creador"): void {
   });
 }
 
+// Al iniciar agendamiento dispara DOS eventos:
+// 1. booking_start → campañas de venta/booking (mapea a Schedule/Contact)
+// 2. lead → campañas de lead generation (mapea a Lead/SubmitForm)
+// Así el mismo disparo sirve para optimizar ambos tipos de campaña.
 export function trackBookingStart(source: string): void {
   trackEvent({
     event: "booking_start",
@@ -231,14 +237,30 @@ export function trackBookingStart(source: string): void {
     label: source,
     funnel_step: "booking_started",
   });
+  trackEvent({
+    event: "lead",
+    category: "conversion",
+    label: `booking_intent_${source}`,
+    funnel_step: "booking_as_lead",
+  });
 }
 
+// Al confirmar el agendamiento dispara DOS eventos:
+// 1. booking_complete → conversión de venta confirmada
+// 2. lead → lead de alta calidad confirmado
 export function trackBookingComplete(source: string): void {
   trackEvent({
     event: "booking_complete",
     category: "conversion",
     label: source,
     funnel_step: "booking_completed",
+    value: 1,
+  });
+  trackEvent({
+    event: "lead",
+    category: "conversion",
+    label: `booking_confirmed_${source}`,
+    funnel_step: "booking_confirmed_as_lead",
     value: 1,
   });
 }

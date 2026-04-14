@@ -151,7 +151,7 @@ export function Navbar() {
           {/* CTA visible en mobile (compacto) + desktop (normal) */}
           <Button
             size="default"
-            onClick={openAudit}
+            onClick={() => openAudit("navbar_desktop")}
             className={cn(
               "font-semibold tracking-wide transition-all duration-300",
               "text-xs sm:text-sm",
@@ -265,7 +265,7 @@ export function Navbar() {
               <Button
                 size="lg"
                 className="w-full min-h-[48px] text-base font-bold"
-                onClick={openAudit}
+                onClick={() => openAudit("navbar_mobile")}
               >
                 Análisis gratis →
               </Button>

@@ -118,7 +118,7 @@ export function CasosCTAFinal() {
             >
               <motion.button
                 type="button"
-                onClick={openAudit}
+                onClick={() => openAudit("casos_cta_final")}
                 className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-4 sm:py-5 rounded-xl bg-brand-yellow text-brand-black font-semibold text-base sm:text-lg tracking-wide overflow-hidden min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-yellow"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}

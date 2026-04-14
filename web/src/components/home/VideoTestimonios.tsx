@@ -255,7 +255,7 @@ export function VideoTestimonios() {
           ¿Ya eres cliente y quieres compartir tu historia?{" "}
           <button
             type="button"
-            onClick={openAudit}
+            onClick={() => openAudit("video_testimonios")}
             className="text-brand-yellow hover:text-brand-gold underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-sm"
           >
             Cuéntanos →

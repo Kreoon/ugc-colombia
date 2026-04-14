@@ -10,6 +10,7 @@ import {
   type RegistrationPayload,
 } from "@/lib/validations/registration";
 import { registerUser } from "@/lib/api/registration";
+import { trackRegistrationComplete } from "@/lib/tracking/events";
 
 const inputClass = cn(
   "w-full bg-black/60 border border-brand-gold/30 rounded-lg px-4 py-3",
@@ -33,6 +34,7 @@ export function RegistrationForm() {
     setServerError("");
     try {
       await registerUser(values);
+      trackRegistrationComplete();
       setSuccess(true);
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "Error inesperado");

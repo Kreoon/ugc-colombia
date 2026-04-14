@@ -115,7 +115,7 @@ export function PreciosCTA() {
           <Button
             size="lg"
             className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
-            onClick={openAudit}
+            onClick={() => openAudit("precios_cta_final")}
           >
             <CalendarDays className="h-5 w-5 mr-2" aria-hidden />
             AGENDA TU LLAMADA →

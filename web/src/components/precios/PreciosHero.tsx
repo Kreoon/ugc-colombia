@@ -192,7 +192,7 @@ export function PreciosHero() {
             size="lg"
             variant="outline"
             className="w-full sm:w-auto text-sm sm:text-base min-h-[52px]"
-            onClick={openAudit}
+            onClick={() => openAudit("precios_hero")}
           >
             AGENDA TU DIAGNÓSTICO
           </Button>

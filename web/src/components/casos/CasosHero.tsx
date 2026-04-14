@@ -119,7 +119,7 @@ export function CasosHero() {
           <Button
             size="lg"
             className="font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)]"
-            onClick={openAudit}
+            onClick={() => openAudit("casos_hero")}
           >
             AGENDAR DIAGNÓSTICO GRATIS →
           </Button>

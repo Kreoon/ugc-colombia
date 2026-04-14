@@ -1,10 +1,11 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { trackAuditOpen } from "@/lib/tracking/events";
 
 interface AuditContextType {
   isOpen: boolean;
-  openAudit: () => void;
+  openAudit: (source?: string) => void;
   closeAudit: () => void;
 }
 
@@ -13,7 +14,10 @@ const AuditContext = createContext<AuditContextType | null>(null);
 export function AuditProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openAudit = useCallback(() => setIsOpen(true), []);
+  const openAudit = useCallback((source?: string) => {
+    trackAuditOpen(source ?? "unknown");
+    setIsOpen(true);
+  }, []);
   const closeAudit = useCallback(() => setIsOpen(false), []);
 
   return (

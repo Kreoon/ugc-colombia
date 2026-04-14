@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Volume2, VolumeX } from "lucide-react";
 import { useIntersection } from "@/hooks/use-intersection";
+import { trackVideoView, trackEvent } from "@/lib/tracking/events";
 import { FALLBACK_SAMPLES, type VideoSample } from "@/lib/showcase-samples";
 
 /**
@@ -50,12 +51,20 @@ interface VideoCardProps {
 function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const hasTrackedViewRef = useRef(false);
 
   // Intersección play/pause del <video> nativo
   const { ref: intersectionRef, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.4,
     once: false,
   });
+
+  useEffect(() => {
+    if (isIntersecting && !hasTrackedViewRef.current) {
+      hasTrackedViewRef.current = true;
+      trackVideoView(`sample_${sample.id}_${sample.tag}`);
+    }
+  }, [isIntersecting, sample.id, sample.tag]);
 
   // Intersección lazy-mount del iframe Bunny (una sola vez, con 400px de
   // precarga para que llegue listo antes de entrar al viewport). Evita
@@ -134,6 +143,11 @@ function VideoCard({ sample, unmuted, onToggleAudio }: VideoCardProps) {
 
   const handleAudioClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    trackEvent({
+      event: "video_audio_toggle",
+      category: "engagement",
+      label: `sample_${sample.id}`,
+    });
     onToggleAudio();
   };
 

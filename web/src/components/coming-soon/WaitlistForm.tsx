@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import confetti from "canvas-confetti";
 import { motion } from "motion/react";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { trackWaitlistSubmit } from "@/lib/tracking/events";
 
 const waitlistSchema = z.object({
   email: z
@@ -62,6 +63,7 @@ export function WaitlistForm() {
         throw new Error(body.message ?? "Error al registrarse.");
       }
 
+      trackWaitlistSubmit();
       setSubmitted(true);
       fireConfetti();
       toast.success("Ya estás dentro. Te avisamos cuando lancemos.", {

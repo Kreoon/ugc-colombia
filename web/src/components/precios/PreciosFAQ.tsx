@@ -96,7 +96,7 @@ export function PreciosFAQ() {
             </div>
             <button
               type="button"
-              onClick={openAudit}
+              onClick={() => openAudit("precios_faq")}
               className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-yellow text-black font-sans font-bold text-sm tracking-wide transition-all hover:bg-brand-gold hover:shadow-[0_8px_30px_-8px_rgba(249,179,52,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Agenda tu llamada →

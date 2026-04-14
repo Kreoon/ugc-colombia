@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { useAudit } from "./AuditContext";
+import {
+  trackAuditTypeSelect,
+  trackQuizComplete,
+  trackLeadCapture,
+  trackDiagnosisView,
+  trackBookingStart,
+} from "@/lib/tracking/events";
 import { StepType } from "./steps/StepType";
 import { StepBrandInfo } from "./steps/StepBrandInfo";
 import { StepCreatorInfo } from "./steps/StepCreatorInfo";
@@ -55,6 +62,7 @@ export function AuditModal() {
   }
 
   function handleTypeSelect(type: "marca" | "creador") {
+    trackAuditTypeSelect(type);
     setData({ ...data, lead_type: type });
     setStep(1);
   }
@@ -72,27 +80,43 @@ export function AuditModal() {
   }
 
   function handleBrandAudit(audit: BrandAudit, askedFields?: Set<string>) {
+    trackQuizComplete("marca");
     setData({ ...data, brand_audit: audit, asked_fields: askedFields });
     setStep(3);
   }
 
   function handleCreatorAudit(audit: CreatorAudit) {
+    trackQuizComplete("creador");
     setData({ ...data, creator_audit: audit });
     setStep(3);
   }
 
   function handleContact(contact: ContactInfo, score: LeadScore, diagnosis: AIDiagnosis, leadId?: string) {
+    if (data.lead_type) {
+      trackLeadCapture({
+        type: data.lead_type,
+        email: contact.email,
+        source: "audit_modal",
+      });
+    }
     setData({ ...data, contact, score, diagnosis, lead_id: leadId });
     setStep(4);
   }
 
   function goToBooking() {
+    trackBookingStart("audit_diagnosis");
     setStep(5);
   }
 
   function goBack() {
     if (step > 0) setStep(step - 1);
   }
+
+  useEffect(() => {
+    if (step === 4 && data.lead_type) {
+      trackDiagnosisView(data.lead_type);
+    }
+  }, [step, data.lead_type]);
 
   // Wider modal for booking step (calendar iframe needs space)
   const isBookingStep = step === 5;

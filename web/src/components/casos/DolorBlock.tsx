@@ -169,7 +169,7 @@ function DolorBlockSection({ block, index }: { block: DolorBlockType; index: num
             <Button asChild size="lg" className="font-bold tracking-wide min-h-[52px]">
               <Link href={`/servicios#${block.servicioId}`}>{block.servicioLabel} →</Link>
             </Button>
-            <Button size="lg" variant="outline" className="min-h-[52px]" onClick={openAudit}>
+            <Button size="lg" variant="outline" className="min-h-[52px]" onClick={() => openAudit(`casos_dolor_${block.servicioId}`)}>
               Agendar diagnóstico
             </Button>
           </div>

@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { SiTiktok } from "@/components/home/icons";
+import { trackSocialClick, trackWhatsappClick } from "@/lib/tracking/events";
 
 const NAV_LINKS = {
   agencia: [
@@ -77,6 +80,18 @@ export function Footer() {
             <div className="mt-8 flex items-center gap-3">
               {SOCIALS.map((s) => {
                 const Icon = s.icon;
+                const network = s.name.toLowerCase();
+                const handleClick = () => {
+                  if (network === "whatsapp") {
+                    trackWhatsappClick("footer");
+                  } else if (
+                    network === "instagram" ||
+                    network === "tiktok" ||
+                    network === "linkedin"
+                  ) {
+                    trackSocialClick(network, "footer");
+                  }
+                };
                 return (
                   <a
                     key={s.name}
@@ -84,6 +99,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.name}
+                    onClick={handleClick}
                     className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/[0.04] border border-brand-graphite/60 text-brand-gray hover:text-brand-yellow hover:border-brand-gold/60 hover:bg-brand-yellow/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
                   >
                     <Icon className="w-5 h-5" aria-hidden />

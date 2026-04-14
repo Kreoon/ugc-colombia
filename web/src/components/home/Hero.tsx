@@ -165,7 +165,7 @@ export function Hero() {
             >
               <Button
                 size="lg"
-                onClick={openAudit}
+                onClick={() => openAudit("hero_home")}
                 className="w-full sm:w-auto text-sm sm:text-base font-bold tracking-wide min-h-[52px] shadow-[0_0_28px_rgba(249,179,52,0.35)] hover:shadow-[0_0_40px_rgba(249,179,52,0.55)] focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 aria-label="Iniciar diagnóstico gratuito con UGC Colombia"
               >

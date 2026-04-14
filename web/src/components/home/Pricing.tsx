@@ -18,6 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useAudit } from "@/components/lead-audit/AuditContext";
+import { trackPlanClick } from "@/lib/tracking/events";
 import {
   PLANES_RECURRENTES,
   ENTERPRISE_FEATURES,
@@ -214,6 +215,7 @@ function PlanCard({
       {/* CTA */}
       <a
         href={plan.ctaHref}
+        onClick={() => trackPlanClick(plan.name, "home_pricing")}
         className={cn(
           "group/cta flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-sans font-bold text-sm tracking-wide transition-all min-h-[44px]",
           plan.highlight
@@ -373,7 +375,7 @@ function EnterpriseBanner({ isIntersecting }: { isIntersecting: boolean }) {
 
             <button
               type="button"
-              onClick={openAudit}
+              onClick={() => openAudit("pricing_enterprise")}
               className={cn(
                 "group/ent flex items-center justify-center gap-2.5 w-full px-6 py-4 rounded-xl",
                 "bg-gradient-to-r from-brand-yellow to-brand-gold-dark text-black",

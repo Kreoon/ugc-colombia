@@ -9,6 +9,7 @@ import { getInsight } from "@/lib/funnel-insights";
 import { brandAuditSchema } from "@/lib/validations/lead-audit";
 import { buildAuditFromAIQuiz, type AIAnswer, type AIQuizQuestion } from "@/lib/quiz-ai";
 import type { BrandAudit, BrandInfo } from "@/lib/validations/lead-audit";
+import { trackQuizAnswer } from "@/lib/tracking/events";
 
 const MAX_QUESTIONS = 6;
 
@@ -94,6 +95,7 @@ export function StepBrandAudit({ brandInfo, onSubmit, onBack }: Props) {
     isAdvancingRef.current = true;
 
     const question = isFirstQuestion ? staticQ1.question : currentQuestion?.question || "";
+    trackQuizAnswer(questionNumber, value);
 
     const newAnswer: AIAnswer = {
       question_number: questionNumber,

@@ -120,7 +120,7 @@ function ServiceBlock({ line, index }: { line: ServiceLine; index: number }) {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Button size="lg" className="font-bold tracking-wide" onClick={openAudit}>
+            <Button size="lg" className="font-bold tracking-wide" onClick={() => openAudit(`servicios_detalle_${line.id}`)}>
               Solicitar propuesta →
             </Button>
             <Button asChild size="lg" variant="outline">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 
@@ -91,34 +92,58 @@ export function Marcas() {
           />
 
           <div className="group relative overflow-hidden rounded-2xl border border-brand-gold/15 bg-white/[0.015] py-10 sm:py-12">
-            <ul className="flex items-center gap-12 sm:gap-20 whitespace-nowrap animate-marquee group-hover:[animation-play-state:paused] will-change-transform">
+            <ul className="flex items-center gap-12 sm:gap-20 whitespace-nowrap animate-marquee-fast group-hover:[animation-play-state:paused] will-change-transform">
               {LOOP.map((m, i) => (
                 <li
                   key={`${m.label}-${i}`}
                   className="flex items-center justify-center shrink-0"
                   aria-hidden={i >= MARCAS.length ? "true" : undefined}
                 >
-                  {m.logo ? (
-                    <img
-                      src={m.logo}
-                      alt={m.label}
-                      className="h-8 sm:h-10 lg:h-12 w-auto object-contain grayscale brightness-0 invert opacity-50 hover:opacity-90 transition-all duration-300"
-                    />
-                  ) : (
+                  <Link
+                    href="/casos"
+                    aria-label={`Ver casos de ${m.label}`}
+                    className="group/brand relative inline-flex items-center justify-center cursor-pointer"
+                  >
+                    {m.logo ? (
+                      <img
+                        src={m.logo}
+                        alt={m.label}
+                        className={[
+                          "h-8 sm:h-10 lg:h-12 w-auto object-contain",
+                          "grayscale brightness-0 invert opacity-50",
+                          "group-hover/brand:opacity-100 group-hover/brand:scale-110",
+                          "transition-all duration-300 ease-out",
+                        ].join(" ")}
+                      />
+                    ) : (
+                      <span
+                        className={[
+                          m.font,
+                          m.className,
+                          "text-2xl sm:text-3xl lg:text-[2rem] leading-none select-none",
+                          "text-white/45 group-hover/brand:text-white group-hover/brand:scale-110",
+                          "transition-all duration-300 ease-out",
+                        ].join(" ")}
+                        style={{ textShadow: "0 0 24px rgba(249,179,52,0.0)" }}
+                      >
+                        {m.label}
+                      </span>
+                    )}
+
+                    {/* Tooltip premium */}
                     <span
                       className={[
-                        m.font,
-                        m.className,
-                        "text-2xl sm:text-3xl lg:text-[2rem] leading-none select-none",
-                        "text-white/45 hover:text-white transition-colors duration-300",
+                        "pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap",
+                        "rounded-md bg-brand-black/90 px-2.5 py-1 text-[10px] font-sans font-medium uppercase tracking-wider text-brand-yellow",
+                        "border border-brand-gold/30 shadow-[0_4px_12px_-2px_rgba(249,179,52,0.3)]",
+                        "opacity-0 translate-y-1 group-hover/brand:opacity-100 group-hover/brand:translate-y-0",
+                        "transition-all duration-200",
                       ].join(" ")}
-                      style={{
-                        textShadow: "0 0 24px rgba(249,179,52,0.0)",
-                      }}
+                      aria-hidden="true"
                     >
                       {m.label}
                     </span>
-                  )}
+                  </Link>
                 </li>
               ))}
             </ul>

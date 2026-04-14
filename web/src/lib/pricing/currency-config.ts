@@ -40,11 +40,11 @@ export const PLAN_PRICES: Record<string, Record<Currency, PlanPricing>> = {
   },
   growth: {
     USD: { amount: 700, monthlySavings: 1_055 },
-    COP: { amount: 2_790_000, monthlySavings: 4_190_000 },
+    COP: { amount: 2_590_000, monthlySavings: 3_890_000 },
   },
   scale: {
     USD: { amount: 1_500, monthlySavings: 3_315 },
-    COP: { amount: 5_990_000, monthlySavings: 13_190_000 },
+    COP: { amount: 5_890_000, monthlySavings: 12_990_000 },
   },
 };
 

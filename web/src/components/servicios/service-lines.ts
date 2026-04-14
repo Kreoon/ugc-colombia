@@ -74,11 +74,11 @@ export const SERVICE_LINES: ServiceLine[] = [
       "Marcas ecommerce, dropshipping y DTC en LATAM que ya facturan o quieren empezar a facturar con contenido que vende. Desde proyectos que arrancan hasta marcas escalando a 6 cifras mensuales, sin necesidad de montar un equipo interno.",
     priceRange: {
       USD: "$400 – $1.500 USD / mes (Inicio · Crecimiento · Escala)",
-      COP: "$1.590.000 – $5.990.000 COP / mes (Inicio · Crecimiento · Escala)",
+      COP: "$1.590.000 – $5.890.000 COP / mes (Inicio · Crecimiento · Escala)",
     },
     example: {
       USD: "Una marca de skincare en Colombia que toma el plan Crecimiento ($700/mes) y recibe 10 videos × 3 variantes = 30 entregables listos para escalar Meta Ads.",
-      COP: "Una marca de skincare en Colombia que toma el plan Crecimiento ($2.790.000/mes) y recibe 10 videos × 3 variantes = 30 entregables listos para escalar Meta Ads.",
+      COP: "Una marca de skincare en Colombia que toma el plan Crecimiento ($2.590.000/mes) y recibe 10 videos × 3 variantes = 30 entregables listos para escalar Meta Ads.",
     },
   },
   {

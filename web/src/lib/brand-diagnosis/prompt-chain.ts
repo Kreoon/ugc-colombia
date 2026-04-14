@@ -66,8 +66,8 @@ const P5_SYSTEM = `Eres un consultor senior de UGC Colombia, agencia de UGC y es
 Genera la propuesta comercial final basada en el analisis.
 PAQUETES:
 1. "Inicio" — 5 videos UGC/mes ($400 USD / $1.590.000 COP al mes)
-2. "Crecimiento" — 10 videos UGC + estrategia ($700 USD / $2.790.000 COP al mes)
-3. "Escala" — 30 videos + estrategia + paid creative ($1.500 USD / $5.990.000 COP al mes)
+2. "Crecimiento" — 10 videos UGC + estrategia ($700 USD / $2.590.000 COP al mes)
+3. "Escala" — 30 videos + estrategia + paid creative ($1.500 USD / $5.890.000 COP al mes)
 4. "Enterprise" — Operación completa personalizada (desde $3.000 USD / $11.990.000 COP al mes)
 Nota: los precios muestran ambas monedas (USD y COP). Si sabes el país del lead (por el contexto) usa la moneda apropiada. Por defecto muestra USD.
 Responde SOLO en JSON valido:

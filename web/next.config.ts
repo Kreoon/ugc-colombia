@@ -6,15 +6,13 @@ const nextConfig: NextConfig = {
 
   // Excluir assets pesados del bundle de serverless functions.
   // public/ ya es servido como estático por Vercel, no necesita estar en las funciones.
+  // IMPORTANTE: NO excluir node_modules/@next/swc-* ni @esbuild — Next los usa en runtime.
   outputFileTracingExcludes: {
     "*": [
       "public/brand/**/*",
       "public/videos/**/*",
       "public/images/**/*",
-      "public/fonts/**/*",
       ".next/cache/**/*",
-      "node_modules/@next/swc-*/**/*",
-      "node_modules/@esbuild/**/*",
     ],
   },
 

@@ -37,10 +37,20 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith(r)
   );
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  // Validar env vars antes de crear el cliente — fallar rápido si faltan
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    // Sin credenciales — dejar pasar solo login para que muestre error claro
+    if (!isPublicAdmin) {
+      return NextResponse.redirect(new URL("/admin/login?error=config", req.url));
+    }
+    return response;
+  }
+
+  try {
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
         getAll: () => req.cookies.getAll(),
         setAll(
@@ -51,26 +61,38 @@ export async function middleware(req: NextRequest) {
           );
         },
       },
+    });
+
+    // Timeout defensivo para evitar que un Supabase lento cuelgue el request
+    const userPromise = supabase.auth.getUser();
+    const timeoutPromise = new Promise<{ data: { user: null } }>((resolve) =>
+      setTimeout(() => resolve({ data: { user: null } }), 5000)
+    );
+    const {
+      data: { user },
+    } = await Promise.race([userPromise, timeoutPromise]);
+
+    // No logueado intentando entrar a admin protegido
+    if (!user && !isPublicAdmin) {
+      const redirectUrl = new URL("/admin/login", req.url);
+      redirectUrl.searchParams.set("next", pathname);
+      return NextResponse.redirect(redirectUrl);
     }
-  );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    // Logueado yendo al login → redirigir al admin
+    if (user && pathname === "/admin/login") {
+      return NextResponse.redirect(new URL("/admin", req.url));
+    }
 
-  // No logueado intentando entrar a admin protegido
-  if (!user && !isPublicAdmin) {
-    const redirectUrl = new URL("/admin/login", req.url);
-    redirectUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(redirectUrl);
+    return response;
+  } catch (err) {
+    console.error("[middleware] Supabase auth error:", err);
+    // En caso de error, dejar pasar rutas públicas (login) y redirigir las demás
+    if (!isPublicAdmin) {
+      return NextResponse.redirect(new URL("/admin/login?error=auth", req.url));
+    }
+    return response;
   }
-
-  // Logueado yendo al login → redirigir al admin
-  if (user && pathname === "/admin/login") {
-    return NextResponse.redirect(new URL("/admin", req.url));
-  }
-
-  return response;
 }
 
 export const config = {

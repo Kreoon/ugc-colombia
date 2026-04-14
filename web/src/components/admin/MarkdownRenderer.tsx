@@ -6,7 +6,7 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import type { Components } from 'react-markdown';
 import type { Element } from 'hast';
-import 'highlight.js/styles/github-dark.css';
+// Nota: estilos de highlight.js se importan desde globals.css al inicio del bundle
 
 interface MarkdownRendererProps {
   content: string;

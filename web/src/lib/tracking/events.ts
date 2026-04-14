@@ -14,10 +14,13 @@ declare global {
 
 // Mapeo a eventos estándar de TikTok para mejor optimización del algoritmo.
 // Eventos no mapeados se envían con su nombre original (evento custom).
+// Mapeo TikTok: SubmitForm está RESERVADO para bookings (agendamientos)
+// para que las campañas de Lead Gen optimicen solo por bookings confirmados.
+// Los formularios regulares (quiz, registro) mapean a CompleteRegistration.
 const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
-  lead: "SubmitForm",
-  lead_capture: "SubmitForm",
-  form_submit: "SubmitForm",
+  lead: "SubmitForm", // solo dispara desde booking_start + booking_complete
+  lead_capture: "CompleteRegistration", // quiz contact info
+  form_submit: "CompleteRegistration",
   quiz_complete: "CompleteRegistration",
   registration_complete: "CompleteRegistration",
   waitlist_submit: "Subscribe",
@@ -31,11 +34,13 @@ const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
 
 // Mapeo a eventos estándar de Meta Pixel. Eventos estándar permiten
 // optimización de campañas y coincidencia automática de conversiones.
+// Mapeo Meta: Lead está RESERVADO para bookings (agendamientos)
+// para que las campañas optimicen por bookings reales, no por formularios.
 const META_STANDARD_EVENTS: Record<string, string> = {
-  lead: "Lead",
-  lead_capture: "Lead",
-  form_submit: "Lead",
-  quiz_complete: "Lead",
+  lead: "Lead", // solo dispara desde booking_start + booking_complete
+  lead_capture: "CompleteRegistration", // quiz contact info
+  form_submit: "CompleteRegistration",
+  quiz_complete: "CompleteRegistration",
   registration_complete: "CompleteRegistration",
   waitlist_submit: "Subscribe",
   booking_start: "Schedule",

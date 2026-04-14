@@ -14,18 +14,20 @@ declare global {
 
 // Mapeo a eventos estándar de TikTok para mejor optimización del algoritmo.
 // Eventos no mapeados se envían con su nombre original (evento custom).
-// Mapeo TikTok: SubmitForm está RESERVADO para bookings (agendamientos)
-// para que las campañas de Lead Gen optimicen solo por bookings confirmados.
-// Los formularios regulares (quiz, registro) mapean a CompleteRegistration.
+// Mapeo TikTok: eventos estándar se RESERVAN para conversiones únicas
+// y solo disparan desde /gracias (booking confirmado):
+// - SubmitForm  → campañas de Lead optimizan por booking intent
+// - Schedule    → campañas de Venta optimizan por slot confirmado
+// - CompleteRegistration → registro confirmado (booking exitoso)
+//
+// Los formularios intermedios (quiz, waitlist, /registro) se envían
+// como eventos custom, sin polucionar los estándar.
 const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
-  lead: "SubmitForm", // solo dispara desde booking_start + booking_complete
-  lead_capture: "CompleteRegistration", // quiz contact info
-  form_submit: "CompleteRegistration",
-  quiz_complete: "CompleteRegistration",
-  registration_complete: "CompleteRegistration",
+  lead: "SubmitForm",                   // solo desde booking_start + booking_complete
+  booking_complete: "Schedule",          // solo desde /gracias
+  registration: "CompleteRegistration",  // solo desde /gracias
   waitlist_submit: "Subscribe",
   booking_start: "Contact",
-  booking_complete: "Schedule",
   whatsapp_click: "Contact",
   plan_click: "AddToCart",
   diagnosis_view: "ViewContent",
@@ -34,17 +36,14 @@ const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
 
 // Mapeo a eventos estándar de Meta Pixel. Eventos estándar permiten
 // optimización de campañas y coincidencia automática de conversiones.
-// Mapeo Meta: Lead está RESERVADO para bookings (agendamientos)
-// para que las campañas optimicen por bookings reales, no por formularios.
+// Mapeo Meta: eventos estándar RESERVADOS solo para /gracias (booking).
+// Formularios intermedios van como custom events.
 const META_STANDARD_EVENTS: Record<string, string> = {
-  lead: "Lead", // solo dispara desde booking_start + booking_complete
-  lead_capture: "CompleteRegistration", // quiz contact info
-  form_submit: "CompleteRegistration",
-  quiz_complete: "CompleteRegistration",
-  registration_complete: "CompleteRegistration",
+  lead: "Lead",                          // solo desde booking_start + booking_complete
+  booking_complete: "Schedule",          // solo desde /gracias
+  registration: "CompleteRegistration",  // solo desde /gracias
   waitlist_submit: "Subscribe",
   booking_start: "Schedule",
-  booking_complete: "Schedule",
   whatsapp_click: "Contact",
   plan_click: "AddToCart",
   diagnosis_view: "ViewContent",
@@ -250,9 +249,11 @@ export function trackBookingStart(source: string): void {
   });
 }
 
-// Al confirmar el agendamiento dispara DOS eventos:
-// 1. booking_complete → conversión de venta confirmada
-// 2. lead → lead de alta calidad confirmado
+// Al confirmar el agendamiento dispara TRES eventos:
+// 1. booking_complete → Schedule (venta)
+// 2. lead           → SubmitForm/Lead (leads campaign)
+// 3. registration   → CompleteRegistration (registro confirmado)
+// Así una sola conversión en /gracias alimenta las 3 estructuras de campaña.
 export function trackBookingComplete(source: string): void {
   trackEvent({
     event: "booking_complete",
@@ -266,6 +267,13 @@ export function trackBookingComplete(source: string): void {
     category: "conversion",
     label: `booking_confirmed_${source}`,
     funnel_step: "booking_confirmed_as_lead",
+    value: 1,
+  });
+  trackEvent({
+    event: "registration",
+    category: "conversion",
+    label: `booking_confirmed_${source}`,
+    funnel_step: "booking_confirmed_as_registration",
     value: 1,
   });
 }

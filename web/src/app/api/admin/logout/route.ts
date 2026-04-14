@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
-import { clearAdminSession } from "@/lib/admin-auth";
+import { createSupabaseServer } from "@/lib/supabase-server";
 
 export async function POST() {
-  await clearAdminSession();
-  return NextResponse.json({ ok: true });
+  const supabase = await createSupabaseServer();
+  await supabase.auth.signOut();
+
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+  return NextResponse.redirect(new URL("/admin/login", siteUrl));
 }

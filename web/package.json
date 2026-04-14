@@ -42,7 +42,12 @@
     "@hookform/resolvers": "^3.10.0",
     "sonner": "^1.7.2",
     "cmdk": "^1.0.4",
-    "canvas-confetti": "^1.9.3"
+    "canvas-confetti": "^1.9.3",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
+    "rehype-highlight": "^7.0.0",
+    "rehype-raw": "^7.0.0",
+    "gray-matter": "^4.0.3"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

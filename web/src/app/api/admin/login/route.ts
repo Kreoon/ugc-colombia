@@ -1,17 +1,11 @@
+// Login manejado directamente en el cliente con @supabase/ssr createBrowserClient.
+// Este endpoint ya no es necesario pero se mantiene el archivo para no romper
+// referencias existentes. Devuelve 404 para cualquier método.
 import { NextResponse } from "next/server";
-import { setAdminSession, verifyPassword } from "@/lib/admin-auth";
 
-export async function POST(request: Request) {
-  const body = (await request.json().catch(() => ({}))) as { password?: string };
-  const password = body.password ?? "";
-
-  if (!verifyPassword(password)) {
-    return NextResponse.json(
-      { error: "Contraseña incorrecta" },
-      { status: 401 },
-    );
-  }
-
-  await setAdminSession();
-  return NextResponse.json({ ok: true });
+export async function POST() {
+  return NextResponse.json(
+    { error: "Endpoint deprecado. Usa Supabase Auth directamente." },
+    { status: 404 }
+  );
 }

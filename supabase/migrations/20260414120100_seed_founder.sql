@@ -1,0 +1,47 @@
+-- Migration: Seed founder — primer miembro del equipo admin
+-- Date: 2026-04-14
+-- Author: Alexander Cast
+-- Project: UGC Colombia
+--
+-- INSTRUCCIONES DE USO:
+-- ============================================================
+-- Este archivo NO se ejecuta automáticamente.
+-- Se corre manualmente UNA VEZ tras crear el usuario en Supabase Auth.
+--
+-- Pasos:
+--   1. Ir a Supabase Dashboard > Authentication > Users > Add User
+--   2. Crear usuario con email: founder@kreoon.com y una contraseña
+--      (asegurarse de marcar "Auto Confirm User")
+--   3. Copiar el UUID generado por Supabase Auth
+--   4. Reemplazar '<UUID-DEL-USUARIO-AUTH>' abajo con ese UUID
+--   5. Descomentar el bloque INSERT y ejecutar en el SQL Editor
+-- ============================================================
+
+-- ------------------------------------------------------------
+-- Insertar primer founder en admin_users
+-- ------------------------------------------------------------
+
+-- INSERT INTO admin_users (
+--   auth_user_id,
+--   email,
+--   role,
+--   full_name,
+--   is_active,
+--   invitation_accepted_at
+-- )
+-- VALUES (
+--   '<UUID-DEL-USUARIO-AUTH>',
+--   'founder@kreoon.com',
+--   'founder',
+--   'Alexander Cast',
+--   true,
+--   now()
+-- );
+
+-- ------------------------------------------------------------
+-- Verificación (tras el INSERT):
+-- ------------------------------------------------------------
+
+-- SELECT id, email, role, auth_user_id, is_active, invitation_accepted_at
+-- FROM admin_users
+-- WHERE email = 'founder@kreoon.com';

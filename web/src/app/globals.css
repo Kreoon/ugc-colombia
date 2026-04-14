@@ -291,3 +291,23 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Markdown renderer ─────────────────────────────────────── */
+
+/* Elimina el margin-top del primer elemento dentro de .markdown-body */
+.markdown-body > *:first-child {
+  margin-top: 0 !important;
+}
+
+/* Tipografía de código dentro de bloques pre */
+.markdown-body pre code {
+  font-family: 'Courier New', Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Ajuste de highlight.js para usar fondo de la marca en vez del tema github-dark */
+.markdown-body .hljs {
+  background: transparent;
+  padding: 0;
+}

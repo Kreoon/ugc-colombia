@@ -1,69 +1,98 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { createBrowserClient } from "@supabase/ssr";
 import { Loader2 } from "lucide-react";
 
 export function LoginForm() {
+  const router = useRouter();
+  const params = useSearchParams();
+  const next = params.get("next") ?? "/admin";
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setError("");
     setLoading(true);
-    try {
-      const res = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
-      if (!res.ok) {
-        setError(data.error ?? "Error desconocido");
-        return;
-      }
-      window.location.href = "/admin/diagnosticos";
-    } catch {
-      setError("Error de red");
-    } finally {
+    setError(null);
+
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (signInError) {
+      setError(
+        signInError.message === "Invalid login credentials"
+          ? "Email o contraseña incorrectos"
+          : signInError.message
+      );
       setLoading(false);
+      return;
     }
+
+    router.push(next);
+    router.refresh();
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-2xl p-6 bg-brand-graphite/40 border border-brand-gold/20 space-y-4"
-    >
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-[11px] font-sans font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
+        <label className="block text-xs font-semibold text-brand-yellow uppercase tracking-widest mb-2">
+          Email
+        </label>
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full h-12 px-4 rounded-xl bg-white/4 border border-brand-gold/15 text-white focus:border-brand-yellow focus:outline-none transition-colors"
+          placeholder="tu@kreoon.com"
+          autoComplete="email"
+        />
+      </div>
+
+      <div>
+        <label className="block text-xs font-semibold text-brand-yellow uppercase tracking-widest mb-2">
           Contraseña
         </label>
         <input
           type="password"
-          autoFocus
-          autoComplete="current-password"
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full bg-black/60 border border-brand-gold/30 rounded-lg px-4 py-3 text-white font-sans text-sm focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/30"
+          className="w-full h-12 px-4 rounded-xl bg-white/4 border border-brand-gold/15 text-white focus:border-brand-yellow focus:outline-none transition-colors"
+          autoComplete="current-password"
         />
       </div>
 
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && (
+        <div className="px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+          {error}
+        </div>
+      )}
 
       <button
         type="submit"
-        disabled={loading || !password}
-        className="w-full py-3 rounded-lg font-sans font-bold text-sm tracking-wide bg-brand-yellow text-black hover:bg-brand-gold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+        disabled={loading || !email || !password}
+        className="w-full h-12 rounded-xl bg-brand-yellow text-black font-bold tracking-wide hover:bg-brand-gold hover:shadow-[0_0_20px_rgba(212,160,23,0.5)] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
       >
         {loading ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            Verificando...
+            Entrando...
           </>
         ) : (
-          "Entrar"
+          "Iniciar sesión"
         )}
       </button>
     </form>

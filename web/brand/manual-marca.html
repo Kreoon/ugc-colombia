@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>UGC Colombia · Manual de Marca</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --brand-black: #000000;
+    --brand-graphite: #3D3D3C;
+    --brand-gray: #BDBCBC;
+    --brand-yellow: #F9B334;
+    --brand-gold: #D4A017;
+    --brand-gold-dark: #C9940A;
+    --white: #FFFFFF;
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--brand-black);
+    color: var(--white);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18mm 16mm;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .page.dark  { background: var(--brand-black); color: var(--white); }
+  .page.graphite { background: var(--brand-graphite); color: var(--white); }
+  .page.yellow { background: var(--brand-yellow); color: var(--brand-black); }
+  .page.gradient { background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); color: var(--white); }
+
+  /* Radial glow overlays (como en la web) */
+  .glow-bg::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 140%; height: 140%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(212,160,23,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page > * { position: relative; z-index: 1; }
+
+  /* Footer */
+  .footer {
+    position: absolute;
+    bottom: 8mm;
+    left: 16mm;
+    right: 16mm;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand-gray);
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 9pt;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brand-yellow);
+    margin-bottom: 10mm;
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 10mm;
+    height: 1px;
+    background: var(--brand-gold);
+  }
+
+  /* Display headline con gradient real de la web */
+  .display-gradient {
+    background: linear-gradient(90deg, #f9b334 0%, #d4a017 50%, #f9b334 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Typography */
+  h1.display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 90pt;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 10mm;
+  }
+
+  h1.section {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 60pt;
+    line-height: 0.92;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    margin-bottom: 8mm;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 36pt;
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 6mm;
+  }
+
+  h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14pt;
+    letter-spacing: -0.01em;
+    margin-bottom: 3mm;
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 10pt;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--brand-gray);
+    margin-bottom: 4mm;
+  }
+
+  p.lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    font-weight: 400;
+    color: var(--brand-gray);
+  }
+
+  p.white { color: var(--white); }
+
+  strong { color: var(--white); font-weight: 700; }
+
+  .mono {
+    font-family: 'Courier New', monospace;
+    font-size: 9pt;
+    letter-spacing: 0.02em;
+  }
+
+  .gold { color: var(--brand-gold); }
+  .yellow { color: var(--brand-yellow); }
+
+  /* Grid helpers */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6mm; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; }
+
+  /* Hairline separator (como en la web) */
+  hr.hairline {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--brand-gold) 50%, transparent);
+    margin: 6mm 0;
+  }
+
+  /* Color swatches */
+  .swatch {
+    border-radius: 16px;
+    padding: 8mm;
+    min-height: 50mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .swatch .name {
+    font-family: var(--font-body);
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .swatch .hex {
+    font-family: 'Courier New', monospace;
+    font-size: 13pt;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .swatch .rgb {
+    font-family: 'Courier New', monospace;
+    font-size: 7.5pt;
+    opacity: 0.75;
+    margin-top: 1mm;
+  }
+  .swatch .use {
+    font-family: var(--font-body);
+    font-size: 7.5pt;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 2mm;
+  }
+
+  /* Card estilo web (rounded-2xl + white/4 border) */
+  .card {
+    border-radius: 16px;
+    border: 1px solid rgba(212,160,23,0.15);
+    background: rgba(255,255,255,0.04);
+    padding: 8mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .card.solid-gray { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.08); }
+  .card.yellow-glow {
+    background: rgba(249,179,52,0.08);
+    border: 1px solid rgba(249,179,52,0.3);
+  }
+
+  /* Type spec cards */
+  .type-spec {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 12px;
+    padding: 5mm 7mm;
+    margin-bottom: 4mm;
+  }
+  .type-label {
+    font-family: var(--font-body);
+    font-size: 7.5pt;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand-yellow);
+    margin-bottom: 2mm;
+  }
+
+  /* Tables estilo web */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin-bottom: 6mm;
+  }
+  table.dark th, table.dark td {
+    padding: 3mm 4mm;
+    text-align: left;
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+    color: var(--brand-gray);
+  }
+  table.dark td strong { color: var(--white); }
+  table.dark th {
+    background: transparent;
+    color: var(--brand-yellow);
+    font-weight: 600;
+    font-size: 8pt;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--brand-gold);
+  }
+
+  /* Badge estilo web */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 2mm;
+    padding: 1mm 3mm;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 7.5pt;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid rgba(249,179,52,0.3);
+    background: rgba(249,179,52,0.15);
+    color: var(--brand-yellow);
+  }
+  .badge.gold { background: rgba(212,160,23,0.15); border-color: rgba(212,160,23,0.3); color: var(--brand-gold); }
+  .badge.solid { background: var(--brand-yellow); color: var(--brand-black); border: none; }
+
+  /* Button estilo web */
+  .button-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 2mm;
+    padding: 4mm 8mm;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 10pt;
+    letter-spacing: 0.025em;
+    background: var(--brand-yellow);
+    color: var(--brand-black);
+    box-shadow: 0 0 20px rgba(212,160,23,0.5);
+  }
+  .button-demo.outline {
+    background: transparent;
+    border: 1px solid var(--brand-gold);
+    color: var(--brand-gold);
+    box-shadow: 0 0 16px rgba(212,160,23,0.3);
+  }
+  .button-demo.ghost {
+    background: transparent;
+    color: var(--brand-gray);
+    box-shadow: none;
+  }
+
+  /* Pillar cards */
+  .pillar-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 16px;
+    padding: 7mm;
+    position: relative;
+  }
+  .pillar-number {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 42pt;
+    color: var(--brand-yellow);
+    line-height: 1;
+    margin-bottom: 3mm;
+  }
+  .pillar-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18pt;
+    margin-bottom: 2mm;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 1;
+  }
+  .pillar-tag {
+    font-family: var(--font-body);
+    font-size: 7.5pt;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand-gold);
+    margin-bottom: 4mm;
+  }
+  .pillar-pct {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32pt;
+    line-height: 1;
+    background: linear-gradient(135deg, #f9b334, #d4a017);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Do / Don't */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-top: 4mm; }
+  .do-list, .dont-list {
+    padding: 6mm 8mm;
+    border-radius: 16px;
+  }
+  .do-list {
+    background: rgba(249,179,52,0.08);
+    border: 1px solid rgba(249,179,52,0.3);
+  }
+  .dont-list {
+    background: rgba(220,38,38,0.08);
+    border: 1px solid rgba(220,38,38,0.3);
+  }
+  .list-header {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22pt;
+    margin-bottom: 4mm;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .do-list .list-header { color: var(--brand-yellow); }
+  .dont-list .list-header { color: #DC2626; }
+  .do-list ul, .dont-list ul { list-style: none; }
+  .do-list li, .dont-list li {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    padding-left: 8mm;
+    margin-bottom: 3mm;
+    position: relative;
+    color: var(--white);
+  }
+  .do-list li::before { content: "+"; color: var(--brand-yellow); font-weight: 900; position: absolute; left: 0; font-size: 13pt; }
+  .dont-list li::before { content: "×"; color: #DC2626; font-weight: 900; position: absolute; left: 0; font-size: 13pt; }
+
+  /* Social template preview */
+  .social-preview {
+    text-align: center;
+  }
+  .social-frame {
+    background: var(--brand-black);
+    border: 1px solid rgba(212,160,23,0.3);
+    display: inline-block;
+    padding: 0;
+    margin: 0 auto 3mm;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .social-frame.feed { width: 48mm; height: 60mm; }
+  .social-frame.story { width: 38mm; height: 67.5mm; }
+  .social-frame.linkedin { width: 68mm; height: 35.5mm; }
+  .social-frame.ytthumb { width: 68mm; height: 38.2mm; }
+  .social-label {
+    font-size: 8pt;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand-yellow);
+  }
+  .social-dim {
+    font-family: 'Courier New', monospace;
+    font-size: 7pt;
+    color: var(--brand-gray);
+    margin-top: 1mm;
+  }
+
+  /* Logo demo */
+  .logo-demo {
+    background: var(--brand-black);
+    padding: 12mm;
+    text-align: center;
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 12px;
+    min-height: 55mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo-demo.light { background: #FDFDFD; border-color: #E5E5E5; }
+  .logo-demo.yellow { background: var(--brand-yellow); border: none; }
+  .logo-demo.graphite { background: var(--brand-graphite); border: none; }
+  .logo-demo img { max-width: 55mm; height: auto; margin-bottom: 5mm; }
+
+  /* Stat blocks */
+  .stat-block {
+    text-align: center;
+    padding: 6mm 4mm;
+  }
+  .stat-block .num {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 44pt;
+    line-height: 1;
+    background: linear-gradient(135deg, #f9b334, #d4a017);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-block .label {
+    font-family: var(--font-body);
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 3mm;
+    color: var(--brand-gray);
+  }
+
+  /* Proportion bar */
+  .proportion-bar {
+    display: flex;
+    height: 14mm;
+    width: 100%;
+    margin: 4mm 0 6mm;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .proportion-bar .seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 10pt;
+  }
+
+  /* Weekly calendar */
+  .weekly {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2mm;
+    margin-bottom: 5mm;
+  }
+  .day-col {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 10px;
+    padding: 4mm 3mm;
+    text-align: center;
+    min-height: 40mm;
+  }
+  .day-col .dayname {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 11pt;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--brand-yellow);
+    margin-bottom: 3mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid rgba(212,160,23,0.2);
+  }
+  .day-col .piece {
+    font-size: 7pt;
+    line-height: 1.3;
+    margin-bottom: 2mm;
+    padding: 1.5mm 2mm;
+    background: rgba(0,0,0,0.4);
+    border-left: 2px solid var(--brand-gold);
+    text-align: left;
+    border-radius: 3px;
+    color: var(--white);
+  }
+  .day-col .piece .plat {
+    font-weight: 700;
+    color: var(--brand-yellow);
+    font-size: 6.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  /* Index list */
+  .index-list { list-style: none; }
+  .index-list li {
+    font-family: var(--font-body);
+    padding: 5mm 0;
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .index-list .chapter {
+    font-size: 12pt;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .index-list .chapter-num {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--brand-yellow);
+    font-size: 16pt;
+    margin-right: 6mm;
+  }
+  .index-list .page-num {
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    color: var(--brand-gold);
+    letter-spacing: 0.1em;
+  }
+
+  /* Formula boxes */
+  .formula-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 12px;
+    padding: 5mm 7mm;
+    margin-bottom: 3mm;
+  }
+  .formula-box .formula {
+    font-family: 'Courier New', monospace;
+    font-size: 8.5pt;
+    color: var(--brand-yellow);
+    letter-spacing: 0.05em;
+    margin-bottom: 2mm;
+  }
+  .formula-box .example {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18pt;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 1.05;
+    color: var(--white);
+  }
+
+  /* Checklist item */
+  .check-item {
+    padding-left: 8mm;
+    position: relative;
+    margin-bottom: 2.5mm;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--white);
+  }
+  .check-item::before {
+    content: "▢";
+    position: absolute;
+    left: 0;
+    color: var(--brand-yellow);
+    font-size: 12pt;
+  }
+
+  /* Grid diagram */
+  .grid-diagram {
+    padding: 4mm;
+    position: relative;
+    height: 60mm;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2mm;
+    border: 1px dashed rgba(212,160,23,0.4);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+  }
+  .grid-diagram > div {
+    background: rgba(249,179,52,0.12);
+    border: 1px dashed rgba(249,179,52,0.3);
+    border-radius: 2px;
+  }
+
+  /* Spacing bar */
+  .space-bar {
+    background: linear-gradient(90deg, #f9b334, #d4a017);
+    height: 3mm;
+    margin-bottom: 2mm;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page dark glow-bg">
+  <div style="position: absolute; top: 16mm; left: 16mm; font-family: var(--font-body); font-size: 9pt; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--brand-yellow); display: flex; align-items: center; gap: 3mm;">
+    <span style="display:inline-block; width: 2mm; height: 2mm; border-radius: 50%; background: var(--brand-yellow);"></span>
+    UGC Colombia · Brand System
+  </div>
+
+  <div style="position: absolute; top: 16mm; right: 16mm; font-family: var(--font-body); font-size: 8pt; letter-spacing: 0.2em; color: var(--brand-gray); text-align: right; text-transform: uppercase; font-weight: 500;">
+    VOL. 01 · 2026
+  </div>
+
+  <div style="position: absolute; top: 120mm; left: 16mm; right: 16mm;">
+    <div class="eyebrow" style="margin-bottom: 12mm;">MANUAL DE MARCA</div>
+    <h1 class="display">
+      IDENTIDAD,<br/>
+      <span class="display-gradient">SISTEMA</span><br/>
+      Y PARRILLA.
+    </h1>
+    <hr class="hairline" style="margin-top: 10mm; background: var(--brand-gold); height: 1px; width: 50mm;">
+    <p class="lead" style="max-width: 130mm; margin-top: 8mm;">
+      La guía visual y operativa que gobierna cómo UGC Colombia se presenta, se publica y se recuerda. Un solo sistema, todos los canales.
+    </p>
+  </div>
+
+  <div style="position: absolute; bottom: 16mm; left: 16mm; right: 16mm; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+      <div style="font-family: var(--font-body); font-size: 8pt; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brand-gray); margin-bottom: 2mm;">Tagline</div>
+      <div style="font-family: var(--font-display); font-size: 22pt; line-height: 1; text-transform: uppercase;">HACEMOS CRECER<br/><span class="display-gradient">MARCAS.</span></div>
+    </div>
+    <div style="text-align: right;">
+      <img src="manual-logo-dark.png" alt="UGC Colombia" style="max-height: 18mm; width: auto; opacity: 0.95;">
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: INDEX -->
+<div class="page dark">
+  <div class="eyebrow">Contenido</div>
+  <h1 class="section">Índice del <span class="display-gradient">manual.</span></h1>
+  <p class="lead" style="max-width: 140mm; margin-bottom: 12mm;">
+    Doce capítulos, un sistema. Todo lo que el equipo necesita para producir marca consistente en cualquier canal.
+  </p>
+
+  <ul class="index-list">
+    <li><span><span class="chapter-num">01</span><span class="chapter">Identidad y posicionamiento</span></span><span class="page-num">P. 03</span></li>
+    <li><span><span class="chapter-num">02</span><span class="chapter">Paleta de colores</span></span><span class="page-num">P. 04</span></li>
+    <li><span><span class="chapter-num">03</span><span class="chapter">Tipografía</span></span><span class="page-num">P. 05</span></li>
+    <li><span><span class="chapter-num">04</span><span class="chapter">Logo y uso</span></span><span class="page-num">P. 06</span></li>
+    <li><span><span class="chapter-num">05</span><span class="chapter">Componentes UI</span></span><span class="page-num">P. 07</span></li>
+    <li><span><span class="chapter-num">06</span><span class="chapter">Sistema de diseño (grid, spacing, radios)</span></span><span class="page-num">P. 08</span></li>
+    <li><span><span class="chapter-num">07</span><span class="chapter">Voz y tono</span></span><span class="page-num">P. 09</span></li>
+    <li><span><span class="chapter-num">08</span><span class="chapter">Efectos y animaciones</span></span><span class="page-num">P. 10</span></li>
+    <li><span><span class="chapter-num">09</span><span class="chapter">Los 5 pilares de contenido</span></span><span class="page-num">P. 11</span></li>
+    <li><span><span class="chapter-num">10</span><span class="chapter">Parrilla semanal y cadencia</span></span><span class="page-num">P. 12</span></li>
+    <li><span><span class="chapter-num">11</span><span class="chapter">Plantillas por plataforma</span></span><span class="page-num">P. 13</span></li>
+    <li><span><span class="chapter-num">12</span><span class="chapter">Checklist de publicación</span></span><span class="page-num">P. 14</span></li>
+  </ul>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>Manual de Marca · V.1</span>
+    <span>02</span>
+  </div>
+</div>
+
+<!-- PAGE 3: IDENTITY -->
+<div class="page dark glow-bg">
+  <div class="eyebrow">01 · Identidad</div>
+  <h1 class="section">Quiénes somos y <span class="display-gradient">cómo se ve.</span></h1>
+
+  <div class="grid-2" style="margin-top: 8mm;">
+    <div>
+      <div class="type-label">Propuesta en una frase</div>
+      <p class="lead white" style="font-size: 14pt; margin-bottom: 8mm;">Agencia boutique premium de UGC. Calidad USA, equipo latino, tecnología propia (Kreoon).</p>
+
+      <div class="type-label">Tagline oficial</div>
+      <h2 style="font-size: 28pt; margin-bottom: 8mm;">HACEMOS CRECER <span class="display-gradient">MARCAS.</span></h2>
+
+      <div class="type-label">Arquetipo</div>
+      <p class="white" style="font-size: 11pt;"><strong style="color: var(--brand-yellow);">Creator + Ruler.</strong> Creadores de alto nivel con obsesión por el orden. Editoriales, sistematizados, humanos.</p>
+
+      <div class="type-label" style="margin-top: 6mm;">Promesa</div>
+      <p class="white" style="font-size: 11pt;">No gritamos — imponemos presencia. No vendemos — construimos autoridad editorial con datos reales.</p>
+    </div>
+
+    <div>
+      <div class="type-label">Valores</div>
+      <div class="card" style="margin-bottom: 3mm; padding: 5mm 6mm;"><strong class="yellow">Autenticidad.</strong><br/><span style="color: var(--brand-gray); font-size: 9pt;">Contenido real que conecta con audiencias reales.</span></div>
+      <div class="card" style="margin-bottom: 3mm; padding: 5mm 6mm;"><strong class="yellow">Resultados.</strong><br/><span style="color: var(--brand-gray); font-size: 9pt;">Cada pieza tiene propósito medible.</span></div>
+      <div class="card" style="margin-bottom: 3mm; padding: 5mm 6mm;"><strong class="yellow">Innovación.</strong><br/><span style="color: var(--brand-gray); font-size: 9pt;">Tech propia, IA integrada, un paso adelante.</span></div>
+      <div class="card" style="margin-bottom: 3mm; padding: 5mm 6mm;"><strong class="yellow">Integridad.</strong><br/><span style="color: var(--brand-gray); font-size: 9pt;">Contratos claros, comunicación honesta.</span></div>
+      <div class="card" style="padding: 5mm 6mm;"><strong class="yellow">Comunidad.</strong><br/><span style="color: var(--brand-gray); font-size: 9pt;">Creadores y marcas como aliados.</span></div>
+    </div>
+  </div>
+
+  <hr class="hairline" style="margin-top: 8mm;">
+
+  <div class="grid-4">
+    <div class="stat-block"><div class="num">30+</div><div class="label">Creators pool</div></div>
+    <div class="stat-block"><div class="num">$500</div><div class="label">Ticket mínimo USD</div></div>
+    <div class="stat-block"><div class="num">2</div><div class="label">Países LATAM+USA</div></div>
+    <div class="stat-block"><div class="num">100%</div><div class="label">Latino</div></div>
+  </div>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>01 · Identidad</span>
+    <span>03</span>
+  </div>
+</div>
+
+<!-- PAGE 4: COLOR PALETTE -->
+<div class="page dark">
+  <div class="eyebrow">02 · Color</div>
+  <h1 class="section">Paleta <span class="display-gradient">oficial.</span></h1>
+  <p class="lead" style="max-width: 140mm;">Negro absoluto, amarillo solar y oro premium. Los valores HEX usados en ugccolombia.co.</p>
+
+  <div class="grid-3" style="margin-top: 6mm;">
+    <div class="swatch" style="background: var(--brand-black); border: 1px solid rgba(212,160,23,0.3); color: var(--white);">
+      <div>
+        <div class="use" style="color: var(--brand-yellow);">Primary · Background</div>
+        <div class="name">Brand Black</div>
+      </div>
+      <div>
+        <div class="hex" style="color: var(--brand-yellow);">#000000</div>
+        <div class="rgb">RGB 0,0,0</div>
+        <div class="rgb"><span class="mono">--brand-black</span></div>
+      </div>
+    </div>
+
+    <div class="swatch" style="background: var(--brand-yellow); color: var(--brand-black);">
+      <div>
+        <div class="use" style="color: var(--brand-black);">CTA · Acento</div>
+        <div class="name">Brand Yellow</div>
+      </div>
+      <div>
+        <div class="hex">#F9B334</div>
+        <div class="rgb">RGB 249,179,52</div>
+        <div class="rgb"><span class="mono">--brand-yellow</span></div>
+      </div>
+    </div>
+
+    <div class="swatch" style="background: var(--brand-gold); color: var(--brand-black);">
+      <div>
+        <div class="use" style="color: var(--brand-black);">Acento Premium</div>
+        <div class="name">Brand Gold</div>
+      </div>
+      <div>
+        <div class="hex">#D4A017</div>
+        <div class="rgb">RGB 212,160,23</div>
+        <div class="rgb"><span class="mono">--brand-gold</span></div>
+      </div>
+    </div>
+
+    <div class="swatch" style="background: var(--brand-graphite); color: var(--white);">
+      <div>
+        <div class="use" style="color: var(--brand-yellow);">Bordes · Neutral</div>
+        <div class="name">Brand Graphite</div>
+      </div>
+      <div>
+        <div class="hex" style="color: var(--brand-yellow);">#3D3D3C</div>
+        <div class="rgb">RGB 61,61,60</div>
+        <div class="rgb"><span class="mono">--brand-graphite</span></div>
+      </div>
+    </div>
+
+    <div class="swatch" style="background: var(--brand-gray); color: var(--brand-black);">
+      <div>
+        <div class="use" style="color: var(--brand-black);">Texto secundario</div>
+        <div class="name">Brand Gray</div>
+      </div>
+      <div>
+        <div class="hex">#BDBCBC</div>
+        <div class="rgb">RGB 189,188,188</div>
+        <div class="rgb"><span class="mono">--brand-gray</span></div>
+      </div>
+    </div>
+
+    <div class="swatch" style="background: var(--brand-gold-dark); color: var(--white);">
+      <div>
+        <div class="use" style="color: var(--brand-yellow);">Hover states</div>
+        <div class="name">Gold Dark</div>
+      </div>
+      <div>
+        <div class="hex" style="color: var(--brand-yellow);">#C9940A</div>
+        <div class="rgb">RGB 201,148,10</div>
+        <div class="rgb"><span class="mono">--brand-gold-dark</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Gradiente signature</h3>
+  <div style="height: 14mm; border-radius: 10px; background: linear-gradient(90deg, #f9b334 0%, #d4a017 50%, #f9b334 100%); margin-top: 3mm; display: flex; align-items: center; padding: 0 6mm;">
+    <span class="mono" style="color: var(--brand-black); font-weight: 700; font-size: 10pt;">linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)</span>
+  </div>
+  <p style="font-size: 9pt; margin-top: 3mm;">Úsalo para headlines destacados (con WebkitBackgroundClip: text), acentos en métricas y elementos signature. Está en Hero, Casos y CTAs finales de la web.</p>
+
+  <h3 style="margin-top: 6mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Proporciones de uso (frecuencia real en código)</h3>
+  <div class="proportion-bar">
+    <div class="seg" style="background: var(--brand-yellow); color: var(--brand-black); flex: 460;">Yellow · 460</div>
+    <div class="seg" style="background: var(--brand-gray); color: var(--brand-black); flex: 357;">Gray · 357</div>
+    <div class="seg" style="background: var(--brand-gold); color: var(--brand-black); flex: 270;">Gold · 270</div>
+    <div class="seg" style="background: var(--brand-black); color: var(--white); flex: 114;">Black · 114</div>
+    <div class="seg" style="background: var(--brand-graphite); color: var(--white); flex: 84;">Graphite · 84</div>
+  </div>
+  <p style="font-size: 9pt;">Instancias reales contadas en el código de web/src/. El amarillo domina como acento, el gris es la segunda voz del texto, el oro es el toque premium.</p>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>02 · Color</span>
+    <span>04</span>
+  </div>
+</div>
+
+<!-- PAGE 5: TYPOGRAPHY -->
+<div class="page dark">
+  <div class="eyebrow">03 · Tipografía</div>
+  <h1 class="section">Dos familias. <span class="display-gradient">Un ritmo.</span></h1>
+
+  <div class="grid-2" style="margin-top: 6mm; align-items: start;">
+    <div class="card">
+      <div class="type-label">Display</div>
+      <div style="font-family: var(--font-display); font-weight: 400; font-size: 72pt; line-height: 0.9; text-transform: uppercase; margin-bottom: 4mm; color: var(--white);">ANTON</div>
+      <p>Sans-serif condensada de impacto. Titulares en mayúsculas con personalidad fuerte. <strong>Único peso disponible: 400.</strong> El peso visual se logra con tamaño y contraste, nunca con bold.</p>
+      <p style="font-family: 'Courier New', monospace; font-size: 8.5pt; color: var(--brand-yellow); margin-top: 4mm;">Google Fonts · weight 400 · --font-anton</p>
+    </div>
+    <div class="card">
+      <div class="type-label">Body</div>
+      <div style="font-family: var(--font-body); font-weight: 700; font-size: 72pt; line-height: 0.9; letter-spacing: -0.035em; margin-bottom: 4mm; color: var(--white);">Inter</div>
+      <p>Sans-serif funcional, limpio, legible. Todo el contenido de cuerpo, UI, botones y labels. <strong>Pesos disponibles: 400, 500, 600, 700.</strong></p>
+      <p style="font-family: 'Courier New', monospace; font-size: 8.5pt; color: var(--brand-yellow); margin-top: 4mm;">Google Fonts · weights 400–700 · --font-inter</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Jerarquía tipográfica</h3>
+
+  <div class="type-spec">
+    <div class="type-label">Display · Anton 400 · Hero Headline</div>
+    <div style="font-family: var(--font-display); font-weight: 400; font-size: 52pt; line-height: 0.92; text-transform: uppercase;">HACEMOS CRECER <span class="display-gradient">MARCAS.</span></div>
+    <p style="font-size: 8pt; margin-top: 2mm;">clamp(2.4rem, 8vw, 8rem) · leading-[0.92]</p>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-label">H2 Section · Anton 400</div>
+    <div style="font-family: var(--font-display); font-weight: 400; font-size: 36pt; line-height: 0.95; text-transform: uppercase;">QUE LOS RESULTADOS HABLEN.</div>
+    <p style="font-size: 8pt; margin-top: 2mm;">clamp(2.5rem, 6vw, 5rem) · tracking-tight</p>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-label">H3 · Inter Bold 700</div>
+    <div style="font-family: var(--font-body); font-weight: 700; font-size: 17pt; color: var(--white);">Card headline · Subtítulo de módulo</div>
+    <p style="font-size: 8pt; margin-top: 2mm;">Cards · Testimonios · Precios · 14-20pt</p>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-label">Body · Inter Regular 400</div>
+    <div style="font-family: var(--font-body); font-weight: 400; font-size: 11pt; line-height: 1.6; color: var(--brand-gray); max-width: 130mm;">Párrafo estándar, descripciones, UI text, contenido corrido. Esta es la base legible del sistema — la que transporta la información real al visitante.</div>
+  </div>
+
+  <div class="type-spec">
+    <div class="type-label">Label · Inter SemiBold 600 · Uppercase</div>
+    <div style="font-family: var(--font-body); font-weight: 600; font-size: 10pt; letter-spacing: 0.25em; text-transform: uppercase; color: var(--brand-yellow);">MARCAS QUE CONFIARON EN NOSOTROS</div>
+    <p style="font-size: 8pt; margin-top: 2mm;">tracking-[0.18em] hasta 0.35em · ALL CAPS · max 4 palabras</p>
+  </div>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>03 · Tipografía</span>
+    <span>05</span>
+  </div>
+</div>
+
+<!-- PAGE 6: LOGO -->
+<div class="page dark glow-bg">
+  <div class="eyebrow">04 · Logo</div>
+  <h1 class="section">Marca <span class="display-gradient">aplicada.</span></h1>
+  <p class="lead" style="max-width: 140mm; margin-bottom: 6mm;">Logo oficial en producción: <span class="mono" style="color: var(--brand-yellow);">/public/brand/logo-dark-bg.png</span> · 814 × 351 px · PNG RGBA.</p>
+
+  <div class="grid-2" style="margin-top: 4mm;">
+    <div class="logo-demo">
+      <img src="manual-logo-dark.png" alt="UGC Colombia sobre negro">
+      <div class="type-label" style="margin-bottom: 0;">Principal · Sobre negro</div>
+    </div>
+    <div class="logo-demo light">
+      <img src="manual-logo-light.png" alt="UGC Colombia sobre claro">
+      <div class="type-label" style="margin-bottom: 0; color: var(--brand-gold);">Inverso · Sobre claro</div>
+    </div>
+    <div class="logo-demo yellow">
+      <img src="manual-logo-light.png" alt="UGC Colombia sobre yellow" style="filter: brightness(0);">
+      <div class="type-label" style="margin-bottom: 0; color: var(--brand-black); opacity: 0.8;">Monocromo negro · Sobre yellow</div>
+    </div>
+    <div class="logo-demo graphite">
+      <img src="manual-logo-dark.png" alt="UGC Colombia sobre grafito">
+      <div class="type-label" style="margin-bottom: 0;">Sobre graphite</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Efecto Shine (implementado en web)</h3>
+  <div class="card" style="margin-top: 3mm; padding: 5mm 7mm;">
+    <p class="mono" style="font-size: 8pt; color: var(--brand-gray);">
+      animation: logo-shine-sweep 5s ease-in-out infinite;<br/>
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.15) 44%, rgba(249,179,52,0.55) 48%, rgba(255,255,255,0.9) 50%, rgba(249,179,52,0.55) 52%, rgba(255,255,255,0.15) 56%, transparent 70%);<br/>
+      mix-blend-mode: screen;
+    </p>
+    <p style="font-size: 9pt; margin-top: 3mm;">Barrido dorado que cruza el logo cada 5s. Da premium sin ser intrusivo. Solo en pantalla — nunca en impresiones.</p>
+  </div>
+
+  <div class="do-dont">
+    <div class="do-list">
+      <div class="list-header">DO</div>
+      <ul>
+        <li>Usar logo-dark-bg.png sobre fondo negro (#000)</li>
+        <li>Mantener clearspace = altura del isotipo</li>
+        <li>Escalar siempre proporcionalmente</li>
+        <li>Mínimo digital: 120px de ancho</li>
+        <li>Usar efecto shine solo en web/video</li>
+      </ul>
+    </div>
+    <div class="dont-list">
+      <div class="list-header">DON'T</div>
+      <ul>
+        <li>No rotar, inclinar ni distorsionar</li>
+        <li>No añadir sombras, biseles ni 3D</li>
+        <li>No cambiar colores del logo</li>
+        <li>No usar sobre fondos sin contraste</li>
+        <li>No recrear con tipografías similares</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>04 · Logo</span>
+    <span>06</span>
+  </div>
+</div>
+
+<!-- PAGE 7: UI COMPONENTS -->
+<div class="page dark">
+  <div class="eyebrow">05 · Componentes UI</div>
+  <h1 class="section">Componentes <span class="display-gradient">del sistema.</span></h1>
+  <p class="lead" style="max-width: 140mm;">Componentes listos en <span class="mono yellow">/web/src/components/ui/</span> basados en shadcn/ui + Radix UI.</p>
+
+  <h3 style="margin-top: 6mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Button · 3 variantes</h3>
+  <div class="grid-3" style="margin-top: 3mm;">
+    <div class="card solid-gray" style="text-align: center; padding: 10mm;">
+      <div class="button-demo">AGENDAR CALL →</div>
+      <div class="type-label" style="margin-top: 5mm;">Default · Yellow</div>
+      <p style="font-size: 8pt; margin-top: 1mm;">bg-brand-yellow text-black · shadow glow</p>
+    </div>
+    <div class="card solid-gray" style="text-align: center; padding: 10mm;">
+      <div class="button-demo outline">VER CASOS</div>
+      <div class="type-label" style="margin-top: 5mm;">Outline · Gold border</div>
+      <p style="font-size: 8pt; margin-top: 1mm;">border brand-gold · texto gold</p>
+    </div>
+    <div class="card solid-gray" style="text-align: center; padding: 10mm;">
+      <div class="button-demo ghost">MÁS INFO</div>
+      <div class="type-label" style="margin-top: 5mm;">Ghost · Transparent</div>
+      <p style="font-size: 8pt; margin-top: 1mm;">text-brand-gray hover:white</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Badge · 4 variantes</h3>
+  <div class="card solid-gray" style="text-align: center; padding: 8mm; margin-top: 3mm;">
+    <div style="display: flex; justify-content: center; gap: 6mm; flex-wrap: wrap;">
+      <span class="badge">● DEFAULT</span>
+      <span class="badge gold">● GOLD</span>
+      <span class="badge" style="background: transparent; border-color: var(--brand-graphite); color: var(--brand-gray);">OUTLINE</span>
+      <span class="badge solid">SOLID</span>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Card · Con border gold/15 y bg white/4</h3>
+  <div class="grid-2" style="margin-top: 3mm;">
+    <div class="card">
+      <div class="badge" style="margin-bottom: 3mm;">● CASO</div>
+      <h3 style="color: var(--white);">De $3K a $14K/mes</h3>
+      <p style="margin-top: 2mm; font-size: 9.5pt;">Marca skincare colombiana, 90 días de contenido UGC sistematizado con nuestro framework.</p>
+      <div class="button-demo outline" style="margin-top: 4mm; font-size: 8pt; padding: 2mm 5mm;">VER CASO →</div>
+    </div>
+    <div class="card">
+      <div class="type-label">Métrica destacada</div>
+      <div class="stat-block" style="padding: 2mm 0;">
+        <div class="num" style="font-size: 56pt;">4.2×</div>
+        <div class="label">ROAS en 60 días</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 6mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Stack técnico</h3>
+  <table class="dark" style="margin-top: 3mm;">
+    <tr><th>Dependencia</th><th>Versión</th><th>Uso</th></tr>
+    <tr><td><strong>Next.js</strong></td><td class="mono yellow">15.5.15</td><td>Framework · Turbopack · App Router</td></tr>
+    <tr><td><strong>React</strong></td><td class="mono yellow">19.1.0</td><td>Biblioteca UI</td></tr>
+    <tr><td><strong>Tailwind CSS</strong></td><td class="mono yellow">4.1.3</td><td>Sistema de estilos · tokens</td></tr>
+    <tr><td><strong>Motion (Framer)</strong></td><td class="mono yellow">11.18.2</td><td>Animaciones · stagger · fade-up</td></tr>
+    <tr><td><strong>Radix UI</strong></td><td class="mono yellow">latest</td><td>Dialog · Accordion · Tabs · Select</td></tr>
+    <tr><td><strong>Lucide React</strong></td><td class="mono yellow">0.487.0</td><td>Iconos (outline, 1.5px stroke)</td></tr>
+  </table>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>05 · Componentes UI</span>
+    <span>07</span>
+  </div>
+</div>
+
+<!-- PAGE 8: DESIGN SYSTEM -->
+<div class="page dark">
+  <div class="eyebrow">06 · Sistema</div>
+  <h1 class="section">Grid, spacing, <span class="display-gradient">radios.</span></h1>
+
+  <div class="grid-2" style="margin-top: 6mm; align-items: start; gap: 10mm;">
+    <div>
+      <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Grid 12 columnas</h3>
+      <div class="grid-diagram" style="margin-top: 3mm;">
+        <div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div>
+      </div>
+      <p style="font-size: 9pt; margin-top: 3mm;"><strong>Container max:</strong> responsive · Tailwind default<br/><strong>Gap:</strong> 8px (space-2)<br/><strong>Padding secciones:</strong> py-20 sm:py-28 lg:py-32 · px-4 sm:px-6 lg:px-8</p>
+    </div>
+
+    <div>
+      <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Escala de spacing</h3>
+      <table class="dark" style="margin-top: 3mm;">
+        <tr><td class="mono yellow" style="width: 18mm;">py-4</td><td>16px</td><td><div class="space-bar" style="width: 4mm;"></div></td></tr>
+        <tr><td class="mono yellow">py-6</td><td>24px</td><td><div class="space-bar" style="width: 6mm;"></div></td></tr>
+        <tr><td class="mono yellow">py-10</td><td>40px</td><td><div class="space-bar" style="width: 10mm;"></div></td></tr>
+        <tr><td class="mono yellow">py-12</td><td>48px</td><td><div class="space-bar" style="width: 12mm;"></div></td></tr>
+        <tr><td class="mono yellow">py-20</td><td>80px</td><td><div class="space-bar" style="width: 20mm;"></div></td></tr>
+        <tr><td class="mono yellow">py-28</td><td>112px</td><td><div class="space-bar" style="width: 28mm;"></div></td></tr>
+        <tr><td class="mono yellow">py-32</td><td>128px</td><td><div class="space-bar" style="width: 32mm;"></div></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 8mm; align-items: start; gap: 10mm;">
+    <div>
+      <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Border Radius (Tailwind)</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 3mm;">
+        <div class="card solid-gray" style="padding: 5mm; text-align: center; border-radius: 8px;"><span class="mono yellow" style="font-size: 8pt;">rounded-lg · 8px</span></div>
+        <div class="card solid-gray" style="padding: 5mm; text-align: center; border-radius: 12px;"><span class="mono yellow" style="font-size: 8pt;">rounded-xl · 12px</span></div>
+        <div class="card solid-gray" style="padding: 5mm; text-align: center; border-radius: 16px;"><span class="mono yellow" style="font-size: 8pt;">rounded-2xl · 16px</span></div>
+        <div class="card solid-gray" style="padding: 5mm; text-align: center; border-radius: 9999px;"><span class="mono yellow" style="font-size: 8pt;">rounded-full · pill</span></div>
+      </div>
+      <p style="font-size: 8pt; margin-top: 3mm;"><strong>Reglas en web:</strong> Botones y cards usan <span class="mono yellow">rounded-xl</span> a <span class="mono yellow">rounded-2xl</span>. Badges usan <span class="mono yellow">rounded-full</span>. Elementos decorativos pueden ir a <span class="mono yellow">rounded-3xl</span>.</p>
+    </div>
+
+    <div>
+      <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Sombras y Glows</h3>
+      <div style="display: grid; gap: 3mm; margin-top: 3mm;">
+        <div class="card solid-gray" style="padding: 4mm; box-shadow: 0 1px 20px rgba(0,0,0,0.5);"><span class="mono yellow" style="font-size: 8pt;">Navbar · shadow dark</span></div>
+        <div class="card solid-gray" style="padding: 4mm; box-shadow: 0 0 28px rgba(249,179,52,0.35);"><span class="mono yellow" style="font-size: 8pt;">Button glow · yellow/35</span></div>
+        <div class="card solid-gray" style="padding: 4mm; box-shadow: 0 0 40px rgba(249,179,52,0.55);"><span class="mono yellow" style="font-size: 8pt;">CTA hover · yellow/55</span></div>
+        <div class="card solid-gray" style="padding: 4mm; box-shadow: 0 10px 40px -10px rgba(249,179,52,0.5), 0 0 80px -20px rgba(212,160,23,0.4);"><span class="mono yellow" style="font-size: 8pt;">CTA Final · double glow</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Opacity overlays (usados en web)</h3>
+  <table class="dark" style="margin-top: 3mm;">
+    <tr><th>Clase Tailwind</th><th>Uso</th><th>Ejemplo</th></tr>
+    <tr><td class="mono yellow">bg-white/4</td><td>Fondo de card</td><td>Cards sobre negro</td></tr>
+    <tr><td class="mono yellow">bg-white/8</td><td>Hover en ghost buttons</td><td>Navbar hover</td></tr>
+    <tr><td class="mono yellow">bg-black/60</td><td>Navbar default</td><td>Backdrop blur</td></tr>
+    <tr><td class="mono yellow">bg-black/92</td><td>Navbar scrolled</td><td>Más opaco al scroll</td></tr>
+    <tr><td class="mono yellow">border-brand-gold/15</td><td>Bordes de card</td><td>Sutil, editorial</td></tr>
+    <tr><td class="mono yellow">border-brand-gold/20</td><td>Navbar scrolled border</td><td>Acento dorado</td></tr>
+  </table>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>06 · Sistema</span>
+    <span>08</span>
+  </div>
+</div>
+
+<!-- PAGE 9: VOICE -->
+<div class="page dark">
+  <div class="eyebrow">07 · Voz</div>
+  <h1 class="section">Cómo <span class="display-gradient">hablamos.</span></h1>
+  <p class="lead" style="max-width: 140mm;">Directo, premium, humano. No vendemos — construimos autoridad editorial con datos reales y lenguaje sin relleno.</p>
+
+  <div class="grid-3" style="margin-top: 8mm;">
+    <div class="card">
+      <div class="type-label">Somos</div>
+      <ul style="list-style: none; margin-top: 3mm;">
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Directos</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Editoriales</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Técnicos</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Humanos</li>
+        <li style="padding: 2mm 0; font-size: 10pt; color: var(--white);">Confiables</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="type-label" style="color: #DC2626;">NO somos</div>
+      <ul style="list-style: none; margin-top: 3mm;">
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(220,38,38,0.15); color: var(--white);">Vendedores</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(220,38,38,0.15); color: var(--white);">Motivacionales</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(220,38,38,0.15); color: var(--white);">Clichés</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(220,38,38,0.15); color: var(--white);">Corporativos</li>
+        <li style="padding: 2mm 0; font-size: 10pt; color: var(--white);">Hype</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="type-label">Reglas de copy</div>
+      <ul style="list-style: none; margin-top: 3mm;">
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Headline ≤ 8 palabras</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Subhead ≤ 15 palabras</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">Body ad ≤ 40 palabras</li>
+        <li style="padding: 2mm 0; font-size: 10pt; border-bottom: 1px solid rgba(212,160,23,0.15); color: var(--white);">CTA ≤ 4 palabras</li>
+        <li style="padding: 2mm 0; font-size: 10pt; color: var(--white);">Label ≤ 3 palabras</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Fórmulas de headline (de la web)</h3>
+
+  <div class="formula-box">
+    <div class="formula">[BENEFICIO + ACCIÓN]</div>
+    <div class="example">HACEMOS CRECER <span class="display-gradient">MARCAS.</span></div>
+  </div>
+  <div class="formula-box">
+    <div class="formula">[RESULTADO + PROOF]</div>
+    <div class="example">QUE LOS RESULTADOS <span class="display-gradient">HABLEN POR NOSOTROS.</span></div>
+  </div>
+  <div class="formula-box">
+    <div class="formula">[DATO + CONTEXTO]</div>
+    <div class="example">4.2× ROAS. 60 DÍAS. <span class="display-gradient">UN SISTEMA.</span></div>
+  </div>
+  <div class="formula-box">
+    <div class="formula">[ORIGEN COMO VENTAJA]</div>
+    <div class="example">UGC LATINO. <span class="display-gradient">ESTÁNDAR USA.</span></div>
+  </div>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>07 · Voz</span>
+    <span>09</span>
+  </div>
+</div>
+
+<!-- PAGE 10: EFFECTS -->
+<div class="page dark glow-bg">
+  <div class="eyebrow">08 · Efectos</div>
+  <h1 class="section">Movimiento <span class="display-gradient">y presencia.</span></h1>
+  <p class="lead" style="max-width: 140mm;">La marca se siente viva. Motion sutil, glows doradas, transiciones de 600–700ms con easing [0.22, 1, 0.36, 1].</p>
+
+  <div class="grid-2" style="margin-top: 6mm;">
+    <div class="card">
+      <div class="type-label">Glow Pulse · CTAs premium</div>
+      <h3 style="color: var(--white);">Animation keyframe</h3>
+      <p class="mono" style="font-size: 8pt; color: var(--brand-gray); margin-top: 3mm;">
+        @keyframes glow-pulse {<br/>
+        &nbsp;&nbsp;0%,100% { box-shadow: 0 0 8px rgba(212,160,23,0.4); }<br/>
+        &nbsp;&nbsp;50% { box-shadow: 0 0 20px 4px rgba(212,160,23,0.7); }<br/>
+        }
+      </p>
+      <p style="font-size: 9pt; margin-top: 3mm;"><strong>Duración:</strong> 2.5s · <strong>Loop:</strong> infinite · <strong>Easing:</strong> ease-in-out</p>
+    </div>
+
+    <div class="card">
+      <div class="type-label">Text Reveal · Entrada de headlines</div>
+      <h3 style="color: var(--white);">Stagger fade-up</h3>
+      <p class="mono" style="font-size: 8pt; color: var(--brand-gray); margin-top: 3mm;">
+        initial: { opacity: 0, y: 32 }<br/>
+        animate: { opacity: 1, y: 0 }<br/>
+        transition: { delay: i * 0.12, duration: 0.65, ease: [0.22, 1, 0.36, 1] }
+      </p>
+      <p style="font-size: 9pt; margin-top: 3mm;">Framer Motion · stagger children · entrada premium de cada línea con 120ms de delay.</p>
+    </div>
+
+    <div class="card">
+      <div class="type-label">Marquee · Logos de marcas</div>
+      <h3 style="color: var(--white);">Infinite horizontal scroll</h3>
+      <p class="mono" style="font-size: 8pt; color: var(--brand-gray); margin-top: 3mm;">
+        @keyframes marquee {<br/>
+        &nbsp;&nbsp;0% { transform: translateX(0%); }<br/>
+        &nbsp;&nbsp;100% { transform: translateX(-50%); }<br/>
+        }<br/>
+        animation: marquee 40s linear infinite;
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="type-label">Logo Shine · Barrido premium</div>
+      <h3 style="color: var(--white);">Sweep 115° con mask</h3>
+      <p class="mono" style="font-size: 8pt; color: var(--brand-gray); margin-top: 3mm;">
+        mix-blend-mode: screen;<br/>
+        animation: logo-shine-sweep 5s ease-in-out infinite;<br/>
+        mask-image: url("/brand/logo-dark-bg.png");
+      </p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Transiciones estándar</h3>
+  <table class="dark" style="margin-top: 3mm;">
+    <tr><th>Elemento</th><th>Duración</th><th>Easing</th><th>Uso</th></tr>
+    <tr><td><strong>Botones hover</strong></td><td class="mono yellow">200ms</td><td>ease</td><td>Color + glow</td></tr>
+    <tr><td><strong>Navbar scroll</strong></td><td class="mono yellow">300ms</td><td>ease</td><td>Bg + border</td></tr>
+    <tr><td><strong>Fade in secciones</strong></td><td class="mono yellow">600ms</td><td>[0.22, 1, 0.36, 1]</td><td>Entrada viewport</td></tr>
+    <tr><td><strong>Text reveal</strong></td><td class="mono yellow">650–700ms</td><td>[0.22, 1, 0.36, 1]</td><td>Hero headlines</td></tr>
+    <tr><td><strong>Glow pulse</strong></td><td class="mono yellow">2.5s loop</td><td>ease-in-out</td><td>CTAs premium</td></tr>
+    <tr><td><strong>Marquee logos</strong></td><td class="mono yellow">40s loop</td><td>linear</td><td>Carrusel marcas</td></tr>
+    <tr><td><strong>Logo shine</strong></td><td class="mono yellow">5s loop</td><td>ease-in-out</td><td>Delay 2s</td></tr>
+  </table>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>08 · Efectos</span>
+    <span>10</span>
+  </div>
+</div>
+
+<!-- PAGE 11: 5 PILLARS -->
+<div class="page dark">
+  <div class="eyebrow">09 · Pilares</div>
+  <h1 class="section">Los 5 pilares <span class="display-gradient">de contenido.</span></h1>
+  <p class="lead" style="max-width: 140mm;">Todo lo que publicamos cae en uno de estos 5 pilares. Cada uno con objetivo, voz y KPI propios.</p>
+
+  <div class="grid-3" style="margin-top: 8mm;">
+    <div class="pillar-card">
+      <div class="pillar-number">01</div>
+      <div class="pillar-tag">Educativo</div>
+      <div class="pillar-name">LA ACADEMIA UGC</div>
+      <p style="font-size: 9pt;">Tutoriales, frameworks originales, desgloses técnicos. Autoridad pedagógica.</p>
+      <div class="pillar-pct" style="margin-top: 4mm;">30%</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-number">02</div>
+      <div class="pillar-tag">Debate</div>
+      <div class="pillar-name">OPINIÓN SIN FILTRO</div>
+      <p style="font-size: 9pt;">Hot takes, críticas fundamentadas, predicciones polémicas. Generar conversación.</p>
+      <div class="pillar-pct" style="margin-top: 4mm;">20%</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-number">03</div>
+      <div class="pillar-tag">Estratégico</div>
+      <div class="pillar-name">EL PIZARRÓN</div>
+      <p style="font-size: 9pt;">Breakdowns, frameworks de funnel, teardowns. Nivel consultor senior.</p>
+      <div class="pillar-pct" style="margin-top: 4mm;">20%</div>
+    </div>
+  </div>
+
+  <div class="grid-3" style="margin-top: 5mm;">
+    <div class="pillar-card">
+      <div class="pillar-number">04</div>
+      <div class="pillar-tag">Casos & Resultados</div>
+      <div class="pillar-name">EL SCOREBOARD</div>
+      <p style="font-size: 9pt;">Case studies, testimonios reales, números verificables. Social proof masivo.</p>
+      <div class="pillar-pct" style="margin-top: 4mm;">15%</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-number">05</div>
+      <div class="pillar-tag">Detrás de cámaras</div>
+      <div class="pillar-name">LA FAMILIA UGC</div>
+      <p style="font-size: 9pt;">BTS del equipo, creators, operación real. Humanizar la marca.</p>
+      <div class="pillar-pct" style="margin-top: 4mm;">15%</div>
+    </div>
+    <div class="pillar-card" style="background: transparent; border-style: dashed;">
+      <div class="pillar-tag">Total semanal</div>
+      <p style="font-size: 9pt; margin-bottom: 4mm;">Cada pieza clasifica en uno y solo un pilar. Mix evaluado mensualmente.</p>
+      <div class="pillar-pct">100%</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>09 · Pilares</span>
+    <span>11</span>
+  </div>
+</div>
+
+<!-- PAGE 12: WEEKLY GRID -->
+<div class="page dark">
+  <div class="eyebrow">10 · Parrilla</div>
+  <h1 class="section">Parrilla <span class="display-gradient">semanal.</span></h1>
+  <p class="lead" style="max-width: 140mm;">~25 piezas semanales distribuidas en 7 plataformas. Cada día tiene un tema dominante.</p>
+
+  <div class="weekly" style="margin-top: 6mm;">
+    <div class="day-col">
+      <div class="dayname">LUN</div>
+      <div class="piece"><span class="plat">LinkedIn</span>Post estratégico</div>
+      <div class="piece"><span class="plat">IG Carrusel</span>Framework</div>
+      <div class="piece"><span class="plat">X Thread</span>Educativo</div>
+    </div>
+    <div class="day-col">
+      <div class="dayname">MAR</div>
+      <div class="piece"><span class="plat">TikTok</span>Hot take</div>
+      <div class="piece"><span class="plat">IG Reel</span>BTS</div>
+      <div class="piece"><span class="plat">LinkedIn Alex</span>Personal</div>
+      <div class="piece"><span class="plat">YouTube</span>Long (bi-sem)</div>
+    </div>
+    <div class="day-col">
+      <div class="dayname">MIE</div>
+      <div class="piece"><span class="plat">IG Feed</span>Caso real</div>
+      <div class="piece"><span class="plat">TikTok</span>Educativo</div>
+      <div class="piece"><span class="plat">Newsletter</span>Envío sem</div>
+    </div>
+    <div class="day-col">
+      <div class="dayname">JUE</div>
+      <div class="piece"><span class="plat">LinkedIn</span>Debate</div>
+      <div class="piece"><span class="plat">TikTok</span>Serie</div>
+      <div class="piece"><span class="plat">YT Short</span>Reuso</div>
+    </div>
+    <div class="day-col">
+      <div class="dayname">VIE</div>
+      <div class="piece"><span class="plat">IG Reel</span>Testimonio</div>
+      <div class="piece"><span class="plat">TikTok</span>Equipo</div>
+      <div class="piece"><span class="plat">LinkedIn Alex</span>BOFU</div>
+      <div class="piece"><span class="plat">WhatsApp</span>Broadcast</div>
+    </div>
+    <div class="day-col">
+      <div class="dayname">SAB</div>
+      <div class="piece"><span class="plat">TikTok</span>Tip rápido</div>
+      <div class="piece"><span class="plat">X</span>Tweet solo</div>
+    </div>
+    <div class="day-col">
+      <div class="dayname">DOM</div>
+      <div class="piece"><span class="plat">IG Stories</span>Community</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 6mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Cadencia por plataforma</h3>
+  <table class="dark" style="margin-top: 3mm;">
+    <tr><th>Plataforma</th><th>Semana</th><th>Mes</th><th>Rol estratégico</th></tr>
+    <tr><td><strong>Instagram</strong></td><td>4 posts</td><td>16</td><td>Awareness + Authority</td></tr>
+    <tr><td><strong>TikTok</strong></td><td>5 videos</td><td>20</td><td>Viralidad TOFU</td></tr>
+    <tr><td><strong>LinkedIn Empresa</strong></td><td>3 posts</td><td>12</td><td>Leads B2B directos</td></tr>
+    <tr><td><strong>LinkedIn Alexander</strong></td><td>3 posts</td><td>12</td><td>Personal brand · cierre</td></tr>
+    <tr><td><strong>YouTube</strong></td><td>2 Shorts + 1 Long /2sem</td><td>8+2</td><td>SEO autoridad evergreen</td></tr>
+    <tr><td><strong>X / Twitter</strong></td><td>5 tweets</td><td>20</td><td>Distribución y comunidad</td></tr>
+    <tr><td><strong>WhatsApp Business</strong></td><td>2 broadcasts</td><td>8</td><td>BOFU directo</td></tr>
+    <tr><td><strong>Newsletter</strong></td><td>1 envío</td><td>4</td><td>Nurture MOFU/BOFU</td></tr>
+  </table>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>10 · Parrilla</span>
+    <span>12</span>
+  </div>
+</div>
+
+<!-- PAGE 13: PLATFORM TEMPLATES -->
+<div class="page dark">
+  <div class="eyebrow">11 · Plantillas</div>
+  <h1 class="section">Plantillas <span class="display-gradient">por formato.</span></h1>
+
+  <div class="grid-4" style="margin-top: 6mm; gap: 4mm;">
+    <div class="social-preview">
+      <div class="social-frame feed" style="padding: 3mm;">
+        <div style="font-size: 5pt; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; text-align: left; font-weight: 600;">● UGC</div>
+        <div style="position: absolute; bottom: 7mm; left: 3mm; right: 3mm;">
+          <div style="width: 12mm; height: 0.5mm; background: var(--brand-gold); margin-bottom: 2mm;"></div>
+          <div style="font-family: var(--font-display); font-weight: 400; font-size: 12pt; color: var(--white); line-height: 0.95; text-transform: uppercase;">CONTENIDO <span class="display-gradient">QUE CONVIERTE.</span></div>
+        </div>
+      </div>
+      <div class="social-label">Instagram Feed</div>
+      <div class="social-dim">1080 × 1350 · 4:5</div>
+    </div>
+
+    <div class="social-preview">
+      <div class="social-frame story" style="padding: 3mm;">
+        <div style="height: 6mm;"></div>
+        <div style="text-align: center; padding: 0 2mm;">
+          <div style="font-family: var(--font-display); font-weight: 400; font-size: 11pt; color: var(--white); line-height: 1; text-transform: uppercase;">EL FRAMEWORK <br/><span class="display-gradient">UGC</span></div>
+          <div style="font-size: 5pt; color: var(--brand-gray); margin-top: 2mm; letter-spacing: 0.15em;">@ugccolombia</div>
+        </div>
+        <div style="position: absolute; bottom: 9mm; left: 5mm; right: 5mm; background: var(--brand-yellow); color: var(--brand-black); padding: 1.5mm; font-size: 5pt; font-weight: 700; text-align: center; letter-spacing: 0.1em; border-radius: 4px;">AGENDAR CALL</div>
+      </div>
+      <div class="social-label">IG Story / TikTok</div>
+      <div class="social-dim">1080 × 1920 · 9:16</div>
+    </div>
+
+    <div class="social-preview">
+      <div class="social-frame feed" style="padding: 3mm;">
+        <div style="font-size: 5pt; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; text-align: left; font-weight: 600;">● FRAMEWORK</div>
+        <div style="text-align: left; margin-top: 3mm;">
+          <div style="font-family: var(--font-display); font-weight: 400; font-size: 11pt; color: var(--white); line-height: 0.95; text-transform: uppercase;">5 ERRORES <br/>QUE MATAN<br/><span class="display-gradient">TU UGC</span></div>
+        </div>
+        <div style="position: absolute; bottom: 3mm; right: 3mm; font-size: 6pt; color: var(--brand-yellow); font-weight: 700;">01 / 08 →</div>
+      </div>
+      <div class="social-label">Carrusel IG</div>
+      <div class="social-dim">1080 × 1350 · 4:5</div>
+    </div>
+
+    <div class="social-preview">
+      <div class="social-frame linkedin" style="padding: 3mm; text-align: left;">
+        <div style="font-size: 5pt; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600;">● UGC</div>
+        <div style="font-family: var(--font-display); font-weight: 400; font-size: 12pt; color: var(--white); line-height: 0.95; margin-top: 2mm; text-transform: uppercase;">4.2× ROAS<br/><span class="display-gradient">EN 60 DÍAS.</span></div>
+        <div style="display: flex; gap: 2mm; margin-top: 3mm;">
+          <div style="background: rgba(249,179,52,0.2); border: 1px solid var(--brand-yellow); color: var(--brand-yellow); padding: 0.5mm 2mm; font-size: 5pt; font-weight: 700; border-radius: 999px;">STAT 1</div>
+          <div style="background: rgba(249,179,52,0.2); border: 1px solid var(--brand-yellow); color: var(--brand-yellow); padding: 0.5mm 2mm; font-size: 5pt; font-weight: 700; border-radius: 999px;">STAT 2</div>
+        </div>
+      </div>
+      <div class="social-label">LinkedIn Post</div>
+      <div class="social-dim">1200 × 628 · 1.91:1</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 6mm; gap: 6mm;">
+    <div class="social-preview">
+      <div class="social-frame ytthumb" style="padding: 3mm; text-align: left; background: linear-gradient(135deg, #000 40%, #3D3D3C 100%);">
+        <div style="float: left; width: 30%; padding-top: 5mm;">
+          <img src="manual-logo-dark.png" alt="logo" style="width: 100%; opacity: 0.3;">
+        </div>
+        <div style="float: right; width: 65%; text-align: right;">
+          <div style="font-family: var(--font-display); font-weight: 400; font-size: 11pt; color: var(--white); line-height: 0.9; text-transform: uppercase;">CASO<br/>REAL</div>
+          <div style="font-family: var(--font-display); font-weight: 400; font-size: 26pt; line-height: 0.9; margin-top: 2mm; background: linear-gradient(135deg, #f9b334, #d4a017); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">4.2×</div>
+        </div>
+      </div>
+      <div class="social-label">YouTube Thumbnail</div>
+      <div class="social-dim">1280 × 720 · 16:9</div>
+    </div>
+
+    <div class="social-preview">
+      <div class="social-frame ytthumb" style="padding: 3mm; text-align: left; position: relative;">
+        <div style="font-size: 4pt; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600;">● UGC COLOMBIA · BRAND</div>
+        <div style="text-align: center; margin-top: 7mm;">
+          <img src="manual-logo-dark.png" alt="logo" style="max-height: 12mm; width: auto;">
+          <div style="font-size: 5pt; color: var(--brand-gray); margin-top: 2mm; letter-spacing: 0.15em; font-weight: 500;">AGENCY · BOUTIQUE</div>
+        </div>
+      </div>
+      <div class="social-label">YouTube Banner</div>
+      <div class="social-dim">2560 × 1440 · Zona segura 1546 × 423</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 6mm; color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt;">Reglas universales</h3>
+  <table class="dark" style="margin-top: 3mm;">
+    <tr><th>Elemento</th><th>Regla</th></tr>
+    <tr><td><strong>Zona segura</strong></td><td>5% inset en todos los lados (mínimo)</td></tr>
+    <tr><td><strong>Font display</strong></td><td>Anton 400 · UPPERCASE siempre</td></tr>
+    <tr><td><strong>Font body</strong></td><td>Inter SemiBold 600 (labels) · Regular 400 (copy)</td></tr>
+    <tr><td><strong>Colores por pieza</strong></td><td>Máximo 3 visibles (negro + amarillo + blanco/gris)</td></tr>
+    <tr><td><strong>Logo / handle</strong></td><td>Esquina definida, nunca ausente</td></tr>
+    <tr><td><strong>Acento gradient</strong></td><td>Solo 1 palabra/dato principal por pieza</td></tr>
+  </table>
+
+  <div class="footer">
+    <span>UGC Colombia</span>
+    <span>11 · Plantillas</span>
+    <span>13</span>
+  </div>
+</div>
+
+<!-- PAGE 14: CHECKLIST -->
+<div class="page yellow">
+  <div style="color: var(--brand-black);">
+    <div class="eyebrow" style="color: var(--brand-black);">
+      <style>.page.yellow .eyebrow::before { background: var(--brand-black); }</style>
+      12 · Checklist
+    </div>
+    <h1 class="section" style="color: var(--brand-black);">ANTES DE <span style="color: var(--brand-black); text-decoration: underline; text-decoration-color: var(--brand-gold);">PUBLICAR.</span></h1>
+    <p class="lead" style="color: var(--brand-black); max-width: 140mm; opacity: 0.75;">Checklist obligatorio. Si falla una casilla, no se publica.</p>
+  </div>
+
+  <div class="grid-2" style="margin-top: 6mm;">
+    <div style="background: var(--brand-black); padding: 7mm; color: var(--white); border-radius: 16px;">
+      <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt; margin-bottom: 4mm;">Contenido</h3>
+      <div class="check-item">Hook de 1.5s brutal en frame 1</div>
+      <div class="check-item">Captions activados y sincronizados</div>
+      <div class="check-item">Pattern interrupts cada 2-3s</div>
+      <div class="check-item">Densidad alta (sin relleno)</div>
+      <div class="check-item">CTA específico y accionable</div>
+      <div class="check-item">Loop perfecto (cierre conecta con inicio)</div>
+      <div class="check-item">Copy con hook pre-fold</div>
+      <div class="check-item">Clasificado en 1 pilar de contenido</div>
+    </div>
+
+    <div style="background: var(--brand-black); padding: 7mm; color: var(--white); border-radius: 16px;">
+      <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt; margin-bottom: 4mm;">Técnico y visual</h3>
+      <div class="check-item">Resolución correcta por plataforma</div>
+      <div class="check-item">Audio claro, nivel consistente</div>
+      <div class="check-item">Paleta: máx 3 colores visibles</div>
+      <div class="check-item">Fuentes: solo Anton + Inter</div>
+      <div class="check-item">Handle o URL visible</div>
+      <div class="check-item">Hashtags optimizados (5-10 máx)</div>
+      <div class="check-item">Horario óptimo por audiencia</div>
+      <div class="check-item">UTM configurado si hay link</div>
+    </div>
+  </div>
+
+  <div style="background: var(--brand-black); color: var(--white); padding: 5mm 7mm; margin-top: 5mm; border-radius: 16px;">
+    <h3 style="color: var(--brand-yellow); letter-spacing: 0.15em; text-transform: uppercase; font-size: 9pt; margin-bottom: 3mm;">Reglas innegociables</h3>
+    <div class="grid-2" style="gap: 6mm;">
+      <div>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white); margin-bottom: 2mm;">× Jamás compartir métricas o nombres de clientes sin permiso</p>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white); margin-bottom: 2mm;">× Jamás atacar a un competidor por nombre</p>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white); margin-bottom: 2mm;">× Jamás mentir o exagerar datos</p>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white);">× Jamás publicar sin captions activos</p>
+      </div>
+      <div>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white); margin-bottom: 2mm;">× Jamás usar stock footage genérico</p>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white); margin-bottom: 2mm;">× Jamás mezclar más de 2 tipografías</p>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white); margin-bottom: 2mm;">× Jamás publicar contenido político</p>
+        <p style="font-size: 9pt; line-height: 1.55; color: var(--white);">× Jamás comprar engagement o seguidores</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute; bottom: 16mm; left: 16mm; right: 16mm; text-align: center;">
+    <div style="font-family: var(--font-display); font-weight: 400; font-size: 24pt; line-height: 1; text-transform: uppercase; color: var(--brand-black);">
+      CONSISTENCIA ANTES QUE CREATIVIDAD.<br/>
+      SISTEMA ANTES QUE IMPROVISACIÓN.
+    </div>
+    <hr style="border: none; height: 2px; background: var(--brand-black); width: 40mm; margin: 6mm auto;">
+    <div style="font-family: var(--font-body); font-size: 9pt; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brand-black);">UGC Colombia · Brand System V.1 · 2026</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -6,73 +6,52 @@ import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { Calculator, TrendingDown, ArrowRight, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCurrency } from "@/components/providers/CurrencyProvider";
+import {
+  CURRENCY_META,
+  PLAN_PRICES,
+  SOLO_RATES,
+  VOLUME_50_PRICE,
+  VOLUME_TIERS,
+  type Currency,
+} from "@/lib/pricing/currency-config";
+import { formatPrice } from "@/lib/pricing/format";
 
-// Tarifas individuales UGC Colombia (para comparación de ahorro vs paquete)
-const SOLO_SCRIPT = 45;
-const SOLO_EDIT = 33;
-const SOLO_CREATOR = 75;
-const SOLO_STRATEGY = 225;
-
-/** Calcula el precio del paquete UGC Colombia según volumen */
-function getPackagePrice(videos: number): {
-  name: string;
-  price: number;
-  priceLabel: string;
-  href: string;
-} {
+/** Calcula el precio del paquete UGC Colombia según volumen y moneda activa. */
+function getPackage(
+  videos: number,
+  currency: Currency,
+): { name: string; price: number; href: string } {
   if (videos <= 5)
-    return { name: "INICIO", price: 400, priceLabel: "$400", href: "#planes" };
+    return {
+      name: "INICIO",
+      price: PLAN_PRICES.starter[currency].amount,
+      href: "#planes",
+    };
   if (videos <= 10)
     return {
       name: "CRECIMIENTO",
-      price: 700,
-      priceLabel: "$700",
+      price: PLAN_PRICES.growth[currency].amount,
       href: "#planes",
     };
   if (videos <= 30)
     return {
       name: "ESCALA",
-      price: 1500,
-      priceLabel: "$1,500",
+      price: PLAN_PRICES.scale[currency].amount,
       href: "#planes",
     };
   if (videos <= 50)
     return {
       name: "VOLUMEN 50",
-      price: 2200,
-      priceLabel: "$2,200",
+      price: VOLUME_50_PRICE[currency],
       href: "#contacto",
     };
-  if (videos <= 99) {
-    const price = videos * 40;
-    return {
-      name: "A LA MEDIDA",
-      price,
-      priceLabel: `$${price.toLocaleString("en-US")}`,
-      href: "#contacto",
-    };
-  }
-  if (videos <= 200) {
-    const price = videos * 35;
-    return {
-      name: "A LA MEDIDA",
-      price,
-      priceLabel: `$${price.toLocaleString("en-US")}`,
-      href: "#contacto",
-    };
-  }
-  const price = videos * 29;
-  return {
-    name: "A LA MEDIDA",
-    price,
-    priceLabel: `$${price.toLocaleString("en-US")}`,
-    href: "#contacto",
-  };
-}
-
-/** Precio por video para mostrar */
-function getPricePerVideo(videos: number, totalPrice: number): string {
-  return `$${Math.round(totalPrice / videos)}`;
+  const tier = VOLUME_TIERS[currency].find(
+    (t) =>
+      videos >= t.minVideos && (t.maxVideos === null || videos <= t.maxVideos),
+  );
+  const price = tier ? videos * tier.perVideo : 0;
+  return { name: "A LA MEDIDA", price, href: "#contacto" };
 }
 
 function useCountUp(target: number, duration = 600) {
@@ -99,15 +78,10 @@ function useCountUp(target: number, duration = 600) {
   return current;
 }
 
-/**
- * Escalas fijas para planes (5, 10, 30, 50).
- * Después de 50, el slider se mueve de 1 en 1 hasta 300.
- * Internamente el slider va de 0 a 253 (4 escalones fijos + 250 valores libres).
- */
 const FIXED_STOPS = [5, 10, 30, 50];
 const FREE_MIN = 51;
 const FREE_MAX = 300;
-const SLIDER_MAX = FIXED_STOPS.length - 1 + (FREE_MAX - FREE_MIN + 1); // 3 + 250 = 253
+const SLIDER_MAX = FIXED_STOPS.length - 1 + (FREE_MAX - FREE_MIN + 1);
 
 function sliderToVideos(pos: number): number {
   if (pos <= 3) return FIXED_STOPS[pos];
@@ -118,7 +92,6 @@ function videosToSlider(v: number): number {
   const idx = FIXED_STOPS.indexOf(v);
   if (idx !== -1) return idx;
   if (v >= FREE_MIN) return FIXED_STOPS.length + (v - FREE_MIN);
-  // Snap to nearest fixed stop
   for (let i = FIXED_STOPS.length - 1; i >= 0; i--) {
     if (v >= FIXED_STOPS[i]) return i;
   }
@@ -139,6 +112,7 @@ export function PreciosCalculator() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.1,
   });
+  const { currency, format } = useCurrency();
   const [videos, setVideos] = useState(10);
 
   const sliderPos = videosToSlider(videos);
@@ -148,17 +122,22 @@ export function PreciosCalculator() {
   };
 
   const { soloCost, plan, savings, savingsPct } = useMemo(() => {
+    const rates = SOLO_RATES[currency];
     const soloCost =
-      videos * (SOLO_SCRIPT + SOLO_EDIT + SOLO_CREATOR) + SOLO_STRATEGY;
-    const plan = getPackagePrice(videos);
+      videos * (rates.script + rates.edit + rates.creator) + rates.strategy;
+    const plan = getPackage(videos, currency);
     const savings = Math.max(0, soloCost - plan.price);
-    const savingsPct = Math.round((savings / soloCost) * 100);
+    const savingsPct = soloCost > 0 ? Math.round((savings / soloCost) * 100) : 0;
     return { soloCost, plan, savings, savingsPct };
-  }, [videos]);
+  }, [videos, currency]);
 
   const animatedSavings = useCountUp(savings);
   const animatedSoloCost = useCountUp(soloCost);
-  const perVideo = getPricePerVideo(videos, plan.price);
+  const perVideoAmount = videos > 0 ? Math.round(plan.price / videos) : 0;
+  const perVideo = format(perVideoAmount);
+  const unitLabel = CURRENCY_META[currency].unitLabel;
+  const localeLabel = `${currency} al mes`;
+  const rates = SOLO_RATES[currency];
 
   const sliderPct = (sliderPos / SLIDER_MAX) * 100;
 
@@ -319,7 +298,7 @@ export function PreciosCalculator() {
                     onClick={() => setVideos(stop.videos)}
                     className={cn(
                       "transition-colors hover:text-brand-yellow",
-                      videos === stop.videos && "text-brand-yellow font-bold"
+                      videos === stop.videos && "text-brand-yellow font-bold",
                     )}
                   >
                     {stop.label}
@@ -348,7 +327,7 @@ export function PreciosCalculator() {
                   Contratando por separado
                 </p>
                 <p className="font-display text-3xl sm:text-4xl text-white/70 line-through decoration-brand-graphite">
-                  ${animatedSoloCost.toLocaleString("en-US")}
+                  {formatPrice(animatedSoloCost, currency)}
                 </p>
                 <p className="text-[11px] text-brand-gray/70 mt-1">
                   Guiones + edición + creadores + estrategia
@@ -361,10 +340,10 @@ export function PreciosCalculator() {
                   Con plan {plan.name}
                 </p>
                 <p className="font-display text-4xl sm:text-5xl text-white">
-                  {plan.priceLabel}
+                  {format(plan.price)}
                 </p>
                 <p className="text-[11px] text-brand-gray mt-1">
-                  USD / mes · todo incluido
+                  {unitLabel} · todo incluido
                 </p>
               </div>
 
@@ -381,10 +360,10 @@ export function PreciosCalculator() {
                     </span>
                   </div>
                   <p className="font-display text-4xl sm:text-5xl text-emerald-400">
-                    ${animatedSavings.toLocaleString("en-US")}
+                    {formatPrice(animatedSavings, currency)}
                   </p>
                   <p className="text-[11px] text-emerald-400/80 mt-1">
-                    USD al mes
+                    {localeLabel}
                   </p>
                 </div>
               )}
@@ -395,7 +374,7 @@ export function PreciosCalculator() {
                 className={cn(
                   "group/cta flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-brand-yellow text-black font-sans font-bold text-base tracking-wide transition-all min-h-[52px]",
                   "hover:bg-brand-gold hover:shadow-[0_10px_40px_-10px_rgba(249,179,52,0.55)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black",
                 )}
               >
                 Quiero este plan
@@ -415,39 +394,36 @@ export function PreciosCalculator() {
 
         {/* Tabla de precios por volumen */}
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-          {[
-            { range: "5–50", price: "Desde $80", note: "por video" },
-            { range: "50–99", price: "$40", note: "por video" },
-            { range: "100–200", price: "$35", note: "por video" },
-            { range: "200+", price: "$29", note: "por video" },
-          ].map((tier) => (
+          {VOLUME_TIERS[currency].map((tier) => (
             <div
-              key={tier.range}
+              key={tier.label}
               className="rounded-xl border border-brand-graphite/40 bg-white/[0.02] p-3 text-center"
             >
               <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-brand-gray mb-1">
-                {tier.range} videos
+                {tier.label} videos
               </p>
               <p
                 className="font-display text-lg"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #f9b334, #d4a017)",
+                  background: "linear-gradient(135deg, #f9b334, #d4a017)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                 }}
               >
-                {tier.price}
+                {tier.displayPrefix ? `${tier.displayPrefix} ` : ""}
+                {format(tier.perVideo)}
               </p>
-              <p className="text-[10px] text-brand-gray/60">{tier.note}</p>
+              <p className="text-[10px] text-brand-gray/60">por video</p>
             </div>
           ))}
         </div>
 
         <p className="mt-6 text-center text-xs text-brand-gray/60">
-          * Comparación basada en tarifas individuales UGC Colombia: $45
-          guión, $33 edición, $75 por creador, $225 estrategia base.
+          * Comparación basada en tarifas individuales UGC Colombia:{" "}
+          {format(rates.script)} guión, {format(rates.edit)} edición,{" "}
+          {format(rates.creator)} por creador, {format(rates.strategy)}{" "}
+          estrategia base.
         </p>
       </div>
     </section>

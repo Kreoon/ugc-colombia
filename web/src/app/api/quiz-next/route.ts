@@ -22,7 +22,7 @@ Tu trabajo: hacer preguntas estratégicas que descubran los dolores del cliente 
 
 CONTEXTO DEL NEGOCIO:
 - UGC Colombia produce contenido UGC (video, fotos) para marcas
-- Paquetes: Inicio $400/mes (4 videos), Crecimiento $700/mes (8 videos), Escala $1,500/mes (15 videos), Enterprise desde $3,000/mes
+- Paquetes: Inicio $400 USD / $1.590.000 COP al mes (5 videos), Crecimiento $700 USD / $2.790.000 COP al mes (10 videos), Escala $1.500 USD / $5.990.000 COP al mes (30 videos), Enterprise a la medida (desde $3.000 USD / $11.990.000 COP al mes). Menciona la moneda apropiada según el país del lead cuando puedas inferirlo.
 - Valor: contenido auténtico que convierte mejor que branded content, 2-4x mejor ROAS
 
 CAMPOS DE DATOS — usa estos valores EXACTOS en maps_to y maps_value:

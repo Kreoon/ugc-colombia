@@ -51,13 +51,13 @@ export const PRECIOS_FAQS: PreciosFAQItem[] = [
   {
     question: "En que moneda se factura?",
     answer:
-      "Los precios publicados son en USD. Facturamos en USD para marcas fuera de Colombia (pago con tarjeta internacional o transferencia). Para marcas colombianas facturamos en COP a la TRM del dia o USD a tu eleccion, con factura electronica DIAN. Todos los impuestos se manejan segun el pais de origen.",
+      "La pagina detecta tu pais y te muestra los precios en tu moneda local (USD por defecto, COP en Colombia). Puedes cambiar la moneda en cualquier momento desde el selector en el menu superior. Para marcas fuera de Colombia facturamos en USD (tarjeta internacional o transferencia). Para marcas colombianas facturamos en COP a la TRM del dia o USD a tu eleccion, con factura electronica DIAN. Los impuestos se manejan segun el pais de origen.",
     icon: DollarSign,
   },
   {
     question: "Que pasa si necesito mas videos un mes especifico?",
     answer:
-      "En los planes mensuales puedes comprar 'extras' del mismo plan a precio unitario (por ejemplo, 5 videos extra en Crecimiento = $350 adicionales ese mes). Si necesitas un volumen mayor recurrente, conviene subir de tier. En llamada ajustamos.",
+      "En los planes mensuales puedes comprar 'extras' del mismo plan a precio unitario proporcional al plan contratado. Por ejemplo, en Crecimiento el costo por video adicional equivale al precio del plan dividido entre los 10 videos base. Si necesitas un volumen mayor recurrente, conviene subir de tier. En llamada ajustamos.",
     icon: Plus,
   },
   {
@@ -75,7 +75,7 @@ export const PRECIOS_FAQS: PreciosFAQItem[] = [
   {
     question: "Que hace diferente al plan A la Medida?",
     answer:
-      "Equipo dedicado exclusivo, director creativo propio, SLA garantizado por contrato, entrega sin limites de variantes, integracion directa con tu equipo de paid media, panel en tiempo real y arranque ejecutivo con Alexander Cast. Es para empresas con presupuesto de paid +$20K/mes que necesitan una maquina de contenido corriendo todo el ano.",
+      "Equipo dedicado exclusivo, director creativo propio, SLA garantizado por contrato, entrega sin limites de variantes, integracion directa con tu equipo de paid media, panel en tiempo real y arranque ejecutivo con Alexander Cast. Es para empresas con presupuesto de paid +$20K USD (~$80M COP) al mes que necesitan una maquina de contenido corriendo todo el ano.",
     icon: Crown,
   },
 ];

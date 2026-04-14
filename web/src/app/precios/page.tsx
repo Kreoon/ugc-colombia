@@ -13,7 +13,7 @@ import { PreciosCTA } from "@/components/precios/PreciosCTA";
 export const metadata = createMetadata({
   title: "Precios UGC",
   description:
-    "4 paquetes UGC con precios claros: Inicio $400, Crecimiento $700, Escala $1.500 y A la Medida. Todos incluyen estrategia, creadores verificados, edición profesional y licencia de publicidad 12 meses.",
+    "4 paquetes UGC con precios claros: Inicio desde $400 USD ($1.590.000 COP), Crecimiento, Escala y A la Medida. Precios detectan tu país automáticamente. Todos incluyen estrategia, creadores verificados, edición profesional y licencia de publicidad 12 meses.",
   path: "/precios",
   keywords: [
     "precios UGC",

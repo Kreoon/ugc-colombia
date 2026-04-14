@@ -6,9 +6,9 @@ export interface Plan {
   id: string;
   name: string;
   icon: LucideIcon;
-  price: string;
-  priceUnit: string;
   videos: string;
+  /** Cantidad numérica de videos/mes — usada para calcular precio por video. */
+  videosCount: number;
   variants: string;
   description: string;
   features: string[];
@@ -17,21 +17,21 @@ export interface Plan {
   ctaHref: string;
   highlight?: boolean;
   badge?: string;
-  saving?: string;
 }
 
 /**
  * Planes UGC recurrentes — fuente de verdad compartida entre home Pricing
- * y la pagina dedicada /precios.
+ * y la página dedicada /precios. Los precios nativos por moneda viven en
+ * `@/lib/pricing/currency-config` (PLAN_PRICES) para permitir multi-moneda
+ * con precios psicológicamente redondeados por país.
  */
 export const PLANES_RECURRENTES: Plan[] = [
   {
     id: "starter",
     name: "INICIO",
     icon: Zap,
-    price: "$400",
-    priceUnit: "USD / mes",
     videos: "5 videos UGC",
+    videosCount: 5,
     variants: "+ 2 variantes = 15 entregables",
     description: "Para marcas que quieren probar sin complicarse.",
     features: [
@@ -49,15 +49,13 @@ export const PLANES_RECURRENTES: Plan[] = [
     ctaLabel: "Quiero empezar",
     ctaType: "stripe",
     ctaHref: "/checkout/starter",
-    saving: "Ahorras ~$590/mes",
   },
   {
     id: "growth",
     name: "CRECIMIENTO",
     icon: Sparkles,
-    price: "$700",
-    priceUnit: "USD / mes",
     videos: "10 videos UGC",
+    videosCount: 10,
     variants: "+ 2 variantes = 30 entregables",
     description: "El más popular: para marcas que ya saben lo que funciona.",
     features: [
@@ -79,15 +77,13 @@ export const PLANES_RECURRENTES: Plan[] = [
     ctaHref: "/checkout/growth",
     highlight: true,
     badge: "MÁS POPULAR",
-    saving: "Ahorras ~$1.055/mes",
   },
   {
     id: "scale",
     name: "ESCALA",
     icon: Rocket,
-    price: "$1.500",
-    priceUnit: "USD / mes",
     videos: "30 videos UGC",
+    videosCount: 30,
     variants: "+ 3 variantes = 120 entregables",
     description:
       "Para marcas que ya entendieron que el contenido es su mayor ventaja.",
@@ -108,7 +104,6 @@ export const PLANES_RECURRENTES: Plan[] = [
     ctaLabel: "Quiero escalar",
     ctaType: "stripe",
     ctaHref: "/checkout/scale",
-    saving: "Ahorras ~$3.315/mes",
   },
 ];
 
@@ -138,7 +133,7 @@ export const ENTERPRISE_PLAN = {
 };
 
 /**
- * Matriz de comparacion feature-by-feature para /precios.
+ * Matriz de comparación feature-by-feature para /precios.
  * Cada fila define la feature y su valor (boolean | string) por plan.
  */
 export type ComparisonRow = {
@@ -151,7 +146,6 @@ export type ComparisonRow = {
 };
 
 export const COMPARISON_ROWS: ComparisonRow[] = [
-  // ─── Producción ──────────────────────────
   {
     category: "Producción",
     feature: "Videos UGC al mes",
@@ -192,7 +186,6 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     escala: "Ilimitadas",
     enterprise: "Ilimitadas",
   },
-  // ─── Estrategia ──────────────────────────
   {
     category: "Estrategia",
     feature: "Investigación de mercado",
@@ -225,7 +218,6 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     escala: "Mensual",
     enterprise: "Arranque ejecutivo",
   },
-  // ─── Creadores ──────────────────────────
   {
     category: "Creadores",
     feature: "Selección de creadores",
@@ -242,7 +234,6 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     escala: true,
     enterprise: true,
   },
-  // ─── Edición ──────────────────────────
   {
     category: "Edición",
     feature: "Edición profesional",
@@ -275,7 +266,6 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     escala: true,
     enterprise: true,
   },
-  // ─── Reporte y cuenta ──────────────────────────
   {
     category: "Cuenta & reportes",
     feature: "Asesora de cuenta",
@@ -300,7 +290,6 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     escala: false,
     enterprise: true,
   },
-  // ─── Derechos ──────────────────────────
   {
     category: "Derechos",
     feature: "Licencia de publicidad pagada",
@@ -325,7 +314,6 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     escala: false,
     enterprise: true,
   },
-  // ─── Soporte ──────────────────────────
   {
     category: "Soporte",
     feature: "Acuerdos de servicio garantizados (SLA)",

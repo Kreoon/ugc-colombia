@@ -17,14 +17,26 @@ import {
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCurrency } from "@/components/providers/CurrencyProvider";
+import {
+  PLAN_PRICES,
+  type Currency,
+} from "@/lib/pricing/currency-config";
+
+type ServicioUnit =
+  | "sesión"
+  | "mes"
+  | "guion"
+  | "proyecto"
+  | "video";
 
 type Servicio = {
   id: string;
   icon: React.ElementType;
   title: string;
   description: string;
-  priceFrom: string;
-  priceUnit: string;
+  prices: Record<Currency, number>;
+  unit: ServicioUnit;
 };
 
 const SERVICIOS: Servicio[] = [
@@ -34,8 +46,8 @@ const SERVICIOS: Servicio[] = [
     title: "Consultoría Estratégica",
     description:
       "Sesiones 1-a-1 con Alexander para auditar tu contenido actual y construir la hoja de ruta de los próximos 90 días.",
-    priceFrom: "$200",
-    priceUnit: "USD / sesión",
+    prices: { USD: 200, COP: 790_000 },
+    unit: "sesión",
   },
   {
     id: "marketing",
@@ -43,8 +55,8 @@ const SERVICIOS: Servicio[] = [
     title: "Estrategia de Marketing",
     description:
       "Plan completo de adquisición, embudo de ventas, precios, canales y presupuesto para hacer crecer tu marca con intención.",
-    priceFrom: "$325",
-    priceUnit: "USD / mes",
+    prices: { USD: 325, COP: 1_290_000 },
+    unit: "mes",
   },
   {
     id: "contenido",
@@ -52,8 +64,8 @@ const SERVICIOS: Servicio[] = [
     title: "Estrategia de Contenido",
     description:
       "Pilares editoriales, calendario mensual, ángulos ganadores y marcos de ganchos probados por vertical.",
-    priceFrom: "$225",
-    priceUnit: "USD / mes",
+    prices: { USD: 225, COP: 890_000 },
+    unit: "mes",
   },
   {
     id: "guiones",
@@ -61,8 +73,8 @@ const SERVICIOS: Servicio[] = [
     title: "Guiones UGC",
     description:
       "Guiones conversacionales escritos con acento latino real. Ganchos, transiciones y llamadas a la acción listos para grabar.",
-    priceFrom: "$45",
-    priceUnit: "USD / guion",
+    prices: { USD: 45, COP: 179_000 },
+    unit: "guion",
   },
   {
     id: "research",
@@ -70,8 +82,8 @@ const SERVICIOS: Servicio[] = [
     title: "Investigación de Mercado",
     description:
       "Análisis de audiencia, dolores, hallazgos culturales y tendencias LATAM + USA Hispanic con datos reales.",
-    priceFrom: "$225",
-    priceUnit: "USD / proyecto",
+    prices: { USD: 225, COP: 890_000 },
+    unit: "proyecto",
   },
   {
     id: "competencia",
@@ -79,8 +91,8 @@ const SERVICIOS: Servicio[] = [
     title: "Análisis de Competencia",
     description:
       "Auditoría de tus competidores directos: contenido creativo, precios, posicionamiento y oportunidades de mercado.",
-    priceFrom: "$175",
-    priceUnit: "USD / proyecto",
+    prices: { USD: 175, COP: 690_000 },
+    unit: "proyecto",
   },
   {
     id: "edicion",
@@ -88,8 +100,8 @@ const SERVICIOS: Servicio[] = [
     title: "Edición Profesional",
     description:
       "Posproducción cinematográfica: corrección de color, gráficos animados, subtítulos animados y exportaciones listas para publicar.",
-    priceFrom: "$33",
-    priceUnit: "USD / video",
+    prices: { USD: 33, COP: 129_000 },
+    unit: "video",
   },
   {
     id: "creadores",
@@ -97,10 +109,16 @@ const SERVICIOS: Servicio[] = [
     title: "Creadores Verificados",
     description:
       "Acceso a nuestra red de +30 creadores latinos pre-verificados. Selección por nicho, audiencia y estilo de marca.",
-    priceFrom: "$75",
-    priceUnit: "USD / video",
+    prices: { USD: 75, COP: 299_000 },
+    unit: "video",
   },
 ];
+
+/** Costo de contratar los 8 servicios separados (anchor de ahorro). */
+const PACKAGE_SEPARATE_COST: Record<Currency, number> = {
+  USD: 4_700,
+  COP: 18_790_000,
+};
 
 const PACKAGE_INCLUDES = [
   "Consultoría estratégica mensual",
@@ -127,6 +145,9 @@ function ServicioCard({
   isIntersecting: boolean;
 }) {
   const Icon = servicio.icon;
+  const { currency, format } = useCurrency();
+  const priceFrom = format(servicio.prices[currency]);
+  const priceUnit = `${currency} / ${servicio.unit}`;
 
   return (
     <motion.article
@@ -185,11 +206,9 @@ function ServicioCard({
             </p>
             <div className="flex items-baseline gap-2">
               <span className="font-display text-2xl sm:text-3xl text-brand-yellow">
-                {servicio.priceFrom}
+                {priceFrom}
               </span>
-              <span className="text-xs text-brand-gray/80">
-                {servicio.priceUnit}
-              </span>
+              <span className="text-xs text-brand-gray/80">{priceUnit}</span>
             </div>
           </div>
           <ArrowRight
@@ -206,6 +225,12 @@ export function Servicios() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.04,
   });
+  const { currency, format } = useCurrency();
+  const growthPrice = PLAN_PRICES.growth[currency].amount;
+  const separateCost = PACKAGE_SEPARATE_COST[currency];
+  const savings = separateCost - growthPrice;
+  const savingsPct = Math.round((savings / separateCost) * 100);
+  const unitPerMes = `${currency} / mes`;
 
   return (
     <section
@@ -259,7 +284,7 @@ export function Servicios() {
             </span>{" "}
             en el Paquete Completo UGC y ahorras hasta{" "}
             <span className="text-emerald-400 font-semibold">
-              $4.000 USD/mes
+              {format(savings)} {unitPerMes}
             </span>
             .
           </p>
@@ -416,9 +441,9 @@ export function Servicios() {
                 </p>
                 <div className="flex items-baseline gap-3 mb-2">
                   <span className="font-display text-5xl sm:text-6xl text-white">
-                    $400
+                    {format(PLAN_PRICES.starter[currency].amount)}
                   </span>
-                  <span className="text-sm text-brand-gray">USD / mes</span>
+                  <span className="text-sm text-brand-gray">{unitPerMes}</span>
                 </div>
                 <p className="text-sm text-brand-gray mb-6">
                   Escala desde 5 hasta 30+ videos al mes con 2 a 3 variantes cada
@@ -451,20 +476,22 @@ export function Servicios() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-white/75">
                     <span>Contratando por separado</span>
-                    <span className="line-through opacity-70">~$4.700/mes</span>
+                    <span className="line-through opacity-70">
+                      ~{format(separateCost)}/mes
+                    </span>
                   </div>
                   <div className="flex justify-between text-white font-semibold">
                     <span>Paquete Completo UGC - Crecimiento</span>
-                    <span>$700/mes</span>
+                    <span>{format(growthPrice)}/mes</span>
                   </div>
                   <div className="border-t border-emerald-500/30 pt-3 mt-3 flex justify-between items-baseline">
                     <span className="text-emerald-400 font-bold">Ahorras</span>
                     <span className="font-display text-2xl text-emerald-400">
-                      $4.000
+                      {format(savings)}
                     </span>
                   </div>
                   <p className="text-[11px] text-emerald-400/80 text-right">
-                    USD / mes · 85% menos
+                    {unitPerMes} · {savingsPct}% menos
                   </p>
                 </div>
               </div>

@@ -6,8 +6,10 @@ import { TrackingScripts } from "@/components/tracking/TrackingScripts";
 import { CookieConsent } from "@/components/tracking/CookieConsent";
 import { AuditProvider } from "@/components/lead-audit/AuditContext";
 import { AuditModal } from "@/components/lead-audit/AuditModal";
+import { CurrencyProvider } from "@/components/providers/CurrencyProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema } from "@/lib/seo/json-ld";
+import { getCurrencyFromHeaders } from "@/lib/geo/server";
 import { GTM_ID } from "@/lib/tracking/constants";
 
 const anton = Anton({
@@ -79,11 +81,13 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { currency, country } = await getCurrencyFromHeaders();
+
   return (
     <html
       lang="es"
@@ -123,10 +127,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           Saltar al contenido principal
         </a>
         <PageLoader />
-        <AuditProvider>
-          {children}
-          <AuditModal />
-        </AuditProvider>
+        <CurrencyProvider initialCurrency={currency} initialCountry={country}>
+          <AuditProvider>
+            {children}
+            <AuditModal />
+          </AuditProvider>
+        </CurrencyProvider>
         <TrackingScripts />
         <CookieConsent />
         <JsonLd data={organizationSchema()} />

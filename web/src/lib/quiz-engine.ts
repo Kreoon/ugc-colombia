@@ -34,11 +34,11 @@ const Q: Record<string, QuizQuestion> = {
     hint: "Meta Ads, Google Ads, TikTok Ads — todo cuenta.",
     options: [
       { value: "nada", label: "$0 — No invierto en ads" },
-      { value: "menos_500", label: "Menos de $500 USD/mes" },
-      { value: "500_1000", label: "$500 - $1,000 USD/mes" },
-      { value: "1000_3000", label: "$1,000 - $3,000 USD/mes" },
-      { value: "3000_5000", label: "$3,000 - $5,000 USD/mes" },
-      { value: "mas_5000", label: "Más de $5,000 USD/mes" },
+      { value: "menos_500", label: "Menos de $500 USD (~$2M COP) /mes" },
+      { value: "500_1000", label: "$500–$1.000 USD ($2M–$4M COP) /mes" },
+      { value: "1000_3000", label: "$1.000–$3.000 USD ($4M–$12M COP) /mes" },
+      { value: "3000_5000", label: "$3.000–$5.000 USD ($12M–$20M COP) /mes" },
+      { value: "mas_5000", label: "Más de $5.000 USD ($20M+ COP) /mes" },
     ],
   },
   content_budget: {
@@ -47,11 +47,11 @@ const Q: Record<string, QuizQuestion> = {
     hint: "Videos, fotos, diseño, creadores — lo que sea.",
     options: [
       { value: "nada", label: "$0 — No invierto en contenido" },
-      { value: "menos_500", label: "Menos de $500 USD/mes" },
-      { value: "500_1000", label: "$500 - $1,000 USD/mes" },
-      { value: "1000_3000", label: "$1,000 - $3,000 USD/mes" },
-      { value: "3000_5000", label: "$3,000 - $5,000 USD/mes" },
-      { value: "mas_5000", label: "Más de $5,000 USD/mes" },
+      { value: "menos_500", label: "Menos de $500 USD (~$2M COP) /mes" },
+      { value: "500_1000", label: "$500–$1.000 USD ($2M–$4M COP) /mes" },
+      { value: "1000_3000", label: "$1.000–$3.000 USD ($4M–$12M COP) /mes" },
+      { value: "3000_5000", label: "$3.000–$5.000 USD ($12M–$20M COP) /mes" },
+      { value: "mas_5000", label: "Más de $5.000 USD ($20M+ COP) /mes" },
     ],
   },
   has_active_ads: {

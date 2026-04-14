@@ -1,6 +1,12 @@
 import { hasConsent } from "./consent";
 import { getUTMParams } from "./utm";
 import type { TrackingEvent } from "./types";
+import {
+  DEFAULT_CURRENCY,
+  SUPPORTED_CURRENCIES,
+  type Currency,
+} from "@/lib/pricing/currency-config";
+import { currencyFromCountry } from "@/lib/geo/country-to-currency";
 
 declare global {
   interface Window {
@@ -12,20 +18,10 @@ declare global {
   }
 }
 
-// Mapeo a eventos estándar de TikTok para mejor optimización del algoritmo.
-// Eventos no mapeados se envían con su nombre original (evento custom).
-// Mapeo TikTok: eventos estándar se RESERVAN para conversiones únicas
-// y solo disparan desde /gracias (booking confirmado):
-// - SubmitForm  → campañas de Lead optimizan por booking intent
-// - Schedule    → campañas de Venta optimizan por slot confirmado
-// - CompleteRegistration → registro confirmado (booking exitoso)
-//
-// Los formularios intermedios (quiz, waitlist, /registro) se envían
-// como eventos custom, sin polucionar los estándar.
 const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
-  lead: "SubmitForm",                   // solo desde booking_start + booking_complete
-  booking_complete: "Schedule",          // solo desde /gracias
-  registration: "CompleteRegistration",  // solo desde /gracias
+  lead: "SubmitForm",
+  booking_complete: "Schedule",
+  registration: "CompleteRegistration",
   waitlist_submit: "Subscribe",
   booking_start: "Contact",
   whatsapp_click: "Contact",
@@ -34,14 +30,10 @@ const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
   video_view: "ViewContent",
 };
 
-// Mapeo a eventos estándar de Meta Pixel. Eventos estándar permiten
-// optimización de campañas y coincidencia automática de conversiones.
-// Mapeo Meta: eventos estándar RESERVADOS solo para /gracias (booking).
-// Formularios intermedios van como custom events.
 const META_STANDARD_EVENTS: Record<string, string> = {
-  lead: "Lead",                          // solo desde booking_start + booking_complete
-  booking_complete: "Schedule",          // solo desde /gracias
-  registration: "CompleteRegistration",  // solo desde /gracias
+  lead: "Lead",
+  booking_complete: "Schedule",
+  registration: "CompleteRegistration",
   waitlist_submit: "Subscribe",
   booking_start: "Schedule",
   whatsapp_click: "Contact",
@@ -64,11 +56,42 @@ function mapToMetaStandardEvent(eventName: string): {
     : { name: eventName, isStandard: false };
 }
 
+function readCookie(name: string): string | null {
+  if (typeof document === "undefined") return null;
+  const pattern = new RegExp(`(?:^|; )${name}=([^;]*)`);
+  const match = document.cookie.match(pattern);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function isSupportedCurrency(value: string | null): value is Currency {
+  return !!value && (SUPPORTED_CURRENCIES as readonly string[]).includes(value);
+}
+
+/** Lee país y moneda activa desde cookies seteadas por middleware + CurrencyProvider. */
+function getTrackingContext(): { country: string | null; currency: Currency } {
+  const country = readCookie("ugc_country");
+  const override = readCookie("ugc_currency");
+  const currency = isSupportedCurrency(override)
+    ? override
+    : currencyFromCountry(country) ?? DEFAULT_CURRENCY;
+  return { country, currency };
+}
+
 export function trackEvent(event: TrackingEvent): void {
   if (typeof window === "undefined") return;
 
   const utm = getUTMParams();
-  const enriched = { ...event, ...utm };
+  const { country, currency } = getTrackingContext();
+  const priceUSD = typeof event.price_usd === "number" ? event.price_usd : undefined;
+  const priceLocal =
+    typeof event.price_local === "number" ? event.price_local : undefined;
+
+  const enriched = {
+    ...event,
+    ...utm,
+    country,
+    local_currency: currency,
+  };
 
   if (hasConsent("analytics") && window.dataLayer) {
     window.dataLayer.push(enriched);
@@ -78,29 +101,40 @@ export function trackEvent(event: TrackingEvent): void {
     window.gtag("event", event.event, {
       event_category: event.category,
       event_label: event.label,
-      value: event.value,
+      value: priceUSD ?? event.value,
+      currency: "USD",
+      country,
+      local_currency: currency,
+      price_local: priceLocal,
       ...utm,
     });
   }
 
   if (hasConsent("marketing") && window.fbq) {
     const meta = mapToMetaStandardEvent(event.event);
-    const params = {
+    const params: Record<string, unknown> = {
       content_name: event.label ?? event.event,
       content_category: event.category,
-      value: event.value ?? 0,
-      currency: "COP",
+      value: priceUSD ?? event.value ?? 0,
+      currency: "USD",
+      country,
+      local_currency: currency,
     };
+    if (priceLocal !== undefined) params.price_local = priceLocal;
     window.fbq(meta.isStandard ? "track" : "trackCustom", meta.name, params);
   }
 
   if (hasConsent("marketing") && window.ttq) {
     const tiktokStandardEvent = mapToTiktokStandardEvent(event.event);
-    window.ttq.track(tiktokStandardEvent, {
+    const params: Record<string, unknown> = {
       content_name: event.label ?? event.event,
-      value: event.value ?? 0,
-      currency: "COP",
-    });
+      value: priceUSD ?? event.value ?? 0,
+      currency: "USD",
+      country,
+      local_currency: currency,
+    };
+    if (priceLocal !== undefined) params.price_local = priceLocal;
+    window.ttq.track(tiktokStandardEvent, params);
   }
 
   if (hasConsent("marketing") && window.uetq) {
@@ -108,7 +142,7 @@ export function trackEvent(event: TrackingEvent): void {
       ea: event.event,
       ec: event.category,
       el: event.label,
-      ev: event.value,
+      ev: priceUSD ?? event.value,
     });
   }
 }
@@ -174,9 +208,7 @@ export function trackAuditOpen(source: string): void {
   });
 }
 
-export function trackAuditTypeSelect(
-  type: "marca" | "creador",
-): void {
+export function trackAuditTypeSelect(type: "marca" | "creador"): void {
   trackEvent({
     event: "audit_type_select",
     category: "funnel",
@@ -230,10 +262,6 @@ export function trackDiagnosisView(type: "marca" | "creador"): void {
   });
 }
 
-// Al iniciar agendamiento dispara DOS eventos:
-// 1. booking_start → campañas de venta/booking (mapea a Schedule/Contact)
-// 2. lead → campañas de lead generation (mapea a Lead/SubmitForm)
-// Así el mismo disparo sirve para optimizar ambos tipos de campaña.
 export function trackBookingStart(source: string): void {
   trackEvent({
     event: "booking_start",
@@ -249,11 +277,6 @@ export function trackBookingStart(source: string): void {
   });
 }
 
-// Al confirmar el agendamiento dispara TRES eventos:
-// 1. booking_complete → Schedule (venta)
-// 2. lead           → SubmitForm/Lead (leads campaign)
-// 3. registration   → CompleteRegistration (registro confirmado)
-// Así una sola conversión en /gracias alimenta las 3 estructuras de campaña.
 export function trackBookingComplete(source: string): void {
   trackEvent({
     event: "booking_complete",
@@ -279,13 +302,26 @@ export function trackBookingComplete(source: string): void {
 }
 
 // ─── Pricing ───
-export function trackPlanClick(plan: string, location: string): void {
+export interface PlanPriceInfo {
+  priceUSD?: number;
+  priceLocal?: number;
+  currency?: Currency;
+}
+
+export function trackPlanClick(
+  plan: string,
+  location: string,
+  priceInfo?: PlanPriceInfo,
+): void {
   trackEvent({
     event: "plan_click",
     category: "conversion",
     label: `${plan}_${location}`,
     plan_name: plan,
     plan_location: location,
+    price_usd: priceInfo?.priceUSD,
+    price_local: priceInfo?.priceLocal,
+    plan_currency: priceInfo?.currency,
   });
 }
 

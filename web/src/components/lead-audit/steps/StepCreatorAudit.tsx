@@ -11,11 +11,11 @@ const CONTENT_TYPES = [
 ];
 
 const RATES = [
-  { value: "menos_50", label: "Menos de $50 USD" },
-  { value: "50_100", label: "$50 - $100 USD" },
-  { value: "100_200", label: "$100 - $200 USD" },
-  { value: "200_500", label: "$200 - $500 USD" },
-  { value: "mas_500", label: "Más de $500 USD" },
+  { value: "menos_50", label: "Menos de $50 USD (~$200K COP)" },
+  { value: "50_100", label: "$50–$100 USD ($200K–$400K COP)" },
+  { value: "100_200", label: "$100–$200 USD ($400K–$800K COP)" },
+  { value: "200_500", label: "$200–$500 USD ($800K–$2M COP)" },
+  { value: "mas_500", label: "Más de $500 USD ($2M+ COP)" },
   { value: "no_se", label: "No sé cuánto cobrar" },
 ] as const;
 

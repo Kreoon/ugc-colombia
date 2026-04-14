@@ -7,7 +7,12 @@ import { Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAudit } from "@/components/lead-audit/AuditContext";
-import { SERVICE_LINES, type ServiceLine } from "./service-lines";
+import { useCurrency } from "@/components/providers/CurrencyProvider";
+import {
+  SERVICE_LINES,
+  resolveLocalized,
+  type ServiceLine,
+} from "./service-lines";
 
 export function ServiciosDetalle() {
   return (
@@ -26,6 +31,10 @@ function ServiceBlock({ line, index }: { line: ServiceLine; index: number }) {
   const Icon = line.icon;
   const reverse = index % 2 === 1;
   const { openAudit } = useAudit();
+  const { currency } = useCurrency();
+  const deliverables = resolveLocalized(line.deliverables, currency);
+  const example = resolveLocalized(line.example, currency);
+  const priceRange = line.priceRange[currency];
 
   return (
     <div
@@ -90,7 +99,7 @@ function ServiceBlock({ line, index }: { line: ServiceLine; index: number }) {
               <Sparkles className="w-3.5 h-3.5" /> Qué incluye
             </p>
             <ul className="grid sm:grid-cols-2 gap-2">
-              {line.deliverables.map((d) => (
+              {deliverables.map((d) => (
                 <li key={d} className="flex items-start gap-2 text-sm text-white/90 font-sans">
                   <Check className="w-4 h-4 text-brand-yellow flex-shrink-0 mt-0.5" />
                   <span>{d}</span>
@@ -111,12 +120,12 @@ function ServiceBlock({ line, index }: { line: ServiceLine; index: number }) {
               <p className="text-[10px] font-sans font-bold tracking-widest uppercase text-brand-gold mb-1">
                 Inversión
               </p>
-              <p className="text-sm text-brand-yellow font-sans font-bold leading-relaxed">{line.priceRange}</p>
+              <p className="text-sm text-brand-yellow font-sans font-bold leading-relaxed">{priceRange}</p>
             </div>
           </div>
 
           <p className="text-xs text-brand-gray italic mb-6 leading-relaxed">
-            <span className="text-brand-gold not-italic font-semibold">Ejemplo:</span> {line.example}
+            <span className="text-brand-gold not-italic font-semibold">Ejemplo:</span> {example}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">

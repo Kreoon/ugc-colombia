@@ -4,19 +4,18 @@ import { motion } from "motion/react";
 import { useIntersection } from "@/hooks/use-intersection";
 import { Check, X } from "lucide-react";
 import { COMPARISON_ROWS, type ComparisonRow } from "@/lib/pricing-plans";
+import { useCurrency } from "@/components/providers/CurrencyProvider";
+import { PLAN_PRICES } from "@/lib/pricing/currency-config";
 import { cn } from "@/lib/utils";
 
-const PLAN_COLUMNS = [
-  { key: "inicio" as const, name: "Inicio", price: "$400/mes" },
-  {
-    key: "crecimiento" as const,
-    name: "Crecimiento",
-    price: "$700/mes",
-    highlight: true,
-  },
-  { key: "escala" as const, name: "Escala", price: "$1.500/mes" },
-  { key: "enterprise" as const, name: "A la medida", price: "Custom" },
-];
+type PlanColumnKey = "inicio" | "crecimiento" | "escala" | "enterprise";
+
+interface PlanColumn {
+  key: PlanColumnKey;
+  name: string;
+  price: string;
+  highlight?: boolean;
+}
 
 function CellValue({
   value,
@@ -79,7 +78,28 @@ export function PreciosComparison() {
   const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
     threshold: 0.05,
   });
+  const { currency, format } = useCurrency();
   const grouped = groupByCategory(COMPARISON_ROWS);
+
+  const PLAN_COLUMNS: PlanColumn[] = [
+    {
+      key: "inicio",
+      name: "Inicio",
+      price: `${format(PLAN_PRICES.starter[currency].amount)}/mes`,
+    },
+    {
+      key: "crecimiento",
+      name: "Crecimiento",
+      price: `${format(PLAN_PRICES.growth[currency].amount)}/mes`,
+      highlight: true,
+    },
+    {
+      key: "escala",
+      name: "Escala",
+      price: `${format(PLAN_PRICES.scale[currency].amount)}/mes`,
+    },
+    { key: "enterprise", name: "A la medida", price: "Custom" },
+  ];
 
   return (
     <section

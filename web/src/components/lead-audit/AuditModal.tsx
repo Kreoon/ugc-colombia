@@ -47,9 +47,19 @@ export interface AuditData {
 // Steps: 0=type, 1=info, 2=audit, 3=contact, 4=diagnosis, 5=booking
 
 export function AuditModal() {
-  const { isOpen, closeAudit } = useAudit();
+  const { isOpen, closeAudit, consumePrefillType } = useAudit();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<AuditData>({ lead_type: null });
+
+  // Aplica prefillType cuando el modal se abre (salta step 0).
+  useEffect(() => {
+    if (!isOpen) return;
+    const prefill = consumePrefillType();
+    if (prefill) {
+      setData((prev) => ({ ...prev, lead_type: prefill }));
+      setStep(1);
+    }
+  }, [isOpen, consumePrefillType]);
 
   function handleReset() {
     setStep(0);

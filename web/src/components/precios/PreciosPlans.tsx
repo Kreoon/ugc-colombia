@@ -24,16 +24,14 @@ import {
   ENTERPRISE_PLAN,
   type Plan,
 } from "@/lib/pricing-plans";
+import { useCurrency } from "@/components/providers/CurrencyProvider";
+import {
+  CURRENCY_META,
+  PLAN_PRICES,
+  priceInUSD,
+} from "@/lib/pricing/currency-config";
 
 const MAX_VISIBLE_FEATURES = 10;
-
-function getPricePerVideo(plan: Plan): string | null {
-  const priceNum = parseInt(plan.price.replace(/[$.,]/g, ""), 10);
-  const videoMatch = plan.videos.match(/(\d+)/);
-  if (!priceNum || !videoMatch) return null;
-  const videos = parseInt(videoMatch[1], 10);
-  return `$${Math.round(priceNum / videos)}`;
-}
 
 function PlanCard({
   plan,
@@ -46,7 +44,20 @@ function PlanCard({
 }) {
   const Icon = plan.icon;
   const [expanded, setExpanded] = useState(false);
-  const pricePerVideo = getPricePerVideo(plan);
+  const { currency, format } = useCurrency();
+
+  const pricing = PLAN_PRICES[plan.id]?.[currency];
+  const priceDisplay = pricing ? format(pricing.amount) : "";
+  const unitLabel = CURRENCY_META[currency].unitLabel;
+  const perVideoAmount =
+    pricing && plan.videosCount
+      ? Math.round(pricing.amount / plan.videosCount)
+      : null;
+  const pricePerVideo =
+    perVideoAmount !== null ? format(perVideoAmount) : null;
+  const savingDisplay = pricing
+    ? `Ahorras ~${format(pricing.monthlySavings)}/mes`
+    : null;
 
   const visibleFeatures = expanded
     ? plan.features
@@ -134,11 +145,9 @@ function PlanCard({
       <div className="mb-3">
         <div className="flex items-baseline gap-2">
           <span className="font-display text-4xl sm:text-5xl leading-none text-white">
-            {plan.price}
+            {priceDisplay}
           </span>
-          <span className="text-brand-gray font-sans text-sm">
-            {plan.priceUnit}
-          </span>
+          <span className="text-brand-gray font-sans text-sm">{unitLabel}</span>
         </div>
         {pricePerVideo && (
           <p className="text-[11px] text-brand-gold/70 font-sans mt-1.5">
@@ -173,10 +182,10 @@ function PlanCard({
       </p>
 
       {/* Ahorro */}
-      {plan.saving && (
+      {savingDisplay && (
         <div className="mb-4 inline-flex items-center gap-2 self-start rounded-lg border border-emerald-500/30 bg-emerald-500/8 px-3 py-1.5">
           <span className="text-xs font-semibold text-emerald-400">
-            {plan.saving}
+            {savingDisplay}
           </span>
         </div>
       )}
@@ -234,7 +243,13 @@ function PlanCard({
       {/* CTA */}
       <a
         href={plan.ctaHref}
-        onClick={() => trackPlanClick(plan.name, "precios_page")}
+        onClick={() =>
+          trackPlanClick(plan.name, "precios_page", {
+            priceUSD: pricing ? priceInUSD(pricing.amount, currency) : undefined,
+            priceLocal: pricing?.amount,
+            currency,
+          })
+        }
         className={cn(
           "group/cta flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl font-sans font-bold text-sm tracking-wide transition-all min-h-[44px]",
           plan.highlight

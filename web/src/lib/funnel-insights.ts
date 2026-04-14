@@ -47,15 +47,15 @@ const INSIGHTS: Record<string, Record<string, Insight>> = {
       emoji: "📈",
     },
     "1000_3000": {
-      text: "Con $1K-$3K en ads, cada dólar sin buen creativo es dinero quemado. UGC logra 2-4x mejor ROAS.",
+      text: "Con $1K-$3K USD ($4M-$12M COP) en ads, cada peso sin buen creativo es dinero quemado. UGC logra 2-4x mejor ROAS.",
       emoji: "🔥",
     },
     "3000_5000": {
-      text: "A este nivel de inversión, la calidad del creativo es tu mayor palanca. Un 1% más de CTR = miles de dólares.",
+      text: "A $3K-$5K USD ($12M-$20M COP) al mes, la calidad del creativo es tu mayor palanca. Un 1% más de CTR = miles de dólares/millones de pesos.",
       emoji: "💎",
     },
     mas_5000: {
-      text: "Con +$5K mensuales, necesitas un pipeline constante de creativos frescos. Es exactamente lo que hacemos.",
+      text: "Con +$5K USD ($20M+ COP) mensuales, necesitas un pipeline constante de creativos frescos. Es exactamente lo que hacemos.",
       emoji: "🏆",
     },
   },

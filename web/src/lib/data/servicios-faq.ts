@@ -45,7 +45,7 @@ export const SERVICIOS_FAQS: FAQItem[] = [
     question:
       "¿Qué diferencia hay entre UGC Ads Pack y Producción Audiovisual Premium?",
     answer:
-      "UGC Ads Pack es contenido generado por creadores reales grabado con sus teléfonos en tono conversacional — perfecto para escalar ads a bajo costo. Producción Audiovisual Premium es VSL, brand films y reels con equipo técnico profesional, color grading, sonido pro y entrega broadcast-ready. Se paga por proyecto ($1.500 – $5.000 USD) y tiene su propio timeline de pre-producción, rodaje y post.",
+      "UGC Ads Pack es contenido generado por creadores reales grabado con sus teléfonos en tono conversacional — perfecto para escalar ads a bajo costo. Producción Audiovisual Premium es VSL, brand films y reels con equipo técnico profesional, color grading, sonido pro y entrega broadcast-ready. Se paga por proyecto ($1.500 – $5.000 USD · $5.990.000 – $19.900.000 COP) y tiene su propio timeline de pre-producción, rodaje y post.",
   },
   {
     question: "¿Realmente usan IA en sus propios procesos?",
@@ -66,7 +66,7 @@ export const SERVICIOS_FAQS: FAQItem[] = [
   {
     question: "¿Qué pasa si un workflow falla en producción?",
     answer:
-      "Si tienes Retainer Dev ($1.800/mes): monitoreo 24/7 con alertas automáticas, tiempo de respuesta crítico < 2h en horario hábil y hot-fixes incluidos en las 20h mensuales. Si tomaste solo Flujo Único o Sistema Conectado: tienes 2 semanas de ajustes post-entrega incluidos; pasado ese plazo se cotiza como soporte por hora.",
+      "Si tienes Retainer Dev ($1.800 USD / $7.190.000 COP al mes): monitoreo 24/7 con alertas automáticas, tiempo de respuesta crítico < 2h en horario hábil y hot-fixes incluidos en las 20h mensuales. Si tomaste solo Flujo Único o Sistema Conectado: tienes 2 semanas de ajustes post-entrega incluidos; pasado ese plazo se cotiza como soporte por hora.",
   },
   {
     question:
@@ -78,7 +78,7 @@ export const SERVICIOS_FAQS: FAQItem[] = [
     question:
       "¿Incluyen hosting, dominio y mantenimiento del sitio web?",
     answer:
-      "Hosting en Vercel está incluido en el primer año para los tiers Pro y Premium. El dominio lo compras tú a tu nombre (~$15 USD/año en Namecheap o Cloudflare) y nosotros lo configuramos. Mantenimiento: el tier Premium incluye 2 meses de soporte post-lanzamiento; después ofrecemos un retainer de mantenimiento web desde $250 USD/mes (actualizaciones, monitoreo, mejoras menores).",
+      "Hosting en Vercel está incluido en el primer año para los tiers Pro y Premium. El dominio lo compras tú a tu nombre (~$15 USD / ~$59.000 COP al año en Namecheap o Cloudflare) y nosotros lo configuramos. Mantenimiento: el tier Premium incluye 2 meses de soporte post-lanzamiento; después ofrecemos un retainer de mantenimiento web desde $250 USD / $990.000 COP al mes (actualizaciones, monitoreo, mejoras menores).",
   },
   {
     question: "¿Qué tracking ponen en las landing pages?",
@@ -89,7 +89,7 @@ export const SERVICIOS_FAQS: FAQItem[] = [
     question:
       "¿Qué incluye la Consultoría de Marketing Digital con Alexander?",
     answer:
-      "Auditoría completa de funnels, paid media y posicionamiento + plan estratégico a 90 días + sesiones mensuales de seguimiento. En cada sesión revisamos métricas, ajustamos plan y priorizamos las siguientes acciones. El formato es $1.200 – $3.000 USD/mes dependiendo de la complejidad del negocio y la cantidad de horas mensuales con el estratega principal.",
+      "Auditoría completa de funnels, paid media y posicionamiento + plan estratégico a 90 días + sesiones mensuales de seguimiento. En cada sesión revisamos métricas, ajustamos plan y priorizamos las siguientes acciones. El formato es $1.200 – $3.000 USD / $4.790.000 – $11.990.000 COP al mes dependiendo de la complejidad del negocio y la cantidad de horas mensuales con el estratega principal.",
   },
   {
     question:

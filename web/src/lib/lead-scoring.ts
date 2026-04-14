@@ -197,11 +197,11 @@ export function generateDiagnosis(
 function formatBudget(budget: string): string {
   const labels: Record<string, string> = {
     nada: "$0",
-    menos_500: "menos de $500/mes",
-    "500_1000": "$500-$1,000/mes",
-    "1000_3000": "$1,000-$3,000/mes",
-    "3000_5000": "$3,000-$5,000/mes",
-    mas_5000: "más de $5,000/mes",
+    menos_500: "menos de $500 USD (~$2M COP) /mes",
+    "500_1000": "$500-$1.000 USD ($2M-$4M COP) /mes",
+    "1000_3000": "$1.000-$3.000 USD ($4M-$12M COP) /mes",
+    "3000_5000": "$3.000-$5.000 USD ($12M-$20M COP) /mes",
+    mas_5000: "más de $5.000 USD ($20M+ COP) /mes",
   };
   return labels[budget] ?? budget;
 }

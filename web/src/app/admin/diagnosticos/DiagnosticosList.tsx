@@ -14,6 +14,7 @@ import {
   Instagram,
   Mail,
   Phone,
+  Trash2,
 } from "lucide-react";
 
 export interface DiagnosticoRow {
@@ -111,6 +112,25 @@ export function DiagnosticosList({ rows }: { rows: DiagnosticoRow[] }) {
     await navigator.clipboard.writeText(url);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 1500);
+  }
+
+  async function deleteLead(id: string, label: string) {
+    const ok = window.confirm(
+      `¿Eliminar permanentemente el diagnóstico de "${label}"? Esta acción no se puede deshacer.`,
+    );
+    if (!ok) return;
+    setToggling(id);
+    const res = await fetch("/api/admin/delete-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    setToggling(null);
+    if (res.ok) {
+      setLocalRows((prev) => prev.filter((r) => r.id !== id));
+    } else {
+      window.alert("No se pudo eliminar. Revisa la consola.");
+    }
   }
 
   async function logout() {
@@ -289,6 +309,21 @@ export function DiagnosticosList({ rows }: { rows: DiagnosticoRow[] }) {
                         </button>
                       </>
                     )}
+
+                    <button
+                      onClick={() =>
+                        deleteLead(
+                          r.id,
+                          r.companyName || r.fullName || r.email || r.id,
+                        )
+                      }
+                      disabled={toggling === r.id}
+                      title="Eliminar permanentemente"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold hover:bg-red-500/20 transition-colors disabled:opacity-50"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      Eliminar
+                    </button>
 
                     <button
                       onClick={() => togglePublic(r.id, !r.diagnosisPublic)}

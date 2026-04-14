@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -15,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/home/Navbar";
 import { Footer } from "@/components/home/Footer";
+import { trackBookingComplete } from "@/lib/tracking/events";
 
 const COMMUNITY_URL = "https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE";
 const DAY_FULL = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -28,6 +30,16 @@ export function GraciasClient() {
   const hostName = params.get("host") || "UGC Colombia";
   const meetLink = params.get("meet") || "";
   const startISO = params.get("start") || "";
+
+  // Dispara conversion tracking solo cuando hay booking real confirmado
+  // (presencia de params start+host) para evitar disparar por visitas directas.
+  const hasFired = useRef(false);
+  useEffect(() => {
+    if (hasFired.current) return;
+    if (!startISO || !params.get("host")) return;
+    hasFired.current = true;
+    trackBookingComplete("gracias_page");
+  }, [startISO, params]);
 
   let dateStr = "";
   let timeStr = "";

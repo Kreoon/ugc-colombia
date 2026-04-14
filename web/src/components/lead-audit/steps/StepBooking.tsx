@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { AuditData } from "../AuditModal";
 import type { LeadScore } from "@/lib/lead-scoring";
-import { trackBookingComplete, trackWhatsappClick } from "@/lib/tracking/events";
+import { trackWhatsappClick } from "@/lib/tracking/events";
 
 const WHATSAPP_NUMBER = "573132947776";
 const DAY_NAMES = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
@@ -105,10 +105,8 @@ export function StepBooking({ data, score, onBack, onClose }: Props) {
 
       if (!res.ok) throw new Error(result.error || "Error al agendar");
 
-      // Dispara booking_complete + lead (2 eventos para pautas de venta Y leads)
-      trackBookingComplete(data.lead_type ?? "unknown");
-
-      // Redirect to thank you page with meeting details
+      // La conversión se trackea en /gracias (ver GraciasClient.tsx) para
+      // asegurar que los pixels disparen sin que el redirect los corte.
       const params = new URLSearchParams({
         host: result.host_name || "",
         meet: result.meet_link || "",

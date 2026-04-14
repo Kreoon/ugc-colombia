@@ -10,7 +10,6 @@ import {
   DollarSign,
   Clock,
   Save,
-  RefreshCw,
   Loader2,
   Copy,
   Check,
@@ -18,6 +17,7 @@ import {
   EyeOff,
 } from "lucide-react";
 import type { LeadDetail } from "../LeadDetailClient";
+import { LogoUploader } from "./LogoUploader";
 
 interface Props {
   lead: LeadDetail;
@@ -28,7 +28,6 @@ export function ContactSidebar({ lead, onPatch }: Props) {
   const [savingDeal, setSavingDeal] = useState(false);
   const [savingAction, setSavingAction] = useState(false);
   const [savingPublic, setSavingPublic] = useState(false);
-  const [fetchingLogo, setFetchingLogo] = useState(false);
   const [copied, setCopied] = useState(false);
   const [dealValue, setDealValue] = useState(lead.dealValueCop?.toString() ?? "");
   const [nextAction, setNextAction] = useState(lead.nextAction ?? "");
@@ -78,23 +77,6 @@ export function ContactSidebar({ lead, onPatch }: Props) {
     const ok = await patchField({ diagnosis_public: next });
     setSavingPublic(false);
     if (ok) onPatch({ diagnosisPublic: next });
-  }
-
-  async function fetchLogo() {
-    setFetchingLogo(true);
-    const res = await fetch("/api/admin/logo-fetch", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        leadId: lead.id,
-        instagramHandle: lead.instagramHandle,
-      }),
-    });
-    setFetchingLogo(false);
-    if (res.ok) {
-      const data = (await res.json()) as { logoUrl?: string | null };
-      onPatch({ logoUrl: data.logoUrl ?? null });
-    }
   }
 
   async function copyDiagnosisUrl() {
@@ -172,27 +154,14 @@ export function ContactSidebar({ lead, onPatch }: Props) {
 
       {/* Logo */}
       <div className={wrapperClass}>
-        <div className="flex items-center justify-between">
-          <p className={labelClass}>Logo</p>
-          <button
-            type="button"
-            onClick={fetchLogo}
-            disabled={fetchingLogo || !lead.instagramHandle}
-            className="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-yellow hover:text-brand-gold disabled:opacity-40"
-          >
-            {fetchingLogo ? (
-              <Loader2 className="w-3 h-3 animate-spin" />
-            ) : (
-              <RefreshCw className="w-3 h-3" />
-            )}
-            Auto-fetch
-          </button>
-        </div>
-        {!lead.instagramHandle && (
-          <p className="text-[10px] text-brand-gray/70">
-            Necesita Instagram handle para auto-fetch
-          </p>
-        )}
+        <p className={labelClass}>Logo / Foto</p>
+        <LogoUploader
+          leadId={lead.id}
+          logoUrl={lead.logoUrl}
+          name={lead.companyName || lead.fullName || "Cliente"}
+          instagramHandle={lead.instagramHandle}
+          onChanged={(url) => onPatch({ logoUrl: url })}
+        />
       </div>
 
       {/* Deal value */}

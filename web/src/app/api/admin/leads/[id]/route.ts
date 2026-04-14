@@ -40,16 +40,36 @@ export async function GET(_request: Request, ctx: RouteCtx) {
   });
 }
 
-interface PatchBody {
-  status?: string;
-  notes?: string | null;
-  logo_url?: string | null;
-  deal_value_cop?: number | null;
-  next_action?: string | null;
-  next_action_at?: string | null;
-  last_contacted_at?: string | null;
-  diagnosis_public?: boolean;
-}
+// Campos CRM (sidebar + tabs) — disparan activity automática
+const CRM_FIELDS = [
+  "status",
+  "notes",
+  "logo_url",
+  "deal_value_cop",
+  "next_action",
+  "next_action_at",
+  "last_contacted_at",
+  "diagnosis_public",
+] as const;
+
+// Campos editables de perfil del cliente
+const PROFILE_FIELDS = [
+  "company_name",
+  "full_name",
+  "email",
+  "phone",
+  "whatsapp",
+  "company",
+  "industry",
+  "instagram_handle",
+  "tiktok_handle",
+  "creator_niche",
+  "creator_portfolio_url",
+] as const;
+
+const ALL_FIELDS = [...CRM_FIELDS, ...PROFILE_FIELDS] as const;
+
+type PatchBody = Partial<Record<(typeof ALL_FIELDS)[number], unknown>>;
 
 export async function PATCH(request: Request, ctx: RouteCtx) {
   if (!(await isAdminAuthenticated())) {
@@ -64,14 +84,16 @@ export async function PATCH(request: Request, ctx: RouteCtx) {
   const { id } = await ctx.params;
   const body = (await request.json().catch(() => ({}))) as PatchBody;
 
-  if (body.status !== undefined && !isLeadStatus(body.status)) {
+  if (body.status !== undefined && !isLeadStatus(body.status as string)) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
   // Fetch state previo para registrar diffs
   const { data: prev } = await supabase
     .from("leads")
-    .select("status, notes, deal_value_cop, next_action, next_action_at, logo_url, diagnosis_public")
+    .select(
+      "status, notes, deal_value_cop, next_action, next_action_at, logo_url, diagnosis_public, company_name, email",
+    )
     .eq("id", id)
     .single();
 
@@ -80,17 +102,14 @@ export async function PATCH(request: Request, ctx: RouteCtx) {
   }
 
   const update: Record<string, unknown> = {};
-  for (const k of [
-    "status",
-    "notes",
-    "logo_url",
-    "deal_value_cop",
-    "next_action",
-    "next_action_at",
-    "last_contacted_at",
-    "diagnosis_public",
-  ] as const) {
-    if (k in body) update[k] = body[k];
+  const profileChanged: string[] = [];
+  for (const k of ALL_FIELDS) {
+    if (k in body) {
+      update[k] = body[k];
+      if ((PROFILE_FIELDS as readonly string[]).includes(k)) {
+        profileChanged.push(k);
+      }
+    }
   }
   update.updated_at = new Date().toISOString();
 
@@ -100,46 +119,61 @@ export async function PATCH(request: Request, ctx: RouteCtx) {
   }
 
   // Activities según diffs
+  const prevRec = prev as Record<string, unknown>;
   await Promise.all([
-    body.status !== undefined && body.status !== prev.status
+    body.status !== undefined && body.status !== prevRec.status
       ? logActivity({
           leadId: id,
           type: "status_changed",
-          description: `Status: ${prev.status ?? "—"} → ${body.status}`,
-          metadata: { from: prev.status, to: body.status },
+          description: `Status: ${(prevRec.status as string) ?? "—"} → ${body.status}`,
+          metadata: { from: prevRec.status, to: body.status },
         })
       : null,
-    body.notes !== undefined && body.notes !== prev.notes
+    body.notes !== undefined && body.notes !== prevRec.notes
       ? logActivity({
           leadId: id,
           type: "note_added",
           description: "Notas actualizadas",
-          metadata: { length: body.notes?.length ?? 0 },
+          metadata: {
+            length: typeof body.notes === "string" ? body.notes.length : 0,
+          },
         })
       : null,
-    body.deal_value_cop !== undefined && body.deal_value_cop !== prev.deal_value_cop
+    body.deal_value_cop !== undefined &&
+    body.deal_value_cop !== prevRec.deal_value_cop
       ? logActivity({
           leadId: id,
           type: "deal_value_updated",
-          description: `Deal: ${prev.deal_value_cop ?? 0} → ${body.deal_value_cop ?? 0} COP`,
-          metadata: { from: prev.deal_value_cop, to: body.deal_value_cop },
+          description: `Deal: ${(prevRec.deal_value_cop as number) ?? 0} → ${(body.deal_value_cop as number) ?? 0} COP`,
+          metadata: { from: prevRec.deal_value_cop, to: body.deal_value_cop },
         })
       : null,
     body.next_action !== undefined &&
-    (body.next_action !== prev.next_action || body.next_action_at !== prev.next_action_at)
+    (body.next_action !== prevRec.next_action ||
+      body.next_action_at !== prevRec.next_action_at)
       ? logActivity({
           leadId: id,
           type: "next_action_set",
-          description: body.next_action ? `Próximo: ${body.next_action}` : "Próxima acción borrada",
+          description: body.next_action
+            ? `Próximo: ${body.next_action}`
+            : "Próxima acción borrada",
           metadata: { action: body.next_action, at: body.next_action_at },
         })
       : null,
-    body.logo_url !== undefined && body.logo_url !== prev.logo_url
+    body.logo_url !== undefined && body.logo_url !== prevRec.logo_url
       ? logActivity({
           leadId: id,
           type: "logo_updated",
           description: body.logo_url ? "Logo actualizado" : "Logo removido",
           metadata: { url: body.logo_url },
+        })
+      : null,
+    profileChanged.length > 0
+      ? logActivity({
+          leadId: id,
+          type: "contact_logged",
+          description: `Perfil editado: ${profileChanged.join(", ")}`,
+          metadata: { fields: profileChanged },
         })
       : null,
   ]);

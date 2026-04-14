@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Sparkles, Activity as ActivityIcon, FileText, BarChart3 } from "lucide-react";
+import {
+  ArrowLeft,
+  Sparkles,
+  Activity as ActivityIcon,
+  FileText,
+  BarChart3,
+  Pencil,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LogoAvatar } from "@/components/admin/LogoAvatar";
 import { StatusSelector } from "@/components/admin/StatusSelector";
@@ -11,6 +18,7 @@ import { DiagnosisTab } from "./tabs/DiagnosisTab";
 import { ActivityTab } from "./tabs/ActivityTab";
 import { NotesTab } from "./tabs/NotesTab";
 import { ContactSidebar } from "./components/ContactSidebar";
+import { EditLeadModal } from "./components/EditLeadModal";
 
 export interface LeadDetail {
   id: string;
@@ -81,6 +89,7 @@ export function LeadDetailClient({ lead: initialLead, initialActivities }: Props
   const [lead, setLead] = useState(initialLead);
   const [activities, setActivities] = useState(initialActivities);
   const [tab, setTab] = useState<TabKey>("overview");
+  const [editing, setEditing] = useState(false);
 
   const displayName = lead.companyName || lead.fullName || "(sin nombre)";
   const handle = lead.instagramHandle.replace(/^@/, "");
@@ -123,13 +132,21 @@ export function LeadDetailClient({ lead: initialLead, initialActivities }: Props
                   · {lead.temperature === "hot" ? "🔥" : lead.temperature === "warm" ? "☀️" : "❄️"} {lead.temperature}
                 </span>
               </p>
-              <div className="mt-3">
+              <div className="mt-3 flex flex-wrap items-center gap-2">
                 <StatusSelector
                   leadId={lead.id}
                   currentStatus={lead.status}
                   size="md"
                   onChanged={(next) => patchLocal({ status: next })}
                 />
+                <button
+                  type="button"
+                  onClick={() => setEditing(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-brand-gold/30 bg-brand-yellow/10 text-brand-yellow text-xs font-bold hover:bg-brand-yellow/20 transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                  Editar cliente
+                </button>
               </div>
             </div>
           </div>
@@ -184,6 +201,14 @@ export function LeadDetailClient({ lead: initialLead, initialActivities }: Props
           <ContactSidebar lead={lead} onPatch={patchLocal} />
         </aside>
       </div>
+
+      {editing && (
+        <EditLeadModal
+          lead={lead}
+          onClose={() => setEditing(false)}
+          onSaved={patchLocal}
+        />
+      )}
     </main>
   );
 }

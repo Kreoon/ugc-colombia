@@ -308,7 +308,7 @@ export async function POST(req: NextRequest) {
     <p style="color:#BDBCBC;font-size:13px;line-height:1.7;margin:0;">
       UGC Colombia es la agencia que conecta marcas con creadores de contenido reales para producir videos, fotos y estrategias que de verdad venden.
       Estrategia + creadores + producción + IA bajo un mismo techo.
-      Ya ayudamos a marcas en Colombia, LATAM y USA Hispanic a multiplicar sus resultados.
+      Ya ayudamos a marcas en Colombia y LATAM a multiplicar sus resultados.
     </p>
   </div>
 

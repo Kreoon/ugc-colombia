@@ -81,7 +81,7 @@ const SERVICIOS: Servicio[] = [
     icon: Search,
     title: "Investigación de Mercado",
     description:
-      "Análisis de audiencia, dolores, hallazgos culturales y tendencias LATAM + USA Hispanic con datos reales.",
+      "Análisis de audiencia, dolores, hallazgos culturales y tendencias LATAM con datos reales.",
     prices: { USD: 225, COP: 890_000 },
     unit: "proyecto",
   },

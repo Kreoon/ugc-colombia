@@ -9,7 +9,7 @@ export const SERVICIOS_FAQS: FAQItem[] = [
   {
     question: "¿En qué países operan y en qué idiomas entregan?",
     answer:
-      "Por el momento operamos 100% desde Colombia, con red activa de creadores y dev team locales. Tenemos la capacidad de escalar a talento en otros países de LATAM (México, Ecuador, Perú, Chile, Argentina) bajo demanda cuando el proyecto lo requiere. Servimos marcas en Colombia, resto de LATAM y USA Hispanic. Todos los servicios se entregan en español neutro o español Colombia por defecto, e inglés bajo solicitud. Diseño web y landings soportan multi-idioma ES/EN.",
+      "Por el momento operamos 100% desde Colombia, con red activa de creadores y dev team locales. Tenemos la capacidad de escalar a talento en otros países de LATAM (México, Ecuador, Perú, Chile, Argentina) bajo demanda cuando el proyecto lo requiere. Servimos marcas en Colombia y resto de LATAM. Todos los servicios se entregan en español neutro o español Colombia por defecto. Diseño web y landings soportan multi-idioma ES.",
   },
   {
     question: "¿Qué incluye la sesión de diagnóstico inicial?",

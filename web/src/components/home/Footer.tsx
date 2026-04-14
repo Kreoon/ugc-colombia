@@ -74,7 +74,7 @@ export function Footer() {
             </a>
             <p className="mt-6 text-sm text-brand-gray max-w-xs leading-relaxed">
               Contenido real, resultados reales. Agencia boutique UGC para
-              marcas que viven de los resultados en LATAM + USA Hispanic.
+              marcas que viven de los resultados en LATAM.
             </p>
 
             <div className="mt-8 flex items-center gap-3">

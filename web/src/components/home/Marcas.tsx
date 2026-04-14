@@ -152,7 +152,7 @@ export function Marcas() {
 
         {/* Disclaimer discreto */}
         <p className="mt-6 text-center text-[11px] sm:text-xs text-brand-gray/70 font-sans tracking-wide">
-          Ecosistema Infiny Group · Clientes UGC LATAM + USA
+          Ecosistema Infiny Group · Clientes UGC LATAM
         </p>
       </div>
     </section>

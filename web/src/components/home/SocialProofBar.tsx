@@ -53,7 +53,7 @@ const FALLBACK_METRICS: MetricItem[] = [
   { prefix: "", value: 2.8, suffix: "%", label: "CTR Meta Ads", decimals: 1 },
 ];
 
-const TEXT_METRICS = ["LATAM + USA"];
+const TEXT_METRICS = ["LATAM"];
 
 interface KreoonStatsDTO {
   creators_count: number;

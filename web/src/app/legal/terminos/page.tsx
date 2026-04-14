@@ -49,7 +49,7 @@ export default function TerminosPage() {
           usuarios (UGC), estrategia de marketing, producción audiovisual,
           consultoría digital, automatización con IA, diseño web y landing
           pages, operando principalmente desde Colombia y sirviendo clientes
-          en LATAM y USA Hispanic.
+          en LATAM.
         </p>
 
         <h2>3. Registro y Cuenta</h2>

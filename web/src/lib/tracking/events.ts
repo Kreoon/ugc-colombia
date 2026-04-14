@@ -22,7 +22,7 @@ const TIKTOK_STANDARD_EVENTS: Record<string, string> = {
   registration_complete: "CompleteRegistration",
   waitlist_submit: "Subscribe",
   booking_start: "Contact",
-  booking_complete: "CompletePayment",
+  booking_complete: "Schedule",
   whatsapp_click: "Contact",
   plan_click: "AddToCart",
   diagnosis_view: "ViewContent",

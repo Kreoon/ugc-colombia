@@ -29,6 +29,7 @@ export default async function EmpresaSectionPage({
         filePath={`content/empresa/${slug}.md`}
         backHref="/admin/empresa"
         backLabel="Volver a Empresa"
+        eyebrow={`Empresa · ${slug.replace(/-/g, ' ')}`}
       />
     </>
   );

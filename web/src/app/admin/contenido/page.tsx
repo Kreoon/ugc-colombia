@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {
   Film,
   Calendar,
@@ -9,16 +8,9 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { requireAuth } from '@/lib/auth';
+import { PageHero, AdminCard, AdminGrid } from '@/components/admin/ui';
 
-interface ContenidoSection {
-  slug: string;
-  href: string;
-  title: string;
-  desc: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-const sections: ContenidoSection[] = [
+const sections = [
   {
     slug: 'guiones',
     href: '/admin/contenido/guiones',
@@ -88,41 +80,25 @@ export default async function ContenidoIndexPage() {
   await requireAuth();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-10">
-        <div className="text-brand-yellow text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-          · Contenido & Viralidad
-        </div>
-        <h1 className="font-display text-5xl uppercase text-white">
-          El estudio{' '}
-          <span className="bg-gradient-to-r from-[#f9b334] via-[#d4a017] to-[#f9b334] bg-clip-text text-transparent">
-            por dentro.
-          </span>
-        </h1>
-        <p className="text-brand-gray mt-3 max-w-2xl">
-          Guiones, producción, parrilla, modelo de viralidad, packs por persona,
-          y archivo de lo publicado. Todo vive acá.
-        </p>
-      </div>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <PageHero
+        eyebrow="Contenido & Viralidad"
+        title="El estudio"
+        highlight="por dentro."
+        lead="Guiones, producción, parrilla, modelo de viralidad, packs por persona, y archivo de lo publicado. Todo vive acá."
+      />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sections.map((s) => {
-          const Icon = s.icon;
-          return (
-            <Link
-              key={s.slug}
-              href={s.href}
-              className="block p-6 rounded-2xl bg-white/[0.04] border border-brand-gold/15 hover:border-brand-yellow/50 hover:bg-white/[0.06] transition-all group"
-            >
-              <Icon className="w-8 h-8 text-brand-yellow mb-4" aria-hidden="true" />
-              <div className="font-display text-xl uppercase text-white group-hover:text-brand-yellow transition-colors mb-1">
-                {s.title}
-              </div>
-              <div className="text-sm text-brand-gray">{s.desc}</div>
-            </Link>
-          );
-        })}
-      </div>
+      <AdminGrid cols={3}>
+        {sections.map((s) => (
+          <AdminCard
+            key={s.slug}
+            href={s.href}
+            icon={s.icon}
+            title={s.title}
+            desc={s.desc}
+          />
+        ))}
+      </AdminGrid>
     </div>
   );
 }

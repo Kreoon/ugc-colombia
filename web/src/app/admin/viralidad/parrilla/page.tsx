@@ -9,6 +9,9 @@ export default async function ParrillaPage() {
       filePath="content/viralidad/03-parrilla-masiva-ig-tiktok.md"
       backHref="/admin/viralidad"
       backLabel="Volver a Viralidad"
+      eyebrow="Viralidad · Parrilla masiva"
+      title="PARRILLA IG + TIKTOK."
+      lead="Ritmo de publicación, slots diarios y patrones de contenido para saturar feeds con presencia editorial."
     />
   );
 }

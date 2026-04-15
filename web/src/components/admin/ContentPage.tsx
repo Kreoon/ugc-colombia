@@ -10,6 +10,9 @@ interface ContentPageProps {
   filePath: string;
   backHref: string;
   backLabel?: string;
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
 }
 
 export async function ContentPage({
@@ -17,6 +20,9 @@ export async function ContentPage({
   filePath,
   backHref,
   backLabel = 'Volver',
+  eyebrow,
+  title,
+  lead,
 }: ContentPageProps) {
   const content = await getContentWithOverrides(filePath);
   if (!content) notFound();
@@ -27,8 +33,12 @@ export async function ContentPage({
     <ContentLayout
       content={content}
       backHref={backHref}
+      backLabel={backLabel}
       editHref={canEdit ? `/admin/editor/${filePath}` : undefined}
       showEditButton={canEdit}
+      eyebrow={eyebrow}
+      title={title}
+      lead={lead}
     >
       <MarkdownRenderer content={content.current} />
     </ContentLayout>

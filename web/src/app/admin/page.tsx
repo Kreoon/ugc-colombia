@@ -1,35 +1,51 @@
+import {
+  Building2,
+  Target,
+  Film,
+  Palette,
+  Scissors,
+  FileText,
+} from "lucide-react";
 import { requireAuth } from "@/lib/auth";
+import { PageHero, AdminCard, AdminGrid, Eyebrow } from "@/components/admin/ui";
+import { identity } from "./marca/_data/identity";
 
 const CARDS = [
   {
     label: "Identidad Corporativa",
     href: "/admin/empresa/identidad",
     desc: "Misión, visión, valores y PUV",
+    icon: Building2,
   },
   {
     label: "Estrategia & OKRs",
     href: "/admin/empresa/estrategia",
     desc: "OKRs 2026, roadmap y KPIs",
+    icon: Target,
   },
   {
     label: "Contenido & Viralidad",
     href: "/admin/contenido",
     desc: "Guiones, parrilla, packs, publicados",
+    icon: Film,
   },
   {
     label: "Manual de Marca",
     href: "/admin/marca",
     desc: "Colores, tipografía, logo, UI",
+    icon: Palette,
   },
   {
     label: "Cola Valentina",
     href: "/admin/contenido/valentina",
     desc: "Dashboard editora de planta",
+    icon: Scissors,
   },
   {
     label: "Diagnósticos",
     href: "/admin/diagnosticos",
     desc: "CRM de leads y prospectos",
+    icon: FileText,
   },
 ] as const;
 
@@ -38,39 +54,54 @@ export default async function AdminHome() {
   const firstName = user.fullName?.split(" ")[0] ?? "equipo";
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* Encabezado */}
-      <div className="mb-10">
-        <div className="text-brand-yellow text-[10px] font-semibold tracking-[0.25em] uppercase mb-3">
-          · Dashboard
-        </div>
-        <h1 className="font-display text-5xl uppercase text-white leading-none">
-          Hola,{" "}
-          <span className="bg-gradient-to-r from-brand-yellow via-brand-gold to-brand-yellow bg-clip-text text-transparent">
-            {firstName}.
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <PageHero
+        eyebrow="Dashboard interno"
+        title={`Hola, ${firstName}.`}
+        lead="Sistema interno de UGC Colombia. Toda la operación en un solo lugar — estrategia, contenido, marca, CRM y equipo."
+      />
+
+      {/* Propósito — propuesta de valor */}
+      <div className="mb-12 rounded-2xl border-2 border-brand-yellow/40 bg-gradient-to-br from-brand-yellow/10 to-brand-gold/5 p-6 sm:p-8">
+        <Eyebrow variant="yellow" className="mb-3">
+          Propósito oficial
+        </Eyebrow>
+        <div className="font-display uppercase text-2xl sm:text-3xl lg:text-4xl leading-tight">
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)",
+            }}
+          >
+            {identity.propuestaDeValor}
           </span>
-        </h1>
-        <p className="text-brand-gray mt-3 text-sm max-w-xl">
-          Este es el sistema interno de UGC Colombia. Toda la operación en un
-          solo lugar.
+        </div>
+        <p className="text-sm text-brand-gray mt-3 leading-relaxed">
+          Guía toda nuestra comunicación. Revísala antes de escribir copy, producir
+          contenido o enviar propuestas.
         </p>
       </div>
 
-      {/* Cards de acceso rápido */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Accesos rápidos */}
+      <div className="mb-6">
+        <Eyebrow className="mb-2">Accesos rápidos</Eyebrow>
+        <h2 className="font-display uppercase text-white text-2xl sm:text-3xl">
+          Por dónde empezar.
+        </h2>
+      </div>
+
+      <AdminGrid cols={3}>
         {CARDS.map((card) => (
-          <a
+          <AdminCard
             key={card.href}
             href={card.href}
-            className="group block p-6 rounded-2xl bg-white/[0.04] border border-brand-gold/15 hover:border-brand-yellow/50 hover:bg-white/[0.06] transition-all"
-          >
-            <div className="font-display text-xl uppercase text-white group-hover:text-brand-yellow transition-colors mb-1 leading-tight">
-              {card.label}
-            </div>
-            <div className="text-sm text-brand-gray">{card.desc}</div>
-          </a>
+            icon={card.icon}
+            title={card.label}
+            desc={card.desc}
+          />
         ))}
-      </div>
+      </AdminGrid>
     </div>
   );
 }

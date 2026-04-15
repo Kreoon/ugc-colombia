@@ -11,6 +11,9 @@ export default async function CalendarioPage() {
       filePath="content/sistemas/contenido/calendario-editorial.md"
       backHref="/admin/contenido"
       backLabel="Volver a Contenido"
+      eyebrow="Contenido · Calendario editorial"
+      title="CALENDARIO EDITORIAL."
+      lead="Temas por semana, fechas clave y alineación con campañas del negocio."
     />
   );
 }

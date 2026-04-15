@@ -1,7 +1,28 @@
 # Logo Specs — UGC Colombia
 
-> Especificación técnica completa del sistema de logo.
-> Para archivos fuente, contactar al equipo de diseño o abrir `/brand/assets/logo/`.
+> **Reconciliado 2026-04-15.** Fuente canónica en código: [`web/src/app/manual/_data/logos.ts`](../web/src/app/manual/_data/logos.ts).
+>
+> **Anatomía real del logo oficial** (slide 02 del Manual de Marca interno, preservado en `/brand/legacy-deck/slide-02-logo-horizontal-color.png`):
+>
+> - Isotipo: 3 glyphs "UGC" en sans-serif condensed (Anton-like), con una palabra "AGENCIA" en vertical dentro de la U izquierda
+> - Cada glyph "UGC" tiene un pequeño "test tube" amarillo `#F9B334` en su interior (como indicador de nivel químico)
+> - Al lado derecho: wordmark "COLOMBIA" en gris oscuro `#3D3D3C`
+> - Debajo de "COLOMBIA": barra horizontal amarilla `#F9B334`
+> - Al final de la barra: 3 marcas diagonales pequeñas amarillas (acento dinámico)
+> - Paleta oficial: `#000000` negro · `#3D3D3C` gris oscuro · `#BDBCBC` gris claro · `#F9B334` amarillo · `#F5F5F0` crema
+>
+> **Archivos PNG oficiales disponibles:**
+> - `/web/public/brand/logos/v2/logo-horizontal-color.png` — versión default (color sobre claro)
+> - `/web/public/brand/logos/v2/logo-horizontal-mono-gray.png` — monocromo gris
+> - `/web/public/brand/logos/v2/logo-horizontal-white-on-transparent.png` — blanco sobre oscuro
+>
+> **Pendiente de generar en Fase 3 (Nanobanana):** stacked-color, stacked-white, isotype-color, isotype-white, isotype-black, horizontal-yellow-bg.
+>
+> El texto histórico que sigue describía un logo especulativo distinto al oficial y se mantiene solo como referencia de la etapa exploratoria.
+
+---
+
+## [Histórico — no oficial]
 
 ---
 

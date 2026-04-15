@@ -1,4 +1,10 @@
 import type { Config } from "tailwindcss";
+import {
+  brandColors,
+  graysScale,
+  radii,
+  shadows,
+} from "./src/app/manual/_data/tokens";
 
 const config: Config = {
   darkMode: "class",
@@ -10,17 +16,51 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          black: "#000000",
-          graphite: "#3D3D3C",
-          gray: "#BDBCBC",
-          yellow: "#F9B334",
-          gold: "#D4A017",
-          "gold-dark": "#C9940A",
+          black: brandColors.black,
+          ink: brandColors.ink,
+          graphite: brandColors.grayDark,
+          "gray-dark": brandColors.grayDark,
+          "gray-light": brandColors.grayLight,
+          gray: brandColors.grayLight,
+          cream: brandColors.cream,
+          white: brandColors.white,
+          yellow: brandColors.yellow,
+          "yellow-hover": brandColors.yellowHover,
+          "yellow-soft": brandColors.yellowSoft,
+          gold: brandColors.yellow,
+          "gold-dark": brandColors.yellowHover,
+          red: brandColors.red,
+          "red-hover": brandColors.redHover,
+          green: brandColors.green,
         },
+        "brand-gray": graysScale,
       },
       fontFamily: {
-        display: ["var(--font-anton)", "Anton", "sans-serif"],
+        display: ["var(--font-anton)", "Anton", "Impact", "sans-serif"],
+        impact: ["var(--font-anton)", "Anton", "sans-serif"],
         sans: ["var(--font-inter)", "Inter", "sans-serif"],
+      },
+      borderRadius: {
+        none: radii.none,
+        sm: radii.sm,
+        base: radii.base,
+        md: radii.md,
+        lg: radii.lg,
+        xl: radii.xl,
+        "2xl": radii["2xl"],
+        full: radii.full,
+      },
+      boxShadow: {
+        "brand-xs": shadows.xs,
+        "brand-sm": shadows.sm,
+        "brand-base": shadows.base,
+        "brand-md": shadows.md,
+        "brand-lg": shadows.lg,
+        "brand-xl": shadows.xl,
+        gold: shadows.yellow,
+        "gold-sm": shadows.yellowSm,
+        yellow: shadows.yellow,
+        "yellow-sm": shadows.yellowSm,
       },
       keyframes: {
         marquee: {
@@ -40,8 +80,8 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 8px 0px rgba(212,160,23,0.4)" },
-          "50%": { boxShadow: "0 0 20px 4px rgba(212,160,23,0.7)" },
+          "0%, 100%": { boxShadow: "0 0 8px 0px rgba(249,179,52,0.40)" },
+          "50%": { boxShadow: "0 0 20px 4px rgba(249,179,52,0.75)" },
         },
       },
       animation: {

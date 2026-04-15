@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { requireAuth } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { DiagnosticosList } from "./DiagnosticosList";
 import type { LeadCardData } from "@/components/admin/LeadCard";
@@ -74,10 +73,7 @@ async function fetchDiagnosticos(): Promise<LeadCardData[]> {
 }
 
 export default async function DiagnosticosAdminPage() {
-  if (!(await isAdminAuthenticated())) {
-    redirect("/admin/login");
-  }
-
+  await requireAuth();
   const rows = await fetchDiagnosticos();
   return <DiagnosticosList rows={rows} />;
 }

@@ -1,6 +1,6 @@
-import { redirect, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { requireAuth } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { LeadDetailClient, type LeadDetail, type Activity } from "./LeadDetailClient";
 
@@ -92,10 +92,7 @@ async function fetchLeadDetail(
 }
 
 export default async function LeadDetailPage({ params }: PageProps) {
-  if (!(await isAdminAuthenticated())) {
-    redirect("/admin/login");
-  }
-
+  await requireAuth();
   const { id } = await params;
   const data = await fetchLeadDetail(id);
   if (!data) notFound();

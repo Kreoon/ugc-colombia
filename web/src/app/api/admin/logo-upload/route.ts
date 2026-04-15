@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getCurrentUser } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { logActivity } from "@/lib/admin/activity-logger";
 
@@ -10,7 +10,7 @@ const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getCurrentUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

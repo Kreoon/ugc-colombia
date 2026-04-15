@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getCurrentUser } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { logActivity } from "@/lib/admin/activity-logger";
 import { isLeadStatus } from "@/lib/admin/lead-status";
@@ -9,7 +9,7 @@ interface RouteCtx {
 }
 
 export async function GET(_request: Request, ctx: RouteCtx) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getCurrentUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -72,7 +72,7 @@ const ALL_FIELDS = [...CRM_FIELDS, ...PROFILE_FIELDS] as const;
 type PatchBody = Partial<Record<(typeof ALL_FIELDS)[number], unknown>>;
 
 export async function PATCH(request: Request, ctx: RouteCtx) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getCurrentUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

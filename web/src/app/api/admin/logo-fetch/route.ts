@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getCurrentUser } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { resolveLogoUrl } from "@/lib/admin/logo-resolver";
 import { logActivity } from "@/lib/admin/activity-logger";
@@ -11,7 +11,7 @@ interface Body {
 }
 
 export async function POST(request: Request) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getCurrentUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getCurrentUser } from "@/lib/auth";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import {
   ACTIVITY_TYPES,
@@ -12,7 +12,7 @@ interface RouteCtx {
 }
 
 export async function GET(_request: Request, ctx: RouteCtx) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getCurrentUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const supabase = getSupabaseAdmin();
@@ -42,7 +42,7 @@ interface PostBody {
 }
 
 export async function POST(request: Request, ctx: RouteCtx) {
-  if (!(await isAdminAuthenticated())) {
+  if (!(await getCurrentUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

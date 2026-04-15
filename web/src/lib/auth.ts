@@ -46,9 +46,33 @@ export async function getCurrentUser(): Promise<AdminUser | null> {
 }
 
 export async function requireAuth(): Promise<AdminUser> {
-  const user = await getCurrentUser();
-  if (!user) redirect("/admin/login");
-  return user;
+  const supabase = await createSupabaseServer();
+  const {
+    data: { user: authUser },
+  } = await supabase.auth.getUser();
+
+  // Sin sesión Supabase → al login
+  if (!authUser) redirect("/admin/login");
+
+  // Con sesión pero sin row en admin_users → pantalla sin-acceso
+  // (evita loop login → middleware → /admin → requireAuth → login)
+  const admin = createSupabaseServiceRole();
+  const { data: member } = await admin
+    .from("admin_users")
+    .select("id, auth_user_id, email, full_name, role, is_active")
+    .eq("auth_user_id", authUser.id)
+    .single();
+
+  if (!member || !member.is_active) redirect("/admin/sin-acceso");
+
+  return {
+    id: member.id as string,
+    authUserId: member.auth_user_id as string,
+    email: member.email as string,
+    fullName: member.full_name as string | null,
+    role: member.role as Role,
+    isActive: member.is_active as boolean,
+  };
 }
 
 export async function requireRole(roles: Role[]): Promise<AdminUser> {

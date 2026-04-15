@@ -6,7 +6,11 @@ const COUNTRY_HEADER = "x-ugc-country";
 const COUNTRY_COOKIE = "ugc_country";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
-const PUBLIC_ADMIN_ROUTES = ["/admin/login", "/admin/invitacion"];
+const PUBLIC_ADMIN_ROUTES = [
+  "/admin/login",
+  "/admin/invitacion",
+  "/admin/sin-acceso",
+];
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;

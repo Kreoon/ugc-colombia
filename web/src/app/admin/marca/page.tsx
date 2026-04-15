@@ -1,105 +1,108 @@
-import Link from 'next/link';
-import {
-  Palette,
-  Type,
-  ImageIcon,
-  Layout,
-  Megaphone,
-  Presentation,
-  Sparkles,
-} from 'lucide-react';
-import { requireAuth } from '@/lib/auth';
-
-interface MarcaSection {
-  slug: string;
-  title: string;
-  desc: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-const sections: MarcaSection[] = [
-  {
-    slug: 'brand-guidelines',
-    title: 'Guidelines',
-    desc: 'Identidad, tono, usos de marca',
-    icon: Palette,
-  },
-  {
-    slug: 'design-tokens',
-    title: 'Design Tokens',
-    desc: 'Colores, tipografía, spacing',
-    icon: Type,
-  },
-  {
-    slug: 'logo-specs',
-    title: 'Logo',
-    desc: 'Versiones, clearspace, aplicaciones',
-    icon: ImageIcon,
-  },
-  {
-    slug: 'social-templates-spec',
-    title: 'Plantillas Sociales',
-    desc: 'IG, TikTok, LinkedIn, YouTube',
-    icon: Layout,
-  },
-  {
-    slug: 'ad-assets-spec',
-    title: 'Assets de Ads',
-    desc: 'Specs Meta, Google, TikTok Ads',
-    icon: Megaphone,
-  },
-  {
-    slug: 'presentation-kit-spec',
-    title: 'Kit Presentaciones',
-    desc: 'Plantillas decks y propuestas',
-    icon: Presentation,
-  },
-  {
-    slug: 'image-prompts',
-    title: 'Prompts de Imagen',
-    desc: 'Prompts para IA generativa',
-    icon: Sparkles,
-  },
-];
+import Link from "next/link";
+import { requireAuth } from "@/lib/auth";
+import { chapters } from "./_data/chapters";
 
 export default async function MarcaIndexPage() {
   await requireAuth();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-10">
-        <div className="text-brand-yellow text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-          · Manual de Marca
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      {/* Hero */}
+      <div className="mb-12 pb-10 border-b border-brand-gold/15">
+        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-yellow mb-3">
+          · Manual de marca · Vol. 01 · 2026
         </div>
-        <h1 className="font-display text-5xl uppercase text-white">
-          Sistema{' '}
-          <span className="bg-gradient-to-r from-[#f9b334] via-[#d4a017] to-[#f9b334] bg-clip-text text-transparent">
-            visual.
+        <h1 className="font-display uppercase text-white text-5xl sm:text-6xl lg:text-7xl leading-[0.95] mb-5">
+          IDENTIDAD,
+          <br />
+          SISTEMA
+          <br />
+          Y{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)",
+            }}
+          >
+            PARRILLA.
           </span>
         </h1>
-        <p className="text-brand-gray mt-3 max-w-2xl">
-          Todas las reglas y specs para que cualquier miembro del equipo pueda
-          producir marca consistente en cualquier canal.
+        <p className="text-brand-gray text-lg max-w-2xl leading-relaxed">
+          La guía visual y operativa que gobierna cómo UGC Colombia se presenta,
+          se publica y se recuerda. Un solo sistema, todos los canales.
+        </p>
+
+        <div className="mt-8 inline-flex items-baseline gap-4 rounded-full border border-brand-gold/30 bg-brand-gold/5 px-5 py-2">
+          <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold">
+            · Tagline oficial
+          </span>
+          <span className="font-display uppercase text-white text-lg">
+            HACEMOS CRECER MARCAS.
+          </span>
+        </div>
+      </div>
+
+      {/* Índice */}
+      <div className="mb-8">
+        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-2">
+          · Índice del manual
+        </div>
+        <h2 className="font-display uppercase text-white text-3xl sm:text-4xl">
+          Doce capítulos, un sistema.
+        </h2>
+        <p className="text-brand-gray mt-2 max-w-2xl">
+          Todo lo que el equipo necesita para producir marca consistente en cualquier canal.
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sections.map((s) => {
-          const Icon = s.icon;
+        {chapters.map((c) => {
+          const Icon = c.icon;
           return (
             <Link
-              key={s.slug}
-              href={`/admin/marca/${s.slug}`}
-              className="block p-6 rounded-2xl bg-white/[0.04] border border-brand-gold/15 hover:border-brand-yellow/50 hover:bg-white/[0.06] transition-all group"
+              key={c.slug}
+              href={`/admin/marca/${c.slug}`}
+              className="group block p-6 rounded-2xl bg-white/[0.04] border border-brand-gold/15 hover:border-brand-yellow/50 hover:bg-white/[0.06] transition-all relative overflow-hidden"
             >
-              <Icon className="w-8 h-8 text-brand-yellow mb-4" aria-hidden="true" />
-              <div className="font-display text-xl uppercase text-white group-hover:text-brand-yellow transition-colors mb-1">
-                {s.title}
+              <div className="absolute top-0 right-0 font-display text-[5rem] leading-none text-brand-yellow/10 select-none pointer-events-none">
+                {c.number}
               </div>
-              <div className="text-sm text-brand-gray">{s.desc}</div>
+
+              <div className="relative">
+                <Icon
+                  className="w-7 h-7 text-brand-yellow mb-4 group-hover:scale-110 transition-transform"
+                  aria-hidden
+                />
+                <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-1">
+                  · {c.eyebrow}
+                </div>
+                <div className="font-display uppercase text-white text-2xl group-hover:text-brand-yellow transition-colors mb-2">
+                  {c.title}
+                </div>
+                <p className="text-sm text-brand-gray leading-relaxed mb-4">{c.desc}</p>
+                <div className="text-[10px] font-mono uppercase tracking-[0.15em] text-brand-gray/60 pt-3 border-t border-brand-gold/10">
+                  P. {String(c.pdfPage).padStart(2, "0")}
+                </div>
+              </div>
             </Link>
           );
         })}
+      </div>
+
+      {/* Footer */}
+      <div className="mt-16 pt-8 border-t border-brand-gold/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="text-[10px] uppercase tracking-[0.2em] text-brand-gray">
+          UGC Colombia · Brand System v.1 · 2026
+        </div>
+        <a
+          href="/pdfs/MANUAL-DE-MARCA.pdf"
+          target="_blank"
+          rel="noreferrer"
+          className="text-xs font-semibold tracking-[0.15em] uppercase text-brand-yellow hover:text-brand-yellow-hover transition-colors"
+        >
+          Descargar PDF original →
+        </a>
       </div>
     </div>
   );

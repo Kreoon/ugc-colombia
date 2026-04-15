@@ -4,7 +4,7 @@ import {
   graysScale,
   radii,
   shadows,
-} from "./src/app/manual/_data/tokens";
+} from "./src/lib/brand/tokens";
 
 const config: Config = {
   darkMode: "class",
@@ -18,7 +18,7 @@ const config: Config = {
         brand: {
           black: brandColors.black,
           ink: brandColors.ink,
-          graphite: brandColors.grayDark,
+          graphite: brandColors.graphite,
           "gray-dark": brandColors.grayDark,
           "gray-light": brandColors.grayLight,
           gray: brandColors.grayLight,
@@ -27,8 +27,8 @@ const config: Config = {
           yellow: brandColors.yellow,
           "yellow-hover": brandColors.yellowHover,
           "yellow-soft": brandColors.yellowSoft,
-          gold: brandColors.yellow,
-          "gold-dark": brandColors.yellowHover,
+          gold: brandColors.gold,
+          "gold-dark": brandColors.goldDark,
           red: brandColors.red,
           "red-hover": brandColors.redHover,
           green: brandColors.green,

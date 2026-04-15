@@ -19,15 +19,20 @@ const SPLASH_DURATION_MS = 2200;
  */
 export function PageLoader() {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(true);
+  const isAdmin = pathname?.startsWith("/admin") ?? false;
+  const [visible, setVisible] = useState(!isAdmin);
 
   useEffect(() => {
+    if (isAdmin) {
+      setVisible(false);
+      return;
+    }
     setVisible(true);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const duration = reduceMotion ? 400 : SPLASH_DURATION_MS;
     const timer = setTimeout(() => setVisible(false), duration);
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, [pathname, isAdmin]);
 
   return (
     <AnimatePresence>

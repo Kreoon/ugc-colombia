@@ -69,7 +69,7 @@ export async function listContentFiles(
  */
 export async function readContentFile(
   filePath: string
-): Promise<{ raw: string; meta: ContentMeta } | null> {
+): Promise<{ raw: string; meta: ContentMeta; frontmatter: Record<string, unknown> } | null> {
   try {
     const fullPath = join(WEB_ROOT, filePath);
     const fileRaw = await readFile(fullPath, 'utf-8');
@@ -79,6 +79,7 @@ export async function readContentFile(
 
     return {
       raw: content,
+      frontmatter: data as Record<string, unknown>,
       meta: {
         path: filePath,
         title: data.title ?? firstH1,

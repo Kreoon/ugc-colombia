@@ -1,32 +1,30 @@
 import { requireAuth } from "@/lib/auth";
 
-export const dynamic = "force-dynamic";
-
 const CARDS = [
+  {
+    label: "Identidad Corporativa",
+    href: "/admin/empresa/identidad",
+    desc: "Misión, visión, valores y PUV",
+  },
+  {
+    label: "Estrategia & OKRs",
+    href: "/admin/empresa/estrategia",
+    desc: "OKRs 2026, roadmap y KPIs",
+  },
+  {
+    label: "Contenido & Viralidad",
+    href: "/admin/contenido",
+    desc: "Guiones, parrilla, packs, publicados",
+  },
   {
     label: "Manual de Marca",
     href: "/admin/marca",
     desc: "Colores, tipografía, logo, UI",
   },
   {
-    label: "Parrilla de Contenido",
-    href: "/admin/viralidad/parrilla",
-    desc: "IG, TikTok, frecuencia diaria",
-  },
-  {
-    label: "Packs Virales",
-    href: "/admin/packs",
-    desc: "Guiones por miembro del equipo",
-  },
-  {
-    label: "Calendarios Q3",
-    href: "/admin/viralidad/calendarios",
-    desc: "Julio · Agosto · Septiembre",
-  },
-  {
-    label: "Benchmark",
-    href: "/admin/viralidad/benchmark",
-    desc: "25 referentes virales",
+    label: "Cola Valentina",
+    href: "/admin/contenido/valentina",
+    desc: "Dashboard editora de planta",
   },
   {
     label: "Diagnósticos",

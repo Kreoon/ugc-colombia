@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createSupabaseServer } from "./supabase-server";
+import { createSupabaseServer, createSupabaseServiceRole } from "./supabase-server";
 
 export type Role =
   | "founder"
@@ -25,7 +25,9 @@ export async function getCurrentUser(): Promise<AdminUser | null> {
 
   if (!user) return null;
 
-  const { data: member } = await supabase
+  // Usa service role para bypass de RLS — la autenticación ya fue validada arriba.
+  const admin = createSupabaseServiceRole();
+  const { data: member } = await admin
     .from("admin_users")
     .select("id, auth_user_id, email, full_name, role, is_active")
     .eq("auth_user_id", user.id)

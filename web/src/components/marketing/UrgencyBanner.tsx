@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { X, Clock } from "lucide-react";
 import { useOfferCountdown, pad2 } from "@/hooks/use-offer-countdown";
 import {
@@ -37,6 +38,7 @@ function persistDismissed(): void {
 }
 
 export function UrgencyBanner() {
+  const pathname = usePathname();
   const countdown = useOfferCountdown();
   const [dismissed, setDismissed] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -46,7 +48,8 @@ export function UrgencyBanner() {
     setHydrated(true);
   }, []);
 
-  const visible = hydrated && !dismissed && !countdown.isExpired;
+  const isAdmin = pathname?.startsWith("/admin") ?? false;
+  const visible = hydrated && !dismissed && !countdown.isExpired && !isAdmin;
 
   useEffect(() => {
     if (typeof document === "undefined") return;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { getConsent } from "@/lib/tracking/consent";
 import { captureUTMParams } from "@/lib/tracking/utm";
 import type { ConsentState } from "@/lib/tracking/types";
@@ -14,6 +15,7 @@ import { Hotjar } from "./Hotjar";
 import { ScrollDepthTracker } from "./ScrollDepthTracker";
 
 export function TrackingScripts() {
+  const pathname = usePathname();
   const [consent, setConsentState] = useState<ConsentState>(getConsent);
 
   useEffect(() => {
@@ -26,6 +28,8 @@ export function TrackingScripts() {
     window.addEventListener("consent-updated", onConsentUpdate);
     return () => window.removeEventListener("consent-updated", onConsentUpdate);
   }, []);
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>

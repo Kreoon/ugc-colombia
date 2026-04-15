@@ -31,6 +31,15 @@ const nextConfig: NextConfig = {
       "./brand/**/*.md",
       "./content/**/*.md",
     ],
+    "/admin/empresa/[slug]": ["./content/empresa/*.md"],
+    "/admin/contenido/calendario": ["./content/sistemas/contenido/*.md"],
+    "/admin/contenido/hooks": ["./content/sistemas/contenido/*.md"],
+    "/admin/contenido/guiones/[slug]": [
+      "./content/sistemas/contenido/guiones/*.md",
+      "./content/sistemas/contenido/humanizados/*.md",
+      "./content/viralidad/packs/**/*.md",
+    ],
+    "/admin/packs/valentina": ["./content/packs/valentina/*.md"],
   },
 
   // Optimización de imágenes

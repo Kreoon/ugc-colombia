@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { useAudit } from "./AuditContext";
@@ -47,6 +48,7 @@ export interface AuditData {
 // Steps: 0=type, 1=info, 2=audit, 3=contact, 4=diagnosis, 5=booking
 
 export function AuditModal() {
+  const pathname = usePathname();
   const { isOpen, closeAudit, consumePrefillType } = useAudit();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<AuditData>({ lead_type: null });
@@ -59,7 +61,8 @@ export function AuditModal() {
       setData((prev) => ({ ...prev, lead_type: prefill }));
       setStep(1);
     }
-  }, [isOpen, consumePrefillType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   function handleReset() {
     setStep(0);
@@ -130,6 +133,8 @@ export function AuditModal() {
 
   // Wider modal for booking step (calendar iframe needs space)
   const isBookingStep = step === 5;
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>

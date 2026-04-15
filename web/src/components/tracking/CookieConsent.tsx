@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   hasStoredConsent,
@@ -10,6 +11,7 @@ import {
 import type { ConsentState } from "@/lib/tracking/types";
 
 export function CookieConsent() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [analytics, setAnalytics] = useState(true);
@@ -30,6 +32,7 @@ export function CookieConsent() {
   }, []);
 
   if (!visible) return null;
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <div

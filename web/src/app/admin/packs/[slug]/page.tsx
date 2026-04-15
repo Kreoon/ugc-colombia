@@ -118,6 +118,36 @@ const PACK_MAP: Record<string, PackDef> = {
       },
     ],
   },
+  valentina: {
+    name: 'Valentina Giraldo',
+    role: 'Editora de Planta',
+    tabs: [
+      {
+        label: 'Rol y responsabilidades',
+        filePath: 'content/packs/valentina/00-rol-y-responsabilidades.md',
+      },
+      {
+        label: 'Workflow de edición',
+        filePath: 'content/packs/valentina/01-workflow-edicion.md',
+      },
+      {
+        label: 'Checklist de calidad',
+        filePath: 'content/packs/valentina/02-checklist-calidad.md',
+      },
+      {
+        label: 'Tools y templates',
+        filePath: 'content/packs/valentina/03-tools-y-templates.md',
+      },
+      {
+        label: 'Referentes editoriales',
+        filePath: 'content/packs/valentina/04-referentes-editoriales.md',
+      },
+      {
+        label: 'SLA y tiempos',
+        filePath: 'content/packs/valentina/05-sla-y-tiempos.md',
+      },
+    ],
+  },
 };
 
 export function generateStaticParams() {

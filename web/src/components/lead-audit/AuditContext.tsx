@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useMemo, useRef, type ReactNode } from "react";
 import { trackAuditOpen, trackAuditTypeSelect } from "@/lib/tracking/events";
 
 export type LeadTypeValue = "marca" | "creador" | null;
@@ -23,6 +23,7 @@ const AuditContext = createContext<AuditContextType | null>(null);
 export function AuditProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [prefillType, setPrefillType] = useState<"marca" | "creador" | null>(null);
+  const prefillRef = useRef<"marca" | "creador" | null>(null);
 
   const openAudit = useCallback(
     (sourceOrOptions?: string | OpenAuditOptions) => {
@@ -33,8 +34,10 @@ export function AuditProvider({ children }: { children: ReactNode }) {
       trackAuditOpen(options.source ?? "unknown");
       if (options.prefillType) {
         trackAuditTypeSelect(options.prefillType);
+        prefillRef.current = options.prefillType;
         setPrefillType(options.prefillType);
       } else {
+        prefillRef.current = null;
         setPrefillType(null);
       }
       setIsOpen(true);
@@ -44,22 +47,23 @@ export function AuditProvider({ children }: { children: ReactNode }) {
 
   const closeAudit = useCallback(() => {
     setIsOpen(false);
+    prefillRef.current = null;
     setPrefillType(null);
   }, []);
 
   const consumePrefillType = useCallback(() => {
-    const value = prefillType;
+    const value = prefillRef.current;
+    prefillRef.current = null;
     setPrefillType(null);
     return value;
-  }, [prefillType]);
+  }, []);
 
-  return (
-    <AuditContext
-      value={{ isOpen, prefillType, openAudit, closeAudit, consumePrefillType }}
-    >
-      {children}
-    </AuditContext>
+  const value = useMemo(
+    () => ({ isOpen, prefillType, openAudit, closeAudit, consumePrefillType }),
+    [isOpen, prefillType, openAudit, closeAudit, consumePrefillType],
   );
+
+  return <AuditContext value={value}>{children}</AuditContext>;
 }
 
 export function useAudit() {

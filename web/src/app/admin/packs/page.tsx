@@ -51,6 +51,14 @@ const packs: Pack[] = [
     pieces: '85+ guiones',
     color: 'from-[#f9b334] to-[#d4a017]',
   },
+  {
+    slug: 'valentina',
+    name: 'Valentina Giraldo',
+    role: 'Editora de Planta',
+    desc: 'Workflow de edición, QA, referentes y SLA',
+    pieces: '6 documentos operativos',
+    color: 'from-[#d4a017] via-[#f9b334] to-[#d4a017]',
+  },
 ];
 
 export default async function PacksIndexPage() {

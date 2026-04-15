@@ -15,6 +15,14 @@ import {
   BookOpen,
   Menu,
   X,
+  Building2,
+  Briefcase,
+  Target,
+  Users2,
+  Film,
+  Sparkles,
+  Archive,
+  Scissors,
 } from "lucide-react";
 import type { AdminUser, Role } from "@/lib/auth";
 
@@ -39,35 +47,32 @@ const nav: NavSection[] = [
     ],
   },
   {
+    section: "Empresa",
+    items: [
+      { href: "/admin/empresa/identidad", label: "Identidad Corporativa", icon: Building2 },
+      { href: "/admin/empresa/modelo-negocio", label: "Modelo de Negocio", icon: Briefcase },
+      { href: "/admin/empresa/estrategia", label: "Estrategia & OKRs", icon: Target },
+      { href: "/admin/empresa/equipo", label: "Equipo & Organigrama", icon: Users2 },
+      { href: "/admin/empresa/mercado", label: "Mercado & Competencia", icon: TrendingUp },
+    ],
+  },
+  {
     section: "Marca",
     items: [
       { href: "/admin/marca", label: "Manual de Marca", icon: Palette },
     ],
   },
   {
-    section: "Viralidad",
+    section: "Contenido & Viralidad",
     items: [
-      {
-        href: "/admin/viralidad/modelo",
-        label: "Modelo de Viralidad",
-        icon: TrendingUp,
-      },
-      {
-        href: "/admin/viralidad/parrilla",
-        label: "Parrilla de Contenido",
-        icon: Calendar,
-      },
-      {
-        href: "/admin/viralidad/benchmark",
-        label: "Benchmark",
-        icon: BookOpen,
-      },
-      {
-        href: "/admin/viralidad/calendarios",
-        label: "Calendarios Q3",
-        icon: Calendar,
-      },
-      { href: "/admin/packs", label: "Packs Virales", icon: Package },
+      { href: "/admin/contenido/guiones", label: "Guiones", icon: Film },
+      { href: "/admin/viralidad/parrilla", label: "Parrilla", icon: Calendar },
+      { href: "/admin/viralidad/modelo", label: "Modelo de Viralidad", icon: TrendingUp },
+      { href: "/admin/contenido/hooks", label: "Banco de Hooks", icon: Sparkles },
+      { href: "/admin/viralidad/calendarios", label: "Calendarios Q3", icon: Calendar },
+      { href: "/admin/viralidad/benchmark", label: "Benchmark", icon: BookOpen },
+      { href: "/admin/contenido/publicados", label: "Publicados", icon: Archive },
+      { href: "/admin/contenido/valentina", label: "Cola Valentina", icon: Scissors },
     ],
   },
   {

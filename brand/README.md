@@ -25,6 +25,11 @@
 
 ## Reglas vigentes (extracto)
 
+- **Propuesta de valor oficial:** **"CREAMOS CONTENIDO REAL QUE HACE CRECER MARCAS."**
+  — guía toda la comunicación. Uso: subheads, ads, LinkedIn bio, email signatures.
+- **Tagline operativo:** "HACEMOS CRECER MARCAS." — cierres de pieza, logo lock-up.
+- **Descriptor boutique:** "Agencia boutique premium de UGC. Calidad USA, equipo
+  latino, tecnología propia (Kreoon)."
 - **Paleta oficial:** `#000000`, `#F9B334`, `#D4A017`, `#3D3D3C`, `#BDBCBC`,
   `#F5F5F0`, `#FFFFFF`, `#C9940A` (hover gold).
 - **Gradiente signature:** `linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)`.

@@ -1,4 +1,7 @@
 export const identity = {
+  propuestaDeValor: "CREAMOS CONTENIDO REAL QUE HACE CRECER MARCAS.",
+  propuestaDeValorDesc:
+    "Propósito como empresa — servicio + categoría + resultado. Guía toda la comunicación.",
   propuesta:
     "Agencia boutique premium de UGC. Calidad USA, equipo latino, tecnología propia (Kreoon).",
   tagline: "HACEMOS CRECER MARCAS.",

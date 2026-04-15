@@ -12,11 +12,16 @@ export default function Identidad() {
     <div className="space-y-12">
       <section>
         <SectionTitle
-          eyebrow="Quiénes somos"
-          title="La propuesta."
-          desc="Cómo nos presentamos en una sola frase, y el tagline que cierra cada mensaje."
+          eyebrow="Propósito oficial"
+          title="Para qué existimos."
+          desc="La propuesta de valor guía toda la comunicación — web, social, ads, decks, email. Debajo de ella, el descriptor boutique y el tagline operativo."
         />
-        <PropuestaBlock propuesta={identity.propuesta} tagline={identity.tagline} />
+        <PropuestaBlock
+          propuestaDeValor={identity.propuestaDeValor}
+          propuestaDeValorDesc={identity.propuestaDeValorDesc}
+          propuesta={identity.propuesta}
+          tagline={identity.tagline}
+        />
       </section>
 
       <section>

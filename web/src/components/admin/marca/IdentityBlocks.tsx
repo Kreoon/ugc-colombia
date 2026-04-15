@@ -2,27 +2,67 @@ import type { identity } from "@/app/admin/marca/_data/identity";
 
 type Identity = typeof identity;
 
-export function PropuestaBlock({ propuesta, tagline }: { propuesta: string; tagline: string }) {
-  return (
-    <div className="rounded-2xl border border-brand-gold/15 p-8 bg-white/[0.02]">
-      <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-3">
-        · Propuesta en una frase
-      </div>
-      <p className="text-white text-lg leading-relaxed mb-6">{propuesta}</p>
+interface PropuestaBlockProps {
+  propuestaDeValor: string;
+  propuestaDeValorDesc: string;
+  propuesta: string;
+  tagline: string;
+}
 
-      <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-3 pt-6 border-t border-brand-gold/10">
-        · Tagline oficial
+export function PropuestaBlock({
+  propuestaDeValor,
+  propuestaDeValorDesc,
+  propuesta,
+  tagline,
+}: PropuestaBlockProps) {
+  return (
+    <div className="space-y-4">
+      {/* Propuesta de valor — el propósito central */}
+      <div className="rounded-2xl border-2 border-brand-yellow/60 bg-gradient-to-br from-brand-yellow/10 to-brand-gold/5 p-8">
+        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-yellow mb-4">
+          · Propuesta de valor · Propósito oficial
+        </div>
+        <div className="font-display uppercase text-3xl sm:text-4xl lg:text-5xl leading-[1.05] mb-4">
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)",
+            }}
+          >
+            {propuestaDeValor}
+          </span>
+        </div>
+        <p className="text-sm text-brand-gray leading-relaxed">
+          {propuestaDeValorDesc}
+        </p>
       </div>
-      <div className="font-display uppercase text-4xl sm:text-5xl">
-        <span
-          className="bg-clip-text text-transparent"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)",
-          }}
-        >
-          {tagline}
-        </span>
+
+      {/* Descriptor + tagline complementarios */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="rounded-2xl border border-brand-gold/15 p-6 bg-white/[0.02]">
+          <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-3">
+            · Descriptor boutique
+          </div>
+          <p className="text-white leading-relaxed">{propuesta}</p>
+        </div>
+
+        <div className="rounded-2xl border border-brand-gold/15 p-6 bg-white/[0.02]">
+          <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-gold mb-3">
+            · Tagline oficial
+          </div>
+          <div className="font-display uppercase text-3xl sm:text-4xl leading-tight">
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)",
+              }}
+            >
+              {tagline}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

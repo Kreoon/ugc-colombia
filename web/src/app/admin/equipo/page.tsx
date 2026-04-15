@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { requireRole } from "@/lib/auth";
 import { createSupabaseServer } from "@/lib/supabase-server";
 import { InviteForm } from "./InviteForm";
+import { PageHero, SectionTitle, Badge, Eyebrow } from "@/components/admin/ui";
 
 export const metadata: Metadata = {
   title: "Equipo — Admin UGC Colombia",
@@ -27,101 +28,111 @@ export default async function EquipoPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <h1 className="font-display text-4xl uppercase text-white mb-2">
-        Equipo
-      </h1>
-      <p className="text-brand-gray mb-10">
-        Miembros activos e invitaciones pendientes.
-      </p>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <PageHero
+        eyebrow="Administración · Equipo"
+        title="Quién está"
+        highlight="adentro."
+        lead="Miembros activos del admin e invitaciones pendientes. Controla quién tiene acceso y a qué."
+      />
 
-      <InviteForm />
+      <div className="mb-12">
+        <SectionTitle
+          eyebrow="Nueva invitación"
+          title="Invitar miembro."
+          desc="Genera un link con expiración para que el nuevo miembro complete su registro."
+        />
+        <div className="rounded-2xl border border-brand-gold/15 bg-white/[0.02] p-6">
+          <InviteForm />
+        </div>
+      </div>
 
-      <h2 className="font-display text-2xl uppercase text-white mt-12 mb-4">
-        Miembros
-      </h2>
-      <div className="rounded-xl border border-brand-gold/15 overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-black/40 border-b-2 border-brand-gold text-xs uppercase tracking-wider text-brand-yellow">
-            <tr>
-              <th className="px-4 py-3 text-left">Nombre</th>
-              <th className="px-4 py-3 text-left">Email</th>
-              <th className="px-4 py-3 text-left">Rol</th>
-              <th className="px-4 py-3 text-left">Último login</th>
-            </tr>
-          </thead>
-          <tbody>
-            {members?.map((m) => (
-              <tr
-                key={m.id as string}
-                className="border-b border-brand-gold/10 text-brand-gray"
-              >
-                <td className="px-4 py-3 text-white font-semibold">
-                  {(m.full_name as string | null) ?? "—"}
-                </td>
-                <td className="px-4 py-3">{m.email as string}</td>
-                <td className="px-4 py-3 uppercase text-xs tracking-wider text-brand-yellow">
-                  {m.role as string}
-                </td>
-                <td className="px-4 py-3">
-                  {m.last_login_at
-                    ? new Date(m.last_login_at as string).toLocaleDateString(
-                        "es-CO"
-                      )
-                    : "—"}
-                </td>
+      <div className="mb-12">
+        <SectionTitle eyebrow="Miembros activos" title="Equipo actual." />
+        <div className="rounded-2xl border border-brand-gold/15 overflow-hidden bg-white/[0.02]">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-[10px] uppercase tracking-[0.15em] text-brand-gray bg-white/[0.02]">
+                <th className="text-left px-6 py-3 font-semibold">Nombre</th>
+                <th className="text-left px-6 py-3 font-semibold">Email</th>
+                <th className="text-left px-6 py-3 font-semibold">Rol</th>
+                <th className="text-left px-6 py-3 font-semibold">Último login</th>
               </tr>
-            ))}
-            {!members?.length && (
-              <tr>
-                <td
-                  colSpan={4}
-                  className="px-4 py-6 text-center text-brand-gray text-sm"
-                >
-                  No hay miembros aún.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {members?.length ? (
+                members.map((m) => (
+                  <tr
+                    key={m.id as string}
+                    className="border-t border-brand-gold/10 hover:bg-white/[0.02] transition-colors"
+                  >
+                    <td className="px-6 py-3 text-white font-semibold">
+                      {(m.full_name as string | null) ?? "—"}
+                    </td>
+                    <td className="px-6 py-3 text-brand-gray">
+                      {m.email as string}
+                    </td>
+                    <td className="px-6 py-3">
+                      <Badge variant="gold">{m.role as string}</Badge>
+                    </td>
+                    <td className="px-6 py-3 text-brand-gray tabular-nums">
+                      {m.last_login_at
+                        ? new Date(m.last_login_at as string).toLocaleDateString(
+                            "es-CO"
+                          )
+                        : "—"}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className="px-6 py-12 text-center text-brand-gray"
+                  >
+                    No hay miembros aún.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {pendingInvites && pendingInvites.length > 0 && (
-        <>
-          <h2 className="font-display text-2xl uppercase text-white mt-12 mb-4">
-            Invitaciones pendientes
-          </h2>
-          <div className="rounded-xl border border-brand-gold/15 overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-black/40 border-b-2 border-brand-gold text-xs uppercase tracking-wider text-brand-yellow">
-                <tr>
-                  <th className="px-4 py-3 text-left">Email</th>
-                  <th className="px-4 py-3 text-left">Rol</th>
-                  <th className="px-4 py-3 text-left">Expira</th>
-                  <th className="px-4 py-3 text-left">Link</th>
+        <div>
+          <SectionTitle
+            eyebrow="Pendientes"
+            title="Invitaciones sin aceptar."
+          />
+          <div className="rounded-2xl border border-brand-gold/15 overflow-hidden bg-white/[0.02]">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-[10px] uppercase tracking-[0.15em] text-brand-gray bg-white/[0.02]">
+                  <th className="text-left px-6 py-3 font-semibold">Email</th>
+                  <th className="text-left px-6 py-3 font-semibold">Rol</th>
+                  <th className="text-left px-6 py-3 font-semibold">Expira</th>
+                  <th className="text-left px-6 py-3 font-semibold">Link</th>
                 </tr>
               </thead>
               <tbody>
                 {pendingInvites.map((inv) => (
                   <tr
                     key={inv.id as string}
-                    className="border-b border-brand-gold/10 text-brand-gray"
+                    className="border-t border-brand-gold/10"
                   >
-                    <td className="px-4 py-3 text-white">
-                      {inv.email as string}
+                    <td className="px-6 py-3 text-white">{inv.email as string}</td>
+                    <td className="px-6 py-3">
+                      <Badge variant="gold">{inv.role as string}</Badge>
                     </td>
-                    <td className="px-4 py-3 uppercase text-xs tracking-wider text-brand-yellow">
-                      {inv.role as string}
-                    </td>
-                    <td className="px-4 py-3">
+                    <td className="px-6 py-3 text-brand-gray tabular-nums">
                       {new Date(inv.expires_at as string).toLocaleDateString(
                         "es-CO"
                       )}
                     </td>
-                    <td className="px-4 py-3">
-                      <code className="text-xs text-brand-yellow/70">
-                        /admin/invitacion/
-                        {(inv.token as string).slice(0, 12)}...
+                    <td className="px-6 py-3">
+                      <code className="text-xs font-mono text-brand-yellow/70">
+                        /admin/invitacion/{(inv.token as string).slice(0, 12)}…
                       </code>
                     </td>
                   </tr>
@@ -129,8 +140,12 @@ export default async function EquipoPage() {
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       )}
+
+      <div className="mt-16 pt-6 border-t border-brand-gold/15">
+        <Eyebrow variant="gray">Solo founders y managers pueden invitar</Eyebrow>
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {
 } from '@/lib/admin/content-dal';
 import { ScriptCard } from '@/components/admin/ScriptCard';
 import { SCRIPT_PLATFORM_LABEL } from '@/lib/admin/script-status';
+import { StatBlock, StatsRow, EmptyState, SectionTitle } from '@/components/admin/ui';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,28 +20,21 @@ export default async function ValentinaPage() {
 
   if (!valentina) {
     return (
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <Link
-          href="/admin/contenido"
-          className="inline-flex items-center gap-2 text-brand-gray hover:text-brand-yellow transition-colors text-sm mb-6"
-        >
-          <ArrowLeft className="w-4 h-4" aria-hidden />
-          Volver a Contenido
-        </Link>
-        <div className="rounded-2xl bg-white/[0.03] border border-brand-gold/10 p-12 text-center">
-          <Scissors
-            className="w-12 h-12 text-brand-yellow/40 mx-auto mb-4"
-            aria-hidden
-          />
-          <h2 className="font-display text-2xl uppercase text-white mb-2">
-            Valentina aún no está registrada
-          </h2>
-          <p className="text-brand-gray text-sm max-w-md mx-auto">
-            Aplica la migración{' '}
-            <code className="text-brand-yellow">20260415120000_content_system.sql</code>{' '}
-            para cargar el seed del team_member.
-          </p>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+        <div className="mb-6">
+          <Link
+            href="/admin/contenido"
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-gray hover:text-brand-yellow transition-colors"
+          >
+            <ArrowLeft className="w-3 h-3" aria-hidden />
+            Volver a Contenido
+          </Link>
         </div>
+        <EmptyState
+          icon={Scissors}
+          title="Valentina aún no está registrada"
+          desc="Aplica la migración 20260415120000_content_system.sql para cargar el seed del team_member."
+        />
       </div>
     );
   }
@@ -76,30 +70,38 @@ export default async function ValentinaPage() {
       : 0;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <Link
-        href="/admin/contenido"
-        className="inline-flex items-center gap-2 text-brand-gray hover:text-brand-yellow transition-colors text-sm mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" aria-hidden />
-        Volver a Contenido
-      </Link>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="mb-6">
+        <Link
+          href="/admin/contenido"
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-gray hover:text-brand-yellow transition-colors"
+        >
+          <ArrowLeft className="w-3 h-3" aria-hidden />
+          Volver a Contenido
+        </Link>
+      </div>
 
-      <header className="mb-10 flex items-center gap-5 flex-wrap">
-        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-yellow to-brand-gold flex items-center justify-center text-black font-display text-3xl flex-shrink-0">
+      <header className="mb-10 pb-8 border-b border-brand-gold/15 flex items-center gap-6 flex-wrap">
+        <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-brand-yellow to-brand-gold flex items-center justify-center text-black font-display text-4xl flex-shrink-0 shadow-[0_0_32px_rgba(249,179,52,0.25)]">
           VG
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-brand-yellow text-xs font-semibold tracking-[0.2em] uppercase mb-2">
+          <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-yellow mb-3">
             · Editora de planta
           </div>
-          <h1 className="font-display text-4xl md:text-5xl uppercase text-white leading-tight">
+          <h1 className="font-display uppercase text-white text-4xl sm:text-5xl lg:text-6xl leading-[0.95]">
             Vale{' '}
-            <span className="bg-gradient-to-r from-[#f9b334] via-[#d4a017] to-[#f9b334] bg-clip-text text-transparent">
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  'linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)',
+              }}
+            >
               Giraldo.
             </span>
           </h1>
-          <p className="text-brand-gray mt-2 max-w-xl">
+          <p className="text-brand-gray mt-3 max-w-xl leading-relaxed">
             Tu cola, tus entregas y tu archivo. El pack operativo completo vive
             en{' '}
             <Link
@@ -114,23 +116,17 @@ export default async function ValentinaPage() {
       </header>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-        <Stat label="En cola" value={String(inQueue.length)} icon={Clock} />
-        <Stat
-          label="Entregados"
-          value={String(delivered.length)}
-          icon={Radio}
-        />
-        <Stat
-          label="Views acumuladas"
-          value={fmtNumber(totalViews)}
-          icon={Radio}
-        />
-        <Stat
-          label="ER promedio"
-          value={avgER > 0 ? avgER.toFixed(1) + '%' : '—'}
-          icon={Radio}
-        />
+      <div className="mb-10">
+        <StatsRow>
+          <StatBlock label="En cola" value={String(inQueue.length)} />
+          <StatBlock label="Entregados" value={String(delivered.length)} />
+          <StatBlock label="Views acumuladas" value={fmtNumber(totalViews)} />
+          <StatBlock
+            label="ER promedio"
+            value={avgER > 0 ? avgER.toFixed(1) + '%' : '—'}
+            highlight={avgER > 0}
+          />
+        </StatsRow>
       </div>
 
       {/* Cola de edición */}
@@ -248,35 +244,14 @@ function Section({
 }) {
   return (
     <section className="mb-10">
-      <header className="flex items-center gap-3 mb-4">
-        <Icon className="w-5 h-5 text-brand-yellow" aria-hidden />
-        <div>
-          <h2 className="font-display text-xl uppercase text-white">{title}</h2>
-          <p className="text-xs text-brand-gray">{subtitle}</p>
+      <div className="flex items-center gap-3 mb-6">
+        <Icon className="w-5 h-5 text-brand-yellow flex-shrink-0" aria-hidden />
+        <div className="flex-1">
+          <SectionTitle eyebrow={subtitle} title={title} className="mb-0" />
         </div>
-      </header>
+      </div>
       {children}
     </section>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  icon: Icon,
-}: {
-  label: string;
-  value: string;
-  icon: React.ComponentType<{ className?: string }>;
-}) {
-  return (
-    <div className="rounded-2xl bg-white/[0.04] border border-brand-gold/15 p-5">
-      <Icon className="w-5 h-5 text-brand-yellow mb-3" aria-hidden />
-      <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-yellow/80 mb-1">
-        {label}
-      </div>
-      <div className="font-display text-3xl text-white">{value}</div>
-    </div>
   );
 }
 

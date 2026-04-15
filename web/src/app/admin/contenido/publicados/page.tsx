@@ -7,6 +7,7 @@ import {
   listActiveTeamMembers,
 } from '@/lib/admin/content-dal';
 import { SCRIPT_PLATFORM_LABEL } from '@/lib/admin/script-status';
+import { PageHero, StatBlock, StatsRow, EmptyState } from '@/components/admin/ui';
 
 export const dynamic = 'force-dynamic';
 
@@ -45,71 +46,59 @@ export default async function PublicadosPage() {
   )[0];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <Link
-        href="/admin/contenido"
-        className="inline-flex items-center gap-2 text-brand-gray hover:text-brand-yellow transition-colors text-sm mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" aria-hidden />
-        Volver a Contenido
-      </Link>
-
-      <div className="mb-8">
-        <div className="text-brand-yellow text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-          · Archivo de Publicaciones
-        </div>
-        <h1 className="font-display text-5xl uppercase text-white">
-          Lo que sale{' '}
-          <span className="bg-gradient-to-r from-[#f9b334] via-[#d4a017] to-[#f9b334] bg-clip-text text-transparent">
-            al mundo.
-          </span>
-        </h1>
-        <p className="text-brand-gray mt-3 max-w-2xl">
-          Historial completo con métricas. Cada row es un momento de
-          distribución registrado por el equipo.
-        </p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="mb-6">
+        <Link
+          href="/admin/contenido"
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-gray hover:text-brand-yellow transition-colors"
+        >
+          <ArrowLeft className="w-3 h-3" aria-hidden />
+          Volver a Contenido
+        </Link>
       </div>
 
+      <PageHero
+        eyebrow="Archivo de publicaciones"
+        title="Lo que sale"
+        highlight="al mundo."
+        lead="Historial completo con métricas. Cada row es un momento de distribución registrado por el equipo."
+      />
+
       {/* Stats del mes */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-        <StatCard
-          label="Publicaciones del mes"
-          value={String(monthPubs.length)}
-        />
-        <StatCard
-          label="Views acumuladas (mes)"
-          value={fmtNumber(totalViewsMonth)}
-        />
-        <StatCard
-          label="ER promedio (mes)"
-          value={avgERMonth > 0 ? avgERMonth.toFixed(1) + '%' : '—'}
-        />
-        <StatCard
-          label="Top performer"
-          value={topPerformer ? fmtNumber(topPerformer.views ?? 0) + ' views' : '—'}
-          sub={
-            topPerformer && scriptById.has(topPerformer.script_id)
-              ? scriptById.get(topPerformer.script_id)!.slug
-              : undefined
-          }
-        />
+      <div className="mb-10">
+        <StatsRow>
+          <StatBlock
+            label="Publicaciones del mes"
+            value={String(monthPubs.length)}
+          />
+          <StatBlock
+            label="Views acumuladas (mes)"
+            value={fmtNumber(totalViewsMonth)}
+          />
+          <StatBlock
+            label="ER promedio (mes)"
+            value={avgERMonth > 0 ? avgERMonth.toFixed(1) + '%' : '—'}
+            highlight={avgERMonth > 0}
+          />
+          <StatBlock
+            label="Top performer"
+            value={topPerformer ? fmtNumber(topPerformer.views ?? 0) + ' views' : '—'}
+            sub={
+              topPerformer && scriptById.has(topPerformer.script_id)
+                ? scriptById.get(topPerformer.script_id)!.slug
+                : undefined
+            }
+          />
+        </StatsRow>
       </div>
 
       {/* Lista */}
       {publications.length === 0 ? (
-        <div className="text-center py-20 rounded-2xl bg-white/[0.03] border border-brand-gold/10">
-          <Archive
-            className="w-12 h-12 text-brand-yellow/40 mx-auto mb-4"
-            aria-hidden
-          />
-          <h2 className="font-display text-xl uppercase text-white mb-2">
-            Sin publicaciones registradas
-          </h2>
-          <p className="text-brand-gray text-sm max-w-md mx-auto">
-            Registra la primera desde el detalle de cualquier guion → tab
-            Publicaciones → Registrar publicación.
-          </p>
-        </div>
+        <EmptyState
+          icon={Archive}
+          title="Sin publicaciones registradas"
+          desc="Registra la primera desde el detalle de cualquier guion → tab Publicaciones → Registrar publicación."
+        />
       ) : (
         <ul className="space-y-2">
           {publications.map((p) => {
@@ -183,26 +172,6 @@ export default async function PublicadosPage() {
           })}
         </ul>
       )}
-    </div>
-  );
-}
-
-function StatCard({
-  label,
-  value,
-  sub,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-}) {
-  return (
-    <div className="rounded-2xl bg-white/[0.04] border border-brand-gold/15 p-5">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-yellow/80 mb-2">
-        {label}
-      </div>
-      <div className="font-display text-3xl text-white">{value}</div>
-      {sub && <div className="text-xs text-brand-gray mt-1">{sub}</div>}
     </div>
   );
 }

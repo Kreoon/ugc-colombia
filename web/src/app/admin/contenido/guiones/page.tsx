@@ -4,6 +4,7 @@ import { requireAuth } from '@/lib/auth';
 import { listScripts, listActiveTeamMembers } from '@/lib/admin/content-dal';
 import { ScriptCard } from '@/components/admin/ScriptCard';
 import { SCRIPT_STATUS_META, SCRIPT_STATUSES } from '@/lib/admin/script-status';
+import { PageHero, EmptyState } from '@/components/admin/ui';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,33 +38,23 @@ export default async function GuionesPage({ searchParams }: PageProps) {
     : null;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <Link
-        href="/admin/contenido"
-        className="inline-flex items-center gap-2 text-brand-gray hover:text-brand-yellow transition-colors text-sm mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" aria-hidden />
-        Volver a Contenido
-      </Link>
-
-      <div className="flex items-end justify-between gap-4 mb-8 flex-wrap">
-        <div>
-          <div className="text-brand-yellow text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-            · Pipeline Editorial
-          </div>
-          <h1 className="font-display text-5xl uppercase text-white">
-            Guiones{' '}
-            <span className="bg-gradient-to-r from-[#f9b334] via-[#d4a017] to-[#f9b334] bg-clip-text text-transparent">
-              activos.
-            </span>
-          </h1>
-          <p className="text-brand-gray mt-3 max-w-2xl">
-            {total} guiones en producción
-            {currentCreator ? ` · asignados a ${currentCreator.full_name}` : ''}.
-            Abre cualquiera para ver las 9 pestañas.
-          </p>
-        </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="mb-6">
+        <Link
+          href="/admin/contenido"
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-gray hover:text-brand-yellow transition-colors"
+        >
+          <ArrowLeft className="w-3 h-3" aria-hidden />
+          Volver a Contenido
+        </Link>
       </div>
+
+      <PageHero
+        eyebrow="Pipeline editorial"
+        title="Guiones"
+        highlight="activos."
+        lead={`${total} guiones en producción${currentCreator ? ` · asignados a ${currentCreator.full_name}` : ''}. Abre cualquiera para ver las 9 pestañas.`}
+      />
 
       {/* Filtro por creator */}
       <div className="flex items-center gap-2 flex-wrap mb-8">
@@ -139,16 +130,10 @@ export default async function GuionesPage({ searchParams }: PageProps) {
 
 function EmptyScripts() {
   return (
-    <div className="text-center py-20 rounded-2xl bg-white/[0.03] border border-brand-gold/10">
-      <Film className="w-12 h-12 text-brand-yellow/40 mx-auto mb-4" aria-hidden />
-      <h2 className="font-display text-xl uppercase text-white mb-2">
-        No hay guiones aún
-      </h2>
-      <p className="text-brand-gray text-sm max-w-md mx-auto">
-        Para cargar los guiones corre el seed:
-        <br />
-        <code className="text-brand-yellow">/api/admin/seed-scripts?scope=all</code>
-      </p>
-    </div>
+    <EmptyState
+      icon={Film}
+      title="No hay guiones aún"
+      desc="Para cargar los guiones corre el seed desde /api/admin/seed-scripts?scope=all"
+    />
   );
 }

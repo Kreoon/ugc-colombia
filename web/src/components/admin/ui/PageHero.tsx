@@ -2,7 +2,7 @@ interface PageHeroProps {
   eyebrow: string;
   title: React.ReactNode;
   highlight?: string;
-  lead?: string;
+  lead?: React.ReactNode;
   meta?: React.ReactNode;
 }
 

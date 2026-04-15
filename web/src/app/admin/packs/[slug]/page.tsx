@@ -179,20 +179,31 @@ export default async function PackPersonPage({
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+      <div className="mb-6">
         <Link
           href="/admin/packs"
-          className="inline-flex items-center gap-2 text-sm text-brand-gray hover:text-white transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-brand-gray hover:text-brand-yellow transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+          <ArrowLeft className="w-3 h-3" aria-hidden="true" />
           Volver a Packs
         </Link>
-        <div className="text-brand-yellow text-xs font-semibold tracking-[0.2em] uppercase mb-2">
-          {pack.role}
+      </div>
+      <div className="mb-10 pb-8 border-b border-brand-gold/15">
+        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand-yellow mb-3">
+          · {pack.role}
         </div>
-        <h1 className="font-display text-5xl uppercase text-white">
-          {pack.name}
+        <h1 className="font-display uppercase text-white text-5xl sm:text-6xl lg:text-7xl leading-[0.95]">
+          {pack.name.split(" ")[0]}{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, #F9B334 0%, #D4A017 50%, #F9B334 100%)",
+            }}
+          >
+            {pack.name.split(" ").slice(1).join(" ")}.
+          </span>
         </h1>
       </div>
 

@@ -393,6 +393,14 @@ BUNNY_STREAM_LIBRARY_ID=[BUNNY_LIBRARY_ID]
 | **n8n/** | `n8n/README.md` | Automatizadores | Setup workflows, credenciales, webhooks, testing |
 | **brand/** | `brand/README.md` | Diseñadores + copy | Logo specs, paleta, tipografía, voice de marca |
 | **content/** | `content/README.md` | Estrategas + productores | Índice navegable de todos los docs operativos |
+| **docs/** | `docs/README.md` | Todo el equipo | Guías operativas: pipeline de contenido (Tanya), admin interno (Brian) |
+
+### 🆕 Pipeline de contenido end-to-end
+
+Para crear carruseles/reels/posts **de idea a publicación en 5-10 minutos**:
+**[→ Guía del Pipeline de Contenido (Mac + Windows)](./docs/content-pipeline-guia.md)**
+
+Convierte un pedido en lenguaje natural (*"hazme un carrusel sobre X"*) en: 10 imágenes con overlay image-aware + logo oficial + caption con hashtags + entry en calendario. Usa Nanobanana (Gemini 2.5 Flash Image) + sub-agentes de Claude Code + sharp/resvg para tipografía. Respeta el manual de marca y el handle único `@agenciaugccolombia`.
 
 ---
 
@@ -534,6 +542,7 @@ R: Regenerar con `supabase gen types typescript --project-id [REF]`.
 - **API Supabase:** `supabase/README.md` (schema, RLS, triggers)
 - **Setup n8n:** `n8n/README.md` (workflows, credenciales)
 - **Frontend Setup:** `web/README.md` (estructura, componentes, deploy)
+- **Claude Code Skill:** `.claude/skills/ugc-content-creator/SKILL.md` — skill para generar contenido on-brand (carruseles, reels, stories, posts) con branding + estrategia viral + Nanobanana. Ver sección "Onboarding Community Manager" en `CONTRIBUTING.md`.
 
 ---
 

@@ -1,0 +1,177 @@
+{
+  "analyzed_at": "2026-04-17T16:05:00.000Z",
+  "analyzer": "ugc-layout-architect (inline)",
+  "dir": "web/public/brand/social/20260417-3-errores-matan-ugc-hook",
+  "slides": {
+    "slide-01": {
+      "luminance": { "top": "midtone-split", "center": "midtone-warm", "bottom": "wood-dark-clean" },
+      "subjectBbox": [0.28, 0.05, 0.65, 0.9],
+      "dominantColors": ["#000000", "#c9b9a3", "#e0c080"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.78, "w": 0.65, "h": 0.18, "kind": "headline" }
+      ],
+      "recommendedPosition": "bottom",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 16, "opacity": 0.7, "offsetY": 3, "color": "#000000" },
+      "textGlow": null,
+      "scrim": { "position": "bottom", "height": 0.35, "gradient": "transparent-to-dark" },
+      "sizes": { "headline": 0.95, "body": 1.0, "eyebrow": 1.0, "signature": 0.9 },
+      "logo": { "show": true, "variant": "white", "position": "bottom-right", "size": 0.85 },
+      "notes": "Creadora ocupa centro-derecha sobre fondo crema, sombra profunda izquierda. Piso madera abajo = safeArea principal. Logo white bottom-right balancea con headline izq. Scrim transparent-to-dark refuerza legibilidad sobre piso con textura."
+    },
+    "slide-02": {
+      "luminance": { "top": "cream-clean", "center": "cream-clean", "bottom": "cream-clean" },
+      "subjectBbox": null,
+      "dominantColors": ["#f1ece0", "#3d3d3c"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.08, "w": 0.9, "h": 0.42, "kind": "headline" },
+        { "x": 0.05, "y": 0.55, "w": 0.9, "h": 0.35, "kind": "body" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#000000",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.15, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Fondo crema uniforme con una hairline a 50%. Headline arriba, body debajo del separador. Sin sombra, sin scrim."
+    },
+    "slide-03": {
+      "luminance": { "top": "dark-pure", "center": "amber-glow", "bottom": "dark-clean" },
+      "subjectBbox": [0.30, 0.35, 0.40, 0.60],
+      "dominantColors": ["#000000", "#d4873e", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.04, "w": 0.9, "h": 0.28, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 8, "opacity": 0.5, "offsetY": 2, "color": "#000000" },
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.0, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Phone con halo amber ocupa el centro bajo. Top-28% es negro puro. Sombra ligera por precaución."
+    },
+    "slide-04": {
+      "luminance": { "top": "dark-pure", "center": "busy-mid", "bottom": "dark-clean" },
+      "subjectBbox": [0.12, 0.2, 0.78, 0.7],
+      "dominantColors": ["#000000", "#d4873e", "#8b6a4a"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.04, "w": 0.9, "h": 0.16, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 10, "opacity": 0.55, "offsetY": 2, "color": "#000000" },
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.88, "body": 0.95, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Manos ocupan centro. Solo top-16% limpio. Autosize reduce headline 12%."
+    },
+    "slide-05": {
+      "luminance": { "top": "dark-clean", "center": "midtone-portrait", "bottom": "dark-clean" },
+      "subjectBbox": [0.25, 0.25, 0.55, 0.75],
+      "dominantColors": ["#0a0a0a", "#4a3a2a", "#a38570"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.03, "w": 0.9, "h": 0.20, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 8, "opacity": 0.5, "offsetY": 2, "color": "#000000" },
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.98, "body": 0.95, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Retrato frontal estático con top negro limpio. Sombra suave."
+    },
+    "slide-06": {
+      "luminance": { "top": "dark-pure", "center": "busy-grid", "bottom": "dark-pure" },
+      "subjectBbox": [0.08, 0.12, 0.92, 0.88],
+      "dominantColors": ["#000000", "#3a2818", "#a38570"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.02, "w": 0.9, "h": 0.10, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.85, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Grid 2x2 llena el frame. Solo top-10% libre. Headline compacto."
+    },
+    "slide-07": {
+      "luminance": { "top": "gray-clean", "center": "gray-products", "bottom": "gray-clean" },
+      "subjectBbox": [0.20, 0.30, 0.70, 0.65],
+      "dominantColors": ["#bdbcbc", "#a38570", "#e0c080"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.03, "w": 0.9, "h": 0.22, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#000000",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.0, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Fondo gris uniforme con flat lay centrado. Texto negro sobre gris, sin sombra."
+    },
+    "slide-08": {
+      "luminance": { "top": "dark-pure", "center": "amber-hero", "bottom": "amber-reflection" },
+      "subjectBbox": [0.32, 0.30, 0.35, 0.65],
+      "dominantColors": ["#000000", "#d4873e", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.03, "w": 0.9, "h": 0.22, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.0, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Botella centrada con halo amber. Top-22% es negro puro."
+    },
+    "slide-09": {
+      "luminance": { "top": "cream-clean", "center": "cream-boxes", "bottom": "cream-clean" },
+      "subjectBbox": [0.28, 0.25, 0.50, 0.65],
+      "dominantColors": ["#f1ece0", "#3d3d3c", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.03, "w": 0.9, "h": 0.18, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#000000",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.1, "body": 0.88, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Checkboxes centrados. Top crema limpia para headline."
+    },
+    "slide-10": {
+      "luminance": { "top": "dark-pure", "center": "amber-bar", "bottom": "dark-pure" },
+      "subjectBbox": null,
+      "dominantColors": ["#000000", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.06, "w": 0.9, "h": 0.32, "kind": "headline" },
+        { "x": 0.05, "y": 0.62, "w": 0.9, "h": 0.25, "kind": "body" },
+        { "x": 0.05, "y": 0.90, "w": 0.9, "h": 0.08, "kind": "signature" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 12, "opacity": 0.5, "offsetY": 3, "color": "#000000" },
+      "textGlow": { "blur": 32, "opacity": 0.32, "color": "#F9B334" },
+      "scrim": null,
+      "sizes": { "headline": 1.08, "body": 0.95, "eyebrow": 1.0, "signature": 0.95 },
+      "logo": { "show": true, "variant": "white", "position": "top-right", "size": 0.8 },
+      "notes": "Barra amber centrada. Headline arriba con glow amber sutil (hero CTA). Body debajo de la barra, signature abajo. Logo top-right."
+    }
+  },
+  "summary": {
+    "slidesAnalyzed": 10,
+    "withScrim": 1,
+    "withGlow": 1,
+    "withShadow": 6,
+    "logosPlaced": 2
+  }
+}

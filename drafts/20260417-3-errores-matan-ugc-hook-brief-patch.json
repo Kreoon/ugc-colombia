@@ -1,0 +1,20 @@
+{
+  "concept": "3-errores-matan-ugc-hook",
+  "platform": "ig-carousel",
+  "aspectRatio": "4:5",
+  "pillar": "educativo",
+  "firma": "Tanya",
+  "_note": "Patch 2026-04-17 para slides 01 y 02. v3 inicial falló: slide-01 interpretó 'editorial magazine cover' como polaroid enmarcada con label '#F9B133' escrito; slide-02 generó texto 'BRAND 001' al lado del swatch. Prompts re-escritos eliminando cualquier referencia a cover, label, postage stamp o framing que Nanobanana convierta en texto.",
+  "images": [
+    {
+      "id": "slide-01",
+      "filename": "slide-01-portada.png",
+      "concept": "documentary photograph filling the entire frame edge to edge with no border and no framing, moody medium shot of a young Colombian woman in her late twenties seen from behind adjusting a ring light and a phone on a small tripod rig inside a minimal home studio with a cream colored wall on the right and a warm wooden floor, warm amber #F9B334 rim light catches her shoulder and hair from the ring light, deep crushed #000000 shadows dominate the left half of the frame, matte film grain texture, premium editorial boutique cinematic feel, subject occupies the center and right portion of the frame standing tall, the bottom 30 percent of the frame shows empty wooden floor reserved for typography overlay, image occupies 100 percent of the canvas with no white border, no cream border, no polaroid frame, no caption box, no text below the image, no color swatches, no labels anywhere"
+    },
+    {
+      "id": "slide-02",
+      "filename": "slide-02-contexto.png",
+      "concept": "minimalist editorial composition on a warm cream #F5F5F0 background covering the entire frame with visible paper grain texture, a single thin graphite #3D3D3C horizontal hairline separator crossing the frame from left edge to right edge at 62 percent vertical height, the rest of the frame is completely empty cream paper, premium boutique feel, flat editorial magazine layout, generous empty negative space above and below the separator for typography overlay, absolutely no text, no numerals, no labels, no color swatches, no rectangles, no postage stamps, no brand marks, no geometric shapes other than the single horizontal line, render every surface completely blank"
+    }
+  ]
+}

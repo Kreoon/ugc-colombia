@@ -1,0 +1,10 @@
+# content/calendar/
+
+Calendario editorial de UGC Colombia.
+
+Estructura sugerida:
+- `YYYY-WW-plan.md` — plan semanal con piezas por dia, pilar, firma, plataforma
+- `YYYY-MM-metricas.md` — resumen mensual con IV, top/bottom 3, patrones
+- `lunes-YYYYMMDD.md` — brief de planeacion del lunes
+
+La skill `ugc-content-creator` puede escribir aqui (permiso otorgado en `.claude/settings.json`).

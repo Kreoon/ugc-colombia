@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-04-17T14:15:00.000Z",
+  "generator": "ugc-copy-overlay (inline)",
+  "concept": "3-errores-matan-ugc-hook",
+  "firma": "Tanya",
+  "pilar": "educativo",
+  "plataforma": "ig-carousel",
+  "slides": {
+    "slide-01": {
+      "eyebrow": "EDUCATIVO · 01",
+      "headline": "3 errores que matan tu UGC antes del hook",
+      "body": "",
+      "signature": "",
+      "position": "bottom",
+      "colorScheme": "dark",
+      "showLogo": true,
+      "logoPosition": "bottom-left",
+      "backgroundHint": "dark"
+    },
+    "slide-02": {
+      "eyebrow": "CONTEXTO",
+      "headline": "Los primeros 0.8 segundos deciden todo",
+      "body": "El algoritmo ya decidio si tu video vale la pena antes de que abras la boca.",
+      "signature": "",
+      "position": "center",
+      "colorScheme": "light",
+      "showLogo": false,
+      "backgroundHint": "cream"
+    },
+    "slide-03": {
+      "eyebrow": "ERROR 01",
+      "headline": "Abrir con el logo de la marca",
+      "body": "Nadie le dio scroll para ver publicidad. Abre con lo que el cliente ya esta buscando.",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "dark",
+      "showLogo": false,
+      "backgroundHint": "dark"
+    },
+    "slide-04": {
+      "eyebrow": "HAZLO ASI",
+      "headline": "Muestra el producto en uso en el frame cero",
+      "body": "Manos, textura, accion. La marca aparece al final cuando la persona ya quiere saber el nombre.",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "dark",
+      "showLogo": false,
+      "backgroundHint": "dark"
+    },
+    "slide-05": {
+      "eyebrow": "ERROR 02",
+      "headline": "Grabar todo desde la misma silla",
+      "body": "Un solo plano fijo mata el ritmo. El cerebro necesita microcambios cada 2 segundos.",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "dark",
+      "showLogo": false,
+      "backgroundHint": "dark"
+    },
+    "slide-06": {
+      "eyebrow": "HAZLO ASI",
+      "headline": "4 angulos del mismo plano",
+      "body": "",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "dark",
+      "showLogo": false,
+      "backgroundHint": "dark"
+    },
+    "slide-07": {
+      "eyebrow": "ERROR 03",
+      "headline": "Tratar el producto como catalogo",
+      "body": "Fondo gris y luz plana no venden. Cuentan una ficha tecnica que nadie esta pidiendo.",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "light",
+      "showLogo": false,
+      "backgroundHint": "gray"
+    },
+    "slide-08": {
+      "eyebrow": "HAZLO ASI",
+      "headline": "Hero shot con luz direccional calida",
+      "body": "Un solo producto, contraste fuerte, halo ambar. Se ve premium sin estudio profesional.",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "dark",
+      "showLogo": false,
+      "backgroundHint": "dark"
+    },
+    "slide-09": {
+      "eyebrow": "CHECKLIST",
+      "headline": "Antes de grabar preguntate",
+      "body": "",
+      "signature": "",
+      "position": "top",
+      "colorScheme": "light",
+      "showLogo": false,
+      "backgroundHint": "cream"
+    },
+    "slide-10": {
+      "eyebrow": "",
+      "headline": "Guarda. Comparte. Aplicalo hoy.",
+      "body": "Link en bio para descargar la guia de hooks 2026 gratis.",
+      "signature": "@agenciaugccolombia",
+      "position": "center",
+      "colorScheme": "dark",
+      "showLogo": true,
+      "logoPosition": "top-right",
+      "backgroundHint": "dark"
+    }
+  }
+}

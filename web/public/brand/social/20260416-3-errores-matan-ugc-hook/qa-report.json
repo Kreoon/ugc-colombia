@@ -1,0 +1,164 @@
+{
+  "validated_at": "2026-04-17T14:10:00.000Z",
+  "validator": "ugc-visual-qa (inline)",
+  "dir": "web/public/brand/social/20260416-3-errores-matan-ugc-hook",
+  "total": 10,
+  "passed": 10,
+  "failed": 0,
+  "warnings": 2,
+  "slides": [
+    {
+      "id": "slide-01",
+      "filename": "slide-01-portada.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Creadora de espaldas con ring light, luz ámbar cálida cae sobre hombro derecho, sombra crujida del lado opuesto. Espacio negativo limpio arriba y abajo. Paleta estricta."
+    },
+    {
+      "id": "slide-02",
+      "filename": "slide-02-contexto.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "REGENERADO v2 2026-04-17. Fondo crema con grain, separador fino graphite, pequeño swatch amber como ancla. Editorial puro. Sin numerales ni texto espurio."
+    },
+    {
+      "id": "slide-03",
+      "filename": "slide-03-error-1.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "warning",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Teléfono iluminado desde atrás con glow ámbar, fondo negro. Warning menor: la pantalla muestra símbolos abstractos similares a 'CC' que podrían leerse como letras; sin embargo son decorativos y no forman palabras reales. Aceptable para el concepto 'logo genérico fantasma'."
+    },
+    {
+      "id": "slide-04",
+      "filename": "slide-04-fix-1.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "warning",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Split vertical funciona. Warning menor: el producto de la derecha es una barrita ambarina (jabón/chocolate) en vez de un producto de marca claro. El mensaje 'producto real' se lee bien de todas formas."
+    },
+    {
+      "id": "slide-05",
+      "filename": "slide-05-error-2.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Creadora estática, composición deliberadamente plana. Comunica falta de dinamismo perfectamente."
+    },
+    {
+      "id": "slide-06",
+      "filename": "slide-06-fix-2.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Grid 2x2 de ángulos múltiples. Ejecución impecable, editorial premium."
+    },
+    {
+      "id": "slide-07",
+      "filename": "slide-07-error-3.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Flat lay de catálogo plano con carteras de cuero. Comunica el concepto 'producto aburrido tipo catálogo' aceptablemente."
+    },
+    {
+      "id": "slide-08",
+      "filename": "slide-08-fix-3.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "REGENERADO v2 2026-04-17. Botella ámbar con cap metálico sobre negro, luz lateral cálida, halo amber. Hero shot editorial perfecto. Sin marca/texto."
+    },
+    {
+      "id": "slide-09",
+      "filename": "slide-09-checklist.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "6 checkboxes con dot ámbar en top-left. Layout editorial minimalista sobre crema."
+    },
+    {
+      "id": "slide-10",
+      "filename": "slide-10-cta.png",
+      "verdict": "pass",
+      "criteria": {
+        "brand_negative": "pass",
+        "palette": "pass",
+        "concept_captured": "pass",
+        "safe_zones": "pass",
+        "editorial_mood": "pass",
+        "technical": "pass"
+      },
+      "notes": "Barra ámbar centrada sobre negro. Composición ideal para triple CTA overlay."
+    }
+  ],
+  "recommendations": [
+    {
+      "slide_id": "slide-03",
+      "action": "accept",
+      "rationale": "Los símbolos en pantalla son decorativos, no rompen el concepto. Dejar como está."
+    },
+    {
+      "slide_id": "slide-04",
+      "action": "accept",
+      "rationale": "El mensaje principal (split de genérico vs real) funciona aunque el objeto real no sea un producto de marca claro. Si en el futuro quiere reforzar, regenerar con concepto 'small cosmetic jar with metal cap'."
+    }
+  ],
+  "summary": "10/10 pass, 2 warnings menores aceptables. Serie lista para overlay y publicación."
+}

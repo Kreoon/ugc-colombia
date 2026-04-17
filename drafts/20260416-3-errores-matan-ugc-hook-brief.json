@@ -1,0 +1,68 @@
+{
+  "concept": "3-errores-matan-ugc-hook",
+  "platform": "ig-carousel",
+  "aspectRatio": "4:5",
+  "pillar": "educativo",
+  "firma": "Tanya",
+  "caption_topic": "3 errores que matan un UGC antes del hook (primer segundo)",
+  "dopamine_check": {
+    "pattern_interrupt": true,
+    "curiosity_gap": true,
+    "reframe": true,
+    "micro_payoff": true,
+    "closed_loop": true,
+    "cta_low_friction": true
+  },
+  "images": [
+    {
+      "id": "slide-01",
+      "filename": "slide-01-portada.png",
+      "concept": "editorial magazine cover for Instagram carousel, moody documentary medium shot of a young Colombian creator seen from behind adjusting a ring light and a phone on a small rig in a minimal home studio set, warm amber #F9B334 rim light from camera-left edge hitting her shoulder, deep crushed #000000 shadows on camera-right, cream wooden floor visible in bokeh, matte grain, premium editorial boutique feel, top 35 percent and bottom 25 percent left as generous empty negative space for bold typography overlay, subject occupies center-right of the frame"
+    },
+    {
+      "id": "slide-02",
+      "filename": "slide-02-contexto.png",
+      "concept": "minimalist editorial composition, cream #F5F5F0 background with subtle paper grain texture, a single thin dark graphite #3D3D3C horizontal separator line at 60 percent height, left 40 percent reserved for a large amber #F9B334 numeral placement, right 60 percent reserved as generous negative space for body copy overlay, premium boutique feel, flat magazine layout"
+    },
+    {
+      "id": "slide-03",
+      "filename": "slide-03-error-1.png",
+      "concept": "close up of a smartphone mounted on a small tripod, the phone screen shows the faded ghost of a generic corporate logo dissolving into static, warm amber #F9B334 backlight glow from behind the phone, deep #000000 environmental background, documentary cinematic quality, shallow depth of field, matte grain, generous empty space on the top half for headline overlay"
+    },
+    {
+      "id": "slide-04",
+      "filename": "slide-04-fix-1.png",
+      "concept": "split vertical composition divided into two halves by a thin dark #000000 seam, left half shows a dim muted phone screen with a generic corporate logo visual slightly desaturated, right half shows a vivid documentary moment of a hand using a product in natural warm afternoon light, warm amber #F9B334 subtle rim accent on the right half only, editorial boutique feel, matte grain, top 25 percent of the frame empty for typography"
+    },
+    {
+      "id": "slide-05",
+      "filename": "slide-05-error-2.png",
+      "concept": "medium close up of a Latin American creator in her early thirties speaking to a locked static camera, framed slightly off-center, deliberately flat composition, desaturated warm tones, crushed #000000 shadows on the background, documentary cinematic feel, matte grain, the whole image implies missing dynamism on purpose, bottom third of the frame empty for caption overlay"
+    },
+    {
+      "id": "slide-06",
+      "filename": "slide-06-fix-2.png",
+      "concept": "dynamic photo collage of four distinct camera angles of the same UGC creator on set, arranged in a two by two grid, each panel shows a different framing including a wide shot, a close up, an over the shoulder, and a low angle, thin amber #F9B334 dividing lines between panels, dark #000000 gaps, matte grain, editorial documentary quality, top 20 percent left as negative space"
+    },
+    {
+      "id": "slide-07",
+      "filename": "slide-07-error-3.png",
+      "concept": "flat lay product photography in a deliberately dull catalogue style, neutral gray #BDBCBC desaturated background, centered symmetrical composition with uniform flat lighting and no shadows, matte finish, the restraint is intentional to imply boredom, no vivid colors, top and bottom thirds of the frame empty for typography"
+    },
+    {
+      "id": "slide-08",
+      "filename": "slide-08-fix-3.png",
+      "concept": "vivid documentary hero shot of a product rendered in amber #F9B334 tones placed against a deep crushed #000000 background, strong directional warm rim light from camera-right creating dramatic contrast and a glow halo, fine film grain texture, premium editorial boutique feel, subject occupies center, generous empty space on top and bottom for typography overlay"
+    },
+    {
+      "id": "slide-09",
+      "filename": "slide-09-checklist.png",
+      "concept": "editorial magazine infographic layout on a cream #F5F5F0 textured paper background, six small empty checkbox squares arranged in two columns of three, thin dark graphite #3D3D3C lines for the boxes, a single amber #F9B334 dot accent next to the top-left checkbox, minimalist premium boutique feel, flat magazine layout, generous empty space at top and bottom, deliberate no typography"
+    },
+    {
+      "id": "slide-10",
+      "filename": "slide-10-cta.png",
+      "concept": "dark #000000 editorial background with subtle film grain, a single thick amber #F9B334 horizontal bar occupying the center 40 percent of the frame, deep crushed shadows around it, premium editorial boutique feel, high contrast minimalist composition, top 30 percent and bottom 30 percent of the frame left empty for triple CTA typography overlay"
+    }
+  ]
+}

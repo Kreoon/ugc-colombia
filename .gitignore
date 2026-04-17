@@ -48,7 +48,12 @@ build/
 # IDE
 .vscode/
 .idea/
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/agents/
+!.claude/settings.json
+.claude/settings.local.json
+.claude/*.lock
 *.swp
 *.swo
 *.sublime-*

@@ -1,0 +1,22 @@
+{
+  "validated_at": "2026-04-17T16:00:00.000Z",
+  "validator": "ugc-visual-qa (inline)",
+  "dir": "web/public/brand/social/20260417-3-errores-matan-ugc-hook",
+  "total": 10,
+  "passed": 10,
+  "failed": 0,
+  "warnings": 0,
+  "slides": [
+    { "id": "slide-01", "verdict": "pass", "notes": "REGENERADA v3-patch. Creadora de espaldas con ring light, fondo crema + dark shadow izq, piso de madera abajo. Sin marco, sin label espurio. Espacio negativo inferior perfecto para overlay." },
+    { "id": "slide-02", "verdict": "pass", "notes": "REGENERADA v3-patch. Fondo crema uniforme con una sola hairline graphite centrada. Sin texto, sin swatch, completamente limpio." },
+    { "id": "slide-03", "verdict": "pass", "notes": "Teléfono con pantalla negra, halo amber detrás, bottom-2/3 del frame. Top libre para headline." },
+    { "id": "slide-04", "verdict": "pass", "notes": "Dos manos editoriales, phone blank + jar amber sin marca. Perfecto split conceptual." },
+    { "id": "slide-05", "verdict": "pass", "notes": "Retrato frontal con top-25% empty. Composición deliberadamente estática." },
+    { "id": "slide-06", "verdict": "pass", "notes": "Grid 2x2 con 4 ángulos únicos de la creadora. Divisores amber finos. Top-15% libre." },
+    { "id": "slide-07", "verdict": "pass", "notes": "3 frascos unbranded + caja cardboard sobre gris uniforme. Sin texto, sin marca. Flat lay catálogo aburrido como pedía el brief." },
+    { "id": "slide-08", "verdict": "pass", "notes": "Botella ámbar centrada sobre negro con reflejo. Hero shot editorial." },
+    { "id": "slide-09", "verdict": "pass", "notes": "6 checkboxes sobre crema con dot amber. Layout limpio." },
+    { "id": "slide-10", "verdict": "pass", "notes": "Barra amber centrada sobre negro. Top-40% y bottom-40% completamente limpios." }
+  ],
+  "summary": "10/10 pass sin warnings. Regeneración v3 aplicada sobre toda la serie con BRAND_NEGATIVE reforzado. Patch de slides 01 y 02 removió el texto espurio que aparecía con 'editorial magazine cover' y 'postage stamp swatch'. Serie 100% brand-compliant."
+}

@@ -1,0 +1,180 @@
+{
+  "analyzed_at": "2026-04-17T15:30:00.000Z",
+  "analyzer": "ugc-layout-architect (inline)",
+  "dir": "web/public/brand/social/20260416-3-errores-matan-ugc-hook",
+  "slides": {
+    "slide-01": {
+      "luminance": { "top": "midtone-busy", "center": "midtone-warm", "bottom": "dark-clean" },
+      "subjectBbox": [0.22, 0.05, 0.75, 0.92],
+      "dominantColors": ["#1a1511", "#8b6a3f", "#e8b87a"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.60, "w": 0.55, "h": 0.32, "kind": "headline" },
+        { "x": 0.05, "y": 0.92, "w": 0.45, "h": 0.06, "kind": "signature" }
+      ],
+      "recommendedPosition": "bottom",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 18, "opacity": 0.72, "offsetY": 4, "color": "#000000" },
+      "textGlow": null,
+      "scrim": { "position": "bottom", "height": 0.42, "gradient": "transparent-to-dark" },
+      "sizes": { "headline": 0.92, "body": 1.0, "eyebrow": 1.0, "signature": 0.9 },
+      "logo": { "show": true, "variant": "white", "position": "bottom-left", "size": 0.95 },
+      "notes": "Creadora ocupa centro-derecha con ring light. Bottom-izq es la unica zona limpia. Scrim transparent-to-dark refuerza separacion del piso texturizado. Logo white abajo-izq respeta clearspace del sujeto."
+    },
+    "slide-02": {
+      "luminance": { "top": "cream-clean", "center": "cream-clean", "bottom": "cream-clean" },
+      "subjectBbox": null,
+      "dominantColors": ["#f1ece0", "#3d3d3c", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.08, "w": 0.9, "h": 0.42, "kind": "headline" },
+        { "x": 0.05, "y": 0.62, "w": 0.9, "h": 0.28, "kind": "body" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#000000",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.15, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Fondo crema uniforme sin sujeto. El separador horizontal a 60% divide naturalmente headline (arriba) y body (abajo). Sin sombra ni scrim — fondo limpio no lo necesita."
+    },
+    "slide-03": {
+      "luminance": { "top": "dark-clean", "center": "amber-glow", "bottom": "dark-clean" },
+      "subjectBbox": [0.25, 0.22, 0.5, 0.72],
+      "dominantColors": ["#000000", "#d4873e", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.04, "w": 0.9, "h": 0.22, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 10, "opacity": 0.55, "offsetY": 2, "color": "#000000" },
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.0, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Telefono iluminado en centro con halo amber. Top-22% es negro puro limpio, perfecto para overlay blanco. Sombra ligera por precaucion. No se necesita scrim ni glow."
+    },
+    "slide-04": {
+      "luminance": { "top": "dark-clean", "center": "busy-mid", "bottom": "dark-clean" },
+      "subjectBbox": [0.1, 0.2, 0.85, 0.7],
+      "dominantColors": ["#000000", "#1a1a1a", "#d4873e"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.04, "w": 0.9, "h": 0.18, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 12, "opacity": 0.6, "offsetY": 2, "color": "#000000" },
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.88, "body": 0.95, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Split vertical con manos en centro. Solo top-18% queda limpio, asi que autosize reduce headline 12% para caber. Body muy corto o sin body."
+    },
+    "slide-05": {
+      "luminance": { "top": "dark-clean", "center": "midtone-warm", "bottom": "dark-clean" },
+      "subjectBbox": [0.25, 0.22, 0.55, 0.78],
+      "dominantColors": ["#0a0a0a", "#4a3a2a", "#8b6a4a"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.04, "w": 0.9, "h": 0.18, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 10, "opacity": 0.5, "offsetY": 2, "color": "#000000" },
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.95, "body": 0.95, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Creadora centrada con halo amber sutil detras. Top es negro limpio. Sombra ligera por el halo que se extiende hacia arriba."
+    },
+    "slide-06": {
+      "luminance": { "top": "dark-pure", "center": "busy-grid", "bottom": "dark-pure" },
+      "subjectBbox": [0.12, 0.12, 0.88, 0.88],
+      "dominantColors": ["#000000", "#3a2818", "#8b6a4a"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.02, "w": 0.9, "h": 0.12, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.9, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Grid 2x2 ocupa 88% del canvas. Top y bottom son negro puro (gap entre panels). Sin sombra necesaria. Headline compacto arriba del grid."
+    },
+    "slide-07": {
+      "luminance": { "top": "gray-clean", "center": "gray-products", "bottom": "gray-clean" },
+      "subjectBbox": [0.15, 0.15, 0.75, 0.85],
+      "dominantColors": ["#bdbcbc", "#3d2a1a", "#8b6a4a"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.03, "w": 0.9, "h": 0.14, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#000000",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 0.95, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Fondo gris uniforme con flat lay al centro. Texto negro sobre gris claro tiene contraste WCAG AA suficiente. Sin sombra."
+    },
+    "slide-08": {
+      "luminance": { "top": "dark-pure", "center": "amber-hero", "bottom": "dark-pure" },
+      "subjectBbox": [0.3, 0.28, 0.4, 0.62],
+      "dominantColors": ["#000000", "#d4873e", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.03, "w": 0.9, "h": 0.22, "kind": "headline" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.0, "body": 1.0, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Botella en centro con halo amber que no llega al top. Top-22% es negro puro. Sin sombra ni scrim — fondo limpio."
+    },
+    "slide-09": {
+      "luminance": { "top": "cream-clean", "center": "cream-boxes", "bottom": "cream-clean" },
+      "subjectBbox": [0.25, 0.22, 0.55, 0.68],
+      "dominantColors": ["#f1ece0", "#3d3d3c", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.04, "w": 0.9, "h": 0.16, "kind": "headline" },
+        { "x": 0.05, "y": 0.92, "w": 0.9, "h": 0.06, "kind": "signature" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#000000",
+      "textShadow": null,
+      "textGlow": null,
+      "scrim": null,
+      "sizes": { "headline": 1.1, "body": 0.88, "eyebrow": 1.0, "signature": 1.0 },
+      "logo": { "show": false },
+      "notes": "Checkboxes centrados sobre crema. Top es crema limpia. Body reducido porque el checklist tiene muchos items — evita tapar los cuadros."
+    },
+    "slide-10": {
+      "luminance": { "top": "dark-pure", "center": "amber-bar", "bottom": "dark-pure" },
+      "subjectBbox": null,
+      "dominantColors": ["#000000", "#f9b334"],
+      "safeAreas": [
+        { "x": 0.05, "y": 0.06, "w": 0.9, "h": 0.32, "kind": "headline" },
+        { "x": 0.05, "y": 0.65, "w": 0.9, "h": 0.22, "kind": "body" },
+        { "x": 0.05, "y": 0.92, "w": 0.9, "h": 0.06, "kind": "signature" }
+      ],
+      "recommendedPosition": "top",
+      "textColor": "#FFFFFF",
+      "textShadow": { "blur": 14, "opacity": 0.55, "offsetY": 3, "color": "#000000" },
+      "textGlow": { "blur": 32, "opacity": 0.35, "color": "#F9B334" },
+      "scrim": null,
+      "sizes": { "headline": 1.08, "body": 0.95, "eyebrow": 1.0, "signature": 0.95 },
+      "logo": { "show": true, "variant": "white", "position": "top-right", "size": 0.85 },
+      "notes": "Barra amber centrada sobre negro — composicion editorial hero. Headline arriba de la barra con glow amber sutil. Body va debajo de la barra. Logo white arriba-derecha balancea visualmente con el texto de la izquierda."
+    }
+  },
+  "summary": {
+    "slidesAnalyzed": 10,
+    "withScrim": 1,
+    "withGlow": 1,
+    "withShadow": 5,
+    "headlineSizeAdjustments": 6,
+    "logosPlaced": 2
+  }
+}

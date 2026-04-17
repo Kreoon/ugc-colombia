@@ -1,0 +1,10 @@
+# drafts/
+
+Carpeta de trabajo de la skill `ugc-content-creator` y otros procesos.
+
+Contenido:
+- Briefs JSON temporales (`*-brief.json`)
+- Drafts de copy que Tanya genera antes de publicar
+- Outputs intermedios que no van al repositorio final
+
+Todo aqui es transitorio. Si se vuelve util para el repo, moverlo a `content/` en una PR.

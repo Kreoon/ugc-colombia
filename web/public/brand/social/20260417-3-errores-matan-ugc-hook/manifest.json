@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-17T16:00:00.000Z",
+  "concept": "3-errores-matan-ugc-hook",
+  "platform": "ig-carousel",
+  "aspectRatio": "4:5",
+  "model": "gemini-2.5-flash-image",
+  "brief_source": "drafts/20260417-3-errores-matan-ugc-hook-brief.json",
+  "brief_patches": [
+    "drafts/20260417-3-errores-matan-ugc-hook-brief-patch.json (slides 01 y 02 regenerados con prompts endurecidos para eliminar texto espurio que apareció en v3 inicial)"
+  ],
+  "results": [
+    { "ok": true, "id": "slide-01", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-01-portada.png" },
+    { "ok": true, "id": "slide-02", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-02-contexto.png" },
+    { "ok": true, "id": "slide-03", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-03-error-1.png" },
+    { "ok": true, "id": "slide-04", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-04-fix-1.png" },
+    { "ok": true, "id": "slide-05", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-05-error-2.png" },
+    { "ok": true, "id": "slide-06", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-06-fix-2.png" },
+    { "ok": true, "id": "slide-07", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-07-error-3.png" },
+    { "ok": true, "id": "slide-08", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-08-fix-3.png" },
+    { "ok": true, "id": "slide-09", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-09-checklist.png" },
+    { "ok": true, "id": "slide-10", "path": "F:\\Users\\SICOMMER SAS\\Documents\\GitHub\\UGC Colombia\\web\\public\\brand\\social\\20260417-3-errores-matan-ugc-hook\\slide-10-cta.png" }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "concept": "3-errores-matan-ugc-hook",
+  "platform": "ig-carousel",
+  "aspectRatio": "4:5",
+  "pillar": "educativo",
+  "firma": "Tanya",
+  "handle_publico": "@agenciaugccolombia",
+  "caption_topic": "3 errores que matan un UGC antes del hook (primer segundo)",
+  "_note": "Brief v3 2026-04-17 — prompts endurecidos tras aprendizajes v1/v2. Slide-02 sin numeral (Nanobanana lo interpretaba como '1' + texto espurio). Slide-07 con producto concreto neutro. Slide-08 con producto reconocible. Todos los prompts refuerzan 'no text, no numerals, no logos' al final.",
+  "dopamine_check": {
+    "pattern_interrupt": true,
+    "curiosity_gap": true,
+    "reframe": true,
+    "micro_payoff": true,
+    "closed_loop": true,
+    "cta_low_friction": true
+  },
+  "images": [
+    {
+      "id": "slide-01",
+      "filename": "slide-01-portada.png",
+      "concept": "editorial magazine cover for Instagram carousel, moody documentary medium shot of a young Colombian creator in her late twenties seen from behind, adjusting a ring light and a phone on a small rig in a minimal home studio with cream wall and wooden floor, warm amber #F9B334 rim light catching her shoulder and hair, deep crushed #000000 shadows on the left side of the frame, matte grain texture, premium editorial boutique feel, subject occupies the center-right of the frame, bottom 35 percent of the frame reserved as generous empty negative space over wooden floor for large typography overlay, no text on any surface, no logos visible"
+    },
+    {
+      "id": "slide-02",
+      "filename": "slide-02-contexto.png",
+      "concept": "minimalist editorial magazine composition on a warm cream #F5F5F0 background with visible paper grain texture, a single thin graphite #3D3D3C horizontal hairline separator sitting at 60 percent vertical height across the frame, a subtle amber #F9B334 rectangular swatch the size of a small postage stamp anchored at the intersection of the separator and the left margin, premium boutique feel, flat editorial magazine layout, generous empty negative space above and below the separator for typography overlay, no numerals, no letters, no labels, render any surface that would normally carry text completely blank"
+    },
+    {
+      "id": "slide-03",
+      "filename": "slide-03-error-1.png",
+      "concept": "close up of a smartphone mounted on a small black tripod, the phone screen is dark and completely blank with no readable content, warm amber #F9B334 backlight glow halo from behind the phone, deep #000000 environmental background, documentary cinematic quality, shallow depth of field, matte grain, subject occupies the bottom two thirds of the frame, generous empty space on the top third for headline overlay, no text anywhere, no ui elements, no app icons, no logos"
+    },
+    {
+      "id": "slide-04",
+      "filename": "slide-04-fix-1.png",
+      "concept": "documentary close up of two hands in natural afternoon light against a deep #000000 background, one hand on the left holds a phone with a completely blank dark screen, the other hand on the right holds a small unbranded ceramic amber jar with a metal cap, warm amber #F9B334 subtle rim light coming from camera-right, editorial boutique feel, matte grain, subject occupies the center of the frame, generous empty space on the top 25 percent for typography, no text on any surface, no labels, no logos, no brand marks, completely unbranded smooth objects"
+    },
+    {
+      "id": "slide-05",
+      "filename": "slide-05-error-2.png",
+      "concept": "medium close up portrait of a Latin American woman in her early thirties speaking to a locked static camera, framed slightly off-center, deliberately flat composition, desaturated warm tones, crushed #000000 shadows on the background, documentary cinematic feel, matte grain, the image implies missing dynamism on purpose, subject fills the center lower two thirds of the frame, top 25 percent empty for caption overlay, no text, no visible logos on clothing, plain neutral dark blouse"
+    },
+    {
+      "id": "slide-06",
+      "filename": "slide-06-fix-2.png",
+      "concept": "dynamic editorial photo collage of four distinct camera angles of the same Colombian UGC creator on a home studio set, arranged in a two by two grid, each panel shows a different framing, a wide shot with the creator next to studio lights, a close up portrait, an over the shoulder shot of her editing on a laptop, and a low angle shot through a window, thin amber #F9B334 hairline dividing lines between panels, pure #000000 gaps around the grid, matte grain, editorial documentary quality, generous empty negative space at the top 15 percent of the frame above the grid for headline typography, no text anywhere"
+    },
+    {
+      "id": "slide-07",
+      "filename": "slide-07-error-3.png",
+      "concept": "flat lay product photography in a deliberately dull catalogue style, neutral light gray #BDBCBC desaturated uniform background, centered symmetrical arrangement of three small unbranded glass skincare bottles and one small neutral cardboard box, uniform flat lighting from above with soft even shadows, matte finish, the restraint is intentional to imply boring catalogue, no vivid colors except the subtle natural tones of the objects, subject occupies the center of the frame, top 20 percent and bottom 20 percent empty for typography, no text on the bottles, no labels, no logos, completely unbranded"
+    },
+    {
+      "id": "slide-08",
+      "filename": "slide-08-fix-3.png",
+      "concept": "vivid documentary hero shot of a single unbranded small ceramic amber colored perfume bottle with a brushed metal cap placed on a reflective dark surface, deep crushed #000000 environmental background, strong directional warm rim light from camera-right creating dramatic highlight on the curved bottle shoulder and a soft amber halo behind it, fine film grain texture, premium editorial boutique feel, subject occupies the center of the frame slightly below the midline, generous empty space on the top 25 percent and bottom 20 percent reserved for typography overlay, no text on the bottle, no label, no logo, completely smooth surface"
+    },
+    {
+      "id": "slide-09",
+      "filename": "slide-09-checklist.png",
+      "concept": "editorial magazine infographic layout on a warm cream #F5F5F0 textured paper background with subtle paper grain, six small empty square checkboxes arranged in two columns of three with even spacing, thin dark graphite #3D3D3C outline for each checkbox, no fills inside the checkboxes, a single small solid amber #F9B334 circular dot accent placed just to the left of the top-left checkbox, minimalist premium boutique feel, flat magazine layout, generous empty negative space at the top 20 percent and bottom 20 percent of the frame, no text, no numerals, no labels, no headings"
+    },
+    {
+      "id": "slide-10",
+      "filename": "slide-10-cta.png",
+      "concept": "dark #000000 editorial background with subtle film grain texture, a single thick solid amber #F9B334 horizontal bar occupying the center 18 percent of the frame height spanning the full width, deep crushed shadows around it, premium editorial boutique feel, high contrast minimalist composition, top 40 percent and bottom 40 percent of the frame completely empty dark space for typography overlay, no text, no numerals, no labels, no logos on the bar, pure flat amber color"
+    }
+  ]
+}

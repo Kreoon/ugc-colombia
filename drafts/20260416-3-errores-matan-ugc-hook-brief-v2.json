@@ -1,0 +1,29 @@
+{
+  "concept": "3-errores-matan-ugc-hook",
+  "platform": "ig-carousel",
+  "aspectRatio": "4:5",
+  "pillar": "educativo",
+  "firma": "Tanya",
+  "caption_topic": "3 errores que matan un UGC antes del hook (primer segundo)",
+  "_note": "Brief v2 2026-04-17: regenera solo slides 02 y 08 con prompts endurecidos. slide-02 elimina el numeral (Nanobanana lo dibujaba como '1' + texto espurio 'ERROR'). slide-08 cambia el concepto abstracto tipo Tetris por un producto concreto.",
+  "dopamine_check": {
+    "pattern_interrupt": true,
+    "curiosity_gap": true,
+    "reframe": true,
+    "micro_payoff": true,
+    "closed_loop": true,
+    "cta_low_friction": true
+  },
+  "images": [
+    {
+      "id": "slide-02",
+      "filename": "slide-02-contexto.png",
+      "concept": "minimalist editorial magazine composition on a warm cream #F5F5F0 background with visible paper grain texture, a single thin graphite #3D3D3C horizontal hairline separator sitting at 60 percent vertical height across the frame, a subtle amber #F9B334 rectangular swatch the size of a small postage stamp anchored at the intersection of the separator and the left margin, premium boutique feel, flat editorial magazine layout, generous empty negative space above and below the separator for typography overlay, no numerals, no letters, no labels, no numeric symbols, render any surface that would normally carry text completely blank"
+    },
+    {
+      "id": "slide-08",
+      "filename": "slide-08-fix-3.png",
+      "concept": "vivid documentary hero shot of a single amber colored small ceramic perfume bottle with a brushed metal cap placed on a reflective dark surface, deep crushed #000000 environmental background, strong directional warm rim light from camera-right creating dramatic highlight on the curved bottle shoulder and a soft amber halo behind it, fine film grain texture, premium editorial boutique feel, subject occupies the center slightly below the midline, generous empty space on top 25 percent and bottom 25 percent of the frame reserved for typography overlay, no text on the bottle, no label, no logo, completely unbranded smooth surface"
+    }
+  ]
+}

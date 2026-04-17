@@ -9,7 +9,11 @@
     "gen": "node generate.mjs"
   },
   "dependencies": {
+    "@fontsource/anton": "^5.2.7",
+    "@fontsource/inter": "^5.2.8",
     "@google/genai": "^1.0.0",
-    "dotenv": "^16.4.5"
+    "@resvg/resvg-js": "^2.6.2",
+    "dotenv": "^16.4.5",
+    "sharp": "^0.34.5"
   }
 }

@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://ugccolombia.co/forge" },
 };
 
+// Force dynamic rendering para evitar errores de prerender en build
+export const dynamic = "force-dynamic";
+
 export default function ForgePage() {
   return (
     <main className="bg-brand-black min-h-screen">

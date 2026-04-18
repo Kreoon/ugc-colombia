@@ -10,17 +10,8 @@ export function ForgeWhoAmI() {
       <div className="max-w-5xl mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start">
           <div className="md:sticky md:top-10">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-brand-yellow/30 bg-gradient-to-br from-brand-yellow/10 to-transparent">
-              <img
-                src="/brand/team/alexander.jpg"
-                alt="Alexander Cast"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  // Fallback si la imagen no existe aún
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border border-brand-yellow/30 bg-gradient-to-br from-brand-yellow/10 to-transparent flex items-center justify-center">
+              <span className="font-display text-6xl text-brand-yellow/80">AC</span>
             </div>
           </div>
 

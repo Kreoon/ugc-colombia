@@ -19,13 +19,13 @@ const METRICS = [
     icon: Target,
     label: "CTR mínimo",
     value: `≥ ${PERFORMANCE_GUARANTEE.minCtrPercent}%`,
-    desc: "Click-Through Rate por video",
+    desc: "Tasa de clics del video en el anuncio",
   },
   {
     icon: TrendingUp,
     label: "Hook Rate mínimo",
     value: `≥ ${PERFORMANCE_GUARANTEE.minHookRatePercent}%`,
-    desc: "Audiencia que ve más de 3 segundos",
+    desc: "Personas que pasan los primeros 3 segundos",
   },
   {
     icon: RefreshCcw,
@@ -88,8 +88,9 @@ export function GuaranteeSection() {
             </span>
           </h2>
           <p className="mt-5 text-sm sm:text-base text-brand-gray leading-relaxed">
-            Si tus videos no llegan a CTR mínimo y Hook Rate mínimo dentro de
-            anuncios pagados, los reemplazamos sin costo hasta cubrir el{" "}
+            Si tus videos no llegan a la tasa de clics mínima ni a la tasa de
+            retención mínima dentro de anuncios pagados, los reemplazamos sin
+            costo hasta cubrir el{" "}
             {PERFORMANCE_GUARANTEE.replacementCapPercent}% de tu paquete.
           </p>
         </motion.div>

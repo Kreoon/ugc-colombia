@@ -1,30 +1,35 @@
-import { NextResponse } from "next/server";
-import { getAvailableSlots } from "@/lib/google-calendar";
+import { NextRequest, NextResponse } from "next/server";
+import { getAvailableSlots, type BookingPurpose } from "@/lib/google-calendar";
 
-export const dynamic = "force-dynamic"; // siempre consulta Google Calendar en tiempo real
+export const dynamic = "force-dynamic";
 
-export async function GET() {
+function parsePurpose(value: string | null): BookingPurpose {
+  return value === "kickoff" ? "kickoff" : "discovery";
+}
+
+export async function GET(req: NextRequest) {
   try {
-    const slots = await getAvailableSlots();
+    const purpose = parsePurpose(req.nextUrl.searchParams.get("purpose"));
+    const slots = await getAvailableSlots(purpose);
 
-    // Group by date for frontend
-    const grouped: Record<string, Array<{
-      start: string;
-      end: string;
-      host_key: string;
-      host_name: string;
-      time_label: string;
-    }>> = {};
+    const grouped: Record<
+      string,
+      Array<{
+        start: string;
+        end: string;
+        host_key: string;
+        host_name: string;
+        time_label: string;
+      }>
+    > = {};
 
     for (const slot of slots) {
       const date = new Date(slot.start);
-      // Format date as YYYY-MM-DD in COT
       const cotDate = new Date(date.getTime() - 5 * 60 * 60 * 1000);
       const dateKey = cotDate.toISOString().split("T")[0];
 
       if (!grouped[dateKey]) grouped[dateKey] = [];
 
-      // Format time in COT
       const hours = cotDate.getUTCHours();
       const mins = cotDate.getUTCMinutes();
       const ampm = hours >= 12 ? "PM" : "AM";
@@ -40,12 +45,12 @@ export async function GET() {
       });
     }
 
-    return NextResponse.json({ slots: grouped });
+    return NextResponse.json({ slots: grouped, purpose });
   } catch (err) {
     console.error("[availability] Error:", err);
     return NextResponse.json(
       { error: "No se pudo cargar la disponibilidad" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

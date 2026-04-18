@@ -5,7 +5,7 @@ import { GraciasPagoClient } from "./GraciasPagoClient";
 export const metadata: Metadata = {
   title: "Gracias — Pago confirmado | UGC Colombia",
   description:
-    "Tu suscripción está activa. Agenda tu llamada de kickoff y comencemos a producir contenido.",
+    "Tu plan está activo. Agenda tu reunión de inicio con Brian y arrancamos a producir contenido esta semana.",
   robots: { index: false, follow: false },
 };
 

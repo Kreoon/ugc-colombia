@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import {
@@ -9,7 +9,9 @@ import {
   MessageCircle,
   FileText,
   Video,
-  TrendingUp,
+  Edit3,
+  PackageCheck,
+  RefreshCw,
   Rocket,
   ArrowRight,
   Instagram,
@@ -21,9 +23,7 @@ import { formatPrice } from "@/lib/pricing/format";
 import type { Currency } from "@/lib/pricing/currency-config";
 import { trackPurchase } from "@/lib/tracking/events";
 
-const WHATSAPP_ADVISOR_URL =
-  process.env.NEXT_PUBLIC_WHATSAPP_ADVISOR_URL ??
-  "https://wa.me/573001234567?text=Hola%2C%20acabo%20de%20pagar%20mi%20plan%20UGC";
+const BRIAN_WHATSAPP_NUMBER = "573113842399";
 const COMMUNITY_URL = "https://chat.whatsapp.com/F5QDgl4imsjBjW1KL2DhRE";
 
 interface SessionSummary {
@@ -45,38 +45,76 @@ const ROADMAP = [
     day: "Día 0 — Hoy",
     title: "Pago confirmado",
     description:
-      "Recibirás un email con el recibo. Tu suscripción queda activa de inmediato.",
+      "Recibirás un correo con la factura. Tu plan queda activo de inmediato.",
     icon: CheckCircle2,
     done: true,
   },
   {
-    day: "Día 1–2",
-    title: "Kickoff call con Alexander",
+    day: "Día 1 y 2",
+    title: "Documento de marca + estrategia + guiones",
     description:
-      "Revisamos tu marca, objetivos y calendarios. Agenda la llamada abajo.",
-    icon: Calendar,
-  },
-  {
-    day: "Día 3–7",
-    title: "Research + matching de creadores",
-    description:
-      "Investigamos tu mercado y seleccionamos los creadores adecuados para tu nicho.",
+      "Te enviamos el formulario para que nos cuentes de tu marca. Con tus respuestas armamos la estrategia de contenido y escribimos los guiones de cada video.",
     icon: FileText,
   },
   {
-    day: "Día 7–14",
-    title: "Primera entrega de contenido",
-    description: "Videos listos para publicar, con edición profesional y variantes.",
+    day: "Día 3 a 5",
+    title: "Grabación con tus creadores",
+    description:
+      "Coordinamos a los creadores asignados a tu marca y arrancan a grabar los videos según los guiones aprobados.",
     icon: Video,
   },
   {
-    day: "Día 30",
-    title: "Reporte de resultados",
+    day: "Día 5 y 6",
+    title: "Edición profesional",
     description:
-      "Métricas, aprendizajes y ajustes para el siguiente mes. Todo documentado.",
-    icon: TrendingUp,
+      "Nuestro equipo edita cada video con la línea visual de tu marca, agrega gráficos y deja todo listo para publicar.",
+    icon: Edit3,
+  },
+  {
+    day: "Día 7",
+    title: "Primeras entregas",
+    description:
+      "Recibes los primeros videos terminados. Los revisas y nos confirmas: aprobados o con novedades para corregir.",
+    icon: PackageCheck,
+  },
+  {
+    day: "+ 2 días si hay novedades",
+    title: "Correcciones (si aplica)",
+    description:
+      "Si pides cambios, tenemos hasta 2 días hábiles para entregar la versión final ajustada a lo que necesitas.",
+    icon: RefreshCw,
   },
 ];
+
+function buildBrianWhatsappUrl(summary: SessionSummary | null): string {
+  const baseUrl = `https://wa.me/${BRIAN_WHATSAPP_NUMBER}`;
+
+  if (!summary || summary.payment_status !== "paid") {
+    return `${baseUrl}?text=${encodeURIComponent(
+      "Hola Brian, acabo de pagar mi plan en UGC Colombia. Necesito ayuda con el arranque.",
+    )}`;
+  }
+
+  const planLabel = summary.plan_label ?? summary.plan_id ?? "—";
+  const cycleLabel =
+    summary.billing_interval_count && summary.billing_interval_count > 1
+      ? `cada ${summary.billing_interval_count} meses`
+      : "mensual";
+  const amount = formatPrice(summary.amount_total, summary.currency);
+  const name = summary.name ?? "(sin nombre registrado)";
+  const email = summary.email ?? "(sin email registrado)";
+
+  const lines = [
+    `Hola Brian, soy ${name}.`,
+    "",
+    `Acabo de comprar el plan ${planLabel} (${amount} ${summary.currency} · ${cycleLabel}).`,
+    `Mi correo de contacto es ${email}.`,
+    "",
+    "Quedo atento a los siguientes pasos para arrancar.",
+  ];
+
+  return `${baseUrl}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
 
 export function GraciasPagoClient() {
   const params = useSearchParams();
@@ -100,8 +138,6 @@ export function GraciasPagoClient() {
           setError(data.error);
         } else {
           setSummary(data);
-          // Dispara Purchase en Meta/TikTok/GA4/Bing UET. Dedupe interno via
-          // sessionStorage para evitar contar dos veces si el user refresca.
           if (data.payment_status === "paid" && data.amount_total > 0) {
             trackPurchase({
               transactionId: data.id,
@@ -128,11 +164,27 @@ export function GraciasPagoClient() {
     };
   }, [sessionId]);
 
-  const calcomKickoff =
-    process.env.NEXT_PUBLIC_CALCOM_KICKOFF_LINK ??
-    "https://cal.com/ugccolombia/kickoff";
+  // URL al kickoff interno (Google Calendar de Brian) con datos prefilled.
+  const kickoffUrl = useMemo(() => {
+    const params = new URLSearchParams();
+    if (summary?.name) params.set("name", summary.name);
+    if (summary?.email) params.set("email", summary.email);
+    const qs = params.toString();
+    return qs ? `/agendar/kickoff?${qs}` : "/agendar/kickoff";
+  }, [summary?.name, summary?.email]);
+
+  // WhatsApp directo a Brian con resumen del pago para que él lo lea de una.
+  const brianWhatsappUrl = useMemo(
+    () => buildBrianWhatsappUrl(summary),
+    [summary],
+  );
 
   const firstName = summary?.name?.split(" ")[0] ?? "";
+
+  const cycleLabel =
+    summary?.billing_interval_count && summary.billing_interval_count > 1
+      ? `Total cada ${summary.billing_interval_count} meses`
+      : "Total mensual";
 
   return (
     <>
@@ -170,8 +222,8 @@ export function GraciasPagoClient() {
               {firstName ? `¡Gracias, ${firstName}!` : "¡Gracias!"}
             </h1>
             <p className="text-brand-gray text-base max-w-xl mx-auto">
-              Tu suscripción está activa. En los próximos minutos recibirás un
-              email con el recibo y el siguiente paso.
+              Tu plan está activo. En los próximos minutos te llega un correo
+              con la factura y el siguiente paso.
             </p>
           </motion.div>
 
@@ -184,17 +236,20 @@ export function GraciasPagoClient() {
               className="mt-8 rounded-2xl border border-brand-gold/25 bg-white/[0.03] p-5 sm:p-6"
             >
               <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-brand-gold/70 mb-3">
-                Resumen
+                Resumen de tu compra
               </p>
               <div className="grid sm:grid-cols-3 gap-4 text-sm">
-                <SummaryRow label="Plan" value={summary.plan_label ?? summary.plan_id ?? "—"} />
                 <SummaryRow
-                  label="Mensualidad"
+                  label="Plan"
+                  value={summary.plan_label ?? summary.plan_id ?? "—"}
+                />
+                <SummaryRow
+                  label={cycleLabel}
                   value={formatPrice(summary.amount_total, summary.currency)}
                 />
                 {summary.videos_per_month && (
                   <SummaryRow
-                    label="Videos / mes"
+                    label="Videos al mes"
                     value={summary.videos_per_month}
                   />
                 )}
@@ -204,12 +259,12 @@ export function GraciasPagoClient() {
 
           {!loading && error && (
             <div className="mt-6 p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 text-sm text-amber-200">
-              {error} — Pero tu pago se procesó correctamente. Te escribiremos
-              al email registrado para continuar.
+              {error} — Pero tu pago se procesó correctamente. Te escribimos al
+              correo registrado para continuar.
             </div>
           )}
 
-          {/* Kickoff call */}
+          {/* Reunión de inicio */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -220,20 +275,17 @@ export function GraciasPagoClient() {
               <Calendar className="w-6 h-6 text-brand-yellow" />
             </div>
             <h2 className="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight mb-2">
-              Agenda tu kickoff call
+              Agenda tu reunión de inicio
             </h2>
             <p className="text-sm text-brand-gray max-w-md mx-auto mb-5">
-              30 minutos con Alexander Cast para alinear objetivos, definir tu
-              mensaje y arrancar producción esta misma semana.
+              30 minutos con Brian, tu coordinador de cuenta, para alinear
+              objetivos, revisar tu marca y dejar listo el calendario de
+              producción de esta semana.
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="gap-2"
-            >
-              <a href={calcomKickoff} target="_blank" rel="noopener noreferrer">
+            <Button asChild size="lg" className="gap-2">
+              <a href={kickoffUrl}>
                 <Calendar className="w-5 h-5" />
-                Reservar kickoff call
+                Reservar mi reunión de inicio
                 <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
@@ -247,7 +299,7 @@ export function GraciasPagoClient() {
             className="mt-10"
           >
             <h3 className="font-display text-xl text-white uppercase tracking-tight mb-5">
-              Tu primer mes, paso a paso
+              Tu primera semana, paso a paso
             </h3>
             <ol className="space-y-3">
               {ROADMAP.map((step, idx) => {
@@ -280,10 +332,14 @@ export function GraciasPagoClient() {
                           {step.day}
                         </span>
                         {step.done && (
-                          <span className="text-[10px] text-emerald-400">✓ Completo</span>
+                          <span className="text-[10px] text-emerald-400">
+                            ✓ Listo
+                          </span>
                         )}
                       </div>
-                      <p className="text-white font-semibold text-sm">{step.title}</p>
+                      <p className="text-white font-semibold text-sm">
+                        {step.title}
+                      </p>
                       <p className="text-brand-gray text-xs mt-1 leading-relaxed">
                         {step.description}
                       </p>
@@ -297,7 +353,7 @@ export function GraciasPagoClient() {
             </ol>
           </motion.div>
 
-          {/* WhatsApp + comunidad */}
+          {/* WhatsApp Brian + comunidad */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -305,7 +361,7 @@ export function GraciasPagoClient() {
             className="mt-10 grid sm:grid-cols-2 gap-4"
           >
             <a
-              href={WHATSAPP_ADVISOR_URL}
+              href={brianWhatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group p-5 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 hover:bg-emerald-500/10 transition-colors"
@@ -313,14 +369,15 @@ export function GraciasPagoClient() {
               <div className="flex items-center gap-3 mb-2">
                 <MessageCircle className="w-5 h-5 text-emerald-400" />
                 <p className="text-white font-semibold text-sm">
-                  WhatsApp con tu asesora
+                  Escríbele a Brian por WhatsApp
                 </p>
               </div>
               <p className="text-xs text-brand-gray mb-3">
-                Diana está lista para resolver dudas y acelerar tu onboarding.
+                Brian es tu coordinador de cuenta. Ya conoce los datos de tu
+                compra; solo confírmale que llegaste y arranca tu proceso.
               </p>
               <span className="text-[11px] text-emerald-400 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                Abrir chat <ArrowRight className="w-3 h-3" />
+                Abrir chat con Brian <ArrowRight className="w-3 h-3" />
               </span>
             </a>
 
@@ -337,22 +394,24 @@ export function GraciasPagoClient() {
                 </p>
               </div>
               <p className="text-xs text-brand-gray mb-3">
-                +200 marcas compartiendo estrategias, casos y resultados.
+                Más de 200 marcas comparten estrategias, casos y resultados.
+                Únete y aprende de quienes ya están dentro.
               </p>
               <span className="text-[11px] text-brand-yellow font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                Unirme <ArrowRight className="w-3 h-3" />
+                Unirme a la comunidad <ArrowRight className="w-3 h-3" />
               </span>
             </a>
           </motion.div>
 
           {/* Redes */}
           <div className="mt-10 flex items-center justify-center gap-4 text-xs text-brand-gray/50">
-            <span>Síguenos:</span>
+            <span>Síguenos en redes:</span>
             <a
               href="https://www.instagram.com/agenciaugccolombia"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-brand-yellow transition-colors"
+              aria-label="Instagram de UGC Colombia"
             >
               <Instagram className="w-5 h-5" />
             </a>

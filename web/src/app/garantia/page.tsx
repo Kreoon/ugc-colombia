@@ -27,13 +27,13 @@ const SUMMARY_CARDS = [
     icon: Target,
     label: "CTR mínimo",
     value: `≥ ${PERFORMANCE_GUARANTEE.minCtrPercent}%`,
-    desc: "Click-Through Rate por video en anuncios pagados",
+    desc: "Tasa de clics por video en anuncios pagados",
   },
   {
     icon: TrendingUp,
     label: "Hook Rate mínimo",
     value: `≥ ${PERFORMANCE_GUARANTEE.minHookRatePercent}%`,
-    desc: "Audiencia que ve más de 3 segundos del video",
+    desc: "Personas que pasan los primeros 3 segundos del video",
   },
   {
     icon: RefreshCcw,
@@ -211,13 +211,14 @@ export default function GarantiaPage() {
                 · Subes los 10 videos a anuncios pagados de Meta o TikTok.
               </li>
               <li>
-                · Después de 14 días de gasto activo, revisamos métricas con
-                acceso a tu Business Manager.
+                · Después de 14 días con gasto activo, revisamos las métricas
+                con acceso a tu cuenta publicitaria.
               </li>
               <li>
                 · Si <strong className="text-white">5 videos</strong> no logran
-                CTR ≥ 1.5% ni Hook Rate ≥ 25% en ninguna de sus 3 variantes →
-                te reemplazamos hasta 3 (el 30% del paquete) sin costo extra.
+                ni 1.5% de tasa de clics ni 25% de tasa de retención en ninguna
+                de sus 3 variantes → te reemplazamos hasta 3 (el 30% del
+                paquete) sin costo extra.
               </li>
               <li>
                 · Si{" "}

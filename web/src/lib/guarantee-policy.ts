@@ -9,10 +9,10 @@
  */
 
 export const PERFORMANCE_GUARANTEE = {
-  /** CTR mínimo para considerar que un video cumple. (Click-Through Rate, %.) */
+  /** Tasa de clics (CTR) mínima para considerar que un video cumple. */
   minCtrPercent: 1.5,
 
-  /** Hook Rate mínimo. (Porcentaje del audience que ve más de 3s.) */
+  /** Tasa de retención (Hook Rate) mínima — % de personas que pasan los 3s. */
   minHookRatePercent: 25,
 
   /** Porcentaje del paquete que es reemplazable cuando aplica la garantía. */
@@ -55,23 +55,23 @@ export const GUARANTEE_RULES: ReadonlyArray<{
 }> = [
   {
     title: "Se mide por video, no por variante",
-    body: "Cada video del paquete se entrega con varias variantes. Si UNA sola variante de ese video supera los umbrales (CTR ≥ 1.5% y Hook Rate ≥ 25%), el video se considera ganador y no aplica la garantía sobre él.",
+    body: "Cada video del paquete se entrega con varias variantes. Si UNA sola variante de ese video supera los umbrales (tasa de clics ≥ 1.5% y tasa de retención ≥ 25%), el video se considera ganador y no aplica la garantía sobre él.",
   },
   {
     title: "Solo aplica si los videos están en publicidad pagada",
-    body: "La garantía cubre el desempeño en anuncios pagados de venta (Meta Ads, TikTok Ads o Google Ads). Si los videos solo se publican como contenido orgánico, no se puede medir CTR ni Hook Rate y la garantía no aplica.",
+    body: "La garantía cubre el desempeño en anuncios pagados de venta (Meta, TikTok o Google). Si los videos solo se publican como contenido orgánico, no se puede medir el desempeño y la garantía no aplica.",
   },
   {
     title: "Necesitamos acceso a tu cuenta publicitaria",
-    body: "Para validar las métricas debemos poder ver el desempeño en tu Business Manager (Meta), TikTok Ads Manager o Google Ads. Damos las instrucciones de acceso seguro al momento del kickoff.",
+    body: "Para validar las métricas debemos poder ver el desempeño en tu administrador de anuncios (Meta, TikTok o Google). Te damos las instrucciones de acceso seguro en la reunión de inicio.",
   },
   {
     title: "Reemplazo cubierto: hasta el 30% del paquete",
-    body: "Si los videos no llegan a los umbrales, los reemplazamos sin costo hasta cubrir el 30% del paquete. Por ejemplo: en el plan Crecimiento (10 videos), hasta 3 videos son reemplazables.",
+    body: "Si los videos no llegan a los umbrales, los reemplazamos sin costo hasta cubrir el 30% del paquete. Ejemplo: en el plan Crecimiento (10 videos), hasta 3 videos son reemplazables.",
   },
   {
-    title: "Si el 80% del paquete cumple, la garantía se anula",
-    body: "Si la mayoría del contenido (80% o más) supera los umbrales, significa que la campaña está funcionando — la garantía completa se desactiva sobre los videos restantes.",
+    title: "Si el 80% del paquete sí cumple, la garantía se anula",
+    body: "Si la mayor parte del contenido (80% o más) sí cumple los umbrales, significa que la campaña está funcionando bien — la garantía se desactiva sobre los videos restantes.",
   },
   {
     title: "Ventana de evaluación: 14 días después de publicación",

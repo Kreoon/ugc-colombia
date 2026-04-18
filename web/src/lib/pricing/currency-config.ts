@@ -29,21 +29,28 @@ export const CURRENCY_META: Record<Currency, CurrencyMeta> = {
 };
 
 export interface PlanPricing {
+  /** Precio mensual base (sin descuento por compromiso). */
   amount: number;
+  /** Ahorro mensual estimado vs. contratar por separado (para copy de UX). */
   monthlySavings: number;
 }
 
+/**
+ * Precios mensuales base (ciclo de 1 mes, sin descuento por compromiso).
+ * Los descuentos por duración (3/6/12 meses) se aplican encima y están
+ * definidos en `@/lib/stripe/plans:DURATION_DISCOUNT`.
+ */
 export const PLAN_PRICES: Record<string, Record<Currency, PlanPricing>> = {
   starter: {
-    USD: { amount: 400, monthlySavings: 590 },
+    USD: { amount: 590, monthlySavings: 400 },
     COP: { amount: 1_590_000, monthlySavings: 2_350_000 },
   },
   growth: {
-    USD: { amount: 700, monthlySavings: 1_055 },
+    USD: { amount: 890, monthlySavings: 855 },
     COP: { amount: 2_590_000, monthlySavings: 3_890_000 },
   },
   scale: {
-    USD: { amount: 1_500, monthlySavings: 3_315 },
+    USD: { amount: 1_890, monthlySavings: 2_925 },
     COP: { amount: 5_890_000, monthlySavings: 12_990_000 },
   },
 };

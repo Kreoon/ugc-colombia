@@ -12,6 +12,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema } from "@/lib/seo/json-ld";
 import { getCurrencyFromHeaders } from "@/lib/geo/server";
 import { GTM_ID } from "@/lib/tracking/constants";
+import { cookies } from "next/headers";
+import {
+  DEFAULT_BILLING_DURATION,
+  isValidBillingDuration,
+  type BillingDuration,
+} from "@/lib/stripe/plans";
 
 const anton = Anton({
   weight: "400",
@@ -88,6 +94,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { currency, country } = await getCurrencyFromHeaders();
+  const cookieStore = await cookies();
+  const rawDuration = cookieStore.get("ugc_billing_duration")?.value;
+  const parsedDuration = rawDuration ? Number(rawDuration) : undefined;
+  const initialDuration: BillingDuration = isValidBillingDuration(parsedDuration)
+    ? parsedDuration
+    : DEFAULT_BILLING_DURATION;
 
   return (
     <html
@@ -128,7 +140,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           Saltar al contenido principal
         </a>
         <PageLoader />
-        <CurrencyProvider initialCurrency={currency} initialCountry={country}>
+        <CurrencyProvider
+          initialCurrency={currency}
+          initialCountry={country}
+          initialDuration={initialDuration}
+        >
           <AuditProvider>
             <UrgencyBanner />
             {children}

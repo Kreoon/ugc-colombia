@@ -1,4 +1,8 @@
 import { Zap, Sparkles, Rocket, Crown, type LucideIcon } from "lucide-react";
+import {
+  computeGuaranteeForPlan,
+  type PlanGuarantee,
+} from "@/lib/guarantee-policy";
 
 export type CtaType = "stripe" | "agenda";
 
@@ -9,9 +13,12 @@ export interface Plan {
   videos: string;
   /** Cantidad numérica de videos/mes — usada para calcular precio por video. */
   videosCount: number;
+  /** Variantes incluidas por video (afecta el cálculo de entregables). */
+  variantsPerVideo: number;
   variants: string;
   description: string;
   features: string[];
+  guarantee: PlanGuarantee;
   ctaLabel: string;
   ctaType: CtaType;
   ctaHref: string;
@@ -19,23 +26,45 @@ export interface Plan {
   badge?: string;
 }
 
+function totalDeliverables(videos: number, variants: number): number {
+  // Total = videos originales + (videos × variantes adicionales)
+  return videos + videos * variants;
+}
+
+const STARTER_VARIANTS = 2;
+const GROWTH_VARIANTS = 3;
+const SCALE_VARIANTS = 3;
+
+const STARTER_VIDEOS = 6;
+const GROWTH_VIDEOS = 10;
+const SCALE_VIDEOS = 30;
+
+const STARTER_GUARANTEE = computeGuaranteeForPlan(STARTER_VIDEOS);
+const GROWTH_GUARANTEE = computeGuaranteeForPlan(GROWTH_VIDEOS);
+const SCALE_GUARANTEE = computeGuaranteeForPlan(SCALE_VIDEOS);
+
 /**
  * Planes UGC recurrentes — fuente de verdad compartida entre home Pricing
  * y la página dedicada /precios. Los precios nativos por moneda viven en
  * `@/lib/pricing/currency-config` (PLAN_PRICES) para permitir multi-moneda
  * con precios psicológicamente redondeados por país.
+ *
+ * La garantía de performance se calcula desde `@/lib/guarantee-policy` para
+ * mantener una sola fuente de verdad de los umbrales (CTR ≥ 1.5%, HR ≥ 25%)
+ * y del cap de reemplazo (30% del paquete).
  */
 export const PLANES_RECURRENTES: Plan[] = [
   {
     id: "starter",
     name: "INICIO",
     icon: Zap,
-    videos: "6 videos UGC",
-    videosCount: 6,
-    variants: "+ 2 variantes = 18 entregables",
+    videos: `${STARTER_VIDEOS} videos UGC`,
+    videosCount: STARTER_VIDEOS,
+    variantsPerVideo: STARTER_VARIANTS,
+    variants: `+ ${STARTER_VARIANTS} variantes = ${totalDeliverables(STARTER_VIDEOS, STARTER_VARIANTS)} entregables`,
     description: "Para marcas que quieren probar sin complicarse.",
     features: [
-      "6 videos UGC + 2 variantes cada uno",
+      `${STARTER_VIDEOS} videos UGC + ${STARTER_VARIANTS} variantes cada uno`,
       "Investigación de mercado básica",
       "Hasta 2 creadores distintos",
       "Guiones escritos por nuestro equipo",
@@ -43,8 +72,10 @@ export const PLANES_RECURRENTES: Plan[] = [
       "Edición profesional lista para publicar",
       "1 ronda de revisión por video",
       "Entrega en 7 días",
+      `Garantía de performance: ${STARTER_GUARANTEE.shortLabel}`,
       "Licencia de publicidad 12 meses",
     ],
+    guarantee: STARTER_GUARANTEE,
     ctaLabel: "Quiero empezar",
     ctaType: "stripe",
     ctaHref: "/checkout/starter",
@@ -53,12 +84,13 @@ export const PLANES_RECURRENTES: Plan[] = [
     id: "growth",
     name: "CRECIMIENTO",
     icon: Sparkles,
-    videos: "10 videos UGC",
-    videosCount: 10,
-    variants: "+ 2 variantes = 30 entregables",
+    videos: `${GROWTH_VIDEOS} videos UGC`,
+    videosCount: GROWTH_VIDEOS,
+    variantsPerVideo: GROWTH_VARIANTS,
+    variants: `+ ${GROWTH_VARIANTS} variantes = ${totalDeliverables(GROWTH_VIDEOS, GROWTH_VARIANTS)} entregables`,
     description: "El más popular: para marcas que ya saben lo que funciona.",
     features: [
-      "10 videos UGC + 2 variantes cada uno",
+      `${GROWTH_VIDEOS} videos UGC + ${GROWTH_VARIANTS} variantes cada uno`,
       "Investigación de mercado V2 (continua)",
       "Parrilla de contenido mensual planificada",
       "Hasta 5 creadores distintos",
@@ -70,8 +102,10 @@ export const PLANES_RECURRENTES: Plan[] = [
       "Reporte mensual de resultados",
       "Asesora de cuenta dedicada",
       "Entrega en 7 días",
+      `Garantía de performance: ${GROWTH_GUARANTEE.shortLabel}`,
       "Licencia de publicidad 12 meses",
     ],
+    guarantee: GROWTH_GUARANTEE,
     ctaLabel: "Quiero crecer",
     ctaType: "stripe",
     ctaHref: "/checkout/growth",
@@ -82,13 +116,14 @@ export const PLANES_RECURRENTES: Plan[] = [
     id: "scale",
     name: "ESCALA",
     icon: Rocket,
-    videos: "30 videos UGC",
-    videosCount: 30,
-    variants: "+ 3 variantes = 120 entregables",
+    videos: `${SCALE_VIDEOS} videos UGC`,
+    videosCount: SCALE_VIDEOS,
+    variantsPerVideo: SCALE_VARIANTS,
+    variants: `+ ${SCALE_VARIANTS} variantes = ${totalDeliverables(SCALE_VIDEOS, SCALE_VARIANTS)} entregables`,
     description:
       "Para marcas que ya entendieron que el contenido es su mayor ventaja.",
     features: [
-      "30 videos UGC + 3 variantes cada uno",
+      `${SCALE_VIDEOS} videos UGC + ${SCALE_VARIANTS} variantes cada uno`,
       "Investigación V3 Plus (deep market research)",
       "Scraping automatizado de competidores",
       "Scraping de productos similares en el mercado",
@@ -102,8 +137,10 @@ export const PLANES_RECURRENTES: Plan[] = [
       "Reportes semanales con datos accionables",
       "Asesora de cuenta senior dedicada",
       "Entrega prioritaria",
+      `Garantía de performance: ${SCALE_GUARANTEE.shortLabel}`,
       "Licencia de publicidad 12 meses",
     ],
+    guarantee: SCALE_GUARANTEE,
     ctaLabel: "Quiero escalar",
     ctaType: "stripe",
     ctaHref: "/checkout/scale",
@@ -122,6 +159,7 @@ export const ENTERPRISE_FEATURES = [
   "Panel en tiempo real",
   "Slack/Teams compartido",
   "Acuerdos de servicio garantizados por contrato",
+  "Garantía de performance personalizada por contrato",
   "Publicación con tu marca (negociable según engagement y seguidores del creador)",
   "Arranque ejecutivo con Alexander Cast",
 ];
@@ -152,25 +190,25 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   {
     category: "Producción",
     feature: "Videos UGC al mes",
-    inicio: "6",
-    crecimiento: "10",
-    escala: "30",
+    inicio: String(STARTER_VIDEOS),
+    crecimiento: String(GROWTH_VIDEOS),
+    escala: String(SCALE_VIDEOS),
     enterprise: "60+",
   },
   {
     category: "Producción",
     feature: "Variantes por video",
-    inicio: "2",
-    crecimiento: "2",
-    escala: "3",
+    inicio: String(STARTER_VARIANTS),
+    crecimiento: String(GROWTH_VARIANTS),
+    escala: String(SCALE_VARIANTS),
     enterprise: "3",
   },
   {
     category: "Producción",
     feature: "Entregables totales/mes",
-    inicio: "18",
-    crecimiento: "30",
-    escala: "120",
+    inicio: String(totalDeliverables(STARTER_VIDEOS, STARTER_VARIANTS)),
+    crecimiento: String(totalDeliverables(GROWTH_VIDEOS, GROWTH_VARIANTS)),
+    escala: String(totalDeliverables(SCALE_VIDEOS, SCALE_VARIANTS)),
     enterprise: "200+",
   },
   {
@@ -188,6 +226,30 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     crecimiento: "2",
     escala: "Ilimitadas",
     enterprise: "Ilimitadas",
+  },
+  {
+    category: "Garantía",
+    feature: "Videos reemplazables si no rinden",
+    inicio: STARTER_GUARANTEE.shortLabel,
+    crecimiento: GROWTH_GUARANTEE.shortLabel,
+    escala: SCALE_GUARANTEE.shortLabel,
+    enterprise: "Personalizada",
+  },
+  {
+    category: "Garantía",
+    feature: "Umbral CTR mínimo",
+    inicio: "≥ 1.5%",
+    crecimiento: "≥ 1.5%",
+    escala: "≥ 1.5%",
+    enterprise: "Negociable",
+  },
+  {
+    category: "Garantía",
+    feature: "Umbral Hook Rate mínimo",
+    inicio: "≥ 25%",
+    crecimiento: "≥ 25%",
+    escala: "≥ 25%",
+    enterprise: "Negociable",
   },
   {
     category: "Estrategia",

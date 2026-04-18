@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Sparkles,
   AlertCircle,
+  Globe,
 } from "lucide-react";
 import { Navbar } from "@/components/home/Navbar";
 import { Footer } from "@/components/home/Footer";
@@ -32,9 +33,26 @@ import {
 
 interface CustomCheckoutClientProps {
   initialVideos: number;
-  initialCurrency: Currency;
   initialDuration?: BillingDuration;
   wasCanceled: boolean;
+  /** Código ISO2 de país detectado por IP. No editable por el user. */
+  country: string;
+}
+
+function countryLabel(code: string): string {
+  const map: Record<string, string> = {
+    CO: "Colombia",
+    US: "Estados Unidos",
+    MX: "México",
+    PE: "Perú",
+    CL: "Chile",
+    AR: "Argentina",
+    EC: "Ecuador",
+    ES: "España",
+    BR: "Brasil",
+    VE: "Venezuela",
+  };
+  return map[code] ?? code;
 }
 
 function resolveMonthlyPrice(
@@ -56,13 +74,12 @@ function resolveMonthlyPrice(
 
 export function CustomCheckoutClient({
   initialVideos,
-  initialCurrency,
   initialDuration,
   wasCanceled,
+  country,
 }: CustomCheckoutClientProps) {
   const {
-    currency: globalCurrency,
-    setCurrency: setGlobalCurrency,
+    currency,
     duration: globalDuration,
     setDuration: setGlobalDuration,
   } = useCurrency();
@@ -72,27 +89,21 @@ export function CustomCheckoutClient({
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [country, setCountry] = useState("CO");
   const [taxId, setTaxId] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Al montar, si el URL trae moneda/duración, los adoptamos en el provider.
   useEffect(() => {
-    if (initialCurrency && initialCurrency !== globalCurrency) {
-      setGlobalCurrency(initialCurrency);
-    }
     if (isValidBillingDuration(initialDuration) && initialDuration !== globalDuration) {
       setGlobalDuration(initialDuration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const currency = globalCurrency;
   const duration = globalDuration;
 
-  const { monthlyAmount, label, cycleTotal, monthlyEquivalent, savings, discountPct } =
+  const { monthlyAmount, label, cycleTotal, monthlyEquivalent, savings } =
     useMemo(() => {
       const { amount, label } = resolveMonthlyPrice(videos, currency);
       const cycle = applyDurationDiscount(amount, duration);
@@ -102,13 +113,11 @@ export function CustomCheckoutClient({
         cycleTotal: cycle,
         monthlyEquivalent: duration > 0 ? Math.round(cycle / duration) : amount,
         savings: amount * duration - cycle,
-        discountPct: Math.round(DURATION_DISCOUNT[duration] * 100),
       };
     }, [videos, currency, duration]);
 
   const perVideo = videos > 0 ? Math.round(monthlyAmount / videos) : 0;
-  const cycleLabel =
-    duration === 1 ? "cada mes" : `cada ${duration} meses`;
+  const cycleLabel = duration === 1 ? "cada mes" : `cada ${duration} meses`;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -128,12 +137,10 @@ export function CustomCheckoutClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           videos,
-          currency,
           duration,
           email,
           name,
           company,
-          country,
           whatsapp: whatsapp || undefined,
           tax_id: taxId || undefined,
         }),
@@ -272,7 +279,7 @@ export function CustomCheckoutClient({
                   {currency} · {formatPrice(perVideo, currency)} por video
                 </p>
                 {duration > 1 && (
-                  <div className="mt-2 flex items-center gap-2 text-xs">
+                  <div className="mt-2 flex items-center gap-2 text-xs flex-wrap">
                     <span className="text-brand-gray">
                       Equivalente a{" "}
                       <strong className="text-white">
@@ -287,21 +294,12 @@ export function CustomCheckoutClient({
                   </div>
                 )}
 
-                <div className="mt-5 flex gap-2">
-                  {(["USD", "COP"] as Currency[]).map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setGlobalCurrency(c)}
-                      className={`flex-1 px-3 py-2 rounded-lg border text-xs font-semibold transition-colors ${
-                        currency === c
-                          ? "border-brand-gold bg-brand-yellow/10 text-brand-yellow"
-                          : "border-brand-graphite text-brand-gray hover:border-brand-gold/40"
-                      }`}
-                    >
-                      {c === "USD" ? "Pagar en USD" : "Pagar en COP"}
-                    </button>
-                  ))}
+                <div className="mt-4 flex items-center gap-2 rounded-lg bg-black/30 border border-brand-graphite/60 px-3 py-2">
+                  <Globe className="w-3.5 h-3.5 text-brand-gold/70 flex-shrink-0" />
+                  <span className="text-[11px] text-brand-gray">
+                    Desde {countryLabel(country)} se paga en{" "}
+                    <strong className="text-white">{currency}</strong>
+                  </span>
                 </div>
               </div>
 
@@ -327,30 +325,7 @@ export function CustomCheckoutClient({
                 <Field label="Email" type="email" required value={email} onChange={setEmail} autoComplete="email" />
                 <Field label="Empresa / Marca" required value={company} onChange={setCompany} autoComplete="organization" />
                 <Field label="WhatsApp (opcional)" value={whatsapp} onChange={setWhatsapp} autoComplete="tel" />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[11px] font-bold tracking-widest uppercase text-brand-gray mb-2">
-                      País
-                    </label>
-                    <select
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-brand-graphite/60 bg-black/40 text-white text-sm focus:outline-none focus:border-brand-gold"
-                    >
-                      <option value="CO">Colombia</option>
-                      <option value="US">Estados Unidos</option>
-                      <option value="MX">México</option>
-                      <option value="PE">Perú</option>
-                      <option value="CL">Chile</option>
-                      <option value="AR">Argentina</option>
-                      <option value="EC">Ecuador</option>
-                      <option value="ES">España</option>
-                      <option value="OT">Otro</option>
-                    </select>
-                  </div>
-                  <Field label="NIT / RUC (opcional)" value={taxId} onChange={setTaxId} />
-                </div>
+                <Field label="NIT / RUC (opcional)" value={taxId} onChange={setTaxId} />
 
                 <label className="flex items-start gap-3 text-xs text-brand-gray cursor-pointer">
                   <input

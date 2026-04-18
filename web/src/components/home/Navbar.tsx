@@ -5,7 +5,6 @@ import Image from "next/image";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CurrencySwitcher } from "@/components/ui/CurrencySwitcher";
 import { useAudit } from "@/components/lead-audit/AuditContext";
 import { cn } from "@/lib/utils";
 
@@ -150,7 +149,6 @@ export function Navbar() {
 
         {/* Lado derecho: CTA visible siempre en mobile + desktop */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <CurrencySwitcher className="hidden sm:flex" />
           {/* CTA visible en mobile (compacto) + desktop (normal) */}
           <Button
             size="default"
@@ -265,7 +263,6 @@ export function Navbar() {
             </a>
 
             <div className="mt-3 pt-4 border-t border-white/10 flex items-center gap-3">
-              <CurrencySwitcher />
               <Button
                 size="lg"
                 className="flex-1 min-h-[48px] text-base font-bold"

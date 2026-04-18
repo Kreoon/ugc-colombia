@@ -9,12 +9,13 @@ import {
   Lock,
   ShieldCheck,
   AlertCircle,
+  Globe,
 } from "lucide-react";
 import { Navbar } from "@/components/home/Navbar";
 import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
 import { useCurrency } from "@/components/providers/CurrencyProvider";
-import { PLAN_PRICES, type Currency } from "@/lib/pricing/currency-config";
+import { PLAN_PRICES } from "@/lib/pricing/currency-config";
 import { formatPrice } from "@/lib/pricing/format";
 import {
   BILLING_DURATIONS,
@@ -33,8 +34,25 @@ interface CheckoutClientProps {
   planDescription: string;
   features: string[];
   wasCanceled: boolean;
+  /** Código ISO2 de país detectado por IP. Nunca editable por el user. */
+  country: string;
   initialDuration?: BillingDuration;
-  initialCurrency?: Currency;
+}
+
+function countryLabel(code: string): string {
+  const map: Record<string, string> = {
+    CO: "Colombia",
+    US: "Estados Unidos",
+    MX: "México",
+    PE: "Perú",
+    CL: "Chile",
+    AR: "Argentina",
+    EC: "Ecuador",
+    ES: "España",
+    BR: "Brasil",
+    VE: "Venezuela",
+  };
+  return map[code] ?? code;
 }
 
 export function CheckoutClient({
@@ -44,25 +62,22 @@ export function CheckoutClient({
   planDescription,
   features,
   wasCanceled,
+  country,
   initialDuration,
-  initialCurrency,
 }: CheckoutClientProps) {
-  const { currency, setCurrency, duration, setDuration } = useCurrency();
+  const { currency, duration, setDuration } = useCurrency();
 
-  // Si el URL trae duration/currency (ej. deeplink desde calculadora),
-  // sincroniza el provider al valor de la URL en el primer render.
   useEffect(() => {
-    if (initialCurrency && initialCurrency !== currency) setCurrency(initialCurrency);
     if (isValidBillingDuration(initialDuration) && initialDuration !== duration) {
       setDuration(initialDuration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [country, setCountry] = useState("CO");
   const [taxId, setTaxId] = useState("");
   const [accepted, setAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -96,12 +111,10 @@ export function CheckoutClient({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           planId,
-          currency,
           duration,
           email,
           name,
           company,
-          country,
           whatsapp: whatsapp || undefined,
           tax_id: taxId || undefined,
         }),
@@ -119,8 +132,7 @@ export function CheckoutClient({
     }
   }
 
-  const cycleLabel =
-    duration === 1 ? "cada mes" : `cada ${duration} meses`;
+  const cycleLabel = duration === 1 ? "cada mes" : `cada ${duration} meses`;
 
   return (
     <>
@@ -228,7 +240,7 @@ export function CheckoutClient({
                 </div>
 
                 {duration > 1 && (
-                  <div className="mt-3 flex items-center gap-2 text-xs">
+                  <div className="mt-3 flex items-center gap-2 text-xs flex-wrap">
                     <span className="text-brand-gray">
                       Equivalente a{" "}
                       <strong className="text-white">
@@ -248,21 +260,12 @@ export function CheckoutClient({
                   </p>
                 )}
 
-                <div className="mt-5 flex gap-2">
-                  {(["USD", "COP"] as Currency[]).map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setCurrency(c)}
-                      className={`flex-1 px-3 py-2 rounded-lg border text-xs font-semibold transition-colors ${
-                        currency === c
-                          ? "border-brand-gold bg-brand-yellow/10 text-brand-yellow"
-                          : "border-brand-graphite text-brand-gray hover:border-brand-gold/40"
-                      }`}
-                    >
-                      {c === "USD" ? "Pagar en USD" : "Pagar en COP"}
-                    </button>
-                  ))}
+                <div className="mt-4 flex items-center gap-2 rounded-lg bg-black/30 border border-brand-graphite/60 px-3 py-2">
+                  <Globe className="w-3.5 h-3.5 text-brand-gold/70 flex-shrink-0" />
+                  <span className="text-[11px] text-brand-gray">
+                    Desde {countryLabel(country)} se paga en{" "}
+                    <strong className="text-white">{currency}</strong>
+                  </span>
                 </div>
               </div>
 
@@ -325,34 +328,11 @@ export function CheckoutClient({
                   onChange={setWhatsapp}
                   autoComplete="tel"
                 />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[11px] font-bold tracking-widest uppercase text-brand-gray mb-2">
-                      País
-                    </label>
-                    <select
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-brand-graphite/60 bg-black/40 text-white text-sm focus:outline-none focus:border-brand-gold"
-                    >
-                      <option value="CO">Colombia</option>
-                      <option value="US">Estados Unidos</option>
-                      <option value="MX">México</option>
-                      <option value="PE">Perú</option>
-                      <option value="CL">Chile</option>
-                      <option value="AR">Argentina</option>
-                      <option value="EC">Ecuador</option>
-                      <option value="ES">España</option>
-                      <option value="OT">Otro</option>
-                    </select>
-                  </div>
-                  <Field
-                    label="NIT / RUC (opcional)"
-                    value={taxId}
-                    onChange={setTaxId}
-                  />
-                </div>
+                <Field
+                  label="NIT / RUC (opcional)"
+                  value={taxId}
+                  onChange={setTaxId}
+                />
 
                 <label className="flex items-start gap-3 text-xs text-brand-gray cursor-pointer">
                   <input

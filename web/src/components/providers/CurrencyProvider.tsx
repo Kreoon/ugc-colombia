@@ -19,15 +19,17 @@ import {
   type BillingDuration,
 } from "@/lib/stripe/plans";
 
-const CURRENCY_COOKIE = "ugc_currency";
 const DURATION_COOKIE = "ugc_billing_duration";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 interface CurrencyContextValue {
+  /**
+   * Moneda activa. Derivada 100% del país detectado por IP en el server —
+   * NO es cambiable desde el cliente (no hay setCurrency por diseño).
+   */
   currency: Currency;
   country: string | null;
   duration: BillingDuration;
-  setCurrency: (next: Currency) => void;
   setDuration: (next: BillingDuration) => void;
   format: (amount: number) => string;
 }
@@ -45,21 +47,13 @@ export function CurrencyProvider({
   initialCountry: string | null;
   initialDuration?: BillingDuration;
 }) {
-  const [currency, setCurrencyState] = useState<Currency>(
-    initialCurrency ?? DEFAULT_CURRENCY,
-  );
+  const currency = initialCurrency ?? DEFAULT_CURRENCY;
+
   const [duration, setDurationState] = useState<BillingDuration>(
     isValidBillingDuration(initialDuration)
       ? initialDuration
       : DEFAULT_BILLING_DURATION,
   );
-
-  const setCurrency = useCallback((next: Currency) => {
-    setCurrencyState(next);
-    if (typeof document !== "undefined") {
-      document.cookie = `${CURRENCY_COOKIE}=${next}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
-    }
-  }, []);
 
   const setDuration = useCallback((next: BillingDuration) => {
     setDurationState(next);
@@ -73,11 +67,10 @@ export function CurrencyProvider({
       currency,
       country: initialCountry,
       duration,
-      setCurrency,
       setDuration,
       format: (amount: number) => formatPrice(amount, currency),
     }),
-    [currency, duration, initialCountry, setCurrency, setDuration],
+    [currency, duration, initialCountry, setDuration],
   );
 
   return (

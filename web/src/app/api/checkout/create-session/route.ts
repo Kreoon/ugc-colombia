@@ -10,19 +10,19 @@ import { createSupabaseServiceRole } from "@/lib/supabase-server";
 import { notifyAdmin } from "@/lib/email/stripe-notifications";
 import { PLAN_PRICES } from "@/lib/pricing/currency-config";
 import { applyDurationDiscount } from "@/lib/stripe/plans";
+import { getCurrencyFromHeaders } from "@/lib/geo/server";
+import { getOrCreateStripeCustomer } from "@/lib/stripe/customers";
 
 export const runtime = "nodejs";
 
 const bodySchema = z.object({
   planId: z.enum(["starter", "growth", "scale"]),
-  currency: z.enum(["USD", "COP"]),
   duration: z
     .union([z.literal(1), z.literal(3), z.literal(6), z.literal(12)])
     .default(1),
   email: z.string().email(),
   name: z.string().min(1).max(120),
   company: z.string().min(1).max(160),
-  country: z.string().min(2).max(2).default("CO"),
   whatsapp: z.string().min(7).max(20).optional(),
   tax_id: z.string().max(40).optional(),
 });
@@ -43,43 +43,31 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Plan inválido" }, { status: 400 });
     }
 
+    // Currency y país vienen 100% del server (geo-IP). NO del body.
+    // Esto garantiza que un visitante desde Colombia siempre paga COP y
+    // un visitante desde fuera siempre paga USD, sin posibilidad de
+    // manipulación desde el cliente.
+    const { currency, country } = await getCurrencyFromHeaders();
+    const detectedCountry = country ?? "US";
+
     const duration = data.duration as BillingDuration;
     const stripe = getStripe();
-    const priceId = getStripePriceId(data.planId, data.currency, duration);
+    const priceId = getStripePriceId(data.planId, currency, duration);
 
-    // Reutiliza Customer si existe (evita duplicados en Stripe).
+    // Reutiliza Customer si existe en Stripe (helper valida que no esté
+    // deleted/missing y recrea automáticamente si es el caso).
     const supabase = createSupabaseServiceRole();
-    const { data: existingCustomer } = await supabase
-      .from("stripe_customers")
-      .select("stripe_customer_id")
-      .eq("email", data.email)
-      .maybeSingle();
-
-    let customerId = existingCustomer?.stripe_customer_id;
-    if (!customerId) {
-      const customer = await stripe.customers.create({
-        email: data.email,
-        name: data.name,
-        metadata: {
-          company: data.company,
-          country: data.country,
-          whatsapp: data.whatsapp ?? "",
-          tax_id: data.tax_id ?? "",
-          source: "ugccolombia.co/checkout",
-        },
-      });
-      customerId = customer.id;
-
-      await supabase.from("stripe_customers").insert({
-        stripe_customer_id: customerId,
-        email: data.email,
-        metadata: {
-          company: data.company,
-          country: data.country,
-          whatsapp: data.whatsapp ?? null,
-        },
-      });
-    }
+    const customerId = await getOrCreateStripeCustomer(supabase, {
+      email: data.email,
+      name: data.name,
+      metadata: {
+        company: data.company,
+        country: detectedCountry,
+        whatsapp: data.whatsapp ?? "",
+        tax_id: data.tax_id ?? "",
+        source: "ugccolombia.co/checkout",
+      },
+    });
 
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ??
@@ -97,19 +85,19 @@ export async function POST(req: NextRequest) {
       subscription_data: {
         metadata: {
           plan_id: data.planId,
-          currency: data.currency,
+          currency,
           billing_interval_count: String(duration),
           company: data.company,
-          country: data.country,
+          country: detectedCountry,
           source: "ugccolombia.co",
         },
       },
       metadata: {
         plan_id: data.planId,
-        currency: data.currency,
+        currency,
         billing_interval_count: String(duration),
         company: data.company,
-        country: data.country,
+        country: detectedCountry,
         whatsapp: data.whatsapp ?? "",
       },
     });
@@ -128,10 +116,8 @@ export async function POST(req: NextRequest) {
       email: data.email,
       plan_id: data.planId,
       billing_interval_count: duration,
-      amount_total: session.amount_total
-        ? session.amount_total / 100
-        : 0,
-      currency: data.currency,
+      amount_total: session.amount_total ? session.amount_total / 100 : 0,
+      currency,
       status: "pending",
       expires_at: session.expires_at
         ? new Date(session.expires_at * 1000).toISOString()
@@ -139,7 +125,7 @@ export async function POST(req: NextRequest) {
       metadata: {
         name: data.name,
         company: data.company,
-        country: data.country,
+        country: detectedCountry,
         whatsapp: data.whatsapp ?? null,
         tax_id: data.tax_id ?? null,
         billing_interval_count: duration,
@@ -147,7 +133,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Notifica al admin que alguien inició checkout (fire-and-forget).
-    const monthlyBase = PLAN_PRICES[data.planId]?.[data.currency]?.amount ?? 0;
+    const monthlyBase = PLAN_PRICES[data.planId]?.[currency]?.amount ?? 0;
     const cycleTotal = applyDurationDiscount(monthlyBase, duration);
     notifyAdmin({
       kind: "checkout_started",
@@ -155,11 +141,11 @@ export async function POST(req: NextRequest) {
       name: data.name,
       company: data.company,
       plan_id: data.planId,
-      currency: data.currency,
+      currency,
       amount: cycleTotal,
       billing_interval_count: duration,
       whatsapp: data.whatsapp ?? null,
-      country: data.country,
+      country: detectedCountry,
       stripe_session_id: session.id,
       stripe_customer_id: customerId,
       extra_note:

@@ -162,8 +162,8 @@ export function PreciosCalculator() {
 
   const checkoutHref =
     plan.slug === "custom"
-      ? `/checkout/custom?videos=${videos}&currency=${currency}&duration=${duration}`
-      : `/checkout/${plan.slug}?duration=${duration}&currency=${currency}`;
+      ? `/checkout/custom?videos=${videos}&duration=${duration}`
+      : `/checkout/${plan.slug}?duration=${duration}`;
 
   const cycleLabel = duration === 1 ? "al mes" : `cada ${duration} meses`;
 

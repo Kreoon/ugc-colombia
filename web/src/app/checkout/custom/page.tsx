@@ -5,6 +5,7 @@ import {
   isValidBillingDuration,
   type BillingDuration,
 } from "@/lib/stripe/plans";
+import { getCurrencyFromHeaders } from "@/lib/geo/server";
 
 export const metadata: Metadata = {
   title: "Plan a la medida — UGC Colombia",
@@ -18,7 +19,6 @@ export default async function CheckoutCustomPage({
 }: {
   searchParams: Promise<{
     videos?: string;
-    currency?: string;
     duration?: string;
     canceled?: string;
   }>;
@@ -26,19 +26,21 @@ export default async function CheckoutCustomPage({
   const sp = await searchParams;
   const videosParsed = sp.videos ? parseInt(sp.videos, 10) : 50;
   const videos = Number.isFinite(videosParsed) ? videosParsed : 50;
-  const currency = sp.currency === "COP" ? "COP" : "USD";
+
   const durationParsed = sp.duration ? Number(sp.duration) : undefined;
   const duration: BillingDuration | undefined = isValidBillingDuration(durationParsed)
     ? durationParsed
     : undefined;
 
+  const { country } = await getCurrencyFromHeaders();
+
   return (
     <Suspense>
       <CustomCheckoutClient
         initialVideos={Math.min(Math.max(videos, 5), 500)}
-        initialCurrency={currency as "USD" | "COP"}
         initialDuration={duration}
         wasCanceled={sp.canceled === "1"}
+        country={country ?? "US"}
       />
     </Suspense>
   );

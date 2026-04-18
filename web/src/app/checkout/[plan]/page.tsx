@@ -7,6 +7,7 @@ import {
   isValidBillingDuration,
   type BillingDuration,
 } from "@/lib/stripe/plans";
+import { getCurrencyFromHeaders } from "@/lib/geo/server";
 import { CheckoutClient } from "./CheckoutClient";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default async function CheckoutPlanPage({
   searchParams,
 }: {
   params: Promise<{ plan: string }>;
-  searchParams: Promise<{ canceled?: string; duration?: string; currency?: string }>;
+  searchParams: Promise<{ canceled?: string; duration?: string }>;
 }) {
   const { plan } = await params;
   const sp = await searchParams;
@@ -30,11 +31,12 @@ export default async function CheckoutPlanPage({
   const planData = PLANES_RECURRENTES.find((p) => p.id === plan);
   if (!planData) notFound();
 
+  const { country } = await getCurrencyFromHeaders();
+
   const durationParsed = sp.duration ? Number(sp.duration) : undefined;
   const initialDuration: BillingDuration | undefined = isValidBillingDuration(durationParsed)
     ? durationParsed
     : undefined;
-  const initialCurrency = sp.currency === "COP" || sp.currency === "USD" ? sp.currency : undefined;
 
   return (
     <Suspense>
@@ -45,8 +47,8 @@ export default async function CheckoutPlanPage({
         planDescription={planData.description}
         features={planData.features}
         wasCanceled={sp.canceled === "1"}
+        country={country ?? "US"}
         initialDuration={initialDuration}
-        initialCurrency={initialCurrency}
       />
     </Suspense>
   );

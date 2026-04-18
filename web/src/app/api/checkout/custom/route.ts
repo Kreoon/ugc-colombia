@@ -14,19 +14,19 @@ import {
 } from "@/lib/pricing/currency-config";
 import { createSupabaseServiceRole } from "@/lib/supabase-server";
 import { notifyAdmin } from "@/lib/email/stripe-notifications";
+import { getCurrencyFromHeaders } from "@/lib/geo/server";
+import { getOrCreateStripeCustomer } from "@/lib/stripe/customers";
 
 export const runtime = "nodejs";
 
 const bodySchema = z.object({
   videos: z.number().int().min(5).max(500),
-  currency: z.enum(["USD", "COP"]),
   duration: z
     .union([z.literal(1), z.literal(3), z.literal(6), z.literal(12)])
     .default(1),
   email: z.string().email(),
   name: z.string().min(1).max(120),
   company: z.string().min(1).max(160),
-  country: z.string().min(2).max(2).default("CO"),
   whatsapp: z.string().min(7).max(20).optional(),
   tax_id: z.string().max(40).optional(),
 });
@@ -70,9 +70,14 @@ export async function POST(req: NextRequest) {
 
     const data = parsed.data;
     const duration = data.duration as BillingDuration;
+
+    // Currency y país siempre vienen del server (geo-IP). NO del body.
+    const { currency, country } = await getCurrencyFromHeaders();
+    const detectedCountry = country ?? "US";
+
     const { amount: monthlyAmount, label } = resolveCustomMonthlyPrice(
       data.videos,
-      data.currency,
+      currency,
     );
     if (monthlyAmount <= 0) {
       return NextResponse.json(
@@ -87,39 +92,18 @@ export async function POST(req: NextRequest) {
     const stripe = getStripe();
     const supabase = createSupabaseServiceRole();
 
-    const { data: existingCustomer } = await supabase
-      .from("stripe_customers")
-      .select("stripe_customer_id")
-      .eq("email", data.email)
-      .maybeSingle();
-
-    let customerId = existingCustomer?.stripe_customer_id;
-    if (!customerId) {
-      const customer = await stripe.customers.create({
-        email: data.email,
-        name: data.name,
-        metadata: {
-          company: data.company,
-          country: data.country,
-          whatsapp: data.whatsapp ?? "",
-          tax_id: data.tax_id ?? "",
-          source: "ugccolombia.co/checkout/custom",
-          videos_per_month: String(data.videos),
-        },
-      });
-      customerId = customer.id;
-
-      await supabase.from("stripe_customers").insert({
-        stripe_customer_id: customerId,
-        email: data.email,
-        metadata: {
-          company: data.company,
-          country: data.country,
-          whatsapp: data.whatsapp ?? null,
-          videos_per_month: data.videos,
-        },
-      });
-    }
+    const customerId = await getOrCreateStripeCustomer(supabase, {
+      email: data.email,
+      name: data.name,
+      metadata: {
+        company: data.company,
+        country: detectedCountry,
+        whatsapp: data.whatsapp ?? "",
+        tax_id: data.tax_id ?? "",
+        source: "ugccolombia.co/checkout/custom",
+        videos_per_month: String(data.videos),
+      },
+    });
 
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ??
@@ -132,8 +116,8 @@ export async function POST(req: NextRequest) {
         {
           quantity: 1,
           price_data: {
-            currency: data.currency.toLowerCase(),
-            unit_amount: toStripeAmount(totalAmount, data.currency),
+            currency: currency.toLowerCase(),
+            unit_amount: toStripeAmount(totalAmount, currency),
             recurring: { interval: "month", interval_count: duration },
             product_data: {
               name: `UGC Colombia — Plan ${label}`,
@@ -153,27 +137,27 @@ export async function POST(req: NextRequest) {
       billing_address_collection: "required",
       locale: "es",
       success_url: `${siteUrl}/gracias-pago?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/checkout/custom?videos=${data.videos}&currency=${data.currency}&duration=${duration}&canceled=1`,
+      cancel_url: `${siteUrl}/checkout/custom?videos=${data.videos}&duration=${duration}&canceled=1`,
       subscription_data: {
         metadata: {
           plan_id: "custom",
           plan_label: label,
-          currency: data.currency,
+          currency,
           videos_per_month: String(data.videos),
           billing_interval_count: String(duration),
           company: data.company,
-          country: data.country,
+          country: detectedCountry,
           source: "ugccolombia.co",
         },
       },
       metadata: {
         plan_id: "custom",
         plan_label: label,
-        currency: data.currency,
+        currency,
         videos_per_month: String(data.videos),
         billing_interval_count: String(duration),
         company: data.company,
-        country: data.country,
+        country: detectedCountry,
         whatsapp: data.whatsapp ?? "",
       },
     });
@@ -192,7 +176,7 @@ export async function POST(req: NextRequest) {
       plan_id: "custom",
       billing_interval_count: duration,
       amount_total: totalAmount,
-      currency: data.currency,
+      currency,
       status: "pending",
       videos_count: data.videos,
       expires_at: session.expires_at
@@ -201,7 +185,7 @@ export async function POST(req: NextRequest) {
       metadata: {
         name: data.name,
         company: data.company,
-        country: data.country,
+        country: detectedCountry,
         whatsapp: data.whatsapp ?? null,
         tax_id: data.tax_id ?? null,
         plan_label: label,
@@ -216,12 +200,12 @@ export async function POST(req: NextRequest) {
       company: data.company,
       plan_id: "custom",
       plan_label: label,
-      currency: data.currency,
+      currency,
       amount: totalAmount,
       billing_interval_count: duration,
       videos_per_month: data.videos,
       whatsapp: data.whatsapp ?? null,
-      country: data.country,
+      country: detectedCountry,
       stripe_session_id: session.id,
       stripe_customer_id: customerId,
       extra_note: `Plan custom: ${data.videos} videos/mes. Fue redirigido a Stripe Checkout.`,

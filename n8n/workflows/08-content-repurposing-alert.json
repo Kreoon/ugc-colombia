@@ -171,8 +171,8 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
-            { "name": "to", "value": "diana@ugccolombia.com" },
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.co>" },
+            { "name": "to", "value": "diana@ugccolombia.co" },
             { "name": "subject", "value": "=Checklist derivadas - {{ $('Code - Format Team Message').item.json.total }} piezas pendientes" },
             { "name": "html", "value": "=<h2>Nuevo pilar subido — Derivadas a generar</h2><pre style='font-family:monospace;background:#f5f5f5;padding:15px;'>{{ $('Code - Format Team Message').item.json.message }}</pre><p>URL del pilar: {{ $('Code - Normalize Payload').item.json.url || 'Sin URL' }}</p><p>Equipo UGC Colombia</p>" }
           ]

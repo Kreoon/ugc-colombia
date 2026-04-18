@@ -133,7 +133,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $('Code - Auth & Validate Payload').item.json.contact_email }}" },
             { "name": "subject", "value": "=Bienvenido a UGC Colombia, {{ $('Code - Auth & Validate Payload').item.json.client_name }}!" },
             { "name": "html", "value": "=<h1>Bienvenido a UGC Colombia!</h1><p>Hola {{ $('Code - Auth & Validate Payload').item.json.client_name }},</p><p>Gracias por confiar en nosotros. Tu plan <strong>{{ $('Code - Auth & Validate Payload').item.json.plan }}</strong> esta activo.</p><p>En las proximas 24h Diana te contactara para el kickoff y onboarding formal.</p><p>- Equipo UGC Colombia</p>" }

@@ -1,0 +1,35 @@
+# CODEOWNERS — UGC Colombia
+# Cualquier PR que toque estas rutas requiere review explicito de @AlexanderKast.
+# Ver CONTRIBUTING.md para flujo completo de colaboracion.
+
+# Default: todo el repo requiere review de Alexander
+*                   @AlexanderKast
+
+# Codigo de producto y backend (sensible)
+/web/               @AlexanderKast
+/supabase/          @AlexanderKast
+/scripts/           @AlexanderKast
+/n8n/               @AlexanderKast
+
+# Infraestructura Claude Code y permisos
+/.claude/           @AlexanderKast
+/.github/           @AlexanderKast
+
+# Docs criticos (contrato de colaboracion)
+/CONTRIBUTING.md    @AlexanderKast
+/README.md          @AlexanderKast
+/.gitignore         @AlexanderKast
+
+# Contenido: Tanya puede proponer cambios, Alexander aprueba
+/content/           @AlexanderKast
+/content/calendar/  @AlexanderKast
+/content/viralidad/ @AlexanderKast
+/brand/             @AlexanderKast
+
+# Packs operativos (por persona)
+/04-PACK-TANYA-COMMUNITY.md     @AlexanderKast
+/01-PACK-ALEXANDER-CEO.md       @AlexanderKast
+/02-PACK-DIANA-CREATORS.md      @AlexanderKast
+/03-PACK-BRIAN-FINANCE.md       @AlexanderKast
+/05-PACK-SAMUEL-TECH.md         @AlexanderKast
+/06-PACK-VALENTINA-EDITOR.md    @AlexanderKast

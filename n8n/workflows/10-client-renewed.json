@@ -152,7 +152,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $('Supabase - Get Client').item.json[0].contact_email }}" },
             { "name": "subject", "value": "=Confirmacion de renovacion - Gracias por seguir con UGC Colombia" },
             { "name": "html", "value": "=<h1>Gracias por renovar!</h1><p>Hola {{ $('Supabase - Get Client').item.json[0].company }},</p><p>Confirmamos la renovacion de tu contrato. Plan activo: <strong>{{ $('Code - Auth & Validate Payload').item.json.new_plan }}</strong>.</p><p>Vigencia hasta: {{ $('Code - Auth & Validate Payload').item.json.contract_end_date }}</p><p>Seguimos creando contenido increible para ti.</p><p>- Equipo UGC Colombia</p>" }

@@ -72,7 +72,7 @@ const PROBLEMAS: Problema[] = [
     num: "08",
     icon: DollarSign,
     title: "Tu CPA en Meta sube cada mes",
-    text: "El costo de adquirir un cliente subió 40% en el último año y tus ads con modelos de stock ya no convierten como antes.",
+    text: "El costo de adquirir un cliente subió 40% en el último año y tus anuncios con modelos genéricos de banco de imágenes ya no convierten como antes.",
   },
 ];
 

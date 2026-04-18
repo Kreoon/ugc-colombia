@@ -288,7 +288,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     feature: "Estrategia general",
     inicio: "Básica",
     crecimiento: "Mensual documentada",
-    escala: "V3 Plus (omnicanal + funnels)",
+    escala: "V3 Plus (omnicanal + embudos de venta)",
     enterprise: "360° con director creativo",
   },
   {

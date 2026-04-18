@@ -257,7 +257,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <pagos@agenciaugccolombia.com>" },
+            { "name": "from", "value": "UGC Colombia <pagos@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $('Code - Calculate Payment Amount').item.json.creator_email }}" },
             { "name": "subject", "value": "Tu pago fue enviado - UGC Colombia" },
             { "name": "html", "value": "=<h2>Hola {{ $('Code - Calculate Payment Amount').item.json.creator_name }}!</h2><p>Tu pago de <strong>${{ $('Code - Calculate Payment Amount').item.json.total_usd }} USD</strong> fue enviado por {{ $json.provider }}.</p><p>Tiempo estimado de llegada: 2-3 dias habiles.</p><p>Referencia: {{ $json.provider_tx_id }}</p><p>Equipo UGC Colombia</p>" }

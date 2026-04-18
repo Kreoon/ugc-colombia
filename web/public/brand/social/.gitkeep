@@ -1,0 +1,14 @@
+# web/public/brand/social/
+
+Assets visuales generados por la skill `ugc-content-creator` via Nanobanana (Gemini 2.5 Flash Image).
+
+Estructura:
+- `YYYYMMDD-<concept>/` — carpeta por batch de generacion.
+- Dentro de cada batch: `slide-01.png`, `slide-02.png`, ..., `manifest.json`.
+
+Los PNGs aqui son assets finales listos para:
+- Usar en Canva/CapCut como base de piezas.
+- Subir a Buffer/Later para publicacion.
+- Archivar como referencia historica.
+
+**No editar manualmente.** Si un asset necesita ajuste, regenerar con nuevo brief.

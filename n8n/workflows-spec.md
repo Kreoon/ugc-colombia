@@ -28,14 +28,14 @@ INTERNAL_WEBHOOK_SECRET=ugc_internal_xxx
 
 ## Credenciales n8n requeridas
 
-| Credencial | Tipo | Usos |
-|---|---|---|
-| `Supabase - UGC Colombia` | Supabase API | Todos los workflows |
-| `Resend API` | HTTP Header Auth | Emails transaccionales |
-| `WhatsApp Cloud API` | HTTP Header Auth | Notificaciones |
-| `Beehiiv API` | HTTP Header Auth | Newsletter subs |
-| `Anthropic Claude` | Anthropic API | BANT scoring, creator scoring |
-| `Cal.com API` | HTTP Header Auth | Bookings |
+| Credencial                | Tipo             | Usos                          |
+| ------------------------- | ---------------- | ----------------------------- |
+| `Supabase - UGC Colombia` | Supabase API     | Todos los workflows           |
+| `Resend API`              | HTTP Header Auth | Emails transaccionales        |
+| `WhatsApp Cloud API`      | HTTP Header Auth | Notificaciones                |
+| `Beehiiv API`             | HTTP Header Auth | Newsletter subs               |
+| `Anthropic Claude`        | Anthropic API    | BANT scoring, creator scoring |
+| `Cal.com API`             | HTTP Header Auth | Bookings                      |
 
 ## Schema Supabase (tablas referenciadas)
 
@@ -60,6 +60,7 @@ workflow_logs (id, workflow, node, level, message, payload, created_at)
 
 **Trigger:** Webhook POST `/webhook/lead-ingestion`
 **Body esperado:**
+
 ```json
 {
   "source": "web_form | whatsapp | instagram_dm",
@@ -76,6 +77,7 @@ workflow_logs (id, workflow, node, level, message, payload, created_at)
 ### Nodos
 
 #### Node 1: Webhook - Lead Ingestion
+
 - **Tipo:** Webhook
 - **Metodo:** POST
 - **Path:** `lead-ingestion`
@@ -83,30 +85,34 @@ workflow_logs (id, workflow, node, level, message, payload, created_at)
 - **Authentication:** Header Auth (`X-Internal-Secret` = `{{ $env.INTERNAL_WEBHOOK_SECRET }}`)
 
 #### Node 2: Code - Validate & Normalize
+
 - **Tipo:** Code (JavaScript)
+
 ```javascript
 const item = $input.first().json;
-const required = ['source', 'email'];
+const required = ["source", "email"];
 for (const f of required) {
   if (!item[f]) throw new Error(`Missing field: ${f}`);
 }
 const normalized = {
   source: item.source,
-  full_name: (item.full_name || '').trim(),
+  full_name: (item.full_name || "").trim(),
   email: item.email.toLowerCase().trim(),
-  phone: (item.phone || '').replace(/\D/g, ''),
+  phone: (item.phone || "").replace(/\D/g, ""),
   company: item.company || null,
   budget_range: item.budget_range || null,
   notes: item.message || null,
-  idempotency_key: item.idempotency_key || `${item.source}-${item.email}-${Date.now()}`,
-  stage: 'new',
+  idempotency_key:
+    item.idempotency_key || `${item.source}-${item.email}-${Date.now()}`,
+  stage: "new",
   touch_count: 0,
-  created_at: new Date().toISOString()
+  created_at: new Date().toISOString(),
 };
 return [{ json: normalized }];
 ```
 
 #### Node 3: Supabase - Check Existing Lead
+
 - **Tipo:** Supabase
 - **Operacion:** Get Many Rows
 - **Tabla:** `leads`
@@ -114,12 +120,14 @@ return [{ json: normalized }];
 - **Limit:** 1
 
 #### Node 4: IF - Is New Lead?
+
 - **Tipo:** IF
 - **Condicion:** `{{ $json.length === 0 }}`
 - **True:** Node 5
 - **False:** Node 11 (update touch_count only)
 
 #### Node 5: Supabase - Insert Lead
+
 - **Tipo:** Supabase
 - **Operacion:** Insert Row
 - **Tabla:** `leads`
@@ -127,27 +135,32 @@ return [{ json: normalized }];
 - **On error:** continue (log en workflow_logs)
 
 #### Node 6: HTTP Request - Resend Welcome Email
+
 - **Tipo:** HTTP Request
 - **Metodo:** POST
 - **URL:** `https://api.resend.com/emails`
 - **Headers:** `Authorization: Bearer {{ $env.RESEND_API_KEY }}`
 - **Body (JSON):**
+
 ```json
 {
-  "from": "UGC Colombia <hola@agenciaugccolombia.com>",
+  "from": "UGC Colombia <hola@agenciaugccolombia.co>",
   "to": "{{ $('Code - Validate & Normalize').item.json.email }}",
   "subject": "Bienvenido a UGC Colombia, {{ $('Code - Validate & Normalize').item.json.full_name }}",
   "html": "<h2>Hola {{ $('Code - Validate & Normalize').item.json.full_name }}!</h2><p>Gracias por tu interes. En 24h te contactamos para una discovery call gratis.</p><p><a href='https://cal.com/ugc-colombia/discovery'>Agenda tu llamada</a></p>"
 }
 ```
+
 - **Retry on fail:** 3x, backoff 2s
 
 #### Node 7: HTTP Request - Beehiiv Subscribe
+
 - **Tipo:** HTTP Request
 - **Metodo:** POST
 - **URL:** `https://api.beehiiv.com/v2/publications/{{ $env.BEEHIIV_PUB_ID }}/subscriptions`
 - **Headers:** `Authorization: Bearer {{ $env.BEEHIIV_API_KEY }}`
 - **Body:**
+
 ```json
 {
   "email": "{{ $('Code - Validate & Normalize').item.json.email }}",
@@ -156,14 +169,17 @@ return [{ json: normalized }];
   "utm_source": "{{ $('Code - Validate & Normalize').item.json.source }}"
 }
 ```
+
 - **On error:** continue
 
 #### Node 8: HTTP Request - WhatsApp Alexander
+
 - **Tipo:** HTTP Request
 - **Metodo:** POST
 - **URL:** `https://graph.facebook.com/v21.0/{{ $env.WHATSAPP_PHONE_ID }}/messages`
 - **Headers:** `Authorization: Bearer {{ $env.WHATSAPP_TOKEN }}`
 - **Body:**
+
 ```json
 {
   "messaging_product": "whatsapp",
@@ -176,20 +192,24 @@ return [{ json: normalized }];
 ```
 
 #### Node 9: HTTP Request - Trigger BANT Scorer
+
 - **Tipo:** HTTP Request
 - **URL:** `https://dev.kreoon.com/webhook/bant-scorer`
 - **Body:** `{ "lead_id": "{{ $('Supabase - Insert Lead').item.json.id }}" }`
 
 #### Node 10: Respond to Webhook
+
 - **Body:** `{ "status": "ok", "lead_id": "{{ $('Supabase - Insert Lead').item.json.id }}" }`
 
 #### Node 11: Supabase - Update Touch Count (rama existente)
+
 - **Operacion:** Update Row
 - **Tabla:** `leads`
 - **Filtro:** `email = {{ $json[0].email }}`
 - **Campos:** `touch_count = {{ $json[0].touch_count + 1 }}`, `last_touch_at = {{ $now.toISO() }}`
 
 #### Error Handler (workflow-level)
+
 - **Tipo:** Error Trigger → Supabase Insert en `workflow_logs` + WhatsApp a Alexander
 
 ---
@@ -203,45 +223,54 @@ return [{ json: normalized }];
 ### Nodos
 
 #### Node 1: Webhook - BANT Trigger
+
 - **Path:** `bant-scorer`
 
 #### Node 2: Supabase - Get Lead
+
 - **Operacion:** Get Row
 - **Tabla:** `leads`
 - **Filtro:** `id = {{ $json.lead_id }}`
 
 #### Node 3: Anthropic - BANT Analysis
+
 - **Tipo:** HTTP Request (o nodo Anthropic si instalado)
 - **URL:** `https://api.anthropic.com/v1/messages`
 - **Headers:** `x-api-key: {{ $env.ANTHROPIC_API_KEY }}`, `anthropic-version: 2023-06-01`
 - **Body:**
+
 ```json
 {
   "model": "claude-sonnet-4-5-20250929",
   "max_tokens": 500,
-  "messages": [{
-    "role": "user",
-    "content": "Analiza este lead UGC y devuelve SOLO JSON valido con {budget:0-25, authority:0-25, need:0-25, timeline:0-25, total:0-100, tier:'HOT'|'WARM'|'COLD', reasoning:''}. Lead: company={{ $json.company }}, budget_range={{ $json.budget_range }}, notes={{ $json.notes }}, source={{ $json.source }}. Reglas: HOT>=75, WARM 50-74, COLD<50."
-  }]
+  "messages": [
+    {
+      "role": "user",
+      "content": "Analiza este lead UGC y devuelve SOLO JSON valido con {budget:0-25, authority:0-25, need:0-25, timeline:0-25, total:0-100, tier:'HOT'|'WARM'|'COLD', reasoning:''}. Lead: company={{ $json.company }}, budget_range={{ $json.budget_range }}, notes={{ $json.notes }}, source={{ $json.source }}. Reglas: HOT>=75, WARM 50-74, COLD<50."
+    }
+  ]
 }
 ```
 
 #### Node 4: Code - Parse BANT Response
+
 ```javascript
 const raw = $input.first().json.content[0].text;
 const match = raw.match(/\{[\s\S]*\}/);
-if (!match) throw new Error('No JSON in Claude response');
+if (!match) throw new Error("No JSON in Claude response");
 const bant = JSON.parse(match[0]);
 return [{ json: bant }];
 ```
 
 #### Node 5: Supabase - Update Lead Score
+
 - **Operacion:** Update Row
 - **Tabla:** `leads`
 - **Filtro:** `id = {{ $('Webhook - BANT Trigger').item.json.lead_id }}`
 - **Campos:** `bant_score = {{ $json.total }}`, `tier = {{ $json.tier }}`, `stage = 'scored'`
 
 #### Node 6: Switch - Tier Routing
+
 - **Tipo:** Switch
 - **Valor:** `{{ $json.tier }}`
 - **Rutas:**
@@ -250,6 +279,7 @@ return [{ json: bant }];
   - `COLD` → Node 9 (solo log)
 
 #### Node 7: WhatsApp HOT Alert
+
 - Mensaje: `HOT LEAD detectado! Score {{ $json.total }}. Contactar en <1h. Lead ID: {{ ... }}`
 
 ---
@@ -261,10 +291,12 @@ return [{ json: bant }];
 ### Nodos
 
 #### Node 1: Webhook - Cal.com Booking
+
 - **Path:** `calcom-booking`
 - **Auth:** Header `X-Cal-Signature-256` validar contra `CALCOM_WEBHOOK_SECRET`
 
 #### Node 2: Crypto - Compute HMAC
+
 - **Tipo:** Crypto (nodo nativo n8n)
 - **Action:** HMAC
 - **Type:** SHA256
@@ -274,45 +306,56 @@ return [{ json: bant }];
 - **Encoding:** hex
 
 #### Node 3: Code - Verify Signature (sandbox-safe, sin require)
+
 ```javascript
 // Nota: el HMAC se calcula en el nodo Crypto previo.
 // Aqui solo comparamos el valor ya computado contra el header recibido.
-const received = $('Webhook - Cal.com Booking').item.json.headers['x-cal-signature-256'];
+const received = $("Webhook - Cal.com Booking").item.json.headers[
+  "x-cal-signature-256"
+];
 const expected = $input.first().json.computed_signature;
 if (!received || received !== expected) {
-  throw new Error('Invalid Cal.com signature');
+  throw new Error("Invalid Cal.com signature");
 }
-return [{ json: $('Webhook - Cal.com Booking').item.json.body }];
+return [{ json: $("Webhook - Cal.com Booking").item.json.body }];
 ```
 
 #### Node 4: Switch - Event Type
+
 - `BOOKING_CREATED` → Node 5
 - `BOOKING_RESCHEDULED` → Node 5
 - `BOOKING_CANCELLED` → Node 11
 
 #### Node 5: Supabase - Upsert Booking
+
 - **Tabla:** `bookings`
 - **Campos:** `cal_booking_id`, `scheduled_at`, `lead_id` (lookup por email), `status='confirmed'`
 
 #### Node 6: Resend - Confirmation Email
+
 - Subject: `Tu discovery call esta confirmada`
 - Body con detalles + link Google Meet
 
 #### Node 7: Wait - Until 24h Before
+
 - **Tipo:** Wait
 - **Modo:** Resume At Specific Time
 - **Time:** `{{ DateTime.fromISO($json.scheduled_at).minus({hours: 24}).toISO() }}`
 
 #### Node 8: WhatsApp - 24h Reminder
+
 - Template: `discovery_reminder_24h`
 
 #### Node 9: Wait - Until 1h After Call
+
 - Time: `{{ DateTime.fromISO($json.scheduled_at).plus({hours: 1}).toISO() }}`
 
 #### Node 10: Resend - Post-call Survey
+
 - Link a Typeform/Tally con NPS + feedback
 
 #### Node 11: Rama Cancelled
+
 - Update Supabase `status='cancelled'` + WhatsApp Alexander
 
 ---
@@ -324,41 +367,51 @@ return [{ json: $('Webhook - Cal.com Booking').item.json.body }];
 ### Nodos
 
 #### Node 1: Webhook - Creator Form
+
 - **Path:** `creator-application`
 - **Body:** `{full_name, email, phone, instagram, tiktok, niche, followers, city, portfolio_url, rate_expectation}`
 
 #### Node 2: Code - Validate
+
 ```javascript
 const d = $input.first().json;
-if (!d.email || !d.instagram) throw new Error('Missing required');
+if (!d.email || !d.instagram) throw new Error("Missing required");
 d.followers = parseInt(d.followers) || 0;
 d.applied_at = new Date().toISOString();
-d.status = 'pending_review';
+d.status = "pending_review";
 return [{ json: d }];
 ```
 
 #### Node 3: HTTP - Instagram Basic Check (opcional)
+
 - Verifica que el handle exista (scrape o API Graph)
 
 #### Node 4: Anthropic - Preliminary Scoring
+
 - **Prompt:** `Evalua este creator UGC para agencia Colombia. Devuelve JSON {score:0-100, strengths:[], weaknesses:[], recommendation:'accept'|'review'|'reject'}. Datos: niche={{ $json.niche }}, followers={{ $json.followers }}, city={{ $json.city }}, rate={{ $json.rate_expectation }}, portfolio={{ $json.portfolio_url }}`
 
 #### Node 5: Code - Merge Score
+
 ```javascript
 const raw = $input.first().json.content[0].text;
 const score = JSON.parse(raw.match(/\{[\s\S]*\}/)[0]);
-const creator = $('Code - Validate').item.json;
-return [{ json: { ...creator, score: score.score, ai_notes: JSON.stringify(score) } }];
+const creator = $("Code - Validate").item.json;
+return [
+  { json: { ...creator, score: score.score, ai_notes: JSON.stringify(score) } },
+];
 ```
 
 #### Node 6: Supabase - Insert Creator
+
 - **Tabla:** `creators`
-- **assigned_to:** `diana@ugccolombia.com`
+- **assigned_to:** `diana@ugccolombia.co`
 
 #### Node 7: WhatsApp Diana
+
 - Mensaje: `Nueva aplicacion creator: {{ $json.full_name }} (@{{ $json.instagram }}) - Score IA: {{ $json.score }}/100 - Rec: {{ recommendation }}`
 
 #### Node 8: Resend - Acknowledge Applicant
+
 - `Gracias por aplicar. Revisamos en 3-5 dias habiles.`
 
 ---
@@ -370,18 +423,23 @@ return [{ json: { ...creator, score: score.score, ai_notes: JSON.stringify(score
 ### Nodos
 
 #### Node 1: Schedule Trigger
+
 - **Cron:** `0 9 1 * *`
 
 #### Node 2: Supabase - Get Active Clients
+
 - **Operacion:** Get Many Rows
 - **Tabla:** `clients`
 - **Filtro:** `plan != 'churned'`
 
 #### Node 3: Split In Batches
+
 - **Batch Size:** 1
 
 #### Node 4: Supabase - Query Client Metrics
+
 - **Tipo:** Execute Query (SQL)
+
 ```sql
 SELECT
   COUNT(*) FILTER (WHERE type='video') as videos,
@@ -395,10 +453,14 @@ WHERE client_id = '{{ $json.id }}'
 ```
 
 #### Node 5: Code - Build HTML Report
+
 ```javascript
-const client = $('Split In Batches').item.json;
+const client = $("Split In Batches").item.json;
 const m = $input.first().json;
-const monthName = new Date(Date.now() - 30*86400000).toLocaleDateString('es-CO', { month: 'long', year: 'numeric' });
+const monthName = new Date(Date.now() - 30 * 86400000).toLocaleDateString(
+  "es-CO",
+  { month: "long", year: "numeric" },
+);
 const html = `
 <!DOCTYPE html><html><body style="font-family:Arial">
 <h1>Reporte ${monthName} - ${client.company}</h1>
@@ -414,15 +476,18 @@ return [{ json: { html, client, metrics: m } }];
 ```
 
 #### Node 6: HTTP - PDF Generation (via Browserless o api2pdf)
+
 - **URL:** `https://chrome.browserless.io/pdf?token={{ $env.BROWSERLESS_TOKEN }}`
 - **Body:** `{ "html": "{{ $json.html }}" }`
 - **Response:** Binary (pdf)
 
 #### Node 7: Resend - Send Report Email
+
 - **Attachments:** PDF del Node 6
 - **To:** `{{ $json.client.contact_email }}`
 
 #### Node 8: WhatsApp Client Notification
+
 - `Hola! Tu reporte mensual de UGC Colombia esta en tu correo ({{ client.contact_email }}).`
 
 ---
@@ -436,6 +501,7 @@ return [{ json: { html, client, metrics: m } }];
 #### Node 1: Schedule Trigger
 
 #### Node 2: Supabase - Query Leads Needing Touch
+
 ```sql
 SELECT *,
   EXTRACT(DAY FROM (now() - last_touch_at)) as days_since
@@ -454,6 +520,7 @@ WHERE stage IN ('scored','contacted')
 #### Node 3: Split In Batches (1)
 
 #### Node 4: Switch - Touch Number
+
 - `touch_count == 0` → D1 email (intro)
 - `touch_count == 1` → D3 WhatsApp (case study)
 - `touch_count == 2` → D7 email (testimonial + oferta)
@@ -476,6 +543,7 @@ WHERE stage IN ('scored','contacted')
 #### Node 1: Schedule Trigger
 
 #### Node 2: Supabase - Calculate Pending Payments
+
 ```sql
 SELECT c.id, c.full_name, c.email,
   SUM(cp.rate_usd) as total_usd,
@@ -492,23 +560,28 @@ HAVING SUM(cp.rate_usd) >= 20;
 #### Node 3: Split In Batches
 
 #### Node 4: IF - Amount > $500?
+
 - **True:** Mercury (bank transfer)
 - **False:** Wise
 
 #### Node 5a: HTTP - Mercury Create Payment
+
 - **URL:** `https://api.mercury.com/api/v1/account/{account_id}/transactions`
 - **Headers:** `Authorization: Bearer {{ $env.MERCURY_API_KEY }}`
 
 #### Node 5b: HTTP - Wise Create Transfer
+
 - **URL:** `https://api.wise.com/v1/transfers`
 
 #### Node 6: Supabase - Insert Payment Record
+
 - **Tabla:** `payments`
 - **status:** `scheduled`
 
 #### Node 7: Supabase - Mark Content as Paid
 
 #### Node 8: WhatsApp Brian
+
 ```
 Pagos programados quincena {{ $now.toFormat('dd/MM') }}:
 - {{ $json.full_name }}: ${{ $json.total_usd }} USD via {{ provider }}
@@ -516,6 +589,7 @@ Total batch: {{ totalSum }}
 ```
 
 #### Node 9: Resend Creator Notification
+
 - `Tu pago de ${{ total_usd }} USD esta en camino. Llegada estimada 2-3 dias habiles.`
 
 ---
@@ -527,46 +601,55 @@ Total batch: {{ totalSum }}
 ### Nodos
 
 #### Node 1: Webhook - Content Uploaded
+
 - **Body:** `{ content_id, client_id, type, url, pillar, duration_sec }`
 
 #### Node 2: IF - Is Pillar Content?
+
 - **Condicion:** `{{ $json.pillar === true && $json.duration_sec > 120 }}`
 
 #### Node 3: Code - Generate Derivative List
+
 ```javascript
 const piece = $input.first().json;
 const derivatives = [
-  { type: 'reel_30s', platform: 'instagram', priority: 1 },
-  { type: 'short_60s', platform: 'youtube', priority: 1 },
-  { type: 'tiktok_15s', platform: 'tiktok', priority: 2 },
-  { type: 'carousel_5slides', platform: 'instagram', priority: 2 },
-  { type: 'tweet_thread', platform: 'twitter', priority: 3 },
-  { type: 'linkedin_post', platform: 'linkedin', priority: 3 },
-  { type: 'newsletter_section', platform: 'beehiiv', priority: 2 },
-  { type: 'blog_post_1500w', platform: 'web', priority: 3 }
+  { type: "reel_30s", platform: "instagram", priority: 1 },
+  { type: "short_60s", platform: "youtube", priority: 1 },
+  { type: "tiktok_15s", platform: "tiktok", priority: 2 },
+  { type: "carousel_5slides", platform: "instagram", priority: 2 },
+  { type: "tweet_thread", platform: "twitter", priority: 3 },
+  { type: "linkedin_post", platform: "linkedin", priority: 3 },
+  { type: "newsletter_section", platform: "beehiiv", priority: 2 },
+  { type: "blog_post_1500w", platform: "web", priority: 3 },
 ];
-return derivatives.map(d => ({ json: { ...d, parent_id: piece.content_id, client_id: piece.client_id } }));
+return derivatives.map((d) => ({
+  json: { ...d, parent_id: piece.content_id, client_id: piece.client_id },
+}));
 ```
 
 #### Node 4: Supabase - Bulk Insert Derivatives
+
 - **Tabla:** `content_pieces` con `status='pending_derivative'`, `parent_id`
 
 #### Node 5: Code - Format Team Message
+
 ```javascript
-const items = $input.all().map(i => i.json);
+const items = $input.all().map((i) => i.json);
 const grouped = items.reduce((acc, d) => {
-  acc[d.priority] = (acc[d.priority] || []);
+  acc[d.priority] = acc[d.priority] || [];
   acc[d.priority].push(`- ${d.type} (${d.platform})`);
   return acc;
 }, {});
-const msg = `Nuevo pilar subido! Derivadas a generar:\n\nP1:\n${(grouped[1]||[]).join('\n')}\n\nP2:\n${(grouped[2]||[]).join('\n')}\n\nP3:\n${(grouped[3]||[]).join('\n')}`;
+const msg = `Nuevo pilar subido! Derivadas a generar:\n\nP1:\n${(grouped[1] || []).join("\n")}\n\nP2:\n${(grouped[2] || []).join("\n")}\n\nP3:\n${(grouped[3] || []).join("\n")}`;
 return [{ json: { message: msg } }];
 ```
 
 #### Node 6: WhatsApp - Notify Team Group
+
 - **To:** grupo de equipo (usar group_id o broadcast a Diana + Alexander)
 
 #### Node 7: Resend - Email con checklist
+
 - Subject: `Checklist derivadas - {{ piece.url }}`
 
 ---
@@ -578,6 +661,7 @@ return [{ json: { message: msg } }];
 **Trigger:** Webhook POST `/webhook/client-onboarded` con header `X-Internal-Secret`.
 
 **Body esperado:**
+
 ```json
 {
   "client_name": "Nombre del contacto",
@@ -621,6 +705,7 @@ return [{ json: { message: msg } }];
 **Trigger:** Webhook POST `/webhook/client-renewed` con header `X-Internal-Secret`.
 
 **Body esperado:**
+
 ```json
 {
   "client_id": "uuid-cliente",
@@ -655,6 +740,7 @@ CREATE INDEX idx_client_renewals_client_id ON client_renewals(client_id);
 ```
 
 Tambien agregar a `clients`:
+
 ```sql
 ALTER TABLE clients
   ADD COLUMN IF NOT EXISTS contract_end_date date,
@@ -718,6 +804,7 @@ Crear un **Error Workflow** en n8n Settings → asignar a todos:
 ## Testing
 
 Cada workflow incluye modo `test` via query param `?test=true` que:
+
 1. No escribe a Supabase produccion (usa schema `staging`)
 2. Envia notificaciones solo a Alexander
 3. Loggea payload completo

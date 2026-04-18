@@ -40,11 +40,11 @@ const CASOS: readonly Caso[] = [
         .
       </>
     ),
-    desc: "Target del marco C.O.N.V.E.R.T. aplicado a skincare: sacar el creativo del promedio de industria (20-25%) y llevarlo al top-cuartil de Meta (30%+). Foco en los primeros 2 segundos.",
+    desc: "Objetivo del marco C.O.N.V.E.R.T. aplicado a cuidado de la piel: sacar el creativo del promedio de industria (20-25%) y llevarlo al cuartil superior de Meta (30%+). Foco en los primeros 2 segundos.",
     metricas: [
-      { label: "HOOK", value: "38%", desc: "Hook rate Meta (3s)" },
-      { label: "HOLD", value: "62%", desc: "Retención a 15s" },
-      { label: "CTR", value: "2.8%", desc: "Click-through rate" },
+      { label: "GANCHO", value: "38%", desc: "Tasa de retención Meta (3s)" },
+      { label: "PERMANENCIA", value: "62%", desc: "Retención a 15s" },
+      { label: "CTR", value: "2.8%", desc: "Tasa de clics" },
     ],
   },
   {
@@ -146,7 +146,7 @@ export function Casos() {
           className="text-center text-brand-gray text-sm sm:text-base font-sans max-w-2xl mx-auto mb-12 sm:mb-16 leading-relaxed"
         >
           Medimos lo que el video <span className="text-white font-semibold">sí controla</span>:
-          hook rate, hold rate y CTR. No ROAS — eso depende de oferta, pricing y funnel.
+          tasa de retención, tasa de permanencia y tasa de clics. No ROAS — eso depende de tu oferta, precios y embudo de venta.
         </motion.p>
 
         {/* Caso destacado */}

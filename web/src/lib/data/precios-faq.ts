@@ -27,7 +27,7 @@ export const PRECIOS_FAQS: PreciosFAQItem[] = [
   {
     question: "Hay permanencia minima?",
     answer:
-      "Por defecto operan mes a mes, sin permanencia obligatoria. Si te comprometes a un contrato minimo de 3 meses bajamos el precio entre 8% y 15% segun el plan. Contratos de 6 o 12 meses escalan el descuento. Se habla en la llamada inicial.",
+      "Por defecto operan mes a mes, sin permanencia obligatoria. Si te comprometes a un contrato mínimo de 3 meses bajamos el precio entre 8% y 15% según el plan. Contratos de 6 o 12 meses tienen un descuento aún mayor. Lo conversamos en la llamada inicial.",
     icon: Clock,
   },
   {
@@ -57,7 +57,7 @@ export const PRECIOS_FAQS: PreciosFAQItem[] = [
   {
     question: "Que pasa si necesito mas videos un mes especifico?",
     answer:
-      "En los planes mensuales puedes comprar 'extras' del mismo plan a precio unitario proporcional al plan contratado. Por ejemplo, en Crecimiento el costo por video adicional equivale al precio del plan dividido entre los 10 videos base. Si necesitas un volumen mayor recurrente, conviene subir de tier. En llamada ajustamos.",
+      "En los planes mensuales puedes comprar videos extra del mismo plan, a precio unitario proporcional al plan contratado. Por ejemplo, en Crecimiento el costo por video adicional equivale al precio del plan dividido entre los 10 videos base. Si necesitas un volumen mayor de forma recurrente, conviene subir de nivel. Lo ajustamos en la llamada.",
     icon: Plus,
   },
   {
@@ -69,13 +69,13 @@ export const PRECIOS_FAQS: PreciosFAQItem[] = [
   {
     question: "Puedo empezar con un paquete y escalar despues?",
     answer:
-      "Si — de hecho es lo mas comun. La mayoria de marcas arranca con Inicio o Crecimiento por 1-3 meses para validar que el flujo funciona con su producto, y luego escala. El historico de briefs, creadores aprobados y aprendizaje queda dentro de la cuenta.",
+      "Sí — de hecho es lo más común. La mayoría de marcas arranca con Inicio o Crecimiento por 1 a 3 meses para validar que el flujo funciona con su producto, y luego sube de plan. El histórico de instructivos, creadores aprobados y aprendizajes queda guardado dentro de tu cuenta.",
     icon: TrendingUp,
   },
   {
     question: "Que hace diferente al plan A la Medida?",
     answer:
-      "Equipo dedicado exclusivo, director creativo propio, SLA garantizado por contrato, entrega sin limites de variantes, integracion directa con tu equipo de paid media, panel en tiempo real y arranque ejecutivo con Alexander Cast. Es para empresas con presupuesto de paid +$20K USD (~$80M COP) al mes que necesitan una maquina de contenido corriendo todo el ano.",
+      "Equipo dedicado exclusivo, director creativo propio, acuerdos de servicio garantizados por contrato, entrega sin límites de variantes, integración directa con tu equipo de medios pagados, panel en tiempo real y arranque ejecutivo con Alexander Cast. Es para empresas con presupuesto en publicidad pagada de más de $20.000 USD (~$80 millones COP) al mes, que necesitan una máquina de contenido corriendo todo el año.",
     icon: Crown,
   },
 ];

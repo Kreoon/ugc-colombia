@@ -149,15 +149,15 @@ export const SERVICE_LINES: ServiceLine[] = [
     shortDescription:
       "Auditoría, plan 90 días y acompañamiento estratégico con Alexander.",
     longDescription:
-      "Servicio de auditoría estratégica integral con acompañamiento directo de Alexander como estratega principal. Analizamos funnels, paid media y posicionamiento competitivo, generamos diagnóstico completo, plan de acción a 90 días y sesiones de seguimiento con reportes detallados de progreso y optimización.",
+      "Servicio de auditoría estratégica integral con acompañamiento directo de Alexander como estratega principal. Analizamos embudos de venta, publicidad pagada y posicionamiento competitivo, generamos diagnóstico completo, plan de acción a 90 días y sesiones de seguimiento con reportes detallados de progreso y optimización.",
     deliverables: [
-      "Auditoría completa de funnels, ads y posicionamiento",
+      "Auditoría completa de embudos, publicidad y posicionamiento",
       "Plan estratégico estructurado para 90 días",
-      "Identificación de gaps y oportunidades de crecimiento",
-      "Recomendaciones de optimización de paid media",
+      "Identificación de brechas y oportunidades de crecimiento",
+      "Recomendaciones para optimizar la publicidad pagada",
       "Sesiones de acompañamiento mensual con liderazgo",
       "Reportes de seguimiento y ajustes estratégicos",
-      "Acceso a benchmarks de mercado e insights competitivos",
+      "Acceso a referencias de mercado y aprendizajes competitivos",
     ],
     target:
       "Fundadores de startups y SaaS en crecimiento, marcas USA expandiendo a LATAM, empresas con PMF que necesitan escalar ingresos recurrentes.",

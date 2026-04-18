@@ -515,5 +515,152 @@ R: Reportar inmediatamente a Alexander. Usar `vercel rollback --prod` si es nece
 
 ---
 
-**Última actualización:** 2026-04-08
+## Claude Code — skill `ugc-content-creator`
+
+El repo incluye una skill versionada en `.claude/skills/ugc-content-creator/` que Tanya (Community Manager) y el resto del equipo pueden usar para generar contenido on-brand. Lee `content/viralidad/`, `brand/design-tokens.md` y `scripts/image-gen/brand-system.mjs` para producir carruseles IG, reels, stories, posts LinkedIn, shorts de YouTube, thumbnails y broadcasts WhatsApp siguiendo los 5 pilares de viralidad.
+
+**Cómo invocarla:**
+
+Con Claude Code abierto en el repo, escribir en lenguaje natural — por ejemplo:
+
+- *"Dame un carrusel educativo para IG sobre los 3 errores que matan un UGC antes del hook"*
+- *"Reel para TikTok de debate sobre marketplaces vs agencias boutique"*
+- *"Story BTS de la grabación de hoy con Camila"*
+- *"Post LinkedIn de Alexander sobre retención en UGC 2026"*
+
+Claude detecta formato + pilar, propone estructura + copy + prompts Nanobanana, y ofrece ejecutar `generate-social.mjs` para generar los PNGs.
+
+**Documentación completa:** `.claude/skills/ugc-content-creator/SKILL.md`.
+
+---
+
+## Permisos y capas de seguridad (Claude Code)
+
+El repo usa 5 capas de defensa en profundidad para que contenido/marketing pueda operar con Claude Code sin riesgo de tocar código de producto:
+
+1. **GitHub Read-only** para miembros de contenido (ej. Tanya). `git push` rebota. Cambios van via PR desde la UI de GitHub.
+2. **Branch protection + CODEOWNERS** (`.github/CODEOWNERS`). Cualquier PR que toque `/web`, `/supabase`, `/scripts`, `/n8n`, `/.claude` o `/.github` requiere review de @AlexanderKast.
+3. **`.claude/settings.json`** compartido con `deny` estricto: bloquea Write sobre `web/app/`, `supabase/`, `scripts/`, `n8n/`, `.env*`, `package.json`, `next.config.*`, etc. Bloquea `git push`, `git commit`, `git reset`, `rm`, `vercel:*`, `supabase:*`. Las reglas `deny` ganan sobre `allow` — ni con `--dangerously-skip-permissions` se saltan.
+4. **Pre-commit hook** (`scripts/hooks/pre-commit.sh`). Si alguien edita archivos protegidos fuera de Claude Code, el commit local aborta. Requiere `ALLOW_PROTECTED=1` para desbloquear (solo Alexander/Samuel lo setean cuando aprueban).
+5. **Flujo documentado** (abajo): ninguna modificación a rutas protegidas ocurre sin aprobación escrita.
+
+**Rutas donde Tanya sí puede escribir** (via `Write` allow de la skill):
+- `content/calendar/**` — planes editoriales, métricas, briefs semanales.
+- `drafts/**` — outputs intermedios, briefs JSON para generate-social.
+- `web/public/brand/social/**` — assets generados con Nanobanana.
+
+**Activar el pre-commit hook en tu máquina (una sola vez):**
+
+```bash
+git config core.hooksPath scripts/hooks
+chmod +x scripts/hooks/pre-commit.sh   # Mac/Linux
+```
+
+En Windows con Git Bash, `chmod` lo ejecuta Git automáticamente al checkout.
+
+---
+
+## Onboarding Community Manager (Tanya)
+
+Pasos para dar acceso a Tanya (o cualquier nuevo miembro del equipo de contenido):
+
+### 1. Invitar al repo en GitHub con rol **Read**
+
+Settings → Collaborators → Add people → rol `Read`.
+Con Read, Tanya puede `git clone` y `git pull` pero no `git push`. Los cambios los propone con PR desde la UI de GitHub.
+
+### 2. Branch protection en `main`
+
+Settings → Branches → Add rule para `main`:
+- ☑ Require a pull request before merging
+- ☑ Require approvals (1 mínimo)
+- ☑ Require review from Code Owners
+- ☑ Restrict who can push to matching branches (solo Alexander y Samuel)
+
+### 3. Instalar en su Mac
+
+- **Git** (viene pre-instalado en macOS; si no, `brew install git`).
+- **Node.js 20+** (`brew install node` o desde nodejs.org).
+- **Claude Code** (https://claude.com/claude-code — extensión VS Code + CLI).
+- **VS Code** con extensiones: Claude Code, GitLens (recomendado).
+
+### 4. Clonar el repo
+
+```bash
+cd ~/Documents
+git clone https://github.com/AlexanderKast/ugc-colombia.git
+cd ugc-colombia
+```
+
+### 5. Configurar su GEMINI_API_KEY propia
+
+Tanya crea su propia key en https://aistudio.google.com con **su cuenta de Google** (no la compartida del proyecto). Esto le da rate limit propio y auditabilidad independiente.
+
+```bash
+# Crear web/.env.local (no se versiona)
+nano web/.env.local
+# Agregar:
+# GEMINI_API_KEY=<su-key-personal>
+```
+
+### 6. Instalar dependencias
+
+```bash
+# Desde la raíz del repo:
+npm install
+# O si scripts/image-gen tiene su propio package.json:
+cd scripts/image-gen && npm install
+```
+
+### 7. Activar el pre-commit hook
+
+```bash
+git config core.hooksPath scripts/hooks
+```
+
+### 8. Test de humo (generar un asset)
+
+```bash
+node scripts/image-gen/generate.mjs home hero
+```
+
+Debería generar un PNG en `web/public/brand/home/hero.png`. Si falla: revisar que la key de Gemini esté activa.
+
+### 9. Test de la skill desde Claude Code
+
+Abrir el repo en Claude Code y escribir:
+
+```
+Usa la skill ugc-content-creator para darme un reel educativo sobre hooks para UGC
+```
+
+Debería activarse la skill y devolver estructura + copy + prompts Nanobanana.
+
+### 10. Test de permisos (opcional pero recomendado)
+
+Pedir a Claude:
+
+```
+Modifica web/app/page.tsx y agrega un banner
+```
+
+Debe bloquearse por el `deny` de `.claude/settings.json`. Si no bloquea, revisar que `settings.json` esté correctamente cargado (reiniciar Claude Code).
+
+### 11. Flujo de trabajo diario de Tanya
+
+1. `git pull` al empezar el día para recibir actualizaciones de skill/branding.
+2. Usa la skill en Claude Code para generar piezas.
+3. Los drafts y calendarios los escribe Claude en `content/calendar/` y `drafts/`.
+4. Los PNGs generados viven en `web/public/brand/social/YYYYMMDD-<slug>/`.
+5. Tanya los descarga, arma en Canva/CapCut y publica con Buffer/Later.
+6. Si hace cambios a docs de contenido que quiere compartir: abre PR desde UI de GitHub → Alexander aprueba → merge.
+
+**Qué NO hacer:**
+- No modificar `web/`, `supabase/`, `scripts/`, `n8n/` directamente. Si surge la necesidad, crear issue describiendo el cambio y esperar aprobación.
+- No desactivar el hook (`git config --unset core.hooksPath`) sin permiso.
+- No compartir su `GEMINI_API_KEY` con nadie más del equipo.
+
+---
+
+**Última actualización:** 2026-04-16
 **Mantenido por:** Alexander Cast

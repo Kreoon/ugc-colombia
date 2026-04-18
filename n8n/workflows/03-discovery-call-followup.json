@@ -95,7 +95,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $('Code - Verify HMAC Signature').item.json.responses?.email?.value || $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.email }}" },
             { "name": "subject", "value": "Tu discovery call esta confirmada - UGC Colombia" },
             { "name": "html", "value": "=<h2>Discovery call confirmada!</h2><p>Hola {{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.name }},</p><p>Tu llamada esta agendada para el <strong>{{ $('Code - Verify HMAC Signature').item.json.startTime }}</strong>.</p><p>Link de reunion: {{ $('Code - Verify HMAC Signature').item.json.videoCallData?.url || 'Se enviara por separado' }}</p><p>Si necesitas reagendar: {{ $('Code - Verify HMAC Signature').item.json.rescheduleLink }}</p><p>Equipo UGC Colombia</p>" }
@@ -250,7 +250,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.email }}" },
             { "name": "subject", "value": "Como fue tu experiencia con UGC Colombia?" },
             { "name": "html", "value": "=<h2>Gracias por tu tiempo!</h2><p>Hola {{ $('Code - Verify HMAC Signature').item.json.attendees?.[0]?.name }},</p><p>Fue genial hablar contigo. Nos ayudaria mucho si pudieras tomar 2 minutos para compartir tu experiencia.</p><p><a href='https://tally.so/r/ugc-colombia-nps'>Completar encuesta (2 min)</a></p><p>Equipo UGC Colombia</p>" }

@@ -77,7 +77,7 @@
             { "fieldId": "score", "fieldValue": "={{ $json.score }}" },
             { "fieldId": "status", "fieldValue": "={{ $json.status }}" },
             { "fieldId": "applied_at", "fieldValue": "={{ $json.applied_at }}" },
-            { "fieldId": "assigned_to", "fieldValue": "diana@ugccolombia.com" },
+            { "fieldId": "assigned_to", "fieldValue": "diana@ugccolombia.co" },
             { "fieldId": "ai_notes", "fieldValue": "={{ $json.ai_notes }}" }
           ]
         }
@@ -121,7 +121,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.com>" },
+            { "name": "from", "value": "UGC Colombia <hola@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $('Code - Merge Creator Score').item.json.email }}" },
             { "name": "subject", "value": "Recibimos tu aplicacion - UGC Colombia" },
             { "name": "html", "value": "=<h2>Hola {{ $('Code - Merge Creator Score').item.json.full_name }}!</h2><p>Gracias por aplicar para hacer parte de la red de creators de UGC Colombia.</p><p>Hemos recibido tu aplicacion y la revisaremos en los proximos <strong>3-5 dias habiles</strong>.</p><p>Si tienes preguntas puedes escribirnos directamente por Instagram: <a href='https://instagram.com/agenciaugccolombia'>@agenciaugccolombia</a></p><p>Equipo UGC Colombia</p>" }

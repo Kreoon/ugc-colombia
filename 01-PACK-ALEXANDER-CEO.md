@@ -1,4 +1,5 @@
 # PACK OPERATIVO — ALEXANDER CAST
+
 ## Founder / CEO · UGC Colombia
 
 **Fecha:** 2026-04-09
@@ -34,16 +35,19 @@
 **North Star Metric (NSM):** **MRR activo cobrado en USD**. Una sola métrica que captura salud comercial, retención y cobranza efectiva. No vale "vendido", vale "cobrado y activo".
 
 **Árbol de métricas derivadas:**
+
 - Nuevo MRR (new logos) ← Leads calificados × Close rate × CAC
 - MRR expansion (upsells) ← Upsell rate × NPS
 - MRR perdido (-) ← Logo churn + Revenue churn (downgrades)
 
 **Counter-metrics (anti-gaming):**
+
 - Gross Margin % (no quemar plata cerrando barato)
 - Delivery Health Score (1-10) — calidad por cliente
 - Creator NPS — salud del lado de oferta
 
 **Supuestos clave:**
+
 - CAC target: $300 USD → LTV/CAC = 18x
 - Payback: 4-5 meses
 - Burn aceptable Q2: ≤$8K USD
@@ -57,15 +61,16 @@
 
 #### O1 — Activar la máquina comercial y cerrar los primeros 10 clientes recurrentes
 
-| KR | Target Jun 30 | Owner |
-|---|---|---|
-| KR1.1: MRR activo cobrado | **$7.500 USD** (10 clientes × $750) | Alexander |
-| KR1.2: Leads calificados (SQL)/mes | **40/mes en junio** | Alexander + Tanya |
-| KR1.3: Close rate de SQL → cliente | **≥25%** | Alexander |
-| KR1.4: CAC blended | **≤$300 USD** | Brian |
-| KR1.5: Pipeline cubierto (3x target) | **$22.500 activo** | Alexander |
+| KR                                   | Target Jun 30                       | Owner             |
+| ------------------------------------ | ----------------------------------- | ----------------- |
+| KR1.1: MRR activo cobrado            | **$7.500 USD** (10 clientes × $750) | Alexander         |
+| KR1.2: Leads calificados (SQL)/mes   | **40/mes en junio**                 | Alexander + Tanya |
+| KR1.3: Close rate de SQL → cliente   | **≥25%**                            | Alexander         |
+| KR1.4: CAC blended                   | **≤$300 USD**                       | Brian             |
+| KR1.5: Pipeline cubierto (3x target) | **$22.500 activo**                  | Alexander         |
 
 **Iniciativas clave:**
+
 - Lanzar landing UGC Colombia con calculadora de ROI y Calendly
 - Outbound manual: 30 cuentas/día en IG + 20 emails/día (Alexander)
 - Caso de estudio "antes/después" con 2 marcas piloto (gratis o costo)
@@ -77,29 +82,30 @@
 
 #### O2 — Construir red de creadores confiable y delivery repetible
 
-| KR | Target Jun 30 | Owner |
-|---|---|---|
-| KR2.1: Creadores activos verificados | **80 creadores** | Diana |
-| KR2.2: Tiempo brief → entrega final | **≤7 días** | Diana |
-| KR2.3: Delivery Health Score promedio | **≥8.5/10** | Diana |
-| KR2.4: % entregables aprobados sin retrabajo | **≥80%** | Diana |
-| KR2.5: Creator NPS | **≥50** | Diana |
+| KR                                           | Target Jun 30    | Owner |
+| -------------------------------------------- | ---------------- | ----- |
+| KR2.1: Creadores activos verificados         | **80 creadores** | Diana |
+| KR2.2: Tiempo brief → entrega final          | **≤7 días**      | Diana |
+| KR2.3: Delivery Health Score promedio        | **≥8.5/10**      | Diana |
+| KR2.4: % entregables aprobados sin retrabajo | **≥80%**         | Diana |
+| KR2.5: Creator NPS                           | **≥50**          | Diana |
 
 **Iniciativas:** Casting masivo, onboarding deck + contrato estándar, base de datos con tags, playbook de briefs por vertical, QA doble.
 
 #### O3 — Establecer base operativa, financiera y de marca
 
-| KR | Target Jun 30 | Owner |
-|---|---|---|
-| KR3.1: Stack operativo en producción | **100% operativo** | Samuel + Brian |
-| KR3.2: Margen bruto promedio | **≥55%** | Brian |
-| KR3.3: DSO (días de cobranza) | **≤15 días** | Brian |
-| KR3.4: Followers IG @agenciaugccolombia | **+5.000 netos** | Tanya |
-| KR3.5: Engagement rate IG | **≥4.5%** | Tanya |
+| KR                                      | Target Jun 30      | Owner          |
+| --------------------------------------- | ------------------ | -------------- |
+| KR3.1: Stack operativo en producción    | **100% operativo** | Samuel + Brian |
+| KR3.2: Margen bruto promedio            | **≥55%**           | Brian          |
+| KR3.3: DSO (días de cobranza)           | **≤15 días**       | Brian          |
+| KR3.4: Followers IG @agenciaugccolombia | **+5.000 netos**   | Tanya          |
+| KR3.5: Engagement rate IG               | **≥4.5%**          | Tanya          |
 
 ### Q3 2026 (Julio – Septiembre) — Tema: "Repetibilidad"
 
 **O1 — Escalar a 35 clientes activos manteniendo calidad**
+
 - MRR activo cobrado: **$26.250 USD** (35 × $750)
 - Logo churn mensual: **≤3%**
 - NRR: **≥105%** (upsell > churn)
@@ -107,12 +113,14 @@
 - Close rate sostenido: **≥30%**
 
 **O2 — Productizar las 3 ofertas y lanzar Premium $1.500**
+
 - % clientes en Pro o Premium: **≥60%**
 - SOPs documentados por servicio: **100%**
 - Time-to-onboard nuevo cliente: **≤48h**
 - Roster de creadores: **200 activos**
 
 **O3 — Activar canal de partners y referidos**
+
 - % MRR proveniente de referidos: **≥25%**
 - Partners activos: **10**
 - Casos de estudio publicados: **8**
@@ -123,18 +131,21 @@
 ## 3. Dashboard del CEO
 
 **Diario (5 min):**
+
 - MRR cobrado hoy
 - Llamadas comerciales agendadas hoy
 - Leads nuevos calificados (SQL)
 - Cash en cuenta
 
 **Semanal (lunes 9am):**
+
 - Pipeline por etapa (lead → demo → propuesta → cierre)
 - Forecast del mes vs actual
 - Top 3 cuentas en riesgo de churn
 - NPS de la semana
 
 **Mensual:**
+
 - MRR / ARR / Growth %
 - CAC, LTV, LTV/CAC, payback period
 - NRR, Gross/Net churn
@@ -151,38 +162,39 @@
 3. **Presupuesto Meta Ads Q2 ($3K trimestre).** ¿Capital propio o reinversión primera factura? → **martes** · Bloquea: lanzamiento de campañas semana 2.
 4. **Los 2 pilotos gratis: ¿qué marcas?** → **miércoles** · Bloquea: primer entregable real + primer caso de estudio.
 5. **Roles oficiales y comp del equipo.** ¿Brian, Diana, Samuel, Tanya son socios, equity, fijo, variable? → **jueves** · Bloquea: compromiso real del equipo.
-6. **Dominio y marca: ¿UGCColombia.com? ¿UGCLatam.com?** → **lunes** · Bloquea: Samuel arranca landing.
+6. **Dominio y marca: ¿ugccolombia.co? ¿UGCLatam.com?** → **lunes** · Bloquea: Samuel arranca landing.
 7. **Política de uso de Jarvis comercial.** ¿Responde como "Alexander"? ¿Como bot? ¿Mix? → **miércoles** · Bloquea: integración WhatsApp comercial.
 
 ---
 
 ## 5. Riesgos Top 5
 
-| # | Riesgo | Prob. | Impacto | Mitigación | Owner |
-|---|---|---|---|---|---|
-| 1 | No llegar a 10 clientes en M3 por pipeline pobre | Alta | Alto | Outbound diario obligatorio + Meta Ads $1K/mes desde semana 2 + 2 pilotos gratis | Alexander |
-| 2 | Calidad inconsistente de creadores → churn temprano | Alta | Crítico | Casting riguroso + QA doble + escrow + rating + roster 3x sobre demanda | Diana |
-| 3 | Cash flow negativo por pago lento USA | Media | Alto | 100% anticipado mes 1, débito Stripe, factor de crédito a $20K MRR | Brian |
-| 4 | Sobrecarga del equipo (5 personas haciendo todo) | Alta | Medio | Roles claros desde día 1, no contratar hasta M4, automatizar con Jarvis + KREOON | Alexander |
-| 5 | Dependencia de Alexander para cerrar ventas | Alta | Alto | Documentar playbook, grabar llamadas, SDR en M5, Jarvis califica L1 | Alexander |
+| #   | Riesgo                                              | Prob. | Impacto | Mitigación                                                                       | Owner     |
+| --- | --------------------------------------------------- | ----- | ------- | -------------------------------------------------------------------------------- | --------- |
+| 1   | No llegar a 10 clientes en M3 por pipeline pobre    | Alta  | Alto    | Outbound diario obligatorio + Meta Ads $1K/mes desde semana 2 + 2 pilotos gratis | Alexander |
+| 2   | Calidad inconsistente de creadores → churn temprano | Alta  | Crítico | Casting riguroso + QA doble + escrow + rating + roster 3x sobre demanda          | Diana     |
+| 3   | Cash flow negativo por pago lento USA               | Media | Alto    | 100% anticipado mes 1, débito Stripe, factor de crédito a $20K MRR               | Brian     |
+| 4   | Sobrecarga del equipo (5 personas haciendo todo)    | Alta  | Medio   | Roles claros desde día 1, no contratar hasta M4, automatizar con Jarvis + KREOON | Alexander |
+| 5   | Dependencia de Alexander para cerrar ventas         | Alta  | Alto    | Documentar playbook, grabar llamadas, SDR en M5, Jarvis califica L1              | Alexander |
 
 ---
 
 ## 6. Script discovery call
 
 ### Contexto
+
 La discovery call es para leads que **ya pasaron BANT** (Budget ≥ $1.500 USD, Authority, Need, Timing ≤ 90 días). Duración: 30 min. Objetivo: calificar y cerrar propuesta escrita en 48h.
 
 ### Estructura (30 min)
 
-| Min | Bloque | Objetivo |
-|---|---|---|
-| 0–3 | Rompehielo + micro-bio del lead | Crear rapport, confirmar rol |
-| 3–8 | Contexto de negocio (producto, ticket, canal actual) | Entender ICP real |
-| 8–15 | Dolor específico (qué no funciona hoy en su creative) | Detectar palanca emocional |
-| 15–22 | Visión de resultado (cómo se ve el éxito a 90 días) | Anclar expectativa medible |
-| 22–27 | Propuesta de siguiente paso (plan + precio tentativo) | Cerrar commitment |
-| 27–30 | Next steps + agenda de envío de propuesta en 48h | Cerrar loop |
+| Min   | Bloque                                                | Objetivo                     |
+| ----- | ----------------------------------------------------- | ---------------------------- |
+| 0–3   | Rompehielo + micro-bio del lead                       | Crear rapport, confirmar rol |
+| 3–8   | Contexto de negocio (producto, ticket, canal actual)  | Entender ICP real            |
+| 8–15  | Dolor específico (qué no funciona hoy en su creative) | Detectar palanca emocional   |
+| 15–22 | Visión de resultado (cómo se ve el éxito a 90 días)   | Anclar expectativa medible   |
+| 22–27 | Propuesta de siguiente paso (plan + precio tentativo) | Cerrar commitment            |
+| 27–30 | Next steps + agenda de envío de propuesta en 48h      | Cerrar loop                  |
 
 ### Preguntas clave (de memoria)
 
@@ -212,17 +224,18 @@ La discovery call es para leads que **ya pasaron BANT** (Budget ≥ $1.500 USD, 
 ## 7. Plan 90 días (LinkedIn + multicanal)
 
 ### Objetivo
+
 Posicionar a Alexander como la referencia #1 de UGC hispano y usar su marca personal como canal de adquisición para UGC Colombia + KREOON.
 
 ### Resumen ejecutivo del plan
 
-| Plataforma | Frecuencia semanal | Total 90 días |
-|---|---|---|
-| LinkedIn | 4 posts + 1 newsletter/mes + 1 long-form/mes | ~52 posts + 3 newsletters + 3 long-forms |
-| X/Twitter | 3 posts + 1 thread | ~52 piezas |
-| Instagram @infiny | 3 reels + 3 carruseles | ~78 piezas |
-| TikTok | 4 videos (repurpose IG) | ~48 videos |
-| YouTube | 1 video long-form/mes | 3 videos |
+| Plataforma        | Frecuencia semanal                           | Total 90 días                            |
+| ----------------- | -------------------------------------------- | ---------------------------------------- |
+| LinkedIn          | 4 posts + 1 newsletter/mes + 1 long-form/mes | ~52 posts + 3 newsletters + 3 long-forms |
+| X/Twitter         | 3 posts + 1 thread                           | ~52 piezas                               |
+| Instagram @infiny | 3 reels + 3 carruseles                       | ~78 piezas                               |
+| TikTok            | 4 videos (repurpose IG)                      | ~48 videos                               |
+| YouTube           | 1 video long-form/mes                        | 3 videos                                 |
 
 **Total ~237 piezas en 90 días.** Ratio de repurposing: 1 long-form → 15 micro-piezas.
 
@@ -262,12 +275,12 @@ en LATAM y USA Hispanic | Agencia · SaaS · Comunidad de creadores
 
 ### Pilares de contenido personal (4 pilares, mix semanal)
 
-| Pilar | % | Posts/sem | Objetivo |
-|---|---|---|---|
-| Educación UGC y Performance Creative | 35% | 2 | Posicionarse como experto técnico |
-| Construcción de negocio en LATAM | 25% | 1-2 | Resonar con founders |
-| Detrás de cámara (agencia + stack) | 25% | 1 | Humanizar, generar confianza |
-| Provocación y punto de vista | 15% | 1 | Alcance orgánico, debate |
+| Pilar                                | %   | Posts/sem | Objetivo                          |
+| ------------------------------------ | --- | --------- | --------------------------------- |
+| Educación UGC y Performance Creative | 35% | 2         | Posicionarse como experto técnico |
+| Construcción de negocio en LATAM     | 25% | 1-2       | Resonar con founders              |
+| Detrás de cámara (agencia + stack)   | 25% | 1         | Humanizar, generar confianza      |
+| Provocación y punto de vista         | 15% | 1         | Alcance orgánico, debate          |
 
 ### Hooks clave del primer mes (20 posts)
 
@@ -317,6 +330,7 @@ Total: 15 piezas por long-form. Tiempo: ~4.5h.
 ### Newsletter "Performance Creative LATAM"
 
 Frecuencia semanal (martes). Extensión 600-900 palabras. Primeras 8 ediciones:
+
 1. Por qué el UGC malo es peor que no hacer publicidad
 2. Anatomía de un hook que para el scroll en 3 segundos
 3. Cómo estructurar el primer brief de UGC de una marca
@@ -339,11 +353,13 @@ Frecuencia semanal (martes). Extensión 600-900 palabras. Primeras 8 ediciones:
 ## 8. Renewal call playbook (Día 90)
 
 ### Contexto
+
 Día 90 es la primera gran puerta de renovación. Para ese momento ya tenemos: 3 batches entregados, 3 meses de performance data, 2 rondas de NPS, health score calculado, señales claras de riesgo o expansión.
 
 **Objetivo:** cerrar renewal de 3 meses adicionales mínimo, idealmente 6 meses, con upgrade de plan si aplica.
 
 ### Pre-call (Día 88 — Diana + Samuel preparan)
+
 - Samuel prepara "Quarterly Performance Report" en Looker Studio + slides.
 - Diana actualiza health score del cliente.
 - Alexander revisa histórico y define objetivo de la call (renew, upgrade, downgrade, churn prevention).
@@ -352,17 +368,18 @@ Día 90 es la primera gran puerta de renovación. Para ese momento ya tenemos: 3
 
 **Escenario A — Health score ≥ 70 (cliente sano, renew esperado)**
 
-| Min | Tema |
-|---|---|
-| 0–10 | Recap de 90 días: qué logramos juntos |
-| 10–20 | Performance: top piezas, CPA evolution, ROAS |
+| Min   | Tema                                                       |
+| ----- | ---------------------------------------------------------- |
+| 0–10  | Recap de 90 días: qué logramos juntos                      |
+| 10–20 | Performance: top piezas, CPA evolution, ROAS               |
 | 20–30 | Visión próximos 90 días: qué pillars mantener, qué agregar |
-| 30–40 | Propuesta comercial: renew + posible upgrade |
-| 40–45 | Firma o commitment |
+| 30–40 | Propuesta comercial: renew + posible upgrade               |
+| 40–45 | Firma o commitment                                         |
 
 **Escenario B — Health score < 70 (riesgo, churn prevention)**
 
 Tácticas:
+
 1. **No hablar de renewal primero.** Abrir con "¿qué ha fallado y cómo lo arreglamos?"
 2. Ofrecer **1 mes de ajuste** con plan de mejora documentado (no descuento).
 3. Si hay bloqueo por feedback del cliente, mostrar data: "Este mes estuvimos bloqueados 9 días esperando tu feedback. Si lo agilizamos a 2 días, podemos entregar 30% más piezas."
@@ -370,16 +387,19 @@ Tácticas:
 5. Si el cliente churnea: activar campaña win-back automática (día 100, 120, 150 vía Jarvis).
 
 ### Entregables de la call
+
 - Contrato de renovación firmado (ideal 3-6 meses).
 - Plan de trabajo Q2 documentado.
 - Cliente movido a `clients.stage='recurring'` en Supabase.
 
 ### KPIs
+
 - % clientes renovados al día 90: **meta 70%**
 - % upgrades al renovar: **meta 25%**
 - LTV promedio al día 90: **meta USD $3.000+**
 
 ### Integración Jarvis
+
 - Jarvis envía "Quarterly Report" previo a la call.
 - Jarvis envía contrato de renovación post-call con link de firma.
 - Jarvis dispara win-back si cliente declina.
@@ -388,15 +408,15 @@ Tácticas:
 
 ## 9. Cadencia de rituales
 
-| Ritual | Frecuencia | Día/Hora | Duración | Asistentes |
-|---|---|---|---|---|
-| Daily standup | Diario | L-V 8:30am | 15 min | Todo el equipo |
-| Weekly Commercial Review | Semanal | Lunes 9am | 45 min | Alexander + Brian + Tanya |
-| Weekly Delivery Review | Semanal | Martes 9am | 45 min | Diana + Samuel + Alexander |
-| Bi-weekly Tech Sync | Quincenal | Jueves 4pm | 30 min | Samuel + Alexander |
-| Monthly Business Review | Mensual | 1er lunes | 2h | Equipo completo |
-| Quarterly Business Review | Trimestral | Última semana Q | Medio día | Equipo + asesores |
-| 1:1 con cada lead | Quincenal | Variable | 30 min | Alexander + cada uno |
+| Ritual                    | Frecuencia | Día/Hora        | Duración  | Asistentes                 |
+| ------------------------- | ---------- | --------------- | --------- | -------------------------- |
+| Daily standup             | Diario     | L-V 8:30am      | 15 min    | Todo el equipo             |
+| Weekly Commercial Review  | Semanal    | Lunes 9am       | 45 min    | Alexander + Brian + Tanya  |
+| Weekly Delivery Review    | Semanal    | Martes 9am      | 45 min    | Diana + Samuel + Alexander |
+| Bi-weekly Tech Sync       | Quincenal  | Jueves 4pm      | 30 min    | Samuel + Alexander         |
+| Monthly Business Review   | Mensual    | 1er lunes       | 2h        | Equipo completo            |
+| Quarterly Business Review | Trimestral | Última semana Q | Medio día | Equipo + asesores          |
+| 1:1 con cada lead         | Quincenal  | Variable        | 30 min    | Alexander + cada uno       |
 
 **Reglas:** standup máximo 15 min, parado, sin laptops. Toda reunión con agenda 24h antes + notas en Notion. MBR usa formato Wins / Losses / Learnings / Next bets.
 

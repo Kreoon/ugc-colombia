@@ -103,7 +103,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "Alexander Cast <alexander@agenciaugccolombia.com>" },
+            { "name": "from", "value": "Alexander Cast <alexander@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $json.email }}" },
             { "name": "subject", "value": "=UGC Colombia puede ayudarte, {{ $json.full_name || 'hola' }}" },
             { "name": "html", "value": "=<p>Hola {{ $json.full_name || '' }},</p><p>Vi que te interesaste en nuestros servicios de UGC. Me gustaria contarte como hemos ayudado a marcas similares a la tuya a generar contenido autentico que convierte.</p><p>Tenemos creators especializados en tu nicho listos para empezar esta semana.</p><p><a href='https://cal.com/ugc-colombia/discovery'>Agenda una llamada de 15 min gratis</a></p><p>Alexander Cast<br>UGC Colombia</p>" }
@@ -147,7 +147,7 @@
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
-            { "name": "from", "value": "Alexander Cast <alexander@agenciaugccolombia.com>" },
+            { "name": "from", "value": "Alexander Cast <alexander@agenciaugccolombia.co>" },
             { "name": "to", "value": "={{ $json.email }}" },
             { "name": "subject", "value": "Lo que dicen nuestros clientes de UGC Colombia" },
             { "name": "html", "value": "=<p>Hola {{ $json.full_name || '' }},</p><p>Te comparto testimonios reales de marcas que trabajan con nosotros:</p><blockquote>\"Pasamos de 0 a 25 piezas de UGC en el primer mes. El ROI ha sido increible.\" — Marca de lifestyle</blockquote><blockquote>\"La calidad de los creators colombianos es excepcional y el costo es 3x menor que en USA.\" — Startup Bogota</blockquote><p>Si quieres ver resultados similares, podemos tener tu primer batch listo en 2 semanas.</p><p><strong>Esta oferta de onboarding gratuito vence el viernes.</strong></p><p><a href='https://cal.com/ugc-colombia/discovery'>Hablar ahora</a></p><p>Alexander</p>" }

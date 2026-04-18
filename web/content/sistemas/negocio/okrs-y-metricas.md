@@ -52,21 +52,25 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 > Los 4 OKRs anuales canónicos definidos por Alexander en el Documento Maestro. Los OKRs trimestrales siguientes deben servir estos objetivos anuales.
 
 ### O1 — Liderazgo de mercado
+
 - **KR1:** 50+ clientes activos en retención mensual
 - **KR2:** $50K+ USD/mes de facturación recurrente (mínimo; meta aspiracional Q4: $70–98K)
 - **KR3:** Ser reconocidos en top 3 de agencias UGC en Colombia
 
 ### O2 — Excelencia operativa
+
 - **KR1:** NPS de clientes > 8/10
 - **KR2:** 100% de entregas en tiempo
 - **KR3:** Churn rate < 5% mensual
 
 ### O3 — Expansión de talento
+
 - **KR1:** Red de 100 creadores verificados
 - **KR2:** 20% de creadores en Nivel A
 - **KR3:** Primer creador internacional incorporado
 
 ### O4 — Expansión geográfica
+
 - **KR1:** 5 clientes activos en México
 - **KR2:** 3 clientes en USA Hispanic
 - **KR3:** Primer aliado de agencia en Ecuador consolidado
@@ -79,15 +83,16 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 
 ### O1 — Activar la máquina comercial y cerrar los primeros 10 clientes recurrentes
 
-| KR | Actual | Target Jun 30 | Owner |
-|----|--------|--------------|-------|
-| KR1.1: MRR activo cobrado | $0 | **$7,500 USD** (10 clientes x $750 promedio) | Alexander |
-| KR1.2: Leads calificados (SQL) generados/mes | 0 | **40/mes en junio** | Alexander + Tanya |
-| KR1.3: Close rate de SQL → cliente | n/a | **≥25%** | Alexander |
-| KR1.4: CAC blended | n/a | **≤$300 USD** (LTV/CAC ≥6x objetivo) | Brian |
-| KR1.5: Pipeline cubierto (3x del target) | $0 | **$22,500 en pipeline activo** | Alexander |
+| KR                                           | Actual | Target Jun 30                                | Owner             |
+| -------------------------------------------- | ------ | -------------------------------------------- | ----------------- |
+| KR1.1: MRR activo cobrado                    | $0     | **$7,500 USD** (10 clientes x $750 promedio) | Alexander         |
+| KR1.2: Leads calificados (SQL) generados/mes | 0      | **40/mes en junio**                          | Alexander + Tanya |
+| KR1.3: Close rate de SQL → cliente           | n/a    | **≥25%**                                     | Alexander         |
+| KR1.4: CAC blended                           | n/a    | **≤$300 USD** (LTV/CAC ≥6x objetivo)         | Brian             |
+| KR1.5: Pipeline cubierto (3x del target)     | $0     | **$22,500 en pipeline activo**               | Alexander         |
 
 **Iniciativas clave:**
+
 - Lanzar landing UGC Colombia con calculadora de ROI y agendamiento Calendly
 - Outbound manual: 30 cuentas/día en IG + 20 emails/día (Alexander)
 - Caso de estudio "antes/después" con 2 marcas piloto (gratis o costo)
@@ -101,15 +106,16 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 
 ### O2 — Construir red de creadores confiable y delivery repetible
 
-| KR | Actual | Target Jun 30 | Owner |
-|----|--------|--------------|-------|
-| KR2.1: Creadores activos verificados en roster | 0 | **80 creadores** (mix nichos) | Diana |
-| KR2.2: Tiempo promedio brief → entrega final | n/a | **≤7 días** | Diana |
-| KR2.3: Delivery Health Score promedio | n/a | **≥8.5/10** | Diana |
-| KR2.4: % entregables aprobados sin retrabajo | n/a | **≥80%** | Diana |
-| KR2.5: Creator NPS | n/a | **≥50** | Diana |
+| KR                                             | Actual | Target Jun 30                 | Owner |
+| ---------------------------------------------- | ------ | ----------------------------- | ----- |
+| KR2.1: Creadores activos verificados en roster | 0      | **80 creadores** (mix nichos) | Diana |
+| KR2.2: Tiempo promedio brief → entrega final   | n/a    | **≤7 días**                   | Diana |
+| KR2.3: Delivery Health Score promedio          | n/a    | **≥8.5/10**                   | Diana |
+| KR2.4: % entregables aprobados sin retrabajo   | n/a    | **≥80%**                      | Diana |
+| KR2.5: Creator NPS                             | n/a    | **≥50**                       | Diana |
 
 **Iniciativas clave:**
+
 - Casting masivo: convocatoria abierta + filtros (Diana)
 - Onboarding deck + contrato estándar + tabla tarifas internas
 - Notion/Airtable: base de datos de creadores con tags (nicho, ciudad, equipo, rate)
@@ -123,15 +129,16 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 
 ### O3 — Establecer base operativa, financiera y de marca
 
-| KR | Actual | Target Jun 30 | Owner |
-|----|--------|--------------|-------|
-| KR3.1: Stack operativo en producción (CRM + facturación + delivery) | 0% | **100% operativo** | Samuel + Brian |
-| KR3.2: Margen bruto promedio | n/a | **≥55%** | Brian |
-| KR3.3: Días de cobranza (DSO) | n/a | **≤15 días** (pago anticipado) | Brian |
-| KR3.4: Followers IG @agenciaugccolombia | actual | **+5,000 netos** | Tanya |
-| KR3.5: Engagement rate IG | actual | **≥4.5%** | Tanya |
+| KR                                                                  | Actual | Target Jun 30                  | Owner          |
+| ------------------------------------------------------------------- | ------ | ------------------------------ | -------------- |
+| KR3.1: Stack operativo en producción (CRM + facturación + delivery) | 0%     | **100% operativo**             | Samuel + Brian |
+| KR3.2: Margen bruto promedio                                        | n/a    | **≥55%**                       | Brian          |
+| KR3.3: Días de cobranza (DSO)                                       | n/a    | **≤15 días** (pago anticipado) | Brian          |
+| KR3.4: Followers IG @agenciaugccolombia                             | actual | **+5,000 netos**               | Tanya          |
+| KR3.5: Engagement rate IG                                           | actual | **≥4.5%**                      | Tanya          |
 
 **Iniciativas clave:**
+
 - Implementar Atomic CRM (Supabase) para pipeline comercial
 - Stripe / Wise / PayU configurados para cobros USD y COP
 - Política de pago: 100% anticipado mes 1, mensualidad anticipada después
@@ -149,31 +156,31 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 
 ### O1 — Escalar a 35 clientes activos manteniendo calidad
 
-| KR | Target Sep 30 |
-|----|---------------|
-| KR1.1: MRR activo cobrado | **$26,250 USD** (35 x $750) |
-| KR1.2: Logo churn mensual | **≤3%** |
-| KR1.3: Net Revenue Retention (NRR) | **≥105%** (upsell > churn) |
-| KR1.4: SQL/mes generados | **120/mes** |
-| KR1.5: Close rate sostenido | **≥30%** |
+| KR                                 | Target Sep 30               |
+| ---------------------------------- | --------------------------- |
+| KR1.1: MRR activo cobrado          | **$26,250 USD** (35 x $750) |
+| KR1.2: Logo churn mensual          | **≤3%**                     |
+| KR1.3: Net Revenue Retention (NRR) | **≥105%** (upsell > churn)  |
+| KR1.4: SQL/mes generados           | **120/mes**                 |
+| KR1.5: Close rate sostenido        | **≥30%**                    |
 
 ### O2 — Productizar las 3 ofertas y lanzar Premium $1,500
 
-| KR | Target Sep 30 |
-|----|---------------|
-| KR2.1: % de clientes en Pro o Premium | **≥60%** |
-| KR2.2: SOPs documentados por servicio | **100%** |
-| KR2.3: Time-to-onboard nuevo cliente | **≤48h** |
-| KR2.4: Roster de creadores | **200 activos** |
+| KR                                    | Target Sep 30   |
+| ------------------------------------- | --------------- |
+| KR2.1: % de clientes en Pro o Premium | **≥60%**        |
+| KR2.2: SOPs documentados por servicio | **100%**        |
+| KR2.3: Time-to-onboard nuevo cliente  | **≤48h**        |
+| KR2.4: Roster de creadores            | **200 activos** |
 
 ### O3 — Activar canal de partners y referidos
 
-| KR | Target Sep 30 |
-|----|---------------|
-| KR3.1: % MRR proveniente de referidos | **≥25%** |
-| KR3.2: Partners activos (agencias, freelancers) | **10** |
-| KR3.3: Caso de estudio publicados | **8** |
-| KR3.4: Speaking / podcasts de Alexander | **6 apariciones** |
+| KR                                              | Target Sep 30     |
+| ----------------------------------------------- | ----------------- |
+| KR3.1: % MRR proveniente de referidos           | **≥25%**          |
+| KR3.2: Partners activos (agencias, freelancers) | **10**            |
+| KR3.3: Caso de estudio publicados               | **8**             |
+| KR3.4: Speaking / podcasts de Alexander         | **6 apariciones** |
 
 ---
 
@@ -182,18 +189,21 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 ### Alexander (CEO) — Vista ejecutiva
 
 **Diario (5 min):**
+
 - MRR cobrado hoy
 - Llamadas comerciales agendadas hoy
 - Leads nuevos calificados (SQL)
 - Cash en cuenta
 
 **Semanal (revisión lunes 9am):**
+
 - Pipeline por etapa (lead → demo → propuesta → cierre)
 - Forecast mes vs actual
 - Top 3 cuentas en riesgo de churn
 - NPS de la semana
 
 **Mensual:**
+
 - MRR / ARR / Growth %
 - CAC, LTV, LTV/CAC, payback period
 - NRR, Gross/Net churn
@@ -208,6 +218,7 @@ Una sola métrica que captura salud comercial, retención y cobranza efectiva. N
 **Mensual:** P&L, margen bruto por servicio, CAC por canal, impuestos Colombia, payroll
 
 KPIs propios:
+
 - DSO (días de cobranza) ≤15
 - % facturas vencidas <5%
 - Margen bruto ≥55%
@@ -221,6 +232,7 @@ KPIs propios:
 **Mensual:** Creator NPS, churn de creadores, tiempo promedio brief→entrega, % aprobados sin retrabajo
 
 KPIs propios:
+
 - ≤7 días brief→entrega
 - ≥80% aprobados sin retrabajo
 - ≥50 Creator NPS
@@ -234,6 +246,7 @@ KPIs propios:
 **Mensual:** % procesos automatizados vs manuales, ahorro de horas/mes, roadmap KREOON↔UGC
 
 KPIs propios:
+
 - Uptime ≥99.5%
 - Horas operativas ahorradas/mes (target ≥40h)
 
@@ -246,6 +259,7 @@ KPIs propios:
 **Mensual:** Crecimiento %, leads atribuidos a orgánico, % SQL desde redes
 
 KPIs propios:
+
 - +5,000 followers netos en Q2
 - ER ≥4.5%
 - ≥30% de SQL desde orgánico
@@ -254,17 +268,18 @@ KPIs propios:
 
 ## 5. Plan de Revisión (Cadencia)
 
-| Ritual | Frecuencia | Día/Hora | Duración | Asistentes | Output |
-|--------|-----------|----------|----------|-----------|--------|
-| **Daily standup** | Diario | L-V 8:30am | 15 min | Todo el equipo | Bloqueos, foco del día |
-| **Weekly Commercial Review** | Semanal | Lunes 9am | 45 min | Alexander + Brian + Tanya | Pipeline, forecast, tácticas semana |
-| **Weekly Delivery Review** | Semanal | Martes 9am | 45 min | Diana + Samuel + Alexander | Estado clientes, calidad, riesgos |
-| **Bi-weekly Tech Sync** | Quincenal | Jueves 4pm | 30 min | Samuel + Alexander | Roadmap, integraciones KREOON |
-| **Monthly Business Review (MBR)** | Mensual | 1er lunes mes | 2h | Equipo completo | OKRs vs actual, decisiones, ajustes |
-| **Quarterly Business Review (QBR)** | Trimestral | Última semana Q | Medio día | Equipo + asesores | Cierre OKRs, planning siguiente Q |
-| **1:1 con cada lead** | Quincenal | Variable | 30 min | Alexander + cada uno | Coaching, carrera, fricciones |
+| Ritual                              | Frecuencia | Día/Hora        | Duración  | Asistentes                 | Output                              |
+| ----------------------------------- | ---------- | --------------- | --------- | -------------------------- | ----------------------------------- |
+| **Daily standup**                   | Diario     | L-V 8:30am      | 15 min    | Todo el equipo             | Bloqueos, foco del día              |
+| **Weekly Commercial Review**        | Semanal    | Lunes 9am       | 45 min    | Alexander + Brian + Tanya  | Pipeline, forecast, tácticas semana |
+| **Weekly Delivery Review**          | Semanal    | Martes 9am      | 45 min    | Diana + Samuel + Alexander | Estado clientes, calidad, riesgos   |
+| **Bi-weekly Tech Sync**             | Quincenal  | Jueves 4pm      | 30 min    | Samuel + Alexander         | Roadmap, integraciones KREOON       |
+| **Monthly Business Review (MBR)**   | Mensual    | 1er lunes mes   | 2h        | Equipo completo            | OKRs vs actual, decisiones, ajustes |
+| **Quarterly Business Review (QBR)** | Trimestral | Última semana Q | Medio día | Equipo + asesores          | Cierre OKRs, planning siguiente Q   |
+| **1:1 con cada lead**               | Quincenal  | Variable        | 30 min    | Alexander + cada uno       | Coaching, carrera, fricciones       |
 
 **Reglas:**
+
 - Standup máximo 15 min, parado, sin laptops
 - Toda reunión tiene agenda 24h antes y notas en Notion
 - MBR usa formato: Wins / Losses / Learnings / Next bets
@@ -276,12 +291,14 @@ KPIs propios:
 ### UGC Colombia ↔ KREOON Tech
 
 **KREOON da a UGC:**
+
 - CRM (Atomic CRM en Supabase) para pipeline comercial
 - Plataforma de gestión de creadores (roster, briefs, entregas)
 - Dashboards en tiempo real (NSM tree)
 - Hosting de video en Bunny CDN para entregables
 
 **UGC da a KREOON:**
+
 - Caso de uso real → KREOON se vuelve "el SaaS de agencias UGC LATAM"
 - Validación de features con clientes reales
 - Primera fuente de revenue recurrente para SaaS
@@ -294,11 +311,13 @@ KPIs propios:
 ### UGC Colombia ↔ Infiny Group / Infiny Latam
 
 **Infiny da a UGC:**
+
 - Motor de paid media (Meta/Google Ads) para generar leads
 - Servicios de growth para clientes que necesitan más que UGC
 - Estructura legal y holding (facturación, contratos LATAM/USA)
 
 **UGC da a Infiny:**
+
 - Lead magnet para clientes de growth (UGC como puerta de entrada)
 - Diferenciador competitivo: "agencia de growth + creators propios"
 - Cross-sell: cliente UGC → cliente Infiny growth (upsell $2-5K/mes)
@@ -310,6 +329,7 @@ KPIs propios:
 ### UGC Colombia ↔ Jarvis (WhatsApp AI Agent)
 
 **Jarvis da a UGC:**
+
 - Agendamiento automático de demos por WhatsApp
 - Calificación de leads 24/7 (BANT antes de pasar a Alexander)
 - Onboarding automatizado de creadores (FAQs, contrato, briefing)
@@ -317,6 +337,7 @@ KPIs propios:
 - Soporte L1 a clientes activos
 
 **UGC da a Jarvis:**
+
 - Caso de uso comercial real → entrenar y validar
 - Primer cliente que paga indirectamente por la infraestructura
 - Volumen de conversaciones = data de entrenamiento
@@ -328,11 +349,13 @@ KPIs propios:
 ### UGC Colombia ↔ Alexander Cast (Personal Brand)
 
 **Alexander Brand da a UGC:**
+
 - Autoridad → cierra ventas más rápido y a precio mayor
 - Tráfico orgánico (LinkedIn, podcasts, speaking)
 - Network de fundadores LATAM = pipeline B2B premium
 
 **UGC da a Alexander Brand:**
+
 - Casos de éxito reales para contenido
 - Revenue para invertir en producción (Remotion, ElevenLabs, Veo 3)
 - Posicionamiento "el que sí ejecuta, no solo habla"
@@ -341,15 +364,16 @@ KPIs propios:
 
 ## 7. Riesgos Top 5 y Mitigación
 
-| # | Riesgo | Probabilidad | Impacto | Mitigación | Owner |
-|---|--------|-------------|---------|-----------|-------|
-| 1 | **No llegar a 10 clientes en M3** por pipeline pobre | Alta | Alto | Outbound diario obligatorio + Meta Ads $1K/mes desde semana 2 + 2 pilotos gratis para casos | Alexander |
-| 2 | **Calidad de creadores inconsistente** → churn temprano | Alta | Crítico | Casting riguroso + QA doble + escrow + rating system + roster 3x sobre demanda | Diana |
-| 3 | **Cash flow negativo** por pago lento de clientes USA | Media | Alto | 100% anticipado mes 1, débito automático Stripe, factor de crédito si llega a $20K MRR | Brian |
-| 4 | **Sobrecarga del equipo** (5 personas, todos haciendo todo) | Alta | Medio | Roles claros desde día 1, no contratar hasta M4, automatizar con Jarvis y KREOON | Alexander |
-| 5 | **Dependencia de Alexander para cerrar ventas** (cuello de botella) | Alta | Alto | Documentar playbook ventas, grabar llamadas, contratar SDR en M5, Jarvis califica L1 | Alexander |
+| #   | Riesgo                                                              | Probabilidad | Impacto | Mitigación                                                                                  | Owner     |
+| --- | ------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------------------------------- | --------- |
+| 1   | **No llegar a 10 clientes en M3** por pipeline pobre                | Alta         | Alto    | Outbound diario obligatorio + Meta Ads $1K/mes desde semana 2 + 2 pilotos gratis para casos | Alexander |
+| 2   | **Calidad de creadores inconsistente** → churn temprano             | Alta         | Crítico | Casting riguroso + QA doble + escrow + rating system + roster 3x sobre demanda              | Diana     |
+| 3   | **Cash flow negativo** por pago lento de clientes USA               | Media        | Alto    | 100% anticipado mes 1, débito automático Stripe, factor de crédito si llega a $20K MRR      | Brian     |
+| 4   | **Sobrecarga del equipo** (5 personas, todos haciendo todo)         | Alta         | Medio   | Roles claros desde día 1, no contratar hasta M4, automatizar con Jarvis y KREOON            | Alexander |
+| 5   | **Dependencia de Alexander para cerrar ventas** (cuello de botella) | Alta         | Alto    | Documentar playbook ventas, grabar llamadas, contratar SDR en M5, Jarvis califica L1        | Alexander |
 
 **Riesgos secundarios a vigilar:**
+
 - Competencia local (otras agencias UGC LATAM bajando precios)
 - Cambios algoritmo Meta/TikTok (afecta entregables)
 - Regulación tributaria Colombia para servicios USD
@@ -387,7 +411,7 @@ KPIs propios:
    - **Decisión esperada:** jueves
    - **Bloquea:** compromiso real del equipo
 
-6. **Dominio y marca: ¿UGCColombia.com? ¿UGCLatam.com? ¿agenciaugccolombia.com?**
+6. **Dominio y marca: ¿ugccolombia.co? ¿UGCLatam.com? ¿agenciaugccolombia.co?**
    - Hoy solo existe IG. Web es urgente.
    - **Decisión esperada:** lunes
    - **Bloquea:** Samuel arranca landing

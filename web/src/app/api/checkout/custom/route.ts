@@ -13,6 +13,7 @@ import {
   type Currency,
 } from "@/lib/pricing/currency-config";
 import { createSupabaseServiceRole } from "@/lib/supabase-server";
+import { notifyAdmin } from "@/lib/email/stripe-notifications";
 
 export const runtime = "nodejs";
 
@@ -207,6 +208,24 @@ export async function POST(req: NextRequest) {
         monthly_equivalent: monthlyAmount,
       },
     });
+
+    notifyAdmin({
+      kind: "checkout_started",
+      email: data.email,
+      name: data.name,
+      company: data.company,
+      plan_id: "custom",
+      plan_label: label,
+      currency: data.currency,
+      amount: totalAmount,
+      billing_interval_count: duration,
+      videos_per_month: data.videos,
+      whatsapp: data.whatsapp ?? null,
+      country: data.country,
+      stripe_session_id: session.id,
+      stripe_customer_id: customerId,
+      extra_note: `Plan custom: ${data.videos} videos/mes. Fue redirigido a Stripe Checkout.`,
+    }).catch((err) => console.error("[checkout/custom] notifyAdmin error:", err));
 
     return NextResponse.json({ url: session.url, id: session.id });
   } catch (err) {

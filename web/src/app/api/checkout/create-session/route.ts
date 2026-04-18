@@ -7,6 +7,9 @@ import {
   type BillingDuration,
 } from "@/lib/stripe/plans";
 import { createSupabaseServiceRole } from "@/lib/supabase-server";
+import { notifyAdmin } from "@/lib/email/stripe-notifications";
+import { PLAN_PRICES } from "@/lib/pricing/currency-config";
+import { applyDurationDiscount } from "@/lib/stripe/plans";
 
 export const runtime = "nodejs";
 
@@ -142,6 +145,28 @@ export async function POST(req: NextRequest) {
         billing_interval_count: duration,
       },
     });
+
+    // Notifica al admin que alguien inició checkout (fire-and-forget).
+    const monthlyBase = PLAN_PRICES[data.planId]?.[data.currency]?.amount ?? 0;
+    const cycleTotal = applyDurationDiscount(monthlyBase, duration);
+    notifyAdmin({
+      kind: "checkout_started",
+      email: data.email,
+      name: data.name,
+      company: data.company,
+      plan_id: data.planId,
+      currency: data.currency,
+      amount: cycleTotal,
+      billing_interval_count: duration,
+      whatsapp: data.whatsapp ?? null,
+      country: data.country,
+      stripe_session_id: session.id,
+      stripe_customer_id: customerId,
+      extra_note:
+        "Fue redirigido a Stripe Checkout. Si no paga en 24h llega un email 'Carrito abandonado'.",
+    }).catch((err) =>
+      console.error("[checkout/create-session] notifyAdmin error:", err),
+    );
 
     return NextResponse.json({ url: session.url, id: session.id });
   } catch (err) {

@@ -34,6 +34,9 @@ export async function GET(
       plan_id: session.metadata?.plan_id ?? null,
       plan_label: session.metadata?.plan_label ?? null,
       videos_per_month: session.metadata?.videos_per_month ?? null,
+      billing_interval_count: session.metadata?.billing_interval_count
+        ? parseInt(session.metadata.billing_interval_count, 10)
+        : 1,
       amount_total: session.amount_total
         ? fromStripeAmount(session.amount_total, currency)
         : 0,

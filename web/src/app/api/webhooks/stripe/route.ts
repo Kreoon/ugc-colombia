@@ -7,11 +7,14 @@ import {
   normalizeSubscriptionStatus,
 } from "@/lib/stripe/events";
 import { createSupabaseServiceRole } from "@/lib/supabase-server";
+import { notifyAdmin } from "@/lib/email/stripe-notifications";
 import type { Currency } from "@/lib/pricing/currency-config";
 
 export const runtime = "nodejs";
 // Next.js App Router: el body debe llegar crudo para verificar la firma.
 export const dynamic = "force-dynamic";
+
+type SupabaseService = ReturnType<typeof createSupabaseServiceRole>;
 
 export async function POST(req: NextRequest) {
   const signature = req.headers.get("stripe-signature");
@@ -62,7 +65,6 @@ export async function POST(req: NextRequest) {
   }
 
   if (!isRelevantEvent(event.type)) {
-    // Ignorar eventos que no nos interesan, pero marcarlos como procesados.
     await supabase
       .from("stripe_events")
       .update({ processed_at: new Date().toISOString() })
@@ -100,10 +102,6 @@ export async function POST(req: NextRequest) {
       .update({ processed_at: new Date().toISOString() })
       .eq("stripe_event_id", event.id);
 
-    await notifyN8n(event).catch((err) =>
-      console.error("[webhook/stripe] n8n dispatch error:", err),
-    );
-
     return NextResponse.json({ received: true });
   } catch (err) {
     console.error(`[webhook/stripe] Handler error for ${event.type}:`, err);
@@ -119,8 +117,6 @@ export async function POST(req: NextRequest) {
 // ─────────────────────────────────────────────────────────────────────────────
 // Handlers
 // ─────────────────────────────────────────────────────────────────────────────
-
-type SupabaseService = ReturnType<typeof createSupabaseServiceRole>;
 
 async function onCheckoutCompleted(
   session: Stripe.Checkout.Session,
@@ -140,6 +136,10 @@ async function onCheckoutCompleted(
       ? session.customer
       : session.customer?.id ?? null;
 
+  const amountTotal = session.amount_total
+    ? fromStripeAmount(session.amount_total, currency)
+    : 0;
+
   await supabase
     .from("orders")
     .update({
@@ -147,13 +147,36 @@ async function onCheckoutCompleted(
       stripe_subscription_id: subscriptionId,
       stripe_payment_intent_id: paymentIntentId,
       stripe_customer_id: customerId,
-      amount_total: session.amount_total
-        ? fromStripeAmount(session.amount_total, currency)
-        : 0,
+      amount_total: amountTotal,
       paid_at:
         session.payment_status === "paid" ? new Date().toISOString() : null,
     })
     .eq("stripe_session_id", session.id);
+
+  if (session.payment_status === "paid") {
+    const meta = session.metadata ?? {};
+    await notifyAdmin({
+      kind: "purchase",
+      email: session.customer_details?.email ?? session.customer_email ?? meta.email ?? null,
+      name: session.customer_details?.name ?? meta.name ?? null,
+      company: meta.company ?? null,
+      plan_id: meta.plan_id ?? null,
+      plan_label: meta.plan_label ?? null,
+      currency,
+      amount: amountTotal,
+      billing_interval_count: meta.billing_interval_count
+        ? parseInt(meta.billing_interval_count, 10)
+        : null,
+      videos_per_month: meta.videos_per_month
+        ? parseInt(meta.videos_per_month, 10)
+        : null,
+      whatsapp: meta.whatsapp ?? null,
+      country: meta.country ?? null,
+      stripe_session_id: session.id,
+      stripe_subscription_id: subscriptionId,
+      stripe_customer_id: customerId,
+    });
+  }
 }
 
 async function onCheckoutExpired(
@@ -164,6 +187,31 @@ async function onCheckoutExpired(
     .from("orders")
     .update({ status: "expired" })
     .eq("stripe_session_id", session.id);
+
+  const meta = session.metadata ?? {};
+  const currency = (meta.currency ?? "USD") as Currency;
+
+  await notifyAdmin({
+    kind: "checkout_expired",
+    email: session.customer_details?.email ?? session.customer_email ?? meta.email ?? null,
+    name: session.customer_details?.name ?? meta.name ?? null,
+    company: meta.company ?? null,
+    plan_id: meta.plan_id ?? null,
+    plan_label: meta.plan_label ?? null,
+    currency,
+    amount: session.amount_total ? fromStripeAmount(session.amount_total, currency) : null,
+    billing_interval_count: meta.billing_interval_count
+      ? parseInt(meta.billing_interval_count, 10)
+      : null,
+    videos_per_month: meta.videos_per_month
+      ? parseInt(meta.videos_per_month, 10)
+      : null,
+    whatsapp: meta.whatsapp ?? null,
+    country: meta.country ?? null,
+    stripe_session_id: session.id,
+    extra_note:
+      "El cliente inició checkout pero no completó el pago en 24h. Considera escribirle directo — Stripe enviará su propio email de recovery si tenemos activados los abandoned cart emails.",
+  });
 }
 
 /**
@@ -189,6 +237,10 @@ function getInvoiceSubscriptionId(invoice: Stripe.Invoice): string | null {
   return null;
 }
 
+function getInvoiceBillingReason(invoice: Stripe.Invoice): string | null {
+  return (invoice as unknown as { billing_reason?: string | null }).billing_reason ?? null;
+}
+
 async function onInvoicePaid(
   invoice: Stripe.Invoice,
   supabase: SupabaseService,
@@ -206,6 +258,28 @@ async function onInvoicePaid(
     })
     .eq("stripe_subscription_id", subscriptionId)
     .eq("status", "pending");
+
+  // Solo notificamos renovaciones (no la compra inicial — esa ya se notificó
+  // desde checkout.session.completed). billing_reason=subscription_cycle es la
+  // renovación recurrente.
+  const billingReason = getInvoiceBillingReason(invoice);
+  if (billingReason !== "subscription_cycle") return;
+
+  const currency = (invoice.currency?.toUpperCase() ?? "USD") as Currency;
+  const amount = invoice.amount_paid
+    ? fromStripeAmount(invoice.amount_paid, currency)
+    : 0;
+
+  await notifyAdmin({
+    kind: "renewal",
+    email: invoice.customer_email ?? null,
+    name: invoice.customer_name ?? null,
+    currency,
+    amount,
+    stripe_subscription_id: subscriptionId,
+    stripe_customer_id:
+      typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id ?? null,
+  });
 }
 
 async function onInvoicePaymentFailed(
@@ -219,6 +293,24 @@ async function onInvoicePaymentFailed(
     .from("subscriptions")
     .update({ status: "past_due" })
     .eq("stripe_subscription_id", subscriptionId);
+
+  const currency = (invoice.currency?.toUpperCase() ?? "USD") as Currency;
+  const amount = invoice.amount_due
+    ? fromStripeAmount(invoice.amount_due, currency)
+    : 0;
+
+  await notifyAdmin({
+    kind: "payment_failed",
+    email: invoice.customer_email ?? null,
+    name: invoice.customer_name ?? null,
+    currency,
+    amount,
+    stripe_subscription_id: subscriptionId,
+    stripe_customer_id:
+      typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id ?? null,
+    extra_note:
+      "Stripe reintentará automáticamente. Si falla 3 veces la suscripción pasa a canceled. Considera escribirle al cliente.",
+  });
 }
 
 async function onSubscriptionUpserted(
@@ -249,6 +341,8 @@ async function onSubscriptionUpserted(
   const periodEnd =
     itemWithPeriod.current_period_end ?? legacySub.current_period_end ?? null;
 
+  const intervalCount = item?.price.recurring?.interval_count ?? 1;
+
   // Busca el email desde stripe_customers para no depender del objeto Stripe.
   const { data: customer } = await supabase
     .from("stripe_customers")
@@ -266,6 +360,7 @@ async function onSubscriptionUpserted(
         email: customer?.email ?? sub.metadata?.email ?? "",
         plan_id: (sub.metadata?.plan_id as string) ?? "unknown",
         currency,
+        billing_interval_count: intervalCount,
         amount,
         status: normalizeSubscriptionStatus(sub.status),
         cancel_at_period_end: sub.cancel_at_period_end,
@@ -295,68 +390,22 @@ async function onSubscriptionDeleted(
       canceled_at: new Date().toISOString(),
     })
     .eq("stripe_subscription_id", sub.id);
-}
 
-// ─────────────────────────────────────────────────────────────────────────────
-// n8n dispatch — best-effort. No bloquea la respuesta a Stripe si n8n falla.
-// ─────────────────────────────────────────────────────────────────────────────
+  const customerId =
+    typeof sub.customer === "string" ? sub.customer : sub.customer.id;
 
-async function notifyN8n(event: Stripe.Event) {
-  const url = process.env.N8N_STRIPE_WEBHOOK_URL;
-  if (!url) return;
+  const { data: customer } = await supabase
+    .from("stripe_customers")
+    .select("email, metadata")
+    .eq("stripe_customer_id", customerId)
+    .maybeSingle();
 
-  const payload = buildN8nPayload(event);
-  if (!payload) return;
-
-  await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(process.env.N8N_WEBHOOK_SECRET
-        ? { "x-webhook-secret": process.env.N8N_WEBHOOK_SECRET }
-        : {}),
-    },
-    body: JSON.stringify(payload),
+  await notifyAdmin({
+    kind: "subscription_canceled",
+    email: customer?.email ?? null,
+    plan_id: (sub.metadata?.plan_id as string) ?? null,
+    stripe_subscription_id: sub.id,
+    stripe_customer_id: customerId,
+    extra_note: "La suscripción ya no se renovará. Considera escribirle para feedback.",
   });
-}
-
-function buildN8nPayload(event: Stripe.Event): Record<string, unknown> | null {
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const s = event.data.object as Stripe.Checkout.Session;
-      if (s.payment_status !== "paid") return null;
-      return {
-        kind: "checkout_paid",
-        stripe_session_id: s.id,
-        stripe_subscription_id:
-          typeof s.subscription === "string" ? s.subscription : null,
-        stripe_customer_id:
-          typeof s.customer === "string" ? s.customer : null,
-        email: s.customer_details?.email ?? s.customer_email ?? null,
-        name: s.customer_details?.name ?? null,
-        amount_total: s.amount_total,
-        currency: (s.metadata?.currency ?? s.currency ?? "USD")
-          .toString()
-          .toUpperCase(),
-        plan_id: s.metadata?.plan_id ?? null,
-        plan_label: s.metadata?.plan_label ?? null,
-        videos_per_month: s.metadata?.videos_per_month ?? null,
-        company: s.metadata?.company ?? null,
-        country: s.metadata?.country ?? null,
-        whatsapp: s.metadata?.whatsapp ?? null,
-      };
-    }
-    case "customer.subscription.deleted": {
-      const sub = event.data.object as Stripe.Subscription;
-      return {
-        kind: "subscription_canceled",
-        stripe_subscription_id: sub.id,
-        stripe_customer_id:
-          typeof sub.customer === "string" ? sub.customer : sub.customer.id,
-        canceled_at: sub.canceled_at,
-      };
-    }
-    default:
-      return null;
-  }
 }

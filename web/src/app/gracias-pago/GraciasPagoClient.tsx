@@ -19,6 +19,7 @@ import { Footer } from "@/components/home/Footer";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/pricing/format";
 import type { Currency } from "@/lib/pricing/currency-config";
+import { trackPurchase } from "@/lib/tracking/events";
 
 const WHATSAPP_ADVISOR_URL =
   process.env.NEXT_PUBLIC_WHATSAPP_ADVISOR_URL ??
@@ -34,6 +35,7 @@ interface SessionSummary {
   plan_id: string | null;
   plan_label: string | null;
   videos_per_month: string | null;
+  billing_interval_count?: number | null;
   amount_total: number;
   currency: Currency;
 }
@@ -98,6 +100,21 @@ export function GraciasPagoClient() {
           setError(data.error);
         } else {
           setSummary(data);
+          // Dispara Purchase en Meta/TikTok/GA4/Bing UET. Dedupe interno via
+          // sessionStorage para evitar contar dos veces si el user refresca.
+          if (data.payment_status === "paid" && data.amount_total > 0) {
+            trackPurchase({
+              transactionId: data.id,
+              value: data.amount_total,
+              currency: data.currency,
+              planId: data.plan_id ?? "unknown",
+              planLabel: data.plan_label ?? undefined,
+              videosPerMonth: data.videos_per_month
+                ? parseInt(data.videos_per_month, 10)
+                : undefined,
+              billingIntervalCount: data.billing_interval_count ?? undefined,
+            });
+          }
         }
       })
       .catch(() => {

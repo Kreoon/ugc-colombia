@@ -4,6 +4,7 @@ import type { TrackingEvent } from "./types";
 import {
   DEFAULT_CURRENCY,
   SUPPORTED_CURRENCIES,
+  priceInUSD,
   type Currency,
 } from "@/lib/pricing/currency-config";
 import { currencyFromCountry } from "@/lib/geo/country-to-currency";
@@ -358,6 +359,126 @@ export function trackRegistrationComplete(): void {
     label: "registro_form",
     value: 1,
   });
+}
+
+// ─── Purchase (evento crítico post-pago Stripe) ───
+export interface PurchaseEvent {
+  transactionId: string;
+  value: number;
+  currency: Currency;
+  planId: string;
+  planLabel?: string;
+  videosPerMonth?: number;
+  /** Duración del ciclo en meses (1/3/6/12). */
+  billingIntervalCount?: number;
+}
+
+/**
+ * Dispara el evento Purchase/CompletePayment/purchase en todos los pixels
+ * instalados (Meta, TikTok, GA4, Bing UET). Usa sessionStorage con
+ * transactionId para deduplicar — si el user refresca /gracias-pago,
+ * no se cuenta dos veces la compra.
+ *
+ * El value se envía en USD (convertido desde la moneda local con la tasa
+ * aproximada de `priceInUSD`) para que las plataformas publicitarias usen
+ * una moneda consistente al optimizar campañas.
+ */
+export function trackPurchase(purchase: PurchaseEvent): void {
+  if (typeof window === "undefined") return;
+
+  const dedupeKey = `ugc_tracked_purchase_${purchase.transactionId}`;
+  try {
+    if (window.sessionStorage.getItem(dedupeKey)) return;
+    window.sessionStorage.setItem(dedupeKey, "1");
+  } catch {
+    // sessionStorage puede fallar en incógnito estricto — seguimos sin dedupe
+  }
+
+  const valueUSD = priceInUSD(purchase.value, purchase.currency);
+  const utm = getUTMParams();
+  const { country, currency: activeCurrency } = getTrackingContext();
+
+  const commonPayload = {
+    transaction_id: purchase.transactionId,
+    plan_id: purchase.planId,
+    plan_label: purchase.planLabel,
+    videos_per_month: purchase.videosPerMonth,
+    billing_interval_count: purchase.billingIntervalCount,
+    price_local: purchase.value,
+    local_currency: purchase.currency,
+    country,
+    ...utm,
+  };
+
+  if (hasConsent("analytics") && window.dataLayer) {
+    window.dataLayer.push({
+      event: "purchase",
+      ...commonPayload,
+      value: valueUSD,
+      currency: "USD",
+    });
+  }
+
+  if (hasConsent("analytics") && window.gtag) {
+    window.gtag("event", "purchase", {
+      transaction_id: purchase.transactionId,
+      value: valueUSD,
+      currency: "USD",
+      items: [
+        {
+          item_id: purchase.planId,
+          item_name: purchase.planLabel ?? purchase.planId,
+          item_category: "subscription",
+          price: valueUSD,
+          quantity: 1,
+        },
+      ],
+      price_local: purchase.value,
+      local_currency: purchase.currency,
+      country,
+      ...utm,
+    });
+  }
+
+  if (hasConsent("marketing") && window.fbq) {
+    window.fbq("track", "Purchase", {
+      value: valueUSD,
+      currency: "USD",
+      content_ids: [purchase.planId],
+      content_name: purchase.planLabel ?? purchase.planId,
+      content_category: "subscription",
+      content_type: "product",
+      num_items: 1,
+      price_local: purchase.value,
+      local_currency: purchase.currency,
+      country,
+    });
+  }
+
+  if (hasConsent("marketing") && window.ttq) {
+    window.ttq.track("CompletePayment", {
+      value: valueUSD,
+      currency: "USD",
+      content_id: purchase.planId,
+      content_name: purchase.planLabel ?? purchase.planId,
+      content_type: "product",
+      quantity: 1,
+      price_local: purchase.value,
+      local_currency: purchase.currency,
+    });
+  }
+
+  if (hasConsent("marketing") && window.uetq) {
+    window.uetq.push("event", "purchase", {
+      revenue_value: valueUSD,
+      currency: "USD",
+      event_category: "ecommerce",
+      event_label: purchase.planId,
+      transaction_id: purchase.transactionId,
+    });
+  }
+  // activeCurrency referenced to avoid unused warning
+  void activeCurrency;
 }
 
 // ─── Waitlist ───

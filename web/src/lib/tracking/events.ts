@@ -396,7 +396,7 @@ export function trackPurchase(purchase: PurchaseEvent): void {
 
   const valueUSD = priceInUSD(purchase.value, purchase.currency);
   const utm = getUTMParams();
-  const { country, currency: activeCurrency } = getTrackingContext();
+  const { country } = getTrackingContext();
 
   const commonPayload = {
     transaction_id: purchase.transactionId,
@@ -469,7 +469,13 @@ export function trackPurchase(purchase: PurchaseEvent): void {
   }
 
   if (hasConsent("marketing") && window.uetq) {
-    window.uetq.push("event", "purchase", {
+    // Bing UET acepta dos estilos: array push({...}) o function-call
+    // push("event", name, payload). Usamos el segundo para enviar Purchase
+    // con todos sus campos — requiere cast porque el tipo global está
+    // declarado como array (compatible con el otro trackEvent legacy).
+    (window.uetq as unknown as {
+      push: (action: string, name: string, payload: Record<string, unknown>) => void;
+    }).push("event", "purchase", {
       revenue_value: valueUSD,
       currency: "USD",
       event_category: "ecommerce",
@@ -477,8 +483,6 @@ export function trackPurchase(purchase: PurchaseEvent): void {
       transaction_id: purchase.transactionId,
     });
   }
-  // activeCurrency referenced to avoid unused warning
-  void activeCurrency;
 }
 
 // ─── Waitlist ───

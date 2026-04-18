@@ -100,7 +100,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:png|jpg|jpeg|svg|gif|webp|avif|ico|mp4|webm|pdf|woff2?)).*)",
-  ],
-};
+    matcher: ["/admin/:path*"],
+  };

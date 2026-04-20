@@ -148,7 +148,7 @@ export function KickoffClient() {
     return (
       <>
         <Navbar />
-        <main className="relative bg-brand-black text-white min-h-screen pt-28 pb-20 px-4">
+        <main className="relative bg-brand-black text-white min-h-screen pt-16 sm:pt-20 md:pt-28 pb-20 px-4">
           <motion.div
             className="max-w-lg mx-auto text-center"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -209,7 +209,7 @@ export function KickoffClient() {
   return (
     <>
       <Navbar />
-      <main className="relative bg-brand-black text-white min-h-screen pt-28 pb-20 px-4">
+      <main className="relative bg-brand-black text-white min-h-screen pt-16 sm:pt-20 md:pt-28 pb-20 px-4">
         <div
           aria-hidden
           className="absolute inset-0"
@@ -246,7 +246,7 @@ export function KickoffClient() {
             transition={{ delay: 0.1 }}
           >
             <div>
-              <label className="block text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
+              <label className="block text-xs sm:text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
                 Tu nombre
               </label>
               <input
@@ -255,24 +255,25 @@ export function KickoffClient() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Juan Pérez"
-                className="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder:text-brand-gray/50 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                className="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder:text-brand-gray/50 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
-                Tu email
+              <label className="block text-xs sm:text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
+                Tu correo
               </label>
               <input
                 type="email"
                 autoComplete="email"
+                inputMode="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="tu@email.com"
-                className="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder:text-brand-gray/50 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                placeholder="tu@correo.com"
+                className="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder:text-brand-gray/50 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
+              <label className="block text-xs sm:text-[11px] font-semibold text-brand-gray mb-1.5 tracking-wider uppercase">
                 Empresa / Marca
               </label>
               <input
@@ -281,7 +282,7 @@ export function KickoffClient() {
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 placeholder="Tu marca"
-                className="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder:text-brand-gray/50 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                className="w-full bg-black/60 border border-emerald-500/30 rounded-xl px-4 py-3 text-white placeholder:text-brand-gray/50 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
               />
             </div>
           </motion.div>
@@ -326,7 +327,8 @@ export function KickoffClient() {
                       setSelectedDate(availableDates[currentDateIdx - 1])
                     }
                     disabled={currentDateIdx === 0}
-                    className="p-2 rounded-lg text-brand-gray hover:text-white hover:bg-white/10 transition-colors disabled:opacity-30"
+                    aria-label="Día anterior"
+                    className="min-w-[44px] min-h-[44px] p-2 rounded-lg text-brand-gray hover:text-white hover:bg-white/10 transition-colors disabled:opacity-30 flex items-center justify-center"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -344,53 +346,61 @@ export function KickoffClient() {
                       setSelectedDate(availableDates[currentDateIdx + 1])
                     }
                     disabled={currentDateIdx === availableDates.length - 1}
-                    className="p-2 rounded-lg text-brand-gray hover:text-white hover:bg-white/10 transition-colors disabled:opacity-30"
+                    aria-label="Día siguiente"
+                    className="min-w-[44px] min-h-[44px] p-2 rounded-lg text-brand-gray hover:text-white hover:bg-white/10 transition-colors disabled:opacity-30 flex items-center justify-center"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </div>
 
-                <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                  {availableDates.slice(0, 14).map((date) => {
-                    const d = new Date(date + "T12:00:00");
-                    const isSelected = date === selectedDate;
-                    return (
-                      <button
-                        key={date}
-                        type="button"
-                        onClick={() => {
-                          setSelectedDate(date);
-                          setSelectedSlot(null);
-                        }}
-                        className={cn(
-                          "flex flex-col items-center min-w-[56px] px-3 py-2.5 rounded-xl border text-xs transition-all flex-shrink-0",
-                          isSelected
-                            ? "border-emerald-500/60 bg-emerald-500/15 text-white"
-                            : "border-white/10 bg-white/[0.02] text-brand-gray hover:border-white/20",
-                        )}
-                      >
-                        <span className="font-semibold">
-                          {DAY_NAMES[d.getDay()]}
-                        </span>
-                        <span
+                <div className="relative">
+                  <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                    {availableDates.slice(0, 14).map((date) => {
+                      const d = new Date(date + "T12:00:00");
+                      const isSelected = date === selectedDate;
+                      return (
+                        <button
+                          key={date}
+                          type="button"
+                          onClick={() => {
+                            setSelectedDate(date);
+                            setSelectedSlot(null);
+                          }}
                           className={cn(
-                            "text-lg font-bold",
-                            isSelected && "text-emerald-400",
+                            "flex flex-col items-center min-w-[64px] sm:min-w-[56px] px-3 py-3 sm:py-2.5 rounded-xl border text-xs transition-all flex-shrink-0",
+                            isSelected
+                              ? "border-emerald-500/60 bg-emerald-500/15 text-white"
+                              : "border-white/10 bg-white/[0.02] text-brand-gray hover:border-white/20",
                           )}
                         >
-                          {d.getDate()}
-                        </span>
-                      </button>
-                    );
-                  })}
+                          <span className="font-semibold">
+                            {DAY_NAMES[d.getDay()]}
+                          </span>
+                          <span
+                            className={cn(
+                              "text-lg font-bold",
+                              isSelected && "text-emerald-400",
+                            )}
+                          >
+                            {d.getDate()}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {/* Fade lateral para indicar scroll horizontal en mobile */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute right-0 top-0 bottom-2 w-10 bg-gradient-to-l from-brand-black to-transparent"
+                  />
                 </div>
               </div>
 
               <div className="mb-5">
-                <p className="text-[11px] font-semibold text-brand-gray uppercase tracking-wider mb-2.5">
+                <p className="text-xs sm:text-[11px] font-semibold text-brand-gray uppercase tracking-wider mb-2.5">
                   Horarios disponibles · Hora Colombia
                 </p>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-2">
                   {currentDateSlots.map((slot) => {
                     const isSelected = selectedSlot?.start === slot.start;
                     return (
@@ -399,7 +409,7 @@ export function KickoffClient() {
                         type="button"
                         onClick={() => setSelectedSlot(slot)}
                         className={cn(
-                          "px-3 py-3 rounded-xl border text-sm font-medium transition-all",
+                          "px-3 py-3.5 sm:py-3 rounded-xl border text-sm font-medium transition-all",
                           isSelected
                             ? "border-emerald-500/60 bg-emerald-500/15 text-emerald-400"
                             : "border-white/10 bg-white/[0.02] text-brand-gray hover:border-white/20 hover:text-white",

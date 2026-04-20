@@ -7,6 +7,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Lock,
+  Loader2,
   ShieldCheck,
   AlertCircle,
   Globe,
@@ -147,7 +148,7 @@ export function CheckoutClient({
           }}
         />
 
-        <div className="relative max-w-5xl mx-auto pt-24 sm:pt-28 pb-20 px-4 sm:px-6">
+        <div className="relative max-w-5xl mx-auto pt-20 sm:pt-24 md:pt-28 pb-20 px-4 sm:px-6">
           {wasCanceled && (
             <motion.div
               initial={{ opacity: 0, y: -8 }}
@@ -167,13 +168,13 @@ export function CheckoutClient({
             </motion.div>
           )}
 
-          <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 items-start">
-            {/* Izquierda: resumen plan */}
+          <div className="grid md:grid-cols-[1fr_1.1fr] gap-8 md:gap-10 items-start">
+            {/* Izquierda: resumen plan (sticky solo en desktop) */}
             <motion.aside
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="sticky top-28"
+              className="md:sticky md:top-28"
             >
               <span className="inline-block px-3 py-1 rounded-full text-[11px] font-sans font-bold tracking-widest uppercase mb-4 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/40">
                 Checkout · Plan {planName}
@@ -199,7 +200,7 @@ export function CheckoutClient({
                         key={d}
                         type="button"
                         onClick={() => setDuration(d)}
-                        className={`relative px-3 py-2.5 rounded-lg border text-left transition-colors ${
+                        className={`relative px-3 py-3.5 sm:py-2.5 rounded-lg border text-left transition-colors ${
                           active
                             ? "border-brand-gold bg-brand-yellow/10"
                             : "border-brand-graphite/60 hover:border-brand-gold/40"
@@ -307,12 +308,13 @@ export function CheckoutClient({
                   autoComplete="name"
                 />
                 <Field
-                  label="Email"
+                  label="Correo electrónico"
                   type="email"
                   required
                   value={email}
                   onChange={setEmail}
                   autoComplete="email"
+                  inputMode="email"
                 />
                 <Field
                   label="Empresa / Marca"
@@ -327,6 +329,7 @@ export function CheckoutClient({
                   value={whatsapp}
                   onChange={setWhatsapp}
                   autoComplete="tel"
+                  inputMode="tel"
                 />
                 <Field
                   label="NIT / RUC (opcional)"
@@ -339,7 +342,7 @@ export function CheckoutClient({
                     type="checkbox"
                     checked={accepted}
                     onChange={(e) => setAccepted(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded border-brand-graphite bg-black/40 accent-brand-yellow"
+                    className="mt-0.5 w-5 h-5 sm:w-4 sm:h-4 rounded border-brand-graphite bg-black/40 accent-brand-yellow flex-shrink-0"
                   />
                   <span>
                     Acepto que se cobre{" "}
@@ -348,14 +351,18 @@ export function CheckoutClient({
                       {cycleLabel}
                     </strong>{" "}
                     de forma automática hasta que cancele. Puedo pausar o
-                    cancelar en cualquier momento escribiéndoles al WhatsApp o
-                    al email{" "}
+                    cancelar en cualquier momento escribiéndole por WhatsApp o
+                    al correo{" "}
                     <span className="text-brand-gold">hola@ugccolombia.co</span>.
                   </span>
                 </label>
 
                 {error && (
-                  <div className="p-3 rounded-lg border border-red-500/40 bg-red-500/10 text-sm text-red-300">
+                  <div
+                    role="alert"
+                    aria-live="assertive"
+                    className="p-3 rounded-lg border border-red-500/40 bg-red-500/10 text-sm text-red-300"
+                  >
                     {error}
                   </div>
                 )}
@@ -367,10 +374,13 @@ export function CheckoutClient({
                   disabled={loading}
                 >
                   {loading ? (
-                    "Conectando con Stripe…"
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Conectando con Stripe…
+                    </>
                   ) : (
                     <>
-                      <Lock className="w-4 h-4" />
+                      <Lock className="w-4 h-4 hidden sm:inline-block" />
                       Continuar al pago seguro
                       <ArrowRight className="w-4 h-4" />
                     </>
@@ -406,6 +416,7 @@ function Field({
   required,
   placeholder,
   autoComplete,
+  inputMode,
 }: {
   label: string;
   value: string;
@@ -414,10 +425,11 @@ function Field({
   required?: boolean;
   placeholder?: string;
   autoComplete?: string;
+  inputMode?: "text" | "email" | "tel" | "numeric" | "decimal" | "search" | "url" | "none";
 }) {
   return (
     <div>
-      <label className="block text-[11px] font-bold tracking-widest uppercase text-brand-gray mb-2">
+      <label className="block text-xs sm:text-[11px] font-bold tracking-widest uppercase text-brand-gray mb-2">
         {label}
         {required && <span className="text-brand-gold ml-1">*</span>}
       </label>
@@ -427,8 +439,9 @@ function Field({
         required={required}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        inputMode={inputMode}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl border border-brand-graphite/60 bg-black/40 text-white text-sm placeholder:text-brand-gray/40 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/40"
+        className="w-full px-4 py-3 rounded-xl border border-brand-graphite/60 bg-black/40 text-white text-base sm:text-sm placeholder:text-brand-gray/40 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/40"
       />
     </div>
   );

@@ -199,11 +199,11 @@ export function GraciasPagoClient() {
           }}
         />
 
-        <div className="relative max-w-3xl mx-auto pt-24 sm:pt-28 pb-20 px-4 sm:px-6">
+        <div className="relative max-w-3xl mx-auto pt-16 sm:pt-20 md:pt-28 pb-20 px-4 sm:px-6">
           <motion.div
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
             className="w-24 h-24 rounded-full bg-emerald-500/15 border-2 border-emerald-500/30 flex items-center justify-center mx-auto mb-6"
           >
             <CheckCircle2 className="w-12 h-12 text-emerald-400" />
@@ -232,13 +232,13 @@ export function GraciasPagoClient() {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
+              transition={{ duration: 0.3 }}
               className="mt-8 rounded-2xl border border-brand-gold/25 bg-white/[0.03] p-5 sm:p-6"
             >
               <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-brand-gold/70 mb-3">
                 Resumen de tu compra
               </p>
-              <div className="grid sm:grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 text-sm">
                 <SummaryRow
                   label="Plan"
                   value={summary.plan_label ?? summary.plan_id ?? "—"}

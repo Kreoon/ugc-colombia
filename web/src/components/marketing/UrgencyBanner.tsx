@@ -48,8 +48,14 @@ export function UrgencyBanner() {
     setHydrated(true);
   }, []);
 
+  // Rutas donde el banner de urgencia estorba — el visitante ya está en el
+  // embudo ejecutando una acción (pagar, agendar) y necesita foco, no pitch.
   const isAdmin = pathname?.startsWith("/admin") ?? false;
-  const visible = hydrated && !dismissed && !countdown.isExpired && !isAdmin;
+  const isTransactional = /^\/(checkout|agendar|gracias-pago|gracias)(\/|$)/.test(
+    pathname ?? "",
+  );
+  const visible =
+    hydrated && !dismissed && !countdown.isExpired && !isAdmin && !isTransactional;
 
   useEffect(() => {
     if (typeof document === "undefined") return;
